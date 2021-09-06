@@ -1,4 +1,4 @@
-﻿#include "dbvisit/DbClient.h"
+#include "dbvisit/DbClient.h"
 #include <cstring>
 #include "shynet/pool/MysqlPool.h"
 #include "shynet/Logger.h"

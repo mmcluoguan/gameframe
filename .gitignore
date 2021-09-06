@@ -4,3 +4,5 @@
 
 /.vs/gameframe/v16
 /world/obj/x86/Debug
+/shynet/obj/x86/Debug/shynet.tlog
+/world/obj/x64/Debug
