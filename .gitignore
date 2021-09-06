@@ -10,3 +10,5 @@
 *.tlog
 *.log
 *.lastbuildstate
+*.out
+*.json
