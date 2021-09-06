@@ -10,3 +10,4 @@
 *.tlog
 *.log
 *.lastbuildstate
+*.out
