@@ -1,0 +1,74 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="world.cpp" />
+    <ClCompile Include="SignalHandler.cpp" />
+    <ClCompile Include="StdinHandler.cpp" />
+    <ClCompile Include="DbConnector.cpp">
+      <Filter>db</Filter>
+    </ClCompile>
+    <ClCompile Include="HttpClient.cpp">
+      <Filter>http</Filter>
+    </ClCompile>
+    <ClCompile Include="HttpServer.cpp">
+      <Filter>http</Filter>
+    </ClCompile>
+    <ClCompile Include="WorldClientMgr.cpp">
+      <Filter>world</Filter>
+    </ClCompile>
+    <ClCompile Include="WorldClient.cpp">
+      <Filter>world</Filter>
+    </ClCompile>
+    <ClCompile Include="WorldServer.cpp">
+      <Filter>world</Filter>
+    </ClCompile>
+    <ClCompile Include="HttpClientMgr.cpp">
+      <Filter>http</Filter>
+    </ClCompile>
+    <ClCompile Include="LuaWrapper.cpp">
+      <Filter>lua</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="SignalHandler.h" />
+    <ClInclude Include="StdinHandler.h" />
+    <ClInclude Include="DbConnector.h">
+      <Filter>db</Filter>
+    </ClInclude>
+    <ClInclude Include="HttpClient.h">
+      <Filter>http</Filter>
+    </ClInclude>
+    <ClInclude Include="HttpServer.h">
+      <Filter>http</Filter>
+    </ClInclude>
+    <ClInclude Include="WorldClientMgr.h">
+      <Filter>world</Filter>
+    </ClInclude>
+    <ClInclude Include="WorldClient.h">
+      <Filter>world</Filter>
+    </ClInclude>
+    <ClInclude Include="WorldServer.h">
+      <Filter>world</Filter>
+    </ClInclude>
+    <ClInclude Include="HttpClientMgr.h">
+      <Filter>http</Filter>
+    </ClInclude>
+    <ClInclude Include="LuaWrapper.h">
+      <Filter>lua</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="db">
+      <UniqueIdentifier>{1c9f2672-69ac-43ee-826e-2b592e2d390e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="http">
+      <UniqueIdentifier>{c8c362da-8f76-4ae9-8418-355174bb2cd3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="lua">
+      <UniqueIdentifier>{b9fc952f-5ec3-4057-80ce-7cdf3efb0552}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="world">
+      <UniqueIdentifier>{41f78311-ef22-4f3b-8ff8-0b5ef58dd7cd}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

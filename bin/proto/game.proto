@@ -1,0 +1,19 @@
+syntax = "proto3";
+import "common.proto";
+package frmpub.protocc;
+
+message register_game_dbvisit_c {
+    ServerInfo sif  = 1;
+}
+
+message register_game_dbvisit_s {
+    int32 result  = 1;
+}
+
+message register_game_world_c {
+    ServerInfo sif  = 1;
+}
+
+message register_game_world_s {
+    int32 result  = 1;
+}

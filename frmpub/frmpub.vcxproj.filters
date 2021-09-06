@@ -1,0 +1,107 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="Connector.cpp" />
+    <ClCompile Include="PingTimer.cpp" />
+    <ClCompile Include="Client.cpp" />
+    <ClCompile Include="Basic.cpp" />
+    <ClCompile Include="protocc\client.pb.cc">
+      <Filter>protocc</Filter>
+    </ClCompile>
+    <ClCompile Include="protocc\common.pb.cc">
+      <Filter>protocc</Filter>
+    </ClCompile>
+    <ClCompile Include="protocc\game.pb.cc">
+      <Filter>protocc</Filter>
+    </ClCompile>
+    <ClCompile Include="protocc\gate.pb.cc">
+      <Filter>protocc</Filter>
+    </ClCompile>
+    <ClCompile Include="protocc\internal.pb.cc">
+      <Filter>protocc</Filter>
+    </ClCompile>
+    <ClCompile Include="protocc\login.pb.cc">
+      <Filter>protocc</Filter>
+    </ClCompile>
+    <ClCompile Include="FilterData.cpp" />
+    <ClCompile Include="FrmLuaWrapper.cpp">
+      <Filter>lua</Filter>
+    </ClCompile>
+    <ClCompile Include="LuaFolderTask.cpp">
+      <Filter>lua</Filter>
+    </ClCompile>
+    <ClCompile Include="LuaHotFixTask.cpp">
+      <Filter>lua</Filter>
+    </ClCompile>
+    <ClCompile Include="protocc\world.pb.cc">
+      <Filter>protocc</Filter>
+    </ClCompile>
+    <ClCompile Include="LuaRemoteDebug.cpp">
+      <Filter>lua</Filter>
+    </ClCompile>
+    <ClCompile Include="LuaTimer.cpp">
+      <Filter>lua</Filter>
+    </ClCompile>
+    <ClCompile Include="protocc\dbvisit.pb.cc">
+      <Filter>protocc</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="PingTimer.h" />
+    <ClInclude Include="ReConnectTimer.h" />
+    <ClInclude Include="Connector.h" />
+    <ClInclude Include="Client.h" />
+    <ClInclude Include="Basic.h" />
+    <ClInclude Include="protocc\client.pb.h">
+      <Filter>protocc</Filter>
+    </ClInclude>
+    <ClInclude Include="protocc\common.pb.h">
+      <Filter>protocc</Filter>
+    </ClInclude>
+    <ClInclude Include="protocc\game.pb.h">
+      <Filter>protocc</Filter>
+    </ClInclude>
+    <ClInclude Include="protocc\gate.pb.h">
+      <Filter>protocc</Filter>
+    </ClInclude>
+    <ClInclude Include="protocc\internal.pb.h">
+      <Filter>protocc</Filter>
+    </ClInclude>
+    <ClInclude Include="protocc\login.pb.h">
+      <Filter>protocc</Filter>
+    </ClInclude>
+    <ClInclude Include="FilterData.h" />
+    <ClInclude Include="FrmLuaWrapper.h">
+      <Filter>lua</Filter>
+    </ClInclude>
+    <ClInclude Include="LuaFolderTask.h">
+      <Filter>lua</Filter>
+    </ClInclude>
+    <ClInclude Include="LuaHotFixTask.h">
+      <Filter>lua</Filter>
+    </ClInclude>
+    <ClInclude Include="LuaCallBackTask.h">
+      <Filter>lua</Filter>
+    </ClInclude>
+    <ClInclude Include="protocc\world.pb.h">
+      <Filter>protocc</Filter>
+    </ClInclude>
+    <ClInclude Include="LuaRemoteDebug.h">
+      <Filter>lua</Filter>
+    </ClInclude>
+    <ClInclude Include="LuaTimer.h">
+      <Filter>lua</Filter>
+    </ClInclude>
+    <ClInclude Include="protocc\dbvisit.pb.h">
+      <Filter>protocc</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="protocc">
+      <UniqueIdentifier>{957d7476-bc00-4109-a78f-75401a3228d6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="lua">
+      <UniqueIdentifier>{f23ef2a0-c99e-4fb0-9946-081ea4eacb34}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

@@ -1,0 +1,82 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="ConnectorMgr.cpp" />
+    <ClCompile Include="gate.cpp" />
+    <ClCompile Include="SignalHandler.cpp" />
+    <ClCompile Include="StdinHandler.cpp" />
+    <ClCompile Include="DbConnector.cpp">
+      <Filter>db</Filter>
+    </ClCompile>
+    <ClCompile Include="GameConnector.cpp">
+      <Filter>game</Filter>
+    </ClCompile>
+    <ClCompile Include="LoginConnector.cpp">
+      <Filter>login</Filter>
+    </ClCompile>
+    <ClCompile Include="WorldConnector.cpp">
+      <Filter>world</Filter>
+    </ClCompile>
+    <ClCompile Include="GateServer.cpp">
+      <Filter>gate</Filter>
+    </ClCompile>
+    <ClCompile Include="GateClientMgr.cpp">
+      <Filter>gate</Filter>
+    </ClCompile>
+    <ClCompile Include="GateClient.cpp">
+      <Filter>gate</Filter>
+    </ClCompile>
+    <ClCompile Include="LuaWrapper.cpp">
+      <Filter>lua</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="ConnectorMgr.h" />
+    <ClInclude Include="SignalHandler.h" />
+    <ClInclude Include="StdinHandler.h" />
+    <ClInclude Include="DbConnector.h">
+      <Filter>db</Filter>
+    </ClInclude>
+    <ClInclude Include="GameConnector.h">
+      <Filter>game</Filter>
+    </ClInclude>
+    <ClInclude Include="LoginConnector.h">
+      <Filter>login</Filter>
+    </ClInclude>
+    <ClInclude Include="WorldConnector.h">
+      <Filter>world</Filter>
+    </ClInclude>
+    <ClInclude Include="GateServer.h">
+      <Filter>gate</Filter>
+    </ClInclude>
+    <ClInclude Include="GateClientMgr.h">
+      <Filter>gate</Filter>
+    </ClInclude>
+    <ClInclude Include="GateClient.h">
+      <Filter>gate</Filter>
+    </ClInclude>
+    <ClInclude Include="LuaWrapper.h">
+      <Filter>lua</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="db">
+      <UniqueIdentifier>{158321a8-2bd1-4324-9ec2-51b69e9c652d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="game">
+      <UniqueIdentifier>{277babfd-1609-4876-abbb-bedfff52425f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="login">
+      <UniqueIdentifier>{598b1214-41db-476e-8112-0b368273202d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="gate">
+      <UniqueIdentifier>{1bc3dbb8-e9b6-4072-8186-400fdf92a498}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="lua">
+      <UniqueIdentifier>{a5643540-9350-41e6-823c-e80cc77060e3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="world">
+      <UniqueIdentifier>{e863580d-a59d-4cf4-9c65-7254a99d7d75}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

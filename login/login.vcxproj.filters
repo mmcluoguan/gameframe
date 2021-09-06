@@ -1,0 +1,64 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="ConnectorMgr.cpp" />
+    <ClCompile Include="login.cpp" />
+    <ClCompile Include="SignalHandler.cpp" />
+    <ClCompile Include="StdinHandler.cpp" />
+    <ClCompile Include="DbConnector.cpp">
+      <Filter>db</Filter>
+    </ClCompile>
+    <ClCompile Include="LoginClient.cpp">
+      <Filter>login</Filter>
+    </ClCompile>
+    <ClCompile Include="LoginClientMgr.cpp">
+      <Filter>login</Filter>
+    </ClCompile>
+    <ClCompile Include="LoginServer.cpp">
+      <Filter>login</Filter>
+    </ClCompile>
+    <ClCompile Include="WorldConnector.cpp">
+      <Filter>world</Filter>
+    </ClCompile>
+    <ClCompile Include="LuaWrapper.cpp">
+      <Filter>lua</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="ConnectorMgr.h" />
+    <ClInclude Include="SignalHandler.h" />
+    <ClInclude Include="StdinHandler.h" />
+    <ClInclude Include="DbConnector.h">
+      <Filter>db</Filter>
+    </ClInclude>
+    <ClInclude Include="LoginClient.h">
+      <Filter>login</Filter>
+    </ClInclude>
+    <ClInclude Include="LoginClientMgr.h">
+      <Filter>login</Filter>
+    </ClInclude>
+    <ClInclude Include="LoginServer.h">
+      <Filter>login</Filter>
+    </ClInclude>
+    <ClInclude Include="WorldConnector.h">
+      <Filter>world</Filter>
+    </ClInclude>
+    <ClInclude Include="LuaWrapper.h">
+      <Filter>lua</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="db">
+      <UniqueIdentifier>{23ea17dd-57c3-4576-a4c0-f3b1040b8ff5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="login">
+      <UniqueIdentifier>{25858657-9293-4e2a-88ff-6dd3f6920b1b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="lua">
+      <UniqueIdentifier>{50fcbf7c-e047-4e6d-b4c2-660e5f31ec03}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="world">
+      <UniqueIdentifier>{4b332d5a-97e5-4f4f-a641-ffa0f88d7009}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

@@ -1,0 +1,319 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|ARM">
+      <Configuration>Debug</Configuration>
+      <Platform>ARM</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|ARM">
+      <Configuration>Release</Configuration>
+      <Platform>ARM</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|ARM64">
+      <Configuration>Debug</Configuration>
+      <Platform>ARM64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|ARM64">
+      <Configuration>Release</Configuration>
+      <Platform>ARM64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x86">
+      <Configuration>Debug</Configuration>
+      <Platform>x86</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x86">
+      <Configuration>Release</Configuration>
+      <Platform>x86</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{5702e8ba-88db-413c-885c-8e9f14ca50d1}</ProjectGuid>
+    <Keyword>Linux</Keyword>
+    <RootNamespace>common</RootNamespace>
+    <MinimumVisualStudioVersion>15.0</MinimumVisualStudioVersion>
+    <ApplicationType>Linux</ApplicationType>
+    <ApplicationTypeRevision>1.0</ApplicationTypeRevision>
+    <TargetLinuxPlatform>Generic</TargetLinuxPlatform>
+    <LinuxProjectType>{2238F9CD-F817-4ECC-BD14-2524D2669B35}</LinuxProjectType>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|ARM'" Label="Configuration">
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <RemoteRootDir>~/gameframe</RemoteRootDir>
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|ARM'" Label="Configuration">
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <RemoteRootDir>~/gameframe</RemoteRootDir>
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x86'" Label="Configuration">
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <RemoteRootDir>~/gameframe</RemoteRootDir>
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x86'" Label="Configuration">
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <RemoteRootDir>~/gameframe</RemoteRootDir>
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <RemoteRootDir>~/gameframe</RemoteRootDir>
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <RemoteRootDir>~/gameframe</RemoteRootDir>
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|ARM64'" Label="Configuration">
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <RemoteRootDir>~/gameframe</RemoteRootDir>
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|ARM64'" Label="Configuration">
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <RemoteRootDir>~/gameframe</RemoteRootDir>
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings" />
+  <ImportGroup Label="Shared" />
+  <ImportGroup Label="PropertySheets" />
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|ARM'">
+    <OutDir>../libs/</OutDir>
+    <TargetExt>.so.1.0.1</TargetExt>
+    <RemoteOutRelDir>$(RemoteProjectRelDir)/../libs/</RemoteOutRelDir>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|ARM'">
+    <OutDir>../libs/</OutDir>
+    <TargetExt>.so.1.0.1</TargetExt>
+    <RemoteOutRelDir>$(RemoteProjectRelDir)/../libs/</RemoteOutRelDir>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|ARM64'">
+    <OutDir>../libs/</OutDir>
+    <TargetExt>.so.1.0.1</TargetExt>
+    <RemoteOutRelDir>$(RemoteProjectRelDir)/../libs/</RemoteOutRelDir>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|ARM64'">
+    <OutDir>../libs/</OutDir>
+    <TargetExt>.so.1.0.1</TargetExt>
+    <RemoteOutRelDir>$(RemoteProjectRelDir)/../libs/</RemoteOutRelDir>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <OutDir>../libs/</OutDir>
+    <TargetExt>.so.1.0.1</TargetExt>
+    <RemoteOutRelDir>$(RemoteProjectRelDir)/../libs/</RemoteOutRelDir>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <OutDir>../libs/</OutDir>
+    <TargetExt>.so.1.0.1</TargetExt>
+    <RemoteOutRelDir>$(RemoteProjectRelDir)/../libs/</RemoteOutRelDir>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x86'">
+    <OutDir>../libs/</OutDir>
+    <TargetExt>.so.1.0.1</TargetExt>
+    <RemoteOutRelDir>$(RemoteProjectRelDir)/../libs/</RemoteOutRelDir>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x86'">
+    <OutDir>../libs/</OutDir>
+    <TargetExt>.so.1.0.1</TargetExt>
+    <RemoteOutRelDir>$(RemoteProjectRelDir)/../libs/</RemoteOutRelDir>
+  </PropertyGroup>
+  <ItemGroup>
+    <ClInclude Include="Basic.h" />
+    <ClInclude Include="crypto\Base64.h" />
+    <ClInclude Include="crypto\Sha1.h" />
+    <ClInclude Include="crypto\Url.h" />
+    <ClInclude Include="events\EventBase.h" />
+    <ClInclude Include="events\EventBuffer.h" />
+    <ClInclude Include="events\EventBufferFilter.h" />
+    <ClInclude Include="events\EventBufferSsl.h" />
+    <ClInclude Include="events\EventConfig.h" />
+    <ClInclude Include="events\EventConnector.h" />
+    <ClInclude Include="events\EventHandler.h" />
+    <ClInclude Include="events\EventLisenter.h" />
+    <ClInclude Include="events\Streambuff.h" />
+    <ClInclude Include="fflua\fflua.h" />
+    <ClInclude Include="fflua\fflua_register.h" />
+    <ClInclude Include="fflua\fflua_type.h" />
+    <ClInclude Include="IdWorker.h" />
+    <ClInclude Include="IniConfig.h" />
+    <ClInclude Include="kaguya\kaguya.hpp" />
+    <ClInclude Include="kaguya\preprocess.hpp" />
+    <ClInclude Include="Logger.h" />
+    <ClInclude Include="lua\LuaEngine.h" />
+    <ClInclude Include="lua\LuaWrapper.h" />
+    <ClInclude Include="net\AcceptHeartbeat.h" />
+    <ClInclude Include="net\AcceptNewFd.h" />
+    <ClInclude Include="net\AcceptReactorMgr.h" />
+    <ClInclude Include="net\ConnectEvent.h" />
+    <ClInclude Include="net\ConnectHeartbeat.h" />
+    <ClInclude Include="net\ConnectIoBuffer.h" />
+    <ClInclude Include="net\ConnectReactorMgr.h" />
+    <ClInclude Include="net\AcceptIoBuffer.h" />
+    <ClInclude Include="net\IPAddress.h" />
+    <ClInclude Include="net\ListenEvent.h" />
+    <ClInclude Include="net\ListenReactorMgr.h" />
+    <ClInclude Include="net\TimerEvent.h" />
+    <ClInclude Include="net\TimerReactorMgr.h" />
+    <ClInclude Include="pool\MysqlPool.h" />
+    <ClInclude Include="pool\ThreadPool.h" />
+    <ClInclude Include="protocol\FilterProces.h" />
+    <ClInclude Include="protocol\Http.h" />
+    <ClInclude Include="protocol\Request.h" />
+    <ClInclude Include="protocol\Responses.h" />
+    <ClInclude Include="protocol\Tcpip.h" />
+    <ClInclude Include="protocol\WebSocket.h" />
+    <ClInclude Include="Singleton.h" />
+    <ClInclude Include="task\AcceptReadIoTask.h" />
+    <ClInclude Include="task\ConnectReadIoTask.h" />
+    <ClInclude Include="task\NotifyTask.h" />
+    <ClInclude Include="task\Task.h" />
+    <ClInclude Include="task\TimerTask.h" />
+    <ClInclude Include="thread\AcceptThread.h" />
+    <ClInclude Include="thread\ConnectThread.h" />
+    <ClInclude Include="thread\InotifyThread.h" />
+    <ClInclude Include="thread\ListenThread.h" />
+    <ClInclude Include="thread\LuaThread.h" />
+    <ClInclude Include="thread\Thread.h" />
+    <ClInclude Include="thread\TimerThread.h" />
+    <ClInclude Include="thread\WorkThread.h" />
+    <ClInclude Include="Utility.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="events\EventBase.cpp" />
+    <ClCompile Include="events\EventBuffer.cpp" />
+    <ClCompile Include="events\EventBufferFilter.cpp" />
+    <ClCompile Include="events\EventBufferSsl.cpp" />
+    <ClCompile Include="events\EventConfig.cpp" />
+    <ClCompile Include="events\EventConnector.cpp" />
+    <ClCompile Include="events\EventHandler.cpp" />
+    <ClCompile Include="events\EventLisenter.cpp" />
+    <ClCompile Include="events\Streambuff.cpp" />
+    <ClCompile Include="IdWorker.cpp" />
+    <ClCompile Include="IniConfig.cpp" />
+    <ClCompile Include="Logger.cpp" />
+    <ClCompile Include="lua\LuaEngine.cpp" />
+    <ClCompile Include="lua\LuaWrapper.cpp" />
+    <ClCompile Include="net\AcceptHeartbeat.cpp" />
+    <ClCompile Include="net\AcceptNewFd.cpp" />
+    <ClCompile Include="net\AcceptReactorMgr.cpp" />
+    <ClCompile Include="net\ConnectEvent.cpp" />
+    <ClCompile Include="net\ConnectHeartbeat.cpp" />
+    <ClCompile Include="net\ConnectIoBuffer.cpp" />
+    <ClCompile Include="net\ConnectReactorMgr.cpp" />
+    <ClCompile Include="net\AcceptIoBuffer.cpp" />
+    <ClCompile Include="net\IPAddress.cpp" />
+    <ClCompile Include="net\ListenEvent.cpp" />
+    <ClCompile Include="net\ListenReactorMgr.cpp" />
+    <ClCompile Include="net\TimerEvent.cpp" />
+    <ClCompile Include="net\TimerReactorMgr.cpp" />
+    <ClCompile Include="pool\MysqlPool.cpp" />
+    <ClCompile Include="pool\ThreadPool.cpp" />
+    <ClCompile Include="protocol\FilterProces.cpp" />
+    <ClCompile Include="protocol\Http.cpp" />
+    <ClCompile Include="protocol\Request.cpp" />
+    <ClCompile Include="protocol\Responses.cpp" />
+    <ClCompile Include="protocol\Tcpip.cpp" />
+    <ClCompile Include="protocol\WebSocket.cpp" />
+    <ClCompile Include="task\AcceptReadIoTask.cpp" />
+    <ClCompile Include="task\ConnectReadIoTask.cpp" />
+    <ClCompile Include="task\NotifyTask.cpp" />
+    <ClCompile Include="task\Task.cpp" />
+    <ClCompile Include="task\TimerTask.cpp" />
+    <ClCompile Include="thread\AcceptThread.cpp" />
+    <ClCompile Include="thread\ConnectThread.cpp" />
+    <ClCompile Include="thread\InotifyThread.cpp" />
+    <ClCompile Include="thread\ListenThread.cpp" />
+    <ClCompile Include="thread\LuaThread.cpp" />
+    <ClCompile Include="thread\Thread.cpp" />
+    <ClCompile Include="thread\TimerThread.cpp" />
+    <ClCompile Include="thread\WorkThread.cpp" />
+    <ClCompile Include="Utility.cpp" />
+  </ItemGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|ARM'">
+    <Link>
+      <LibraryDependencies>jemalloc;event;event_pthreads;ssl;crypto;event_openssl;pthread;mysqlcppconn8;lua</LibraryDependencies>
+    </Link>
+    <ClCompile>
+      <AdditionalIncludeDirectories>$(SolutionDir)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>JEMALLOC_NO_DEMANGLE</PreprocessorDefinitions>
+    </ClCompile>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|ARM64'">
+    <Link>
+      <LibraryDependencies>jemalloc;event;event_pthreads;ssl;crypto;event_openssl;pthread;mysqlcppconn8;lua</LibraryDependencies>
+    </Link>
+    <ClCompile>
+      <AdditionalIncludeDirectories>$(SolutionDir)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>JEMALLOC_NO_DEMANGLE</PreprocessorDefinitions>
+    </ClCompile>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Link>
+      <LibraryDependencies>jemalloc;event;event_pthreads;ssl;crypto;event_openssl;pthread;mysqlcppconn8;lua</LibraryDependencies>
+    </Link>
+    <ClCompile>
+      <AdditionalIncludeDirectories>$(SolutionDir)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>JEMALLOC_NO_DEMANGLE</PreprocessorDefinitions>
+    </ClCompile>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x86'">
+    <Link>
+      <LibraryDependencies>jemalloc;event;event_pthreads;ssl;crypto;event_openssl;pthread;mysqlcppconn8;lua</LibraryDependencies>
+    </Link>
+    <ClCompile>
+      <AdditionalIncludeDirectories>$(SolutionDir)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>JEMALLOC_NO_DEMANGLE</PreprocessorDefinitions>
+    </ClCompile>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|ARM'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>$(SolutionDir)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>NDEBUG;JEMALLOC_NO_DEMANGLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+    <Link>
+      <LibraryDependencies>jemalloc;event;event_pthreads;ssl;crypto;event_openssl;pthread;mysqlcppconn8;lua</LibraryDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|ARM64'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>$(SolutionDir)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>NDEBUG;JEMALLOC_NO_DEMANGLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+    <Link>
+      <LibraryDependencies>jemalloc;event;event_pthreads;ssl;crypto;event_openssl;pthread;mysqlcppconn8;lua</LibraryDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>$(SolutionDir)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>NDEBUG;JEMALLOC_NO_DEMANGLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+    <Link>
+      <LibraryDependencies>jemalloc;event;event_pthreads;ssl;crypto;event_openssl;pthread;mysqlcppconn8;lua</LibraryDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x86'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>$(SolutionDir)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>NDEBUG;JEMALLOC_NO_DEMANGLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+    <Link>
+      <LibraryDependencies>jemalloc;event;event_pthreads;ssl;crypto;event_openssl;pthread;mysqlcppconn8;lua</LibraryDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets" />
+</Project>

@@ -1,0 +1,508 @@
+syntax = "proto3";
+package frmpub.protocc;
+
+enum AnimalMsgId {
+  ANIMALMSGID_BEGIN = 0;
+
+  CLIENT_ANIMAL_BEGIN = 1500;
+  LOGIN_CA_C = 1501;                    //登录
+  LOGIN_CA_S = 1502;
+  ENABLED_CA_C = 1503;                  //激活
+  ENABLED_CA_S = 1504;
+  SETWALLET_CA_C = 1505;                //钱包
+  SETWALLET_CA_S = 1506;
+  MYTEAM_CA_C = 1507;                   //我的团队
+  MYTEAM_CA_S = 1508;
+  DEPTH_LIST_CA_C = 1509;               //直推列表
+  DEPTH_LIST_CA_S = 1510;
+  IDCARD_CA_C = 1511;                   //身份认证
+  IDCARD_CA_S = 1512;
+  SIGN_CA_C = 1513;                     //签到            
+  SIGN_CA_S = 1514;
+  LOGIN_PWD_CA_C = 1515;                //修改密码
+  LOGIN_PWD_CA_S = 1516;
+  DISPATCH_COIN_LOG_CA_C = 1517;        //排单币日志
+  DISPATCH_COIN_LOG_CA_S = 1518;
+  RECHARGE_CA_C = 1519;                 //充值排单币和激活币
+  RECHARGE_CA_S = 1520;
+  TRANSFER_CA_C = 1521;                 //赠送排单币和激活币
+  TRANSFER_CA_S = 1522;
+  TRANSFER_CA_CS = 1523;                //推送排单币和激活币变化
+  ACTIVATED_COIN_LOG_CA_C = 1525;       //激活币日志
+  ACTIVATED_COIN_LOG_CA_S = 1526;
+  SELF_ASSETS_CA_C = 1527;              //我的资产
+  SELF_ASSETS_CA_S = 1528;
+  INCOME_LOG_CA_C = 1529;              //收益日志
+  INCOME_LOG_CA_S = 1530;
+  GETCONTRACT_CA_C = 1531;             //换购合约
+  GETCONTRACT_CA_S = 1532;
+  GET_COIN_CA_C = 1533;                //换购排单币和激活币
+  GET_COIN_CA_S = 1534;
+  MAIL_LIST_CA_C = 1535;                //邮件列表
+  MAIL_LIST_CA_S = 1536;    
+  MAIL_LOOK_CA_C = 1537;                //查看邮件
+  MAIL_LOOK_CA_S = 1538;
+  SMS_CA_C = 1539;                      //发送短信验证码
+  SMS_CA_S = 1540;
+  UPDATA_PWD_CA_C = 1541;              //更新交易或登录密码
+  UPDATA_PWD_CA_S = 1542;
+  OFFICIAL_INFO_CA_C = 1543;           //官方充值信息
+  OFFICIAL_INFO_CA_S = 1544;
+  REGISTER_CA_C = 1545;                //注册
+  REGISTER_CA_S = 1546;
+  BOOKING_LIST_CA_C = 1547;            //预约列表
+  BOOKING_LIST_CA_S = 1548;
+  CONTRACT_ROB_CA_C = 1549;            //合约抢购区
+  CONTRACT_ROB_CA_S = 1550;
+  BOOKING_CA_C = 1551;                 //预约
+  BOOKING_CA_S = 1552;
+  ROB_CA_C = 1553;                     //抢购
+  ROB_CA_S = 1554;              
+  ORDER_LIST_CA_C = 1555;              //抢单记录或转让记录
+  ORDER_LIST_CA_S = 1556;   
+  SELL_INFO_CA_C = 1557;               //卖方信息
+  SELL_INFO_CA_S = 1558;
+  PAY_ORDER_CA_C = 1559;               //支付订单
+  PAY_ORDER_CA_S = 1560;
+  BUY_INFO_CA_C = 1561;                //买家信息
+  BUY_INFO_CA_S = 1562;        
+  ORDER_OPER_CA_C = 1563;              //卖家订单操作
+  ORDER_OPER_CA_S = 1564;   
+  UPLOAD_CA_C = 1565;              //上传
+  UPLOAD_CA_S = 1566;   
+  USER_INFO_CA_C = 1567;           //查看基础用户信息
+  USER_INFO_CA_S = 1568;            
+  CLIENT_ANIMAL_END = 2000;
+
+  ANIMALMSGID_END = 5000;
+}
+
+message login_ca_c {
+    int64  phone  = 1;
+    string pwd = 2;
+}
+
+message login_ca_s {
+    int32 result = 1;//0成功,1账号密码错误,2已封号,3预约未抢购封号,4支付超时封号
+    int32 activated_coin = 2;//激活币
+    int32 dispatch_coin = 3;//派单币
+    float static_income = 4;//累计静态收益
+    float promote_income = 5;//累计推广收益
+    float team_income = 6;//累计团队收益
+    bool enable = 7; //是否激活
+    float assets = 8;//我的资产
+    int32 level = 9; //等级
+    int32 name_verifie = 10; //实名认证 1.未提交,2已提交,3已认证
+    int32 pay_verifie = 11; //支付认证 1.未提交,2已提交,3已认证
+    string nichen = 12; //昵称
+    string bank_name = 13;//银行名称
+    string bank_cardid = 14;//银行卡
+    string bank_user_name = 15;//银行开户名
+    string ailpay_id = 16;//支付宝账号
+    string alipay_name = 17;//支付宝名称
+    string webchat_name = 18;//微信
+    string name = 19; //真实姓名
+    string idcard = 20; //身份证
+    float promote_current_income = 21; //当前推广收益
+    float team_current_income = 22; //当前团队收益
+    int32 sign_time = 23; //签到时间
+    string invite = 24;//邀请码
+}
+
+message enabled_ca_s
+{
+    int32 result = 1;//0成功,1激活币不足,2已激活
+    int32 activated_coin = 2;//当前激活币
+}
+
+message setwallet_ca_c
+{
+    string bank_name = 1;
+    string bank_cardid = 2;
+    string bank_user_name = 3;
+    string ailpay_id = 4;
+    string alipay_name = 5;
+    string webchat_name = 6;
+}
+
+message setwallet_ca_s
+{
+    int32 result = 1;//0成功,1失败
+    int32 pay_verifie = 2; //是否支付认证 1.未提交,2已提交,3已认证
+}
+
+message myteam_ca_s
+{
+    float team_total_assets = 1; //团队总资产
+    int32 team_total_activated_num = 2;//团队激活玩家总数量
+    int32 team_total_register_num = 3;//团队注册玩家总数量
+    int32 depth1_total_activated_num = 4;//直推激活玩家总数量
+    int32 depth1_total_register_num = 5;///直推注册玩家总数量
+    int32 depth2_total_activated_num = 6;//二级激活玩家总数量
+    int32 depth2_total_register_num = 7;///二级注册玩家总数量
+    int32 depth3_total_activated_num = 8;//三级激活玩家总数量
+    int32 depth3_total_register_num = 9;///三级注册玩家总数量
+}
+
+message depth_list_ca_s
+{
+    message item
+    {
+        string nc = 1; //昵称
+        int32 num = 2; //直推人数
+        float assets = 3; //合约资产
+    }
+
+    repeated  item sifs  = 1;
+}
+
+message idcard_ca_c
+{
+    string name = 1; //真实姓名
+    string idcard = 2; //身份证
+}
+
+message idcard_ca_s
+{
+    int32 result = 1;//0成功,1失败
+    int32 name_verifie = 2; //是否实名认证 1.未提交,2已提交,3已认证
+}
+
+message sign_ca_s
+{
+    int32 result = 1;//0成功,1失败
+    int32 dispatch_coin = 2;//最新派单币
+}
+
+message login_pwd_ca_c
+{
+    string source_pwd = 1;
+    string target_pwd = 2;
+}
+
+message login_pwd_ca_s
+{
+    int32 result = 1;//0成功,1失败
+}
+
+message dispatch_coin_log_ca_s
+{
+    message item{
+        int32 id = 1; //日志id
+        int64 time = 2; //变化时间
+        int32 type = 3; //变化类型,1充值,2其他玩家赠送,3签到,4预约消耗,5抢购消耗,6赠送给其他玩家,7抢购失败退还,8系统赠送,9推广兑换,10团队兑换
+        int64 target_phone = 4;//目标电话
+        int32 num = 5;//变化数量
+        int32 contract_type = 6;//合约类型
+    }
+
+     repeated  item its  = 1;
+}
+
+message recharge_ca_c
+{
+    int32 type = 1;//类型1排单币,2激活币
+    int32 num = 2;  //数量
+    float rmb = 3; //人民币
+    string paycert = 4;//支付凭证文件名
+}
+
+message recharge_ca_s
+{
+    int32 result = 1;//0成功,1失败
+}
+
+message transfer_ca_c
+{
+     int32 type = 1;//类型1排单币,2激活币
+     int32 num = 2;//赠送数量
+     int64 target_phone = 3; //目标手机
+     int32 trade_code = 4;//交易码
+}
+
+message transfer_ca_s
+{
+    int32 result = 1;//0成功,1数量不足,2对方手机号不存在,3不能赠送给自己,4交易码错误,5类型不对
+    int32 type = 2;//类型1排单币,2激活币
+    int32 curr_num = 3;//当前数量
+}
+
+message transfer_ca_cs
+{
+    int32 type = 1;//类型1排单币,2激活币
+    int32 curr_num = 2;//当前数量
+}
+
+message activated_coin_log_ca_s
+{
+    message item{
+        int32 id = 1; //日志id
+        int64 time = 2; //变化时间
+        int32 type = 3; //变化类型,1充值,2其他玩家赠送,3激活消耗,4赠送给其他玩家,5系统赠送,6推广兑换,7团队兑换
+        int64 target_phone = 4;//目标电话
+        int32 num = 5;//变化数量
+    }
+
+    repeated  item its  = 1;
+}
+
+message self_assets_ca_s
+{
+    message item{
+        int32 type = 1;//资产类型
+        float price = 2; //价值
+        int32 time = 3; //获得时间戳
+        int32 getway = 4; //获得合约途径(1.推广兑换,2.团队兑换,3.抢购,4.系统)
+    }
+
+    repeated  item its  = 1;
+}
+
+message income_log_ca_c
+{
+    int32 type = 1; //收益类型,1.静态收益,2.推广收益,3.团队收益
+}
+
+message income_log_ca_s
+{
+    message item{
+        int32 type = 1;//资产类型
+        float price = 2; //价值
+        int32 time = 3; //获得时间戳
+        int32 depth = 4; //层级
+        int64 target_phone = 5;//下级电话
+    }
+
+    repeated  item its  = 1;
+}
+
+message getcontract_ca_c
+{
+    float price = 1; //价格
+    int32 contract_type = 2; //合约类型
+    int32 change_type = 3; //换购类型,1推广,2团队
+    int32 trade_code = 4;//交易码
+}
+
+message getcontract_ca_s
+{
+    int32 result = 1; //0成功,1价格错误,2类型错误,3收益不足,4交易码错误
+    float income = 2; //当前收益
+    int32 change_type = 3; //换购类型,1推广,2团队
+}
+
+message get_coin_ca_c
+{
+    int32 num = 1; //换购数量
+    int32 change_type = 2; //换购类型,1推广,2团队
+    int32 coin_type = 3; //1排单币,2激活币
+    int32 trade_code = 4;//交易码
+}
+
+message get_coin_ca_s
+{
+    int32 result = 1; //0成功,1收益不足,2类型错误,3交易码错误
+    float income = 2; //当前收益
+    int32 change_type = 3; //换购类型,1推广,2团队
+    int32 coin_type = 4; //1排单币,2激活币
+    int32 coin_value = 5; //当前币值
+}
+
+message mail_list_ca_s
+{
+    message item{
+        int32 id = 1;//邮件id
+        string topic = 2; //标题
+        string info = 3; //内容
+        int32 time = 4; //创建时间戳
+        int32 state = 5; //0未读,1已读
+    }
+    repeated  item its  = 1;
+}
+
+message mail_look_ca_c
+{
+    int32 id = 1;//邮件id
+}
+
+message mail_look_ca_s
+{
+    int32 result = 1; //0成功,1失败
+    int32 id = 2;//邮件id
+    int32 state = 3; //0未读,1已读
+}
+
+message sms_ca_c
+{
+    int64 phone = 1;
+}
+
+message sms_ca_s
+{
+    int32 result = 1; //0成功,1失败
+    int32 code = 2; //新验证码
+}
+
+message updata_pwd_ca_c
+{
+    int32 code = 1; //验证码
+    string newpwd = 2; //交易密码
+    int32 type = 3; //1交易密码,2登录密码
+    int64 phone = 4;
+}
+
+message updata_pwd_ca_s
+{
+    int32 result = 1; //0成功,1验证码错误,2验证码过期
+    int32 type = 2; //1交易密码,2登录密码
+}
+
+message official_info_ca_s{
+    string ailpay_name = 1; //官方支付宝充值姓名
+    string ailpay_account = 2; //官方支付宝账号
+    string ail_qr = 3; //官方支付宝二维码
+    string bank_card = 4; //官方银行卡号
+    string bank_name = 5;//官方开户行
+    string bank_account = 6;//官方银行开户姓名
+}
+
+message register_ca_c{
+    int64 phone = 1; //电话号码
+    int32 code = 2; //验证码
+    string nichen = 3; //昵称
+    string pwd = 4;//登录密码
+    int32  trade = 5;//交易密码
+    string invite = 6; //邀请码
+}
+
+message register_ca_s{
+    int32 result = 1; //0成功,1验证码错误,2邀请码错误,3已注册,4验证过期
+}
+
+message booking_list_ca_s{
+    message item{
+        int32 id = 1;//预约id
+        int32 contract_type = 2; //合约类型
+        int32 time = 3; //当前预约时间
+    }
+    repeated  item its  = 1;
+}
+
+message contract_rob_ca_s{
+    message item{
+        int32 contract_type = 1; //合约类型
+        int32 rob = 2; //是否已预约,0未预约,1预约
+    }
+    repeated  item its  = 1;
+}
+
+message booking_ca_c
+{
+    int32 contract_type = 1; //合约类型
+}
+
+message booking_ca_s{
+    int32 result = 1; //0成功,1已预约,2未激活,3未实名,4未认证,5预约已截至,6排单币不足,7合约不存在
+    int32 curr_dispatch_coin = 2; //当前排单币
+}
+
+message rob_ca_c{
+    int32 contract_type = 1;    //合约类型
+}
+
+message rob_ca_s{
+    int32 result = 1; //结果,0成功,1不在时间内,2不能重复抢购,3排单币不足,4未激活,5未实名,6未认证,7抢购失败
+    int32 curr_dispatch_coin = 2; //当前排单币
+}
+
+message order_list_ca_c
+{
+     int32 type = 1; //1抢单记录,2转让记录
+}
+
+message order_list_ca_s{
+    message item{
+        int64 id = 1; //订单编号
+        int32 contract_type = 2; //合约类型
+        int32 robtime = 3; //抢单时间
+        int32 paytime = 4; //支付时间
+        int32 oktime = 5; //确认时间
+        int32 state = 6; //1.未支付,2未确认,3已完成,4申诉中,5取消
+        int64 sell_phone = 7; //卖方电话
+        int64 buy_phone = 8; //买方电话
+        float price = 9;//支付价值
+    }
+
+    int32 type = 1; //1抢单记录,2转让记录
+    repeated  item its  = 2;
+}
+
+message sell_info_ca_c{
+    int64 sell_phone = 1;//卖方电话
+}
+
+message sell_info_ca_s{
+    string nichen = 1; //昵称
+    int64 sell_phone = 2;//卖方电话 
+    string bank_name = 3;//银行名称
+    string bank_cardid = 4;//银行卡
+    string bank_user_name = 5;//银行开户名
+    string ailpay_id = 6;//支付宝账号
+    string alipay_name = 7;//支付宝名称
+    string webchat_name = 8;//微信
+}
+
+message pay_order_ca_c{
+    int64 order_id = 1;//订单编号
+    string pay_voucher = 2;//支付凭证
+}
+
+message pay_order_ca_s{
+    int32 result = 1; //0成功,1失败
+}
+
+message buy_info_ca_c{
+     int64 order_id = 1;//订单编号
+}
+
+message buy_info_ca_s{
+    string nichen = 1; //买家昵称
+    int64 phone = 2;//买家电话
+    string pay_voucher = 3;//支付凭证
+}
+
+message order_oper_ca_c{
+    int64 order_id = 1;//订单编号
+    int32 oper_type = 2; //1确认,2申诉
+    int32 trade_code = 3;//交易密码
+}
+
+message order_oper_ca_s{
+    int32 result = 1; //0成功,1失败,2交易密码错误
+    int32 oper_type = 2; //1确认,2申诉
+}
+
+message upload_ca_c{
+    string name = 1;//上传文件名
+    bytes data  = 2;//内容
+}
+
+message upload_ca_s{
+    int32 result = 1; //0成功,1失败
+}
+
+message user_info_ca_c{
+    int64 phone = 1;
+}
+
+message user_info_ca_s{
+    int64 phone = 1;
+    int32 activated_coin = 2;//激活币
+    int32 dispatch_coin = 3;//派单币
+    float static_income = 4;//累计静态收益
+    float promote_income = 5;//累计推广收益
+    float team_income = 6;//累计团队收益
+    float promote_current_income = 7; //当前推广收益
+    float team_current_income = 8; //当前团队收益
+    float assets = 9;//我的资产
+}

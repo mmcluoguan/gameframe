@@ -1,0 +1,7 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="远程调试" type="lua.mobdebug" factoryName="Lua Remote(Mobdebug)" editBeforeRun="true" singleton="false">
+    <module name="lua" />
+    <option name="PORT" value="8172" />
+    <method v="2" />
+  </configuration>
+</component>

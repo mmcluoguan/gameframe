@@ -1,0 +1,137 @@
+﻿#include "login/LoginClient.h"
+#include <cstring>
+#include "shynet/lua/LuaEngine.h"
+#include "shynet/Logger.h"
+#include "shynet/Utility.h"
+#include "frmpub/LuaCallBackTask.h"
+#include "frmpub/protocc/gate.pb.h"
+#include "frmpub/protocc/client.pb.h"
+#include "login/ConnectorMgr.h"
+#include "login/LoginClientMgr.h"
+
+namespace login {
+	LoginClient::LoginClient(std::shared_ptr<net::IPAddress> remote_addr,
+		std::shared_ptr<net::IPAddress> listen_addr,
+		std::shared_ptr<events::EventBuffer> iobuf)
+		: frmpub::Client(remote_addr, listen_addr, iobuf) {
+		LOG_INFO << "新客户端连接 [ip:" << remote_addr->ip() << ":" << remote_addr->port() << "]";
+
+		pmb_ = {
+			{
+				protocc::ERRCODE,
+				std::bind(&LoginClient::errcode,this,std::placeholders::_1,std::placeholders::_2)
+			},
+			{
+				protocc::REGISTER_GATE_LOGIN_C,
+				std::bind(&LoginClient::register_gate_login_c,this,std::placeholders::_1,std::placeholders::_2)
+			},
+			{
+				protocc::LOGIN_CLIENT_GATE_C,
+				std::bind(&LoginClient::forward_client_gate_c,this,std::placeholders::_1,std::placeholders::_2)
+			},
+			{
+				protocc::RECONNECT_CLIENT_GATE_C,
+				std::bind(&LoginClient::forward_client_gate_c,this,std::placeholders::_1,std::placeholders::_2)
+			},
+			{
+				protocc::CLIOFFLINE_GATE_ALL_C,
+				std::bind(&LoginClient::clioffline_gate_all_c,this,std::placeholders::_1,std::placeholders::_2)
+			},
+		};
+	}
+
+	LoginClient::~LoginClient() {
+		std::string str;
+		if (active()) {
+			str = "服务器login主动关闭连接";
+		}
+		else {
+			str = frmpub::Basic::connectname(sif().st()) + "客户端主动关闭连接";
+		}
+		LOG_INFO << str << "[ip:" << remote_addr()->ip() << ":" << remote_addr()->port() << "]";
+	}
+
+	int LoginClient::input_handle(std::shared_ptr<protocc::CommonObject> obj, std::shared_ptr<std::stack<FilterData::Envelope>> enves) {
+		if (obj != nullptr) {
+			auto it = pmb_.find(obj->msgid());
+			if (it != pmb_.end()) {
+				return it->second(obj, enves);
+			}
+			else {
+				//通知lua的onMessage函数
+				shynet::Singleton<lua::LuaEngine>::get_instance().append(
+					std::make_shared<frmpub::OnMessageTask<LoginClient>>(shared_from_this(), obj, enves));
+			}
+		}
+		return 0;
+	}
+
+	void LoginClient::close(bool active) {
+		frmpub::Client::close(active);
+		shynet::Singleton<LoginClientMgr>::instance().remove(iobuf()->fd());
+	}
+
+	int LoginClient::errcode(std::shared_ptr<protocc::CommonObject> data, std::shared_ptr<std::stack<FilterData::Envelope>> enves) {
+		protocc::errcode err;
+		if (err.ParseFromString(data->msgdata()) == true) {
+			LOG_DEBUG << "错误码:" << err.code() << " 描述:" << err.desc();
+		}
+		else {
+			std::stringstream stream;
+			stream << "消息" << frmpub::Basic::msgname(data->msgid()) << "解析错误";
+			SEND_ERR(protocc::MESSAGE_PARSING_ERROR, stream.str());
+		}
+		return 0;
+	}
+
+	int LoginClient::register_gate_login_c(std::shared_ptr<protocc::CommonObject> data,
+		std::shared_ptr<std::stack<FilterData::Envelope>> enves) {
+		protocc::register_gate_login_c msgc;
+		if (msgc.ParseFromString(data->msgdata()) == true) {
+			LOG_DEBUG << frmpub::Basic::connectname(protocc::ServerType::GATE) << "注册"
+				<< " sid:" << msgc.sif().sid() << " ["
+				<< msgc.sif().ip() << ":" << msgc.sif().port() << "]";
+			sif(msgc.sif());
+			protocc::register_gate_login_s msgs;
+			msgs.set_result(0);
+			send_proto(protocc::REGISTER_GATE_LOGIN_S, &msgs);
+		}
+		else {
+			std::stringstream stream;
+			stream << "消息" << frmpub::Basic::msgname(data->msgid()) << "解析错误";
+			SEND_ERR(protocc::MESSAGE_PARSING_ERROR, stream.str());
+		}
+		return 0;
+	}
+
+	int LoginClient::forward_client_gate_c(std::shared_ptr<protocc::CommonObject> data,
+		std::shared_ptr<std::stack<FilterData::Envelope>> enves) {
+		std::shared_ptr<DbConnector> db = shynet::Singleton<ConnectorMgr>::instance().db_connector();
+		if (db != nullptr) {
+			FilterData::Envelope enve;
+			enve.fd = iobuf()->fd();
+			enve.addr = *remote_addr()->sockaddr();
+			enves->push(enve);
+			db->send_proto(data.get(), enves.get());
+			LOG_DEBUG << "转发消息" << frmpub::Basic::msgname(data->msgid())
+				<< "到dbvisit[" << db->connect_addr()->ip() << ":"
+				<< db->connect_addr()->port() << "]";
+		}
+		else {
+			SEND_ERR_EX(protocc::DBVISIT_NOT_EXIST, "没有可选的db连接", enves.get());
+		}
+		return 0;
+	}
+	int LoginClient::clioffline_gate_all_c(std::shared_ptr<protocc::CommonObject> data, std::shared_ptr<std::stack<FilterData::Envelope>> enves) {
+		protocc::clioffline_gate_all_c msgc;
+		if (msgc.ParseFromString(data->msgdata()) == true) {
+
+		}
+		else {
+			std::stringstream stream;
+			stream << "消息" << frmpub::Basic::msgname(data->msgid()) << "解析错误";
+			SEND_ERR(protocc::MESSAGE_PARSING_ERROR, stream.str());
+		}
+		return 0;
+	}
+}

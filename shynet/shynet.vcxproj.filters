@@ -1,0 +1,355 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="IniConfig.cpp" />
+    <ClCompile Include="Logger.cpp" />
+    <ClCompile Include="Utility.cpp" />
+    <ClCompile Include="pool\ThreadPool.cpp">
+      <Filter>pool</Filter>
+    </ClCompile>
+    <ClCompile Include="net\IPAddress.cpp">
+      <Filter>net</Filter>
+    </ClCompile>
+    <ClCompile Include="events\EventBase.cpp">
+      <Filter>events</Filter>
+    </ClCompile>
+    <ClCompile Include="events\EventBuffer.cpp">
+      <Filter>events</Filter>
+    </ClCompile>
+    <ClCompile Include="events\EventBufferFilter.cpp">
+      <Filter>events</Filter>
+    </ClCompile>
+    <ClCompile Include="events\EventBufferSsl.cpp">
+      <Filter>events</Filter>
+    </ClCompile>
+    <ClCompile Include="events\EventConfig.cpp">
+      <Filter>events</Filter>
+    </ClCompile>
+    <ClCompile Include="events\EventConnector.cpp">
+      <Filter>events</Filter>
+    </ClCompile>
+    <ClCompile Include="events\EventHandler.cpp">
+      <Filter>events</Filter>
+    </ClCompile>
+    <ClCompile Include="events\EventLisenter.cpp">
+      <Filter>events</Filter>
+    </ClCompile>
+    <ClCompile Include="events\Streambuff.cpp">
+      <Filter>events</Filter>
+    </ClCompile>
+    <ClCompile Include="net\AcceptNewFd.cpp">
+      <Filter>net\accept</Filter>
+    </ClCompile>
+    <ClCompile Include="net\AcceptReactorMgr.cpp">
+      <Filter>net\accept</Filter>
+    </ClCompile>
+    <ClCompile Include="net\AcceptIoBuffer.cpp">
+      <Filter>net\accept</Filter>
+    </ClCompile>
+    <ClCompile Include="net\ListenReactorMgr.cpp">
+      <Filter>net\listen</Filter>
+    </ClCompile>
+    <ClCompile Include="net\ListenEvent.cpp">
+      <Filter>net\listen</Filter>
+    </ClCompile>
+    <ClCompile Include="net\TimerReactorMgr.cpp">
+      <Filter>net\timer</Filter>
+    </ClCompile>
+    <ClCompile Include="net\TimerEvent.cpp">
+      <Filter>net\timer</Filter>
+    </ClCompile>
+    <ClCompile Include="net\ConnectIoBuffer.cpp">
+      <Filter>net\connect</Filter>
+    </ClCompile>
+    <ClCompile Include="net\ConnectEvent.cpp">
+      <Filter>net\connect</Filter>
+    </ClCompile>
+    <ClCompile Include="net\ConnectReactorMgr.cpp">
+      <Filter>net\connect</Filter>
+    </ClCompile>
+    <ClCompile Include="protocol\FilterProces.cpp">
+      <Filter>protocol</Filter>
+    </ClCompile>
+    <ClCompile Include="protocol\Http.cpp">
+      <Filter>protocol</Filter>
+    </ClCompile>
+    <ClCompile Include="protocol\Request.cpp">
+      <Filter>protocol</Filter>
+    </ClCompile>
+    <ClCompile Include="protocol\Responses.cpp">
+      <Filter>protocol</Filter>
+    </ClCompile>
+    <ClCompile Include="protocol\Tcpip.cpp">
+      <Filter>protocol</Filter>
+    </ClCompile>
+    <ClCompile Include="protocol\WebSocket.cpp">
+      <Filter>protocol</Filter>
+    </ClCompile>
+    <ClCompile Include="thread\ListenThread.cpp">
+      <Filter>thread</Filter>
+    </ClCompile>
+    <ClCompile Include="thread\Thread.cpp">
+      <Filter>thread</Filter>
+    </ClCompile>
+    <ClCompile Include="thread\AcceptThread.cpp">
+      <Filter>thread</Filter>
+    </ClCompile>
+    <ClCompile Include="thread\WorkThread.cpp">
+      <Filter>thread</Filter>
+    </ClCompile>
+    <ClCompile Include="thread\TimerThread.cpp">
+      <Filter>thread</Filter>
+    </ClCompile>
+    <ClCompile Include="thread\ConnectThread.cpp">
+      <Filter>thread</Filter>
+    </ClCompile>
+    <ClCompile Include="thread\LuaThread.cpp">
+      <Filter>thread</Filter>
+    </ClCompile>
+    <ClCompile Include="lua\LuaEngine.cpp">
+      <Filter>lua</Filter>
+    </ClCompile>
+    <ClCompile Include="pool\MysqlPool.cpp">
+      <Filter>pool</Filter>
+    </ClCompile>
+    <ClCompile Include="lua\LuaWrapper.cpp">
+      <Filter>lua</Filter>
+    </ClCompile>
+    <ClCompile Include="thread\InotifyThread.cpp">
+      <Filter>thread</Filter>
+    </ClCompile>
+    <ClCompile Include="task\Task.cpp">
+      <Filter>task</Filter>
+    </ClCompile>
+    <ClCompile Include="task\TimerTask.cpp">
+      <Filter>task</Filter>
+    </ClCompile>
+    <ClCompile Include="task\ConnectReadIoTask.cpp">
+      <Filter>task</Filter>
+    </ClCompile>
+    <ClCompile Include="task\AcceptReadIoTask.cpp">
+      <Filter>task</Filter>
+    </ClCompile>
+    <ClCompile Include="net\AcceptHeartbeat.cpp">
+      <Filter>net\timer</Filter>
+    </ClCompile>
+    <ClCompile Include="net\ConnectHeartbeat.cpp">
+      <Filter>net\timer</Filter>
+    </ClCompile>
+    <ClCompile Include="task\NotifyTask.cpp">
+      <Filter>task</Filter>
+    </ClCompile>
+    <ClCompile Include="IdWorker.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="IniConfig.h" />
+    <ClInclude Include="Logger.h" />
+    <ClInclude Include="Utility.h" />
+    <ClInclude Include="Singleton.h" />
+    <ClInclude Include="Basic.h" />
+    <ClInclude Include="pool\ThreadPool.h">
+      <Filter>pool</Filter>
+    </ClInclude>
+    <ClInclude Include="net\IPAddress.h">
+      <Filter>net</Filter>
+    </ClInclude>
+    <ClInclude Include="events\EventBase.h">
+      <Filter>events</Filter>
+    </ClInclude>
+    <ClInclude Include="events\EventBuffer.h">
+      <Filter>events</Filter>
+    </ClInclude>
+    <ClInclude Include="events\EventBufferFilter.h">
+      <Filter>events</Filter>
+    </ClInclude>
+    <ClInclude Include="events\EventBufferSsl.h">
+      <Filter>events</Filter>
+    </ClInclude>
+    <ClInclude Include="events\EventConfig.h">
+      <Filter>events</Filter>
+    </ClInclude>
+    <ClInclude Include="events\EventConnector.h">
+      <Filter>events</Filter>
+    </ClInclude>
+    <ClInclude Include="events\EventHandler.h">
+      <Filter>events</Filter>
+    </ClInclude>
+    <ClInclude Include="events\EventLisenter.h">
+      <Filter>events</Filter>
+    </ClInclude>
+    <ClInclude Include="events\Streambuff.h">
+      <Filter>events</Filter>
+    </ClInclude>
+    <ClInclude Include="net\AcceptNewFd.h">
+      <Filter>net\accept</Filter>
+    </ClInclude>
+    <ClInclude Include="net\AcceptReactorMgr.h">
+      <Filter>net\accept</Filter>
+    </ClInclude>
+    <ClInclude Include="net\AcceptIoBuffer.h">
+      <Filter>net\accept</Filter>
+    </ClInclude>
+    <ClInclude Include="net\ListenReactorMgr.h">
+      <Filter>net\listen</Filter>
+    </ClInclude>
+    <ClInclude Include="net\ListenEvent.h">
+      <Filter>net\listen</Filter>
+    </ClInclude>
+    <ClInclude Include="net\TimerReactorMgr.h">
+      <Filter>net\timer</Filter>
+    </ClInclude>
+    <ClInclude Include="net\TimerEvent.h">
+      <Filter>net\timer</Filter>
+    </ClInclude>
+    <ClInclude Include="net\ConnectIoBuffer.h">
+      <Filter>net\connect</Filter>
+    </ClInclude>
+    <ClInclude Include="net\ConnectEvent.h">
+      <Filter>net\connect</Filter>
+    </ClInclude>
+    <ClInclude Include="net\ConnectReactorMgr.h">
+      <Filter>net\connect</Filter>
+    </ClInclude>
+    <ClInclude Include="crypto\Sha1.h">
+      <Filter>crypto</Filter>
+    </ClInclude>
+    <ClInclude Include="crypto\Base64.h">
+      <Filter>crypto</Filter>
+    </ClInclude>
+    <ClInclude Include="protocol\FilterProces.h">
+      <Filter>protocol</Filter>
+    </ClInclude>
+    <ClInclude Include="protocol\Http.h">
+      <Filter>protocol</Filter>
+    </ClInclude>
+    <ClInclude Include="protocol\Request.h">
+      <Filter>protocol</Filter>
+    </ClInclude>
+    <ClInclude Include="protocol\Responses.h">
+      <Filter>protocol</Filter>
+    </ClInclude>
+    <ClInclude Include="protocol\Tcpip.h">
+      <Filter>protocol</Filter>
+    </ClInclude>
+    <ClInclude Include="protocol\WebSocket.h">
+      <Filter>protocol</Filter>
+    </ClInclude>
+    <ClInclude Include="crypto\Url.h">
+      <Filter>crypto</Filter>
+    </ClInclude>
+    <ClInclude Include="fflua\fflua.h">
+      <Filter>fflua</Filter>
+    </ClInclude>
+    <ClInclude Include="fflua\fflua_register.h">
+      <Filter>fflua</Filter>
+    </ClInclude>
+    <ClInclude Include="fflua\fflua_type.h">
+      <Filter>fflua</Filter>
+    </ClInclude>
+    <ClInclude Include="thread\ListenThread.h">
+      <Filter>thread</Filter>
+    </ClInclude>
+    <ClInclude Include="thread\Thread.h">
+      <Filter>thread</Filter>
+    </ClInclude>
+    <ClInclude Include="thread\AcceptThread.h">
+      <Filter>thread</Filter>
+    </ClInclude>
+    <ClInclude Include="thread\WorkThread.h">
+      <Filter>thread</Filter>
+    </ClInclude>
+    <ClInclude Include="thread\TimerThread.h">
+      <Filter>thread</Filter>
+    </ClInclude>
+    <ClInclude Include="thread\ConnectThread.h">
+      <Filter>thread</Filter>
+    </ClInclude>
+    <ClInclude Include="thread\LuaThread.h">
+      <Filter>thread</Filter>
+    </ClInclude>
+    <ClInclude Include="lua\LuaEngine.h">
+      <Filter>lua</Filter>
+    </ClInclude>
+    <ClInclude Include="pool\MysqlPool.h">
+      <Filter>pool</Filter>
+    </ClInclude>
+    <ClInclude Include="kaguya\kaguya.hpp">
+      <Filter>kaguya</Filter>
+    </ClInclude>
+    <ClInclude Include="kaguya\preprocess.hpp">
+      <Filter>kaguya</Filter>
+    </ClInclude>
+    <ClInclude Include="lua\LuaWrapper.h">
+      <Filter>lua</Filter>
+    </ClInclude>
+    <ClInclude Include="thread\InotifyThread.h">
+      <Filter>thread</Filter>
+    </ClInclude>
+    <ClInclude Include="task\Task.h">
+      <Filter>task</Filter>
+    </ClInclude>
+    <ClInclude Include="task\TimerTask.h">
+      <Filter>task</Filter>
+    </ClInclude>
+    <ClInclude Include="task\ConnectReadIoTask.h">
+      <Filter>task</Filter>
+    </ClInclude>
+    <ClInclude Include="task\AcceptReadIoTask.h">
+      <Filter>task</Filter>
+    </ClInclude>
+    <ClInclude Include="net\AcceptHeartbeat.h">
+      <Filter>net\timer</Filter>
+    </ClInclude>
+    <ClInclude Include="net\ConnectHeartbeat.h">
+      <Filter>net\timer</Filter>
+    </ClInclude>
+    <ClInclude Include="task\NotifyTask.h">
+      <Filter>task</Filter>
+    </ClInclude>
+    <ClInclude Include="IdWorker.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="pool">
+      <UniqueIdentifier>{3fc3dd56-be07-4861-ae6b-bc20e7d9d50c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="net">
+      <UniqueIdentifier>{f7cdf704-2ecd-4406-9d48-4a9889d86b55}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="events">
+      <UniqueIdentifier>{f6d87736-e8c7-4ae5-8e12-be05a1352281}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="net\accept">
+      <UniqueIdentifier>{aa7f0b34-fe72-4d65-96ab-f270f67ca09a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="net\listen">
+      <UniqueIdentifier>{88c31776-8da6-4340-b974-e35fc422c22d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="net\timer">
+      <UniqueIdentifier>{e450fb1d-d19f-4f82-8bc4-d2813654565c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="net\connect">
+      <UniqueIdentifier>{d706a91b-9c3e-4ad3-a68c-d8cda8663a0b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="crypto">
+      <UniqueIdentifier>{f1266e77-80f5-4140-8356-46ee62856c89}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="protocol">
+      <UniqueIdentifier>{9b71b6b2-b942-4737-beb5-76f80f79d12a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="fflua">
+      <UniqueIdentifier>{b6c925f6-cbe8-4a4d-bcbe-c6ae7ff19d5f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="thread">
+      <UniqueIdentifier>{4658e87f-753d-491a-b571-a19656fcda3f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="lua">
+      <UniqueIdentifier>{577a98c2-f0c1-46ce-a230-02029308ab7a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="kaguya">
+      <UniqueIdentifier>{4817fff1-b5c4-4b4c-8fb4-eb8b2b831099}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="task">
+      <UniqueIdentifier>{e2b3b197-8b3f-41c7-9bca-b2ca178ee547}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

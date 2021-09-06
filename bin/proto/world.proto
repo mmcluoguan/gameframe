@@ -1,0 +1,17 @@
+syntax = "proto3";
+import "common.proto";
+package frmpub.protocc;
+
+//世界服向数据服注册
+message register_world_dbvisit_c {
+    ServerInfo sif  = 1;
+}
+
+message register_world_dbvisit_s {
+    int32 result  = 1; //0成功,1已注册
+}
+
+//通知网关服其他服务器上线
+message seronline_world_gate_g {
+    ServerInfo sif  = 1;
+}

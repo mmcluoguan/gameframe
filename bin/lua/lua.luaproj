@@ -1,0 +1,79 @@
+﻿<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>E439935D-B2A2-46AE-856D-2AA408428F33</ProjectGuid>
+    <!--fb6853d3-36e6-4a90-ab57-45224f4c16b0-->
+    <ProjectHome>.</ProjectHome>
+    <StartupFile>
+    </StartupFile>
+    <SearchPath>
+    </SearchPath>
+    <WorkingDirectory>.</WorkingDirectory>
+    <OutputPath>.</OutputPath>
+    <Name>lua</Name>
+    <RootNamespace>lua</RootNamespace>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
+    <DebugSymbols>true</DebugSymbols>
+    <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
+    <DebugSymbols>true</DebugSymbols>
+    <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
+  </PropertyGroup>
+  <ItemGroup>
+    <Folder Include="client\" />
+    <Folder Include="common\" />
+    <Folder Include="config\" />
+    <Folder Include="dbvisit\" />
+    <Folder Include="gate\" />
+    <Folder Include="login\" />
+    <Folder Include="game\" />
+    <Folder Include="world\" />
+    <Folder Include="pb\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="client\example.lua" />
+    <Compile Include="client\test.lua" />
+    <Compile Include="common\baseNet.lua" />
+    <Compile Include="common\hotfix.lua" />
+    <Compile Include="common\luaunit.lua" />
+    <Compile Include="common\serpent.lua" />
+    <Compile Include="common\strings.lua" />
+    <Compile Include="config\user_skill.lua" />
+    <Compile Include="dbvisit\test.lua" />
+    <Compile Include="dbvisit\db_main.lua" />
+    <Compile Include="dbvisit\test1.lua">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="game\acceptMgr.lua">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="game\connectorMgr.lua">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="game\gameClient.lua">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="game\game_main.lua" />
+    <Compile Include="gate\gate_main.lua" />
+    <Compile Include="login\login_main.lua" />
+    <Compile Include="world\world_main.lua">
+      <SubType>Code</SubType>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="pb\animal.pb" />
+    <Content Include="pb\backend.pb" />
+    <Content Include="pb\client.pb" />
+    <Content Include="pb\common.pb" />
+    <Content Include="pb\game.pb" />
+    <Content Include="pb\gate.pb" />
+    <Content Include="pb\internal.pb" />
+    <Content Include="pb\login.pb" />
+    <Content Include="pb\registered.pb" />
+    <Content Include="pb\world.pb" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.Common.targets" />
+</Project>

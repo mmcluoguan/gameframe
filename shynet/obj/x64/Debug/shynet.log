@@ -1,0 +1,10 @@
+﻿  正在验证源
+  正在将源远程复制到“172.28.10.65”
+  正在验证体系结构
+  正在验证体系结构
+  正在启动远程生成
+  正在编译源:
+  Tcpip.cpp
+  WebSocket.cpp
+  正在链接对象
+  shynet.vcxproj -> D:\bak\gameframe\libs\libshynet.so.1.0.1

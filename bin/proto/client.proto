@@ -1,0 +1,133 @@
+syntax = "proto3";
+import "common.proto";
+package frmpub.protocc;
+
+enum ClientMsgId {
+  CLIENTMSGID_BEGIN = 0;
+
+  CLIENT_GATE_BEGIN = 1000;
+  SERVERLIST_CLIENT_GATE_C = 1001; //获取服务器列表
+  SERVERLIST_CLIENT_GATE_S = 1002;
+  SELECTSERVER_CLIENT_GATE_C = 1003; //选择服务器
+  SELECTSERVER_CLIENT_GATE_S = 1004;
+  REPEATLOGIN_CLIENT_GATE_S = 1005;  //被通知被顶号
+  CLIENT_GATE_END = 1099;
+
+  CLIENT_LOGIN_BEGIN = 1100;
+  LOGIN_CLIENT_GATE_C = 1101;       //登录
+  LOGIN_CLIENT_GATE_S = 1102;
+  RECONNECT_CLIENT_GATE_C = 1103;   //重连
+  RECONNECT_CLIENT_GATE_S = 1104;
+  CLIENT_LOGIN_END = 1199;
+
+  CLIENT_GAME_BEGIN = 1200;  
+  CREATEROLE_CLIENT_GATE_C = 1201;  //创建角色
+  CREATEROLE_CLIENT_GATE_S = 1202;  
+  LOADROLE_CLIENT_GATE_C = 1203;  //加载角色数据
+  LOADROLE_CLIENT_GATE_S = 1204;
+  SETLEVEL_CLIENT_GATE_C = 1205;  //设置角色等级为1
+  SETLEVEL_CLIENT_GATE_S = 1206;
+  LOADGOODS_CLIENT_GATE_C = 1207; //加载角色物品数据
+  LOADGOODS_CLIENT_GATE_S = 1208;
+  CLIENT_GAME_END = 1299;
+
+  CLIENTMSGID_END = 5000;
+}
+
+//返回的服务器列表
+message serverlist_client_gate_s {
+    repeated  ServerInfo sifs  = 1;
+}
+
+//选择服务器
+message selectserver_client_gate_c {
+    int32 loginid = 1;
+    int32 gameid = 2;
+}
+
+message selectserver_client_gate_s {
+    int32 result  = 1;
+}
+
+//被顶号通知
+message repeatlogin_client_gate_s{
+    string aid = 1;
+}
+
+//断线重连
+message reconnect_client_gate_c
+{
+    string aid = 1;
+    int32 loginid = 2;
+    int32 gameid = 3;
+}
+
+message reconnect_client_gate_s
+{
+    int32 result  = 1; //0成功，1失败须重新登录
+    string aid = 2;
+    int32 loginid = 3;
+    int32 gameid = 4;
+}
+
+//登录
+message login_client_gate_c {  
+    string name = 1;
+    string pwd = 2;
+}
+
+message login_client_gate_s {
+    int32 result  = 1;
+    string aid = 2;
+    int64 roleid = 3;
+}
+
+//创建角色
+message createrole_client_gate_c{
+    string aid = 1;
+}
+
+message createrole_client_gate_s{
+    int32 result  = 1; //0成功，1没有此账号，2已有角色
+    string aid = 2;
+    int64 roleid = 3;
+}
+
+//加载角色数据
+message loadrole_client_gate_c{
+    string aid = 1;
+    int64 roleid = 2;
+}
+
+message loadrole_client_gate_s{
+    int32 result  = 1; //0成功，1没有角色
+    string aid = 2;
+    int64 roleid = 3;
+    int32 level = 4;
+}
+
+//重置角色等级
+message setlevel_client_gate_c{
+    int64 roleid = 1;
+}
+
+message setlevel_client_gate_s{
+    int32 result  = 1; //0成功
+}
+
+//加载角色物品数据
+message loadgoods_client_gate_c{
+    string aid = 1;
+    int64 roleid = 2;
+}
+
+//加载角色物品数据
+message loadgoods_client_gate_s{
+     message Goods{
+        int64 id = 1;
+        int32 cfgid = 2;
+        int32 num = 3;
+    }
+
+    repeated Goods goods = 1; //物品列表
+}

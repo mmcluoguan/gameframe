@@ -1,0 +1,50 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="DbClient.cpp" />
+    <ClCompile Include="DbClientMgr.cpp" />
+    <ClCompile Include="DbServer.cpp" />
+    <ClCompile Include="dbvisit.cpp" />
+    <ClCompile Include="SignalHandler.cpp" />
+    <ClCompile Include="StdinHandler.cpp" />
+    <ClCompile Include="LuaWrapper.cpp">
+      <Filter>lua</Filter>
+    </ClCompile>
+    <ClCompile Include="Datahelp.cpp">
+      <Filter>data</Filter>
+    </ClCompile>
+    <ClCompile Include="DataTimer.cpp">
+      <Filter>data</Filter>
+    </ClCompile>
+    <ClCompile Include="DataTimerMgr.cpp">
+      <Filter>data</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="DbClient.h" />
+    <ClInclude Include="DbClientMgr.h" />
+    <ClInclude Include="DbServer.h" />
+    <ClInclude Include="SignalHandler.h" />
+    <ClInclude Include="StdinHandler.h" />
+    <ClInclude Include="LuaWrapper.h">
+      <Filter>lua</Filter>
+    </ClInclude>
+    <ClInclude Include="Datahelp.h">
+      <Filter>data</Filter>
+    </ClInclude>
+    <ClInclude Include="DataTimer.h">
+      <Filter>data</Filter>
+    </ClInclude>
+    <ClInclude Include="DataTimerMgr.h">
+      <Filter>data</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="lua">
+      <UniqueIdentifier>{fba559fa-8bac-40dc-b324-1df0b1c2ade3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="data">
+      <UniqueIdentifier>{f577ae3b-e410-4764-b890-d5490b5e726c}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

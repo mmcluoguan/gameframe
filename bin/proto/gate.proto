@@ -1,0 +1,47 @@
+syntax = "proto3";
+import "common.proto";
+package frmpub.protocc;
+
+//网关服向世界服注册
+message register_gate_dbvisit_c {
+    ServerInfo sif  = 1;
+}
+
+message register_gate_dbvisit_s {
+    int32 result  = 1;
+}
+
+//网关服向世界服注册
+message register_gate_world_c {
+    ServerInfo sif  = 1;
+}
+
+message register_gate_world_s {
+    int32 result  = 1;
+    repeated  ServerInfo sifs  = 2; //在线的服务器列表
+}
+
+//网关服向登录服注册
+message register_gate_login_c {
+    ServerInfo sif  = 1;
+}
+
+message register_gate_login_s {
+    int32 result  = 1;
+}
+
+//网关服向游戏服注册
+message register_gate_game_c {
+    ServerInfo sif  = 1;
+}
+
+message register_gate_game_s {
+    int32 result  = 1;
+}
+
+//玩家下线
+message clioffline_gate_all_c {
+    string aid = 1;
+    string ip = 2;
+    int32 port = 3;
+}

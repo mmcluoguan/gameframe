@@ -1,0 +1,68 @@
+syntax = "proto3";
+import "common.proto";
+package frmpub.protocc;
+
+//从dbvisit加载1条hash数据
+message loaddata_from_dbvisit_c {
+    string tag = 1;
+    string cache_key = 2; 
+    
+    repeated FieldsEntry fields = 4;
+}
+
+message loaddata_from_dbvisit_s {
+    int32 result = 1; //0成功
+    string tag = 2;
+    repeated FieldsEntry fields = 3;
+}
+
+//从dbvisit加载多条hash数据
+message loaddata_more_from_dbvisit_c {
+    string tag = 1;
+    string condition = 2; //条件 如 goods_[goodsid,*]_roleid
+    repeated FieldsEntry fields = 3;
+}
+
+message loaddata_more_from_dbvisit_s {
+    int32 result = 1; //0成功
+    string tag = 2;
+    message item{
+        repeated FieldsEntry fields = 1;
+    }
+    repeated item objs = 3;
+}
+
+//添加1条hash数据到dbvisit
+message insertdata_to_dbvisit_c{
+    string tag = 1;
+    string cache_key = 2; 
+    repeated FieldsEntry fields = 3;
+}
+
+message insertdata_to_dbvisit_s{
+    int32 result = 1; //0成功
+    string tag = 2;
+}
+
+//更新1条hash数据到dbvisit
+message updata_to_dbvisit_c {
+    string tag = 1;
+    string cache_key = 2;
+    repeated FieldsEntry fields = 3;
+}
+
+message updata_to_dbvisit_s {
+    int32 result = 1; //0成功
+    string tag = 2;
+}
+
+//从dbvisit删除1条hash数据
+message deletedata_to_dbvisit_c {
+    string tag = 1;
+    string cache_key = 2;
+}
+
+message deletedata_to_dbvisit_s {
+    int32 result = 1; //0成功
+    string tag = 2;
+}

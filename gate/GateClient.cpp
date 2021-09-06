@@ -1,0 +1,272 @@
+﻿#include "gate/GateClient.h"
+#include <cstring>
+#include "shynet/lua/LuaEngine.h"
+#include "shynet/Logger.h"
+#include "shynet/Utility.h"
+#include "shynet/IniConfig.h"
+#include "frmpub/LuaCallBackTask.h"
+#include "frmpub/protocc/gate.pb.h"
+#include "frmpub/protocc/internal.pb.h"
+#include "gate/ConnectorMgr.h"
+#include "gate/GateClientMgr.h"
+
+namespace gate {
+	GateClient::GateClient(std::shared_ptr<net::IPAddress> remote_addr,
+		std::shared_ptr<net::IPAddress> listen_addr,
+		std::shared_ptr<events::EventBuffer> iobuf)
+		: frmpub::Client(remote_addr, listen_addr, iobuf, false, 0, shynet::protocol::FilterProces::ProtoType::WEBSOCKET) {
+		LOG_INFO << "新客户端连接 [ip:" << remote_addr->ip() << ":" << remote_addr->port() << "]";
+
+		pmb_ = {
+			{
+				protocc::SERVERLIST_CLIENT_GATE_C,
+				std::bind(&GateClient::serverlist_client_gate_c,this,std::placeholders::_1,std::placeholders::_2)
+			},
+			{
+				protocc::SELECTSERVER_CLIENT_GATE_C,
+				std::bind(&GateClient::selectserver_client_gate_c,this,std::placeholders::_1,std::placeholders::_2)
+			},
+		};
+	}
+
+	GateClient::~GateClient() {
+		LOG_INFO << (active() ? "服务器gate主动关闭连接 " : "客户端主动关闭连接 ") << \
+			"[ip:" << remote_addr()->ip() << ":" << remote_addr()->port() << "]";
+	}
+
+	int GateClient::input_handle(std::shared_ptr<protocc::CommonObject> obj, std::shared_ptr<std::stack<FilterData::Envelope>> enves) {
+		if (obj != nullptr) {
+			if (obj->msgid() > protocc::CLIENT_LOGIN_BEGIN &&
+				obj->msgid() < protocc::CLIENT_LOGIN_END) {
+				return login_message(obj, enves);
+			}
+
+			else if (obj->msgid() > protocc::CLIENT_GAME_BEGIN &&
+				obj->msgid() < protocc::CLIENT_GAME_END) {
+				return game_message(obj, enves);
+			}
+
+			else if (obj->msgid() > protocc::CLIENT_GATE_BEGIN &&
+				obj->msgid() < protocc::CLIENT_GATE_END) {
+				auto it = pmb_.find(obj->msgid());
+				if (it != pmb_.end()) {
+					return it->second(obj, enves);
+				}
+				else {
+					//通知lua的onMessage函数
+					shynet::Singleton<lua::LuaEngine>::get_instance().append(
+						std::make_shared<frmpub::OnMessageTask<GateClient>>(shared_from_this(), obj, enves));
+				}
+			}
+			else {
+				std::stringstream stream;
+				stream << "非法消息" << obj->msgid();
+				SEND_ERR(protocc::ILLEGAL_UNKNOWN_MESSAGE, stream.str());
+			}
+		}
+		return 0;
+	}
+
+	void GateClient::close(bool active) {
+		frmpub::Client::close(active);
+		if (accountid_.empty() == false) {
+			ConnectorMgr& mgr = shynet::Singleton<ConnectorMgr>::instance();
+			mgr.reduce_count(login_id_);
+			mgr.reduce_count(game_id_);
+
+			if (accountid_ != "") {
+				//通知服务器玩家下线
+				protocc::clioffline_gate_all_c msg;
+				msg.set_aid(accountid_);
+				msg.set_ip(remote_addr()->ip());
+				msg.set_port(remote_addr()->port());
+				auto reg = mgr.world_connector();
+				if (reg != nullptr) {
+					reg->send_proto(protocc::CLIOFFLINE_GATE_ALL_C, &msg);
+				}
+				auto db = mgr.db_connector();
+				if (db != nullptr) {
+					db->send_proto(protocc::CLIOFFLINE_GATE_ALL_C, &msg);
+				}
+				auto lg = mgr.login_connector(login_id_);
+				if (lg != nullptr) {
+					lg->send_proto(protocc::CLIOFFLINE_GATE_ALL_C, &msg);
+				}
+				auto gs = mgr.game_connector(game_id_);
+				if (gs != nullptr) {
+					gs->send_proto(protocc::CLIOFFLINE_GATE_ALL_C, &msg);
+				}
+			}
+		}
+		shynet::Singleton<GateClientMgr>::instance().remove(iobuf()->fd());
+	}
+
+	void GateClient::accountid(std::string t) {
+		accountid_ = t;
+	}
+	std::string GateClient::accountid() const {
+		return accountid_;
+	}
+	void GateClient::login_id(int t) {
+		login_id_ = t;
+	}
+	int GateClient::login_id() const {
+		return login_id_;
+	}
+	void GateClient::game_id(int t) {
+		game_id_ = t;
+	}
+	int GateClient::game_id() const {
+		return game_id_;
+	}
+
+	int GateClient::login_message(std::shared_ptr<protocc::CommonObject> obj,
+		std::shared_ptr<std::stack<FilterData::Envelope>> enves) {
+		if (accountid_.empty() == true &&
+			obj->msgid() != protocc::LOGIN_CLIENT_GATE_C &&
+			obj->msgid() != protocc::RECONNECT_CLIENT_GATE_C) {
+			SEND_ERR(protocc::UNAUTHENTICATED, "未验证的客户端连接,消息终止转发");
+			return -1;
+		}
+		std::shared_ptr<LoginConnector> login = shynet::Singleton<ConnectorMgr>::instance().
+			select_login(login_id_);
+		if (login != nullptr) {
+			if (login_id_ != login->login_id()) {
+				LOG_WARN << "负载均衡选择的login_id:" << login->login_id();
+			}
+			login_id_ = login->login_id();
+			FilterData::Envelope enve;
+			enve.fd = iobuf()->fd();
+			enve.addr = *remote_addr()->sockaddr();
+			enves->push(enve);
+			if (obj->msgid() == protocc::LOGIN_CLIENT_GATE_C) {
+				//同服顶号处理
+				protocc::login_client_gate_c msgc;
+				if (msgc.ParseFromString(obj->msgdata()) == true) {
+					auto cli = shynet::Singleton<GateClientMgr>::instance().find(msgc.name(), msgc.pwd());
+					if (cli) {
+						protocc::repeatlogin_client_gate_s msgs;
+						msgs.set_aid(cli->accountid());
+						cli->send_proto(protocc::REPEATLOGIN_CLIENT_GATE_S, &msgs);
+						cli->close(true);
+					}
+					name_ = msgc.name();
+					pwd_ = msgc.pwd();
+				}
+				else {
+					std::stringstream stream;
+					stream << "消息" << frmpub::Basic::msgname(obj->msgid()) << "解析错误";
+					SEND_ERR(protocc::MESSAGE_PARSING_ERROR, stream.str());
+				}
+
+				//登陆消息中附加上选择的loginid,gameid,gateid
+				auto& connectMgr = shynet::Singleton<ConnectorMgr>::instance();
+				auto logininfo = connectMgr.find_connect_data(login_id_);
+				auto gameinfo = connectMgr.find_connect_data(game_id_);
+
+				if (gameinfo.connect_id == 0) {
+					//登陆前没有选择游戏服务器，负载均衡开始选择
+					std::shared_ptr<GameConnector> game = shynet::Singleton<ConnectorMgr>::instance().select_game(game_id_);
+					if (game != nullptr) {
+						if (game_id_ != game->game_id()) {
+							LOG_WARN << "负载均衡选择的game_id_:" << game->game_id();
+						}
+						game_id_ = game->game_id();
+						gameinfo = connectMgr.find_connect_data(game_id_);
+					}
+				}
+
+				if (logininfo.connect_id != 0 &&
+					gameinfo.connect_id != 0) {
+					shynet::IniConfig& ini = shynet::Singleton<shynet::IniConfig>::get_instance();
+					int gateid = ini.get<int, int>("gate", "sid", 1);
+
+					std::string extend = shynet::Utility::str_format("%d,%d,%d",
+						gateid, logininfo.sif.sid(), gameinfo.sif.sid());
+					obj->set_extend(extend);
+				}
+				else {
+					std::stringstream stream;
+					stream << "没有可用的" << frmpub::Basic::connectname(protocc::ServerType::GAME) << "连接";
+					SEND_ERR(protocc::LOGIN_NOT_EXIST, stream.str());
+					return 0;
+				}
+			}
+			else if (obj->msgid() == protocc::RECONNECT_CLIENT_GATE_C) {
+				//断线重连消息中附加上选择的gateid
+				shynet::IniConfig& ini = shynet::Singleton<shynet::IniConfig>::get_instance();
+				int gateid = ini.get<int, int>("gate", "sid", 1);
+				obj->set_extend(std::to_string(gateid));
+			}
+			login->send_proto(obj.get(), enves.get());
+			LOG_DEBUG << "转发消息" << frmpub::Basic::msgname(obj->msgid())
+				<< "到login[" << login->connect_addr()->ip() << ":"
+				<< login->connect_addr()->port() << "]";
+		}
+		else {
+			std::stringstream stream;
+			stream << "没有可用的" << frmpub::Basic::connectname(protocc::ServerType::LOGIN) << "连接";
+			SEND_ERR(protocc::LOGIN_NOT_EXIST, stream.str());
+		}
+		return 0;
+	}
+
+	int GateClient::game_message(std::shared_ptr<protocc::CommonObject> obj, std::shared_ptr<std::stack<FilterData::Envelope>> enves) {
+		if (accountid_.empty() == true) {
+			SEND_ERR(protocc::UNAUTHENTICATED, "未验证的客户端连接,消息终止转发");
+			return -1;
+		}
+		std::shared_ptr<GameConnector> game = shynet::Singleton<ConnectorMgr>::instance().select_game(game_id_);
+		if (game != nullptr) {
+			if (game_id_ != game->game_id()) {
+				LOG_WARN << "负载均衡选择的game_id_:" << game->game_id();
+			}
+			game_id_ = game->game_id();
+			FilterData::Envelope enve;
+			enve.fd = iobuf()->fd();
+			enve.addr = *remote_addr()->sockaddr();
+			enves->push(enve);
+
+			game->send_proto(obj.get(), enves.get());
+			LOG_DEBUG << "转发消息" << frmpub::Basic::msgname(obj->msgid())
+				<< "到game[" << game->connect_addr()->ip() << ":"
+				<< game->connect_addr()->port() << "]";
+		}
+		else {
+			std::stringstream stream;
+			stream << "没有可用的" << frmpub::Basic::connectname(protocc::ServerType::GAME) << "连接";
+			SEND_ERR(protocc::LOGIN_NOT_EXIST, stream.str());
+		}
+		return 0;
+	}
+
+	int GateClient::serverlist_client_gate_c(std::shared_ptr<protocc::CommonObject> data,
+		std::shared_ptr<std::stack<FilterData::Envelope>> enves) {
+		protocc::serverlist_client_gate_s msgs;
+		auto list = shynet::Singleton<ConnectorMgr>::instance().connect_datas();
+		for (const auto& it : list) {
+			protocc::ServerInfo* sif = msgs.add_sifs();
+			*sif = it.second.sif;
+		}
+		send_proto(protocc::SERVERLIST_CLIENT_GATE_S, &msgs);
+		return 0;
+	}
+	int GateClient::selectserver_client_gate_c(std::shared_ptr<protocc::CommonObject> data,
+		std::shared_ptr<std::stack<FilterData::Envelope>> enves) {
+		protocc::selectserver_client_gate_c msgc;
+		if (msgc.ParseFromString(data->msgdata()) == true) {
+			login_id_ = shynet::Singleton<ConnectorMgr>::instance().sid_conv_connect_id(msgc.loginid());
+			game_id_ = shynet::Singleton<ConnectorMgr>::instance().sid_conv_connect_id(msgc.gameid());
+
+			protocc::selectserver_client_gate_s msgs;
+			msgs.set_result(0);
+			send_proto(protocc::SELECTSERVER_CLIENT_GATE_S, &msgs);
+		}
+		else {
+			std::stringstream stream;
+			stream << "消息" << frmpub::Basic::msgname(data->msgid()) << "解析错误";
+			SEND_ERR(protocc::MESSAGE_PARSING_ERROR, stream.str());
+		}
+		return 0;
+	}
+}

@@ -1,0 +1,141 @@
+﻿#include "client/StdinHandler.h"
+#include <cstring>
+#include <unistd.h>
+#include <tuple>
+#include "shynet/net/ConnectReactorMgr.h"
+#include "shynet/Logger.h"
+#include "shynet/Utility.h"
+#include "shynet/IniConfig.h"
+#include "frmpub/protocc/client.pb.h"
+#include "client/GateConnector.h"
+//#include "notifymgr.h"
+
+extern int optind, opterr, optopt;
+extern char* optarg;
+extern int g_gateconnect_id;
+
+namespace client {
+	StdinHandler::StdinHandler(std::shared_ptr<events::EventBase> base, evutil_socket_t fd) :
+		events::EventHandler(base, fd, EV_READ | EV_PERSIST) {
+	}
+
+	StdinHandler::~StdinHandler() {
+	}
+
+	void StdinHandler::input(int fd) {
+		char msg[1024];
+		memset(&msg, 0, sizeof(msg));
+		ssize_t ret = read(fd, msg, sizeof(msg));
+		if (ret < 0) {
+			LOG_WARN << "call read";
+		}
+		else {
+			typedef std::tuple<const char*, const char*, std::function<void(const char*, int, char**, const char*)>> item;
+			item orders[] = {
+				item("quit",":",bind(&StdinHandler::quit_order, this,
+					std::placeholders::_1,std::placeholders::_2,std::placeholders::_3,std::placeholders::_4)),
+				item("reconnect",":",bind(&StdinHandler::reconnect_order, this,
+					std::placeholders::_1,std::placeholders::_2,std::placeholders::_3,std::placeholders::_4)),
+				item("login",":u:p:",bind(&StdinHandler::login_order, this,
+					std::placeholders::_1,std::placeholders::_2,std::placeholders::_3,std::placeholders::_4)),
+			};
+
+			char* order = shynet::Utility::trim(msg);
+			char* argv[20] = { 0 };
+			int argc = shynet::Utility::spilt(order, " ", argv, 20);
+			if (argc > 0) {
+				bool flag = false;
+				for (const auto& it : orders) {
+					if (strcmp(argv[0], std::get<0>(it)) == 0) {
+						std::get<2>(it)(std::get<0>(it), argc, argv, std::get<1>(it));
+						flag = true;
+					}
+				}
+				if (flag == false) {
+					/*std::set<std::string>* newset = new std::set<std::string>();
+					std::set<std::string>* nowset = shynet::Singleton<utils::NotifyMgr>::instance().get(newset);
+					for (auto& it : *nowset)
+					{
+						LOG_DEBUG << "文件:" << it;
+					}
+					delete nowset;*/
+
+					LOG_WARN << "没有可执行的命令";
+					LOG_INFO << "可执行的命令列表";
+					for (const auto& it : orders) {
+						LOG_INFO << "	<" << std::get<0>(it) << " " << &std::get<1>(it)[1] << ">";
+					}
+				}
+			}
+		}
+	}
+
+	void StdinHandler::quit_order(const char* od, int argc, char** argv, const char* optstr) {
+		struct timeval delay = { 2, 0 };
+		LOG_INFO << "捕获到一个退出命令,程序将在2秒后安全退出";
+		base()->loopexit(&delay);
+	}
+
+	void StdinHandler::reconnect_order(const char* od, int argc, char** argv, const char* optstr) {
+		std::shared_ptr<GateConnector> gate = std::dynamic_pointer_cast<GateConnector>(
+			shynet::Singleton<net::ConnectReactorMgr>::instance().find(g_gateconnect_id));
+		if (gate != nullptr) {
+			std::shared_ptr<GateConnector::DisConnectData> ptr = gate->disconnect_data();
+			gate->close(net::ConnectEvent::CloseType::CLIENT_CLOSE);
+			gate.reset();
+			sleep(1);
+			shynet::IniConfig& ini = shynet::Singleton<shynet::IniConfig>::get_instance();
+			std::string gateip = ini.get<const char*, std::string>("gate", "ip", "127.0.0.1");
+			short gateport = ini.get<short, short>("gate", "port", short(25000));
+			std::shared_ptr<net::IPAddress> gateaddr(new net::IPAddress(gateip.c_str(), gateport));
+			std::shared_ptr<GateConnector> gateconnect(new GateConnector(gateaddr, ptr));
+			gateaddr.reset();
+			g_gateconnect_id = shynet::Singleton<net::ConnectReactorMgr>::instance().add(gateconnect);
+			gateconnect.reset();
+		}
+		else {
+			LOG_WARN << "连接已经释放";
+		}
+	}
+
+	void StdinHandler::login_order(const char* od, int argc, char** argv, const char* optstr) {
+		int opt;
+		optind = 1;
+		char* username = nullptr;
+		char* password = nullptr;
+		while ((opt = getopt(argc, argv, optstr)) != -1) {
+			switch (opt) {
+			case 'u': username = optarg; break;
+			case 'p': password = optarg; break;
+			case ':':
+				LOG_WARN << od << " 丢失参数 (-" << (char)optopt << ")";
+				break;
+			case '?':
+				LOG_WARN << od << " 未知选项 (-" << (char)optopt << ")";
+				break;
+			default:
+				LOG_SYSFATAL << "call getopt";
+			}
+		}
+		if (optind < argc) {
+			LOG_WARN << " 第一个不是选项的参数是" << argv[optind] << "在argv[" << optind << "]";
+		}
+		if (username == nullptr || password == nullptr) {
+			LOG_INFO << "usage: " << od << " [-u username] [-p password]";
+			return;
+		}
+		protocc::login_client_gate_c msg;
+		msg.set_name(username);
+		msg.set_pwd(password);
+
+		std::shared_ptr<GateConnector> gate = std::dynamic_pointer_cast<GateConnector>(
+			shynet::Singleton<net::ConnectReactorMgr>::instance().find(g_gateconnect_id));
+		if (gate != nullptr) {
+			gate->send_proto(protocc::LOGIN_CLIENT_GATE_C, &msg);
+			LOG_DEBUG << "发送" << frmpub::Basic::msgname(protocc::LOGIN_CLIENT_GATE_C);
+		}
+		else {
+			LOG_WARN << "连接已经释放";
+		}
+	}
+}

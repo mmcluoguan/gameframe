@@ -1,0 +1,464 @@
+syntax = "proto3";
+package frmpub.protocc;
+
+enum BackendMsgId {
+  BACKENDMSGID_BEGIN = 0;
+
+  CLIENT_BACKEND_BEGIN = 5100;
+  LOGIN_BK_C = 5101;                    //登录
+  LOGIN_BK_S = 5102;  
+  CRUCIAL_BK_C = 5103;                  //关键指标
+  CRUCIAL_BK_S = 5104;
+  MAILLIST_BK_C = 5105;                  //公告列表
+  MAILLIST_BK_S = 5106;
+  ADDMAIL_BK_C = 5107;                  //添加公告
+  ADDMAIL_BK_S = 5108;
+  CONTRACT_TYPE_LIST_BK_C = 5109;       //合约类型列表
+  CONTRACT_TYPE_LIST_BK_S = 5110;
+  UPDATE_CONTRACT_TYPE_BK_C = 5111;     //修改合约
+  UPDATE_CONTRACT_TYPE_BK_S = 5112;    
+  ADD_CONTRACT_BK_C = 5113;             //添加合约
+  ADD_CONTRACT_BK_S = 5114;
+  BOOKING_COUNT_BK_C = 5115;            //预约统计列表
+  BOOKING_COUNT_BK_S = 5116;
+  BOOKING_BK_C = 5117;                 //预约明细
+  BOOKING_BK_S = 5118;
+  RIPE_COUNT_BK_C = 5119;                 //挂单统计
+  RIPE_COUNT_BK_S = 5120;
+  RIPE_BK_C = 5121;                 //挂单明细
+  RIPE_BK_S = 5122;
+  ORDER_LIST_BK_C = 5123;                 //订单列表
+  ORDER_LIST_BK_S = 5124;
+  ORDER_BK_C = 5125;                 //订单操作
+  ORDER_BK_S = 5126;
+  RECHARGE_BK_C = 5127;             //充值管理
+  RECHARGE_BK_S = 5128;
+  RECHARGE_OPER_BK_C = 5129;             //充值操作
+  RECHARGE_OPER_BK_S = 5130;
+  USER_LIST_BK_C = 5131;             //用户列表
+  USER_LIST_BK_S = 5132;
+  UPDATE_USER_BK_C = 5133;             //用户编辑
+  UPDATE_USER_BK_S = 5134;
+  USER_CONTRACT_LIST_BK_C = 5135;       //用户合约列表
+  USER_CONTRACT_LIST_BK_S = 5136;
+  DEL_USER_CONTRACT_BK_C = 5137;       //删除用户合约
+  DEL_USER_CONTRACT_BK_S = 5138;       
+  NAME_VERIFIE_LIST_BK_C = 5139;       //实名认证列表
+  NAME_VERIFIE_LIST_BK_S = 5140;
+  NAME_VERIFIE_OPER_BK_C = 5141;       //实名认证操作
+  NAME_VERIFIE_OPER_BK_S = 5142;
+  PAY_VERIFIE_LIST_BK_C = 5143;       //支付认证列表
+  PAY_VERIFIE_LIST_BK_S = 5144;
+  PAY_VERIFIE_OPER_BK_C = 5145;       //支付认证操作
+  PAY_VERIFIE_OPER_BK_S = 5146;
+  CREATE_USER_BK_C = 5147;            //生成用户
+  CREATE_USER_BK_S = 5148;
+  USER_PROXY_BK_C = 5149;              //玩家代理明细
+  USER_PROXY_BK_S = 5150;
+  CLOSE_USER_BK_C = 5151;              //封号
+  CLOSE_USER_BK_S = 5152;
+  NEW_RECHARGE_C = 5153;                //有新的充值
+  NEW_RECHARGE_S = 5154;
+  CONTRACT_OPER_LIST_C = 5155;          //合约升级拆分列表
+  CONTRACT_OPER_LIST_S = 5156;
+  CONTRACT_OPER_C = 5157;              //合约升级拆分操作
+  CONTRACT_OPER_S = 5158;              
+  CLIENT_BACKEND_END = 9999;
+
+  BACKENDMSGID_END = 10000;
+}
+
+message login_bk_c {
+    int64  phone  = 1;
+    string pwd = 2;
+}
+
+message login_bk_s {
+    int32 result = 1;//0成功,1账号密码错误
+}
+
+message crucial_bk_s{
+    int32 total_register_num = 1; //累计注册人数
+    int32 today_register_num = 2; //今日注册人数
+    int32 total_active_num = 3; //累计激活人数
+    int32 today_active_num = 4; //今日激活人数
+    int32 total_disenable_num = 5; //累计封号人数
+    int32 today_disenable_num = 6; //今日封号人数
+    float total_income = 7; //总资产
+}
+
+message maillist_bk_s{
+    message item{
+        int32 id = 1;//邮件id
+        string topic = 2; //标题
+        string info = 3; //内容
+        int32 time = 4; //发布时间戳
+    }
+    repeated  item its  = 1;
+}
+
+message addmail_bk_c{
+     string topic = 2; //标题
+     string info = 3; //内容
+}
+
+message addmail_bk_s{
+    int32 result = 1;//0成功,1失败
+}
+
+message contract_type_list_bk_s{
+    message item{
+        int32 id = 1;//id
+        int32 cycle = 2; //周期时间(s)
+        float interest_rate = 3; //利率
+        int32 reserve_dispatch_coin = 4; //预约派单币消耗
+        int32 rush_dispathch_coin = 5; //抢购派单币消耗
+        int32 rush_begin_time = 6; //抢购开始时间(s)
+        int32 rush_end_time = 7; //抢购结束时间(s)
+        int32 state = 8; //状态,1上架,2下架,3未开放
+        string name = 9; //合约名称
+        int32 min_price = 10; //最小值
+        int32 max_price = 11; //最大值
+    }
+    repeated  item its  = 1;
+}
+
+message update_contract_type_bk_c{
+    int32 id = 1;//id
+    int32 cycle = 2; //周期时间(s)
+    float interest_rate = 3; //利率
+    int32 reserve_dispatch_coin = 4; //预约派单币消耗
+    int32 rush_dispathch_coin = 5; //抢购派单币消耗
+    int32 rush_begin_time = 6; //抢购开始时间(s)
+    int32 rush_end_time = 7; //抢购结束时间(s)
+    int32 state = 8; //状态,1上架,2下架,3未开放
+    string name = 9; //合约名称
+    int32 min_price = 10; //最小值
+    int32 max_price = 11; //最大值
+}
+
+message update_contract_type_bk_s{
+    int32 result = 1;//0成功,1失败
+}
+
+message add_contract_bk_c{
+    int64 phone = 1;//电话
+    int32 type = 2;//合约类型
+    float price = 3;//价值
+    int32 num = 4;//数量
+}
+
+message add_contract_bk_s{
+    int32 result = 1;//0成功,1电话不存在
+}
+
+message booking_count_bk_s{
+    message item{
+        int32 contract_type = 1; //合约类型
+        int32 num = 2;//预约数量
+    }
+    repeated  item its  = 1;
+}
+
+message booking_bk_c{
+    int64 phone = 1;//电话
+    int32 type = 2;//合约类型
+    string begin_time = 3; //开始时间
+    string end_time = 4;//结束时间
+    int32 curr_page = 5;//页码
+}
+
+message booking_bk_s{
+     message item{
+        int64 phone = 1;//电话
+        string nichen = 2;//昵称
+        int32 contract_type = 3;//合约类型id 
+        int32 time = 4;//预约时间
+        int32 rob = 5;//是否抢购0否,1是
+        int32 robed = 6;//是否已抢购到合约0否,1是
+    }
+    repeated  item its  = 1;
+    int32 total_page = 2;//总页数
+}
+
+message ripe_count_bk_s{
+    message item{
+        int32 contract_type = 1; //合约类型
+        int32 num = 2;//挂单数量
+    }
+    repeated  item its  = 1;
+}
+
+message ripe_bk_c{
+    int64 phone = 1;//电话
+    int32 type = 2;//合约类型
+    int32 curr_page = 3;//页码
+}
+
+message ripe_bk_s{
+     message item{
+        int64 phone = 1;//电话
+        string nichen = 2;//昵称
+        int32 contract_type = 3;//合约类型id
+        float price = 4;//价值
+        int32 time = 5;//挂单时间
+    }
+    repeated  item its  = 1;
+    int32 total_page = 2;//总页数
+}
+
+message order_list_bk_c{
+    int64 buy_phone = 1;//买电话
+    int32 type = 2;//合约类型
+    int64 sell_phone = 3;//卖电话
+    int32 state = 4;//1.未支付,2未确认,3已完成,4申诉中,5取消
+    int64 id = 5;//订单编号
+    int32 curr_page = 6;//页码
+}
+
+message order_list_bk_s{
+     message item{
+        int64 id = 1;//订单编号
+        int64 buy_phone = 2;//买电话
+        int64 sell_phone = 3;//卖电话
+        string contract_type_name = 4;//合约类型名称
+        float price = 5;//价值
+        string payicon = 6;//支付凭证
+        int32 rush_time = 7;//抢购时间
+        int32 pay_time = 8;//支付时间
+        int32 sell_confirm_time = 9;//卖方确认时间
+        int32 state = 10;//1.未支付,2未确认,3已完成,4申诉中,5取消
+    }
+    repeated  item its  = 1;
+    int32 total_page = 2;//总页数
+}
+
+message order_bk_c{
+    int64 id = 1;//订单编号
+    int32 oper = 2;//3已完成,5取消
+}
+
+message order_bk_s{
+    int32 result = 1;//0成功,1失败
+}
+
+message recharge_bk_c{
+    int64 phone = 1;//电话
+    int32 enable = 2;//0未审核1审核
+    int32 operator = 3;//后台是否0未操作,1操作
+    int32 type = 4;//类型1排单币,2激活币
+    int32 curr_page = 5;//页码
+}
+
+message recharge_bk_s{
+     message item{
+        int32 id = 1;//充值编号
+        int64 phone = 2;//电话
+        int32 num = 3;//数量
+        float rmb = 4;//金额
+        string paycert = 5;//支付凭证
+        int32 time = 6;//抢时间
+        int32 enable = 7;///0未操作,1操作
+        int32 operator = 8;///后台是否0未操作,1操作
+        string nichen = 9;//昵称
+    }
+    repeated  item its  = 1;
+    int32 total_page = 2;//总页数
+    int32 type = 3;//类型1排单币,2激活币
+}
+
+message recharge_oper_bk_c{
+    int32 id = 1;//充值编号
+    int32 enable = 2;//0不通过1通过
+    int32 type = 3;//类型1排单币,2激活币
+}
+
+message recharge_oper_bk_s{
+    int32 result = 1;//0成功,1失败
+}
+
+message user_list_bk_c{
+    int64 phone = 1; //电话
+    int32 enable = 2; //是否封号,0正常,1封号
+    int32 curr_page = 3;//页码
+}
+
+message user_list_bk_s{
+    message item{
+        int64 phone = 1;//电话
+        string nichen = 2;//昵称
+        int32 dispatch_coin = 3;//排单币
+        int32 activated_coin = 4;//激活币
+        float total_income = 5;//总收入
+        float static_income = 6;//静态收益
+        float promote_current_income = 7;///当前推广收益
+        float team_current_income = 8;//当前团队收益
+        int32 activated = 9;//是否激活,0未激活,1激活币
+        int32 enable = 10; //是否封号,0正常,1封号
+        string pwd = 11; //登录密码
+        int32 trade = 12; //交易密码
+        int64 parent_phone = 13;//上级电话
+    }
+    repeated  item its  = 1;
+    int32 total_page = 2;//总页数
+}
+
+message update_user_bk_c{
+     int32 dispatch_coin = 1;//排单币
+     int32 activated_coin = 2;//激活币
+     int32 promote_current_income = 3;///当前推广收益
+     int32 team_current_income = 4;//当前团队收益
+     string pwd = 5; //登录密码
+     int32 trade = 6; //交易密码
+     int64 parent_phone = 7;//上级电话
+     int64 phone = 8; //更新的手机
+}
+
+message update_user_bk_s{
+    int32 result = 1;//0成功,1失败
+}
+
+message user_contract_list_bk_c{
+    int64 phone = 8; //手机
+}
+
+message user_contract_list_bk_s{
+    message item{
+        int32 id = 1;
+        int32 contract_type = 2;//合约类型id
+        float price = 3;//价值
+        int32 time = 4;//挂单时间       
+    }
+    repeated  item its  = 1;
+}
+
+message del_user_contract_bk_c{
+    int32 id = 1; //合约id
+}
+
+message del_user_contract_bk_s{
+    int32 result = 1;//0成功,1失败
+}
+
+message name_verifie_list_bk_c{
+    int32 curr_page = 1;//页码
+}
+
+message name_verifie_list_bk_s{
+    message item{
+       int64 phone = 1; //手机
+       string nichen = 2;//昵称
+       int32 activated = 3;//是否激活
+       string name = 4;//姓名
+       string idcard = 5;//身份证
+       int32 name_verifie = 6; //是否实名认证 1.未提交,2已提交,3已认证
+    }
+    repeated  item its  = 1;
+    int32 total_page = 2;//总页数
+}
+
+message name_verifie_oper_bk_c{
+    int64 phone = 1; //手机
+    int32 type = 2; //1通过,2不通过
+}
+
+message name_verifie_oper_bk_s{
+    int32 result = 1;//0成功,1失败
+}
+
+message pay_verifie_list_bk_c{
+    int32 curr_page = 1;//页码
+}
+
+message pay_verifie_list_bk_s{
+    message item{
+       int64 phone = 1; //手机
+       string nichen = 2;//昵称
+       int32 activated = 3;//是否激活
+       string bank_name = 4;//银行姓名
+       string bank_cardid = 5;//银行卡卡号
+       string bank_user_name = 6;//银行开户名
+       string ailpay_id = 7; //支付宝id
+       string alipay_name = 8; //支付宝名称
+       string webchat_name = 9; //微信名称
+       int32 pay_verifie = 10; //是否支付认证 1.未提交,2已提交,3已认证
+    }
+    repeated  item its  = 1;
+    int32 total_page = 2;//总页数
+}
+
+message pay_verifie_oper_bk_c{
+    int64 phone = 1; //手机
+    int32 type = 2; //1通过,2不通过
+}
+
+message pay_verifie_oper_bk_s{
+    int32 result = 1;//0成功,1失败
+}
+
+message create_user_bk_c{
+    int64 phone = 1; //手机
+    string nichen = 2;//昵称
+    string pwd = 3;//密码
+    int32 trade = 4; //交易密码
+}
+
+message create_user_bk_s{
+    int32 result = 1;//0成功,1已存在
+}
+
+message user_proxy_bk_c{
+    int64 phone = 1; //手机
+}
+
+message user_proxy_bk_s{
+    int64 phone = 1; //手机
+    string nichen = 2;//昵称
+    int64 parent_phone = 3;//上级手机
+    string parent_nichen = 4;//上级昵称
+    int32 sum_1_activated = 5; //1级激活
+    int32 count_1_phone = 6; //1级注册
+    int32 sum_2_activated = 7; //2级激活
+    int32 count_2_phone = 8; //2级注册
+    int32 sum_3_activated = 9; //3级激活
+    int32 count_3_phone = 10; //3级注册
+    int32 sum_99_activated = 11; //团队激活
+    int32 count_99_phone = 12; //团队注册
+    float team_total_income = 13; //团队总资产
+}
+
+message close_user_bk_c{
+    int64 phone = 1; //手机
+}
+
+message close_user_bk_s{
+    int32 result = 1;//0成功,1失败
+}
+
+message new_recharge_s{
+    int32 result = 1;//0有,1没有
+}
+
+message contract_oper_list_c{
+    int32 type = 1; //1升级,2拆分
+}
+
+message contract_oper_list_s{
+    message item{
+       int32 contract_type = 1; //合约类型
+       float price = 2;//当前价格
+       int64 phone = 3;//电话
+       string nichen = 4;//昵称
+    }
+    repeated  item its  = 1;
+    int32 type = 2; //1升级,2拆分
+}
+
+message contract_oper_c{
+    int32 type = 1; //1升级,2拆分
+}
+
+message contract_oper_s{
+    int32 type = 1; //1升级,2拆分
+    int32 result = 2; //0成功,1失败
+}

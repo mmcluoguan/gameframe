@@ -1,0 +1,21 @@
+syntax = "proto3";
+import "common.proto";
+package frmpub.protocc;
+
+//登录服向数据服注册
+message register_login_dbvisit_c {
+    ServerInfo sif  = 1;
+}
+
+message register_login_dbvisit_s {
+    int32 result  = 1;
+}
+
+//登录服向世界服注册
+message register_login_world_c {
+    ServerInfo sif  = 1;
+}
+
+message register_login_world_s {
+    int32 result  = 1;
+}

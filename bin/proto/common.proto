@@ -1,0 +1,67 @@
+syntax = "proto3";
+package frmpub.protocc;
+
+//广播消息
+enum BroadcastMsgId {
+  ERRCODE = 0; //服务器通用错误信息
+ }
+
+ //服务器类型
+ enum ServerType {
+  UNKNOW = 0;
+  DBVISIT = 1;
+  WORLD = 2;
+  LOGIN = 3;
+  GAME = 4;
+  GATE = 5;
+}
+
+//通用消息头
+message CommonObject {
+    message routing{
+        uint32 fd = 1;
+        bytes addr = 2;
+    }    
+
+    int32 msgid = 1;
+    repeated routing rs = 2;     //路由信息,服务器转发信息时用
+    string extend = 3;          //扩展信息,服务器转发信息时用
+    bytes msgdata  = 4;
+}
+
+//服务器信息
+message ServerInfo {
+    string ip  = 1;
+    int32 port = 2;
+    ServerType st  = 3;
+    int32 sid = 4;
+    string name = 5;
+}
+
+//键值对
+message FieldsEntry {
+    string key = 1;
+    string value = 2;
+}
+
+enum errnum{
+    MESSAGE_PARSING_ERROR = 0;      //消息解析错误
+    ILLEGAL_UNKNOWN_MESSAGE = 1;    //非法的未知消息
+    GAMS_NOT_EXIST = 2;             //游戏服不存在
+    LOGIN_NOT_EXIST = 3;            //登录服不存在
+    WORLD_NOT_EXIST = 4;            //世界服不存在
+    DBVISIT_NOT_EXIST = 5;          //数据服不存在
+    GATE_NOT_EXIST = 6;             //网关服不存在
+    DB_CACHE_ERROR = 7;             //db或cache操作错误
+    UNAUTHENTICATED = 8;            //未认证的客户端
+    CLIENT_CLOSEED = 9;             //客户端已经关闭
+    UNKNOWN_SERVER_TYPE = 10;        //未知服务器类型
+}
+
+//服务器通用错误信息
+message errcode{
+    
+    errnum code = 1; //错误码
+    string desc = 2; //描述
+}
+

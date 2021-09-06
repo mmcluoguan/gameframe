@@ -1,0 +1,26 @@
+﻿#pragma once
+#include <mutex>
+#include <unordered_map>
+#include "shynet/net/ConnectEvent.h"
+#include "shynet/Singleton.h"
+
+namespace shynet {
+	namespace net {
+		class ConnectReactorMgr final : public Nocopy {
+			friend class Singleton<ConnectReactorMgr>;
+			ConnectReactorMgr();
+		public:
+			~ConnectReactorMgr();
+
+			int add(std::shared_ptr<ConnectEvent> v);
+			bool remove(int k);
+			std::shared_ptr<ConnectEvent> find(int k);
+			std::shared_ptr<ConnectEvent> find(const std::string ip, unsigned short port);
+		private:
+			void notify(const void* data, size_t len);
+		private:
+			std::mutex cnt_mutex_;
+			std::unordered_map<int, std::shared_ptr<ConnectEvent>> cnts_;
+		};
+	}
+}
