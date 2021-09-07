@@ -1,4 +1,4 @@
-﻿#pragma once
+#pragma once
 #include "shynet/events/EventBuffer.h"
 #include "frmpub/Client.h"
 
@@ -27,6 +27,15 @@ namespace world {
 		/// <param name="active">true服务器主动断开,false客户端主动断开</param>
 		void close(bool active) override;
 
+		/*
+		* 获取设置连接数
+		*/
+		int connect_num() const {
+			return connect_num_;
+		}
+		void connect_num(int value) {
+			connect_num_ = value;
+		}
 	private:
 		/// <summary>
 		/// 服务器通用错误信息
@@ -57,6 +66,13 @@ namespace world {
 		*/
 		int clioffline_gate_all_c(std::shared_ptr<protocc::CommonObject> data,
 			std::shared_ptr<std::stack<FilterData::Envelope>> enves);
+
+		/*
+		* 分配gamesid
+		*/
+		int gamesid_login_world_c(std::shared_ptr<protocc::CommonObject> data,
+			std::shared_ptr<std::stack<FilterData::Envelope>> enves);
 	private:
+		int connect_num_ = 0;
 	};
 }

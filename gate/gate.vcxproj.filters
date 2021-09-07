@@ -5,9 +5,6 @@
     <ClCompile Include="gate.cpp" />
     <ClCompile Include="SignalHandler.cpp" />
     <ClCompile Include="StdinHandler.cpp" />
-    <ClCompile Include="DbConnector.cpp">
-      <Filter>db</Filter>
-    </ClCompile>
     <ClCompile Include="GameConnector.cpp">
       <Filter>game</Filter>
     </ClCompile>
@@ -34,9 +31,6 @@
     <ClInclude Include="ConnectorMgr.h" />
     <ClInclude Include="SignalHandler.h" />
     <ClInclude Include="StdinHandler.h" />
-    <ClInclude Include="DbConnector.h">
-      <Filter>db</Filter>
-    </ClInclude>
     <ClInclude Include="GameConnector.h">
       <Filter>game</Filter>
     </ClInclude>
@@ -60,9 +54,6 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <Filter Include="db">
-      <UniqueIdentifier>{158321a8-2bd1-4324-9ec2-51b69e9c652d}</UniqueIdentifier>
-    </Filter>
     <Filter Include="game">
       <UniqueIdentifier>{277babfd-1609-4876-abbb-bedfff52425f}</UniqueIdentifier>
     </Filter>

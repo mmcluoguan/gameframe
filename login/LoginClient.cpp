@@ -1,4 +1,4 @@
-﻿#include "login/LoginClient.h"
+#include "login/LoginClient.h"
 #include <cstring>
 #include "shynet/lua/LuaEngine.h"
 #include "shynet/Logger.h"
@@ -6,6 +6,7 @@
 #include "frmpub/LuaCallBackTask.h"
 #include "frmpub/protocc/gate.pb.h"
 #include "frmpub/protocc/client.pb.h"
+#include "frmpub/protocc/dbvisit.pb.h"
 #include "login/ConnectorMgr.h"
 #include "login/LoginClientMgr.h"
 
@@ -27,7 +28,7 @@ namespace login {
 			},
 			{
 				protocc::LOGIN_CLIENT_GATE_C,
-				std::bind(&LoginClient::forward_client_gate_c,this,std::placeholders::_1,std::placeholders::_2)
+				std::bind(&LoginClient::login_client_gate_c,this,std::placeholders::_1,std::placeholders::_2)
 			},
 			{
 				protocc::RECONNECT_CLIENT_GATE_C,
@@ -36,6 +37,10 @@ namespace login {
 			{
 				protocc::CLIOFFLINE_GATE_ALL_C,
 				std::bind(&LoginClient::clioffline_gate_all_c,this,std::placeholders::_1,std::placeholders::_2)
+			},
+			{
+				protocc::CREATEROLE_CLIENT_GATE_S,
+				std::bind(&LoginClient::createrole_client_gate_s,this,std::placeholders::_1,std::placeholders::_2)
 			},
 		};
 	}
@@ -104,6 +109,13 @@ namespace login {
 		return 0;
 	}
 
+	int LoginClient::login_client_gate_c(std::shared_ptr<protocc::CommonObject> data, 
+		std::shared_ptr<std::stack<FilterData::Envelope>> enves)
+	{
+		//以后接第3方登录sdk
+		return forward_client_gate_c(data,enves);
+	}
+
 	int LoginClient::forward_client_gate_c(std::shared_ptr<protocc::CommonObject> data,
 		std::shared_ptr<std::stack<FilterData::Envelope>> enves) {
 		std::shared_ptr<DbConnector> db = shynet::Singleton<ConnectorMgr>::instance().db_connector();
@@ -125,7 +137,36 @@ namespace login {
 	int LoginClient::clioffline_gate_all_c(std::shared_ptr<protocc::CommonObject> data, std::shared_ptr<std::stack<FilterData::Envelope>> enves) {
 		protocc::clioffline_gate_all_c msgc;
 		if (msgc.ParseFromString(data->msgdata()) == true) {
+			return forward_client_gate_c(data, enves);
+		}
+		else {
+			std::stringstream stream;
+			stream << "消息" << frmpub::Basic::msgname(data->msgid()) << "解析错误";
+			SEND_ERR(protocc::MESSAGE_PARSING_ERROR, stream.str());
+		}
+		return 0;
+	}
+	int LoginClient::createrole_client_gate_s(std::shared_ptr<protocc::CommonObject> data, 
+		std::shared_ptr<std::stack<FilterData::Envelope>> enves)
+	{
+		protocc::createrole_client_gate_s msgc;
+		if (msgc.ParseFromString(data->msgdata()) == true) {
+			std::shared_ptr<DbConnector> db = shynet::Singleton<ConnectorMgr>::instance().db_connector();
+			if (db != nullptr) {
+				protocc::updata_to_dbvisit_c updata;
+				updata.set_cache_key("account_" + msgc.aid());
+				auto fields = updata.add_fields();
+				fields->set_key("roleid");
+				fields->set_value(std::to_string(msgc.roleid()));
 
+				db->send_proto(protocc::UPDATA_TO_DBVISIT_C, &updata);
+				LOG_DEBUG << "发送更新数据消息" << frmpub::Basic::msgname(data->msgid())
+					<< "到dbvisit[" << db->connect_addr()->ip() << ":"
+					<< db->connect_addr()->port() << "]";
+			}
+			else {
+				SEND_ERR_EX(protocc::DBVISIT_NOT_EXIST, "没有可选的db连接", enves.get());
+			}
 		}
 		else {
 			std::stringstream stream;

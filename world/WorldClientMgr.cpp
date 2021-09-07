@@ -1,4 +1,4 @@
-﻿#include "world/WorldClientMgr.h"
+#include "world/WorldClientMgr.h"
 #include "shynet/lua/LuaEngine.h"
 #include "frmpub/LuaCallBackTask.h"
 
@@ -45,5 +45,31 @@ namespace world {
 	}
 	void WorldClientMgr::listen_addr(const net::IPAddress& addr) {
 		listen_addr_ = addr;
+	}
+
+	std::shared_ptr<WorldClient> WorldClientMgr::select_game() {
+		std::lock_guard<std::mutex> lock(clis_mutex_);
+		std::shared_ptr<WorldClient> game;
+		int min = -1;
+		int target_id = 0;
+		for (auto& it : clis_) {
+			if (it.second->sif().st() == protocc::ServerType::GAME) {
+				if (min == -1) {
+					min = it.second->connect_num();
+					target_id = it.second->sif().sid();
+					game = it.second;
+				}
+				else if (it.second->connect_num() < min) {
+					min = it.second->connect_num();
+					target_id = it.second->sif().sid();
+					game = it.second;
+				}
+			}
+		}
+		if (game != nullptr) {
+
+			game->connect_num(game->connect_num() + 1);
+		}
+		return game;
 	}
 }

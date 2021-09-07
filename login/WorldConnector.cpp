@@ -1,4 +1,4 @@
-﻿#include "login/WorldConnector.h"
+#include "login/WorldConnector.h"
 #include "shynet/net/ConnectReactorMgr.h"
 #include "shynet/lua/LuaEngine.h"
 #include "shynet/IniConfig.h"
@@ -15,6 +15,10 @@ namespace login {
 			{
 				protocc::ERRCODE,
 				std::bind(&WorldConnector::errcode,this,std::placeholders::_1,std::placeholders::_2)
+			},
+			{
+				protocc::GAMESID_LOGIN_WORLD_S,
+				std::bind(&WorldConnector::gamesid_login_world_s,this,std::placeholders::_1,std::placeholders::_2)
 			},
 		};
 	}
@@ -95,5 +99,37 @@ namespace login {
 			SEND_ERR(protocc::MESSAGE_PARSING_ERROR, stream.str());
 		}
 		return 0;
+	}
+
+	int WorldConnector::forward_client_gate_c(std::shared_ptr<protocc::CommonObject> data,
+		std::shared_ptr<std::stack<FilterData::Envelope>> enves) {
+		if (enves->empty() == false) {
+			FilterData::Envelope& env = enves->top();
+			enves->pop();
+			std::shared_ptr<LoginClient> gate = shynet::Singleton<LoginClientMgr>::instance().find(env.fd);
+			if (gate != nullptr) {
+				gate->send_proto(data.get(), enves.get());
+				LOG_DEBUG << "转发消息" << frmpub::Basic::msgname(data->msgid())
+					<< "到gate[" << gate->remote_addr()->ip() << ":"
+					<< gate->remote_addr()->port() << "]"
+					<< " gate fd:" << env.fd;
+			}
+			else {
+				std::stringstream stream;
+				stream << "gate fd:" << env.fd << " 已断开连接";
+				SEND_ERR(protocc::GATE_NOT_EXIST, stream.str());
+			}
+		}
+		else {
+			SEND_ERR(protocc::NO_ROUTING_INFO, "转发消息没有路由信息");
+		}
+		return 0;
+	}
+
+	int WorldConnector::gamesid_login_world_s(std::shared_ptr<protocc::CommonObject> data, 
+		std::shared_ptr<std::stack<FilterData::Envelope>> enves)
+	{
+		data->set_msgid(protocc::LOGIN_CLIENT_GATE_S);
+		return forward_client_gate_c(data, enves);
 	}
 }

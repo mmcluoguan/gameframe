@@ -1,4 +1,4 @@
-﻿#include "frmpub/Basic.h"
+#include "frmpub/Basic.h"
 #include "shynet/Utility.h"
 #include "shynet/Logger.h"
 
@@ -15,6 +15,8 @@ namespace frmpub {
 		{ (int)protocc::InternalMsgId::REGISTER_LOGIN_DBVISIT_C,"REGISTER_LOGIN_DBVISIT_S" },
 		{ (int)protocc::InternalMsgId::REGISTER_LOGIN_DBVISIT_C,"REGISTER_LOGIN_WORLD_C" },
 		{ (int)protocc::InternalMsgId::REGISTER_LOGIN_DBVISIT_C,"REGISTER_LOGIN_WORLD_S" },
+		{ (int)protocc::InternalMsgId::GAMESID_LOGIN_WORLD_C,"GAMESID_LOGIN_WORLD_C" },
+		{ (int)protocc::InternalMsgId::GAMESID_LOGIN_WORLD_S,"GAMESID_LOGIN_WORLD_S" },
 
 		{ (int)protocc::InternalMsgId::REGISTER_GAME_DBVISIT_C,"REGISTER_GAME_DBVISIT_C" },
 		{ (int)protocc::InternalMsgId::REGISTER_GAME_DBVISIT_S,"REGISTER_GAME_DBVISIT_S" },

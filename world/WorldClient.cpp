@@ -1,4 +1,4 @@
-﻿#include "world/WorldClient.h"
+#include "world/WorldClient.h"
 #include <cstring>
 #include "shynet/lua/LuaEngine.h"
 #include "shynet/Logger.h"
@@ -37,6 +37,10 @@ namespace world {
 			{
 				protocc::CLIOFFLINE_GATE_ALL_C,
 				std::bind(&WorldClient::clioffline_gate_all_c,this,std::placeholders::_1,std::placeholders::_2)
+			},
+			{
+				protocc::GAMESID_LOGIN_WORLD_C,
+				std::bind(&WorldClient::gamesid_login_world_c,this,std::placeholders::_1,std::placeholders::_2)
 			},
 		};
 	}
@@ -185,6 +189,30 @@ namespace world {
 			std::stringstream stream;
 			stream << "消息" << frmpub::Basic::msgname(data->msgid()) << "解析错误";
 			SEND_ERR(protocc::MESSAGE_PARSING_ERROR, stream.str());
+		}
+		return 0;
+	}
+	int WorldClient::gamesid_login_world_c(std::shared_ptr<protocc::CommonObject> data, 
+		std::shared_ptr<std::stack<FilterData::Envelope>> enves)
+	{
+		if (data->extend().empty() == false &&
+			data->extend() == "0") {
+			auto game = shynet::Singleton<WorldClientMgr>::instance().select_game();
+			if (game != nullptr)
+			{
+				data->set_extend(std::to_string(game->sif().sid()));
+				send_proto(protocc::GAMESID_LOGIN_WORLD_S,data.get(), enves.get());
+			}
+			else {
+				std::stringstream stream;
+				stream << "没有可用的" << frmpub::Basic::connectname(protocc::ServerType::GAME) << "连接";
+				SEND_ERR(protocc::GAMS_NOT_EXIST, stream.str());
+			}
+		}
+		else {
+			std::stringstream stream;
+			stream << "附加信息解析错误 extend:" << data->extend();
+			SEND_ERR(protocc::EXTEND_FORMAT_ERR, stream.str());
 		}
 		return 0;
 	}

@@ -1,4 +1,4 @@
-﻿#pragma once
+#pragma once
 #include <memory>
 #include <mutex>
 #include <unordered_map>
@@ -33,6 +33,11 @@ namespace world {
 		*/
 		const net::IPAddress& listen_addr() const;
 		void listen_addr(const net::IPAddress& addr);
+
+		/*
+		* 负载均衡选择gamesid
+		*/
+		std::shared_ptr<WorldClient> select_game();
 	private:
 		net::IPAddress listen_addr_;
 		mutable std::mutex clis_mutex_;

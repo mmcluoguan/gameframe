@@ -2,7 +2,7 @@ syntax = "proto3";
 import "common.proto";
 package frmpub.protocc;
 
-//µÇÂ¼·şÏòÊı¾İ·ş×¢²á
+//ç™»å½•æœå‘æ•°æ®æœæ³¨å†Œ
 message register_login_dbvisit_c {
     ServerInfo sif  = 1;
 }
@@ -11,7 +11,7 @@ message register_login_dbvisit_s {
     int32 result  = 1;
 }
 
-//µÇÂ¼·şÏòÊÀ½ç·ş×¢²á
+//ç™»å½•æœå‘ä¸–ç•Œæœæ³¨å†Œ
 message register_login_world_c {
     ServerInfo sif  = 1;
 }

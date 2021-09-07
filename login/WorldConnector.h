@@ -1,4 +1,4 @@
-﻿#pragma once
+#pragma once
 #include "frmpub/Connector.h"
 
 namespace login {
@@ -33,6 +33,18 @@ namespace login {
 		/// 服务器通用错误信息
 		/// </summary>
 		int errcode(std::shared_ptr<protocc::CommonObject> data,
+			std::shared_ptr<std::stack<FilterData::Envelope>> enves);
+
+		/// <summary>
+		/// 转发消息到gate
+		/// </summary>
+		int forward_client_gate_c(std::shared_ptr<protocc::CommonObject> data,
+			std::shared_ptr<std::stack<FilterData::Envelope>> enves);
+
+		/// <summary>
+		/// 分配的game服
+		/// </summary>
+		int gamesid_login_world_s(std::shared_ptr<protocc::CommonObject> data,
 			std::shared_ptr<std::stack<FilterData::Envelope>> enves);
 	};
 }

@@ -1,4 +1,4 @@
-﻿#include "login/DbConnector.h"
+#include "login/DbConnector.h"
 #include "shynet/net/ConnectReactorMgr.h"
 #include "shynet/lua/LuaEngine.h"
 #include "shynet/IniConfig.h"
@@ -20,6 +20,10 @@ namespace login {
 			{
 				protocc::REGISTER_LOGIN_DBVISIT_S,
 				std::bind(&DbConnector::register_login_dbvisit_s,this,std::placeholders::_1,std::placeholders::_2)
+			},
+			{
+				protocc::LOGIN_CLIENT_GATE_S,
+				std::bind(&DbConnector::login_client_gate_s,this,std::placeholders::_1,std::placeholders::_2)
 			},
 		};
 	}
@@ -66,7 +70,9 @@ namespace login {
 		sif->set_name(name);
 		send_proto(protocc::REGISTER_LOGIN_DBVISIT_C, &msgc);
 	}
-	int DbConnector::input_handle(std::shared_ptr<protocc::CommonObject> obj, std::shared_ptr<std::stack<FilterData::Envelope>> enves) {
+
+	int DbConnector::input_handle(std::shared_ptr<protocc::CommonObject> obj, 
+		std::shared_ptr<std::stack<FilterData::Envelope>> enves) {
 		if (obj != nullptr) {
 			if (enves->empty() == false) {
 				FilterData::Envelope& env = enves->top();
@@ -109,7 +115,8 @@ namespace login {
 		Connector::close(active);
 	}
 
-	int DbConnector::errcode(std::shared_ptr<protocc::CommonObject> data, std::shared_ptr<std::stack<FilterData::Envelope>> enves) {
+	int DbConnector::errcode(std::shared_ptr<protocc::CommonObject> data, 
+		std::shared_ptr<std::stack<FilterData::Envelope>> enves) {
 		protocc::errcode err;
 		if (err.ParseFromString(data->msgdata()) == true) {
 			LOG_DEBUG << "错误码:" << err.code() << " 描述:" << err.desc();
@@ -122,7 +129,8 @@ namespace login {
 		return 0;
 	}
 
-	int DbConnector::register_login_dbvisit_s(std::shared_ptr<protocc::CommonObject> data, std::shared_ptr<std::stack<FilterData::Envelope>> enves) {
+	int DbConnector::register_login_dbvisit_s(std::shared_ptr<protocc::CommonObject> data, 
+		std::shared_ptr<std::stack<FilterData::Envelope>> enves) {
 		protocc::register_login_dbvisit_s msgc;
 		if (msgc.ParseFromString(data->msgdata()) == true) {
 			shynet::IniConfig& ini = shynet::Singleton<shynet::IniConfig>::get_instance();
@@ -157,6 +165,75 @@ namespace login {
 			std::stringstream stream;
 			stream << "消息" << frmpub::Basic::msgname(data->msgid()) << "解析错误";
 			SEND_ERR(protocc::MESSAGE_PARSING_ERROR, stream.str());
+		}
+		return 0;
+	}
+
+	int DbConnector::login_client_gate_s(std::shared_ptr<protocc::CommonObject> data, 
+		std::shared_ptr<std::stack<FilterData::Envelope>> enves)
+	{
+		protocc::login_client_gate_s msgc;
+		if (msgc.ParseFromString(data->msgdata()) == true) {
+			if (msgc.result() == 0)
+			{
+				//判断登录前是否选择gamesid
+				if (data->extend().empty() == false){
+					if (data->extend() == "0") {
+						//请求world选择gamesid
+						auto world = shynet::Singleton<ConnectorMgr>::instance().world_connector();
+						if (world != nullptr)
+						{
+							world->send_proto(protocc::GAMESID_LOGIN_WORLD_C, data.get(), enves.get());
+						}
+						else {
+							std::stringstream stream;
+							stream << "没有可用的" << frmpub::Basic::connectname(protocc::ServerType::WORLD) << "连接";
+							SEND_ERR(protocc::WORLD_NOT_EXIST, stream.str());
+						}
+					}
+					else {
+						return forward_client_gate_c(data, enves);
+					}
+				}
+				else {
+					std::stringstream stream;
+					stream << "附加信息解析错误 extend:" << data->extend();
+					SEND_ERR(protocc::EXTEND_FORMAT_ERR, stream.str());
+				}
+			}
+			else {
+				return forward_client_gate_c(data, enves);
+			}
+		}
+		else {
+			std::stringstream stream;
+			stream << "消息" << frmpub::Basic::msgname(data->msgid()) << "解析错误";
+			SEND_ERR(protocc::MESSAGE_PARSING_ERROR, stream.str());
+		}
+		return 0;
+	}
+
+	int DbConnector::forward_client_gate_c(std::shared_ptr<protocc::CommonObject> data, 
+		std::shared_ptr<std::stack<FilterData::Envelope>> enves){		
+		if (enves->empty() == false) {
+			FilterData::Envelope& env = enves->top();
+			enves->pop();
+			std::shared_ptr<LoginClient> gate = shynet::Singleton<LoginClientMgr>::instance().find(env.fd);
+			if (gate != nullptr) {
+				gate->send_proto(data.get(), enves.get());
+				LOG_DEBUG << "转发消息" << frmpub::Basic::msgname(data->msgid())
+					<< "到gate[" << gate->remote_addr()->ip() << ":"
+					<< gate->remote_addr()->port() << "]"
+					<< " gate fd:" << env.fd;
+			}
+			else {
+				std::stringstream stream;
+				stream << "gate fd:" << env.fd << " 已断开连接";
+				SEND_ERR(protocc::GATE_NOT_EXIST, stream.str());
+			}
+		}
+		else {
+			SEND_ERR(protocc::NO_ROUTING_INFO,"转发消息没有路由信息");
 		}
 		return 0;
 	}

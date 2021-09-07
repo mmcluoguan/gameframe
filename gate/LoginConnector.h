@@ -1,4 +1,4 @@
-﻿#pragma once
+#pragma once
 #include "frmpub/Connector.h"
 
 namespace gate {
@@ -29,8 +29,11 @@ namespace gate {
 		/// <param name="active">断开原因</param>
 		void close(net::ConnectEvent::CloseType active) override;
 
-		void login_id(int v);
-		int login_id() const;
+		/*
+		* 获取或设置连接id
+		*/
+		void login_conncet_id(int v);
+		int login_conncet_id() const;
 	private:
 		/// <summary>
 		/// 服务器通用错误信息
@@ -38,6 +41,6 @@ namespace gate {
 		int errcode(std::shared_ptr<protocc::CommonObject> data,
 			std::shared_ptr<std::stack<FilterData::Envelope>> enves);
 	private:
-		int login_id_;
+		int login_connect_id_;
 	};
 }

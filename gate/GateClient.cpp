@@ -1,6 +1,7 @@
-﻿#include "gate/GateClient.h"
+#include "gate/GateClient.h"
 #include <cstring>
 #include "shynet/lua/LuaEngine.h"
+#include "shynet/net/ConnectReactorMgr.h"
 #include "shynet/Logger.h"
 #include "shynet/Utility.h"
 #include "shynet/IniConfig.h"
@@ -72,7 +73,6 @@ namespace gate {
 		if (accountid_.empty() == false) {
 			ConnectorMgr& mgr = shynet::Singleton<ConnectorMgr>::instance();
 			mgr.reduce_count(login_id_);
-			mgr.reduce_count(game_id_);
 
 			if (accountid_ != "") {
 				//通知服务器玩家下线
@@ -80,19 +80,17 @@ namespace gate {
 				msg.set_aid(accountid_);
 				msg.set_ip(remote_addr()->ip());
 				msg.set_port(remote_addr()->port());
-				auto reg = mgr.world_connector();
-				if (reg != nullptr) {
-					reg->send_proto(protocc::CLIOFFLINE_GATE_ALL_C, &msg);
-				}
-				auto db = mgr.db_connector();
-				if (db != nullptr) {
-					db->send_proto(protocc::CLIOFFLINE_GATE_ALL_C, &msg);
-				}
-				auto lg = mgr.login_connector(login_id_);
+				auto world = mgr.world_connector();
+				if (world != nullptr) {
+					world->send_proto(protocc::CLIOFFLINE_GATE_ALL_C, &msg);
+				}				
+				int login_connect_id = mgr.sid_conv_connect_id(login_id_);
+				auto lg = mgr.login_connector(login_connect_id);
 				if (lg != nullptr) {
 					lg->send_proto(protocc::CLIOFFLINE_GATE_ALL_C, &msg);
 				}
-				auto gs = mgr.game_connector(game_id_);
+				int game_connect_id = mgr.sid_conv_connect_id(game_id_);
+				auto gs = mgr.game_connector(game_connect_id);
 				if (gs != nullptr) {
 					gs->send_proto(protocc::CLIOFFLINE_GATE_ALL_C, &msg);
 				}
@@ -128,13 +126,13 @@ namespace gate {
 			SEND_ERR(protocc::UNAUTHENTICATED, "未验证的客户端连接,消息终止转发");
 			return -1;
 		}
-		std::shared_ptr<LoginConnector> login = shynet::Singleton<ConnectorMgr>::instance().
-			select_login(login_id_);
+		ConnectorMgr& connectMgr = shynet::Singleton<ConnectorMgr>::instance();
+		int login_connect_id = connectMgr.sid_conv_connect_id(login_id_);
+		std::shared_ptr<LoginConnector> login = connectMgr.select_login(login_connect_id);
 		if (login != nullptr) {
-			if (login_id_ != login->login_id()) {
-				LOG_WARN << "负载均衡选择的login_id:" << login->login_id();
+			if (login_connect_id != login->login_conncet_id()) {
+				LOG_WARN << "负载均衡选择的login_connect_id:" << login->login_conncet_id();
 			}
-			login_id_ = login->login_id();
 			FilterData::Envelope enve;
 			enve.fd = iobuf()->fd();
 			enve.addr = *remote_addr()->sockaddr();
@@ -160,37 +158,20 @@ namespace gate {
 				}
 
 				//登陆消息中附加上选择的loginid,gameid,gateid
-				auto& connectMgr = shynet::Singleton<ConnectorMgr>::instance();
-				auto logininfo = connectMgr.find_connect_data(login_id_);
-				auto gameinfo = connectMgr.find_connect_data(game_id_);
-
-				if (gameinfo.connect_id == 0) {
-					//登陆前没有选择游戏服务器，负载均衡开始选择
-					std::shared_ptr<GameConnector> game = shynet::Singleton<ConnectorMgr>::instance().select_game(game_id_);
-					if (game != nullptr) {
-						if (game_id_ != game->game_id()) {
-							LOG_WARN << "负载均衡选择的game_id_:" << game->game_id();
-						}
-						game_id_ = game->game_id();
-						gameinfo = connectMgr.find_connect_data(game_id_);
-					}
-				}
-
-				if (logininfo.connect_id != 0 &&
-					gameinfo.connect_id != 0) {
-					shynet::IniConfig& ini = shynet::Singleton<shynet::IniConfig>::get_instance();
-					int gateid = ini.get<int, int>("gate", "sid", 1);
-
-					std::string extend = shynet::Utility::str_format("%d,%d,%d",
-						gateid, logininfo.sif.sid(), gameinfo.sif.sid());
-					obj->set_extend(extend);
-				}
-				else {
+				auto logininfo = connectMgr.find_connect_data(login_connect_id);
+				if (logininfo == nullptr) {
 					std::stringstream stream;
-					stream << "没有可用的" << frmpub::Basic::connectname(protocc::ServerType::GAME) << "连接";
-					SEND_ERR(protocc::LOGIN_NOT_EXIST, stream.str());
+					stream << "没有可用的" << frmpub::Basic::connectname(protocc::ServerType::LOGIN) << "连接";
 					return 0;
 				}
+				int game_connect_id = connectMgr.sid_conv_connect_id(game_id_);
+				auto gameinfo = connectMgr.find_connect_data(game_connect_id);
+
+				shynet::IniConfig& ini = shynet::Singleton<shynet::IniConfig>::get_instance();
+				int gateid = ini.get<int, int>("gate", "sid", 1);
+				std::string extend = shynet::Utility::str_format("%d,%d,%d",
+					gateid, logininfo->sif.sid(), gameinfo ? gameinfo->sif.sid() : 0);
+				obj->set_extend(extend);
 			}
 			else if (obj->msgid() == protocc::RECONNECT_CLIENT_GATE_C) {
 				//断线重连消息中附加上选择的gateid
@@ -216,12 +197,9 @@ namespace gate {
 			SEND_ERR(protocc::UNAUTHENTICATED, "未验证的客户端连接,消息终止转发");
 			return -1;
 		}
-		std::shared_ptr<GameConnector> game = shynet::Singleton<ConnectorMgr>::instance().select_game(game_id_);
-		if (game != nullptr) {
-			if (game_id_ != game->game_id()) {
-				LOG_WARN << "负载均衡选择的game_id_:" << game->game_id();
-			}
-			game_id_ = game->game_id();
+		int game_connect_id = shynet::Singleton<ConnectorMgr>::instance().sid_conv_connect_id(game_id_);
+		std::shared_ptr<GameConnector> game = shynet::Singleton<ConnectorMgr>::instance().game_connector(game_connect_id);
+		if (game != nullptr) {			
 			FilterData::Envelope enve;
 			enve.fd = iobuf()->fd();
 			enve.addr = *remote_addr()->sockaddr();
@@ -255,8 +233,8 @@ namespace gate {
 		std::shared_ptr<std::stack<FilterData::Envelope>> enves) {
 		protocc::selectserver_client_gate_c msgc;
 		if (msgc.ParseFromString(data->msgdata()) == true) {
-			login_id_ = shynet::Singleton<ConnectorMgr>::instance().sid_conv_connect_id(msgc.loginid());
-			game_id_ = shynet::Singleton<ConnectorMgr>::instance().sid_conv_connect_id(msgc.gameid());
+			login_id_ = msgc.loginid();
+			game_id_ = msgc.gameid();
 
 			protocc::selectserver_client_gate_s msgs;
 			msgs.set_result(0);

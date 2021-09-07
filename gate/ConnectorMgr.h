@@ -1,4 +1,4 @@
-﻿#pragma once
+#pragma once
 #include <mutex>
 #include <unordered_map>
 #include "shynet/Singleton.h"
@@ -40,24 +40,20 @@ namespace gate {
 		/// <summary>
 		/// 删除服务器连接信息
 		/// </summary>
-		/// <param name="connect_id">服务器连接id</param>
+		/// <param name="sid">服务器连接id</param>
 		/// <returns></returns>
 		bool remove(int connect_id);
 		/// <summary>
-		/// 通过服务id查找连接信息
+		/// 通过服务器连接id查找连接信息
 		/// </summary>
-		/// <param name="connect_id">服务器连接id</param>
+		/// <param name="sid">服务器连接id</param>
 		/// <returns></returns>
-		ConnectData find_connect_data(int connect_id);
+		ConnectData* find_connect_data(int connect_id);
 
 		/*
-		* 选择登录服务器，如果指定login_id找不到,默认选择connect_num值最小的登录服务器
+		* 选择登录服务器，如果指定login_connect_id找不到,默认选择connect_num值最小的登录服务器
 		*/
-		std::shared_ptr<LoginConnector> select_login(int login_id);
-		/*
-		* 选择游戏服务器，如果指定game_id找不到,默认选择connect_num值最小的游戏服务器
-		*/
-		std::shared_ptr<GameConnector> select_game(int game_id);
+		std::shared_ptr<LoginConnector> select_login(int login_connect_id);
 
 
 		/// <summary>
@@ -68,24 +64,21 @@ namespace gate {
 		bool reduce_count(int connect_id);
 
 		std::shared_ptr<WorldConnector> world_connector() const;
-		void world_id(int id);
-
-		std::shared_ptr<DbConnector> db_connector() const;
-		void db_id(int id);
+		void world_conncet_id(int id);
 
 		/// <summary>
 		/// 获取登录服务器连接
 		/// </summary>
-		/// <param name="login_id">服务器连接id</param>
+		/// <param name="login_connect_id">服务器连接id</param>
 		/// <returns></returns>
-		std::shared_ptr<LoginConnector> login_connector(int login_id) const;
+		std::shared_ptr<LoginConnector> login_connector(int login_connect_id) const;
 
 		/// <summary>
 		/// 获取游戏服务器连接
 		/// </summary>
-		/// <param name="game_id">服务器连接id</param>
+		/// <param name="game_connect_id">服务器连接id</param>
 		/// <returns></returns>
-		std::shared_ptr<GameConnector> game_connector(int game_id) const;
+		std::shared_ptr<GameConnector> game_connector(int game_connect_id) const;
 
 		/// <summary>
 		/// 服务器连接信息列表
@@ -95,8 +88,8 @@ namespace gate {
 		std::unordered_map<int, ConnectData> connect_datas() const;
 
 	private:
-		int world_id_;
-		int db_id_;
+		//world连接id
+		int world_conncet_id_;
 		mutable std::mutex connect_data_mutex_;
 		std::unordered_map<int, ConnectData> connect_datas_;
 	};

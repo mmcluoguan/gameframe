@@ -1,4 +1,4 @@
-﻿#include <unistd.h>
+#include <unistd.h>
 #include "shynet/IniConfig.h"
 #include "shynet/events/EventHandler.h"
 #include "shynet/net/IPAddress.h"
@@ -40,8 +40,8 @@ int main(int argc, char* argv[]) {
 	Singleton<ThreadPool>::instance().start();
 
 	//连接db服务器
-	string dbip = ini.get<const char*, string>("dbvisit", "ip", "127.0.0.1");
-	short dbport = ini.get<short, short>("dbvisit", "port", short(21000));
+	string dbip = ini.get<const char*, string>("dbvisit_world", "ip", "127.0.0.1");
+	short dbport = ini.get<short, short>("dbvisit_world", "port", short(21000));
 	shared_ptr<IPAddress> dbaddr(new IPAddress(dbip.c_str(), dbport));
 	Singleton<ConnectReactorMgr>::instance().add(
 		shared_ptr<DbConnector>(

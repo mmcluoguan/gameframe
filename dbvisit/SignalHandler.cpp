@@ -1,10 +1,13 @@
-﻿#include "dbvisit/SignalHandler.h"
+#include "dbvisit/SignalHandler.h"
 #include <signal.h>
 #include <sw/redis++/redis++.h>
 namespace redis = sw::redis;
 #include <shynet/IniConfig.h>
 #include <shynet/Singleton.h>
 #include "frmpub/Basic.h"
+
+//配置参数
+extern const char* g_confname;
 
 namespace dbvisit
 {
@@ -21,7 +24,7 @@ namespace dbvisit
 	{
 		shynet::IniConfig& ini = shynet::Singleton<shynet::IniConfig>::get_instance();
 		std::string type = frmpub::Basic::connectname(protocc::ServerType::DBVISIT);
-		int sid = ini.get<int, int>("dbvisit", "sid", 1);
+		int sid = ini.get<int, int>(g_confname, "sid", 1);
 		std::string key = shynet::Utility::str_format("%s_%d", type.c_str(), sid);
 		redis::Redis& redis = shynet::Singleton<redis::Redis>::instance(std::string());
 		try

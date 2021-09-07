@@ -1,4 +1,4 @@
-﻿#pragma once
+#pragma once
 #include "shynet/net/AcceptNewFd.h"
 #include "frmpub/Client.h"
 

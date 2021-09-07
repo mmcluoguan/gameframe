@@ -1,4 +1,4 @@
-﻿#include "gate/LuaWrapper.h"
+#include "gate/LuaWrapper.h"
 #include "shynet/IniConfig.h"
 #include "shynet/Singleton.h"
 #include "gate/GateServer.h"
@@ -22,9 +22,6 @@ namespace gate {
 		);
 
 		state["GateClient_CPP"].setClass(kaguya::UserdataMetatable<GateClient, frmpub::Client>()
-		);
-
-		state["DbConnector_CPP"].setClass(kaguya::UserdataMetatable<DbConnector, frmpub::Connector>()
 		);
 
 		state["WorldConnector_CPP"].setClass(kaguya::UserdataMetatable<WorldConnector, frmpub::Connector>()

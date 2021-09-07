@@ -1,4 +1,4 @@
-﻿#include "gate/ConnectorMgr.h"
+#include "gate/ConnectorMgr.h"
 #include "shynet/net/ConnectReactorMgr.h"
 
 namespace gate {
@@ -24,16 +24,20 @@ namespace gate {
 		connect_datas_[connect_id] = data;
 	}
 
-	ConnectorMgr::ConnectData ConnectorMgr::find_connect_data(int connect_id)
+	ConnectorMgr::ConnectData* ConnectorMgr::find_connect_data(int connect_id)
 	{
 		std::lock_guard<std::mutex> lock(connect_data_mutex_);
-		return connect_datas_[connect_id];
+		auto it = connect_datas_.find(connect_id);
+		if (it != connect_datas_.end()) {
+			return &it->second;
+		}
+		return nullptr;
 	}
 
-	std::shared_ptr<LoginConnector> ConnectorMgr::select_login(int login_id) {
+	std::shared_ptr<LoginConnector> ConnectorMgr::select_login(int login_connect_id) {
 		std::lock_guard<std::mutex> lock(connect_data_mutex_);
 		std::shared_ptr<LoginConnector> login;
-		auto iter_data = connect_datas_.find(login_id);
+		auto iter_data = connect_datas_.find(login_connect_id);
 		ConnectData* data = nullptr;
 		if (iter_data == connect_datas_.end()) {
 			//如果指定login_id找不到,默认选择connect_num值最小的登录服务器
@@ -62,49 +66,10 @@ namespace gate {
 		}
 		else {
 			login = std::dynamic_pointer_cast<LoginConnector>(
-				shynet::Singleton<net::ConnectReactorMgr>::instance().find(login_id));
+				shynet::Singleton<net::ConnectReactorMgr>::instance().find(login_connect_id));
 			iter_data->second.connect_num++;
 		}
 		return login;
-	}
-
-	std::shared_ptr<GameConnector> ConnectorMgr::select_game(int game_id) {
-		std::lock_guard<std::mutex> lock(connect_data_mutex_);
-		std::shared_ptr<GameConnector> game;
-		auto iter_data = connect_datas_.find(game_id);
-		ConnectData* data = nullptr;
-		if (iter_data == connect_datas_.end()) {
-			//如果指定game_id找不到,默认选择connect_num值最小的游戏服务器
-			int min = -1;
-			int target_game_id = 0;
-			for (auto& it : connect_datas_) {
-				if (it.second.sif.st() == protocc::ServerType::GAME) {
-					if (min == -1) {
-						min = it.second.connect_num;
-						target_game_id = it.second.connect_id;
-						data = &it.second;
-					}
-					else if (it.second.connect_num < min) {
-						min = it.second.connect_num;
-						target_game_id = it.second.connect_id;
-						data = &it.second;
-					}
-				}
-			}
-			game = std::dynamic_pointer_cast<GameConnector>(
-				shynet::Singleton<net::ConnectReactorMgr>::instance().find(target_game_id));
-			if (data != nullptr) {
-
-				data->connect_num++;
-			}
-		}
-		else {
-			game = std::dynamic_pointer_cast<GameConnector>(
-				shynet::Singleton<net::ConnectReactorMgr>::instance().find(game_id));
-			iter_data->second.connect_num++;
-			
-		}
-		return game;
 	}
 
 	bool ConnectorMgr::remove(int connect_id) {
@@ -127,30 +92,21 @@ namespace gate {
 
 	std::shared_ptr<WorldConnector> ConnectorMgr::world_connector() const {
 		return std::dynamic_pointer_cast<WorldConnector>(
-			shynet::Singleton<net::ConnectReactorMgr>::instance().find(world_id_));
+			shynet::Singleton<net::ConnectReactorMgr>::instance().find(world_conncet_id_));
 	}
 
-	void ConnectorMgr::world_id(int id) {
-		world_id_ = id;
+	void ConnectorMgr::world_conncet_id(int id) {
+		world_conncet_id_ = id;
 	}
 
-	std::shared_ptr<DbConnector> ConnectorMgr::db_connector() const {
-		return std::dynamic_pointer_cast<DbConnector>(
-			shynet::Singleton<net::ConnectReactorMgr>::instance().find(db_id_));
-	}
-
-	void ConnectorMgr::db_id(int id) {
-		db_id_ = id;
-	}
-
-	std::shared_ptr<LoginConnector> ConnectorMgr::login_connector(int login_id) const {
+	std::shared_ptr<LoginConnector> ConnectorMgr::login_connector(int login_connect_id) const {
 		return std::dynamic_pointer_cast<LoginConnector>(
-			shynet::Singleton<net::ConnectReactorMgr>::instance().find(login_id));
+			shynet::Singleton<net::ConnectReactorMgr>::instance().find(login_connect_id));
 	}
 
-	std::shared_ptr<GameConnector> ConnectorMgr::game_connector(int game_id) const {
+	std::shared_ptr<GameConnector> ConnectorMgr::game_connector(int game_connect_id) const {
 		return std::dynamic_pointer_cast<GameConnector>(
-			shynet::Singleton<net::ConnectReactorMgr>::instance().find(game_id));
+			shynet::Singleton<net::ConnectReactorMgr>::instance().find(game_connect_id));
 	}
 
 	std::unordered_map<int, ConnectorMgr::ConnectData> ConnectorMgr::connect_datas() const {

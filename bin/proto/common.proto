@@ -55,7 +55,9 @@ enum errnum{
     DB_CACHE_ERROR = 7;             //db或cache操作错误
     UNAUTHENTICATED = 8;            //未认证的客户端
     CLIENT_CLOSEED = 9;             //客户端已经关闭
-    UNKNOWN_SERVER_TYPE = 10;        //未知服务器类型
+    UNKNOWN_SERVER_TYPE = 10;       //未知服务器类型
+    EXTEND_FORMAT_ERR = 11;         //附加信息解析错误
+    NO_ROUTING_INFO = 12;           //转发消息没有路由信息
 }
 
 //服务器通用错误信息

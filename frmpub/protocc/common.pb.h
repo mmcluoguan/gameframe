@@ -149,12 +149,14 @@ enum errnum : int {
   UNAUTHENTICATED = 8,
   CLIENT_CLOSEED = 9,
   UNKNOWN_SERVER_TYPE = 10,
+  EXTEND_FORMAT_ERR = 11,
+  NO_ROUTING_INFO = 12,
   errnum_INT_MIN_SENTINEL_DO_NOT_USE_ = std::numeric_limits<::PROTOBUF_NAMESPACE_ID::int32>::min(),
   errnum_INT_MAX_SENTINEL_DO_NOT_USE_ = std::numeric_limits<::PROTOBUF_NAMESPACE_ID::int32>::max()
 };
 bool errnum_IsValid(int value);
 constexpr errnum errnum_MIN = MESSAGE_PARSING_ERROR;
-constexpr errnum errnum_MAX = UNKNOWN_SERVER_TYPE;
+constexpr errnum errnum_MAX = NO_ROUTING_INFO;
 constexpr int errnum_ARRAYSIZE = errnum_MAX + 1;
 
 const ::PROTOBUF_NAMESPACE_ID::EnumDescriptor* errnum_descriptor();

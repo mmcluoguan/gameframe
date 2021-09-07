@@ -1,4 +1,4 @@
-﻿#include "game/DbConnector.h"
+#include "game/DbConnector.h"
 #include "shynet/net/ConnectReactorMgr.h"
 #include "shynet/IniConfig.h"
 #include "shynet/lua/LuaEngine.h"
@@ -130,7 +130,7 @@ namespace game {
 			}
 			else {
 				shynet::IniConfig& ini = shynet::Singleton<shynet::IniConfig>::get_instance();
-				int sid = ini.get<int, int>("dbvisit", "sid", 1);
+				int sid = ini.get<int, int>("dbvisit_game", "sid", 1);
 				LOG_WARN << frmpub::Basic::connectname(protocc::ServerType::GAME) << " sid:" << sid << " 已存在";
 				return -1;
 			}

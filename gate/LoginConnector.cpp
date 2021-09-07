@@ -1,4 +1,4 @@
-﻿#include "gate/LoginConnector.h"
+#include "gate/LoginConnector.h"
 #include <unistd.h>
 #include "shynet/net/ConnectReactorMgr.h"
 #include "shynet/lua/LuaEngine.h"
@@ -65,6 +65,10 @@ namespace gate {
 						if (msgc.ParseFromString(obj->msgdata()) == true) {
 							if (msgc.result() == 0) {
 								client->accountid(msgc.aid());
+								if (obj->extend().empty() == false) {
+									//从扩展信息中取出gamesid
+									client->game_id(atoi(obj->extend().c_str()));
+								}
 							}
 						}
 						else {
@@ -129,14 +133,14 @@ namespace gate {
 		shynet::Singleton<lua::LuaEngine>::get_instance().append(
 			std::make_shared<frmpub::OnCloseTask>(fd()));
 
-		shynet::Singleton<ConnectorMgr>::instance().remove(login_id_);
+		shynet::Singleton<ConnectorMgr>::instance().remove(login_connect_id_);
 		Connector::close(active);
 	}
-	void LoginConnector::login_id(int v) {
-		login_id_ = v;
+	void LoginConnector::login_conncet_id(int v) {
+		login_connect_id_ = v;
 	}
-	int LoginConnector::login_id() const {
-		return login_id_;
+	int LoginConnector::login_conncet_id() const {
+		return login_connect_id_;
 	}
 	int LoginConnector::errcode(std::shared_ptr<protocc::CommonObject> data,
 		std::shared_ptr<std::stack<FilterData::Envelope>> enves) {

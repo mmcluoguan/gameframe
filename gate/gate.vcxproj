@@ -36,7 +36,6 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ConnectorMgr.cpp" />
-    <ClCompile Include="DbConnector.cpp" />
     <ClCompile Include="GameConnector.cpp" />
     <ClCompile Include="gate.cpp" />
     <ClCompile Include="GateClient.cpp" />
@@ -50,7 +49,6 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ConnectorMgr.h" />
-    <ClInclude Include="DbConnector.h" />
     <ClInclude Include="GameConnector.h" />
     <ClInclude Include="GateClient.h" />
     <ClInclude Include="GateClientMgr.h" />

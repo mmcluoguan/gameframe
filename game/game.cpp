@@ -1,4 +1,4 @@
-﻿#include <unistd.h>
+#include <unistd.h>
 #include "shynet/IniConfig.h"
 #include "shynet/Logger.h"
 #include "shynet/Utility.h"
@@ -29,11 +29,11 @@ int main(int argc, char* argv[]) {
 	const char* file = "gameframe.ini";
 	IniConfig& ini = Singleton<IniConfig>::instance(std::move(file));
 
-	int centerid = ini.get<int, int>("snowflakeid", "centerid", 1);
-	int workerid = ini.get<int, int>("snowflakeid", "workerid", 1);
+	int centerid = ini.get<int, int>("dbvisit_game", "centerid", 1);
+	int workerid = ini.get<int, int>("dbvisit_game", "workerid", 1);
 	shynet::Singleton<IdWorker>::instance(std::move(workerid), std::move(centerid));
 
-	bool daemon = ini.get<bool, bool>("dbvisit", "daemon", false);
+	bool daemon = ini.get<bool, bool>("dbvisit_game", "daemon", false);
 	if (daemon) {
 		Utility::daemon();
 		Singleton<IniConfig>::instance(std::move(string("gameframe.ini").c_str()));
@@ -56,8 +56,8 @@ int main(int argc, char* argv[]) {
 		);
 	}
 
-	string dbip = ini.get<const char*, string>("dbvisit", "ip", "127.0.0.1");
-	short dbport = ini.get<short, short>("dbvisit", "port", short(21000));
+	string dbip = ini.get<const char*, string>("dbvisit_game", "ip", "127.0.0.1");
+	short dbport = ini.get<short, short>("dbvisit_game", "port", short(21000));
 	shared_ptr<IPAddress> dbaddr(new IPAddress(dbip.c_str(), dbport));
 	Singleton<ConnectReactorMgr>::instance().add(
 		shared_ptr<DbConnector>(

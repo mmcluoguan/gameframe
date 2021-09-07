@@ -1,4 +1,4 @@
-﻿#include "gate/WorldConnector.h"
+#include "gate/WorldConnector.h"
 #include "shynet/net/ConnectReactorMgr.h"
 #include "shynet/lua/LuaEngine.h"
 #include "shynet/IniConfig.h"
@@ -52,7 +52,7 @@ namespace gate {
 	}
 	void WorldConnector::complete() {
 		LOG_INFO << "连接服务器world成功 [ip:" << connect_addr()->ip() << ":" << connect_addr()->port() << "]";
-		shynet::Singleton<ConnectorMgr>::instance().world_id(connectid());
+		shynet::Singleton<ConnectorMgr>::instance().world_conncet_id(connectid());
 
 		//通知lua的onConnect函数
 		shynet::Singleton<lua::LuaEngine>::get_instance().append(
@@ -92,7 +92,7 @@ namespace gate {
 		shynet::Singleton<lua::LuaEngine>::get_instance().append(
 			std::make_shared<frmpub::OnCloseTask>(fd()));
 
-		shynet::Singleton<ConnectorMgr>::instance().world_id(0);
+		shynet::Singleton<ConnectorMgr>::instance().world_conncet_id(0);
 		Connector::close(active);
 	}
 
@@ -138,7 +138,7 @@ namespace gate {
 								)));
 						//连接游戏服务器
 						int gameid = shynet::Singleton<net::ConnectReactorMgr>::instance().add(game);
-						game->game_id(gameid);
+						game->game_conncet_id(gameid);
 
 						shynet::Singleton<ConnectorMgr>::instance().add_new_connect_data(gameid, sif);
 					}
@@ -152,7 +152,7 @@ namespace gate {
 								)));
 						//连接登录服务器
 						int loginid = shynet::Singleton<net::ConnectReactorMgr>::instance().add(login);
-						login->login_id(loginid);
+						login->login_conncet_id(loginid);
 
 						shynet::Singleton<ConnectorMgr>::instance().add_new_connect_data(loginid, sif);
 					}
@@ -185,7 +185,7 @@ namespace gate {
 							)));
 					//连接游戏服务器
 					int gameid = shynet::Singleton<net::ConnectReactorMgr>::instance().add(game);
-					game->game_id(gameid);
+					game->game_conncet_id(gameid);
 
 					shynet::Singleton<ConnectorMgr>::instance().add_new_connect_data(gameid, sif);
 				}
@@ -199,7 +199,7 @@ namespace gate {
 							)));
 					//连接登录服务器
 					int loginid = shynet::Singleton<net::ConnectReactorMgr>::instance().add(login);
-					login->login_id(loginid);
+					login->login_conncet_id(loginid);
 
 					shynet::Singleton<ConnectorMgr>::instance().add_new_connect_data(loginid, sif);
 				}

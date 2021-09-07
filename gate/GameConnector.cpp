@@ -1,4 +1,4 @@
-﻿#include "gate/GameConnector.h"
+#include "gate/GameConnector.h"
 #include "shynet/net/ConnectReactorMgr.h"
 #include "shynet/lua/LuaEngine.h"
 #include "shynet/IniConfig.h"
@@ -62,6 +62,33 @@ namespace gate {
 				enves->pop();
 				std::shared_ptr<GateClient> client = shynet::Singleton<GateClientMgr>::instance().find(env.fd);
 				if (client != nullptr) {
+					if (obj->msgid() == protocc::CREATEROLE_CLIENT_GATE_S)
+					{
+						protocc::createrole_client_gate_s createrole;
+						if (createrole.ParseFromString(obj->msgdata()) == true) {
+							if (createrole.result() == 0) {
+								//通知login修改account关联role
+								std::shared_ptr<LoginConnector> login = shynet::Singleton<ConnectorMgr>::instance().
+									login_connector(client->login_id());
+								if (login != nullptr)
+								{
+									login->send_proto(obj.get(), enves.get());
+								}
+								else {
+									std::stringstream stream;
+									stream << "没有可用的" << frmpub::Basic::connectname(protocc::ServerType::LOGIN) << "连接";
+									return 0;
+								}
+							}
+						}
+						else {
+							std::stringstream stream;
+							stream << "消息" << frmpub::Basic::msgname(obj->msgid()) << "解析错误";
+							SEND_ERR(protocc::MESSAGE_PARSING_ERROR, stream.str());
+							return 0;
+						}
+					}
+
 					client->send_proto(obj.get(), enves.get());
 					LOG_DEBUG << "转发消息" << frmpub::Basic::msgname(obj->msgid())
 						<< "到client[" << client->remote_addr()->ip() << ":"
@@ -94,16 +121,16 @@ namespace gate {
 		shynet::Singleton<lua::LuaEngine>::get_instance().append(
 			std::make_shared<frmpub::OnCloseTask>(fd()));
 
-		shynet::Singleton<ConnectorMgr>::instance().remove(game_id_);
+		shynet::Singleton<ConnectorMgr>::instance().remove(game_connect_id_);
 		Connector::close(active);
 	}
 
-	void GameConnector::game_id(int v) {
-		game_id_ = v;
+	void GameConnector::game_conncet_id(int v) {
+		game_connect_id_ = v;
 	}
 
-	int GameConnector::game_id() const {
-		return game_id_;
+	int GameConnector::game_conncet_id() const {
+		return game_connect_id_;
 	}
 
 	int GameConnector::errcode(std::shared_ptr<protocc::CommonObject> data, std::shared_ptr<std::stack<FilterData::Envelope>> enves) {

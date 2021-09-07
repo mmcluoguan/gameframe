@@ -441,11 +441,11 @@ namespace dbvisit {
 			try {
 				//取出路由信息
 				std::stack<FilterData::Envelope> routing = *enves;
-				FilterData::Envelope cli_enve = routing.top();
-				net::IPAddress cli_addr(&cli_enve.addr);
-				routing.pop();
 				FilterData::Envelope gate_enve = routing.top();
 				net::IPAddress gate_addr(&gate_enve.addr);
+				routing.pop();
+				FilterData::Envelope cli_enve = routing.top();
+				net::IPAddress cli_addr(&cli_enve.addr);
 				routing.pop();
 
 				int result = 0;//默认失败
@@ -455,7 +455,9 @@ namespace dbvisit {
 				std::string roleid = "0";//角色id
 				auto temp = shynet::Utility::spilt(data->extend(), ",");
 				if (temp.size() != 3) {
-					LOG_WARN << "附加信息解析错误 extend:" << data->extend();
+					std::stringstream stream;
+					stream << "附加信息解析错误 extend:" << data->extend();
+					SEND_ERR(protocc::EXTEND_FORMAT_ERR, stream.str());
 					return 0;
 				}
 				std::string gate_sid = temp[0];
@@ -560,7 +562,7 @@ namespace dbvisit {
 				msgs.set_result(result);
 				msgs.set_aid(accountid);
 				msgs.set_roleid(strtoull(roleid.c_str(), nullptr, 0));
-				send_proto(protocc::LOGIN_CLIENT_GATE_S, &msgs, enves.get());
+				send_proto(protocc::LOGIN_CLIENT_GATE_S, &msgs, enves.get(),&game_sid);
 				LOG_DEBUG << "发送消息" << frmpub::Basic::msgname(protocc::LOGIN_CLIENT_GATE_S) << "到"
 					<< frmpub::Basic::connectname(sif().st())
 					<< " result:" << msgs.result();
@@ -690,41 +692,32 @@ namespace dbvisit {
 				};
 				int result = 0;
 				std::string roleid = "0";
-				std::string account_key = "account_" + msgc.aid();
-				Datahelp& help = shynet::Singleton<Datahelp>::instance();
-				Datahelp::ErrorCode error = help.getdata(account_key, data);
-				if (error == Datahelp::ErrorCode::OK) {
-					if (data["roleid"] == "0") {
-						std::default_random_engine random(time(nullptr));
-						std::uniform_int_distribution<int> level_random(1, 100);
-						roleid = std::to_string(shynet::Singleton<shynet::IdWorker>::get_instance().getid());
-						std::unordered_map<std::string, std::string> role_data{
-							{"_id",roleid},
-							{"accountid",msgc.aid()},
-							{"level",std::to_string(level_random(random))},
+				std::string account_key = "account_" + msgc.aid();				
+				if (roleid == "0") {
+					std::default_random_engine random(time(nullptr));
+					std::uniform_int_distribution<int> level_random(1, 100);
+					roleid = std::to_string(shynet::Singleton<shynet::IdWorker>::get_instance().getid());
+					std::unordered_map<std::string, std::string> role_data{
+						{"_id",roleid},
+						{"accountid",msgc.aid()},
+						{"level",std::to_string(level_random(random))},
+					};
+					Datahelp& help = shynet::Singleton<Datahelp>::instance();
+					help.insertdata("role_" + roleid, role_data);
+					//默认初始化3个物品
+					for (size_t i = 0; i < 3; i++) {
+						std::string goodsid = std::to_string(shynet::Singleton<shynet::IdWorker>::get_instance().getid());
+						std::uniform_int_distribution<int> num_random(1, 20);
+						std::unordered_map<std::string, std::string> goods_data{
+							{"_id",goodsid},
+							{"cfgid",std::to_string(i + 1)},
+							{"num",std::to_string(num_random(random))},
 						};
-						Datahelp& help = shynet::Singleton<Datahelp>::instance();
-						help.insertdata("role_" + roleid, role_data);
-						//默认初始化3个物品
-						for (size_t i = 0; i < 3; i++) {
-							std::string goodsid = std::to_string(shynet::Singleton<shynet::IdWorker>::get_instance().getid());
-							std::uniform_int_distribution<int> num_random(1, 20);
-							std::unordered_map<std::string, std::string> goods_data{
-								{"_id",goodsid},
-								{"cfgid",std::to_string(i + 1)},
-								{"num",std::to_string(num_random(random))},
-							};
-							help.insertdata("goods_" + goodsid + "_" + roleid, goods_data);
-						}
-						//更新accout的roleid
-						help.updata(account_key, { {"roleid",roleid} });
-					}
-					else {
-						result = 2; //已有角色
+						help.insertdata("goods_" + goodsid + "_" + roleid, goods_data);
 					}
 				}
 				else {
-					result = 1; //没有此账号
+					result = 2; //已有角色
 				}
 				protocc::createrole_client_gate_s msgs;
 				msgs.set_result(result);
