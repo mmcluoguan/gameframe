@@ -63,7 +63,7 @@ function role:setlevel_client_gate_c(msgname,data,routing)
         cfgid = random(10,20),
         num = random(10,20),
     }
-    table.insert(self.goods,#self.goods,item)
+    table.insert(self.goods,#self.goods + 1,item)
     log("重置角色等级 id:",self.id,"获得物品 goodsid:",item.id)
     local savedata = {
         cache_key = 'goods_' .. item.id .. "_" .. self.id,

@@ -12,3 +12,4 @@
 *.lastbuildstate
 *.out
 *.json
+/bin/.idea

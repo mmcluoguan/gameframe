@@ -1,4 +1,4 @@
-﻿#include "game/LuaWrapper.h"
+#include "game/LuaWrapper.h"
 #include <random>
 #include "shynet/IniConfig.h"
 #include "shynet/Singleton.h"
@@ -20,13 +20,7 @@ namespace game {
 
 		state["newid"] = kaguya::function([]() {
 			return shynet::Singleton<shynet::IdWorker>::get_instance().getid();
-			});
-
-		state["random"] = kaguya::function([](int min, int max) {
-			std::default_random_engine random(time(nullptr));
-			std::uniform_int_distribution<int> num_random(1, 20);
-			return num_random(random);
-			});
+			});		
 
 		state["GameServer_CPP"].setClass(kaguya::UserdataMetatable<GameServer, net::ListenEvent>()
 		);

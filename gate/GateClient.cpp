@@ -234,7 +234,7 @@ namespace gate {
 		protocc::selectserver_client_gate_c msgc;
 		if (msgc.ParseFromString(data->msgdata()) == true) {
 			login_id_ = msgc.loginid();
-			game_id_ = msgc.gameid();
+			game_id_ = 0;// msgc.gameid();
 
 			protocc::selectserver_client_gate_s msgs;
 			msgs.set_result(0);

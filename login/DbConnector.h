@@ -42,6 +42,12 @@ namespace login {
 			std::shared_ptr<std::stack<FilterData::Envelope>> enves);
 
 		/// <summary>
+		/// 跨服顶号处理
+		/// </summary>
+		int repeatlogin_client_gate_s(std::shared_ptr<protocc::CommonObject> data,
+			std::shared_ptr<std::stack<FilterData::Envelope>> enves);
+
+		/// <summary>
 		/// 登录结果
 		/// </summary>
 		int login_client_gate_s(std::shared_ptr<protocc::CommonObject> data,

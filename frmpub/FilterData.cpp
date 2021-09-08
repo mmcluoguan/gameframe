@@ -114,7 +114,7 @@ namespace frmpub {
 		std::stack<Envelope>* enves,
 		const std::string* extend) const {
 		protocc::CommonObject obj;
-		if (extend != 0) {
+		if (extend != nullptr) {
 			obj.set_extend(*extend);
 		}
 		obj.set_msgid(msgid);

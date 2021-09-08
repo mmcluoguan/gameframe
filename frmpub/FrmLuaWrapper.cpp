@@ -1,4 +1,4 @@
-﻿#include "frmpub/FrmLuaWrapper.h"
+#include "frmpub/FrmLuaWrapper.h"
 #include "shynet/IniConfig.h"
 #include "shynet/Singleton.h"
 #include "frmpub/Client.h"
@@ -13,6 +13,12 @@ namespace frmpub {
 	}
 	void FrmLuaWrapper::init(kaguya::State& state) {
 		lua::LuaWrapper::init(state);
+
+		state["random"] = kaguya::function([](int min, int max) {
+			std::default_random_engine random(time(nullptr));
+			std::uniform_int_distribution<int> num_random(1, 20);
+			return num_random(random);
+			});
 
 		state["schedule_timer"] = kaguya::function([](int millisecond, bool repeat) {
 			int second = millisecond / 1000;

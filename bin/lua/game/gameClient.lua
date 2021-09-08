@@ -58,12 +58,49 @@ end
 
 --创建角色
 function gameClient:createrole_client_gate_c(msgid,msgdata,routing)
-    --转发消息到db
-    local enve = Envelope_CPP.new()
-    enve:fd(self.id)
-    enve:addr(self.cpp_socket:remote_addr())
-    routing:push(enve)
-    connectorMgr.dbConnector:send(msgid,msgdata,routing)
+    local msgtable = pb.decode("frmpub.protocc.createrole_client_gate_c", msgdata)
+    local msgdata={}
+    msgdata.result = 0;
+    if roleMgr:findby_accountid(msgtable.aid) == nil then
+        --创建角色
+        local role = require("lua/game/role")
+        local roleObj = role:new(newid(),self.id)
+        roleObj.accountid = msgtable.aid
+        roleObj.level = random(1,100)
+        local savedata = {
+            cache_key = 'role_' .. roleObj.id,
+            fields = {
+                { key = '_id', value = tostring(roleObj.id),},
+                { key = 'accountid', value = tostring(roleObj.accountid),},
+                { key = 'level', value = tostring(roleObj.level),},
+                { key = 'star', value = tostring(roleObj.star),},
+            }
+        }
+        connectorMgr.dbConnector:send('insertdata_to_dbvisit_c',savedata)
+        --默认初始化3个物品
+        for i = 1, 3 do
+            local item = {
+                id = newid(),
+                cfgid = random(10,20),
+                num = random(10,20),
+            }
+            table.insert(roleObj.goods,#roleObj.goods + 1,item)
+            local savedata = {
+                cache_key = 'goods_' .. item.id .. "_" .. self.id,
+                fields = {
+                    { key = '_id', value = tostring(item.id),},
+                    { key = 'cfgid', value = tostring(item.cfgid),},
+                    { key = 'num', value = tostring(item.num),},
+                }
+            }
+            connectorMgr.dbConnector:send('insertdata_to_dbvisit_c',savedata)
+        end
+        msgdata.aid = roleObj.accountid
+        msgdata.roleid = roleObj.id
+    else
+        msgdata.result = 2;
+    end
+    self:send("createrole_client_gate_s",msgdata,routing)
 end
 
 --加载角色数据

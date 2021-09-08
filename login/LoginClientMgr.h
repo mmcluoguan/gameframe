@@ -1,4 +1,4 @@
-﻿#pragma once
+#pragma once
 #include <memory>
 #include <mutex>
 #include <unordered_map>
@@ -23,6 +23,10 @@ namespace login
 		void add(int k, std::shared_ptr<LoginClient> v);
 		bool remove(int k);
 		std::shared_ptr<LoginClient> find(int k);
+		/*
+		* 通过服务id查找连接
+		*/
+		std::shared_ptr<LoginClient> find_from_sid(const std::string& sid) const;
 
 		/// <summary>
         /// 所有连接列表,int为连接fd

@@ -1,4 +1,4 @@
-﻿#pragma once
+#pragma once
 #include <unordered_map>
 #include <functional>
 #include "frmpub/Connector.h"
@@ -46,6 +46,12 @@ namespace gate {
 		* 其他服务器上线
 		*/
 		int seronline_world_gate_g(std::shared_ptr<protocc::CommonObject> data,
+			std::shared_ptr<std::stack<FilterData::Envelope>> enves);
+
+		/// <summary>
+		/// 转发消息到client
+		/// </summary>
+		int forward_world_client_c(std::shared_ptr<protocc::CommonObject> data,
 			std::shared_ptr<std::stack<FilterData::Envelope>> enves);
 	private:
 	};

@@ -68,9 +68,9 @@ namespace world {
 			std::shared_ptr<std::stack<FilterData::Envelope>> enves);
 
 		/*
-		* 分配gamesid
+		* 登录成功后分配gamesid
 		*/
-		int gamesid_login_world_c(std::shared_ptr<protocc::CommonObject> data,
+		int login_client_gate_s(std::shared_ptr<protocc::CommonObject> data,
 			std::shared_ptr<std::stack<FilterData::Envelope>> enves);
 	private:
 		int connect_num_ = 0;

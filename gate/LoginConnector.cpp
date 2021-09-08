@@ -17,6 +17,10 @@ namespace gate {
 				protocc::ERRCODE,
 				std::bind(&LoginConnector::errcode,this,std::placeholders::_1,std::placeholders::_2)
 			},
+			{
+				protocc::REPEATLOGIN_CLIENT_GATE_S,
+				std::bind(&LoginConnector::repeatlogin_client_gate_s,this,std::placeholders::_1,std::placeholders::_2)
+			},
 		};
 	}
 	LoginConnector::~LoginConnector() {
@@ -54,70 +58,15 @@ namespace gate {
 		send_proto(protocc::REGISTER_GATE_LOGIN_C, &msgc);
 	}
 	int LoginConnector::input_handle(std::shared_ptr<protocc::CommonObject> obj, std::shared_ptr<std::stack<FilterData::Envelope>> enves) {
-		if (obj != nullptr) {
-			if (enves->empty() == false) {
-				FilterData::Envelope& env = enves->top();
-				enves->pop();
-				std::shared_ptr<GateClient> client = shynet::Singleton<GateClientMgr>::instance().find(env.fd);
-				if (client != nullptr) {
-					if (obj->msgid() == protocc::LOGIN_CLIENT_GATE_S) {
-						protocc::login_client_gate_s msgc;
-						if (msgc.ParseFromString(obj->msgdata()) == true) {
-							if (msgc.result() == 0) {
-								client->accountid(msgc.aid());
-								if (obj->extend().empty() == false) {
-									//从扩展信息中取出gamesid
-									client->game_id(atoi(obj->extend().c_str()));
-								}
-							}
-						}
-						else {
-							std::stringstream stream;
-							stream << "消息" << frmpub::Basic::msgname(obj->msgid()) << "解析错误";
-							SEND_ERR(protocc::MESSAGE_PARSING_ERROR, stream.str());
-						}
-					}
-					else if (obj->msgid() == protocc::RECONNECT_CLIENT_GATE_S) {
-						protocc::reconnect_client_gate_s msgc;
-						if (msgc.ParseFromString(obj->msgdata()) == true) {
-							if (msgc.result() == 0) {
-								client->accountid(msgc.aid());
-								client->login_id(msgc.loginid());
-								client->game_id(msgc.gameid());
-
-								//通知游戏服玩家断线重连成功
-								int conncetid = shynet::Singleton<ConnectorMgr>::instance().sid_conv_connect_id(msgc.gameid());
-								auto game = shynet::Singleton<ConnectorMgr>::instance().game_connector(conncetid);
-								if (game != nullptr) {
-									game->send_proto(obj.get());
-									LOG_DEBUG << "通知游戏服玩家断线重连成功" << frmpub::Basic::msgname(obj->msgid());
-								}
-							}
-						}
-						else {
-							std::stringstream stream;
-							stream << "消息" << frmpub::Basic::msgname(obj->msgid()) << "解析错误";
-							SEND_ERR(protocc::MESSAGE_PARSING_ERROR, stream.str());
-						}
-					}
-
-					client->send_proto(obj.get(), enves.get());
-					LOG_DEBUG << "转发消息" << frmpub::Basic::msgname(obj->msgid())
-						<< "到client[" << client->remote_addr()->ip() << ":"
-						<< client->remote_addr()->port() << "]"
-						<< " client fd:" << env.fd;
-				}
-				else {
-					std::stringstream stream;
-					stream << "client fd:" << env.fd << " 已断开连接";
-					SEND_ERR(protocc::CLIENT_CLOSEED, stream.str());
-				}
+		if (obj != nullptr) {			
+			//直接处理的登录服消息
+			auto it = pmb_.find(obj->msgid());
+			if (it != pmb_.end()) {
+				return it->second(obj, enves);
 			}
 			else {
-				//直接处理的登录服消息
-				auto it = pmb_.find(obj->msgid());
-				if (it != pmb_.end()) {
-					return it->second(obj, enves);
+				if (enves->empty() == false) {
+					return forward_login_client_c(obj, enves);
 				}
 				else {
 					//通知lua的onMessage函数
@@ -159,6 +108,96 @@ namespace gate {
 					stream << "client fd:" << env.fd << " 已断开连接";
 					SEND_ERR(protocc::CLIENT_CLOSEED, stream.str());
 				}
+			}
+		}
+		else {
+			std::stringstream stream;
+			stream << "消息" << frmpub::Basic::msgname(data->msgid()) << "解析错误";
+			SEND_ERR(protocc::MESSAGE_PARSING_ERROR, stream.str());
+		}
+		return 0;
+	}
+
+	int LoginConnector::forward_login_client_c(std::shared_ptr<protocc::CommonObject> data,
+		std::shared_ptr<std::stack<FilterData::Envelope>> enves) {
+		if (enves->empty() == false) {
+			FilterData::Envelope& env = enves->top();
+			enves->pop();
+			std::shared_ptr<GateClient> client = shynet::Singleton<GateClientMgr>::instance().find(env.fd);
+			if (client != nullptr) {
+				if (data->msgid() == protocc::LOGIN_CLIENT_GATE_S) {
+					protocc::login_client_gate_s msgc;
+					if (msgc.ParseFromString(data->msgdata()) == true) {
+						if (msgc.result() == 0) {
+							client->accountid(msgc.aid());
+							if (data->extend().empty() == false) {
+								//从扩展信息中取出gamesid
+								client->game_id(atoi(data->extend().c_str()));
+							}
+						}
+					}
+					else {
+						std::stringstream stream;
+						stream << "消息" << frmpub::Basic::msgname(data->msgid()) << "解析错误";
+						SEND_ERR(protocc::MESSAGE_PARSING_ERROR, stream.str());
+					}
+				}
+				else if (data->msgid() == protocc::RECONNECT_CLIENT_GATE_S) {
+					protocc::reconnect_client_gate_s msgc;
+					if (msgc.ParseFromString(data->msgdata()) == true) {
+						if (msgc.result() == 0) {
+							client->accountid(msgc.aid());
+							client->login_id(msgc.loginid());
+							client->game_id(msgc.gameid());
+
+							//通知游戏服玩家断线重连成功
+							int conncetid = shynet::Singleton<ConnectorMgr>::instance().sid_conv_connect_id(msgc.gameid());
+							auto game = shynet::Singleton<ConnectorMgr>::instance().game_connector(conncetid);
+							if (game != nullptr) {
+								game->send_proto(data.get());
+								LOG_DEBUG << "通知游戏服玩家断线重连成功" << frmpub::Basic::msgname(data->msgid());
+							}
+						}
+					}
+					else {
+						std::stringstream stream;
+						stream << "消息" << frmpub::Basic::msgname(data->msgid()) << "解析错误";
+						SEND_ERR(protocc::MESSAGE_PARSING_ERROR, stream.str());
+					}
+				}
+
+				client->send_proto(data.get(), enves.get());
+				LOG_DEBUG << "转发消息" << frmpub::Basic::msgname(data->msgid())
+					<< "到client[" << client->remote_addr()->ip() << ":"
+					<< client->remote_addr()->port() << "]"
+					<< " client fd:" << env.fd;
+			}
+			else {
+				std::stringstream stream;
+				stream << "client fd:" << env.fd << " 已断开连接";
+				SEND_ERR(protocc::CLIENT_CLOSEED, stream.str());
+			}
+		}
+		else {
+			SEND_ERR(protocc::NO_ROUTING_INFO, "转发消息没有路由信息");
+		}
+		return 0;
+	}
+	
+	int LoginConnector::repeatlogin_client_gate_s(std::shared_ptr<protocc::CommonObject> data, std::shared_ptr<std::stack<FilterData::Envelope>> enves)
+	{
+		protocc::repeatlogin_client_gate_s msg;
+		if (msg.ParseFromString(data->msgdata()) == true) {
+			std::shared_ptr<GateClient> client = shynet::Singleton<GateClientMgr>::instance().find(msg.aid());
+			if (client != nullptr) {
+				//顶掉之前登录的账号
+				client->send_proto(data.get(), enves.get());
+				client->close(true);
+			}
+			else {
+				std::stringstream stream;
+				stream << "client acccount:" << msg.aid() << " 已断开连接";
+				SEND_ERR(protocc::CLIENT_CLOSEED, stream.str());
 			}
 		}
 		else {

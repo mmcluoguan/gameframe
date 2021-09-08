@@ -5,6 +5,7 @@
 #include "frmpub/ReConnectTimer.h"
 #include "frmpub/LuaCallBackTask.h"
 #include "frmpub/protocc/login.pb.h"
+#include "frmpub/protocc/dbvisit.pb.h"
 #include "login/ConnectorMgr.h"
 #include "login/LoginClientMgr.h"
 
@@ -17,8 +18,8 @@ namespace login {
 				std::bind(&WorldConnector::errcode,this,std::placeholders::_1,std::placeholders::_2)
 			},
 			{
-				protocc::GAMESID_LOGIN_WORLD_S,
-				std::bind(&WorldConnector::gamesid_login_world_s,this,std::placeholders::_1,std::placeholders::_2)
+				protocc::LOGIN_CLIENT_GATE_S,
+				std::bind(&WorldConnector::login_client_gate_s,this,std::placeholders::_1,std::placeholders::_2)
 			},
 		};
 	}
@@ -70,10 +71,15 @@ namespace login {
 			if (it != pmb_.end()) {
 				return it->second(obj, enves);
 			}
-			else {
-				//通知lua的onMessage函数
-				shynet::Singleton<lua::LuaEngine>::get_instance().append(
-					std::make_shared<frmpub::OnMessageTask<WorldConnector>>(shared_from_this(), obj, enves));
+			else {		
+				if (enves->empty() == false) {
+					return forward_world_gate_c(obj, enves);
+				}
+				else {
+					//通知lua的onMessage函数
+					shynet::Singleton<lua::LuaEngine>::get_instance().append(
+						std::make_shared<frmpub::OnMessageTask<WorldConnector>>(shared_from_this(), obj, enves));
+				}
 			}
 		}
 		return 0;
@@ -101,7 +107,7 @@ namespace login {
 		return 0;
 	}
 
-	int WorldConnector::forward_client_gate_c(std::shared_ptr<protocc::CommonObject> data,
+	int WorldConnector::forward_world_gate_c(std::shared_ptr<protocc::CommonObject> data,
 		std::shared_ptr<std::stack<FilterData::Envelope>> enves) {
 		if (enves->empty() == false) {
 			FilterData::Envelope& env = enves->top();
@@ -126,10 +132,34 @@ namespace login {
 		return 0;
 	}
 
-	int WorldConnector::gamesid_login_world_s(std::shared_ptr<protocc::CommonObject> data, 
-		std::shared_ptr<std::stack<FilterData::Envelope>> enves)
-	{
-		data->set_msgid(protocc::LOGIN_CLIENT_GATE_S);
-		return forward_client_gate_c(data, enves);
+	int WorldConnector::login_client_gate_s(std::shared_ptr<protocc::CommonObject> data,
+		std::shared_ptr<std::stack<FilterData::Envelope>> enves) {
+
+		protocc::login_client_gate_s msgc;
+		if (msgc.ParseFromString(data->msgdata()) == true) {
+			std::shared_ptr<DbConnector> db = shynet::Singleton<ConnectorMgr>::instance().db_connector();
+			if (db != nullptr) {
+				//更新world选择的gameid到db
+				protocc::updata_to_dbvisit_c updata;
+				updata.set_cache_key("account_" + msgc.aid());
+				auto fields = updata.add_fields();
+				fields->set_key("game_sid");
+				fields->set_value(data->extend());
+
+				db->send_proto(protocc::UPDATA_TO_DBVISIT_C, &updata);
+				LOG_DEBUG << "发送更新数据消息" << frmpub::Basic::msgname(data->msgid())
+					<< "到dbvisit[" << db->connect_addr()->ip() << ":"
+					<< db->connect_addr()->port() << "]";
+			}
+			else {
+				SEND_ERR_EX(protocc::DBVISIT_NOT_EXIST, "没有可选的db连接", enves.get());
+			}
+		}
+		else {
+			std::stringstream stream;
+			stream << "消息" << frmpub::Basic::msgname(data->msgid()) << "解析错误";
+			SEND_ERR(protocc::MESSAGE_PARSING_ERROR, stream.str());
+		}
+		return forward_world_gate_c(data, enves);
 	}
 }

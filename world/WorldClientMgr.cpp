@@ -51,17 +51,14 @@ namespace world {
 		std::lock_guard<std::mutex> lock(clis_mutex_);
 		std::shared_ptr<WorldClient> game;
 		int min = -1;
-		int target_id = 0;
 		for (auto& it : clis_) {
 			if (it.second->sif().st() == protocc::ServerType::GAME) {
 				if (min == -1) {
 					min = it.second->connect_num();
-					target_id = it.second->sif().sid();
 					game = it.second;
 				}
 				else if (it.second->connect_num() < min) {
 					min = it.second->connect_num();
-					target_id = it.second->sif().sid();
 					game = it.second;
 				}
 			}

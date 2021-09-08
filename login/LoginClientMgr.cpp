@@ -1,4 +1,4 @@
-﻿#include "login/LoginClientMgr.h"
+#include "login/LoginClientMgr.h"
 #include "shynet/lua/LuaEngine.h"
 #include "frmpub/LuaCallBackTask.h"
 
@@ -40,6 +40,19 @@ namespace login
 	{
 		std::lock_guard<std::mutex> lock(clis_mutex_);
 		return clis_[k];
+	}
+
+	std::shared_ptr<LoginClient> LoginClientMgr::find_from_sid(const std::string& sid) const
+	{
+		std::lock_guard<std::mutex> lock(clis_mutex_);
+		for (auto& it : clis_)
+		{
+			if (std::to_string(it.second->sif().sid()) == sid)
+			{
+				return it.second;
+			}
+		}
+		return nullptr;
 	}
 
 	std::unordered_map<int, std::shared_ptr<LoginClient>> LoginClientMgr::clis() const
