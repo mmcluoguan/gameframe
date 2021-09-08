@@ -79,9 +79,14 @@ namespace gate {
 				return it->second(obj, enves);
 			}
 			else {
-				//通知lua的onMessage函数
-				shynet::Singleton<lua::LuaEngine>::get_instance().append(
-					std::make_shared<frmpub::OnMessageTask<WorldConnector>>(shared_from_this(), obj, enves));
+				if (enves->empty() == false) {
+					return forward_world_client_c(obj, enves);
+				}
+				else {
+					//通知lua的onMessage函数
+					shynet::Singleton<lua::LuaEngine>::get_instance().append(
+						std::make_shared<frmpub::OnMessageTask<WorldConnector>>(shared_from_this(), obj, enves));
+				}
 			}
 		}
 		return 0;
@@ -171,6 +176,7 @@ namespace gate {
 		}
 		return 0;
 	}
+
 	int WorldConnector::seronline_world_gate_g(std::shared_ptr<protocc::CommonObject> data,
 		std::shared_ptr<std::stack<FilterData::Envelope>> enves) {
 		protocc::seronline_world_gate_g msgc;
@@ -214,6 +220,30 @@ namespace gate {
 			std::stringstream stream;
 			stream << "消息" << frmpub::Basic::msgname(data->msgid()) << "解析错误";
 			SEND_ERR(protocc::MESSAGE_PARSING_ERROR, stream.str());
+		}
+		return 0;
+	}
+
+	int WorldConnector::forward_world_client_c(std::shared_ptr<protocc::CommonObject> data,
+		std::shared_ptr<std::stack<FilterData::Envelope>> enves) {
+		if (enves->empty() == false) {
+			FilterData::Envelope& env = enves->top();
+			enves->pop();
+			std::shared_ptr<GateClient> client = shynet::Singleton<GateClientMgr>::instance().find(env.fd);
+			if (client != nullptr) {
+				client->send_proto(data.get(), enves.get());
+				LOG_DEBUG << "转发消息" << frmpub::Basic::msgname(data->msgid())
+					<< "到client[" << client->remote_addr()->ip() << ":"
+					<< client->remote_addr()->port() << "]";
+			}
+			else {
+				std::stringstream stream;
+				stream << "client fd:" << env.fd << " 已断开连接";
+				SEND_ERR(protocc::CLIENT_CLOSEED, stream.str());
+			}
+		}
+		else {
+			SEND_ERR(protocc::NO_ROUTING_INFO, "转发消息没有路由信息");
 		}
 		return 0;
 	}

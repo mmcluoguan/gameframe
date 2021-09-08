@@ -57,54 +57,14 @@ namespace gate {
 
 	int GameConnector::input_handle(std::shared_ptr<protocc::CommonObject> obj, std::shared_ptr<std::stack<FilterData::Envelope>> enves) {
 		if (obj != nullptr) {
-			if (enves->empty() == false) {
-				FilterData::Envelope& env = enves->top();
-				enves->pop();
-				std::shared_ptr<GateClient> client = shynet::Singleton<GateClientMgr>::instance().find(env.fd);
-				if (client != nullptr) {
-					if (obj->msgid() == protocc::CREATEROLE_CLIENT_GATE_S)
-					{
-						protocc::createrole_client_gate_s createrole;
-						if (createrole.ParseFromString(obj->msgdata()) == true) {
-							if (createrole.result() == 0) {
-								//通知login修改account关联role
-								std::shared_ptr<LoginConnector> login = shynet::Singleton<ConnectorMgr>::instance().
-									login_connector(client->login_id());
-								if (login != nullptr)
-								{
-									login->send_proto(obj.get(), enves.get());
-								}
-								else {
-									std::stringstream stream;
-									stream << "没有可用的" << frmpub::Basic::connectname(protocc::ServerType::LOGIN) << "连接";
-									return 0;
-								}
-							}
-						}
-						else {
-							std::stringstream stream;
-							stream << "消息" << frmpub::Basic::msgname(obj->msgid()) << "解析错误";
-							SEND_ERR(protocc::MESSAGE_PARSING_ERROR, stream.str());
-							return 0;
-						}
-					}
-
-					client->send_proto(obj.get(), enves.get());
-					LOG_DEBUG << "转发消息" << frmpub::Basic::msgname(obj->msgid())
-						<< "到client[" << client->remote_addr()->ip() << ":"
-						<< client->remote_addr()->port() << "]";
-				}
-				else {
-					std::stringstream stream;
-					stream << "client fd:" << env.fd << " 已断开连接";
-					SEND_ERR(protocc::CLIENT_CLOSEED, stream.str());
-				}
+			//直接处理的游戏服消息
+			auto it = pmb_.find(obj->msgid());
+			if (it != pmb_.end()) {
+				return it->second(obj, enves);
 			}
 			else {
-				//直接处理的游戏服消息
-				auto it = pmb_.find(obj->msgid());
-				if (it != pmb_.end()) {
-					return it->second(obj, enves);
+				if (enves->empty() == false) {
+					return forward_game_client_c(obj, enves);
 				}
 				else {
 					//通知lua的onMessage函数
@@ -155,6 +115,30 @@ namespace gate {
 			std::stringstream stream;
 			stream << "消息" << frmpub::Basic::msgname(data->msgid()) << "解析错误";
 			SEND_ERR(protocc::MESSAGE_PARSING_ERROR, stream.str());
+		}
+		return 0;
+	}
+
+	int GameConnector::forward_game_client_c(std::shared_ptr<protocc::CommonObject> data,
+		std::shared_ptr<std::stack<FilterData::Envelope>> enves) {
+		if (enves->empty() == false) {
+			FilterData::Envelope& env = enves->top();
+			enves->pop();
+			std::shared_ptr<GateClient> client = shynet::Singleton<GateClientMgr>::instance().find(env.fd);
+			if (client != nullptr) {
+				client->send_proto(data.get(), enves.get());
+				LOG_DEBUG << "转发消息" << frmpub::Basic::msgname(data->msgid())
+					<< "到client[" << client->remote_addr()->ip() << ":"
+					<< client->remote_addr()->port() << "]";
+			}
+			else {
+				std::stringstream stream;
+				stream << "client fd:" << env.fd << " 已断开连接";
+				SEND_ERR(protocc::CLIENT_CLOSEED, stream.str());
+			}
+		}
+		else {
+			SEND_ERR(protocc::NO_ROUTING_INFO, "转发消息没有路由信息");
 		}
 		return 0;
 	}

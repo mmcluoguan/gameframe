@@ -39,8 +39,8 @@ namespace world {
 				std::bind(&WorldClient::clioffline_gate_all_c,this,std::placeholders::_1,std::placeholders::_2)
 			},
 			{
-				protocc::GAMESID_LOGIN_WORLD_C,
-				std::bind(&WorldClient::gamesid_login_world_c,this,std::placeholders::_1,std::placeholders::_2)
+				protocc::LOGIN_CLIENT_GATE_S,
+				std::bind(&WorldClient::login_client_gate_s,this,std::placeholders::_1,std::placeholders::_2)
 			},
 		};
 	}
@@ -192,7 +192,7 @@ namespace world {
 		}
 		return 0;
 	}
-	int WorldClient::gamesid_login_world_c(std::shared_ptr<protocc::CommonObject> data, 
+	int WorldClient::login_client_gate_s(std::shared_ptr<protocc::CommonObject> data,
 		std::shared_ptr<std::stack<FilterData::Envelope>> enves)
 	{
 		if (data->extend().empty() == false &&
@@ -201,7 +201,7 @@ namespace world {
 			if (game != nullptr)
 			{
 				data->set_extend(std::to_string(game->sif().sid()));
-				send_proto(protocc::GAMESID_LOGIN_WORLD_S,data.get(), enves.get());
+				send_proto(data.get(), enves.get());
 			}
 			else {
 				std::stringstream stream;

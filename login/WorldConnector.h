@@ -38,13 +38,13 @@ namespace login {
 		/// <summary>
 		/// 转发消息到gate
 		/// </summary>
-		int forward_client_gate_c(std::shared_ptr<protocc::CommonObject> data,
+		int forward_world_gate_c(std::shared_ptr<protocc::CommonObject> data,
 			std::shared_ptr<std::stack<FilterData::Envelope>> enves);
 
 		/// <summary>
-		/// 分配的game服
+		/// 处理登录成功后world选择的gameid
 		/// </summary>
-		int gamesid_login_world_s(std::shared_ptr<protocc::CommonObject> data,
+		int login_client_gate_s(std::shared_ptr<protocc::CommonObject> data,
 			std::shared_ptr<std::stack<FilterData::Envelope>> enves);
 	};
 }

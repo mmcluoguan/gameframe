@@ -17,32 +17,8 @@ end
 
 function dbConnector:regMsg()
     baseNet:regMsg(self);
-    self:regMsgEx('createrole_client_gate_s')
     self:regMsgEx('loaddata_from_dbvisit_s')
     self:regMsgEx('loaddata_more_from_dbvisit_s')
-end
-
---创建角色结果
-function dbConnector:createrole_client_gate_s(msgid,msgdata,routing)
-    local gameClientFd = routing:top():fd()
-    routing:pop()
-    local acceptMgr = require ("lua/game/acceptMgr")
-    local gameClient = acceptMgr:find(gameClientFd)
-    if gameClient ~= nil then
-        local msgs = pb.decode("frmpub.protocc.createrole_client_gate_s", msgdata)
-        if msgs.result == 0 then
-            --创建角色结果成功
-            local roleMgr = require ("lua/game/roleMgr")
-            local roleObj = role:new(msgs.roleid,gameClientFd)
-            roleObj.accountid = msgs.aid
-            roleMgr:add(roleObj)
-        else
-            log("创建角色结果失败 result:",msgs.result)
-        end
-        gameClient:send(msgid,msgdata,routing)
-    else
-        log("网关 fd:",gameClientFd," 已断开连接")
-    end
 end
 
 --加载1条hash数据结果

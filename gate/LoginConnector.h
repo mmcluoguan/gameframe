@@ -40,6 +40,12 @@ namespace gate {
 		/// </summary>
 		int errcode(std::shared_ptr<protocc::CommonObject> data,
 			std::shared_ptr<std::stack<FilterData::Envelope>> enves);
+
+		/// <summary>
+		/// 转发消息到client
+		/// </summary>
+		int forward_login_client_c(std::shared_ptr<protocc::CommonObject> data,
+			std::shared_ptr<std::stack<FilterData::Envelope>> enves);
 	private:
 		int login_connect_id_;
 	};

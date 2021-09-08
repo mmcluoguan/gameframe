@@ -74,33 +74,14 @@ namespace login {
 	int DbConnector::input_handle(std::shared_ptr<protocc::CommonObject> obj, 
 		std::shared_ptr<std::stack<FilterData::Envelope>> enves) {
 		if (obj != nullptr) {
-			if (enves->empty() == false) {
-				FilterData::Envelope& env = enves->top();
-				enves->pop();
-				std::shared_ptr<LoginClient> gate = shynet::Singleton<LoginClientMgr>::instance().find(env.fd);
-				if (gate != nullptr) {
-					gate->send_proto(obj.get(), enves.get());
-					LOG_DEBUG << "转发消息" << frmpub::Basic::msgname(obj->msgid())
-						<< "到gate[" << gate->remote_addr()->ip() << ":"
-						<< gate->remote_addr()->port() << "]"
-						<< " gate fd:" << env.fd;
-				}
-				else {
-					std::stringstream stream;
-					stream << "gate fd:" << env.fd << " 已断开连接";
-					SEND_ERR(protocc::GATE_NOT_EXIST, stream.str());
-				}
+			auto it = pmb_.find(obj->msgid());
+			if (it != pmb_.end()) {
+				return it->second(obj, enves);
 			}
 			else {
-				auto it = pmb_.find(obj->msgid());
-				if (it != pmb_.end()) {
-					return it->second(obj, enves);
-				}
-				else {
-					//通知lua的onMessage函数
-					shynet::Singleton<lua::LuaEngine>::get_instance().append(
-						std::make_shared<frmpub::OnMessageTask<DbConnector>>(shared_from_this(), obj, enves));
-				}
+				//通知lua的onMessage函数
+				shynet::Singleton<lua::LuaEngine>::get_instance().append(
+					std::make_shared<frmpub::OnMessageTask<DbConnector>>(shared_from_this(), obj, enves));
 			}
 		}
 		return 0;
@@ -183,7 +164,7 @@ namespace login {
 						auto world = shynet::Singleton<ConnectorMgr>::instance().world_connector();
 						if (world != nullptr)
 						{
-							world->send_proto(protocc::GAMESID_LOGIN_WORLD_C, data.get(), enves.get());
+							world->send_proto(data.get(), enves.get());
 						}
 						else {
 							std::stringstream stream;

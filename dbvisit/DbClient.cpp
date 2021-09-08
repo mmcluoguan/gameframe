@@ -75,10 +75,6 @@ namespace dbvisit {
 				protocc::RECONNECT_CLIENT_GATE_C,
 				std::bind(&DbClient::reconnect_client_gate_c,this,std::placeholders::_1,std::placeholders::_2)
 			},
-			{
-				protocc::CREATEROLE_CLIENT_GATE_C,
-				std::bind(&DbClient::createrole_client_gate_c,this,std::placeholders::_1,std::placeholders::_2)
-			},
 		};
 	}
 
@@ -480,11 +476,11 @@ namespace dbvisit {
 						{"online","1"},
 				};
 				redis::Redis& redis = shynet::Singleton<redis::Redis>::instance(std::string());
-				//通过用户名和密码取出账号cache_key
-				redis::OptionalString cache_key = redis.get(name_pwd);
+				//通过用户名和密码取出账号cache_key_value
+				redis::OptionalString cache_key_value = redis.get(name_pwd);
 				Datahelp& help = shynet::Singleton<Datahelp>::instance();
 
-				if (!cache_key) {
+				if (!cache_key_value) {
 					///缓存没有玩家数据,查询数据库
 					std::string tablename = "account";
 					std::string sql = shynet::Utility::str_format("name='%s' and pwd='%s'", msgc.name().c_str(), msgc.pwd().c_str());
@@ -503,18 +499,18 @@ namespace dbvisit {
 						roleid = user_data["roleid"];
 						old_gate_sid = user_data["gate_sid"];
 					}
-					*cache_key = "account_" + accountid;
+					*cache_key_value = "account_" + accountid;
 					//玩家用户名和密码关联的cache_key缓存X小时
-					redis.set(name_pwd, *cache_key, oneday_);
+					redis.set(name_pwd, *cache_key_value, oneday_);
 					//缓存玩家数据
-					help.updata_cache(*cache_key, user_data);
+					help.updata_cache(*cache_key_value, user_data);
 					LOG_DEBUG << "从db取出账号信息 accountid:" << accountid << " roleid:" << roleid;
 				}
 				else {
 					//玩家用户名和密码关联的cache_key缓存X小时
 					redis.expire(name_pwd, oneday_);
 					//通过cache_key从缓存取出玩家数据					
-					Datahelp::ErrorCode error = help.getdata_from_cache(*cache_key, user_data);
+					Datahelp::ErrorCode error = help.getdata_from_cache(*cache_key_value, user_data);
 					if (error == Datahelp::ErrorCode::OK) {
 						accountid = user_data["_id"];
 						roleid = user_data["roleid"];
@@ -529,7 +525,7 @@ namespace dbvisit {
 							{"game_sid",game_sid},
 							{"online","1"},
 						};
-						help.updata(*cache_key, data);
+						help.updata(*cache_key_value, data);
 						LOG_DEBUG << "从cache取出账号信息 accountid:" << accountid << " roleid:" << roleid;
 					}
 					else {
@@ -555,7 +551,7 @@ namespace dbvisit {
 				if (result == 0) {
 					//如果有则清除断线重连有效时间
 					redis::Redis& redis = shynet::Singleton<redis::Redis>::instance(std::string());
-					redis.del(*cache_key + "_disconnect");
+					redis.del(*cache_key_value + "_disconnect");
 				}
 				//发送登录结果
 				protocc::login_client_gate_s msgs;
@@ -667,65 +663,6 @@ namespace dbvisit {
 				msgs.set_gameid(msgc.gameid());
 				send_proto(protocc::RECONNECT_CLIENT_GATE_S, &msgs, enves.get());
 				LOG_DEBUG << "发送消息" << frmpub::Basic::msgname(protocc::RECONNECT_CLIENT_GATE_S) << "到"
-					<< frmpub::Basic::connectname(sif().st())
-					<< " result:" << msgs.result();
-			}
-			catch (const std::exception& err) {
-				SEND_ERR(protocc::DB_CACHE_ERROR, err.what());
-			}
-		}
-		else {
-			std::stringstream stream;
-			stream << "消息" << frmpub::Basic::msgname(data->msgid()) << "解析错误";
-			SEND_ERR(protocc::MESSAGE_PARSING_ERROR, stream.str());
-		}
-		return 0;
-	}
-
-	int DbClient::createrole_client_gate_c(std::shared_ptr<protocc::CommonObject> data,
-		std::shared_ptr<std::stack<FilterData::Envelope>> enves) {
-		protocc::createrole_client_gate_c msgc;
-		if (msgc.ParseFromString(data->msgdata()) == true) {
-			try {
-				std::unordered_map<std::string, std::string> data{
-					{"roleid","0"}
-				};
-				int result = 0;
-				std::string roleid = "0";
-				std::string account_key = "account_" + msgc.aid();				
-				if (roleid == "0") {
-					std::default_random_engine random(time(nullptr));
-					std::uniform_int_distribution<int> level_random(1, 100);
-					roleid = std::to_string(shynet::Singleton<shynet::IdWorker>::get_instance().getid());
-					std::unordered_map<std::string, std::string> role_data{
-						{"_id",roleid},
-						{"accountid",msgc.aid()},
-						{"level",std::to_string(level_random(random))},
-					};
-					Datahelp& help = shynet::Singleton<Datahelp>::instance();
-					help.insertdata("role_" + roleid, role_data);
-					//默认初始化3个物品
-					for (size_t i = 0; i < 3; i++) {
-						std::string goodsid = std::to_string(shynet::Singleton<shynet::IdWorker>::get_instance().getid());
-						std::uniform_int_distribution<int> num_random(1, 20);
-						std::unordered_map<std::string, std::string> goods_data{
-							{"_id",goodsid},
-							{"cfgid",std::to_string(i + 1)},
-							{"num",std::to_string(num_random(random))},
-						};
-						help.insertdata("goods_" + goodsid + "_" + roleid, goods_data);
-					}
-				}
-				else {
-					result = 2; //已有角色
-				}
-				protocc::createrole_client_gate_s msgs;
-				msgs.set_result(result);
-				msgs.set_aid(msgc.aid());
-				msgs.set_roleid(strtoll(roleid.c_str(), nullptr, 0));
-				send_proto(protocc::CREATEROLE_CLIENT_GATE_S, &msgs, enves.get());
-				LOG_DEBUG << "创建角色结果 result:" << result << " account:" << msgc.aid() << " roleid:" << roleid;
-				LOG_DEBUG << "发送消息" << frmpub::Basic::msgname(protocc::CREATEROLE_CLIENT_GATE_S) << "到"
 					<< frmpub::Basic::connectname(sif().st())
 					<< " result:" << msgs.result();
 			}

@@ -1,4 +1,4 @@
-﻿#pragma once
+#pragma once
 #include <sw/redis++/redis++.h>
 namespace redis = sw::redis;
 #include <unordered_map>
@@ -112,12 +112,5 @@ namespace dbvisit {
 		*/
 		int reconnect_client_gate_c(std::shared_ptr<protocc::CommonObject> data,
 			std::shared_ptr<std::stack<FilterData::Envelope>> enves);
-
-		/*
-		* 创建角色
-		*/
-		int createrole_client_gate_c(std::shared_ptr<protocc::CommonObject> data,
-			std::shared_ptr<std::stack<FilterData::Envelope>> enves);
-
 	};
 }
