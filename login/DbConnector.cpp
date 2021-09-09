@@ -53,7 +53,7 @@ namespace login {
 	}
 	void DbConnector::complete() {
 		LOG_INFO << "连接服务器dbvisit成功 [ip:" << connect_addr()->ip() << ":" << connect_addr()->port() << "]";
-		shynet::Singleton<ConnectorMgr>::instance().dbctor_id(connectid());
+		shynet::Singleton<ConnectorMgr>::instance().add_dbctor(connectid());
 
 		//通知lua的onConnect函数
 		shynet::Singleton<lua::LuaEngine>::get_instance().append(
@@ -96,7 +96,7 @@ namespace login {
 		shynet::Singleton<lua::LuaEngine>::get_instance().append(
 			std::make_shared<frmpub::OnCloseTask>(fd()));
 
-		shynet::Singleton<ConnectorMgr>::instance().dbctor_id(0);
+		shynet::Singleton<ConnectorMgr>::instance().remove_dbctor(connectid());
 		Connector::close(active);
 	}
 
@@ -118,32 +118,7 @@ namespace login {
 		std::shared_ptr<std::stack<FilterData::Envelope>> enves) {
 		protocc::register_login_dbvisit_s msgc;
 		if (msgc.ParseFromString(data->msgdata()) == true) {
-			shynet::IniConfig& ini = shynet::Singleton<shynet::IniConfig>::get_instance();
 			if (msgc.result() == 0) {
-				static bool oc = true;
-				if (oc == true) {
-					LOG_DEBUG << "开启登录服服务器监听";
-					std::string loginip = ini.get<const char*, std::string>("login", "ip", "127.0.0.1");
-					short loginport = ini.get<short, short>("login", "port", short(23000));
-					std::shared_ptr<net::IPAddress> loginaddr(new net::IPAddress(loginip.c_str(), loginport));
-					std::shared_ptr<LoginServer> loginserver(new LoginServer(loginaddr));
-					shynet::Singleton<net::ListenReactorMgr>::instance().add(loginserver);
-
-					LOG_DEBUG << "开始连接世界服";
-					std::string regip = ini.get<const char*, std::string>("world", "ip", "127.0.0.1");
-					short regport = ini.get<short, short>("world", "port", short(22000));
-					shynet::Singleton<net::ConnectReactorMgr>::instance().add(
-						std::shared_ptr<WorldConnector>(
-							new WorldConnector(std::shared_ptr<net::IPAddress>(
-								new net::IPAddress(regip.c_str(), regport)))));
-					oc = false;
-				}
-			}
-			else {
-				shynet::IniConfig& ini = shynet::Singleton<shynet::IniConfig>::get_instance();
-				int sid = ini.get<int, int>("login", "sid", 1);
-				LOG_WARN << frmpub::Basic::connectname(protocc::ServerType::LOGIN) << " sid:" << sid << " 已存在";
-				return -1;
 			}
 		}
 		else {

@@ -116,6 +116,7 @@
     <RemoteOutRelDir>$(RemoteProjectRelDir)/../bin</RemoteOutRelDir>
   </PropertyGroup>
   <ItemGroup>
+    <ClCompile Include="ConnectorMgr.cpp" />
     <ClCompile Include="DbConnector.cpp" />
     <ClCompile Include="LuaWrapper.cpp" />
     <ClCompile Include="HttpClient.cpp" />
@@ -129,6 +130,7 @@
     <ClCompile Include="StdinHandler.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="ConnectorMgr.h" />
     <ClInclude Include="DbConnector.h" />
     <ClInclude Include="LuaWrapper.h" />
     <ClInclude Include="HttpClient.h" />

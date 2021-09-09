@@ -1,8 +1,8 @@
 #pragma once
 #include <mutex>
 #include <unordered_map>
+#include <list>
 #include "shynet/Singleton.h"
-#include "gate/DbConnector.h"
 #include "gate/LoginConnector.h"
 #include "gate/WorldConnector.h"
 #include "gate/GameConnector.h"
@@ -55,7 +55,6 @@ namespace gate {
 		*/
 		std::shared_ptr<LoginConnector> select_login(int login_connect_id);
 
-
 		/// <summary>
 		/// 减少指定连接的服务中接收玩家数量1
 		/// </summary>
@@ -63,8 +62,10 @@ namespace gate {
 		/// <returns></returns>
 		bool reduce_count(int connect_id);
 
-		std::shared_ptr<WorldConnector> world_connector() const;
-		void world_conncet_id(int id);
+		std::shared_ptr<WorldConnector> world_connector();
+		void add_worldctor(int connectid);
+		void remove_worldctor(int connectid);
+		std::shared_ptr<WorldConnector> find_worldctor(int connectid);
 
 		/// <summary>
 		/// 获取登录服务器连接
@@ -88,8 +89,8 @@ namespace gate {
 		std::unordered_map<int, ConnectData> connect_datas() const;
 
 	private:
-		//world连接id
-		int world_conncet_id_;
+		std::list<int> worldctor_ids_;
+		std::mutex worldctor_ids_mtx_;
 		mutable std::mutex connect_data_mutex_;
 		std::unordered_map<int, ConnectData> connect_datas_;
 	};

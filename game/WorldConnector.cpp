@@ -1,4 +1,4 @@
-﻿#include "game/WorldConnector.h"
+#include "game/WorldConnector.h"
 #include "shynet/net/ConnectReactorMgr.h"
 #include "shynet/IniConfig.h"
 #include "shynet/lua/LuaEngine.h"
@@ -40,7 +40,7 @@ namespace game {
 	}
 	void WorldConnector::complete() {
 		LOG_INFO << "连接服务器world成功 [ip:" << connect_addr()->ip() << ":" << connect_addr()->port() << "]";
-		shynet::Singleton<ConnectorMgr>::instance().world_id(connectid());
+		shynet::Singleton<ConnectorMgr>::instance().add_worldctor(connectid());
 
 		//通知lua的onConnect函数
 		shynet::Singleton<lua::LuaEngine>::get_instance().append(
@@ -81,7 +81,7 @@ namespace game {
 		shynet::Singleton<lua::LuaEngine>::get_instance().append(
 			std::make_shared<frmpub::OnCloseTask>(fd()));
 
-		shynet::Singleton<ConnectorMgr>::instance().world_id(0);
+		shynet::Singleton<ConnectorMgr>::instance().remove_worldctor(connectid());
 		Connector::close(active);
 	}
 

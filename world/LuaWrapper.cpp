@@ -1,4 +1,4 @@
-﻿#include "world/LuaWrapper.h"
+#include "world/LuaWrapper.h"
 #include "shynet/IniConfig.h"
 #include "shynet/Singleton.h"
 #include "frmpub/LuaRemoteDebug.h"
@@ -9,6 +9,9 @@
 #include "world/HttpClient.h"
 #include "world/HttpClientMgr.h"
 #include "world/DbConnector.h"
+
+//配置参数
+extern const char* g_confname;
 
 namespace world {
 	LuaWrapper::LuaWrapper() {
@@ -37,7 +40,7 @@ namespace world {
 
 		//是否开启调试模式
 		shynet::IniConfig& ini = shynet::Singleton<shynet::IniConfig>::get_instance();
-		std::string luadebugip = ini.get<const char*, std::string>("world", "luadebugip", "");
+		std::string luadebugip = ini.get<const char*, std::string>(g_confname, "luadebugip", "");
 		if (!luadebugip.empty()) {
 			shynet::Singleton<frmpub::LuaRemoteDebug>::instance().init(luadebugip).start(state);
 		}

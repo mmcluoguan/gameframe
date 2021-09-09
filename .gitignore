@@ -13,3 +13,13 @@
 *.out
 *.json
 /bin/.idea
+/.vs
+/bin
+/client/obj/x64/Debug
+/dbvisit/obj/x64/Debug
+/frmpub/obj/x86/Debug
+/game/obj/x64/Debug
+/PythonApplication1
+/login/obj/x64/Debug
+/shynet/obj
+/upload

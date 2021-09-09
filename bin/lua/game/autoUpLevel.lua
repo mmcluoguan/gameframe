@@ -18,13 +18,13 @@ function autoUpLevel:uplevel()
                     { key = 'level', value = tostring(v.level),},
                 }
             }
-            connectorMgr.dbConnector:send('updata_to_dbvisit_c',savedata)
+            connectorMgr:dbConnector():send('updata_to_dbvisit_c',savedata)
             if v.level % 5 == 0 then
                 v.star = v.star + 1
                 log("角色升星: roleid=",v.id," star=",v.star)
                 --保存星级到db
                 savedata.fields =  {{ key = 'star', value = tostring(v.star),}}
-                connectorMgr.dbConnector:send('updata_to_dbvisit_c',savedata)
+                connectorMgr:dbConnector():send('updata_to_dbvisit_c',savedata)
             end
         end
     end

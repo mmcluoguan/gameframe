@@ -1,4 +1,6 @@
-﻿#pragma once
+#pragma once
+#include <list>
+#include <mutex>
 #include "shynet/Singleton.h"
 #include "login/DbConnector.h"
 #include "login/WorldConnector.h"
@@ -13,15 +15,20 @@ namespace login {
 	public:
 		~ConnectorMgr();
 
-		std::shared_ptr<DbConnector> db_connector() const;
-		std::shared_ptr<WorldConnector> world_connector() const;
+		std::shared_ptr<DbConnector> db_connector();
+		void add_dbctor(int connectid);
+		void remove_dbctor(int connectid);
+		std::shared_ptr<DbConnector> find_dbctor(int connectid);
 
-		int dbctor_id() const;
-		void dbctor_id(int v);
-		int world_id() const;
-		void world_id(int v);
+		std::shared_ptr<WorldConnector> world_connector();
+		void add_worldctor(int connectid);
+		void remove_worldctor(int connectid);
+		std::shared_ptr<WorldConnector> find_worldctor(int connectid);
+		
 	private:
-		int dbctor_id_ = 0;
-		int world_id_ = 0;
+		std::list<int> dbctor_ids_;
+		std::mutex dbctor_ids_mtx_;
+		std::list<int> worldctor_ids_;
+		std::mutex worldctor_ids_mtx_;
 	};
 }

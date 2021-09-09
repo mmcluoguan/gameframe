@@ -337,8 +337,7 @@ namespace dbvisit {
 						field->set_value(j.second);
 					}
 				}
-				if (resdata->size() == 0)
-				{
+				if (resdata->size() == 0) {
 					msgs.set_result(1);
 				}
 				msgs.set_tag(msgc.tag());
@@ -564,7 +563,7 @@ namespace dbvisit {
 				msgs.set_result(result);
 				msgs.set_aid(accountid);
 				msgs.set_roleid(strtoull(roleid.c_str(), nullptr, 0));
-				send_proto(protocc::LOGIN_CLIENT_GATE_S, &msgs, enves.get(),&game_sid);
+				send_proto(protocc::LOGIN_CLIENT_GATE_S, &msgs, enves.get(), &game_sid);
 				LOG_DEBUG << "发送消息" << frmpub::Basic::msgname(protocc::LOGIN_CLIENT_GATE_S) << "到"
 					<< frmpub::Basic::connectname(sif().st())
 					<< " result:" << msgs.result();

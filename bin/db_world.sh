@@ -1,1 +1,0 @@
-./dbvisit.out dbvisit_world

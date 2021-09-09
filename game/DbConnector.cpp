@@ -46,7 +46,7 @@ namespace game {
 	}
 	void DbConnector::complete() {
 		LOG_INFO << "连接服务器dbvisit成功 [ip:" << connect_addr()->ip() << ":" << connect_addr()->port() << "]";
-		shynet::Singleton<ConnectorMgr>::instance().dbctor_id(connectid());
+		shynet::Singleton<ConnectorMgr>::instance().add_dbctor(connectid());
 
 		//通知lua的onConnect函数
 		shynet::Singleton<lua::LuaEngine>::get_instance().append(
@@ -87,7 +87,7 @@ namespace game {
 		shynet::Singleton<lua::LuaEngine>::get_instance().append(
 			std::make_shared<frmpub::OnCloseTask>(fd()));
 
-		shynet::Singleton<ConnectorMgr>::instance().dbctor_id(0);
+		shynet::Singleton<ConnectorMgr>::instance().remove_dbctor(connectid());
 		Connector::close(active);
 	}
 
@@ -107,33 +107,8 @@ namespace game {
 	int DbConnector::register_game_dbvisit_s(std::shared_ptr<protocc::CommonObject> data, std::shared_ptr<std::stack<FilterData::Envelope>> enves) {
 		protocc::register_game_dbvisit_s msgc;
 		if (msgc.ParseFromString(data->msgdata()) == true) {
-			shynet::IniConfig& ini = shynet::Singleton<shynet::IniConfig>::get_instance();
-			if (msgc.result() == 0) {
-				static bool oc = true;
-				if (oc == true) {
-					LOG_DEBUG << "开启游戏服服务器监听";
-					std::string gameip = ini.get<const char*, std::string>("game", "ip", "127.0.0.1");
-					short gameport = ini.get<short, short>("game", "port", short(24000));
-					std::shared_ptr<net::IPAddress> gameaddr(new net::IPAddress(gameip.c_str(), gameport));
-					std::shared_ptr<GameServer> gameserver(new GameServer(gameaddr));
-					shynet::Singleton<net::ListenReactorMgr>::instance().add(gameserver);
-
-					LOG_DEBUG << "开始连接世界服";
-					std::string regip = ini.get<const char*, std::string>("world", "ip", "127.0.0.1");
-					short regport = ini.get<short, short>("world", "port", short(22000));
-					shynet::Singleton<net::ConnectReactorMgr>::instance().add(
-						std::shared_ptr<WorldConnector>(
-							new WorldConnector(std::shared_ptr<net::IPAddress>(
-								new net::IPAddress(regip.c_str(), regport)))));
-					oc = false;
-				}
-			}
-			else {
-				shynet::IniConfig& ini = shynet::Singleton<shynet::IniConfig>::get_instance();
-				int sid = ini.get<int, int>("dbvisit_game", "sid", 1);
-				LOG_WARN << frmpub::Basic::connectname(protocc::ServerType::GAME) << " sid:" << sid << " 已存在";
-				return -1;
-			}
+			if (msgc.result() == 0) {				
+			}			
 		}
 		else {
 			std::stringstream stream;

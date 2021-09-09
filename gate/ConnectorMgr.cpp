@@ -90,13 +90,28 @@ namespace gate {
 		return false;
 	}
 
-	std::shared_ptr<WorldConnector> ConnectorMgr::world_connector() const {
-		return std::dynamic_pointer_cast<WorldConnector>(
-			shynet::Singleton<net::ConnectReactorMgr>::instance().find(world_conncet_id_));
+	std::shared_ptr<WorldConnector> ConnectorMgr::world_connector()  {
+		if (worldctor_ids_.begin() != worldctor_ids_.end())
+		{
+			return find_worldctor(*worldctor_ids_.begin());
+		}
+		return nullptr;
 	}
 
-	void ConnectorMgr::world_conncet_id(int id) {
-		world_conncet_id_ = id;
+	void ConnectorMgr::add_worldctor(int connectid)
+	{
+		std::lock_guard<std::mutex> lock(worldctor_ids_mtx_);
+		worldctor_ids_.push_back(connectid);
+	}
+	void ConnectorMgr::remove_worldctor(int connectid)
+	{
+		std::lock_guard<std::mutex> lock(worldctor_ids_mtx_);
+		worldctor_ids_.remove(connectid);
+	}
+	std::shared_ptr<WorldConnector> ConnectorMgr::find_worldctor(int connectid)
+	{
+		return std::dynamic_pointer_cast<WorldConnector>(
+			shynet::Singleton<net::ConnectReactorMgr>::instance().find(connectid));
 	}
 
 	std::shared_ptr<LoginConnector> ConnectorMgr::login_connector(int login_connect_id) const {

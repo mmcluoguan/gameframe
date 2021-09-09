@@ -36,7 +36,7 @@ namespace client {
 					std::placeholders::_1,std::placeholders::_2,std::placeholders::_3,std::placeholders::_4)),
 				item("reconnect",":",bind(&StdinHandler::reconnect_order, this,
 					std::placeholders::_1,std::placeholders::_2,std::placeholders::_3,std::placeholders::_4)),
-				item("login",":u:p:",bind(&StdinHandler::login_order, this,
+				item("login",":p:",bind(&StdinHandler::login_order, this,
 					std::placeholders::_1,std::placeholders::_2,std::placeholders::_3,std::placeholders::_4)),
 			};
 
@@ -101,12 +101,10 @@ namespace client {
 	void StdinHandler::login_order(const char* od, int argc, char** argv, const char* optstr) {
 		int opt;
 		optind = 1;
-		char* username = nullptr;
-		char* password = nullptr;
+		char* platform = nullptr;
 		while ((opt = getopt(argc, argv, optstr)) != -1) {
 			switch (opt) {
-			case 'u': username = optarg; break;
-			case 'p': password = optarg; break;
+			case 'p': platform = optarg; break;
 			case ':':
 				LOG_WARN << od << " 丢失参数 (-" << (char)optopt << ")";
 				break;
@@ -120,13 +118,12 @@ namespace client {
 		if (optind < argc) {
 			LOG_WARN << " 第一个不是选项的参数是" << argv[optind] << "在argv[" << optind << "]";
 		}
-		if (username == nullptr || password == nullptr) {
-			LOG_INFO << "usage: " << od << " [-u username] [-p password]";
+		if (platform == nullptr) {
+			LOG_INFO << "usage: " << od << " [-p platform]";
 			return;
 		}
 		protocc::login_client_gate_c msg;
-		msg.set_name(username);
-		msg.set_pwd(password);
+		msg.set_platform_key(platform);
 
 		std::shared_ptr<GateConnector> gate = std::dynamic_pointer_cast<GateConnector>(
 			shynet::Singleton<net::ConnectReactorMgr>::instance().find(g_gateconnect_id));

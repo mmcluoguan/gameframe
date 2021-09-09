@@ -1,0 +1,1 @@
+./dbvisit.out dbvisit_game_slave
