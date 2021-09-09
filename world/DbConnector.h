@@ -1,4 +1,4 @@
-﻿#pragma once
+#pragma once
 #include "frmpub/Connector.h"
 
 namespace world {
@@ -29,11 +29,6 @@ namespace world {
 		/// <param name="active">断开原因</param>
 		void close(net::ConnectEvent::CloseType active) override;
 
-		/// <summary>
-		/// 数据访问服id
-		/// </summary>
-		static int db_id;
-		static std::shared_ptr<DbConnector> db_connector();
 	private:
 		/// <summary>
 		/// 服务器通用错误信息

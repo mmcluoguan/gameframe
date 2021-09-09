@@ -74,7 +74,7 @@ function role:setlevel_client_gate_c(msgname,data,routing)
         }
     }
     local connectorMgr = require ("lua/game/connectorMgr")
-    connectorMgr.dbConnector:send('insertdata_to_dbvisit_c',savedata)
+    connectorMgr:dbConnector():send('insertdata_to_dbvisit_c',savedata)
 end
 
 return role

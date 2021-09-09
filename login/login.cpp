@@ -43,13 +43,45 @@ int main(int argc, char* argv[]) {
 	Singleton<ThreadPool>::instance().start();
 
 	//连接db服务器
-	string dbip = ini.get<const char*, string>("dbvisit_account", "ip", "127.0.0.1");
-	short dbport = ini.get<short, short>("dbvisit_account", "port", short(21000));
-	shared_ptr<IPAddress> dbaddr(new IPAddress(dbip.c_str(), dbport));
-	Singleton<ConnectReactorMgr>::instance().add(
-		shared_ptr<DbConnector>(
-			new DbConnector(shared_ptr<IPAddress>(
-				new IPAddress(dbip.c_str(), dbport)))));
+	string dbstr = ini.get<const char*, string>("login", "db", "");
+	auto dblist = Utility::spilt(dbstr, ",");
+	if (dblist.size() > 2 || dblist.size() == 0) {
+		LOG_ERROR << "db配置错误:" << dbstr;
+	}
+	for (auto& item : dblist)
+	{
+		string dbip = ini.get<const char*, string>(item, "ip", "");
+		short dbport = ini.get<short, short>(item, "port", short(21000));
+		shared_ptr<IPAddress> dbaddr(new IPAddress(dbip.c_str(), dbport));
+		Singleton<ConnectReactorMgr>::instance().add(
+			shared_ptr<DbConnector>(
+				new DbConnector(shared_ptr<IPAddress>(
+					new IPAddress(dbip.c_str(), dbport)))));
+	}
+
+	//连接world服务器
+	string worldstr = ini.get<const char*, string>("login", "world", "");
+	auto worldlist = Utility::spilt(worldstr, ",");
+	if (worldlist.size() > 2 || worldlist.size() == 0) {
+		LOG_ERROR << "world配置错误:" << worldstr;
+	}
+	for (auto& item : worldlist)
+	{
+		std::string worldip = ini.get<const char*, string>(item, "ip", "");
+		short worldport = ini.get<short, short>(item, "port", short(22000));
+		shynet::Singleton<ConnectReactorMgr>::instance().add(
+			std::shared_ptr<WorldConnector>(
+				new WorldConnector(std::shared_ptr<IPAddress>(
+					new IPAddress(worldip.c_str(), worldport)))));
+	}
+
+	LOG_DEBUG << "开启登录服服务器监听";
+	std::string loginip = ini.get<const char*, std::string>("login", "ip", "127.0.0.1");
+	short loginport = ini.get<short, short>("login", "port", short(23000));
+	std::shared_ptr<IPAddress> loginaddr(new IPAddress(loginip.c_str(), loginport));
+	std::shared_ptr<LoginServer> loginserver(new LoginServer(loginaddr));
+	shynet::Singleton<ListenReactorMgr>::instance().add(loginserver);
+		
 
 	shared_ptr<EventBase> base(new EventBase());
 	shared_ptr<StdinHandler> stdin(new StdinHandler(base, STDIN_FILENO));

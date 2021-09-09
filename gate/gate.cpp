@@ -26,7 +26,7 @@ int main(int argc, char* argv[]) {
 
 	const char* file = "gameframe.ini";
 	IniConfig& ini = Singleton<IniConfig>::instance(std::move(file));
-	bool daemon = ini.get<bool, bool>("register", "daemon", false);
+	bool daemon = ini.get<bool, bool>("gate", "daemon", false);
 	if (daemon) {
 		Utility::daemon();
 		Singleton<IniConfig>::instance(std::move(string("gameframe.ini").c_str()));
@@ -49,14 +49,21 @@ int main(int argc, char* argv[]) {
 	std::shared_ptr<GateServer> gateserver(new GateServer(gateaddr));
 	shynet::Singleton<ListenReactorMgr>::instance().add(gateserver);
 
-	LOG_DEBUG << "开始连接世界服";
-	std::string worldip = ini.get<const char*, std::string>("world", "ip", "127.0.0.1");
-	short worldport = ini.get<short, short>("world", "port", short(22000));
-	std::shared_ptr<IPAddress> registeraddr(new IPAddress(worldip.c_str(), worldport));
-	shynet::Singleton<ConnectReactorMgr>::instance().add(
-		std::shared_ptr<WorldConnector>(
-			new WorldConnector(std::shared_ptr<IPAddress>(
-				new IPAddress(worldip.c_str(), worldport)))));
+	//连接world服务器
+	string worldstr = ini.get<const char*, string>("gate", "world", "");
+	auto worldlist = Utility::spilt(worldstr, ",");
+	if (worldlist.size() > 2 || worldlist.size() == 0) {
+		LOG_ERROR << "world配置错误:" << worldstr;
+	}
+	for (auto& item : worldlist)
+	{
+		std::string worldip = ini.get<const char*, string>(item, "ip", "");
+		short worldport = ini.get<short, short>(item, "port", short(22000));
+		shynet::Singleton<ConnectReactorMgr>::instance().add(
+			std::shared_ptr<WorldConnector>(
+				new WorldConnector(std::shared_ptr<IPAddress>(
+					new IPAddress(worldip.c_str(), worldport)))));
+	}
 
 	shared_ptr<EventBase> base(new EventBase());
 	shared_ptr<StdinHandler> stdin(new StdinHandler(base, STDIN_FILENO));

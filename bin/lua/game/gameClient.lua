@@ -76,7 +76,7 @@ function gameClient:createrole_client_gate_c(msgid,msgdata,routing)
                 { key = 'star', value = tostring(roleObj.star),},
             }
         }
-        connectorMgr.dbConnector:send('insertdata_to_dbvisit_c',savedata)
+        connectorMgr:dbConnector():send('insertdata_to_dbvisit_c',savedata)
         --默认初始化3个物品
         for i = 1, 3 do
             local item = {
@@ -93,7 +93,7 @@ function gameClient:createrole_client_gate_c(msgid,msgdata,routing)
                     { key = 'num', value = tostring(item.num),},
                 }
             }
-            connectorMgr.dbConnector:send('insertdata_to_dbvisit_c',savedata)
+            connectorMgr:dbConnector():send('insertdata_to_dbvisit_c',savedata)
         end
         msgdata.aid = roleObj.accountid
         msgdata.roleid = roleObj.id
@@ -132,7 +132,7 @@ function gameClient:loadrole_client_gate_c(msgid,msgdata,routing)
                 {key = 'accountid', value = '',},
             },
         };
-        connectorMgr.dbConnector:send('loaddata_from_dbvisit_c',roledata,routing)
+        connectorMgr:dbConnector():send('loaddata_from_dbvisit_c',roledata,routing)
     end
 end
 
@@ -159,7 +159,7 @@ function gameClient:loadgoods_client_gate_c(msgid,msgdata,routing)
                 {key = 'num', value = '',},
             },
         }
-        connectorMgr.dbConnector:send('loaddata_more_from_dbvisit_c',goodsdata,routing)
+        connectorMgr:dbConnector():send('loaddata_more_from_dbvisit_c',goodsdata,routing)
     end
 end
 

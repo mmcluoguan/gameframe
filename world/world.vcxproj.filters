@@ -28,6 +28,7 @@
     <ClCompile Include="LuaWrapper.cpp">
       <Filter>lua</Filter>
     </ClCompile>
+    <ClCompile Include="ConnectorMgr.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="SignalHandler.h" />
@@ -56,6 +57,7 @@
     <ClInclude Include="LuaWrapper.h">
       <Filter>lua</Filter>
     </ClInclude>
+    <ClInclude Include="ConnectorMgr.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="db">

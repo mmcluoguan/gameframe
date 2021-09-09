@@ -1,4 +1,4 @@
-﻿#include "shynet/pool/ThreadPool.h"
+#include "shynet/pool/ThreadPool.h"
 #include "shynet/Logger.h"
 #include "shynet/Utility.h"
 
@@ -45,7 +45,7 @@ namespace shynet {
 			static std::once_flag oc;
 			std::call_once(oc,
 				[&]() {
-					pthread_barrier_init(&g_barrier, nullptr, 5);
+					pthread_barrier_init(&g_barrier, nullptr, 6);
 					size_t i = 0;
 					std::shared_ptr<thread::ListenThread> shlisten = std::make_shared<thread::ListenThread>(i);
 					listernTh_ = shlisten;
@@ -99,7 +99,7 @@ namespace shynet {
 					tifs_.push_back(shnotify);
 					LOG_TRACE << "InotifyThread start [" << i << "]:" << std::hash<std::thread::id>()(id);
 
-					//等待ListenThread,ConnectThread,TimerThread,InotifyThread准备完成
+					//等待ListenThread,ConnectThread,TimerThread,LuaThread,InotifyThread准备完成
 					pthread_barrier_wait(&g_barrier);
 				}
 			);
