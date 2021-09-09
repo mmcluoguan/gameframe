@@ -1214,39 +1214,22 @@ class login_client_gate_c PROTOBUF_FINAL :
   // accessors -------------------------------------------------------
 
   enum : int {
-    kNameFieldNumber = 1,
-    kPwdFieldNumber = 2,
+    kPlatformKeyFieldNumber = 1,
   };
-  // string name = 1;
-  void clear_name();
-  const std::string& name() const;
-  void set_name(const std::string& value);
-  void set_name(std::string&& value);
-  void set_name(const char* value);
-  void set_name(const char* value, size_t size);
-  std::string* mutable_name();
-  std::string* release_name();
-  void set_allocated_name(std::string* name);
+  // string platform_key = 1;
+  void clear_platform_key();
+  const std::string& platform_key() const;
+  void set_platform_key(const std::string& value);
+  void set_platform_key(std::string&& value);
+  void set_platform_key(const char* value);
+  void set_platform_key(const char* value, size_t size);
+  std::string* mutable_platform_key();
+  std::string* release_platform_key();
+  void set_allocated_platform_key(std::string* platform_key);
   private:
-  const std::string& _internal_name() const;
-  void _internal_set_name(const std::string& value);
-  std::string* _internal_mutable_name();
-  public:
-
-  // string pwd = 2;
-  void clear_pwd();
-  const std::string& pwd() const;
-  void set_pwd(const std::string& value);
-  void set_pwd(std::string&& value);
-  void set_pwd(const char* value);
-  void set_pwd(const char* value, size_t size);
-  std::string* mutable_pwd();
-  std::string* release_pwd();
-  void set_allocated_pwd(std::string* pwd);
-  private:
-  const std::string& _internal_pwd() const;
-  void _internal_set_pwd(const std::string& value);
-  std::string* _internal_mutable_pwd();
+  const std::string& _internal_platform_key() const;
+  void _internal_set_platform_key(const std::string& value);
+  std::string* _internal_mutable_platform_key();
   public:
 
   // @@protoc_insertion_point(class_scope:frmpub.protocc.login_client_gate_c)
@@ -1256,8 +1239,7 @@ class login_client_gate_c PROTOBUF_FINAL :
   template <typename T> friend class ::PROTOBUF_NAMESPACE_ID::Arena::InternalHelper;
   typedef void InternalArenaConstructable_;
   typedef void DestructorSkippable_;
-  ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr name_;
-  ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr pwd_;
+  ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr platform_key_;
   mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
   friend struct ::TableStruct_client_2eproto;
 };
@@ -3219,126 +3201,65 @@ inline void reconnect_client_gate_s::set_gameid(::PROTOBUF_NAMESPACE_ID::int32 v
 
 // login_client_gate_c
 
-// string name = 1;
-inline void login_client_gate_c::clear_name() {
-  name_.ClearToEmpty();
+// string platform_key = 1;
+inline void login_client_gate_c::clear_platform_key() {
+  platform_key_.ClearToEmpty();
 }
-inline const std::string& login_client_gate_c::name() const {
-  // @@protoc_insertion_point(field_get:frmpub.protocc.login_client_gate_c.name)
-  return _internal_name();
+inline const std::string& login_client_gate_c::platform_key() const {
+  // @@protoc_insertion_point(field_get:frmpub.protocc.login_client_gate_c.platform_key)
+  return _internal_platform_key();
 }
-inline void login_client_gate_c::set_name(const std::string& value) {
-  _internal_set_name(value);
-  // @@protoc_insertion_point(field_set:frmpub.protocc.login_client_gate_c.name)
+inline void login_client_gate_c::set_platform_key(const std::string& value) {
+  _internal_set_platform_key(value);
+  // @@protoc_insertion_point(field_set:frmpub.protocc.login_client_gate_c.platform_key)
 }
-inline std::string* login_client_gate_c::mutable_name() {
-  // @@protoc_insertion_point(field_mutable:frmpub.protocc.login_client_gate_c.name)
-  return _internal_mutable_name();
+inline std::string* login_client_gate_c::mutable_platform_key() {
+  // @@protoc_insertion_point(field_mutable:frmpub.protocc.login_client_gate_c.platform_key)
+  return _internal_mutable_platform_key();
 }
-inline const std::string& login_client_gate_c::_internal_name() const {
-  return name_.Get();
+inline const std::string& login_client_gate_c::_internal_platform_key() const {
+  return platform_key_.Get();
 }
-inline void login_client_gate_c::_internal_set_name(const std::string& value) {
+inline void login_client_gate_c::_internal_set_platform_key(const std::string& value) {
   
-  name_.Set(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, value, GetArena());
+  platform_key_.Set(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, value, GetArena());
 }
-inline void login_client_gate_c::set_name(std::string&& value) {
+inline void login_client_gate_c::set_platform_key(std::string&& value) {
   
-  name_.Set(
+  platform_key_.Set(
     ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, ::std::move(value), GetArena());
-  // @@protoc_insertion_point(field_set_rvalue:frmpub.protocc.login_client_gate_c.name)
+  // @@protoc_insertion_point(field_set_rvalue:frmpub.protocc.login_client_gate_c.platform_key)
 }
-inline void login_client_gate_c::set_name(const char* value) {
+inline void login_client_gate_c::set_platform_key(const char* value) {
   GOOGLE_DCHECK(value != nullptr);
   
-  name_.Set(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, ::std::string(value), GetArena());
-  // @@protoc_insertion_point(field_set_char:frmpub.protocc.login_client_gate_c.name)
+  platform_key_.Set(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, ::std::string(value), GetArena());
+  // @@protoc_insertion_point(field_set_char:frmpub.protocc.login_client_gate_c.platform_key)
 }
-inline void login_client_gate_c::set_name(const char* value,
+inline void login_client_gate_c::set_platform_key(const char* value,
     size_t size) {
   
-  name_.Set(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, ::std::string(
+  platform_key_.Set(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, ::std::string(
       reinterpret_cast<const char*>(value), size), GetArena());
-  // @@protoc_insertion_point(field_set_pointer:frmpub.protocc.login_client_gate_c.name)
+  // @@protoc_insertion_point(field_set_pointer:frmpub.protocc.login_client_gate_c.platform_key)
 }
-inline std::string* login_client_gate_c::_internal_mutable_name() {
+inline std::string* login_client_gate_c::_internal_mutable_platform_key() {
   
-  return name_.Mutable(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, GetArena());
+  return platform_key_.Mutable(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, GetArena());
 }
-inline std::string* login_client_gate_c::release_name() {
-  // @@protoc_insertion_point(field_release:frmpub.protocc.login_client_gate_c.name)
-  return name_.Release(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArena());
+inline std::string* login_client_gate_c::release_platform_key() {
+  // @@protoc_insertion_point(field_release:frmpub.protocc.login_client_gate_c.platform_key)
+  return platform_key_.Release(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArena());
 }
-inline void login_client_gate_c::set_allocated_name(std::string* name) {
-  if (name != nullptr) {
+inline void login_client_gate_c::set_allocated_platform_key(std::string* platform_key) {
+  if (platform_key != nullptr) {
     
   } else {
     
   }
-  name_.SetAllocated(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), name,
+  platform_key_.SetAllocated(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), platform_key,
       GetArena());
-  // @@protoc_insertion_point(field_set_allocated:frmpub.protocc.login_client_gate_c.name)
-}
-
-// string pwd = 2;
-inline void login_client_gate_c::clear_pwd() {
-  pwd_.ClearToEmpty();
-}
-inline const std::string& login_client_gate_c::pwd() const {
-  // @@protoc_insertion_point(field_get:frmpub.protocc.login_client_gate_c.pwd)
-  return _internal_pwd();
-}
-inline void login_client_gate_c::set_pwd(const std::string& value) {
-  _internal_set_pwd(value);
-  // @@protoc_insertion_point(field_set:frmpub.protocc.login_client_gate_c.pwd)
-}
-inline std::string* login_client_gate_c::mutable_pwd() {
-  // @@protoc_insertion_point(field_mutable:frmpub.protocc.login_client_gate_c.pwd)
-  return _internal_mutable_pwd();
-}
-inline const std::string& login_client_gate_c::_internal_pwd() const {
-  return pwd_.Get();
-}
-inline void login_client_gate_c::_internal_set_pwd(const std::string& value) {
-  
-  pwd_.Set(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, value, GetArena());
-}
-inline void login_client_gate_c::set_pwd(std::string&& value) {
-  
-  pwd_.Set(
-    ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, ::std::move(value), GetArena());
-  // @@protoc_insertion_point(field_set_rvalue:frmpub.protocc.login_client_gate_c.pwd)
-}
-inline void login_client_gate_c::set_pwd(const char* value) {
-  GOOGLE_DCHECK(value != nullptr);
-  
-  pwd_.Set(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, ::std::string(value), GetArena());
-  // @@protoc_insertion_point(field_set_char:frmpub.protocc.login_client_gate_c.pwd)
-}
-inline void login_client_gate_c::set_pwd(const char* value,
-    size_t size) {
-  
-  pwd_.Set(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, ::std::string(
-      reinterpret_cast<const char*>(value), size), GetArena());
-  // @@protoc_insertion_point(field_set_pointer:frmpub.protocc.login_client_gate_c.pwd)
-}
-inline std::string* login_client_gate_c::_internal_mutable_pwd() {
-  
-  return pwd_.Mutable(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, GetArena());
-}
-inline std::string* login_client_gate_c::release_pwd() {
-  // @@protoc_insertion_point(field_release:frmpub.protocc.login_client_gate_c.pwd)
-  return pwd_.Release(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArena());
-}
-inline void login_client_gate_c::set_allocated_pwd(std::string* pwd) {
-  if (pwd != nullptr) {
-    
-  } else {
-    
-  }
-  pwd_.SetAllocated(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), pwd,
-      GetArena());
-  // @@protoc_insertion_point(field_set_allocated:frmpub.protocc.login_client_gate_c.pwd)
+  // @@protoc_insertion_point(field_set_allocated:frmpub.protocc.login_client_gate_c.platform_key)
 }
 
 // -------------------------------------------------------------------

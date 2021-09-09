@@ -2,7 +2,7 @@ syntax = "proto3";
 import "common.proto";
 package frmpub.protocc;
 
-//´Ódbvisit¼ÓÔØ1ÌõhashÊı¾İ
+//ä»dbvisitåŠ è½½1æ¡hashæ•°æ®
 message loaddata_from_dbvisit_c {
     string tag = 1;
     string cache_key = 2; 
@@ -11,20 +11,20 @@ message loaddata_from_dbvisit_c {
 }
 
 message loaddata_from_dbvisit_s {
-    int32 result = 1; //0³É¹¦
+    int32 result = 1; //0æˆåŠŸ,1æ²¡æœ‰æ•°æ®
     string tag = 2;
     repeated FieldsEntry fields = 3;
 }
 
-//´Ódbvisit¼ÓÔØ¶àÌõhashÊı¾İ
+//ä»dbvisitåŠ è½½å¤šæ¡hashæ•°æ®
 message loaddata_more_from_dbvisit_c {
     string tag = 1;
-    string condition = 2; //Ìõ¼ş Èç goods_[goodsid,*]_roleid
+    string condition = 2; //æ¡ä»¶ å¦‚ goods_[goodsid,*]_roleid
     repeated FieldsEntry fields = 3;
 }
 
 message loaddata_more_from_dbvisit_s {
-    int32 result = 1; //0³É¹¦
+    int32 result = 1; //0æˆåŠŸ,1æ²¡æœ‰æ•°æ®
     string tag = 2;
     message item{
         repeated FieldsEntry fields = 1;
@@ -32,7 +32,7 @@ message loaddata_more_from_dbvisit_s {
     repeated item objs = 3;
 }
 
-//Ìí¼Ó1ÌõhashÊı¾İµ½dbvisit
+//æ·»åŠ 1æ¡hashæ•°æ®åˆ°dbvisit
 message insertdata_to_dbvisit_c{
     string tag = 1;
     string cache_key = 2; 
@@ -40,11 +40,11 @@ message insertdata_to_dbvisit_c{
 }
 
 message insertdata_to_dbvisit_s{
-    int32 result = 1; //0³É¹¦
+    int32 result = 1; //0æˆåŠŸ,1å¤±è´¥
     string tag = 2;
 }
 
-//¸üĞÂ1ÌõhashÊı¾İµ½dbvisit
+//æ›´æ–°1æ¡hashæ•°æ®åˆ°dbvisit
 message updata_to_dbvisit_c {
     string tag = 1;
     string cache_key = 2;
@@ -52,17 +52,17 @@ message updata_to_dbvisit_c {
 }
 
 message updata_to_dbvisit_s {
-    int32 result = 1; //0³É¹¦
+    int32 result = 1; //0æˆåŠŸ,1å¤±è´¥
     string tag = 2;
 }
 
-//´ÓdbvisitÉ¾³ı1ÌõhashÊı¾İ
+//ä»dbvisitåˆ é™¤1æ¡hashæ•°æ®
 message deletedata_to_dbvisit_c {
     string tag = 1;
     string cache_key = 2;
 }
 
 message deletedata_to_dbvisit_s {
-    int32 result = 1; //0³É¹¦
+    int32 result = 1; //0æˆåŠŸ,1å¤±è´¥
     string tag = 2;
 }

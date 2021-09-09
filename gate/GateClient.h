@@ -33,20 +33,11 @@ namespace gate {
 		*/
 		void accountid(std::string t);
 		std::string accountid() const;
-
-		void name(std::string t) {
-			name_ = t;
-		}
-		std::string name() const {
-			return name_;
-		}
-
-		void pwd(std::string t) {
-			pwd_ = t;
-		}
-		std::string pwd() const {
-			return pwd_;
-		}
+		/*
+		* 获取设置玩家平台key
+		*/
+		void platform_key(std::string t);
+		std::string platform_key() const;
 
 		/*
 		* 获取设置选择的登录服id
@@ -85,11 +76,7 @@ namespace gate {
 	private:
 		int login_id_ = 0;
 		int game_id_ = 0;
-		//玩家账号
 		std::string accountid_;
-		//用户名
-		std::string name_;
-		//密码
-		std::string pwd_;
+		std::string platform_key_;
 	};
 }

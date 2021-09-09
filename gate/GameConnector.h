@@ -46,6 +46,7 @@ namespace gate {
 		/// </summary>
 		int forward_game_client_c(std::shared_ptr<protocc::CommonObject> data,
 			std::shared_ptr<std::stack<FilterData::Envelope>> enves);
+
 	private:
 		int game_connect_id_;
 	};

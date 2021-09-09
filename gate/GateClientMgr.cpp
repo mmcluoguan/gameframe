@@ -1,4 +1,4 @@
-﻿#include "gate/GateClientMgr.h"
+#include "gate/GateClientMgr.h"
 #include "shynet/lua/LuaEngine.h"
 #include "frmpub/LuaCallBackTask.h"
 
@@ -36,21 +36,11 @@ namespace gate {
 		return clis_[k];
 	}
 
-	std::shared_ptr<GateClient> GateClientMgr::find(const std::string& accountid) {
+	std::shared_ptr<GateClient> GateClientMgr::find(const std::string& key) {
 		std::lock_guard<std::mutex> lock(clis_mutex_);
 		for (auto& iter : clis_) {
-			if (iter.second->accountid() == accountid) {
-				return iter.second;
-			}
-		}
-		return nullptr;
-	}
-
-	std::shared_ptr<GateClient> GateClientMgr::find(const std::string& name, const std::string& pwd) {
-		std::lock_guard<std::mutex> lock(clis_mutex_);
-		for (auto& iter : clis_) {
-			if (iter.second->name() == name &&
-				iter.second->pwd() == pwd) {
+			if (iter.second->accountid() == key ||
+				iter.second->platform_key() == key) {
 				return iter.second;
 			}
 		}

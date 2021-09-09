@@ -86,7 +86,7 @@ function gameClient:createrole_client_gate_c(msgid,msgdata,routing)
             }
             table.insert(roleObj.goods,#roleObj.goods + 1,item)
             local savedata = {
-                cache_key = 'goods_' .. item.id .. "_" .. self.id,
+                cache_key = 'goods_' .. item.id .. "_" .. roleObj.id,
                 fields = {
                     { key = '_id', value = tostring(item.id),},
                     { key = 'cfgid', value = tostring(item.cfgid),},

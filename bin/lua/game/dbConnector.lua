@@ -39,7 +39,7 @@ function dbConnector:loaddata_from_dbvisit_s(msgid,msgdata,routing)
                 gameClient:send(msgname,msgtable,routing)
             end
         else
-            log("加载1条hash数据失败 tag:",temp[0])
+            log("加载1条hash数据失败 tag:",msgs.tag)
         end
     else
         log("网关 fd:",gameClientFd," 已断开连接")
@@ -63,7 +63,7 @@ function dbConnector:loaddata_more_from_dbvisit_s(msgid,msgdata,routing)
                 gameClient:send(msgname,msgtable,routing)
             end
         else
-            log("加载多条hash数据失败 tag:",temp[0])
+            log("加载多条hash数据失败 tag:",msgs.tag)
         end
     else
         log("网关 fd:",gameClientFd," 已断开连接")

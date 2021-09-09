@@ -126,6 +126,34 @@ namespace gate {
 			enves->pop();
 			std::shared_ptr<GateClient> client = shynet::Singleton<GateClientMgr>::instance().find(env.fd);
 			if (client != nullptr) {
+				if (data->msgid() == protocc::CREATEROLE_CLIENT_GATE_S)
+				{
+					protocc::createrole_client_gate_s createrole;
+					if (createrole.ParseFromString(data->msgdata()) == true) {
+						if (createrole.result() == 0) {
+							//通知login修改account关联role
+							ConnectorMgr& connectMgr = shynet::Singleton<ConnectorMgr>::instance();
+							int login_connect_id = connectMgr.sid_conv_connect_id(client->login_id());
+							std::shared_ptr<LoginConnector> login = connectMgr.select_login(login_connect_id);
+							if (login != nullptr)
+							{
+								login->send_proto(data.get(), enves.get());
+							}
+							else {
+								std::stringstream stream;
+								stream << "没有可用的" << frmpub::Basic::connectname(protocc::ServerType::LOGIN) << "连接";
+								SEND_ERR(protocc::MESSAGE_PARSING_ERROR, stream.str());
+								return 0;
+							}
+						}
+					}
+					else {
+						std::stringstream stream;
+						stream << "消息" << frmpub::Basic::msgname(data->msgid()) << "解析错误";
+						SEND_ERR(protocc::MESSAGE_PARSING_ERROR, stream.str());
+						return 0;
+					}
+				}
 				client->send_proto(data.get(), enves.get());
 				LOG_DEBUG << "转发消息" << frmpub::Basic::msgname(data->msgid())
 					<< "到client[" << client->remote_addr()->ip() << ":"

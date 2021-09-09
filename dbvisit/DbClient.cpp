@@ -287,11 +287,16 @@ namespace dbvisit {
 				for (int i = 0; i < msgc.fields_size(); i++) {
 					data[msgc.fields(i).key()] = "";
 				}
-				shynet::Singleton<Datahelp>::instance().getdata(msgc.cache_key(), data);
-				for (auto& it : data) {
-					auto field = msgs.add_fields();
-					field->set_key(it.first);
-					field->set_value(it.second);
+				Datahelp::ErrorCode err = shynet::Singleton<Datahelp>::instance().getdata(msgc.cache_key(), data);
+				if (err == Datahelp::ErrorCode::OK) {
+					for (auto& it : data) {
+						auto field = msgs.add_fields();
+						field->set_key(it.first);
+						field->set_value(it.second);
+					}
+				}
+				else {
+					msgs.set_result(1);
 				}
 				msgs.set_tag(msgc.tag());
 				send_proto(protocc::LOADDATA_FROM_DBVISIT_S, &msgs, enves.get());
@@ -331,6 +336,10 @@ namespace dbvisit {
 						field->set_key(j.first);
 						field->set_value(j.second);
 					}
+				}
+				if (resdata->size() == 0)
+				{
+					msgs.set_result(1);
 				}
 				msgs.set_tag(msgc.tag());
 				send_proto(protocc::LOADDATA_MORE_FROM_DBVISIT_S, &msgs, enves.get());
@@ -446,7 +455,6 @@ namespace dbvisit {
 
 				int result = 0;//默认失败
 				//缓存过期24小时
-				std::string name_pwd = msgc.name() + "_" + msgc.pwd(); //用户名和密码
 				std::string accountid = "0";//账号id
 				std::string roleid = "0";//角色id
 				auto temp = shynet::Utility::spilt(data->extend(), ",");
@@ -466,24 +474,23 @@ namespace dbvisit {
 				std::unordered_map<std::string, std::string> user_data{
 						{"_id",accountid},
 						{"roleid",roleid},
-						{"name",msgc.name()},
-						{"pwd",msgc.pwd()},
 						{"clientaddr",cli_addr.ip()},
 						{"clientport",std::to_string(cli_addr.port())},
 						{"gate_sid",gate_sid},
 						{"login_sid",login_sid},
 						{"game_sid",game_sid},
 						{"online","1"},
+						{"platform_key",msgc.platform_key()},
 				};
 				redis::Redis& redis = shynet::Singleton<redis::Redis>::instance(std::string());
-				//通过用户名和密码取出账号cache_key_value
-				redis::OptionalString cache_key_value = redis.get(name_pwd);
+				//通过平台key取出账号cache_key_value
+				redis::OptionalString cache_key_value = redis.get(msgc.platform_key());
 				Datahelp& help = shynet::Singleton<Datahelp>::instance();
 
 				if (!cache_key_value) {
 					///缓存没有玩家数据,查询数据库
 					std::string tablename = "account";
-					std::string sql = shynet::Utility::str_format("name='%s' and pwd='%s'", msgc.name().c_str(), msgc.pwd().c_str());
+					std::string sql = shynet::Utility::str_format("platform_key='%s'", msgc.platform_key().c_str());
 					Datahelp::ErrorCode code = help.getdata_from_db(tablename, "", user_data, sql);
 
 					if (code == Datahelp::ErrorCode::NOT_DATA) {
@@ -500,15 +507,15 @@ namespace dbvisit {
 						old_gate_sid = user_data["gate_sid"];
 					}
 					*cache_key_value = "account_" + accountid;
-					//玩家用户名和密码关联的cache_key缓存X小时
-					redis.set(name_pwd, *cache_key_value, oneday_);
+					//玩家平台key缓存X小时
+					redis.set(msgc.platform_key(), *cache_key_value, oneday_);
 					//缓存玩家数据
 					help.updata_cache(*cache_key_value, user_data);
 					LOG_DEBUG << "从db取出账号信息 accountid:" << accountid << " roleid:" << roleid;
 				}
 				else {
-					//玩家用户名和密码关联的cache_key缓存X小时
-					redis.expire(name_pwd, oneday_);
+					//玩家平台key缓存X小时
+					redis.expire(msgc.platform_key(), oneday_);
 					//通过cache_key从缓存取出玩家数据					
 					Datahelp::ErrorCode error = help.getdata_from_cache(*cache_key_value, user_data);
 					if (error == Datahelp::ErrorCode::OK) {
@@ -524,12 +531,14 @@ namespace dbvisit {
 							{"login_sid",login_sid},
 							{"game_sid",game_sid},
 							{"online","1"},
+							{"platform_key",msgc.platform_key()},
 						};
 						help.updata(*cache_key_value, data);
 						LOG_DEBUG << "从cache取出账号信息 accountid:" << accountid << " roleid:" << roleid;
 					}
 					else {
 						LOG_DEBUG << "缓存中没有账号数据";
+						redis.del(msgc.platform_key());
 						result = 1;
 					}
 				}
@@ -597,6 +606,7 @@ namespace dbvisit {
 								{"login_sid",""},
 								{"game_sid",""},
 								{"gate_sid",""},
+								{"platform_key",""},
 						};
 						help.updata(key, data);
 

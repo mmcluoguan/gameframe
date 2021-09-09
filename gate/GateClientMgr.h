@@ -1,4 +1,4 @@
-﻿#pragma once
+#pragma once
 #include <memory>
 #include <mutex>
 #include <unordered_map>
@@ -22,13 +22,9 @@ namespace gate {
 		bool remove(int k);
 		std::shared_ptr<GateClient> find(int k);
 		/*
-		* 通过账号查找
+		* 通过账号或平台key查找
 		*/
-		std::shared_ptr<GateClient> find(const std::string& accountid);
-		/*
-		* 通过名称和密码查找
-		*/
-		std::shared_ptr<GateClient> find(const std::string& name, const std::string& pwd);
+		std::shared_ptr<GateClient> find(const std::string& key);
 
 		/// <summary>
 		/// 所有连接列表,int为连接fd

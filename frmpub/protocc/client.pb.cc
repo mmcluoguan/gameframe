@@ -98,8 +98,7 @@ struct reconnect_client_gate_sDefaultTypeInternal {
 PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT reconnect_client_gate_sDefaultTypeInternal _reconnect_client_gate_s_default_instance_;
 constexpr login_client_gate_c::login_client_gate_c(
   ::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized)
-  : name_(&::PROTOBUF_NAMESPACE_ID::internal::fixed_address_empty_string)
-  , pwd_(&::PROTOBUF_NAMESPACE_ID::internal::fixed_address_empty_string){}
+  : platform_key_(&::PROTOBUF_NAMESPACE_ID::internal::fixed_address_empty_string){}
 struct login_client_gate_cDefaultTypeInternal {
   constexpr login_client_gate_cDefaultTypeInternal()
     : _instance(::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized{}) {}
@@ -294,8 +293,7 @@ const ::PROTOBUF_NAMESPACE_ID::uint32 TableStruct_client_2eproto::offsets[] PROT
   ~0u,  // no _extensions_
   ~0u,  // no _oneof_case_
   ~0u,  // no _weak_field_map_
-  PROTOBUF_FIELD_OFFSET(::frmpub::protocc::login_client_gate_c, name_),
-  PROTOBUF_FIELD_OFFSET(::frmpub::protocc::login_client_gate_c, pwd_),
+  PROTOBUF_FIELD_OFFSET(::frmpub::protocc::login_client_gate_c, platform_key_),
   ~0u,  // no _has_bits_
   PROTOBUF_FIELD_OFFSET(::frmpub::protocc::login_client_gate_s, _internal_metadata_),
   ~0u,  // no _extensions_
@@ -376,16 +374,16 @@ static const ::PROTOBUF_NAMESPACE_ID::internal::MigrationSchema schemas[] PROTOB
   { 25, -1, sizeof(::frmpub::protocc::reconnect_client_gate_c)},
   { 33, -1, sizeof(::frmpub::protocc::reconnect_client_gate_s)},
   { 42, -1, sizeof(::frmpub::protocc::login_client_gate_c)},
-  { 49, -1, sizeof(::frmpub::protocc::login_client_gate_s)},
-  { 57, -1, sizeof(::frmpub::protocc::createrole_client_gate_c)},
-  { 63, -1, sizeof(::frmpub::protocc::createrole_client_gate_s)},
-  { 71, -1, sizeof(::frmpub::protocc::loadrole_client_gate_c)},
-  { 78, -1, sizeof(::frmpub::protocc::loadrole_client_gate_s)},
-  { 87, -1, sizeof(::frmpub::protocc::setlevel_client_gate_c)},
-  { 93, -1, sizeof(::frmpub::protocc::setlevel_client_gate_s)},
-  { 99, -1, sizeof(::frmpub::protocc::loadgoods_client_gate_c)},
-  { 106, -1, sizeof(::frmpub::protocc::loadgoods_client_gate_s_Goods)},
-  { 114, -1, sizeof(::frmpub::protocc::loadgoods_client_gate_s)},
+  { 48, -1, sizeof(::frmpub::protocc::login_client_gate_s)},
+  { 56, -1, sizeof(::frmpub::protocc::createrole_client_gate_c)},
+  { 62, -1, sizeof(::frmpub::protocc::createrole_client_gate_s)},
+  { 70, -1, sizeof(::frmpub::protocc::loadrole_client_gate_c)},
+  { 77, -1, sizeof(::frmpub::protocc::loadrole_client_gate_s)},
+  { 86, -1, sizeof(::frmpub::protocc::setlevel_client_gate_c)},
+  { 92, -1, sizeof(::frmpub::protocc::setlevel_client_gate_s)},
+  { 98, -1, sizeof(::frmpub::protocc::loadgoods_client_gate_c)},
+  { 105, -1, sizeof(::frmpub::protocc::loadgoods_client_gate_s_Goods)},
+  { 113, -1, sizeof(::frmpub::protocc::loadgoods_client_gate_s)},
 };
 
 static ::PROTOBUF_NAMESPACE_ID::Message const * const file_default_instances[] = {
@@ -419,48 +417,48 @@ const char descriptor_table_protodef_client_2eproto[] PROTOBUF_SECTION_VARIABLE(
   "lient_gate_c\022\013\n\003aid\030\001 \001(\t\022\017\n\007loginid\030\002 \001"
   "(\005\022\016\n\006gameid\030\003 \001(\005\"W\n\027reconnect_client_g"
   "ate_s\022\016\n\006result\030\001 \001(\005\022\013\n\003aid\030\002 \001(\t\022\017\n\007lo"
-  "ginid\030\003 \001(\005\022\016\n\006gameid\030\004 \001(\005\"0\n\023login_cli"
-  "ent_gate_c\022\014\n\004name\030\001 \001(\t\022\013\n\003pwd\030\002 \001(\t\"B\n"
-  "\023login_client_gate_s\022\016\n\006result\030\001 \001(\005\022\013\n\003"
-  "aid\030\002 \001(\t\022\016\n\006roleid\030\003 \001(\003\"\'\n\030createrole_"
-  "client_gate_c\022\013\n\003aid\030\001 \001(\t\"G\n\030createrole"
-  "_client_gate_s\022\016\n\006result\030\001 \001(\005\022\013\n\003aid\030\002 "
-  "\001(\t\022\016\n\006roleid\030\003 \001(\003\"5\n\026loadrole_client_g"
-  "ate_c\022\013\n\003aid\030\001 \001(\t\022\016\n\006roleid\030\002 \001(\003\"T\n\026lo"
-  "adrole_client_gate_s\022\016\n\006result\030\001 \001(\005\022\013\n\003"
-  "aid\030\002 \001(\t\022\016\n\006roleid\030\003 \001(\003\022\r\n\005level\030\004 \001(\005"
-  "\"(\n\026setlevel_client_gate_c\022\016\n\006roleid\030\001 \001"
-  "(\003\"(\n\026setlevel_client_gate_s\022\016\n\006result\030\001"
-  " \001(\005\"6\n\027loadgoods_client_gate_c\022\013\n\003aid\030\001"
-  " \001(\t\022\016\n\006roleid\030\002 \001(\003\"\210\001\n\027loadgoods_clien"
-  "t_gate_s\022<\n\005goods\030\001 \003(\0132-.frmpub.protocc"
-  ".loadgoods_client_gate_s.Goods\032/\n\005Goods\022"
-  "\n\n\002id\030\001 \001(\003\022\r\n\005cfgid\030\002 \001(\005\022\013\n\003num\030\003 \001(\005*"
-  "\304\005\n\013ClientMsgId\022\025\n\021CLIENTMSGID_BEGIN\020\000\022\026"
-  "\n\021CLIENT_GATE_BEGIN\020\350\007\022\035\n\030SERVERLIST_CLI"
-  "ENT_GATE_C\020\351\007\022\035\n\030SERVERLIST_CLIENT_GATE_"
-  "S\020\352\007\022\037\n\032SELECTSERVER_CLIENT_GATE_C\020\353\007\022\037\n"
-  "\032SELECTSERVER_CLIENT_GATE_S\020\354\007\022\036\n\031REPEAT"
-  "LOGIN_CLIENT_GATE_S\020\355\007\022\024\n\017CLIENT_GATE_EN"
-  "D\020\313\010\022\027\n\022CLIENT_LOGIN_BEGIN\020\314\010\022\030\n\023LOGIN_C"
-  "LIENT_GATE_C\020\315\010\022\030\n\023LOGIN_CLIENT_GATE_S\020\316"
-  "\010\022\034\n\027RECONNECT_CLIENT_GATE_C\020\317\010\022\034\n\027RECON"
-  "NECT_CLIENT_GATE_S\020\320\010\022\025\n\020CLIENT_LOGIN_EN"
-  "D\020\257\t\022\026\n\021CLIENT_GAME_BEGIN\020\260\t\022\035\n\030CREATERO"
-  "LE_CLIENT_GATE_C\020\261\t\022\035\n\030CREATEROLE_CLIENT"
-  "_GATE_S\020\262\t\022\033\n\026LOADROLE_CLIENT_GATE_C\020\263\t\022"
-  "\033\n\026LOADROLE_CLIENT_GATE_S\020\264\t\022\033\n\026SETLEVEL"
-  "_CLIENT_GATE_C\020\265\t\022\033\n\026SETLEVEL_CLIENT_GAT"
-  "E_S\020\266\t\022\034\n\027LOADGOODS_CLIENT_GATE_C\020\267\t\022\034\n\027"
-  "LOADGOODS_CLIENT_GATE_S\020\270\t\022\024\n\017CLIENT_GAM"
-  "E_END\020\223\n\022\024\n\017CLIENTMSGID_END\020\210\'b\006proto3"
+  "ginid\030\003 \001(\005\022\016\n\006gameid\030\004 \001(\005\"+\n\023login_cli"
+  "ent_gate_c\022\024\n\014platform_key\030\001 \001(\t\"B\n\023logi"
+  "n_client_gate_s\022\016\n\006result\030\001 \001(\005\022\013\n\003aid\030\002"
+  " \001(\t\022\016\n\006roleid\030\003 \001(\003\"\'\n\030createrole_clien"
+  "t_gate_c\022\013\n\003aid\030\001 \001(\t\"G\n\030createrole_clie"
+  "nt_gate_s\022\016\n\006result\030\001 \001(\005\022\013\n\003aid\030\002 \001(\t\022\016"
+  "\n\006roleid\030\003 \001(\003\"5\n\026loadrole_client_gate_c"
+  "\022\013\n\003aid\030\001 \001(\t\022\016\n\006roleid\030\002 \001(\003\"T\n\026loadrol"
+  "e_client_gate_s\022\016\n\006result\030\001 \001(\005\022\013\n\003aid\030\002"
+  " \001(\t\022\016\n\006roleid\030\003 \001(\003\022\r\n\005level\030\004 \001(\005\"(\n\026s"
+  "etlevel_client_gate_c\022\016\n\006roleid\030\001 \001(\003\"(\n"
+  "\026setlevel_client_gate_s\022\016\n\006result\030\001 \001(\005\""
+  "6\n\027loadgoods_client_gate_c\022\013\n\003aid\030\001 \001(\t\022"
+  "\016\n\006roleid\030\002 \001(\003\"\210\001\n\027loadgoods_client_gat"
+  "e_s\022<\n\005goods\030\001 \003(\0132-.frmpub.protocc.load"
+  "goods_client_gate_s.Goods\032/\n\005Goods\022\n\n\002id"
+  "\030\001 \001(\003\022\r\n\005cfgid\030\002 \001(\005\022\013\n\003num\030\003 \001(\005*\304\005\n\013C"
+  "lientMsgId\022\025\n\021CLIENTMSGID_BEGIN\020\000\022\026\n\021CLI"
+  "ENT_GATE_BEGIN\020\350\007\022\035\n\030SERVERLIST_CLIENT_G"
+  "ATE_C\020\351\007\022\035\n\030SERVERLIST_CLIENT_GATE_S\020\352\007\022"
+  "\037\n\032SELECTSERVER_CLIENT_GATE_C\020\353\007\022\037\n\032SELE"
+  "CTSERVER_CLIENT_GATE_S\020\354\007\022\036\n\031REPEATLOGIN"
+  "_CLIENT_GATE_S\020\355\007\022\024\n\017CLIENT_GATE_END\020\313\010\022"
+  "\027\n\022CLIENT_LOGIN_BEGIN\020\314\010\022\030\n\023LOGIN_CLIENT"
+  "_GATE_C\020\315\010\022\030\n\023LOGIN_CLIENT_GATE_S\020\316\010\022\034\n\027"
+  "RECONNECT_CLIENT_GATE_C\020\317\010\022\034\n\027RECONNECT_"
+  "CLIENT_GATE_S\020\320\010\022\025\n\020CLIENT_LOGIN_END\020\257\t\022"
+  "\026\n\021CLIENT_GAME_BEGIN\020\260\t\022\035\n\030CREATEROLE_CL"
+  "IENT_GATE_C\020\261\t\022\035\n\030CREATEROLE_CLIENT_GATE"
+  "_S\020\262\t\022\033\n\026LOADROLE_CLIENT_GATE_C\020\263\t\022\033\n\026LO"
+  "ADROLE_CLIENT_GATE_S\020\264\t\022\033\n\026SETLEVEL_CLIE"
+  "NT_GATE_C\020\265\t\022\033\n\026SETLEVEL_CLIENT_GATE_S\020\266"
+  "\t\022\034\n\027LOADGOODS_CLIENT_GATE_C\020\267\t\022\034\n\027LOADG"
+  "OODS_CLIENT_GATE_S\020\270\t\022\024\n\017CLIENT_GAME_END"
+  "\020\223\n\022\024\n\017CLIENTMSGID_END\020\210\'b\006proto3"
   ;
 static const ::PROTOBUF_NAMESPACE_ID::internal::DescriptorTable*const descriptor_table_client_2eproto_deps[1] = {
   &::descriptor_table_common_2eproto,
 };
 static ::PROTOBUF_NAMESPACE_ID::internal::once_flag descriptor_table_client_2eproto_once;
 const ::PROTOBUF_NAMESPACE_ID::internal::DescriptorTable descriptor_table_client_2eproto = {
-  false, false, 1798, descriptor_table_protodef_client_2eproto, "client.proto", 
+  false, false, 1793, descriptor_table_protodef_client_2eproto, "client.proto", 
   &descriptor_table_client_2eproto_once, descriptor_table_client_2eproto_deps, 1, 17,
   schemas, file_default_instances, TableStruct_client_2eproto::offsets,
   file_level_metadata_client_2eproto, file_level_enum_descriptors_client_2eproto, file_level_service_descriptors_client_2eproto,
@@ -1885,22 +1883,16 @@ login_client_gate_c::login_client_gate_c(::PROTOBUF_NAMESPACE_ID::Arena* arena)
 login_client_gate_c::login_client_gate_c(const login_client_gate_c& from)
   : ::PROTOBUF_NAMESPACE_ID::Message() {
   _internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
-  name_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
-  if (!from._internal_name().empty()) {
-    name_.Set(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, from._internal_name(), 
-      GetArena());
-  }
-  pwd_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
-  if (!from._internal_pwd().empty()) {
-    pwd_.Set(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, from._internal_pwd(), 
+  platform_key_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+  if (!from._internal_platform_key().empty()) {
+    platform_key_.Set(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, from._internal_platform_key(), 
       GetArena());
   }
   // @@protoc_insertion_point(copy_constructor:frmpub.protocc.login_client_gate_c)
 }
 
 void login_client_gate_c::SharedCtor() {
-name_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
-pwd_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+platform_key_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
 }
 
 login_client_gate_c::~login_client_gate_c() {
@@ -1911,8 +1903,7 @@ login_client_gate_c::~login_client_gate_c() {
 
 void login_client_gate_c::SharedDtor() {
   GOOGLE_DCHECK(GetArena() == nullptr);
-  name_.DestroyNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
-  pwd_.DestroyNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+  platform_key_.DestroyNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
 }
 
 void login_client_gate_c::ArenaDtor(void* object) {
@@ -1931,8 +1922,7 @@ void login_client_gate_c::Clear() {
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
-  name_.ClearToEmpty();
-  pwd_.ClearToEmpty();
+  platform_key_.ClearToEmpty();
   _internal_metadata_.Clear<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>();
 }
 
@@ -1943,21 +1933,12 @@ const char* login_client_gate_c::_InternalParse(const char* ptr, ::PROTOBUF_NAME
     ptr = ::PROTOBUF_NAMESPACE_ID::internal::ReadTag(ptr, &tag);
     CHK_(ptr);
     switch (tag >> 3) {
-      // string name = 1;
+      // string platform_key = 1;
       case 1:
         if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 10)) {
-          auto str = _internal_mutable_name();
+          auto str = _internal_mutable_platform_key();
           ptr = ::PROTOBUF_NAMESPACE_ID::internal::InlineGreedyStringParser(str, ptr, ctx);
-          CHK_(::PROTOBUF_NAMESPACE_ID::internal::VerifyUTF8(str, "frmpub.protocc.login_client_gate_c.name"));
-          CHK_(ptr);
-        } else goto handle_unusual;
-        continue;
-      // string pwd = 2;
-      case 2:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 18)) {
-          auto str = _internal_mutable_pwd();
-          ptr = ::PROTOBUF_NAMESPACE_ID::internal::InlineGreedyStringParser(str, ptr, ctx);
-          CHK_(::PROTOBUF_NAMESPACE_ID::internal::VerifyUTF8(str, "frmpub.protocc.login_client_gate_c.pwd"));
+          CHK_(::PROTOBUF_NAMESPACE_ID::internal::VerifyUTF8(str, "frmpub.protocc.login_client_gate_c.platform_key"));
           CHK_(ptr);
         } else goto handle_unusual;
         continue;
@@ -1989,24 +1970,14 @@ failure:
   ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
   (void) cached_has_bits;
 
-  // string name = 1;
-  if (this->name().size() > 0) {
+  // string platform_key = 1;
+  if (this->platform_key().size() > 0) {
     ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::VerifyUtf8String(
-      this->_internal_name().data(), static_cast<int>(this->_internal_name().length()),
+      this->_internal_platform_key().data(), static_cast<int>(this->_internal_platform_key().length()),
       ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::SERIALIZE,
-      "frmpub.protocc.login_client_gate_c.name");
+      "frmpub.protocc.login_client_gate_c.platform_key");
     target = stream->WriteStringMaybeAliased(
-        1, this->_internal_name(), target);
-  }
-
-  // string pwd = 2;
-  if (this->pwd().size() > 0) {
-    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::VerifyUtf8String(
-      this->_internal_pwd().data(), static_cast<int>(this->_internal_pwd().length()),
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::SERIALIZE,
-      "frmpub.protocc.login_client_gate_c.pwd");
-    target = stream->WriteStringMaybeAliased(
-        2, this->_internal_pwd(), target);
+        1, this->_internal_platform_key(), target);
   }
 
   if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
@@ -2025,18 +1996,11 @@ size_t login_client_gate_c::ByteSizeLong() const {
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
-  // string name = 1;
-  if (this->name().size() > 0) {
+  // string platform_key = 1;
+  if (this->platform_key().size() > 0) {
     total_size += 1 +
       ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::StringSize(
-        this->_internal_name());
-  }
-
-  // string pwd = 2;
-  if (this->pwd().size() > 0) {
-    total_size += 1 +
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::StringSize(
-        this->_internal_pwd());
+        this->_internal_platform_key());
   }
 
   if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
@@ -2070,11 +2034,8 @@ void login_client_gate_c::MergeFrom(const login_client_gate_c& from) {
   ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
   (void) cached_has_bits;
 
-  if (from.name().size() > 0) {
-    _internal_set_name(from._internal_name());
-  }
-  if (from.pwd().size() > 0) {
-    _internal_set_pwd(from._internal_pwd());
+  if (from.platform_key().size() > 0) {
+    _internal_set_platform_key(from._internal_platform_key());
   }
 }
 
@@ -2099,8 +2060,7 @@ bool login_client_gate_c::IsInitialized() const {
 void login_client_gate_c::InternalSwap(login_client_gate_c* other) {
   using std::swap;
   _internal_metadata_.Swap<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(&other->_internal_metadata_);
-  name_.Swap(&other->name_, &::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArena());
-  pwd_.Swap(&other->pwd_, &::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArena());
+  platform_key_.Swap(&other->platform_key_, &::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArena());
 }
 
 ::PROTOBUF_NAMESPACE_ID::Metadata login_client_gate_c::GetMetadata() const {

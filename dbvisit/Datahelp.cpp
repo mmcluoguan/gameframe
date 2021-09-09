@@ -1,4 +1,4 @@
-﻿#include "dbvisit/Datahelp.h"
+#include "dbvisit/Datahelp.h"
 #include <unordered_set>
 #include <sw/redis++/redis++.h>
 #include <rapidjson/document.h>
@@ -19,7 +19,8 @@ namespace dbvisit {
 		const std::string& key, std::unordered_map<std::string, std::string>& out,
 		const std::string& where) {
 		pool::MysqlPool& mysql = shynet::Singleton<pool::MysqlPool>::get_instance();
-		std::string condition = key;
+		std::string sql = shynet::Utility::str_format("_id='%s'", key.c_str());
+		std::string condition = sql;
 		if (key.empty()) {
 			condition = where;
 		}
@@ -110,8 +111,10 @@ namespace dbvisit {
 			}
 		}
 		for (auto& key : keys) {
-			getdata_from_cache(key, out);
-			datalist->push_back(out);
+		 	ErrorCode err = getdata_from_cache(key, out);
+			if (err == ErrorCode::OK) {
+				datalist->push_back(out);
+			}
 		}
 		return datalist;
 	}

@@ -105,6 +105,12 @@ namespace gate {
 	std::string GateClient::accountid() const {
 		return accountid_;
 	}
+	void GateClient::platform_key(std::string t) {
+		platform_key_ = t;
+	}
+	std::string GateClient::platform_key() const {
+		return platform_key_;
+	}
 	void GateClient::login_id(int t) {
 		login_id_ = t;
 	}
@@ -141,15 +147,14 @@ namespace gate {
 				//同服顶号处理
 				protocc::login_client_gate_c msgc;
 				if (msgc.ParseFromString(obj->msgdata()) == true) {
-					auto cli = shynet::Singleton<GateClientMgr>::instance().find(msgc.name(), msgc.pwd());
+					auto cli = shynet::Singleton<GateClientMgr>::instance().find(msgc.platform_key());
 					if (cli) {
 						protocc::repeatlogin_client_gate_s msgs;
 						msgs.set_aid(cli->accountid());
 						cli->send_proto(protocc::REPEATLOGIN_CLIENT_GATE_S, &msgs);
 						cli->close(true);
 					}
-					name_ = msgc.name();
-					pwd_ = msgc.pwd();
+					platform_key_ = msgc.platform_key();
 				}
 				else {
 					std::stringstream stream;
@@ -234,7 +239,7 @@ namespace gate {
 		protocc::selectserver_client_gate_c msgc;
 		if (msgc.ParseFromString(data->msgdata()) == true) {
 			login_id_ = msgc.loginid();
-			game_id_ = 0;// msgc.gameid();
+			game_id_ = msgc.gameid();
 
 			protocc::selectserver_client_gate_s msgs;
 			msgs.set_result(0);

@@ -72,8 +72,7 @@ message reconnect_client_gate_s
 
 //登录
 message login_client_gate_c {  
-    string name = 1;
-    string pwd = 2;
+    string platform_key = 1;
 }
 
 message login_client_gate_s {

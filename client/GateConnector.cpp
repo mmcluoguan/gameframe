@@ -1,4 +1,4 @@
-﻿#include "client/GateConnector.h"
+#include "client/GateConnector.h"
 #include "shynet/events/Streambuff.h"
 #include "shynet/net/ConnectReactorMgr.h"
 #include "frmpub/ReConnectTimer.h"
@@ -164,8 +164,7 @@ namespace client {
 		protocc::selectserver_client_gate_s msgs;
 		if (msgs.ParseFromString(data->msgdata()) == true) {
 			protocc::login_client_gate_c msgc;
-			msgc.set_name("aaaa");
-			msgc.set_pwd("123456");
+			msgc.set_platform_key("aaaa_123456");
 			send_proto(protocc::LOGIN_CLIENT_GATE_C, &msgc);
 			LOG_DEBUG << "登陆";
 		}
@@ -226,8 +225,7 @@ namespace client {
 			}
 			else {
 				protocc::login_client_gate_c msgc;
-				msgc.set_name("aaaa");
-				msgc.set_pwd("123456");
+				msgc.set_platform_key("aaaa_123456");
 				send_proto(protocc::LOGIN_CLIENT_GATE_C, &msgc);
 				LOG_DEBUG << "登陆";
 			}
