@@ -1,8 +1,10 @@
-﻿#include "shynet/Utility.h"
+#include "shynet/Utility.h"
 #include <arpa/inet.h>
 #include <cstring>
 #include <sys/resource.h>
 #include <unistd.h>
+#include <fcntl.h>
+#include <limits.h>
 #include "shynet/Logger.h"
 
 namespace shynet {
@@ -12,10 +14,52 @@ namespace shynet {
 			LOG_SYSERR << "call setrlimit";
 		}
 	}
-	void Utility::daemon() {
+	int Utility::daemon() {
 		if (::daemon(1, 0) == -1) {
 			LOG_SYSERR << "call daemon";
+		}		
+		return getpid();
+	}
+
+	void Utility::writepid(const std::string& pidfile) {
+		writepid(pidfile.c_str());
+	}
+
+	void Utility::writepid(const char* pidfile)
+	{
+		bool isfree = false;
+		if (pidfile == nullptr)
+		{
+			char path[PATH_MAX] = { 0 };
+			char processname[NAME_MAX] = { 0 };
+			if (Utility::get_executable_path(path, processname, sizeof(path)) == -1) {
+				LOG_SYSERR << "call get_executable_path";
+			}
+			char* processname_end = strrchr(processname, '.');
+			if (processname != nullptr) {
+				*processname_end = '\0';
+			}
+			pidfile = new char[NAME_MAX];
+			sprintf(const_cast<char*>(pidfile), "./%s.pid", processname);
+			isfree = true;
 		}
+		int fp = open(pidfile, O_WRONLY | O_CREAT | O_TRUNC, 0600);
+		if (isfree) {
+			delete[] pidfile;
+		}
+		if (fp == -1) {
+			LOG_SYSERR << "call open";
+		}
+		if (lockf(fp, F_TLOCK, 0) < 0) {
+			LOG_SYSERR << "call lockf";
+		}
+
+		char buf[64] = { 0 };
+		pid_t pid = ::getpid();
+		snprintf(buf, 64, "%d\n", pid);
+		size_t len = strlen(buf);
+		::write(fp, buf, len);
+		close(fp);
 	}
 
 	std::string& Utility::trim(std::string& xstr, std::function<int(int)> cb) {
@@ -32,6 +76,8 @@ namespace shynet {
 
 		return xstr;
 	}
+
+	
 
 	char* Utility::trim(char* str, std::function<int(int)> cb) {
 		char* p = str;

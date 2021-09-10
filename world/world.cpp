@@ -45,6 +45,8 @@ int main(int argc, char* argv[]) {
 		LOG_ERROR << "call usethread";
 	}
 	EventBase::initssl();
+	std::string pidfile = Utility::str_format("./%s.pid", g_confname);
+	Utility::writepid(pidfile);
 
 	Singleton<LuaEngine>::instance(std::make_shared<world::LuaWrapper>());
 	Singleton<ThreadPool>::instance().start();

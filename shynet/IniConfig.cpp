@@ -1,4 +1,4 @@
-﻿#include "shynet/IniConfig.h"
+#include "shynet/IniConfig.h"
 #include <fstream>
 #include "shynet/Utility.h"
 #include "shynet/Logger.h"
