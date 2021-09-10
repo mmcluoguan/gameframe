@@ -44,6 +44,9 @@ int main(int argc, char* argv[]) {
 		LOG_ERROR << "call usethread";
 	}
 	EventBase::initssl();
+	int sid = ini.get<int, int>("game", "sid", 0);
+	std::string pidfile = Utility::str_format("./game_%d.pid", sid);
+	Utility::writepid(pidfile);
 
 	Singleton<LuaEngine>::instance(std::make_shared<game::LuaWrapper>());
 	Singleton<ThreadPool>::instance().start();

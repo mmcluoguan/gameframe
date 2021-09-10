@@ -1,10 +1,10 @@
-﻿#pragma once
+#pragma once
 #include <string>
 
 namespace shynet {
 	namespace crypto {
 		namespace url {
-			char dec2hexChar(short int n) {
+			static char dec2hexChar(short int n) {
 				if (0 <= n && n <= 9) {
 					return char(short('0') + n);
 				}
@@ -16,7 +16,7 @@ namespace shynet {
 				}
 			}
 
-			short int hexChar2dec(char c) {
+			static short int hexChar2dec(char c) {
 				if ('0' <= c && c <= '9') {
 					return short(c - '0');
 				}

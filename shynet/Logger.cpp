@@ -1,4 +1,4 @@
-﻿#include "shynet/Logger.h"
+#include "shynet/Logger.h"
 #include <cstring>
 #include <limits.h>
 #include <sys/time.h>
@@ -94,7 +94,7 @@ namespace shynet {
 			*processname_end = '\0';
 		}
 
-		char logfilename[100] = { 0 };
+		char logfilename[NAME_MAX] = { 0 };
 		sprintf(logfilename, "./log/%s_%s", processname, timebuf);
 
 		if (strncmp(g_logfilename, logfilename, strlen(logfilename)) != 0) {

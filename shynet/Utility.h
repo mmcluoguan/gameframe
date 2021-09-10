@@ -1,4 +1,4 @@
-﻿#pragma once
+#pragma once
 #include <atomic>
 #include <cstdint>
 #include <memory>
@@ -20,8 +20,16 @@ namespace shynet {
 		static void create_coredump();
 		/*
 		* 守护进程运行
+		* 返回进程id
 		*/
-		static void daemon();
+		static int daemon();
+
+		/*
+		* 写进程id
+		* pidfile 默认工作目录下,程序名.pid
+		*/
+		static void writepid(const char* pidfile = nullptr);
+		static void writepid(const std::string& pidfile);
 
 		static char* trim(char* str, std::function<int(int)> cb = isspace);
 		static std::string& trim(std::string& xstr, std::function<int(int)> cb = isspace);

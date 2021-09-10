@@ -38,6 +38,9 @@ int main(int argc, char* argv[]) {
 		LOG_ERROR << "call usethread";
 	}
 	EventBase::initssl();
+	int sid = ini.get<int, int>("login", "sid", 0);
+	std::string pidfile = Utility::str_format("./login_%d.pid", sid);
+	Utility::writepid(pidfile);
 
 	Singleton<LuaEngine>::instance(std::make_shared<login::LuaWrapper>());
 	Singleton<ThreadPool>::instance().start();
