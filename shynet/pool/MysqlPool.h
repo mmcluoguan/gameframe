@@ -1,11 +1,11 @@
-﻿#pragma once
+#pragma once
 #include <mutex>
 #include <memory>
 #include <functional>
 #include <queue>
 #include <condition_variable>
 #include <mysqlx/xdevapi.h>
-#include "shynet/Singleton.h"
+#include "shynet/utils/Singleton.h"
 
 namespace shynet {
 	namespace pool {
@@ -13,7 +13,7 @@ namespace shynet {
 		* mysql连接池
 		*/
 		class MysqlPool final : public Nocopy {
-			friend class Singleton<MysqlPool>;
+			friend class utils::Singleton<MysqlPool>;
 
 			MysqlPool(const mysqlx::SessionSettings& opt, size_t capactiy = 1);
 		public:

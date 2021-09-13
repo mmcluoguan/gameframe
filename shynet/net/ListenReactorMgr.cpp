@@ -1,4 +1,5 @@
-﻿#include "shynet/net/ListenReactorMgr.h"
+#include "shynet/net/ListenReactorMgr.h"
+#include "shynet/utils/Logger.h"
 
 namespace shynet {
 	namespace net {
@@ -10,7 +11,7 @@ namespace shynet {
 		}
 
 		void ListenReactorMgr::notify(const void* data, size_t len) {
-			std::shared_ptr<thread::ListenThread> lth = Singleton<pool::ThreadPool>::get_instance().listernTh().lock();
+			std::shared_ptr<thread::ListenThread> lth = utils::Singleton<pool::ThreadPool>::get_instance().listernTh().lock();
 			if (lth != nullptr) {
 				lth->notify(data, len);
 			}

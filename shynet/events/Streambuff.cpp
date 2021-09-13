@@ -1,7 +1,6 @@
-﻿#include "shynet/events/Streambuff.h"
+#include "shynet/events/Streambuff.h"
 #include <stdarg.h>
-#include "shynet/Logger.h"
-#include "shynet/Utility.h"
+#include "shynet/utils/Logger.h"
 
 namespace shynet
 {

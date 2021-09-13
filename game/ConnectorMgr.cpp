@@ -33,7 +33,7 @@ namespace game {
 	std::shared_ptr<DbConnector> ConnectorMgr::find_dbctor(int connectid)
 	{
 		return std::dynamic_pointer_cast<DbConnector>(
-			shynet::Singleton<net::ConnectReactorMgr>::instance().find(connectid));
+			shynet::utils::Singleton<net::ConnectReactorMgr>::instance().find(connectid));
 	}
 	void ConnectorMgr::add_worldctor(int connectid)
 	{
@@ -48,6 +48,6 @@ namespace game {
 	std::shared_ptr<WorldConnector> ConnectorMgr::find_worldctor(int connectid)
 	{
 		return std::dynamic_pointer_cast<WorldConnector>(
-			shynet::Singleton<net::ConnectReactorMgr>::instance().find(connectid));
+			shynet::utils::Singleton<net::ConnectReactorMgr>::instance().find(connectid));
 	}
 }

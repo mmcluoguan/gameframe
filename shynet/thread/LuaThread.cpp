@@ -1,8 +1,6 @@
 #include "shynet/thread/LuaThread.h"
 #include "shynet/lua/LuaEngine.h"
-#include "shynet/Logger.h"
-#include "shynet/Utility.h"
-#include "shynet/Singleton.h"
+#include "shynet/utils/Logger.h"
 
 namespace shynet {
 	extern pthread_barrier_t g_barrier;
@@ -17,7 +15,7 @@ namespace shynet {
 		int LuaThread::run() {
 			kaguya::State state;
 			luaState_ = &state;
-			Singleton<lua::LuaEngine>::instance().init(state);
+			utils::Singleton<lua::LuaEngine>::instance().init(state);
 			pthread_barrier_wait(&g_barrier);
 			while (stop_ == false) {
 				std::shared_ptr<task::Task> tk;

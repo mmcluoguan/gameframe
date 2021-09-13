@@ -1,4 +1,4 @@
-﻿#pragma once
+#pragma once
 #include "shynet/net/ConnectReactorMgr.h"
 #include "shynet/net/IPAddress.h"
 #include "shynet/net/TimerReactorMgr.h"
@@ -20,9 +20,9 @@ namespace frmpub
 
 		void timeout() override
 		{
-			shynet::Singleton<net::TimerReactorMgr>::instance().remove(timerid());
+			shynet::utils::Singleton<net::TimerReactorMgr>::instance().remove(timerid());
 			std::shared_ptr<T> reconnect(new T(connect_addr_));
-			shynet::Singleton<net::ConnectReactorMgr>::instance().add(reconnect);
+			shynet::utils::Singleton<net::ConnectReactorMgr>::instance().add(reconnect);
 			reconnect.reset();
 		}
 	private:

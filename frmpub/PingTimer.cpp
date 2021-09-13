@@ -1,6 +1,4 @@
-﻿#include "frmpub/PingTimer.h"
-#include "shynet/Utility.h"
-#include "shynet/Logger.h"
+#include "frmpub/PingTimer.h"
 #include "shynet/net/TimerReactorMgr.h"
 #include "frmpub/Connector.h"
 
@@ -16,7 +14,7 @@ namespace frmpub {
 			connector_->ping();
 		}
 		else {
-			shynet::Singleton<net::TimerReactorMgr>::instance().remove(timerid());
+			shynet::utils::Singleton<net::TimerReactorMgr>::instance().remove(timerid());
 		}
 	}
 }

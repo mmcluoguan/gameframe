@@ -1,4 +1,4 @@
-﻿#pragma once
+#pragma once
 #include "shynet/events/EventHandler.h"
 
 namespace dbvisit

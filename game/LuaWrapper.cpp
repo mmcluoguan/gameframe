@@ -1,8 +1,8 @@
 #include "game/LuaWrapper.h"
 #include <random>
-#include "shynet/IniConfig.h"
-#include "shynet/Singleton.h"
-#include "shynet/IdWorker.h"
+#include "shynet/utils/IniConfig.h"
+#include "shynet/utils/Singleton.h"
+#include "shynet/utils/IdWorker.h"
 #include "game/GameServer.h"
 #include "game/GameClient.h"
 #include "game/DbConnector.h"
@@ -19,7 +19,7 @@ namespace game {
 		frmpub::FrmLuaWrapper::init(state);
 
 		state["newid"] = kaguya::function([]() {
-			return shynet::Singleton<shynet::IdWorker>::get_instance().getid();
+			return shynet::utils::Singleton<shynet::utils::IdWorker>::get_instance().getid();
 			});		
 
 		state["GameServer_CPP"].setClass(kaguya::UserdataMetatable<GameServer, net::ListenEvent>()
@@ -35,7 +35,7 @@ namespace game {
 		);
 
 		//载入lua文件
-		shynet::IniConfig& ini = shynet::Singleton<shynet::IniConfig>::get_instance();
+		shynet::utils::IniConfig& ini = shynet::utils::Singleton<shynet::utils::IniConfig>::get_instance();
 		std::string luafile = ini.get<const char*, std::string>("game", "luafile", "lua/game/game_main.lua");
 		state.dofile(luafile);
 	}

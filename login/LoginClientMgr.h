@@ -2,7 +2,7 @@
 #include <memory>
 #include <mutex>
 #include <unordered_map>
-#include "shynet/Singleton.h"
+#include "shynet/utils/Singleton.h"
 #include "login/LoginClient.h"
 
 namespace login
@@ -12,7 +12,7 @@ namespace login
 	/// </summary>
 	class LoginClientMgr final : public shynet::Nocopy
 	{
-		friend class shynet::Singleton<LoginClientMgr>;
+		friend class shynet::utils::Singleton<LoginClientMgr>;
 		LoginClientMgr();
 	public:
 		~LoginClientMgr();

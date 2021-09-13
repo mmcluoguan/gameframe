@@ -1,4 +1,4 @@
-﻿#include "shynet/task/AcceptReadIoTask.h"
+#include "shynet/task/AcceptReadIoTask.h"
 
 namespace shynet {
 	namespace task {

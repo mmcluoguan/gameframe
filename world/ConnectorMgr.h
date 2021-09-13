@@ -1,7 +1,7 @@
 #pragma once
 #include <list>
 #include <mutex>
-#include "shynet/Singleton.h"
+#include "shynet/utils/Singleton.h"
 #include "world/DbConnector.h"
 
 namespace world {
@@ -9,7 +9,7 @@ namespace world {
 	/// 服务器连接管理器
 	/// </summary>
 	class ConnectorMgr {
-		friend class shynet::Singleton<ConnectorMgr>;
+		friend class shynet::utils::Singleton<ConnectorMgr>;
 		ConnectorMgr();
 	public:
 		~ConnectorMgr();

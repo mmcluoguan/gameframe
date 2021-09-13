@@ -1,6 +1,4 @@
-﻿#include "shynet/net/AcceptNewFd.h"
-#include "shynet/Utility.h"
-#include "shynet/Logger.h"
+#include "shynet/net/AcceptNewFd.h"
 
 namespace shynet {
 	namespace net {

@@ -1,4 +1,4 @@
-﻿#include "world/HttpClientMgr.h"
+#include "world/HttpClientMgr.h"
 #include "shynet/lua/LuaEngine.h"
 #include "frmpub/LuaCallBackTask.h"
 
@@ -14,7 +14,7 @@ namespace world {
 		clis_.insert({ k,v });
 
 		//通知lua的onAccept函数
-		shynet::Singleton<lua::LuaEngine>::get_instance().append(
+		shynet::utils::Singleton<lua::LuaEngine>::get_instance().append(
 			std::make_shared<frmpub::OnAcceptTask<HttpClient>>(v));
 	}
 
@@ -23,7 +23,7 @@ namespace world {
 		if (clis_.erase(k) > 0) {
 
 			//通知lua的onClose函数
-			shynet::Singleton<lua::LuaEngine>::get_instance().append(
+			shynet::utils::Singleton<lua::LuaEngine>::get_instance().append(
 				std::make_shared<frmpub::OnCloseTask>(k));
 
 			return true;

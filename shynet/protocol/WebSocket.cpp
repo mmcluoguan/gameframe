@@ -4,9 +4,9 @@
 #include <jemalloc/jemalloc.h>
 #include "shynet/crypto/Sha1.h"
 #include "shynet/crypto/Base64.h"
-#include "shynet/Utility.h"
-#include "shynet/Logger.h"
 #include "shynet/protocol/FilterProces.h"
+#include "shynet/utils/Stuff.h"
+#include "shynet/utils/Logger.h"
 
 namespace shynet {
 	namespace protocol {
@@ -205,7 +205,7 @@ namespace shynet {
 						inputbuffer->remove(&data_length, needlen);
 						restore->add(&data_length, needlen);
 						inputbuffer->unlock();
-						data_length = shynet::Utility::ntohl64(data_length);
+						data_length = utils::Stuff::ntohl64(data_length);
 					}
 					else {
 						LOG_WARN << "数据包数据不足,需要needlen:" << needlen;
@@ -319,7 +319,7 @@ namespace shynet {
 		int WebSocket::request_handshake() {
 			std::string buf = "GET / HTTP/1.1\r\nUpgrade:websocket\r\nConnection:Upgrade\r\nSec-WebSocket-Version:13\r\nSec-WebSocket-Key:";
 			unsigned char mask[16];
-			shynet::Utility::random(mask, sizeof(mask));
+			utils::Stuff::random(mask, sizeof(mask));
 			std::string newkey = crypto::base64_encode(mask, sizeof(mask));
 			buf += newkey + "\r\n\r\n";
 			unsigned char md[20];
@@ -350,7 +350,7 @@ namespace shynet {
 			}
 			else {
 				header[1] = 127 | (ismask ? 128 : 0);
-				uint64_t nlen = shynet::Utility::hl64ton(len);
+				uint64_t nlen = utils::Stuff::hl64ton(len);
 				memcpy(&header[2], &nlen, sizeof(nlen));
 				header_len = 10;
 			}
@@ -366,7 +366,7 @@ namespace shynet {
 					memcpy(data_buffer.get() + pos, header, header_len);
 					pos += header_len;
 
-					shynet::Utility::random(mask, sizeof(mask));
+					utils::Stuff::random(mask, sizeof(mask));
 					memcpy(data_buffer.get() + pos, mask, sizeof(mask));
 					pos += sizeof(mask);
 

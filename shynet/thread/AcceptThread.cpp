@@ -1,10 +1,9 @@
-﻿#include "shynet/thread/AcceptThread.h"
+#include "shynet/thread/AcceptThread.h"
 #include <cstring>
 #include "shynet/net/ListenEvent.h"
 #include "shynet/net/AcceptHeartbeat.h"
 #include "shynet/net/AcceptIoBuffer.h"
-#include "shynet/Logger.h"
-#include "shynet/Utility.h"
+#include "shynet/utils/Logger.h"
 
 namespace shynet {
 
@@ -73,7 +72,7 @@ namespace shynet {
 						if (apnewfd->enableHeart()) {
 							std::shared_ptr<net::AcceptHeartbeat> ht(
 								new net::AcceptHeartbeat(apnewfd, { apnewfd->heart_second() ,0L }));
-							Singleton<net::TimerReactorMgr>::instance().add(ht);
+							utils::Singleton<net::TimerReactorMgr>::instance().add(ht);
 							apnewfd->heart(ht);
 						}
 					}

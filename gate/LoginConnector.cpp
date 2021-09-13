@@ -2,7 +2,7 @@
 #include <unistd.h>
 #include "shynet/net/ConnectReactorMgr.h"
 #include "shynet/lua/LuaEngine.h"
-#include "shynet/IniConfig.h"
+#include "shynet/utils/IniConfig.h"
 #include "frmpub/ReConnectTimer.h"
 #include "frmpub/LuaCallBackTask.h"
 #include "frmpub/protocc/gate.pb.h"
@@ -41,16 +41,16 @@ namespace gate {
 		LOG_INFO << "连接服务器login成功 [ip:" << connect_addr()->ip() << ":" << connect_addr()->port() << "]";
 
 		//通知lua的onConnect函数
-		shynet::Singleton<lua::LuaEngine>::get_instance().append(
+		shynet::utils::Singleton<lua::LuaEngine>::get_instance().append(
 			std::make_shared<frmpub::OnConnectorTask<LoginConnector>>(shared_from_this()));
 
 		//向登录服注册服务器信息
 		protocc::register_gate_login_c msgc;
 		protocc::ServerInfo* sif = msgc.mutable_sif();
-		sif->set_ip(shynet::Singleton<GateClientMgr>::instance().listen_addr().ip());
-		sif->set_port(shynet::Singleton<GateClientMgr>::instance().listen_addr().port());
+		sif->set_ip(shynet::utils::Singleton<GateClientMgr>::instance().listen_addr().ip());
+		sif->set_port(shynet::utils::Singleton<GateClientMgr>::instance().listen_addr().port());
 		sif->set_st(protocc::ServerType::GATE);
-		shynet::IniConfig& ini = shynet::Singleton<shynet::IniConfig>::get_instance();
+		shynet::utils::IniConfig& ini = shynet::utils::Singleton<shynet::utils::IniConfig>::get_instance();
 		int sid = ini.get<int, int>("gate", "sid", 1);
 		sif->set_sid(sid);
 		std::string name = ini.get<const char*, std::string>("gate", "name", "");
@@ -70,7 +70,7 @@ namespace gate {
 				}
 				else {
 					//通知lua的onMessage函数
-					shynet::Singleton<lua::LuaEngine>::get_instance().append(
+					shynet::utils::Singleton<lua::LuaEngine>::get_instance().append(
 						std::make_shared<frmpub::OnMessageTask<LoginConnector>>(shared_from_this(), obj, enves));
 				}
 			}
@@ -79,10 +79,10 @@ namespace gate {
 	}
 	void LoginConnector::close(net::ConnectEvent::CloseType active) {
 		//通知lua的onClose函数
-		shynet::Singleton<lua::LuaEngine>::get_instance().append(
+		shynet::utils::Singleton<lua::LuaEngine>::get_instance().append(
 			std::make_shared<frmpub::OnCloseTask>(fd()));
 
-		shynet::Singleton<ConnectorMgr>::instance().remove(login_connect_id_);
+		shynet::utils::Singleton<ConnectorMgr>::instance().remove(login_connect_id_);
 		Connector::close(active);
 	}
 	void LoginConnector::login_conncet_id(int v) {
@@ -99,7 +99,7 @@ namespace gate {
 			if (enves->empty() == false) {
 				FilterData::Envelope& env = enves->top();
 				enves->pop();
-				std::shared_ptr<GateClient> client = shynet::Singleton<GateClientMgr>::instance().find(env.fd);
+				std::shared_ptr<GateClient> client = shynet::utils::Singleton<GateClientMgr>::instance().find(env.fd);
 				if (client != nullptr) {
 					client->send_proto(data.get(), enves.get());
 				}
@@ -123,7 +123,7 @@ namespace gate {
 		if (enves->empty() == false) {
 			FilterData::Envelope& env = enves->top();
 			enves->pop();
-			std::shared_ptr<GateClient> client = shynet::Singleton<GateClientMgr>::instance().find(env.fd);
+			std::shared_ptr<GateClient> client = shynet::utils::Singleton<GateClientMgr>::instance().find(env.fd);
 			if (client != nullptr) {
 				if (data->msgid() == protocc::LOGIN_CLIENT_GATE_S) {
 					protocc::login_client_gate_s msgc;
@@ -151,8 +151,8 @@ namespace gate {
 							client->game_id(msgc.gameid());
 
 							//通知游戏服玩家断线重连成功
-							int conncetid = shynet::Singleton<ConnectorMgr>::instance().sid_conv_connect_id(msgc.gameid());
-							auto game = shynet::Singleton<ConnectorMgr>::instance().game_connector(conncetid);
+							int conncetid = shynet::utils::Singleton<ConnectorMgr>::instance().sid_conv_connect_id(msgc.gameid());
+							auto game = shynet::utils::Singleton<ConnectorMgr>::instance().game_connector(conncetid);
 							if (game != nullptr) {
 								game->send_proto(data.get());
 								LOG_DEBUG << "通知游戏服玩家断线重连成功" << frmpub::Basic::msgname(data->msgid());
@@ -188,7 +188,7 @@ namespace gate {
 	{
 		protocc::repeatlogin_client_gate_s msg;
 		if (msg.ParseFromString(data->msgdata()) == true) {
-			std::shared_ptr<GateClient> client = shynet::Singleton<GateClientMgr>::instance().find(msg.aid());
+			std::shared_ptr<GateClient> client = shynet::utils::Singleton<GateClientMgr>::instance().find(msg.aid());
 			if (client != nullptr) {
 				//顶掉之前登录的账号
 				client->send_proto(data.get(), enves.get());

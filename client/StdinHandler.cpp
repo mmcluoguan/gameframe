@@ -1,14 +1,13 @@
-﻿#include "client/StdinHandler.h"
+#include "client/StdinHandler.h"
 #include <cstring>
 #include <unistd.h>
 #include <tuple>
 #include "shynet/net/ConnectReactorMgr.h"
-#include "shynet/Logger.h"
-#include "shynet/Utility.h"
-#include "shynet/IniConfig.h"
+#include "shynet/utils/Singleton.h"
+#include "shynet/utils/StringOp.h"
+#include "shynet/utils/IniConfig.h"
 #include "frmpub/protocc/client.pb.h"
 #include "client/GateConnector.h"
-//#include "notifymgr.h"
 
 extern int optind, opterr, optopt;
 extern char* optarg;
@@ -40,9 +39,9 @@ namespace client {
 					std::placeholders::_1,std::placeholders::_2,std::placeholders::_3,std::placeholders::_4)),
 			};
 
-			char* order = shynet::Utility::trim(msg);
+			char* order = shynet::utils::StringOp::trim(msg);
 			char* argv[20] = { 0 };
-			int argc = shynet::Utility::spilt(order, " ", argv, 20);
+			int argc = shynet::utils::StringOp::spilt(order, " ", argv, 20);
 			if (argc > 0) {
 				bool flag = false;
 				for (const auto& it : orders) {
@@ -52,13 +51,6 @@ namespace client {
 					}
 				}
 				if (flag == false) {
-					/*std::set<std::string>* newset = new std::set<std::string>();
-					std::set<std::string>* nowset = shynet::Singleton<utils::NotifyMgr>::instance().get(newset);
-					for (auto& it : *nowset)
-					{
-						LOG_DEBUG << "文件:" << it;
-					}
-					delete nowset;*/
 
 					LOG_WARN << "没有可执行的命令";
 					LOG_INFO << "可执行的命令列表";
@@ -78,19 +70,19 @@ namespace client {
 
 	void StdinHandler::reconnect_order(const char* od, int argc, char** argv, const char* optstr) {
 		std::shared_ptr<GateConnector> gate = std::dynamic_pointer_cast<GateConnector>(
-			shynet::Singleton<net::ConnectReactorMgr>::instance().find(g_gateconnect_id));
+			shynet::utils::Singleton<net::ConnectReactorMgr>::instance().find(g_gateconnect_id));
 		if (gate != nullptr) {
 			std::shared_ptr<GateConnector::DisConnectData> ptr = gate->disconnect_data();
 			gate->close(net::ConnectEvent::CloseType::CLIENT_CLOSE);
 			gate.reset();
 			sleep(1);
-			shynet::IniConfig& ini = shynet::Singleton<shynet::IniConfig>::get_instance();
+			shynet::utils::IniConfig& ini = shynet::utils::Singleton<shynet::utils::IniConfig>::get_instance();
 			std::string gateip = ini.get<const char*, std::string>("gate", "ip", "127.0.0.1");
 			short gateport = ini.get<short, short>("gate", "port", short(25000));
 			std::shared_ptr<net::IPAddress> gateaddr(new net::IPAddress(gateip.c_str(), gateport));
 			std::shared_ptr<GateConnector> gateconnect(new GateConnector(gateaddr, ptr));
 			gateaddr.reset();
-			g_gateconnect_id = shynet::Singleton<net::ConnectReactorMgr>::instance().add(gateconnect);
+			g_gateconnect_id = shynet::utils::Singleton<net::ConnectReactorMgr>::instance().add(gateconnect);
 			gateconnect.reset();
 		}
 		else {
@@ -126,7 +118,7 @@ namespace client {
 		msg.set_platform_key(platform);
 
 		std::shared_ptr<GateConnector> gate = std::dynamic_pointer_cast<GateConnector>(
-			shynet::Singleton<net::ConnectReactorMgr>::instance().find(g_gateconnect_id));
+			shynet::utils::Singleton<net::ConnectReactorMgr>::instance().find(g_gateconnect_id));
 		if (gate != nullptr) {
 			gate->send_proto(protocc::LOGIN_CLIENT_GATE_C, &msg);
 			LOG_DEBUG << "发送" << frmpub::Basic::msgname(protocc::LOGIN_CLIENT_GATE_C);

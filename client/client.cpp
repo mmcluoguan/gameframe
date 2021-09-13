@@ -1,5 +1,6 @@
-﻿#include <unistd.h>
-#include "shynet/IniConfig.h"
+#include <unistd.h>
+#include "shynet/utils/IniConfig.h"
+#include "shynet/utils/Stuff.h"
 #include "shynet/events/EventHandler.h"
 #include "shynet/net/IPAddress.h"
 #include "shynet/net/ConnectReactorMgr.h"
@@ -9,12 +10,6 @@
 #include "client/SignalHandler.h"
 #include "client/StdinHandler.h"
 
-//#include "notifymgr.h"
-
-//void test() {
-//	shynet::Singleton<utils::NotifyMgr>::instance().start();
-//	shynet::Singleton<utils::NotifyMgr>::instance().add("proto", true);
-//}
 
 int g_gateconnect_id;
 
@@ -24,6 +19,7 @@ int main(int argc, char* argv[]) {
 
 	using namespace std;
 	using namespace shynet;
+	using namespace shynet::utils;
 	using namespace shynet::events;
 	using namespace shynet::pool;
 	using namespace shynet::net;
@@ -35,11 +31,11 @@ int main(int argc, char* argv[]) {
 	IniConfig& ini = Singleton<IniConfig>::instance(std::move(file));
 	bool daemon = ini.get<bool, bool>("register", "daemon", false);
 	if (daemon) {
-		Utility::daemon();
+		Stuff::daemon();
 		Singleton<IniConfig>::instance(std::move(string("gameframe.ini").c_str()));
 	}
 
-	Utility::create_coredump();
+	Stuff::create_coredump();
 	Logger::loglevel(Logger::LogLevel::DEBUG);
 	if (EventBase::usethread() == -1) {
 		LOG_ERROR << "call usethread";
@@ -62,9 +58,7 @@ int main(int argc, char* argv[]) {
 	base->addevent(stdin, nullptr);
 	base->addevent(sigint, nullptr);
 	base->dispatch();
-	
-	//shynet::Singleton<utils::NotifyMgr>::instance().stop();
-	
+		
 	EventBase::cleanssl();
 	EventBase::event_shutdown();
 	google::protobuf::ShutdownProtobufLibrary();

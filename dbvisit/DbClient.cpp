@@ -1,10 +1,9 @@
 #include "dbvisit/DbClient.h"
 #include <cstring>
 #include "shynet/pool/MysqlPool.h"
-#include "shynet/Logger.h"
-#include "shynet/Utility.h"
 #include "shynet/lua/LuaEngine.h"
-#include "shynet/IdWorker.h"
+#include "shynet/utils/StringOp.h"
+#include "shynet/utils/IdWorker.h"
 #include "frmpub/LuaCallBackTask.h"
 #include "frmpub/protocc/client.pb.h"
 #include "frmpub/protocc/game.pb.h"
@@ -80,8 +79,8 @@ namespace dbvisit {
 
 	DbClient::~DbClient() {
 		std::string type = frmpub::Basic::connectname(sif().st());
-		std::string key = shynet::Utility::str_format("%s_%d", type.c_str(), sif().sid());
-		redis::Redis& redis = shynet::Singleton<redis::Redis>::instance(std::string());
+		std::string key = shynet::utils::StringOp::str_format("%s_%d", type.c_str(), sif().sid());
+		redis::Redis& redis = shynet::utils::Singleton<redis::Redis>::instance(std::string());
 		try {
 			redis.del(key);
 		}
@@ -106,7 +105,7 @@ namespace dbvisit {
 			}
 			else {
 				//通知lua的onMessage函数
-				shynet::Singleton<lua::LuaEngine>::get_instance().append(
+				shynet::utils::Singleton<lua::LuaEngine>::get_instance().append(
 					std::make_shared<frmpub::OnMessageTask<DbClient>>(shared_from_this(), obj, enves));
 			}
 		}
@@ -115,13 +114,13 @@ namespace dbvisit {
 
 	void DbClient::close(bool active) {
 		frmpub::Client::close(active);
-		shynet::Singleton<DbClientMgr>::instance().remove(iobuf()->fd());
+		shynet::utils::Singleton<DbClientMgr>::instance().remove(iobuf()->fd());
 	}
 
 	bool DbClient::verify_register(const protocc::ServerInfo& sif) {
-		redis::Redis& redis = shynet::Singleton<redis::Redis>::instance(std::string());
+		redis::Redis& redis = shynet::utils::Singleton<redis::Redis>::instance(std::string());
 		std::string type = frmpub::Basic::connectname(sif.st());
-		std::string key = shynet::Utility::str_format("%s_%d", type.c_str(), sif.sid());
+		std::string key = shynet::utils::StringOp::str_format("%s_%d", type.c_str(), sif.sid());
 		std::unordered_map<std::string, std::string> info;
 		try {
 			if (redis.exists(key) == 0) {
@@ -287,7 +286,8 @@ namespace dbvisit {
 				for (int i = 0; i < msgc.fields_size(); i++) {
 					data[msgc.fields(i).key()] = "";
 				}
-				Datahelp::ErrorCode err = shynet::Singleton<Datahelp>::instance().getdata(msgc.cache_key(), data);
+				Datahelp::ErrorCode err = shynet::utils::Singleton<Datahelp>::instance().
+					getdata(msgc.cache_key(), data);
 				if (err == Datahelp::ErrorCode::OK) {
 					for (auto& it : data) {
 						auto field = msgs.add_fields();
@@ -327,7 +327,7 @@ namespace dbvisit {
 					data[msgc.fields(i).key()] = "";
 				}
 
-				moredataptr resdata = shynet::Singleton<Datahelp>::instance().
+				moredataptr resdata = shynet::utils::Singleton<Datahelp>::instance().
 					getdata_more_cache(msgc.condition(), data);
 				for (auto& i : *resdata) {
 					auto obj = msgs.add_objs();
@@ -367,7 +367,7 @@ namespace dbvisit {
 				for (int i = 0; i < msgc.fields_size(); i++) {
 					data[msgc.fields(i).key()] = msgc.fields(i).value();
 				}
-				shynet::Singleton<Datahelp>::instance().insertdata(msgc.cache_key(), data);
+				shynet::utils::Singleton<Datahelp>::instance().insertdata(msgc.cache_key(), data);
 				msgs.set_tag(msgc.tag());
 				send_proto(protocc::INSERTDATA_TO_DBVISIT_S, &msgs, enves.get());
 				LOG_DEBUG << "发送消息" << frmpub::Basic::msgname(protocc::INSERTDATA_TO_DBVISIT_S) << "到"
@@ -395,7 +395,7 @@ namespace dbvisit {
 				for (int i = 0; i < msgc.fields_size(); i++) {
 					data[msgc.fields(i).key()] = msgc.fields(i).value();
 				}
-				shynet::Singleton<Datahelp>::instance().updata(msgc.cache_key(), data);
+				shynet::utils::Singleton<Datahelp>::instance().updata(msgc.cache_key(), data);
 				msgs.set_tag(msgc.tag());
 				send_proto(protocc::UPDATA_TO_DBVISIT_S, &msgs, enves.get());
 				LOG_DEBUG << "发送消息" << frmpub::Basic::msgname(protocc::UPDATA_TO_DBVISIT_S) << "到"
@@ -419,7 +419,7 @@ namespace dbvisit {
 		if (msgc.ParseFromString(data->msgdata()) == true) {
 			try {
 				protocc::deletedata_to_dbvisit_s msgs;
-				shynet::Singleton<Datahelp>::instance().deletedata(msgc.cache_key());
+				shynet::utils::Singleton<Datahelp>::instance().deletedata(msgc.cache_key());
 				msgs.set_tag(msgc.tag());
 				send_proto(protocc::DELETEDATA_TO_DBVISIT_S, &msgs, enves.get());
 				LOG_DEBUG << "发送消息" << frmpub::Basic::msgname(protocc::DELETEDATA_TO_DBVISIT_S) << "到"
@@ -456,7 +456,7 @@ namespace dbvisit {
 				//缓存过期24小时
 				std::string accountid = "0";//账号id
 				std::string roleid = "0";//角色id
-				auto temp = shynet::Utility::spilt(data->extend(), ",");
+				auto temp = shynet::utils::StringOp::spilt(data->extend(), ",");
 				if (temp.size() != 3) {
 					std::stringstream stream;
 					stream << "附加信息解析错误 extend:" << data->extend();
@@ -481,20 +481,20 @@ namespace dbvisit {
 						{"online","1"},
 						{"platform_key",msgc.platform_key()},
 				};
-				redis::Redis& redis = shynet::Singleton<redis::Redis>::instance(std::string());
+				redis::Redis& redis = shynet::utils::Singleton<redis::Redis>::instance(std::string());
 				//通过平台key取出账号cache_key_value
 				redis::OptionalString cache_key_value = redis.get(msgc.platform_key());
-				Datahelp& help = shynet::Singleton<Datahelp>::instance();
+				Datahelp& help = shynet::utils::Singleton<Datahelp>::instance();
 
 				if (!cache_key_value) {
 					///缓存没有玩家数据,查询数据库
 					std::string tablename = "account";
-					std::string sql = shynet::Utility::str_format("platform_key='%s'", msgc.platform_key().c_str());
+					std::string sql = shynet::utils::StringOp::str_format("platform_key='%s'", msgc.platform_key().c_str());
 					Datahelp::ErrorCode code = help.getdata_from_db(tablename, "", user_data, sql);
 
 					if (code == Datahelp::ErrorCode::NOT_DATA) {
 						//没有玩家数据，注册玩家
-						accountid = std::to_string(shynet::Singleton<shynet::IdWorker>::get_instance().getid());
+						accountid = std::to_string(shynet::utils::Singleton<shynet::utils::IdWorker>::get_instance().getid());
 						user_data["_id"] = accountid;
 						help.insert_db(tablename, accountid, user_data);
 						LOG_DEBUG << "注册玩家 accountid:" << accountid << " roleid:" << roleid;
@@ -555,7 +555,7 @@ namespace dbvisit {
 				}
 				if (result == 0) {
 					//如果有则清除断线重连有效时间
-					redis::Redis& redis = shynet::Singleton<redis::Redis>::instance(std::string());
+					redis::Redis& redis = shynet::utils::Singleton<redis::Redis>::instance(std::string());
 					redis.del(*cache_key_value + "_disconnect");
 				}
 				//发送登录结果
@@ -591,7 +591,7 @@ namespace dbvisit {
 					{"clientport",""},
 				};
 
-				Datahelp& help = shynet::Singleton<Datahelp>::instance();
+				Datahelp& help = shynet::utils::Singleton<Datahelp>::instance();
 				Datahelp::ErrorCode error = help.getdata(key, fields, false);
 				if (error == Datahelp::ErrorCode::OK) {
 					if (msgc.ip() == fields["clientaddr"]
@@ -609,7 +609,7 @@ namespace dbvisit {
 						};
 						help.updata(key, data);
 
-						redis::Redis& redis = shynet::Singleton<redis::Redis>::instance(std::string());
+						redis::Redis& redis = shynet::utils::Singleton<redis::Redis>::instance(std::string());
 						//设置断线重连有效时间30秒
 						redis.set(key + "_disconnect", "0", std::chrono::seconds(30));
 					}
@@ -636,7 +636,7 @@ namespace dbvisit {
 		if (msgc.ParseFromString(data->msgdata()) == true) {
 			protocc::reconnect_client_gate_s msgs;
 			try {
-				redis::Redis& redis = shynet::Singleton<redis::Redis>::instance(std::string());
+				redis::Redis& redis = shynet::utils::Singleton<redis::Redis>::instance(std::string());
 				std::string key = "account_" + msgc.aid() + "_disconnect";
 				//验证断线重连是否有效
 				if (redis.exists(key)) {
@@ -657,7 +657,7 @@ namespace dbvisit {
 								{"game_sid",std::to_string(msgc.gameid())},
 								{"gate_sid",data->extend()},
 					};
-					shynet::Singleton<Datahelp>::instance().
+					shynet::utils::Singleton<Datahelp>::instance().
 						updata("account_" + msgc.aid(), clidata);
 					redis.del(key);
 				}

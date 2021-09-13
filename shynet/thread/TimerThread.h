@@ -1,4 +1,4 @@
-﻿#pragma once
+#pragma once
 #include "shynet/events/EventBuffer.h"
 #include "shynet/thread/Thread.h"
 

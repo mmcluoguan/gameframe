@@ -1,6 +1,4 @@
 #include "shynet/task/ConnectReadIoTask.h"
-#include "shynet/Utility.h"
-#include "shynet/Logger.h"
 
 namespace shynet {
 	namespace task {

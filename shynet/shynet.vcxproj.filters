@@ -1,9 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <ClCompile Include="IniConfig.cpp" />
-    <ClCompile Include="Logger.cpp" />
-    <ClCompile Include="Utility.cpp" />
     <ClCompile Include="pool\ThreadPool.cpp">
       <Filter>pool</Filter>
     </ClCompile>
@@ -139,13 +136,23 @@
     <ClCompile Include="task\NotifyTask.cpp">
       <Filter>task</Filter>
     </ClCompile>
-    <ClCompile Include="IdWorker.cpp" />
+    <ClCompile Include="utils\Stuff.cpp">
+      <Filter>utils</Filter>
+    </ClCompile>
+    <ClCompile Include="utils\StringOp.cpp">
+      <Filter>utils</Filter>
+    </ClCompile>
+    <ClCompile Include="utils\IdWorker.cpp">
+      <Filter>utils</Filter>
+    </ClCompile>
+    <ClCompile Include="utils\IniConfig.cpp">
+      <Filter>utils</Filter>
+    </ClCompile>
+    <ClCompile Include="utils\Logger.cpp">
+      <Filter>utils</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="IniConfig.h" />
-    <ClInclude Include="Logger.h" />
-    <ClInclude Include="Utility.h" />
-    <ClInclude Include="Singleton.h" />
     <ClInclude Include="Basic.h" />
     <ClInclude Include="pool\ThreadPool.h">
       <Filter>pool</Filter>
@@ -306,7 +313,24 @@
     <ClInclude Include="task\NotifyTask.h">
       <Filter>task</Filter>
     </ClInclude>
-    <ClInclude Include="IdWorker.h" />
+    <ClInclude Include="utils\Stuff.h">
+      <Filter>utils</Filter>
+    </ClInclude>
+    <ClInclude Include="utils\StringOp.h">
+      <Filter>utils</Filter>
+    </ClInclude>
+    <ClInclude Include="utils\IdWorker.h">
+      <Filter>utils</Filter>
+    </ClInclude>
+    <ClInclude Include="utils\IniConfig.h">
+      <Filter>utils</Filter>
+    </ClInclude>
+    <ClInclude Include="utils\Logger.h">
+      <Filter>utils</Filter>
+    </ClInclude>
+    <ClInclude Include="utils\Singleton.h">
+      <Filter>utils</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="pool">
@@ -350,6 +374,9 @@
     </Filter>
     <Filter Include="task">
       <UniqueIdentifier>{e2b3b197-8b3f-41c7-9bca-b2ca178ee547}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="utils">
+      <UniqueIdentifier>{0c04a382-75be-4e8b-976e-949635a7f4a6}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

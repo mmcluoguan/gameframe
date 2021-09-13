@@ -1,12 +1,12 @@
 #include <unistd.h>
-#include "shynet/IniConfig.h"
-#include "shynet/Logger.h"
-#include "shynet/Utility.h"
 #include "shynet/events/EventHandler.h"
 #include "shynet/net/IPAddress.h"
 #include "shynet/net/ConnectReactorMgr.h"
 #include "shynet/pool/ThreadPool.h"
 #include "shynet/lua/LuaEngine.h"
+#include "shynet/utils/IniConfig.h"
+#include "shynet/utils/StringOp.h"
+#include "shynet/utils/Stuff.h"
 #include "login/ConnectorMgr.h"
 #include "login/DbConnector.h"
 #include "login/LoginServer.h"
@@ -17,6 +17,7 @@
 int main(int argc, char* argv[]) {
 	using namespace std;
 	using namespace shynet;
+	using namespace shynet::utils;
 	using namespace shynet::events;
 	using namespace shynet::pool;
 	using namespace shynet::net;
@@ -28,26 +29,26 @@ int main(int argc, char* argv[]) {
 	IniConfig& ini = Singleton<IniConfig>::instance(std::move(file));
 	bool daemon = ini.get<bool, bool>("login", "daemon", false);
 	if (daemon) {
-		Utility::daemon();
+		Stuff::daemon();
 		Singleton<IniConfig>::instance(std::move(string("gameframe.ini").c_str()));
 	}
 
-	Utility::create_coredump();
+	Stuff::create_coredump();
 	Logger::loglevel(Logger::LogLevel::DEBUG);
 	if (EventBase::usethread() == -1) {
 		LOG_ERROR << "call usethread";
 	}
 	EventBase::initssl();
 	int sid = ini.get<int, int>("login", "sid", 0);
-	std::string pidfile = Utility::str_format("./login_%d.pid", sid);
-	Utility::writepid(pidfile);
+	std::string pidfile = StringOp::str_format("./login_%d.pid", sid);
+	Stuff::writepid(pidfile);
 
 	Singleton<LuaEngine>::instance(std::make_shared<login::LuaWrapper>());
 	Singleton<ThreadPool>::instance().start();
 
 	//连接db服务器
 	string dbstr = ini.get<const char*, string>("login", "db", "");
-	auto dblist = Utility::spilt(dbstr, ",");
+	auto dblist = StringOp::spilt(dbstr, ",");
 	if (dblist.size() > 2 || dblist.size() == 0) {
 		LOG_ERROR << "db配置错误:" << dbstr;
 	}
@@ -64,7 +65,7 @@ int main(int argc, char* argv[]) {
 
 	//连接world服务器
 	string worldstr = ini.get<const char*, string>("login", "world", "");
-	auto worldlist = Utility::spilt(worldstr, ",");
+	auto worldlist = StringOp::spilt(worldstr, ",");
 	if (worldlist.size() > 2 || worldlist.size() == 0) {
 		LOG_ERROR << "world配置错误:" << worldstr;
 	}
@@ -72,7 +73,7 @@ int main(int argc, char* argv[]) {
 	{
 		std::string worldip = ini.get<const char*, string>(item, "ip", "");
 		short worldport = ini.get<short, short>(item, "port", short(22000));
-		shynet::Singleton<ConnectReactorMgr>::instance().add(
+		Singleton<ConnectReactorMgr>::instance().add(
 			std::shared_ptr<WorldConnector>(
 				new WorldConnector(std::shared_ptr<IPAddress>(
 					new IPAddress(worldip.c_str(), worldport)))));
@@ -83,7 +84,7 @@ int main(int argc, char* argv[]) {
 	short loginport = ini.get<short, short>("login", "port", short(23000));
 	std::shared_ptr<IPAddress> loginaddr(new IPAddress(loginip.c_str(), loginport));
 	std::shared_ptr<LoginServer> loginserver(new LoginServer(loginaddr));
-	shynet::Singleton<ListenReactorMgr>::instance().add(loginserver);
+	Singleton<ListenReactorMgr>::instance().add(loginserver);
 		
 
 	shared_ptr<EventBase> base(new EventBase());

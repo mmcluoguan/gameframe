@@ -1,7 +1,7 @@
 #pragma once
 #include <unordered_map>
 #include <list>
-#include "shynet/Singleton.h"
+#include "shynet/utils/Singleton.h"
 
 namespace dbvisit {
 	class DataException : public std::exception {
@@ -31,7 +31,7 @@ namespace dbvisit {
 	/// 数据简易操作
 	/// </summary>
 	class Datahelp :public shynet::Nocopy {
-		friend class shynet::Singleton<Datahelp>;
+		friend class shynet::utils::Singleton<Datahelp>;
 		Datahelp();
 	public:
 		/// <summary>

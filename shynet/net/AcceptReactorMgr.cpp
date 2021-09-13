@@ -1,5 +1,6 @@
-﻿#include "shynet/net/AcceptReactorMgr.h"
+#include "shynet/net/AcceptReactorMgr.h"
 #include "shynet/pool/ThreadPool.h"
+#include "shynet/utils/Logger.h"
 
 namespace shynet {
 	namespace net {
@@ -20,7 +21,7 @@ namespace shynet {
 
 		std::shared_ptr<thread::AcceptThread> AcceptReactorMgr::find_rtk() const {
 			std::shared_ptr<thread::AcceptThread> ath;
-			std::vector<std::weak_ptr<thread::AcceptThread>> aths = Singleton<pool::ThreadPool>::get_instance().acceptThs();
+			std::vector<std::weak_ptr<thread::AcceptThread>> aths = utils::Singleton<pool::ThreadPool>::get_instance().acceptThs();
 			int tot = -1;
 			for (const auto& it : aths) {
 				std::shared_ptr<thread::AcceptThread> rtkp = it.lock();

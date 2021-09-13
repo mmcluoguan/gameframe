@@ -1,8 +1,7 @@
-﻿#include "shynet/events/EventConnector.h"
+#include "shynet/events/EventConnector.h"
 #include <cstring>
 #include <event2/dns.h>
-#include "shynet/Logger.h"
-#include "shynet/Utility.h"
+#include "shynet/utils/Logger.h"
 
 namespace shynet
 {

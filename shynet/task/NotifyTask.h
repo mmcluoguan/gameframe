@@ -1,4 +1,4 @@
-﻿#pragma once
+#pragma once
 #include <sys/inotify.h>
 #include <unordered_map>
 #include "shynet/Basic.h"

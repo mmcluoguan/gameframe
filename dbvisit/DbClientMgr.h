@@ -1,8 +1,8 @@
-﻿#pragma once
+#pragma once
 #include <memory>
 #include <mutex>
 #include <unordered_map>
-#include "shynet/Singleton.h"
+#include "shynet/utils/Singleton.h"
 #include "dbvisit/DbClient.h"
 
 namespace dbvisit {
@@ -10,7 +10,7 @@ namespace dbvisit {
 	/// db连接管理器
 	/// </summary>
 	class DbClientMgr final : public shynet::Nocopy {
-		friend class shynet::Singleton<DbClientMgr>;
+		friend class shynet::utils::Singleton<DbClientMgr>;
 		DbClientMgr();
 	public:
 		~DbClientMgr();

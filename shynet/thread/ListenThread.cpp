@@ -1,7 +1,6 @@
-﻿#include "shynet/thread/ListenThread.h"
+#include "shynet/thread/ListenThread.h"
 #include "shynet/net/ListenReactorMgr.h"
-#include "shynet/Logger.h"
-#include "shynet/Utility.h"
+#include "shynet/utils/Logger.h"
 
 namespace shynet {
 
@@ -41,7 +40,7 @@ namespace shynet {
 					index += sizeof(serverid);
 
 					std::shared_ptr<net::ListenEvent> listenEv =
-						Singleton<net::ListenReactorMgr>::instance().find(serverid);
+						utils::Singleton<net::ListenReactorMgr>::instance().find(serverid);
 					if (listenEv != nullptr) {
 						listenEv->event(base_, listenEv->listenfd(), EV_READ | EV_PERSIST);
 						base_->addevent(listenEv, nullptr);

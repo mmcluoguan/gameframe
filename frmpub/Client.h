@@ -1,4 +1,4 @@
-﻿#pragma once
+#pragma once
 #include "shynet/net/AcceptNewFd.h"
 #include "shynet/events/EventBuffer.h"
 #include "frmpub/FilterData.h"

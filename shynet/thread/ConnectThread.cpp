@@ -1,10 +1,9 @@
-﻿#include "shynet/thread/ConnectThread.h"
+#include "shynet/thread/ConnectThread.h"
 #include <cstring>
 #include <event2/dns.h>
 #include "shynet/net/ConnectReactorMgr.h"
 #include "shynet/net/ConnectIoBuffer.h"
-#include "shynet/Logger.h"
-#include "shynet/Utility.h"
+#include "shynet/utils/Logger.h"
 
 namespace shynet {
 
@@ -41,7 +40,7 @@ namespace shynet {
 					index += sizeof(connectid);
 
 					std::shared_ptr<net::ConnectEvent> connect =
-						Singleton<net::ConnectReactorMgr>::instance().find(connectid);
+						utils::Singleton<net::ConnectReactorMgr>::instance().find(connectid);
 					if (connect != nullptr) {
 						struct sockaddr* address = (struct sockaddr*)connect->connect_addr()->sockaddr();
 

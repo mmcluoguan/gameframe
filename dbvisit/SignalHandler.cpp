@@ -2,8 +2,10 @@
 #include <signal.h>
 #include <sw/redis++/redis++.h>
 namespace redis = sw::redis;
-#include <shynet/IniConfig.h>
-#include <shynet/Singleton.h>
+#include "shynet/utils/IniConfig.h"
+#include "shynet/utils/Singleton.h"
+#include "shynet/utils/StringOp.h"
+#include "frmpub/protocc/common.pb.h"
 #include "frmpub/Basic.h"
 
 //配置参数
@@ -22,11 +24,11 @@ namespace dbvisit
 
 	void SigIntHandler::signal(int signal)
 	{
-		shynet::IniConfig& ini = shynet::Singleton<shynet::IniConfig>::get_instance();
+		shynet::utils::IniConfig& ini = shynet::utils::Singleton<shynet::utils::IniConfig>::get_instance();
 		std::string type = frmpub::Basic::connectname(protocc::ServerType::DBVISIT);
 		int sid = ini.get<int, int>(g_confname, "sid", 1);
-		std::string key = shynet::Utility::str_format("%s_%d", type.c_str(), sid);
-		redis::Redis& redis = shynet::Singleton<redis::Redis>::instance(std::string());
+		std::string key = shynet::utils::StringOp::str_format("%s_%d", type.c_str(), sid);
+		redis::Redis& redis = shynet::utils::Singleton<redis::Redis>::instance(std::string());
 		try
 		{
 			redis.del(key);

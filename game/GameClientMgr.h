@@ -1,8 +1,8 @@
-﻿#pragma once
+#pragma once
 #include <memory>
 #include <mutex>
 #include <unordered_map>
-#include "shynet/Singleton.h"
+#include "shynet/utils/Singleton.h"
 #include "game/GameClient.h"
 
 namespace game
@@ -12,7 +12,7 @@ namespace game
 	/// </summary>
 	class GameClientMgr final : public shynet::Nocopy
 	{
-		friend class shynet::Singleton<GameClientMgr>;
+		friend class shynet::utils::Singleton<GameClientMgr>;
 		GameClientMgr();
 	public:
 		~GameClientMgr();

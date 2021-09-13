@@ -1,4 +1,4 @@
-﻿#include "login/LoginServer.h"
+#include "login/LoginServer.h"
 #include "shynet/net/TimerReactorMgr.h"
 #include "login/LoginClient.h"
 #include "login/LoginClientMgr.h"
@@ -9,7 +9,7 @@ namespace login
 		net::ListenEvent(listen_addr)
 	{
 		LOG_INFO << "服务器login启动 [ip:" << listen_addr->ip() << ":" << listen_addr->port() << "]";
-		shynet::Singleton<LoginClientMgr>::instance().listen_addr(*listenaddr());
+		shynet::utils::Singleton<LoginClientMgr>::instance().listen_addr(*listenaddr());
 	}
 
 	LoginServer::~LoginServer()
@@ -21,7 +21,7 @@ namespace login
 		std::shared_ptr<events::EventBuffer> iobuf)
 	{
 		std::shared_ptr<LoginClient> cli(new LoginClient(remote_addr, listenaddr(), iobuf));
-		shynet::Singleton<LoginClientMgr>::instance().add(iobuf->fd(), cli);
+		shynet::utils::Singleton<LoginClientMgr>::instance().add(iobuf->fd(), cli);
 		return cli;
 	}
 }

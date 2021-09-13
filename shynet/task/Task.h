@@ -1,4 +1,4 @@
-﻿#pragma once
+#pragma once
 #include <shynet/thread/Thread.h>
 
 namespace shynet {

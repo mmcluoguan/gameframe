@@ -1,4 +1,4 @@
-﻿#include "gate/GateServer.h"
+#include "gate/GateServer.h"
 #include "shynet/net/TimerReactorMgr.h"
 #include "gate/GateClient.h"
 #include "gate/GateClientMgr.h"
@@ -9,7 +9,7 @@ namespace gate
 		net::ListenEvent(listen_addr, true)
 	{
 		LOG_INFO << "服务器gate启动 [ip:" << listen_addr->ip() << ":" << listen_addr->port() << "]";
-		shynet::Singleton<GateClientMgr>::instance().listen_addr(*listenaddr());
+		shynet::utils::Singleton<GateClientMgr>::instance().listen_addr(*listenaddr());
 	}
 
 	GateServer::~GateServer()
@@ -21,7 +21,7 @@ namespace gate
 		std::shared_ptr<events::EventBuffer> iobuf)
 	{
 		std::shared_ptr<GateClient> cli(new GateClient(remote_addr, listenaddr(), iobuf));
-		shynet::Singleton<GateClientMgr>::instance().add(iobuf->fd(), cli);
+		shynet::utils::Singleton<GateClientMgr>::instance().add(iobuf->fd(), cli);
 		return cli;
 	}
 }

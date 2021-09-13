@@ -1,4 +1,4 @@
-﻿#include "frmpub/LuaTimer.h"
+#include "frmpub/LuaTimerTask.h"
 #include "shynet/net/TimerReactorMgr.h"
 #include "shynet/lua/LuaEngine.h"
 #include "shynet/thread/LuaThread.h"
@@ -12,9 +12,9 @@ namespace frmpub {
 	int LuaTimerMgr::LuaTimerTask::run(thread::Thread* tif) {
 		thread::LuaThread* lua = dynamic_cast<thread::LuaThread*>(tif);
 		kaguya::State& state = *(lua->luaState());
-		shynet::Singleton<LuaRemoteDebug>::instance().start(state);
+		shynet::utils::Singleton<LuaRemoteDebug>::instance().start(state);
 		state["onTimerOut"].call<void>(timerid_);
-		shynet::Singleton<LuaRemoteDebug>::instance().stop(state);
+		shynet::utils::Singleton<LuaRemoteDebug>::instance().stop(state);
 		return 0;
 	}
 
@@ -28,9 +28,9 @@ namespace frmpub {
 
 	void LuaTimerMgr::LuaTimer::timeout() {
 		std::shared_ptr<LuaTimerTask> task = std::make_shared<LuaTimerTask>(timerid());
-		shynet::Singleton<shynet::lua::LuaEngine>::get_instance().append(task);
+		shynet::utils::Singleton<shynet::lua::LuaEngine>::get_instance().append(task);
 		if (repeat_ == false) {
-			shynet::Singleton<net::TimerReactorMgr>::instance().remove(timerid());
+			shynet::utils::Singleton<net::TimerReactorMgr>::instance().remove(timerid());
 		}
 	}
 
@@ -39,13 +39,13 @@ namespace frmpub {
 
 	int LuaTimerMgr::add(const timeval val, bool repeat) {
 		std::shared_ptr<LuaTimer> timer = std::make_shared<LuaTimer>(val, repeat);
-		int id = shynet::Singleton<net::TimerReactorMgr>::instance().add(timer);
+		int id = shynet::utils::Singleton<net::TimerReactorMgr>::instance().add(timer);
 		timerids_.insert(id);
 		return id;
 	}
 
 	void LuaTimerMgr::remove(int timerid) {
 		timerids_.erase(timerid);
-		shynet::Singleton<net::TimerReactorMgr>::instance().remove(timerid);
+		shynet::utils::Singleton<net::TimerReactorMgr>::instance().remove(timerid);
 	}
 }

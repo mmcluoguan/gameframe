@@ -1,8 +1,6 @@
-﻿#include "world/HttpClient.h"
+#include "world/HttpClient.h"
 #include <cstring>
 #include "shynet/lua/LuaEngine.h"
-#include "shynet/Logger.h"
-#include "shynet/Utility.h"
 #include "frmpub/LuaCallBackTask.h"
 #include "frmpub/protocc/world.pb.h"
 #include "frmpub/protocc/login.pb.h"
@@ -43,7 +41,7 @@ namespace world {
 			}
 			else {
 				//通知lua的onMessage函数
-				shynet::Singleton<lua::LuaEngine>::get_instance().append(
+				shynet::utils::Singleton<lua::LuaEngine>::get_instance().append(
 					std::make_shared<frmpub::OnMessageTask<HttpClient>>(shared_from_this(), doc, enves));
 			}
 		}
@@ -52,7 +50,7 @@ namespace world {
 
 	void HttpClient::close(bool active) {
 		frmpub::Client::close(active);
-		shynet::Singleton<HttpClientMgr>::instance().remove(iobuf()->fd());
+		shynet::utils::Singleton<HttpClientMgr>::instance().remove(iobuf()->fd());
 	}
 
 

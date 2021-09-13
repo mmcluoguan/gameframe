@@ -1,10 +1,7 @@
-﻿#include "frmpub/LuaFolderTask.h"
+#include "frmpub/LuaFolderTask.h"
 #include <chrono>
 #include "shynet/pool/ThreadPool.h"
 #include "shynet/lua/LuaEngine.h"
-#include "shynet/Singleton.h"
-#include "shynet/Utility.h"
-#include "shynet/Logger.h"
 #include "frmpub/LuaHotFixTask.h"
 
 namespace frmpub {
@@ -36,14 +33,14 @@ namespace frmpub {
 			}
 			if (ismodify) {
 				LOG_DEBUG << path << " 被修改";
-				shynet::Singleton<shynet::lua::LuaEngine>::get_instance().append(
+				shynet::utils::Singleton<shynet::lua::LuaEngine>::get_instance().append(
 					std::make_shared<LuaHotFixTask>(path)
 				);
 				g_filemodifys[path] = duration_in_ms.count();
 			}
 		}
 		else if (mask & IN_CREATE) {
-			shynet::Singleton<pool::ThreadPool>::get_instance().notifyTh().lock()->add(
+			shynet::utils::Singleton<pool::ThreadPool>::get_instance().notifyTh().lock()->add(
 				std::make_shared<LuaFolderTask>(path, true)
 			);
 			LOG_DEBUG << path << " 被加入监控";

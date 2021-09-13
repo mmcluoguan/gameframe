@@ -1,7 +1,6 @@
-﻿#include "gate/SignalHandler.h"
+#include "gate/SignalHandler.h"
 #include <signal.h>
-#include "shynet/Logger.h"
-#include "shynet/Utility.h"
+#include "shynet/utils/Logger.h"
 
 namespace gate
 {

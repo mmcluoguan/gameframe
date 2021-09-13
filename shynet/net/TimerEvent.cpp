@@ -1,9 +1,6 @@
-﻿#include "shynet/net/TimerEvent.h"
+#include "shynet/net/TimerEvent.h"
 #include "shynet/pool/ThreadPool.h"
 #include "shynet/task/TimerTask.h"
-#include "shynet/Singleton.h"
-#include "shynet/Utility.h"
-#include "shynet/Logger.h"
 
 namespace shynet {
 
@@ -41,7 +38,7 @@ namespace shynet {
 
 		void TimerEvent::timeout(int fd) {
 			std::shared_ptr<task::TimerTask> ttk(new task::TimerTask(timerid_));
-			Singleton<pool::ThreadPool>::instance().append(ttk);
+			utils::Singleton<pool::ThreadPool>::instance().append(ttk);
 		}
 
 	}

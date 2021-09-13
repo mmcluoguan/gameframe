@@ -1,4 +1,4 @@
-﻿#include "world/WorldServer.h"
+#include "world/WorldServer.h"
 #include "shynet/net/TimerReactorMgr.h"
 #include "world/WorldClient.h"
 #include "world/WorldClientMgr.h"
@@ -7,7 +7,7 @@ namespace world {
 	WorldServer::WorldServer(std::shared_ptr<net::IPAddress> listen_addr) :
 		net::ListenEvent(listen_addr) {
 		LOG_INFO << "服务器world启动 [ip:" << listen_addr->ip() << ":" << listen_addr->port() << "]";
-		shynet::Singleton<WorldClientMgr>::instance().listen_addr(*listenaddr());
+		shynet::utils::Singleton<WorldClientMgr>::instance().listen_addr(*listenaddr());
 	}
 
 	WorldServer::~WorldServer() {
@@ -18,7 +18,7 @@ namespace world {
 		std::shared_ptr<net::IPAddress> remote_addr,
 		std::shared_ptr<events::EventBuffer> iobuf) {
 		std::shared_ptr<WorldClient> cli(new WorldClient(remote_addr, listenaddr(), iobuf));
-		shynet::Singleton<WorldClientMgr>::instance().add(iobuf->fd(), cli);
+		shynet::utils::Singleton<WorldClientMgr>::instance().add(iobuf->fd(), cli);
 		return cli;
 	}
 }

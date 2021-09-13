@@ -1,6 +1,5 @@
-﻿#include "login/LuaWrapper.h"
-#include "shynet/IniConfig.h"
-#include "shynet/Singleton.h"
+#include "login/LuaWrapper.h"
+#include "shynet/utils/IniConfig.h"
 #include "login/LoginServer.h"
 #include "login/LoginClient.h"
 #include "login/LoginClientMgr.h"
@@ -30,7 +29,7 @@ namespace login {
 		);
 
 		//载入lua文件
-		shynet::IniConfig& ini = shynet::Singleton<shynet::IniConfig>::get_instance();
+		shynet::utils::IniConfig& ini = shynet::utils::Singleton<shynet::utils::IniConfig>::get_instance();
 		std::string luafile = ini.get<const char*, std::string>("login", "luafile", "lua/login/login_main.lua");
 		state.dofile(luafile);
 	}

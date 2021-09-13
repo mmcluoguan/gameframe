@@ -1,6 +1,7 @@
-﻿#pragma once
+#pragma once
 
 namespace shynet {
+	namespace utils {};
 	namespace events {};
 	namespace net {};
 	namespace pool {};

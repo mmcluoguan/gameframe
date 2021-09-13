@@ -1,4 +1,4 @@
-﻿#include "shynet/net/ConnectIoBuffer.h"
+#include "shynet/net/ConnectIoBuffer.h"
 #include "shynet/pool/ThreadPool.h"
 #include "shynet/net/TimerReactorMgr.h"
 #include "shynet/task/ConnectReadIoTask.h"
@@ -52,7 +52,7 @@ namespace shynet {
 			std::shared_ptr<ConnectEvent> shconector = cnev_.lock();
 			if (shconector != nullptr) {
 				std::shared_ptr<task::ConnectReadIoTask> io(new task::ConnectReadIoTask(shconector));
-				Singleton<pool::ThreadPool>::instance().appendWork(io, fd());
+				utils::Singleton<pool::ThreadPool>::instance().appendWork(io, fd());
 			}
 		}
 
@@ -73,7 +73,7 @@ namespace shynet {
 					if (shconector->enable_heart()) {
 						std::shared_ptr<ConnectHeartbeat> ht(
 							new ConnectHeartbeat(shconector, { shconector->heart_second() ,0L }));
-						Singleton<TimerReactorMgr>::instance().add(ht);
+						utils::Singleton<TimerReactorMgr>::instance().add(ht);
 						shconector->heart(ht);
 					}
 					shconector->success();

@@ -1,4 +1,4 @@
-﻿#include "shynet/net/AcceptIoBuffer.h"
+#include "shynet/net/AcceptIoBuffer.h"
 #include "shynet/pool/ThreadPool.h"
 #include "shynet/net/AcceptReactorMgr.h"
 #include "shynet/task/AcceptReadIoTask.h"
@@ -54,7 +54,7 @@ namespace shynet {
 			std::shared_ptr<AcceptNewFd> aptnewfd = newfd_.lock();
 			if (aptnewfd != nullptr) {
 				std::shared_ptr<task::AcceptReadIoTask> io(new task::AcceptReadIoTask(aptnewfd));
-				Singleton<pool::ThreadPool>::instance().appendWork(io, fd());
+				utils::Singleton<pool::ThreadPool>::instance().appendWork(io, fd());
 			}
 		}
 

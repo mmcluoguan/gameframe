@@ -1,9 +1,7 @@
 #include "frmpub/FrmLuaWrapper.h"
-#include "shynet/IniConfig.h"
-#include "shynet/Singleton.h"
 #include "frmpub/Client.h"
 #include "frmpub/Connector.h"
-#include "frmpub/LuaTimer.h"
+#include "frmpub/LuaTimerTask.h"
 #include "frmpub/protocc/common.pb.h"
 
 namespace frmpub {
@@ -23,11 +21,11 @@ namespace frmpub {
 		state["schedule_timer"] = kaguya::function([](int millisecond, bool repeat) {
 			int second = millisecond / 1000;
 			int milli = millisecond - second * 1000;
-			return shynet::Singleton<LuaTimerMgr>::instance().add({ second,milli * 1000 }, repeat);
+			return shynet::utils::Singleton<LuaTimerMgr>::instance().add({ second,milli * 1000 }, repeat);
 			});
 
 		state["cancel_timer"] = kaguya::function([](int timerid) {
-			shynet::Singleton<LuaTimerMgr>::instance().remove(timerid);
+			shynet::utils::Singleton<LuaTimerMgr>::instance().remove(timerid);
 			});
 
 		state["Envelope_CPP"].setClass(kaguya::UserdataMetatable<FilterData::Envelope>()

@@ -1,8 +1,5 @@
-﻿#include "shynet/thread/WorkThread.h"
+#include "shynet/thread/WorkThread.h"
 #include "shynet/pool/ThreadPool.h"
-#include "shynet/Logger.h"
-#include "shynet/Utility.h"
-#include "shynet/Singleton.h"
 
 namespace shynet {
 	namespace thread {
@@ -22,7 +19,7 @@ namespace shynet {
 					LOG_TRACE << "pop local queue task";
 				}
 				else {
-					pool::ThreadPool& tpool = Singleton<pool::ThreadPool>::get_instance();
+					pool::ThreadPool& tpool = utils::Singleton<pool::ThreadPool>::get_instance();
 					std::unique_lock<std::mutex> lock(tpool.tasks_mutex());
 					tpool.tasks_condvar().wait(lock, [&tpool, this] {
 						LOG_TRACE << "start front check  globalsize:" << tpool.tasks().size() << \

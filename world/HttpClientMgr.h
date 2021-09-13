@@ -1,8 +1,8 @@
-﻿#pragma once
+#pragma once
 #include <memory>
 #include <mutex>
 #include <unordered_map>
-#include "shynet/Singleton.h"
+#include "shynet/utils/Singleton.h"
 #include "world/HttpClient.h"
 
 namespace world {
@@ -10,7 +10,7 @@ namespace world {
 	/// http后台连接管理器
 	/// </summary>
 	class HttpClientMgr final : public shynet::Nocopy {
-		friend class shynet::Singleton<HttpClientMgr>;
+		friend class shynet::utils::Singleton<HttpClientMgr>;
 		HttpClientMgr();
 	public:
 		~HttpClientMgr();

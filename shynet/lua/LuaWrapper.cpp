@@ -1,11 +1,10 @@
-﻿#include "shynet/lua/LuaWrapper.h"
+#include "shynet/lua/LuaWrapper.h"
 #include "shynet/net/IPAddress.h"
 #include "shynet/net/ListenEvent.h"
 #include "shynet/net/ListenReactorMgr.h"
 #include "shynet/net/AcceptNewFd.h"
 #include "shynet/net/ConnectEvent.h"
-#include "shynet/IniConfig.h"
-#include "shynet/Singleton.h"
+#include "shynet/utils/Logger.h"
 
 namespace shynet {
 	namespace lua {

@@ -1,6 +1,5 @@
-﻿#include "shynet/net/ConnectEvent.h"
-#include "shynet/Utility.h"
-#include "shynet/Logger.h"
+#include "shynet/net/ConnectEvent.h"
+#include "shynet/utils/Logger.h"
 
 namespace shynet {
 	extern pthread_barrier_t g_barrier;

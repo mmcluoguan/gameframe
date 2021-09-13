@@ -2,9 +2,8 @@
 #include <cstring>
 #include "shynet/lua/LuaEngine.h"
 #include "shynet/net/ConnectReactorMgr.h"
-#include "shynet/Logger.h"
-#include "shynet/Utility.h"
-#include "shynet/IniConfig.h"
+#include "shynet/utils/IniConfig.h"
+#include "shynet/utils/StringOp.h"
 #include "frmpub/LuaCallBackTask.h"
 #include "frmpub/protocc/gate.pb.h"
 #include "frmpub/protocc/internal.pb.h"
@@ -55,7 +54,7 @@ namespace gate {
 				}
 				else {
 					//通知lua的onMessage函数
-					shynet::Singleton<lua::LuaEngine>::get_instance().append(
+					shynet::utils::Singleton<lua::LuaEngine>::get_instance().append(
 						std::make_shared<frmpub::OnMessageTask<GateClient>>(shared_from_this(), obj, enves));
 				}
 			}
@@ -71,7 +70,7 @@ namespace gate {
 	void GateClient::close(bool active) {
 		frmpub::Client::close(active);
 		if (accountid_.empty() == false) {
-			ConnectorMgr& mgr = shynet::Singleton<ConnectorMgr>::instance();
+			ConnectorMgr& mgr = shynet::utils::Singleton<ConnectorMgr>::instance();
 			mgr.reduce_count(login_id_);
 
 			if (accountid_ != "") {
@@ -96,7 +95,7 @@ namespace gate {
 				}
 			}
 		}
-		shynet::Singleton<GateClientMgr>::instance().remove(iobuf()->fd());
+		shynet::utils::Singleton<GateClientMgr>::instance().remove(iobuf()->fd());
 	}
 
 	void GateClient::accountid(std::string t) {
@@ -132,7 +131,7 @@ namespace gate {
 			SEND_ERR(protocc::UNAUTHENTICATED, "未验证的客户端连接,消息终止转发");
 			return -1;
 		}
-		ConnectorMgr& connectMgr = shynet::Singleton<ConnectorMgr>::instance();
+		ConnectorMgr& connectMgr = shynet::utils::Singleton<ConnectorMgr>::instance();
 		int login_connect_id = connectMgr.sid_conv_connect_id(login_id_);
 		std::shared_ptr<LoginConnector> login = connectMgr.select_login(login_connect_id);
 		if (login != nullptr) {
@@ -147,7 +146,7 @@ namespace gate {
 				//同服顶号处理
 				protocc::login_client_gate_c msgc;
 				if (msgc.ParseFromString(obj->msgdata()) == true) {
-					auto cli = shynet::Singleton<GateClientMgr>::instance().find(msgc.platform_key());
+					auto cli = shynet::utils::Singleton<GateClientMgr>::instance().find(msgc.platform_key());
 					if (cli) {
 						protocc::repeatlogin_client_gate_s msgs;
 						msgs.set_aid(cli->accountid());
@@ -172,15 +171,15 @@ namespace gate {
 				int game_connect_id = connectMgr.sid_conv_connect_id(game_id_);
 				auto gameinfo = connectMgr.find_connect_data(game_connect_id);
 
-				shynet::IniConfig& ini = shynet::Singleton<shynet::IniConfig>::get_instance();
+				shynet::utils::IniConfig& ini = shynet::utils::Singleton<shynet::utils::IniConfig>::get_instance();
 				int gateid = ini.get<int, int>("gate", "sid", 1);
-				std::string extend = shynet::Utility::str_format("%d,%d,%d",
+				std::string extend = shynet::utils::StringOp::str_format("%d,%d,%d",
 					gateid, logininfo->sif.sid(), gameinfo ? gameinfo->sif.sid() : 0);
 				obj->set_extend(extend);
 			}
 			else if (obj->msgid() == protocc::RECONNECT_CLIENT_GATE_C) {
 				//断线重连消息中附加上选择的gateid
-				shynet::IniConfig& ini = shynet::Singleton<shynet::IniConfig>::get_instance();
+				shynet::utils::IniConfig& ini = shynet::utils::Singleton<shynet::utils::IniConfig>::get_instance();
 				int gateid = ini.get<int, int>("gate", "sid", 1);
 				obj->set_extend(std::to_string(gateid));
 			}
@@ -202,8 +201,9 @@ namespace gate {
 			SEND_ERR(protocc::UNAUTHENTICATED, "未验证的客户端连接,消息终止转发");
 			return -1;
 		}
-		int game_connect_id = shynet::Singleton<ConnectorMgr>::instance().sid_conv_connect_id(game_id_);
-		std::shared_ptr<GameConnector> game = shynet::Singleton<ConnectorMgr>::instance().game_connector(game_connect_id);
+		int game_connect_id = shynet::utils::Singleton<ConnectorMgr>::instance().sid_conv_connect_id(game_id_);
+		std::shared_ptr<GameConnector> game = shynet::utils::Singleton<ConnectorMgr>::instance().
+			game_connector(game_connect_id);
 		if (game != nullptr) {			
 			FilterData::Envelope enve;
 			enve.fd = iobuf()->fd();
@@ -226,7 +226,7 @@ namespace gate {
 	int GateClient::serverlist_client_gate_c(std::shared_ptr<protocc::CommonObject> data,
 		std::shared_ptr<std::stack<FilterData::Envelope>> enves) {
 		protocc::serverlist_client_gate_s msgs;
-		auto list = shynet::Singleton<ConnectorMgr>::instance().connect_datas();
+		auto list = shynet::utils::Singleton<ConnectorMgr>::instance().connect_datas();
 		for (const auto& it : list) {
 			protocc::ServerInfo* sif = msgs.add_sifs();
 			*sif = it.second.sif;

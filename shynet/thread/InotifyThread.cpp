@@ -3,8 +3,7 @@
 #include <fcntl.h>
 #include <ftw.h>
 #include "shynet/pool/ThreadPool.h"
-#include "shynet/Logger.h"
-#include "shynet/Utility.h"
+#include "shynet/utils/Logger.h"
 
 namespace shynet {
 	extern pthread_barrier_t g_barrier;

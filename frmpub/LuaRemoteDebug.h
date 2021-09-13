@@ -1,14 +1,13 @@
-﻿#pragma once
+#pragma once
 #include "shynet/kaguya/kaguya.hpp"
-#include "shynet/Singleton.h"
-#include "shynet/Utility.h"
+#include "shynet/utils/Singleton.h"
 
 namespace frmpub {
 	/*
 	* lua远程调试
 	*/
 	class LuaRemoteDebug final : public shynet::Nocopy {
-		friend class shynet::Singleton<LuaRemoteDebug>;
+		friend class shynet::utils::Singleton<LuaRemoteDebug>;
 
 		LuaRemoteDebug() = default;
 	public:

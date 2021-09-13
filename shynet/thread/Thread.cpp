@@ -1,6 +1,4 @@
-﻿#include "shynet/thread/Thread.h"
-#include "shynet/Logger.h"
-#include "shynet/Utility.h"
+#include "shynet/thread/Thread.h"
 
 namespace shynet {
 	namespace thread {

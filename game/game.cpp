@@ -1,13 +1,13 @@
 #include <unistd.h>
-#include "shynet/IniConfig.h"
-#include "shynet/Logger.h"
-#include "shynet/Utility.h"
 #include "shynet/events/EventHandler.h"
 #include "shynet/net/IPAddress.h"
 #include "shynet/net/ConnectReactorMgr.h"
 #include "shynet/pool/ThreadPool.h"
 #include "shynet/lua/LuaEngine.h"
-#include "shynet/IdWorker.h"
+#include "shynet/utils/Stuff.h"
+#include "shynet/utils/IniConfig.h"
+#include "shynet/utils/IdWorker.h"
+#include "shynet/utils/StringOp.h"
 #include "frmpub/LuaFolderTask.h"
 #include "game/ConnectorMgr.h"
 #include "game/DbConnector.h"
@@ -19,6 +19,7 @@
 int main(int argc, char* argv[]) {
 	using namespace std;
 	using namespace shynet;
+	using namespace shynet::utils;
 	using namespace shynet::events;
 	using namespace shynet::pool;
 	using namespace shynet::net;
@@ -31,28 +32,28 @@ int main(int argc, char* argv[]) {
 
 	int centerid = ini.get<int, int>("dbvisit_game_master", "centerid", 1);
 	int workerid = ini.get<int, int>("dbvisit_game_master", "workerid", 1);
-	shynet::Singleton<IdWorker>::instance(std::move(workerid), std::move(centerid));
+	Singleton<IdWorker>::instance(std::move(workerid), std::move(centerid));
 
 	bool daemon = ini.get<bool, bool>("game", "daemon", false);
 	if (daemon) {
-		Utility::daemon();
+		Stuff::daemon();
 		Singleton<IniConfig>::instance(std::move(string("gameframe.ini").c_str()));
 	}
-	Utility::create_coredump();
+	Stuff::create_coredump();
 	Logger::loglevel(Logger::LogLevel::DEBUG);
 	if (EventBase::usethread() == -1) {
 		LOG_ERROR << "call usethread";
 	}
 	EventBase::initssl();
 	int sid = ini.get<int, int>("game", "sid", 0);
-	std::string pidfile = Utility::str_format("./game_%d.pid", sid);
-	Utility::writepid(pidfile);
+	std::string pidfile = StringOp::str_format("./game_%d.pid", sid);
+	Stuff::writepid(pidfile);
 
 	Singleton<LuaEngine>::instance(std::make_shared<game::LuaWrapper>());
 	Singleton<ThreadPool>::instance().start();
 
 	std::string luapath = ini.get<const char*, std::string>("game", "luapath", "");
-	std::vector<std::string> vectpath = Utility::spilt(luapath, ";");
+	std::vector<std::string> vectpath = StringOp::spilt(luapath, ";");
 	for (string pstr : vectpath) {
 		Singleton<ThreadPool>::get_instance().notifyTh().lock()->add(
 			std::make_shared<LuaFolderTask>(pstr, true)
@@ -61,7 +62,7 @@ int main(int argc, char* argv[]) {
 
 	//连接db服务器
 	string dbstr = ini.get<const char*, string>("game", "db", "");
-	auto dblist = Utility::spilt(dbstr, ",");
+	auto dblist = StringOp::spilt(dbstr, ",");
 	if (dblist.size() > 2 || dblist.size() == 0) {
 		LOG_ERROR << "db配置错误:" << dbstr;
 	}
@@ -78,7 +79,7 @@ int main(int argc, char* argv[]) {
 
 	//连接world服务器
 	string worldstr = ini.get<const char*, string>("game", "world", "");
-	auto worldlist = Utility::spilt(worldstr, ",");
+	auto worldlist = StringOp::spilt(worldstr, ",");
 	if (worldlist.size() > 2 || worldlist.size() == 0) {
 		LOG_ERROR << "world配置错误:" << worldstr;
 	}
@@ -86,7 +87,7 @@ int main(int argc, char* argv[]) {
 	{
 		std::string worldip = ini.get<const char*, string>(item, "ip", "");
 		short worldport = ini.get<short, short>(item, "port", short(22000));
-		shynet::Singleton<ConnectReactorMgr>::instance().add(
+		Singleton<ConnectReactorMgr>::instance().add(
 			std::shared_ptr<WorldConnector>(
 				new WorldConnector(std::shared_ptr<IPAddress>(
 					new IPAddress(worldip.c_str(), worldport)))));
@@ -97,7 +98,7 @@ int main(int argc, char* argv[]) {
 	short gameport = ini.get<short, short>("game", "port", short(24000));
 	std::shared_ptr<IPAddress> gameaddr(new IPAddress(gameip.c_str(), gameport));
 	std::shared_ptr<GameServer> gameserver(new GameServer(gameaddr));
-	shynet::Singleton<ListenReactorMgr>::instance().add(gameserver);
+	Singleton<ListenReactorMgr>::instance().add(gameserver);
 
 	shared_ptr<EventBase> base(new EventBase());
 	shared_ptr<StdinHandler> stdin(new StdinHandler(base, STDIN_FILENO));

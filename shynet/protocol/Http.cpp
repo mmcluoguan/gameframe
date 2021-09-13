@@ -1,9 +1,8 @@
-﻿#include "shynet/protocol/Http.h"
+#include "shynet/protocol/Http.h"
 #include <cstring>
 #include <jemalloc/jemalloc.h>
-#include "shynet/Utility.h"
-#include "shynet/Logger.h"
 #include "shynet/protocol/FilterProces.h"
+#include "shynet/utils/Logger.h"
 
 namespace shynet {
 	namespace protocol {

@@ -1,6 +1,7 @@
-﻿#include "dbvisit/DataTimer.h"
+#include "dbvisit/DataTimer.h"
+#include <vector>
 #include "shynet/net/TimerReactorMgr.h"
-#include "shynet/Singleton.h"
+#include "shynet/utils/StringOp.h"
 #include "dbvisit/Datahelp.h"
 #include "dbvisit/DataTimerMgr.h"
 
@@ -15,10 +16,10 @@ namespace dbvisit {
 
 	void DataTimer::timeout() {
 		try {
-			std::vector<std::string> temp = shynet::Utility::spilt(cachekey_, "_");
-			shynet::Singleton<Datahelp>::instance().updata_db(temp[0], temp[1], fields_);
-			shynet::Singleton<net::TimerReactorMgr>::instance().remove(timerid());
-			shynet::Singleton<DataTimerMgr>::instance().remove(cachekey_);
+			std::vector<std::string> temp = shynet::utils::StringOp::spilt(cachekey_, "_");
+			shynet::utils::Singleton<Datahelp>::instance().updata_db(temp[0], temp[1], fields_);
+			shynet::utils::Singleton<net::TimerReactorMgr>::instance().remove(timerid());
+			shynet::utils::Singleton<DataTimerMgr>::instance().remove(cachekey_);
 			LOG_DEBUG << "更新数据到 tablename:" << temp[0] << " key:" << temp[1];
 		}
 		catch (std::exception& err) {

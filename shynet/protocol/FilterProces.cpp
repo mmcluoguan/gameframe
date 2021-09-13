@@ -1,8 +1,7 @@
-﻿#include "shynet/protocol/FilterProces.h"
+#include "shynet/protocol/FilterProces.h"
 #include <cstring>
-#include "shynet/Logger.h"
-#include "shynet/Utility.h"
 #include "shynet/net/IPAddress.h"
+#include "shynet/utils/Logger.h"
 
 namespace shynet {
 	namespace protocol {

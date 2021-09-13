@@ -1,4 +1,4 @@
-﻿#include "shynet/net/ListenEvent.h"
+#include "shynet/net/ListenEvent.h"
 #include <cstring>
 #include "shynet/net/AcceptReactorMgr.h"
 #include "shynet/net/ListenReactorMgr.h"
@@ -93,11 +93,11 @@ namespace shynet {
 		}
 
 		void ListenEvent::input(int listenfd) {
-			Singleton<AcceptReactorMgr>::instance().notify(&self, sizeof(uintptr_t));
+			utils::Singleton<AcceptReactorMgr>::instance().notify(&self, sizeof(uintptr_t));
 		}
 
 		bool ListenEvent::stop() const {
-			return Singleton<ListenReactorMgr>::instance().remove(serverid_);
+			return utils::Singleton<ListenReactorMgr>::instance().remove(serverid_);
 		}
 	}
 }

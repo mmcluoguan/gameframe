@@ -1,4 +1,4 @@
-﻿#include "shynet/task/TimerTask.h"
+#include "shynet/task/TimerTask.h"
 #include "shynet/net/TimerReactorMgr.h"
 
 namespace shynet {
@@ -11,7 +11,7 @@ namespace shynet {
 		}
 
 		int TimerTask::run(thread::Thread* tif) {
-			std::shared_ptr<net::TimerEvent> tv = Singleton<net::TimerReactorMgr>::instance().find(timerid_);
+			std::shared_ptr<net::TimerEvent> tv = utils::Singleton<net::TimerReactorMgr>::instance().find(timerid_);
 			if (tv != nullptr) {
 				tv->timeout();
 			}
