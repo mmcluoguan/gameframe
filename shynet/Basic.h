@@ -1,5 +1,4 @@
 #pragma once
-
 // 无锁数据成员
 #define PROPERTY(Type, name) \
   public: \
