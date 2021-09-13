@@ -1,4 +1,4 @@
-﻿#pragma once
+#pragma once
 #include "shynet/task/Task.h"
 
 namespace shynet {

@@ -1,4 +1,5 @@
-﻿#include "frmpub/LuaRemoteDebug.h"
+#include "frmpub/LuaRemoteDebug.h"
+#include "shynet/utils/StringOp.h"
 
 namespace frmpub {
 	LuaRemoteDebug& LuaRemoteDebug::init(const std::string debugip) {
@@ -9,7 +10,7 @@ namespace frmpub {
 
 	LuaRemoteDebug& LuaRemoteDebug::start(kaguya::State& state) {
 		if (isinit_) {
-			state(shynet::Utility::str_format("require('mobdebug').start('%s')", debugip_.c_str()));
+			state(shynet::utils::StringOp::str_format("require('mobdebug').start('%s')", debugip_.c_str()));
 		}
 		return *this;
 	}

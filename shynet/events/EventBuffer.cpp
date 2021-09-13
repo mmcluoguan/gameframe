@@ -1,6 +1,5 @@
-﻿#include "shynet/events/EventBuffer.h"
-#include "shynet/Logger.h"
-#include "shynet/Utility.h"
+#include "shynet/events/EventBuffer.h"
+#include "shynet/utils/Logger.h"
 
 namespace shynet {
 	namespace events {
@@ -31,7 +30,7 @@ namespace shynet {
 		bufferevent* EventBuffer::buffer() const {
 			return buffer_;
 		}
-		void EventBuffer::buffer(bufferevent* buffer) {
+		void EventBuffer::set_buffer(bufferevent* buffer) {
 			buffer_ = buffer;
 			delflag_ = false;
 		}

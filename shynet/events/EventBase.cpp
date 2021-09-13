@@ -1,4 +1,4 @@
-﻿#include "shynet/events/EventBase.h"
+#include "shynet/events/EventBase.h"
 #include <jemalloc/jemalloc.h>
 #include <openssl/ssl.h>
 #include <openssl/err.h>
@@ -6,8 +6,7 @@
 #include <event2/bufferevent.h>
 #include "shynet/events/EventBuffer.h"
 #include "shynet/events/EventHandler.h"
-#include "shynet/Logger.h"
-#include "shynet/Utility.h"
+#include "shynet/utils/Logger.h"
 
 namespace shynet {
 	namespace events {

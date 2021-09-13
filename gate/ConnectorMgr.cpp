@@ -58,7 +58,7 @@ namespace gate {
 				}
 			}
 			login = std::dynamic_pointer_cast<LoginConnector>(
-				shynet::Singleton<net::ConnectReactorMgr>::instance().find(target_login_id));
+				shynet::utils::Singleton<net::ConnectReactorMgr>::instance().find(target_login_id));
 			if (data != nullptr) {
 
 				data->connect_num++;
@@ -66,7 +66,7 @@ namespace gate {
 		}
 		else {
 			login = std::dynamic_pointer_cast<LoginConnector>(
-				shynet::Singleton<net::ConnectReactorMgr>::instance().find(login_connect_id));
+				shynet::utils::Singleton<net::ConnectReactorMgr>::instance().find(login_connect_id));
 			iter_data->second.connect_num++;
 		}
 		return login;
@@ -111,17 +111,17 @@ namespace gate {
 	std::shared_ptr<WorldConnector> ConnectorMgr::find_worldctor(int connectid)
 	{
 		return std::dynamic_pointer_cast<WorldConnector>(
-			shynet::Singleton<net::ConnectReactorMgr>::instance().find(connectid));
+			shynet::utils::Singleton<net::ConnectReactorMgr>::instance().find(connectid));
 	}
 
 	std::shared_ptr<LoginConnector> ConnectorMgr::login_connector(int login_connect_id) const {
 		return std::dynamic_pointer_cast<LoginConnector>(
-			shynet::Singleton<net::ConnectReactorMgr>::instance().find(login_connect_id));
+			shynet::utils::Singleton<net::ConnectReactorMgr>::instance().find(login_connect_id));
 	}
 
 	std::shared_ptr<GameConnector> ConnectorMgr::game_connector(int game_connect_id) const {
 		return std::dynamic_pointer_cast<GameConnector>(
-			shynet::Singleton<net::ConnectReactorMgr>::instance().find(game_connect_id));
+			shynet::utils::Singleton<net::ConnectReactorMgr>::instance().find(game_connect_id));
 	}
 
 	std::unordered_map<int, ConnectorMgr::ConnectData> ConnectorMgr::connect_datas() const {

@@ -1,4 +1,4 @@
-﻿#include "shynet/task/AcceptReadIoTask.h"
+#include "shynet/task/AcceptReadIoTask.h"
 
 namespace shynet {
 	namespace task {
@@ -13,7 +13,7 @@ namespace shynet {
 			if (aptnewfd != nullptr) {
 				std::shared_ptr<net::AcceptHeartbeat> ht = aptnewfd->heart().lock();
 				if (ht != nullptr) {
-					ht->val({ aptnewfd->heart_second(),0 });
+					ht->set_val({ aptnewfd->heart_second(),0 });
 				}
 				int ret = aptnewfd->input();
 				if (ret == -1) {

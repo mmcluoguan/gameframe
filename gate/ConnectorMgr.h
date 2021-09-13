@@ -2,7 +2,7 @@
 #include <mutex>
 #include <unordered_map>
 #include <list>
-#include "shynet/Singleton.h"
+#include "shynet/utils/Singleton.h"
 #include "gate/LoginConnector.h"
 #include "gate/WorldConnector.h"
 #include "gate/GameConnector.h"
@@ -12,7 +12,7 @@ namespace gate {
 	/// 服务器连接管理器
 	/// </summary>
 	class ConnectorMgr {
-		friend class shynet::Singleton<ConnectorMgr>;
+		friend class shynet::utils::Singleton<ConnectorMgr>;
 		ConnectorMgr();
 	public:
 		/// <summary>

@@ -1,13 +1,13 @@
-﻿#pragma once
+#pragma once
 #include <list>
 #include "shynet/thread/AcceptThread.h"
-#include <shynet/Singleton.h>
+#include <shynet/utils/Singleton.h>
 
 namespace shynet {
 	namespace net {
 
 		class AcceptReactorMgr final : public Nocopy {
-			friend class Singleton<AcceptReactorMgr>;
+			friend class utils::Singleton<AcceptReactorMgr>;
 			AcceptReactorMgr();
 		public:
 			~AcceptReactorMgr();

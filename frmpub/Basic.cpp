@@ -1,6 +1,5 @@
 #include "frmpub/Basic.h"
-#include "shynet/Utility.h"
-#include "shynet/Logger.h"
+#include "shynet/utils/Logger.h"
 
 namespace frmpub {
 	std::unordered_map<int, std::string> Basic::internal_msgname_

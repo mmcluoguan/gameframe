@@ -1,4 +1,4 @@
-﻿#include "shynet/net/ConnectIoBuffer.h"
+#include "shynet/net/ConnectIoBuffer.h"
 #include "shynet/pool/ThreadPool.h"
 #include "shynet/net/TimerReactorMgr.h"
 #include "shynet/task/ConnectReadIoTask.h"
@@ -31,7 +31,7 @@ namespace shynet {
 				iobuf_ = std::shared_ptr<events::EventBuffer>(new events::EventBuffer(base, -1,
 					BEV_OPT_CLOSE_ON_FREE | BEV_OPT_THREADSAFE));
 			}
-			buffer(iobuf_->buffer());
+			set_buffer(iobuf_->buffer());
 
 			iobuf_->setcb(ioreadcb, iowritecb, ioeventcb, this);
 			iobuf_->enabled(EV_READ | EV_WRITE | EV_PERSIST);
@@ -43,7 +43,7 @@ namespace shynet {
 			return cnev_;
 		}
 
-		void ConnectIoBuffer::cnev(std::weak_ptr<ConnectEvent> cnev) {
+		void ConnectIoBuffer::set_cnev(std::weak_ptr<ConnectEvent> cnev) {
 			cnev_ = cnev;
 		}
 
@@ -52,7 +52,7 @@ namespace shynet {
 			std::shared_ptr<ConnectEvent> shconector = cnev_.lock();
 			if (shconector != nullptr) {
 				std::shared_ptr<task::ConnectReadIoTask> io(new task::ConnectReadIoTask(shconector));
-				Singleton<pool::ThreadPool>::instance().appendWork(io, fd());
+				utils::Singleton<pool::ThreadPool>::instance().appendWork(io, fd());
 			}
 		}
 
@@ -73,8 +73,8 @@ namespace shynet {
 					if (shconector->enable_heart()) {
 						std::shared_ptr<ConnectHeartbeat> ht(
 							new ConnectHeartbeat(shconector, { shconector->heart_second() ,0L }));
-						Singleton<TimerReactorMgr>::instance().add(ht);
-						shconector->heart(ht);
+						utils::Singleton<TimerReactorMgr>::instance().add(ht);
+						shconector->set_heart(ht);
 					}
 					shconector->success();
 				}
@@ -82,7 +82,7 @@ namespace shynet {
 					shconector->close(ConnectEvent::CloseType::SERVER_CLOSE);
 				}
 				else if (events & (BEV_EVENT_ERROR | BEV_EVENT_READING | BEV_EVENT_WRITING)) {
-					if (shconector->dnsbase() != nullptr)
+					if (shconector->set_dnsbase() != nullptr)
 						LOG_WARN << evutil_gai_strerror(bufferevent_socket_get_dns_error(iobuf_->buffer()));
 					LOG_WARN << evutil_socket_error_to_string(EVUTIL_SOCKET_ERROR());
 					shconector->close(ConnectEvent::CloseType::CONNECT_FAIL);

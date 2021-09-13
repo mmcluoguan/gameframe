@@ -1,4 +1,4 @@
-﻿#pragma once
+#pragma once
 #include <thread>
 #include <shynet/Basic.h>
 
@@ -26,9 +26,9 @@ namespace shynet {
 			~Thread();
 
 			ThreadType type() const;
-			void type(ThreadType v);
+			void set_type(ThreadType v);
 			size_t index() const;
-			void index(size_t v);
+			void set_index(size_t v);
 			std::shared_ptr<std::thread> thread() const {
 				return thread_;
 			}

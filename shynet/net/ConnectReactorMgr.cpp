@@ -1,6 +1,7 @@
-﻿#include "shynet/net/ConnectReactorMgr.h"
+#include "shynet/net/ConnectReactorMgr.h"
 #include "shynet/pool/ThreadPool.h"
 #include "shynet/thread/ConnectThread.h"
+#include "shynet/utils/Logger.h"
 
 namespace shynet {
 	namespace net {
@@ -47,7 +48,7 @@ namespace shynet {
 		}
 
 		void ConnectReactorMgr::notify(const void* data, size_t len) {
-			std::shared_ptr<thread::ConnectThread> cnt = Singleton<pool::ThreadPool>::get_instance().connectTh().lock();
+			std::shared_ptr<thread::ConnectThread> cnt = utils::Singleton<pool::ThreadPool>::get_instance().connectTh().lock();
 			if (cnt != nullptr) {
 				cnt->notify(data, len);
 			}

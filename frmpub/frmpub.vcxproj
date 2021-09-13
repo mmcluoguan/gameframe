@@ -43,7 +43,7 @@
     <ClCompile Include="LuaFolderTask.cpp" />
     <ClCompile Include="LuaHotFixTask.cpp" />
     <ClCompile Include="LuaRemoteDebug.cpp" />
-    <ClCompile Include="LuaTimer.cpp" />
+    <ClCompile Include="LuaTimerTask.cpp" />
     <ClCompile Include="PingTimer.cpp" />
     <ClCompile Include="protocc\client.pb.cc" />
     <ClCompile Include="protocc\common.pb.cc" />
@@ -64,7 +64,7 @@
     <ClInclude Include="LuaHotFixTask.h" />
     <ClInclude Include="LuaCallBackTask.h" />
     <ClInclude Include="LuaRemoteDebug.h" />
-    <ClInclude Include="LuaTimer.h" />
+    <ClInclude Include="LuaTimerTask.h" />
     <ClInclude Include="PingTimer.h" />
     <ClInclude Include="protocc\client.pb.h" />
     <ClInclude Include="protocc\common.pb.h" />

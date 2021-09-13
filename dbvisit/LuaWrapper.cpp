@@ -1,6 +1,6 @@
 #include "dbvisit/LuaWrapper.h"
-#include "shynet/IniConfig.h"
-#include "shynet/Singleton.h"
+#include "shynet/utils/IniConfig.h"
+#include "shynet/utils/Singleton.h"
 #include "frmpub/LuaRemoteDebug.h"
 #include "dbvisit/DbServer.h"
 #include "dbvisit/DbClient.h"
@@ -26,16 +26,16 @@ namespace dbvisit {
 		);
 
 		//是否开启调试模式
-		shynet::IniConfig& ini = shynet::Singleton<shynet::IniConfig>::get_instance();
+		shynet::utils::IniConfig& ini = shynet::utils::Singleton<shynet::utils::IniConfig>::get_instance();
 		std::string luadebugip = ini.get<const char*, std::string>(g_confname, "luadebugip", "");
 		if (!luadebugip.empty()){
-			shynet::Singleton<frmpub::LuaRemoteDebug>::instance().init(luadebugip).start(state);
+			shynet::utils::Singleton<frmpub::LuaRemoteDebug>::instance().init(luadebugip).start(state);
 		}
 
 		//载入lua文件
 		std::string luafile = ini.get<const char*, std::string>(g_confname, "luafile", "lua/dbvisit/db_main.lua");
 		state.dofile(luafile);
 
-		shynet::Singleton<frmpub::LuaRemoteDebug>::instance().stop(state);
+		shynet::utils::Singleton<frmpub::LuaRemoteDebug>::instance().stop(state);
 	}
 }

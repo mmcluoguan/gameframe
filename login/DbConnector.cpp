@@ -1,10 +1,9 @@
 #include "login/DbConnector.h"
 #include "shynet/net/ConnectReactorMgr.h"
 #include "shynet/lua/LuaEngine.h"
-#include "shynet/IniConfig.h"
+#include "shynet/utils/IniConfig.h"
 #include "frmpub/ReConnectTimer.h"
 #include "frmpub/LuaCallBackTask.h"
-#include "frmpub/protocc/login.pb.h"
 #include "login/ConnectorMgr.h"
 #include "login/LoginClientMgr.h"
 #include "login/LoginServer.h"
@@ -48,21 +47,21 @@ namespace login {
 			LOG_INFO << "3秒后开始重连";
 			std::shared_ptr<frmpub::ReConnectTimer<DbConnector>> reconnect(
 				new frmpub::ReConnectTimer<DbConnector>(connect_addr(), { 3L,0L }));
-			shynet::Singleton<net::TimerReactorMgr>::instance().add(reconnect);
+			shynet::utils::Singleton<net::TimerReactorMgr>::instance().add(reconnect);
 		}
 	}
 	void DbConnector::complete() {
 		LOG_INFO << "连接服务器dbvisit成功 [ip:" << connect_addr()->ip() << ":" << connect_addr()->port() << "]";
-		shynet::Singleton<ConnectorMgr>::instance().add_dbctor(connectid());
+		shynet::utils::Singleton<ConnectorMgr>::instance().add_dbctor(connectid());
 
 		//通知lua的onConnect函数
-		shynet::Singleton<lua::LuaEngine>::get_instance().append(
+		shynet::utils::Singleton<lua::LuaEngine>::get_instance().append(
 			std::make_shared<frmpub::OnConnectorTask<DbConnector>>(shared_from_this()));
 
 		//向db服注册服务器信息
 		protocc::register_login_dbvisit_c msgc;
 		protocc::ServerInfo* sif = msgc.mutable_sif();
-		shynet::IniConfig& ini = shynet::Singleton<shynet::IniConfig>::get_instance();
+		shynet::utils::IniConfig& ini = shynet::utils::Singleton<shynet::utils::IniConfig>::get_instance();
 		std::string loginip = ini.get<const char*, std::string>("login", "ip", "127.0.0.1");
 		short loginport = ini.get<short, short>("login", "port", short(24000));
 		sif->set_ip(loginip);
@@ -84,7 +83,7 @@ namespace login {
 			}
 			else {
 				//通知lua的onMessage函数
-				shynet::Singleton<lua::LuaEngine>::get_instance().append(
+				shynet::utils::Singleton<lua::LuaEngine>::get_instance().append(
 					std::make_shared<frmpub::OnMessageTask<DbConnector>>(shared_from_this(), obj, enves));
 			}
 		}
@@ -93,10 +92,10 @@ namespace login {
 
 	void DbConnector::close(net::ConnectEvent::CloseType active) {
 		//通知lua的onClose函数
-		shynet::Singleton<lua::LuaEngine>::get_instance().append(
+		shynet::utils::Singleton<lua::LuaEngine>::get_instance().append(
 			std::make_shared<frmpub::OnCloseTask>(fd()));
 
-		shynet::Singleton<ConnectorMgr>::instance().remove_dbctor(connectid());
+		shynet::utils::Singleton<ConnectorMgr>::instance().remove_dbctor(connectid());
 		Connector::close(active);
 	}
 
@@ -132,7 +131,7 @@ namespace login {
 	int DbConnector::repeatlogin_client_gate_s(std::shared_ptr<protocc::CommonObject> data,
 		std::shared_ptr<std::stack<FilterData::Envelope>> enves)
 	{
-		auto gate = shynet::Singleton<LoginClientMgr>::instance().find_from_sid(data->extend());
+		auto gate = shynet::utils::Singleton<LoginClientMgr>::instance().find_from_sid(data->extend());
 		if (gate != nullptr) {
 			gate->send_proto(data.get(), enves.get());
 		}
@@ -155,7 +154,7 @@ namespace login {
 				if (data->extend().empty() == false){
 					if (data->extend() == "0") {
 						//请求world选择gamesid
-						auto world = shynet::Singleton<ConnectorMgr>::instance().world_connector();
+						auto world = shynet::utils::Singleton<ConnectorMgr>::instance().world_connector();
 						if (world != nullptr)
 						{
 							world->send_proto(data.get(), enves.get());
@@ -193,7 +192,7 @@ namespace login {
 		if (enves->empty() == false) {
 			FilterData::Envelope& env = enves->top();
 			enves->pop();
-			std::shared_ptr<LoginClient> gate = shynet::Singleton<LoginClientMgr>::instance().find(env.fd);
+			std::shared_ptr<LoginClient> gate = shynet::utils::Singleton<LoginClientMgr>::instance().find(env.fd);
 			if (gate != nullptr) {
 				gate->send_proto(data.get(), enves.get());
 				LOG_DEBUG << "转发消息" << frmpub::Basic::msgname(data->msgid())

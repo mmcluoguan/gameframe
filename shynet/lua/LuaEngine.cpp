@@ -1,7 +1,6 @@
-﻿#include "shynet/lua/LuaEngine.h"
+#include "shynet/lua/LuaEngine.h"
 #include "shynet/pool/ThreadPool.h"
-#include "shynet/Logger.h"
-#include "shynet/Utility.h"
+#include "shynet/utils/Logger.h"
 
 namespace shynet {
 	namespace lua {
@@ -18,7 +17,7 @@ namespace shynet {
 		}
 
 		void LuaEngine::append(std::shared_ptr<task::Task> task) {
-			auto ptr = Singleton<pool::ThreadPool>::get_instance().luaTh().lock();
+			auto ptr = utils::Singleton<pool::ThreadPool>::get_instance().luaTh().lock();
 			if (ptr) {
 				ptr->addTask(task);
 			}

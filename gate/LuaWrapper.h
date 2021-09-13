@@ -1,4 +1,4 @@
-﻿#pragma once
+#pragma once
 #include "frmpub/FrmLuaWrapper.h"
 
 namespace gate {

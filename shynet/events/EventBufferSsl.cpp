@@ -1,6 +1,5 @@
-﻿#include "shynet/events/EventBufferSsl.h"
-#include "shynet/Logger.h"
-#include "shynet/Utility.h"
+#include "shynet/events/EventBufferSsl.h"
+#include "shynet/utils/Logger.h"
 
 namespace shynet
 {
@@ -19,7 +18,7 @@ namespace shynet
 			{
 				LOG_ERROR << "call bufferevent_openssl_socket_new";
 			}
-			buffer(buf);
+			set_buffer(buf);
 		}
 		EventBufferSsl::~EventBufferSsl()
 		{

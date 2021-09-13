@@ -1,8 +1,7 @@
-﻿#pragma once
+#pragma once
 #include <map>
 #include <memory>
 #include "shynet/events/Streambuff.h"
-#include "shynet/Basic.h"
 #include "shynet/protocol/Request.h"
 #include "shynet/protocol/Responses.h"
 

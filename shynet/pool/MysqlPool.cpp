@@ -1,6 +1,4 @@
-﻿#include "shynet/pool/MysqlPool.h"
-#include "shynet/Logger.h"
-#include "shynet/Utility.h"
+#include "shynet/pool/MysqlPool.h"
 
 namespace shynet {
 	namespace pool {
@@ -26,7 +24,6 @@ namespace shynet {
 				}
 			}
 			++use_num_;
-			//LOG_DEBUG << "fetch:" << use_num_;
 			SessionPtr sptr = std::move(queue_.front());
 			queue_.pop();
 			try {
@@ -46,20 +43,11 @@ namespace shynet {
 				delete ses;
 				return;
 			}
-			/*try {
-				ses->sql("select 1").execute();
-			}
-			catch (const mysqlx::Error& err) {
-				delete ses;
-				--use_num_;
-				return;
-			}*/
 			SessionPtr ptr(ses, fun_);
 			{
 				std::lock_guard<std::mutex> lock(queue_mutex_);
 				queue_.push(std::move(ptr));
 				--use_num_;
-				//LOG_DEBUG << "reclaim:" << use_num_;
 			}
 			cond_var_.notify_one();
 		}

@@ -7,7 +7,7 @@
 namespace redis = sw::redis;
 #include "shynet/net/TimerReactorMgr.h"
 #include "shynet/pool/MysqlPool.h"
-#include "shynet/Logger.h"
+#include "shynet/utils/StringOp.h"
 #include "dbvisit/DataTimer.h"
 #include "dbvisit/DataTimerMgr.h"
 
@@ -18,8 +18,8 @@ namespace dbvisit {
 	Datahelp::ErrorCode Datahelp::getdata_from_db(const std::string& tablename,
 		const std::string& key, std::unordered_map<std::string, std::string>& out,
 		const std::string& where) {
-		pool::MysqlPool& mysql = shynet::Singleton<pool::MysqlPool>::get_instance();
-		std::string sql = shynet::Utility::str_format("_id='%s'", key.c_str());
+		pool::MysqlPool& mysql = shynet::utils::Singleton<pool::MysqlPool>::get_instance();
+		std::string sql = shynet::utils::StringOp::str_format("_id='%s'", key.c_str());
 		std::string condition = sql;
 		if (key.empty()) {
 			condition = where;
@@ -47,7 +47,7 @@ namespace dbvisit {
 		std::unordered_map<std::string, std::string>& out,
 		std::chrono::seconds seconds) {
 
-		redis::Redis& redis = shynet::Singleton<redis::Redis>::instance(std::string());
+		redis::Redis& redis = shynet::utils::Singleton<redis::Redis>::instance(std::string());
 		if (redis.exists(cachekey) == 1) {
 			std::vector<std::string> out_key;
 			for (auto& it : out) {
@@ -78,7 +78,7 @@ namespace dbvisit {
 		std::chrono::seconds seconds) {
 		ErrorCode error = getdata_from_cache(cachekey, out);
 		if (error == ErrorCode::NOT_DATA) {
-			const auto temp = shynet::Utility::spilt(cachekey, "_");
+			const auto temp = shynet::utils::StringOp::split(cachekey, "_");
 			if (temp.size() < 2) {
 				LOG_WARN << "解析错误 cachekey:" << cachekey;
 				throw DataException("解析错误 cachekey:" + cachekey);
@@ -86,7 +86,7 @@ namespace dbvisit {
 			error = getdata_from_db(temp[0], temp[1], out);
 			if (error == ErrorCode::OK) {
 				if (updatacache) {
-					redis::Redis& redis = shynet::Singleton<redis::Redis>::instance(std::string());
+					redis::Redis& redis = shynet::utils::Singleton<redis::Redis>::instance(std::string());
 					redis.hset(cachekey, out.begin(), out.end());
 					if (seconds.count() != 0) {
 						redis.expire(cachekey, seconds);
@@ -101,7 +101,7 @@ namespace dbvisit {
 		std::unordered_map<std::string, std::string>& out) {
 
 		moredataptr datalist = std::make_shared<moredata>();
-		redis::Redis& redis = shynet::Singleton<redis::Redis>::instance(std::string());
+		redis::Redis& redis = shynet::utils::Singleton<redis::Redis>::instance(std::string());
 		auto cursor = 0LL;
 		std::unordered_set<std::string> keys;
 		while (true) {
@@ -121,9 +121,9 @@ namespace dbvisit {
 
 	void Datahelp::updata_db(const std::string& tablename, const std::string& key, const std::unordered_map<std::string, std::string>& fields) {
 
-		pool::MysqlPool& mysql = shynet::Singleton<pool::MysqlPool>::get_instance();
+		pool::MysqlPool& mysql = shynet::utils::Singleton<pool::MysqlPool>::get_instance();
 		mysqlx::Schema sch = mysql.fetch()->getDefaultSchema();
-		std::string where = shynet::Utility::str_format("_id='%s'", key.c_str());
+		std::string where = shynet::utils::StringOp::str_format("_id='%s'", key.c_str());
 		mysqlx::CollectionModify md = sch.createCollection(tablename, true).modify(where);
 		for (const auto& it : fields) {
 			if (it.first != "_id") {
@@ -137,7 +137,7 @@ namespace dbvisit {
 
 	void Datahelp::insert_db(const std::string& tablename, const std::string& key,
 		const std::unordered_map<std::string, std::string>& fields) {
-		pool::MysqlPool& mysql = shynet::Singleton<pool::MysqlPool>::get_instance();
+		pool::MysqlPool& mysql = shynet::utils::Singleton<pool::MysqlPool>::get_instance();
 		mysqlx::Schema sch = mysql.fetch()->getDefaultSchema();
 		rapidjson::Document doc;
 		rapidjson::Value& data = doc.SetObject();
@@ -156,9 +156,9 @@ namespace dbvisit {
 	}
 
 	void Datahelp::delete_db(const std::string& tablename, const std::string& key) {
-		pool::MysqlPool& mysql = shynet::Singleton<pool::MysqlPool>::get_instance();
+		pool::MysqlPool& mysql = shynet::utils::Singleton<pool::MysqlPool>::get_instance();
 		mysqlx::Schema sch = mysql.fetch()->getDefaultSchema();
-		std::string sql = shynet::Utility::str_format("_id='%s'", key.c_str());
+		std::string sql = shynet::utils::StringOp::str_format("_id='%s'", key.c_str());
 		if (sch.createCollection(tablename, true).remove(sql)
 			.execute().getAffectedItemsCount() == 0) {
 			throw DataException("数据删除失败 tablename:" + tablename + " key:" + key);
@@ -169,12 +169,12 @@ namespace dbvisit {
 		const std::unordered_map<std::string, std::string>& fields,
 		std::chrono::seconds seconds) {
 
-		redis::Redis& redis = shynet::Singleton<redis::Redis>::instance(std::string());
+		redis::Redis& redis = shynet::utils::Singleton<redis::Redis>::instance(std::string());
 		redis.hmset(cachekey, fields.begin(), fields.end());
 		if (seconds.count() != 0) {
 			redis.expire(cachekey, seconds);
 		}
-		std::vector<std::string> temp = shynet::Utility::spilt(cachekey, "_");
+		std::vector<std::string> temp = shynet::utils::StringOp::split(cachekey, "_");
 		if (temp.size() < 2) {
 			LOG_WARN << "解析错误 cachekey:" << cachekey;
 			return;
@@ -184,13 +184,13 @@ namespace dbvisit {
 	}
 
 	void Datahelp::deletedata(const std::string& cachekey) {
-		redis::Redis& redis = shynet::Singleton<redis::Redis>::instance(std::string());
+		redis::Redis& redis = shynet::utils::Singleton<redis::Redis>::instance(std::string());
 		long long ret = redis.del(cachekey);
 		if (ret == 0) {
 			throw DataException("cachekey数据删除失败 cachekey:" + cachekey);
 		}
 		else {
-			std::vector<std::string> temp = shynet::Utility::spilt(cachekey, "_");
+			std::vector<std::string> temp = shynet::utils::StringOp::split(cachekey, "_");
 			if (temp.size() < 2) {
 				LOG_WARN << "解析错误 cachekey:" << cachekey;
 				return;
@@ -202,7 +202,7 @@ namespace dbvisit {
 	void Datahelp::updata_cache(const std::string& cachekey,
 		const std::unordered_map<std::string, std::string>& fields,
 		std::chrono::seconds seconds) {
-		redis::Redis& redis = shynet::Singleton<redis::Redis>::instance(std::string());
+		redis::Redis& redis = shynet::utils::Singleton<redis::Redis>::instance(std::string());
 		redis.hmset(cachekey, fields.begin(), fields.end());
 		if (seconds.count() != 0) {
 			redis.expire(cachekey, seconds);
@@ -215,12 +215,12 @@ namespace dbvisit {
 		const timeval val,
 		std::chrono::seconds seconds) {
 
-		redis::Redis& redis = shynet::Singleton<redis::Redis>::instance(std::string());
+		redis::Redis& redis = shynet::utils::Singleton<redis::Redis>::instance(std::string());
 		redis.hmset(cachekey, fields.begin(), fields.end());
 		if (seconds.count() != 0) {
 			redis.expire(cachekey, seconds);
 		}
-		std::vector<std::string> temp = shynet::Utility::spilt(cachekey, "_");
+		std::vector<std::string> temp = shynet::utils::StringOp::split(cachekey, "_");
 		if (temp.size() < 2) {
 			LOG_WARN << "解析错误 cachekey:" << cachekey;
 			return;
@@ -231,20 +231,20 @@ namespace dbvisit {
 		}
 		else {
 			//延时排队写库				
-			auto timerid = shynet::Singleton<DataTimerMgr>::instance().find(cachekey);
+			auto timerid = shynet::utils::Singleton<DataTimerMgr>::instance().find(cachekey);
 			if (timerid == 0) {
 				//创建写库计时器
 				std::shared_ptr<DataTimer> dt = std::make_shared<DataTimer>(cachekey, val);
 				dt->modify_cache_fields(fields);
-				shynet::Singleton<DataTimerMgr>::instance().add(cachekey,
-					shynet::Singleton<shynet::net::TimerReactorMgr>::instance().add(dt));
+				shynet::utils::Singleton<DataTimerMgr>::instance().add(cachekey,
+					shynet::utils::Singleton<shynet::net::TimerReactorMgr>::instance().add(dt));
 			}
 			else {
 				//延迟写库计时器执行时间
 				std::shared_ptr<DataTimer> dt = std::dynamic_pointer_cast<DataTimer>(
-					shynet::Singleton<shynet::net::TimerReactorMgr>::instance().find(timerid));
+					shynet::utils::Singleton<shynet::net::TimerReactorMgr>::instance().find(timerid));
 				if (dt) {
-					dt->val(val);
+					dt->set_val(val);
 					dt->modify_cache_fields(fields);
 				}
 			}

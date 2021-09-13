@@ -1,10 +1,9 @@
 #include "game/DbConnector.h"
 #include "shynet/net/ConnectReactorMgr.h"
-#include "shynet/IniConfig.h"
+#include "shynet/utils/IniConfig.h"
 #include "shynet/lua/LuaEngine.h"
 #include "frmpub/LuaCallBackTask.h"
 #include "frmpub/ReConnectTimer.h"
-#include "frmpub/protocc/game.pb.h"
 #include "game/ConnectorMgr.h"
 #include "game/GameClientMgr.h"
 #include "game/GameServer.h"
@@ -41,21 +40,21 @@ namespace game {
 			LOG_INFO << "3秒后开始重连";
 			std::shared_ptr<frmpub::ReConnectTimer<DbConnector>> reconnect(
 				new frmpub::ReConnectTimer<DbConnector>(connect_addr(), { 3L,0L }));
-			shynet::Singleton<net::TimerReactorMgr>::instance().add(reconnect);
+			shynet::utils::Singleton<net::TimerReactorMgr>::instance().add(reconnect);
 		}
 	}
 	void DbConnector::complete() {
 		LOG_INFO << "连接服务器dbvisit成功 [ip:" << connect_addr()->ip() << ":" << connect_addr()->port() << "]";
-		shynet::Singleton<ConnectorMgr>::instance().add_dbctor(connectid());
+		shynet::utils::Singleton<ConnectorMgr>::instance().add_dbctor(connectid());
 
 		//通知lua的onConnect函数
-		shynet::Singleton<lua::LuaEngine>::get_instance().append(
+		shynet::utils::Singleton<lua::LuaEngine>::get_instance().append(
 			std::make_shared<frmpub::OnConnectorTask<DbConnector>>(shared_from_this()));
 
 		//向db服游戏服务器信息
 		protocc::register_game_dbvisit_c msgc;
 		protocc::ServerInfo* sif = msgc.mutable_sif();
-		shynet::IniConfig& ini = shynet::Singleton<shynet::IniConfig>::get_instance();
+		shynet::utils::IniConfig& ini = shynet::utils::Singleton<shynet::utils::IniConfig>::get_instance();
 		std::string gameip = ini.get<const char*, std::string>("game", "ip", "127.0.0.1");
 		short gameport = ini.get<short, short>("game", "port", short(24000));
 		sif->set_ip(gameip);
@@ -75,7 +74,7 @@ namespace game {
 			}
 			else {
 				//通知lua的onMessage函数
-				shynet::Singleton<lua::LuaEngine>::get_instance().append(
+				shynet::utils::Singleton<lua::LuaEngine>::get_instance().append(
 					std::make_shared<frmpub::OnMessageTask<DbConnector>>(shared_from_this(), obj, enves));
 			}
 		}
@@ -84,10 +83,10 @@ namespace game {
 
 	void DbConnector::close(net::ConnectEvent::CloseType active) {
 		//通知lua的onClose函数
-		shynet::Singleton<lua::LuaEngine>::get_instance().append(
+		shynet::utils::Singleton<lua::LuaEngine>::get_instance().append(
 			std::make_shared<frmpub::OnCloseTask>(fd()));
 
-		shynet::Singleton<ConnectorMgr>::instance().remove_dbctor(connectid());
+		shynet::utils::Singleton<ConnectorMgr>::instance().remove_dbctor(connectid());
 		Connector::close(active);
 	}
 

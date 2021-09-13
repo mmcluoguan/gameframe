@@ -1,4 +1,4 @@
-﻿#pragma once
+#pragma once
 #include <mutex>
 #include <unordered_map>
 #include "shynet/net/ListenEvent.h"
@@ -7,7 +7,7 @@
 namespace shynet {
 	namespace net {
 		class ListenReactorMgr final : public Nocopy {
-			friend class Singleton<ListenReactorMgr>;
+			friend class utils::Singleton<ListenReactorMgr>;
 			ListenReactorMgr();
 		public:
 			~ListenReactorMgr();

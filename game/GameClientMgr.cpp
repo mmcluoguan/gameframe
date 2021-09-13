@@ -1,4 +1,4 @@
-﻿#include "game/GameClientMgr.h"
+#include "game/GameClientMgr.h"
 #include "shynet/lua/LuaEngine.h"
 #include "frmpub/LuaCallBackTask.h"
 
@@ -17,7 +17,7 @@ namespace game
 		std::lock_guard<std::mutex> lock(clis_mutex_);
 		clis_.insert({ k,v });
 		//通知lua的onAccept函数
-		shynet::Singleton<lua::LuaEngine>::get_instance().append(
+		shynet::utils::Singleton<lua::LuaEngine>::get_instance().append(
 			std::make_shared<frmpub::OnAcceptTask<GameClient>>(v));
 	}
 
@@ -28,7 +28,7 @@ namespace game
 		if (clis_.erase(k) > 0) {
 
 			//通知lua的onClose函数
-			shynet::Singleton<lua::LuaEngine>::get_instance().append(
+			shynet::utils::Singleton<lua::LuaEngine>::get_instance().append(
 				std::make_shared<frmpub::OnCloseTask>(k));
 
 			return true;
@@ -52,7 +52,7 @@ namespace game
 	{
 		return listen_addr_;
 	}
-	void GameClientMgr::listen_addr(const net::IPAddress& addr)
+	void GameClientMgr::set_listen_addr(const net::IPAddress& addr)
 	{
 		listen_addr_ = addr;
 	}

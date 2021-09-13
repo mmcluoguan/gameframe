@@ -1,10 +1,9 @@
-﻿#include "shynet/thread/AcceptThread.h"
+#include "shynet/thread/AcceptThread.h"
 #include <cstring>
 #include "shynet/net/ListenEvent.h"
 #include "shynet/net/AcceptHeartbeat.h"
 #include "shynet/net/AcceptIoBuffer.h"
-#include "shynet/Logger.h"
-#include "shynet/Utility.h"
+#include "shynet/utils/Logger.h"
 
 namespace shynet {
 
@@ -69,12 +68,12 @@ namespace shynet {
 						LOG_WARN << "the connection is blocked";
 					}
 					else {
-						iobuf->newfd(apnewfd);
+						iobuf->set_newfd(apnewfd);
 						if (apnewfd->enableHeart()) {
 							std::shared_ptr<net::AcceptHeartbeat> ht(
 								new net::AcceptHeartbeat(apnewfd, { apnewfd->heart_second() ,0L }));
-							Singleton<net::TimerReactorMgr>::instance().add(ht);
-							apnewfd->heart(ht);
+							utils::Singleton<net::TimerReactorMgr>::instance().add(ht);
+							apnewfd->set_heart(ht);
 						}
 					}
 				}
@@ -105,7 +104,7 @@ namespace shynet {
 			return eventTot_;
 		}
 
-		void AcceptThread::event_tot(int v) {
+		void AcceptThread::set_event_tot(int v) {
 			eventTot_ = v;
 		}
 

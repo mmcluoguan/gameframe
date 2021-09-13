@@ -1,4 +1,4 @@
-﻿#pragma once
+#pragma once
 #include <memory>
 #include "shynet/events/EventBuffer.h"
 #include "shynet/net/AcceptHeartbeat.h"
@@ -85,7 +85,7 @@ namespace shynet {
 			* 心跳计时器
 			*/
 			std::weak_ptr<AcceptHeartbeat> heart() const;
-			void  heart(std::weak_ptr<AcceptHeartbeat> heart);
+			void  set_heart(std::weak_ptr<AcceptHeartbeat> heart);
 		private:
 			std::shared_ptr<IPAddress> remote_addr_ = nullptr;
 			std::shared_ptr<IPAddress> listen_addr_ = nullptr;

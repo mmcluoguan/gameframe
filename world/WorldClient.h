@@ -33,7 +33,7 @@ namespace world {
 		int connect_num() const {
 			return connect_num_;
 		}
-		void connect_num(int value) {
+		void set_connect_num(int value) {
 			connect_num_ = value;
 		}
 	private:

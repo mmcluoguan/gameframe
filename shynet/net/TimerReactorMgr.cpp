@@ -1,4 +1,4 @@
-﻿#include "shynet/net/TimerReactorMgr.h"
+#include "shynet/net/TimerReactorMgr.h"
 #include "shynet/pool/ThreadPool.h"
 #include "shynet/thread/TimerThread.h"
 
@@ -14,7 +14,7 @@ namespace shynet {
 		}
 
 		void TimerReactorMgr::notify(const void* data, size_t len) {
-			std::shared_ptr<thread::TimerThread> tth = Singleton<pool::ThreadPool>::get_instance().timerTh().lock();
+			std::shared_ptr<thread::TimerThread> tth = utils::Singleton<pool::ThreadPool>::get_instance().timerTh().lock();
 			if (tth != nullptr) {
 				tth->notify(data, len);
 			}

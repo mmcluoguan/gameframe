@@ -26,6 +26,6 @@ namespace world {
 	std::shared_ptr<DbConnector> ConnectorMgr::find_dbctor(int connectid)
 	{
 		return std::dynamic_pointer_cast<DbConnector>(
-			shynet::Singleton<net::ConnectReactorMgr>::instance().find(connectid));
+			shynet::utils::Singleton<net::ConnectReactorMgr>::instance().find(connectid));
 	}	
 }

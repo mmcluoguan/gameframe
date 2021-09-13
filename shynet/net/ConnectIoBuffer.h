@@ -1,4 +1,4 @@
-﻿#pragma once
+#pragma once
 #include "shynet/events/EventBufferSsl.h"
 #include "shynet/net/ConnectEvent.h"
 
@@ -13,7 +13,7 @@ namespace shynet
 			~ConnectIoBuffer();
 
 			std::weak_ptr<ConnectEvent> cnev() const;
-			void cnev(std::weak_ptr<ConnectEvent> newfd);
+			void set_cnev(std::weak_ptr<ConnectEvent> newfd);
 
 			void io_readcb();
 			void io_writecb();

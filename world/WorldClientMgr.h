@@ -2,7 +2,7 @@
 #include <memory>
 #include <mutex>
 #include <unordered_map>
-#include "shynet/Singleton.h"
+#include "shynet/utils/Singleton.h"
 #include "world/WorldClient.h"
 
 namespace world {
@@ -10,7 +10,7 @@ namespace world {
 	/// 世界服连接管理器
 	/// </summary>
 	class WorldClientMgr final : public shynet::Nocopy {
-		friend class shynet::Singleton<WorldClientMgr>;
+		friend class shynet::utils::Singleton<WorldClientMgr>;
 		WorldClientMgr();
 	public:
 		~WorldClientMgr();
@@ -32,7 +32,7 @@ namespace world {
 		* 获取设置世界服务器监听地址
 		*/
 		const net::IPAddress& listen_addr() const;
-		void listen_addr(const net::IPAddress& addr);
+		void set_listen_addr(const net::IPAddress& addr);
 
 		/*
 		* 负载均衡选择gamesid

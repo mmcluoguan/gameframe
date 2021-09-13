@@ -32,24 +32,24 @@ namespace gate {
 		* 获取设置玩家账号id
 		*/
 		void accountid(std::string t);
-		std::string accountid() const;
+		std::string set_accountid() const;
 		/*
 		* 获取设置玩家平台key
 		*/
 		void platform_key(std::string t);
-		std::string platform_key() const;
+		std::string set_platform_key() const;
 
 		/*
 		* 获取设置选择的登录服id
 		*/
 		void login_id(int t);
-		int login_id() const;
+		int set_login_id() const;
 
 		/*
 		* 获取设置选择的游戏服id
 		*/
 		void game_id(int t);
-		int game_id() const;
+		int set_game_id() const;
 	private:
 		/*
 		* 到登陆消息处理

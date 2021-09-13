@@ -1,4 +1,4 @@
-﻿#pragma once
+#pragma once
 #include "shynet/events/EventBuffer.h"
 #include "shynet/thread/Thread.h"
 
@@ -11,7 +11,7 @@ namespace shynet {
 			~AcceptThread();
 
 			int event_tot() const;
-			void event_tot(int v);
+			void set_event_tot(int v);
 
 			int run() override;
 			int stop() override;

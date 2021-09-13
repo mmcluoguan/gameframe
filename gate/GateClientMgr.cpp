@@ -14,7 +14,7 @@ namespace gate {
 		clis_.insert({ k,v });
 
 		//通知lua的onAccept函数
-		shynet::Singleton<lua::LuaEngine>::get_instance().append(
+		shynet::utils::Singleton<lua::LuaEngine>::get_instance().append(
 			std::make_shared<frmpub::OnAcceptTask<GateClient>>(v));
 	}
 
@@ -23,7 +23,7 @@ namespace gate {
 		if (clis_.erase(k) > 0) {
 
 			//通知lua的onClose函数
-			shynet::Singleton<lua::LuaEngine>::get_instance().append(
+			shynet::utils::Singleton<lua::LuaEngine>::get_instance().append(
 				std::make_shared<frmpub::OnCloseTask>(k));
 
 			return true;
@@ -39,8 +39,8 @@ namespace gate {
 	std::shared_ptr<GateClient> GateClientMgr::find(const std::string& key) {
 		std::lock_guard<std::mutex> lock(clis_mutex_);
 		for (auto& iter : clis_) {
-			if (iter.second->accountid() == key ||
-				iter.second->platform_key() == key) {
+			if (iter.second->set_accountid() == key ||
+				iter.second->set_platform_key() == key) {
 				return iter.second;
 			}
 		}
@@ -55,7 +55,7 @@ namespace gate {
 	const net::IPAddress& GateClientMgr::listen_addr() const {
 		return listen_addr_;
 	}
-	void GateClientMgr::listen_addr(const net::IPAddress& addr) {
+	void GateClientMgr::set_listen_addr(const net::IPAddress& addr) {
 		listen_addr_ = addr;
 	}
 }

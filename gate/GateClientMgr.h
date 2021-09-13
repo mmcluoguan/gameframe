@@ -2,7 +2,7 @@
 #include <memory>
 #include <mutex>
 #include <unordered_map>
-#include "shynet/Singleton.h"
+#include "shynet/utils/Singleton.h"
 #include "gate/GateClient.h"
 
 namespace gate {
@@ -10,7 +10,7 @@ namespace gate {
 	/// 网关服连接管理器
 	/// </summary>
 	class GateClientMgr final : public shynet::Nocopy {
-		friend class shynet::Singleton<GateClientMgr>;
+		friend class shynet::utils::Singleton<GateClientMgr>;
 		GateClientMgr();
 	public:
 		~GateClientMgr();
@@ -36,7 +36,7 @@ namespace gate {
 		* 获取设置登录服务器监听地址
 		*/
 		const net::IPAddress& listen_addr() const;
-		void listen_addr(const net::IPAddress& addr);
+		void set_listen_addr(const net::IPAddress& addr);
 
 	private:
 		net::IPAddress listen_addr_;

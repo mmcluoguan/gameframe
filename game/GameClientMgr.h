@@ -1,8 +1,8 @@
-﻿#pragma once
+#pragma once
 #include <memory>
 #include <mutex>
 #include <unordered_map>
-#include "shynet/Singleton.h"
+#include "shynet/utils/Singleton.h"
 #include "game/GameClient.h"
 
 namespace game
@@ -12,7 +12,7 @@ namespace game
 	/// </summary>
 	class GameClientMgr final : public shynet::Nocopy
 	{
-		friend class shynet::Singleton<GameClientMgr>;
+		friend class shynet::utils::Singleton<GameClientMgr>;
 		GameClientMgr();
 	public:
 		~GameClientMgr();
@@ -34,7 +34,7 @@ namespace game
 		* 获取设置游戏服务器监听地址
 		*/
 		const net::IPAddress& listen_addr() const;
-		void listen_addr(const net::IPAddress& addr);
+		void set_listen_addr(const net::IPAddress& addr);
 	private:
 		net::IPAddress listen_addr_;
 		mutable std::mutex clis_mutex_;

@@ -1,4 +1,4 @@
-﻿#pragma once
+#pragma once
 #include <list>
 #include <memory>
 #include <mutex>
@@ -14,7 +14,7 @@
 #include "shynet/thread/LuaThread.h"
 #include "shynet/thread/InotifyThread.h"
 #include "shynet/task/Task.h"
-#include "shynet/Singleton.h"
+#include "shynet/utils/Singleton.h"
 
 namespace shynet {
 	namespace pool {
@@ -22,7 +22,7 @@ namespace shynet {
 		/// 线程池
 		/// </summary>
 		class ThreadPool final : public Nocopy {
-			friend class Singleton<ThreadPool>;
+			friend class utils::Singleton<ThreadPool>;
 
 			/// <summary>
 			/// 初始化线程池

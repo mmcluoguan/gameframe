@@ -1,6 +1,4 @@
-﻿#include "shynet/net/AcceptNewFd.h"
-#include "shynet/Utility.h"
-#include "shynet/Logger.h"
+#include "shynet/net/AcceptNewFd.h"
 
 namespace shynet {
 	namespace net {
@@ -44,7 +42,7 @@ namespace shynet {
 			return heart_;
 		}
 
-		void AcceptNewFd::heart(std::weak_ptr<AcceptHeartbeat> heart) {
+		void AcceptNewFd::set_heart(std::weak_ptr<AcceptHeartbeat> heart) {
 			heart_ = heart;
 		}
 

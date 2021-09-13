@@ -1,7 +1,6 @@
-﻿#include "frmpub/Client.h"
+#include "frmpub/Client.h"
 #include <cstring>
-#include "shynet/Logger.h"
-#include "shynet/Utility.h"
+#include "shynet/utils/Logger.h"
 
 namespace frmpub {
 	Client::Client(std::shared_ptr<net::IPAddress> remote_addr,
@@ -38,7 +37,7 @@ namespace frmpub {
 	protocc::ServerInfo Client::sif() const {
 		return sif_;
 	}
-	void Client::sif(const protocc::ServerInfo& v) {
+	void Client::set_sif(const protocc::ServerInfo& v) {
 		sif_ = v;
 	}
 }

@@ -1,4 +1,4 @@
-﻿#pragma once
+#pragma once
 #include "shynet/net/AcceptNewFd.h"
 #include "shynet/events/EventBuffer.h"
 #include "frmpub/FilterData.h"
@@ -51,7 +51,7 @@ namespace frmpub {
 		* 获取或设置连接的客户端的监听的服务信息
 		*/
 		protocc::ServerInfo sif() const;
-		void sif(const protocc::ServerInfo& v);
+		void set_sif(const protocc::ServerInfo& v);
 	private:
 		protocc::ServerInfo sif_;
 		bool active_ = false;

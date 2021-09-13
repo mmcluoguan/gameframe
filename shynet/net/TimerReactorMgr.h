@@ -1,13 +1,13 @@
-﻿#pragma once
+#pragma once
 #include <mutex>
 #include <unordered_map>
 #include "shynet/net/TimerEvent.h"
-#include "shynet/Singleton.h"
+#include "shynet/utils/Singleton.h"
 
 namespace shynet {
 	namespace net {
 		class TimerReactorMgr final : public Nocopy {
-			friend class Singleton<TimerReactorMgr>;
+			friend class utils::Singleton<TimerReactorMgr>;
 			TimerReactorMgr();
 		public:
 			~TimerReactorMgr();

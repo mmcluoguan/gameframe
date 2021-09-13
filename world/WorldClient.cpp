@@ -1,13 +1,7 @@
 #include "world/WorldClient.h"
 #include <cstring>
 #include "shynet/lua/LuaEngine.h"
-#include "shynet/Logger.h"
-#include "shynet/Utility.h"
 #include "frmpub/LuaCallBackTask.h"
-#include "frmpub/protocc/world.pb.h"
-#include "frmpub/protocc/login.pb.h"
-#include "frmpub/protocc/game.pb.h"
-#include "frmpub/protocc/gate.pb.h"
 #include "world/WorldClientMgr.h"
 
 namespace world {
@@ -64,7 +58,7 @@ namespace world {
 			}
 			else {
 				//通知lua的onMessage函数
-				shynet::Singleton<lua::LuaEngine>::get_instance().append(
+				shynet::utils::Singleton<lua::LuaEngine>::get_instance().append(
 					std::make_shared<frmpub::OnMessageTask<WorldClient>>(shared_from_this(), obj, enves));
 			}
 		}
@@ -73,7 +67,7 @@ namespace world {
 
 	void WorldClient::close(bool active) {
 		frmpub::Client::close(active);
-		shynet::Singleton<WorldClientMgr>::instance().remove(iobuf()->fd());
+		shynet::utils::Singleton<WorldClientMgr>::instance().remove(iobuf()->fd());
 	}
 
 	int WorldClient::errcode(std::shared_ptr<protocc::CommonObject> data, std::shared_ptr<std::stack<FilterData::Envelope>> enves) {
@@ -96,7 +90,7 @@ namespace world {
 			LOG_DEBUG << frmpub::Basic::connectname(protocc::ServerType::LOGIN) << "注册"
 				<< " sid:" << msgc.sif().sid() << " ["
 				<< msgc.sif().ip() << ":" << msgc.sif().port() << "]";
-			sif(msgc.sif());
+			set_sif(msgc.sif());
 			protocc::register_login_world_s msgs;
 			msgs.set_result(0);
 			send_proto(protocc::REGISTER_LOGIN_WORLD_S, &msgs);
@@ -106,7 +100,7 @@ namespace world {
 			protocc::ServerInfo* sif = msgg.mutable_sif();
 			*sif = this->sif();
 
-			auto clis = shynet::Singleton<WorldClientMgr>::instance().clis();
+			auto clis = shynet::utils::Singleton<WorldClientMgr>::instance().clis();
 			for (auto& it : clis) {
 				if (it.second->sif().st() == protocc::ServerType::GATE) {
 					it.second->send_proto(protocc::SERONLINE_WORLD_GATE_G, &msgg);
@@ -127,7 +121,7 @@ namespace world {
 			LOG_DEBUG << frmpub::Basic::connectname(protocc::ServerType::GAME) << "注册"
 				<< " sid:" << msgc.sif().sid() << " ["
 				<< msgc.sif().ip() << ":" << msgc.sif().port() << "]";
-			sif(msgc.sif());
+			set_sif(msgc.sif());
 			protocc::register_game_world_s msgs;
 			msgs.set_result(0);
 			send_proto(protocc::REGISTER_GAME_WORLD_S, &msgs);
@@ -137,7 +131,7 @@ namespace world {
 			protocc::ServerInfo* sif = msgg.mutable_sif();
 			*sif = this->sif();
 
-			auto clis = shynet::Singleton<WorldClientMgr>::instance().clis();
+			auto clis = shynet::utils::Singleton<WorldClientMgr>::instance().clis();
 			for (auto& it : clis) {
 				if (it.second->sif().st() == protocc::ServerType::GATE) {
 					it.second->send_proto(protocc::SERONLINE_WORLD_GATE_G, &msgg);
@@ -158,12 +152,12 @@ namespace world {
 			LOG_DEBUG << frmpub::Basic::connectname(protocc::ServerType::GATE) << "注册"
 				<< " sid:" << msgc.sif().sid() << " ["
 				<< msgc.sif().ip() << ":" << msgc.sif().port() << "]";
-			sif(msgc.sif());
+			set_sif(msgc.sif());
 
 			//返回已经在世界服注册的游戏和登录服务器信息
 			protocc::register_gate_world_s msgs;
 			msgs.set_result(0);
-			auto clis = shynet::Singleton<WorldClientMgr>::instance().clis();
+			auto clis = shynet::utils::Singleton<WorldClientMgr>::instance().clis();
 			for (auto& it : clis) {
 				if (it.second->sif().st() == protocc::ServerType::GAME ||
 					it.second->sif().st() == protocc::ServerType::LOGIN) {
@@ -197,7 +191,7 @@ namespace world {
 	{
 		if (data->extend().empty() == false &&
 			data->extend() == "0") {
-			auto game = shynet::Singleton<WorldClientMgr>::instance().select_game();
+			auto game = shynet::utils::Singleton<WorldClientMgr>::instance().select_game();
 			if (game != nullptr)
 			{
 				data->set_extend(std::to_string(game->sif().sid()));

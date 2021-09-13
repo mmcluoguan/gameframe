@@ -1,9 +1,9 @@
-﻿#include "dbvisit/StdinHandler.h"
+#include "dbvisit/StdinHandler.h"
 #include <cstring>
 #include <unistd.h>
 #include <tuple>
-#include "shynet/Logger.h"
-#include "shynet/Utility.h"
+#include "shynet/utils/StringOp.h"
+#include "shynet/utils/Logger.h"
 
 namespace dbvisit
 {
@@ -38,9 +38,9 @@ namespace dbvisit
 					std::placeholders::_1,std::placeholders::_2,std::placeholders::_3,std::placeholders::_4)),
 			};
 
-			char* order = shynet::Utility::trim(msg);
+			char* order = shynet::utils::StringOp::trim(msg);
 			char* argv[20] = { 0 };
-			int argc = shynet::Utility::spilt(order, " ", argv, 20);
+			int argc = shynet::utils::StringOp::split(order, " ", argv, 20);
 			if (argc > 0)
 			{
 				bool flag = false;

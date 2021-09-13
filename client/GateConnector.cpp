@@ -73,7 +73,7 @@ namespace client {
 
 			std::shared_ptr<GateReConnctorTimer> reconnect(
 				new GateReConnctorTimer(connect_addr(), disconnect_data(), { 3L,0L }));
-			shynet::Singleton<net::TimerReactorMgr>::instance().add(reconnect);
+			shynet::utils::Singleton<net::TimerReactorMgr>::instance().add(reconnect);
 		}
 	}
 	void GateConnector::complete() {

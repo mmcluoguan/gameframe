@@ -1,7 +1,7 @@
 #pragma once
 #include <rapidjson/document.h>
-#include "frmpub/protocc/common.pb.h"
 #include "shynet/protocol/FilterProces.h"
+#include "frmpub/Basic.h"
 
 namespace frmpub {
 	/// <summary>

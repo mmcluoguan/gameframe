@@ -1,4 +1,4 @@
-﻿#include "dbvisit/DbServer.h"
+#include "dbvisit/DbServer.h"
 #include "shynet/net/TimerReactorMgr.h"
 #include "shynet/lua/LuaEngine.h"
 #include "dbvisit/DbClient.h"
@@ -10,7 +10,7 @@ namespace dbvisit
 		net::ListenEvent(listen_addr)
 	{
 		LOG_INFO << "服务器dbvisit启动 [ip:" << listen_addr->ip() << ":" << listen_addr->port() << "]";
-		shynet::Singleton<DbClientMgr>::instance().listen_addr(*listenaddr());
+		shynet::utils::Singleton<DbClientMgr>::instance().set_listen_addr(*listenaddr());
 	}
 
 	DbServer::~DbServer()
@@ -23,7 +23,7 @@ namespace dbvisit
 		std::shared_ptr<events::EventBuffer> iobuf)
 	{
 		std::shared_ptr<DbClient> cli(new DbClient(remote_addr, listenaddr(), iobuf));
-		shynet::Singleton<DbClientMgr>::instance().add(iobuf->fd(), cli);
+		shynet::utils::Singleton<DbClientMgr>::instance().add(iobuf->fd(), cli);
 
 		return cli;
 	}

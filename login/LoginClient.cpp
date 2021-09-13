@@ -1,12 +1,7 @@
 #include "login/LoginClient.h"
 #include <cstring>
 #include "shynet/lua/LuaEngine.h"
-#include "shynet/Logger.h"
-#include "shynet/Utility.h"
 #include "frmpub/LuaCallBackTask.h"
-#include "frmpub/protocc/gate.pb.h"
-#include "frmpub/protocc/client.pb.h"
-#include "frmpub/protocc/dbvisit.pb.h"
 #include "login/ConnectorMgr.h"
 #include "login/LoginClientMgr.h"
 
@@ -64,7 +59,7 @@ namespace login {
 			}
 			else {
 				//通知lua的onMessage函数
-				shynet::Singleton<lua::LuaEngine>::get_instance().append(
+				shynet::utils::Singleton<lua::LuaEngine>::get_instance().append(
 					std::make_shared<frmpub::OnMessageTask<LoginClient>>(shared_from_this(), obj, enves));
 			}
 		}
@@ -73,7 +68,7 @@ namespace login {
 
 	void LoginClient::close(bool active) {
 		frmpub::Client::close(active);
-		shynet::Singleton<LoginClientMgr>::instance().remove(iobuf()->fd());
+		shynet::utils::Singleton<LoginClientMgr>::instance().remove(iobuf()->fd());
 	}
 
 	int LoginClient::errcode(std::shared_ptr<protocc::CommonObject> data, std::shared_ptr<std::stack<FilterData::Envelope>> enves) {
@@ -96,7 +91,7 @@ namespace login {
 			LOG_DEBUG << frmpub::Basic::connectname(protocc::ServerType::GATE) << "注册"
 				<< " sid:" << msgc.sif().sid() << " ["
 				<< msgc.sif().ip() << ":" << msgc.sif().port() << "]";
-			sif(msgc.sif());
+			set_sif(msgc.sif());
 			protocc::register_gate_login_s msgs;
 			msgs.set_result(0);
 			send_proto(protocc::REGISTER_GATE_LOGIN_S, &msgs);
@@ -118,7 +113,7 @@ namespace login {
 
 	int LoginClient::forward_client_gate_c(std::shared_ptr<protocc::CommonObject> data,
 		std::shared_ptr<std::stack<FilterData::Envelope>> enves) {
-		std::shared_ptr<DbConnector> db = shynet::Singleton<ConnectorMgr>::instance().db_connector();
+		std::shared_ptr<DbConnector> db = shynet::utils::Singleton<ConnectorMgr>::instance().db_connector();
 		if (db != nullptr) {
 			FilterData::Envelope enve;
 			enve.fd = iobuf()->fd();
@@ -151,7 +146,7 @@ namespace login {
 	{
 		protocc::createrole_client_gate_s msgc;
 		if (msgc.ParseFromString(data->msgdata()) == true) {
-			std::shared_ptr<DbConnector> db = shynet::Singleton<ConnectorMgr>::instance().db_connector();
+			std::shared_ptr<DbConnector> db = shynet::utils::Singleton<ConnectorMgr>::instance().db_connector();
 			if (db != nullptr) {
 				protocc::updata_to_dbvisit_c updata;
 				updata.set_cache_key("account_" + msgc.aid());

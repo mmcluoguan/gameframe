@@ -1,4 +1,4 @@
-﻿#pragma once
+#pragma once
 #include "shynet/net/IPAddress.h"
 #include "shynet/net/TimerEvent.h"
 

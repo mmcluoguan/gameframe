@@ -1,9 +1,7 @@
 #include "gate/LuaWrapper.h"
-#include "shynet/IniConfig.h"
-#include "shynet/Singleton.h"
+#include "shynet/utils/IniConfig.h"
 #include "gate/GateServer.h"
 #include "gate/GateClient.h"
-#include "gate/DbConnector.h"
 #include "gate/WorldConnector.h"
 #include "gate/LoginConnector.h"
 #include "gate/GameConnector.h"
@@ -34,7 +32,7 @@ namespace gate {
 		);
 
 		//载入lua文件
-		shynet::IniConfig& ini = shynet::Singleton<shynet::IniConfig>::get_instance();
+		shynet::utils::IniConfig& ini = shynet::utils::Singleton<shynet::utils::IniConfig>::get_instance();
 		std::string luafile = ini.get<const char*, std::string>("gate", "luafile", "lua/gate/gate_main.lua");
 		state.dofile(luafile);
 	}

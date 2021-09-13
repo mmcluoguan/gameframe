@@ -14,7 +14,7 @@ namespace world {
 		clis_.insert({ k,v });
 
 		//通知lua的onAccept函数
-		shynet::Singleton<lua::LuaEngine>::get_instance().append(
+		shynet::utils::Singleton<lua::LuaEngine>::get_instance().append(
 			std::make_shared<frmpub::OnAcceptTask<WorldClient>>(v));
 	}
 
@@ -23,7 +23,7 @@ namespace world {
 		if (clis_.erase(k) > 0) {
 
 			//通知lua的onClose函数
-			shynet::Singleton<lua::LuaEngine>::get_instance().append(
+			shynet::utils::Singleton<lua::LuaEngine>::get_instance().append(
 				std::make_shared<frmpub::OnCloseTask>(k));
 
 			return true;
@@ -43,7 +43,7 @@ namespace world {
 	const net::IPAddress& WorldClientMgr::listen_addr() const {
 		return listen_addr_;
 	}
-	void WorldClientMgr::listen_addr(const net::IPAddress& addr) {
+	void WorldClientMgr::set_listen_addr(const net::IPAddress& addr) {
 		listen_addr_ = addr;
 	}
 
@@ -65,7 +65,7 @@ namespace world {
 		}
 		if (game != nullptr) {
 
-			game->connect_num(game->connect_num() + 1);
+			game->set_connect_num(game->connect_num() + 1);
 		}
 		return game;
 	}

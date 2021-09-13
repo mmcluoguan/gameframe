@@ -1,4 +1,4 @@
-﻿#pragma once
+#pragma once
 #include "frmpub/Connector.h"
 
 namespace game {

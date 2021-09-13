@@ -1,4 +1,5 @@
-﻿#include "shynet/net/ListenReactorMgr.h"
+#include "shynet/net/ListenReactorMgr.h"
+#include "shynet/utils/Logger.h"
 
 namespace shynet {
 	namespace net {
@@ -10,7 +11,7 @@ namespace shynet {
 		}
 
 		void ListenReactorMgr::notify(const void* data, size_t len) {
-			std::shared_ptr<thread::ListenThread> lth = Singleton<pool::ThreadPool>::get_instance().listernTh().lock();
+			std::shared_ptr<thread::ListenThread> lth = utils::Singleton<pool::ThreadPool>::get_instance().listernTh().lock();
 			if (lth != nullptr) {
 				lth->notify(data, len);
 			}
@@ -24,7 +25,7 @@ namespace shynet {
 				std::lock_guard<std::mutex> lock(les_mutex_);
 				serverid++;
 				les_.insert({ serverid,v });
-				v->serverid(serverid);
+				v->set_serverid(serverid);
 			}
 			notify(&serverid, sizeof(serverid));
 			return serverid;

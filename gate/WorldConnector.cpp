@@ -1,7 +1,7 @@
 #include "gate/WorldConnector.h"
 #include "shynet/net/ConnectReactorMgr.h"
 #include "shynet/lua/LuaEngine.h"
-#include "shynet/IniConfig.h"
+#include "shynet/utils/IniConfig.h"
 #include "frmpub/ReConnectTimer.h"
 #include "frmpub/LuaCallBackTask.h"
 #include "frmpub/protocc/gate.pb.h"
@@ -47,24 +47,24 @@ namespace gate {
 			LOG_INFO << "3秒后开始重连";
 			std::shared_ptr<frmpub::ReConnectTimer<WorldConnector>> reconnect(
 				new frmpub::ReConnectTimer<WorldConnector>(connect_addr(), { 3L,0L }));
-			shynet::Singleton<net::TimerReactorMgr>::instance().add(reconnect);
+			shynet::utils::Singleton<net::TimerReactorMgr>::instance().add(reconnect);
 		}
 	}
 	void WorldConnector::complete() {
 		LOG_INFO << "连接服务器world成功 [ip:" << connect_addr()->ip() << ":" << connect_addr()->port() << "]";
-		shynet::Singleton<ConnectorMgr>::instance().add_worldctor(connectid());
+		shynet::utils::Singleton<ConnectorMgr>::instance().add_worldctor(connectid());
 
 		//通知lua的onConnect函数
-		shynet::Singleton<lua::LuaEngine>::get_instance().append(
+		shynet::utils::Singleton<lua::LuaEngine>::get_instance().append(
 			std::make_shared<frmpub::OnConnectorTask<WorldConnector>>(shared_from_this()));
 
 		//向世界服注册网关服信息
 		protocc::register_gate_world_c msgc;
 		protocc::ServerInfo* sif = msgc.mutable_sif();
-		sif->set_ip(shynet::Singleton<GateClientMgr>::instance().listen_addr().ip());
-		sif->set_port(shynet::Singleton<GateClientMgr>::instance().listen_addr().port());
+		sif->set_ip(shynet::utils::Singleton<GateClientMgr>::instance().listen_addr().ip());
+		sif->set_port(shynet::utils::Singleton<GateClientMgr>::instance().listen_addr().port());
 		sif->set_st(protocc::ServerType::GATE);
-		shynet::IniConfig& ini = shynet::Singleton<shynet::IniConfig>::get_instance();
+		shynet::utils::IniConfig& ini = shynet::utils::Singleton<shynet::utils::IniConfig>::get_instance();
 		int sid = ini.get<int, int>("gate", "sid", 1);
 		sif->set_sid(sid);
 		std::string name = ini.get<const char*, std::string>("gate", "name", "");
@@ -84,7 +84,7 @@ namespace gate {
 				}
 				else {
 					//通知lua的onMessage函数
-					shynet::Singleton<lua::LuaEngine>::get_instance().append(
+					shynet::utils::Singleton<lua::LuaEngine>::get_instance().append(
 						std::make_shared<frmpub::OnMessageTask<WorldConnector>>(shared_from_this(), obj, enves));
 				}
 			}
@@ -94,10 +94,10 @@ namespace gate {
 
 	void WorldConnector::close(net::ConnectEvent::CloseType active) {
 		//通知lua的onClose函数
-		shynet::Singleton<lua::LuaEngine>::get_instance().append(
+		shynet::utils::Singleton<lua::LuaEngine>::get_instance().append(
 			std::make_shared<frmpub::OnCloseTask>(fd()));
 
-		shynet::Singleton<ConnectorMgr>::instance().remove_worldctor(connectid());
+		shynet::utils::Singleton<ConnectorMgr>::instance().remove_worldctor(connectid());
 		Connector::close(active);
 	}
 
@@ -108,7 +108,7 @@ namespace gate {
 			if (enves->empty() == false) {
 				FilterData::Envelope& env = enves->top();
 				enves->pop();
-				std::shared_ptr<GateClient> client = shynet::Singleton<GateClientMgr>::instance().find(env.fd);
+				std::shared_ptr<GateClient> client = shynet::utils::Singleton<GateClientMgr>::instance().find(env.fd);
 				if (client != nullptr) {
 					client->send_proto(data.get(), enves.get());
 				}
@@ -135,31 +135,31 @@ namespace gate {
 			for (int i = 0; i < msgc.sifs_size(); i++) {
 				const protocc::ServerInfo& sif = msgc.sifs(i);
 				if (sif.st() == protocc::ServerType::GAME) {
-					if (shynet::Singleton<net::ConnectReactorMgr>::instance()
+					if (shynet::utils::Singleton<net::ConnectReactorMgr>::instance()
 						.find(sif.ip(), (unsigned short)sif.port()) == nullptr) {
 						std::shared_ptr<GameConnector> game(
 							new GameConnector(std::shared_ptr<net::IPAddress>(
 								new net::IPAddress(sif.ip().c_str(), (unsigned short)sif.port())
 								)));
 						//连接游戏服务器
-						int gameid = shynet::Singleton<net::ConnectReactorMgr>::instance().add(game);
+						int gameid = shynet::utils::Singleton<net::ConnectReactorMgr>::instance().add(game);
 						game->game_conncet_id(gameid);
 
-						shynet::Singleton<ConnectorMgr>::instance().add_new_connect_data(gameid, sif);
+						shynet::utils::Singleton<ConnectorMgr>::instance().add_new_connect_data(gameid, sif);
 					}
 				}
 				else if (sif.st() == protocc::ServerType::LOGIN) {
-					if (shynet::Singleton<net::ConnectReactorMgr>::instance()
+					if (shynet::utils::Singleton<net::ConnectReactorMgr>::instance()
 						.find(sif.ip(), (unsigned short)sif.port()) == nullptr) {
 						std::shared_ptr<LoginConnector> login(
 							new LoginConnector(std::shared_ptr<net::IPAddress>(
 								new net::IPAddress(sif.ip().c_str(), (unsigned short)sif.port())
 								)));
 						//连接登录服务器
-						int loginid = shynet::Singleton<net::ConnectReactorMgr>::instance().add(login);
+						int loginid = shynet::utils::Singleton<net::ConnectReactorMgr>::instance().add(login);
 						login->login_conncet_id(loginid);
 
-						shynet::Singleton<ConnectorMgr>::instance().add_new_connect_data(loginid, sif);
+						shynet::utils::Singleton<ConnectorMgr>::instance().add_new_connect_data(loginid, sif);
 					}
 				}
 				else {
@@ -183,31 +183,31 @@ namespace gate {
 		if (msgc.ParseFromString(data->msgdata()) == true) {
 			const protocc::ServerInfo& sif = msgc.sif();
 			if (sif.st() == protocc::ServerType::GAME) {
-				if (shynet::Singleton<net::ConnectReactorMgr>::instance()
+				if (shynet::utils::Singleton<net::ConnectReactorMgr>::instance()
 					.find(sif.ip(), (unsigned short)sif.port()) == nullptr) {
 					std::shared_ptr<GameConnector> game(
 						new GameConnector(std::shared_ptr<net::IPAddress>(
 							new net::IPAddress(sif.ip().c_str(), (unsigned short)sif.port())
 							)));
 					//连接游戏服务器
-					int gameid = shynet::Singleton<net::ConnectReactorMgr>::instance().add(game);
+					int gameid = shynet::utils::Singleton<net::ConnectReactorMgr>::instance().add(game);
 					game->game_conncet_id(gameid);
 
-					shynet::Singleton<ConnectorMgr>::instance().add_new_connect_data(gameid, sif);
+					shynet::utils::Singleton<ConnectorMgr>::instance().add_new_connect_data(gameid, sif);
 				}
 			}
 			else if (sif.st() == protocc::ServerType::LOGIN) {
-				if (shynet::Singleton<net::ConnectReactorMgr>::instance()
+				if (shynet::utils::Singleton<net::ConnectReactorMgr>::instance()
 					.find(sif.ip(), (unsigned short)sif.port()) == nullptr) {
 					std::shared_ptr<LoginConnector> login(
 						new LoginConnector(std::shared_ptr<net::IPAddress>(
 							new net::IPAddress(sif.ip().c_str(), (unsigned short)sif.port())
 							)));
 					//连接登录服务器
-					int loginid = shynet::Singleton<net::ConnectReactorMgr>::instance().add(login);
+					int loginid = shynet::utils::Singleton<net::ConnectReactorMgr>::instance().add(login);
 					login->login_conncet_id(loginid);
 
-					shynet::Singleton<ConnectorMgr>::instance().add_new_connect_data(loginid, sif);
+					shynet::utils::Singleton<ConnectorMgr>::instance().add_new_connect_data(loginid, sif);
 				}
 			}
 			else {
@@ -229,7 +229,7 @@ namespace gate {
 		if (enves->empty() == false) {
 			FilterData::Envelope& env = enves->top();
 			enves->pop();
-			std::shared_ptr<GateClient> client = shynet::Singleton<GateClientMgr>::instance().find(env.fd);
+			std::shared_ptr<GateClient> client = shynet::utils::Singleton<GateClientMgr>::instance().find(env.fd);
 			if (client != nullptr) {
 				client->send_proto(data.get(), enves.get());
 				LOG_DEBUG << "转发消息" << frmpub::Basic::msgname(data->msgid())

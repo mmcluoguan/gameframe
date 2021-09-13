@@ -1,11 +1,11 @@
-﻿#pragma once
+#pragma once
 #include <mutex>
 #include <unordered_map>
-#include "shynet/Singleton.h"
+#include "shynet/utils/Singleton.h"
 
 namespace dbvisit {
 	class DataTimerMgr : public shynet::Nocopy {
-		friend class shynet::Singleton<DataTimerMgr>;
+		friend class shynet::utils::Singleton<DataTimerMgr>;
 		DataTimerMgr();
 	public:
 		~DataTimerMgr();

@@ -1,11 +1,9 @@
 #include "gate/GameConnector.h"
 #include "shynet/net/ConnectReactorMgr.h"
 #include "shynet/lua/LuaEngine.h"
-#include "shynet/IniConfig.h"
+#include "shynet/utils/IniConfig.h"
 #include "frmpub/ReConnectTimer.h"
 #include "frmpub/LuaCallBackTask.h"
-#include "frmpub/protocc/gate.pb.h"
-#include "frmpub/protocc/common.pb.h"
 #include "gate/ConnectorMgr.h"
 #include "gate/GateClientMgr.h"
 
@@ -38,16 +36,16 @@ namespace gate {
 		LOG_INFO << "连接服务器game成功 [ip:" << connect_addr()->ip() << ":" << connect_addr()->port() << "]";
 
 		//通知lua的onConnect函数
-		shynet::Singleton<lua::LuaEngine>::get_instance().append(
+		shynet::utils::Singleton<lua::LuaEngine>::get_instance().append(
 			std::make_shared<frmpub::OnConnectorTask<GameConnector>>(shared_from_this()));
 
 		//向游戏服注册服务器信息
 		protocc::register_gate_game_c msgc;
 		protocc::ServerInfo* sif = msgc.mutable_sif();
-		sif->set_ip(shynet::Singleton<GateClientMgr>::instance().listen_addr().ip());
-		sif->set_port(shynet::Singleton<GateClientMgr>::instance().listen_addr().port());
+		sif->set_ip(shynet::utils::Singleton<GateClientMgr>::instance().listen_addr().ip());
+		sif->set_port(shynet::utils::Singleton<GateClientMgr>::instance().listen_addr().port());
 		sif->set_st(protocc::ServerType::GATE);
-		shynet::IniConfig& ini = shynet::Singleton<shynet::IniConfig>::get_instance();
+		shynet::utils::IniConfig& ini = shynet::utils::Singleton<shynet::utils::IniConfig>::get_instance();
 		int sid = ini.get<int, int>("gate", "sid", 1);
 		sif->set_sid(sid);
 		std::string name = ini.get<const char*, std::string>("gate", "name", "");
@@ -68,7 +66,7 @@ namespace gate {
 				}
 				else {
 					//通知lua的onMessage函数
-					shynet::Singleton<lua::LuaEngine>::get_instance().append(
+					shynet::utils::Singleton<lua::LuaEngine>::get_instance().append(
 						std::make_shared<frmpub::OnMessageTask<GameConnector>>(shared_from_this(), obj, enves));
 				}
 			}
@@ -78,10 +76,10 @@ namespace gate {
 
 	void GameConnector::close(net::ConnectEvent::CloseType active) {
 		//通知lua的onClose函数
-		shynet::Singleton<lua::LuaEngine>::get_instance().append(
+		shynet::utils::Singleton<lua::LuaEngine>::get_instance().append(
 			std::make_shared<frmpub::OnCloseTask>(fd()));
 
-		shynet::Singleton<ConnectorMgr>::instance().remove(game_connect_id_);
+		shynet::utils::Singleton<ConnectorMgr>::instance().remove(game_connect_id_);
 		Connector::close(active);
 	}
 
@@ -89,7 +87,7 @@ namespace gate {
 		game_connect_id_ = v;
 	}
 
-	int GameConnector::game_conncet_id() const {
+	int GameConnector::set_game_conncet_id() const {
 		return game_connect_id_;
 	}
 
@@ -100,7 +98,7 @@ namespace gate {
 			if (enves->empty() == false) {
 				FilterData::Envelope& env = enves->top();
 				enves->pop();
-				std::shared_ptr<GateClient> client = shynet::Singleton<GateClientMgr>::instance().find(env.fd);
+				std::shared_ptr<GateClient> client = shynet::utils::Singleton<GateClientMgr>::instance().find(env.fd);
 				if (client != nullptr) {
 					client->send_proto(data.get(), enves.get());
 				}
@@ -124,7 +122,7 @@ namespace gate {
 		if (enves->empty() == false) {
 			FilterData::Envelope& env = enves->top();
 			enves->pop();
-			std::shared_ptr<GateClient> client = shynet::Singleton<GateClientMgr>::instance().find(env.fd);
+			std::shared_ptr<GateClient> client = shynet::utils::Singleton<GateClientMgr>::instance().find(env.fd);
 			if (client != nullptr) {
 				if (data->msgid() == protocc::CREATEROLE_CLIENT_GATE_S)
 				{
@@ -132,8 +130,8 @@ namespace gate {
 					if (createrole.ParseFromString(data->msgdata()) == true) {
 						if (createrole.result() == 0) {
 							//通知login修改account关联role
-							ConnectorMgr& connectMgr = shynet::Singleton<ConnectorMgr>::instance();
-							int login_connect_id = connectMgr.sid_conv_connect_id(client->login_id());
+							ConnectorMgr& connectMgr = shynet::utils::Singleton<ConnectorMgr>::instance();
+							int login_connect_id = connectMgr.sid_conv_connect_id(client->set_login_id());
 							std::shared_ptr<LoginConnector> login = connectMgr.select_login(login_connect_id);
 							if (login != nullptr)
 							{

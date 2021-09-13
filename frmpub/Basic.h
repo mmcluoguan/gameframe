@@ -1,4 +1,4 @@
-﻿#pragma once
+#pragma once
 #include <stack>
 #include <unordered_map>
 #include <curl/curl.h>
@@ -6,8 +6,11 @@
 #include "frmpub/protocc/client.pb.h"
 #include "frmpub/protocc/internal.pb.h"
 #include "frmpub/protocc/common.pb.h"
-#include "frmpub/protocc/animal.pb.h"
-#include "frmpub/protocc/backend.pb.h"
+#include "frmpub/protocc/dbvisit.pb.h"
+#include "frmpub/protocc/game.pb.h"
+#include "frmpub/protocc/gate.pb.h"
+#include "frmpub/protocc/login.pb.h"
+#include "frmpub/protocc/world.pb.h"
 namespace protocc = frmpub::protocc;
 
 #ifndef SEND_ERR

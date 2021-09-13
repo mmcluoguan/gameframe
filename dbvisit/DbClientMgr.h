@@ -1,8 +1,8 @@
-﻿#pragma once
+#pragma once
 #include <memory>
 #include <mutex>
 #include <unordered_map>
-#include "shynet/Singleton.h"
+#include "shynet/utils/Singleton.h"
 #include "dbvisit/DbClient.h"
 
 namespace dbvisit {
@@ -10,7 +10,7 @@ namespace dbvisit {
 	/// db连接管理器
 	/// </summary>
 	class DbClientMgr final : public shynet::Nocopy {
-		friend class shynet::Singleton<DbClientMgr>;
+		friend class shynet::utils::Singleton<DbClientMgr>;
 		DbClientMgr();
 	public:
 		~DbClientMgr();
@@ -32,7 +32,7 @@ namespace dbvisit {
 		* 获取设置db服务器监听地址
 		*/
 		const net::IPAddress& listen_addr() const;
-		void listen_addr(const net::IPAddress& addr);
+		void set_listen_addr(const net::IPAddress& addr);
 
 		/*
 		* 通过服务器id查找

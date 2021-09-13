@@ -1,4 +1,4 @@
-﻿#pragma once
+#pragma once
 #include "shynet/events/EventBufferSsl.h"
 #include "shynet/net/AcceptNewFd.h"
 
@@ -11,7 +11,7 @@ namespace shynet {
 			~AcceptIoBuffer();
 
 			std::weak_ptr<AcceptNewFd> newfd() const;
-			void newfd(std::weak_ptr<AcceptNewFd> newfd);
+			void set_newfd(std::weak_ptr<AcceptNewFd> newfd);
 
 			void io_readcb();
 			void io_writecb();

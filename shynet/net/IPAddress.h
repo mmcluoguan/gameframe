@@ -1,7 +1,6 @@
-﻿#pragma once
+#pragma once
 #include <arpa/inet.h>
 #include <string>
-#include "shynet/Basic.h"
 
 namespace shynet {
 	namespace net {

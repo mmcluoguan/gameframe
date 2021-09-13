@@ -1,8 +1,8 @@
-﻿#include "shynet/protocol/Request.h"
+#include "shynet/protocol/Request.h"
 #include <cstring>
 #include <algorithm>
-#include "shynet/Utility.h"
-#include "shynet/Logger.h"
+#include "shynet/utils/StringOp.h"
+#include "shynet/utils/Logger.h"
 
 namespace shynet {
 	namespace protocol {
@@ -86,9 +86,9 @@ namespace shynet {
 				std::string::size_type end = line.find(":");
 				if (end != std::string::npos) {
 					std::string key = line.substr(0, end);
-					key = shynet::Utility::trim(key);
+					key = utils::StringOp::trim(key);
 					std::string value = line.substr(end + 1);
-					value = shynet::Utility::trim(value);
+					value = utils::StringOp::trim(value);
 					heads_[key] = value;
 				}
 				else {

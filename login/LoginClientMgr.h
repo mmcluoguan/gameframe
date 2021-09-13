@@ -2,7 +2,7 @@
 #include <memory>
 #include <mutex>
 #include <unordered_map>
-#include "shynet/Singleton.h"
+#include "shynet/utils/Singleton.h"
 #include "login/LoginClient.h"
 
 namespace login
@@ -12,7 +12,7 @@ namespace login
 	/// </summary>
 	class LoginClientMgr final : public shynet::Nocopy
 	{
-		friend class shynet::Singleton<LoginClientMgr>;
+		friend class shynet::utils::Singleton<LoginClientMgr>;
 		LoginClientMgr();
 	public:
 		~LoginClientMgr();
@@ -38,7 +38,7 @@ namespace login
         * 获取设置登录服务器监听地址
         */
 		const net::IPAddress& listen_addr() const;
-		void listen_addr(const net::IPAddress& addr);
+		void set_listen_addr(const net::IPAddress& addr);
 	private:
 		net::IPAddress listen_addr_;
 		mutable std::mutex clis_mutex_;

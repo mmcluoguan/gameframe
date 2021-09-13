@@ -1,13 +1,13 @@
-﻿#pragma once
+#pragma once
 #include <mutex>
 #include <unordered_map>
 #include "shynet/net/ConnectEvent.h"
-#include "shynet/Singleton.h"
+#include "shynet/utils/Singleton.h"
 
 namespace shynet {
 	namespace net {
 		class ConnectReactorMgr final : public Nocopy {
-			friend class Singleton<ConnectReactorMgr>;
+			friend class utils::Singleton<ConnectReactorMgr>;
 			ConnectReactorMgr();
 		public:
 			~ConnectReactorMgr();

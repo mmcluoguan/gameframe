@@ -39,7 +39,7 @@
     <ClCompile Include="LuaRemoteDebug.cpp">
       <Filter>lua</Filter>
     </ClCompile>
-    <ClCompile Include="LuaTimer.cpp">
+    <ClCompile Include="LuaTimerTask.cpp">
       <Filter>lua</Filter>
     </ClCompile>
     <ClCompile Include="protocc\dbvisit.pb.cc">
@@ -89,7 +89,7 @@
     <ClInclude Include="LuaRemoteDebug.h">
       <Filter>lua</Filter>
     </ClInclude>
-    <ClInclude Include="LuaTimer.h">
+    <ClInclude Include="LuaTimerTask.h">
       <Filter>lua</Filter>
     </ClInclude>
     <ClInclude Include="protocc\dbvisit.pb.h">

@@ -1,8 +1,6 @@
-﻿#include "shynet/thread/TimerThread.h"
+#include "shynet/thread/TimerThread.h"
 #include <cstring>
 #include "shynet/net/TimerReactorMgr.h"
-#include "shynet/Logger.h"
-#include "shynet/Utility.h"
 
 namespace shynet {
 
@@ -41,7 +39,7 @@ namespace shynet {
 					memcpy(&timerid, buf + index, sizeof(timerid));
 					index += sizeof(timerid);
 
-					std::shared_ptr<net::TimerEvent> timerEv = Singleton<net::TimerReactorMgr>::instance().find(timerid);
+					std::shared_ptr<net::TimerEvent> timerEv = utils::Singleton<net::TimerReactorMgr>::instance().find(timerid);
 					if (timerEv != nullptr) {
 						timerEv->event(base_, -1, timerEv->what());
 						base_->addevent(timerEv, &timerEv->val());

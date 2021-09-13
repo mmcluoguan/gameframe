@@ -1,4 +1,4 @@
-﻿#include "shynet/net/AcceptHeartbeat.h"
+#include "shynet/net/AcceptHeartbeat.h"
 #include "shynet/net/AcceptNewFd.h"
 
 namespace shynet
@@ -15,7 +15,7 @@ namespace shynet
 		}
 		void AcceptHeartbeat::timeout()
 		{
-			Singleton<TimerReactorMgr>::instance().remove(timerid());
+			utils::Singleton<TimerReactorMgr>::instance().remove(timerid());
 			std::shared_ptr<AcceptNewFd> newfd = newfd_.lock();
 			if (newfd != nullptr)
 			{

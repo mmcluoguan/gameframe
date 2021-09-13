@@ -1,4 +1,4 @@
-﻿#pragma once
+#pragma once
 #include <openssl/err.h>
 #include <openssl/ssl.h>
 #include <event2/dns.h>
@@ -117,12 +117,12 @@ namespace shynet {
 			 * 心跳计时器
 			*/
 			std::weak_ptr<ConnectHeartbeat> heart() const;
-			void heart(std::weak_ptr<ConnectHeartbeat> ht);
+			void set_heart(std::weak_ptr<ConnectHeartbeat> ht);
 
 			bool enable_dns() const;
 			short dnsport() const;
 			void dnsbase(evdns_base* base);
-			evdns_base* dnsbase() const;
+			evdns_base* set_dnsbase() const;
 			std::string hostname() const;
 
 		private:

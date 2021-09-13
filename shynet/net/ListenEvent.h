@@ -1,4 +1,4 @@
-﻿#pragma once
+#pragma once
 #include <openssl/err.h>
 #include <openssl/ssl.h>
 #include "shynet/net/IPAddress.h"
@@ -26,7 +26,7 @@ namespace shynet
 			* 获取设置服务器id
 			*/
 			int serverid() const;
-			void serverid(int id);
+			void set_serverid(int id);
 
 			std::shared_ptr<net::IPAddress> listenaddr() const;
 			int listenfd() const;

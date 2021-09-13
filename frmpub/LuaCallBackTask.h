@@ -1,8 +1,7 @@
-﻿#pragma once
+#pragma once
 #include "shynet/task/Task.h"
 #include "shynet/thread/Thread.h"
 #include "shynet/thread/LuaThread.h"
-#include "shynet/Basic.h"
 #include "frmpub/LuaRemoteDebug.h"
 #include "frmpub/protocc/common.pb.h"
 
@@ -24,9 +23,9 @@ namespace frmpub {
 			thread::LuaThread* lua = dynamic_cast<thread::LuaThread*>(tif);
 			kaguya::State& state = *(lua->luaState());
 			if (client_) {
-				shynet::Singleton<LuaRemoteDebug>::instance().start(state);
+				shynet::utils::Singleton<LuaRemoteDebug>::instance().start(state);
 				state["onAccept"].call<void>(client_.get());
-				shynet::Singleton<LuaRemoteDebug>::instance().stop(state);
+				shynet::utils::Singleton<LuaRemoteDebug>::instance().stop(state);
 			}
 			return 0;
 		}
@@ -51,9 +50,9 @@ namespace frmpub {
 			thread::LuaThread* lua = dynamic_cast<thread::LuaThread*>(tif);
 			kaguya::State& state = *(lua->luaState());
 			if (conncetor_) {
-				shynet::Singleton<LuaRemoteDebug>::instance().start(state);
+				shynet::utils::Singleton<LuaRemoteDebug>::instance().start(state);
 				state["onConnect"].call<void>(conncetor_.get());
-				shynet::Singleton<LuaRemoteDebug>::instance().stop(state);
+				shynet::utils::Singleton<LuaRemoteDebug>::instance().stop(state);
 			}
 			return 0;
 		}
@@ -76,9 +75,9 @@ namespace frmpub {
 		int run(thread::Thread* tif) override {
 			thread::LuaThread* lua = dynamic_cast<thread::LuaThread*>(tif);
 			kaguya::State& state = *(lua->luaState());
-			shynet::Singleton<LuaRemoteDebug>::instance().start(state);
+			shynet::utils::Singleton<LuaRemoteDebug>::instance().start(state);
 			state["onClose"].call<void>(fd_);
-			shynet::Singleton<LuaRemoteDebug>::instance().stop(state);
+			shynet::utils::Singleton<LuaRemoteDebug>::instance().stop(state);
 			return 0;
 		}
 	private:
@@ -111,14 +110,14 @@ namespace frmpub {
 			thread::LuaThread* lua = dynamic_cast<thread::LuaThread*>(tif);
 			kaguya::State& state = *(lua->luaState());
 			if (client_) {
-				shynet::Singleton<LuaRemoteDebug>::instance().start(state);
+				shynet::utils::Singleton<LuaRemoteDebug>::instance().start(state);
 				if (data_) {
 					state["onMessage"].call<void>(client_.get(), data_->msgid(), data_->msgdata(), enves_.get());
 				}
 				else if (doc_) {
 					state["onMessage"].call<void>(client_.get(), doc_, enves_.get());
 				}
-				shynet::Singleton<LuaRemoteDebug>::instance().stop(state);
+				shynet::utils::Singleton<LuaRemoteDebug>::instance().stop(state);
 			}
 			return 0;
 		}

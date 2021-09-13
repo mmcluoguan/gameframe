@@ -1,4 +1,4 @@
-﻿#pragma once
+#pragma once
 #include <event2/bufferevent.h>
 #include "shynet/events/EventBase.h"
 #include "shynet/events/Streambuff.h"
@@ -32,7 +32,7 @@ namespace shynet {
 
 			std::shared_ptr<EventBase> base() const;
 			bufferevent* buffer() const;
-			void buffer(bufferevent* buffer);
+			void set_buffer(bufferevent* buffer);
 
 			int fd() const;
 

@@ -1,9 +1,8 @@
 #include "game/WorldConnector.h"
 #include "shynet/net/ConnectReactorMgr.h"
-#include "shynet/IniConfig.h"
+#include "shynet/utils/IniConfig.h"
 #include "shynet/lua/LuaEngine.h"
 #include "frmpub/LuaCallBackTask.h"
-#include "frmpub/protocc/game.pb.h"
 #include "frmpub/ReConnectTimer.h"
 #include "game/ConnectorMgr.h"
 #include "game/GameClientMgr.h"
@@ -35,24 +34,24 @@ namespace game {
 			LOG_INFO << "3秒后开始重连";
 			std::shared_ptr<frmpub::ReConnectTimer<WorldConnector>> reconnect(
 				new frmpub::ReConnectTimer<WorldConnector>(connect_addr(), { 3L,0L }));
-			shynet::Singleton<net::TimerReactorMgr>::instance().add(reconnect);
+			shynet::utils::Singleton<net::TimerReactorMgr>::instance().add(reconnect);
 		}
 	}
 	void WorldConnector::complete() {
 		LOG_INFO << "连接服务器world成功 [ip:" << connect_addr()->ip() << ":" << connect_addr()->port() << "]";
-		shynet::Singleton<ConnectorMgr>::instance().add_worldctor(connectid());
+		shynet::utils::Singleton<ConnectorMgr>::instance().add_worldctor(connectid());
 
 		//通知lua的onConnect函数
-		shynet::Singleton<lua::LuaEngine>::get_instance().append(
+		shynet::utils::Singleton<lua::LuaEngine>::get_instance().append(
 			std::make_shared<frmpub::OnConnectorTask<WorldConnector>>(shared_from_this()));
 
 		//向世界服注册游戏服信息
 		protocc::register_game_world_c msgc;
 		protocc::ServerInfo* sif = msgc.mutable_sif();
-		sif->set_ip(shynet::Singleton<GameClientMgr>::instance().listen_addr().ip());
-		sif->set_port(shynet::Singleton<GameClientMgr>::instance().listen_addr().port());
+		sif->set_ip(shynet::utils::Singleton<GameClientMgr>::instance().listen_addr().ip());
+		sif->set_port(shynet::utils::Singleton<GameClientMgr>::instance().listen_addr().port());
 		sif->set_st(protocc::ServerType::GAME);
-		shynet::IniConfig& ini = shynet::Singleton<shynet::IniConfig>::get_instance();
+		shynet::utils::IniConfig& ini = shynet::utils::Singleton<shynet::utils::IniConfig>::get_instance();
 		int sid = ini.get<int, int>("game", "sid", 1);
 		sif->set_sid(sid);
 		std::string name = ini.get<const char*, std::string>("game", "name", "");
@@ -69,7 +68,7 @@ namespace game {
 			}
 			else {
 				//通知lua的onMessage函数
-				shynet::Singleton<lua::LuaEngine>::get_instance().append(
+				shynet::utils::Singleton<lua::LuaEngine>::get_instance().append(
 					std::make_shared<frmpub::OnMessageTask<WorldConnector>>(shared_from_this(), obj, enves));
 			}
 		}
@@ -78,10 +77,10 @@ namespace game {
 
 	void WorldConnector::close(net::ConnectEvent::CloseType active) {
 		//通知lua的onClose函数
-		shynet::Singleton<lua::LuaEngine>::get_instance().append(
+		shynet::utils::Singleton<lua::LuaEngine>::get_instance().append(
 			std::make_shared<frmpub::OnCloseTask>(fd()));
 
-		shynet::Singleton<ConnectorMgr>::instance().remove_worldctor(connectid());
+		shynet::utils::Singleton<ConnectorMgr>::instance().remove_worldctor(connectid());
 		Connector::close(active);
 	}
 

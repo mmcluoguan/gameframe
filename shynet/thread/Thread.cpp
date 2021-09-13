@@ -1,6 +1,4 @@
-﻿#include "shynet/thread/Thread.h"
-#include "shynet/Logger.h"
-#include "shynet/Utility.h"
+#include "shynet/thread/Thread.h"
 
 namespace shynet {
 	namespace thread {
@@ -13,13 +11,13 @@ namespace shynet {
 		Thread::ThreadType Thread::type() const {
 			return type_;
 		}
-		void Thread::type(ThreadType v) {
+		void Thread::set_type(ThreadType v) {
 			type_ = v;
 		}
 		size_t Thread::index() const {
 			return index_;
 		}
-		void Thread::index(size_t v) {
+		void Thread::set_index(size_t v) {
 			index_ = v;
 		}
 		std::shared_ptr<std::thread> Thread::start()

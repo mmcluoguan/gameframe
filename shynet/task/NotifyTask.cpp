@@ -1,4 +1,4 @@
-﻿#include "shynet/task/NotifyTask.h"
+#include "shynet/task/NotifyTask.h"
 #include "shynet/net/TimerReactorMgr.h"
 
 namespace shynet {

@@ -1,4 +1,4 @@
-﻿#pragma once
+#pragma once
 #include "shynet/events/EventHandler.h"
 
 namespace shynet
@@ -23,7 +23,7 @@ namespace shynet
 			/// 重新设置超时时间，如果超时未触发，则延迟指定时间
 			/// </summary>
 			/// <param name="t"></param>
-			void val(const struct timeval& t);
+			void set_val(const struct timeval& t);
 
 			/// <summary>
 			/// 事件处理器标识 EV_TIMEOUT，EV_PERSIST

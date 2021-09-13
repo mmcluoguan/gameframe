@@ -1,4 +1,4 @@
-﻿#include "shynet/net/AcceptIoBuffer.h"
+#include "shynet/net/AcceptIoBuffer.h"
 #include "shynet/pool/ThreadPool.h"
 #include "shynet/net/AcceptReactorMgr.h"
 #include "shynet/task/AcceptReadIoTask.h"
@@ -33,7 +33,7 @@ namespace shynet {
 				iobuf_ = std::shared_ptr<events::EventBuffer>(new events::EventBuffer(base, fd,
 					BEV_OPT_CLOSE_ON_FREE | BEV_OPT_THREADSAFE));
 			}
-			buffer(iobuf_->buffer());
+			set_buffer(iobuf_->buffer());
 
 			iobuf_->setcb(ioreadcb, iowritecb, ioeventcb, this);
 			iobuf_->enabled(EV_READ | EV_WRITE | EV_PERSIST);
@@ -45,7 +45,7 @@ namespace shynet {
 			return newfd_;
 		}
 
-		void AcceptIoBuffer::newfd(std::weak_ptr<AcceptNewFd> newfd) {
+		void AcceptIoBuffer::set_newfd(std::weak_ptr<AcceptNewFd> newfd) {
 			newfd_ = newfd;
 		}
 
@@ -54,7 +54,7 @@ namespace shynet {
 			std::shared_ptr<AcceptNewFd> aptnewfd = newfd_.lock();
 			if (aptnewfd != nullptr) {
 				std::shared_ptr<task::AcceptReadIoTask> io(new task::AcceptReadIoTask(aptnewfd));
-				Singleton<pool::ThreadPool>::instance().appendWork(io, fd());
+				utils::Singleton<pool::ThreadPool>::instance().appendWork(io, fd());
 			}
 		}
 

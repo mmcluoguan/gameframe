@@ -1,6 +1,5 @@
-﻿#include "shynet/net/ConnectEvent.h"
-#include "shynet/Utility.h"
-#include "shynet/Logger.h"
+#include "shynet/net/ConnectEvent.h"
+#include "shynet/utils/Logger.h"
 
 namespace shynet {
 	extern pthread_barrier_t g_barrier;
@@ -88,7 +87,7 @@ namespace shynet {
 			return heart_;
 		}
 
-		void ConnectEvent::heart(std::weak_ptr<ConnectHeartbeat> ht) {
+		void ConnectEvent::set_heart(std::weak_ptr<ConnectHeartbeat> ht) {
 			heart_ = ht;
 		}
 
@@ -108,7 +107,7 @@ namespace shynet {
 			dnsbase_ = base;
 		}
 
-		evdns_base* ConnectEvent::dnsbase() const {
+		evdns_base* ConnectEvent::set_dnsbase() const {
 			return dnsbase_;
 		}
 

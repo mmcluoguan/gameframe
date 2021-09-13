@@ -1,4 +1,4 @@
-﻿#include "frmpub/Connector.h"
+#include "frmpub/Connector.h"
 #include "shynet/net/TimerReactorMgr.h"
 #include "shynet/net/ConnectReactorMgr.h"
 
@@ -26,7 +26,7 @@ namespace frmpub {
 		net::ConnectEvent::success();
 		if (enable_ping_ == true) {
 			std::shared_ptr<PingTimer> pt(new PingTimer({ heartSecond_,0L }, this));
-			shynet::Singleton<net::TimerReactorMgr>::instance().add(pt);
+			shynet::utils::Singleton<net::TimerReactorMgr>::instance().add(pt);
 			ping_timer_ = pt;
 		}
 	}
@@ -34,7 +34,7 @@ namespace frmpub {
 		//有数据接收到，因此延迟心跳计时器时间
 		std::shared_ptr<PingTimer> pt = ping_timer_.lock();
 		if (pt != nullptr) {
-			pt->val({ heartSecond_,0L });
+			pt->set_val({ heartSecond_,0L });
 		}
 		return net::ConnectEvent::input();
 	}
@@ -45,7 +45,7 @@ namespace frmpub {
 
 	void Connector::close(net::ConnectEvent::CloseType active) {
 		active_ = active;
-		shynet::Singleton<net::ConnectReactorMgr>::instance().remove(connectid());
+		shynet::utils::Singleton<net::ConnectReactorMgr>::instance().remove(connectid());
 	}
 	void Connector::timerout() {
 		LOG_INFO << "服务器心跳超时 [ip:" << connect_addr()->ip() << ":" << connect_addr()->port() << "]";

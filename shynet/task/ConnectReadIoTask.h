@@ -1,4 +1,4 @@
-﻿#pragma once
+#pragma once
 #include "shynet/thread/Thread.h"
 #include "shynet/net/ConnectEvent.h"
 #include "shynet/task/Task.h"

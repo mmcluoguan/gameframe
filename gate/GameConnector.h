@@ -33,7 +33,7 @@ namespace gate {
 		* 获取或设置连接id
 		*/
 		void game_conncet_id(int v);
-		int game_conncet_id() const;
+		int set_game_conncet_id() const;
 	private:
 		/// <summary>
 		/// 服务器通用错误信息

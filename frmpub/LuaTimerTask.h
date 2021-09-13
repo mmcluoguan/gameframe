@@ -1,8 +1,8 @@
-﻿#pragma once
+#pragma once
 #include <unordered_set>
 #include "shynet/net/TimerEvent.h"
-#include "shynet/Singleton.h"
 #include "shynet/task/Task.h"
+#include "shynet/utils/Singleton.h"
 
 namespace frmpub {
 	/*
@@ -28,7 +28,7 @@ namespace frmpub {
 			bool repeat_ = true;
 		};
 
-		friend class shynet::Singleton<LuaTimerMgr>;
+		friend class shynet::utils::Singleton<LuaTimerMgr>;
 		LuaTimerMgr();
 	public:
 		/// <summary>

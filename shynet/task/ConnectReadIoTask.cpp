@@ -1,6 +1,4 @@
 #include "shynet/task/ConnectReadIoTask.h"
-#include "shynet/Utility.h"
-#include "shynet/Logger.h"
 
 namespace shynet {
 	namespace task {
@@ -14,7 +12,7 @@ namespace shynet {
 		int ConnectReadIoTask::run(thread::Thread* tif) {
 			std::shared_ptr<net::ConnectHeartbeat> ht = cntevent_->heart().lock();
 			if (ht != nullptr) {
-				ht->val({ cntevent_->heart_second(),0 });
+				ht->set_val({ cntevent_->heart_second(),0 });
 			}
 			int ret = cntevent_->input();
 			if (ret == -1) {

@@ -147,11 +147,8 @@
     <ClInclude Include="fflua\fflua.h" />
     <ClInclude Include="fflua\fflua_register.h" />
     <ClInclude Include="fflua\fflua_type.h" />
-    <ClInclude Include="IdWorker.h" />
-    <ClInclude Include="IniConfig.h" />
     <ClInclude Include="kaguya\kaguya.hpp" />
     <ClInclude Include="kaguya\preprocess.hpp" />
-    <ClInclude Include="Logger.h" />
     <ClInclude Include="lua\LuaEngine.h" />
     <ClInclude Include="lua\LuaWrapper.h" />
     <ClInclude Include="net\AcceptHeartbeat.h" />
@@ -175,7 +172,6 @@
     <ClInclude Include="protocol\Responses.h" />
     <ClInclude Include="protocol\Tcpip.h" />
     <ClInclude Include="protocol\WebSocket.h" />
-    <ClInclude Include="Singleton.h" />
     <ClInclude Include="task\AcceptReadIoTask.h" />
     <ClInclude Include="task\ConnectReadIoTask.h" />
     <ClInclude Include="task\NotifyTask.h" />
@@ -189,7 +185,12 @@
     <ClInclude Include="thread\Thread.h" />
     <ClInclude Include="thread\TimerThread.h" />
     <ClInclude Include="thread\WorkThread.h" />
-    <ClInclude Include="Utility.h" />
+    <ClInclude Include="utils\IdWorker.h" />
+    <ClInclude Include="utils\IniConfig.h" />
+    <ClInclude Include="utils\Logger.h" />
+    <ClInclude Include="utils\Singleton.h" />
+    <ClInclude Include="utils\StringOp.h" />
+    <ClInclude Include="utils\Stuff.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="events\EventBase.cpp" />
@@ -201,9 +202,6 @@
     <ClCompile Include="events\EventHandler.cpp" />
     <ClCompile Include="events\EventLisenter.cpp" />
     <ClCompile Include="events\Streambuff.cpp" />
-    <ClCompile Include="IdWorker.cpp" />
-    <ClCompile Include="IniConfig.cpp" />
-    <ClCompile Include="Logger.cpp" />
     <ClCompile Include="lua\LuaEngine.cpp" />
     <ClCompile Include="lua\LuaWrapper.cpp" />
     <ClCompile Include="net\AcceptHeartbeat.cpp" />
@@ -240,7 +238,11 @@
     <ClCompile Include="thread\Thread.cpp" />
     <ClCompile Include="thread\TimerThread.cpp" />
     <ClCompile Include="thread\WorkThread.cpp" />
-    <ClCompile Include="Utility.cpp" />
+    <ClCompile Include="utils\IdWorker.cpp" />
+    <ClCompile Include="utils\IniConfig.cpp" />
+    <ClCompile Include="utils\Logger.cpp" />
+    <ClCompile Include="utils\StringOp.cpp" />
+    <ClCompile Include="utils\Stuff.cpp" />
   </ItemGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|ARM'">
     <Link>

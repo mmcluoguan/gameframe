@@ -1,9 +1,9 @@
-﻿#pragma once
+#pragma once
 #include "shynet/thread/Thread.h"
 #include "shynet/kaguya/kaguya.hpp"
 #include "shynet/lua/LuaWrapper.h"
 #include "shynet/task/Task.h"
-#include "shynet/Singleton.h"
+#include "shynet/utils/Singleton.h"
 
 namespace shynet {
 	namespace lua {
@@ -11,7 +11,7 @@ namespace shynet {
 		/// lua通信引擎
 		/// </summary>
 		class LuaEngine final : public Nocopy {
-			friend class Singleton<LuaEngine>;
+			friend class utils::Singleton<LuaEngine>;
 
 			LuaEngine(std::shared_ptr<LuaWrapper> wrapper = nullptr);
 		public:

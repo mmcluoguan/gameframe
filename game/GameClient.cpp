@@ -1,10 +1,7 @@
-﻿#include "game/GameClient.h"
+#include "game/GameClient.h"
 #include <cstring>
 #include "shynet/lua/LuaEngine.h"
-#include "shynet/Logger.h"
-#include "shynet/Utility.h"
 #include "frmpub/LuaCallBackTask.h"
-#include "frmpub/protocc/gate.pb.h"
 #include "game/GameClientMgr.h"
 
 namespace game {
@@ -45,7 +42,7 @@ namespace game {
 			}
 			else {
 				//通知lua的onMessage函数
-				shynet::Singleton<lua::LuaEngine>::get_instance().append(
+				shynet::utils::Singleton<lua::LuaEngine>::get_instance().append(
 					std::make_shared<frmpub::OnMessageTask<GameClient>>(shared_from_this(), obj, enves));
 			}
 		}
@@ -54,7 +51,7 @@ namespace game {
 
 	void GameClient::close(bool active) {
 		frmpub::Client::close(active);
-		shynet::Singleton<GameClientMgr>::instance().remove(iobuf()->fd());
+		shynet::utils::Singleton<GameClientMgr>::instance().remove(iobuf()->fd());
 	}
 
 	int GameClient::errcode(std::shared_ptr<protocc::CommonObject> data, std::shared_ptr<std::stack<FilterData::Envelope>> enves) {
@@ -77,7 +74,7 @@ namespace game {
 			LOG_DEBUG << frmpub::Basic::connectname(protocc::ServerType::GATE) << "注册"
 				<< " sid:" << msgc.sif().sid() << " ["
 				<< msgc.sif().ip() << ":" << msgc.sif().port() << "]";
-			sif(msgc.sif());
+			set_sif(msgc.sif());
 			protocc::register_gate_game_s msgs;
 			msgs.set_result(0);
 			send_proto(protocc::REGISTER_GATE_GAME_S, &msgs);

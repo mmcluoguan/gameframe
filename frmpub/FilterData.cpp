@@ -3,9 +3,7 @@
 #include <rapidjson/stringbuffer.h>
 #include <rapidjson/writer.h>
 #include "shynet/net/IPAddress.h"
-#include "shynet/Utility.h"
-#include "shynet/Logger.h"
-#include "Basic.h"
+#include "shynet/utils/Logger.h"
 
 namespace frmpub {
 	FilterData::FilterData(ProtoData pd) {
