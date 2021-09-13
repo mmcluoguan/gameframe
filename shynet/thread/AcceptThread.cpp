@@ -73,7 +73,11 @@ namespace shynet {
 							std::shared_ptr<net::AcceptHeartbeat> ht(
 								new net::AcceptHeartbeat(apnewfd, { apnewfd->heart_second() ,0L }));
 							utils::Singleton<net::TimerReactorMgr>::instance().add(ht);
+<<<<<<< HEAD
 							apnewfd->set_heart(ht);
+=======
+							apnewfd->heart(ht);
+>>>>>>> 97f5d8ccc1392d6c54dfc663b535a803fe2f1f9e
 						}
 					}
 				}

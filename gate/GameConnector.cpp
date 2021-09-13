@@ -131,7 +131,11 @@ namespace gate {
 						if (createrole.result() == 0) {
 							//通知login修改account关联role
 							ConnectorMgr& connectMgr = shynet::utils::Singleton<ConnectorMgr>::instance();
+<<<<<<< HEAD
 							int login_connect_id = connectMgr.sid_conv_connect_id(client->set_login_id());
+=======
+							int login_connect_id = connectMgr.sid_conv_connect_id(client->login_id());
+>>>>>>> 97f5d8ccc1392d6c54dfc663b535a803fe2f1f9e
 							std::shared_ptr<LoginConnector> login = connectMgr.select_login(login_connect_id);
 							if (login != nullptr)
 							{

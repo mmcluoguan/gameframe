@@ -9,7 +9,11 @@ namespace gate
 		net::ListenEvent(listen_addr, true)
 	{
 		LOG_INFO << "服务器gate启动 [ip:" << listen_addr->ip() << ":" << listen_addr->port() << "]";
+<<<<<<< HEAD
 		shynet::utils::Singleton<GateClientMgr>::instance().set_listen_addr(*listenaddr());
+=======
+		shynet::utils::Singleton<GateClientMgr>::instance().listen_addr(*listenaddr());
+>>>>>>> 97f5d8ccc1392d6c54dfc663b535a803fe2f1f9e
 	}
 
 	GateServer::~GateServer()

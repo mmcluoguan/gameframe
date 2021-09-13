@@ -16,7 +16,11 @@ namespace dbvisit {
 
 	void DataTimer::timeout() {
 		try {
+<<<<<<< HEAD
 			std::vector<std::string> temp = shynet::utils::StringOp::split(cachekey_, "_");
+=======
+			std::vector<std::string> temp = shynet::utils::StringOp::spilt(cachekey_, "_");
+>>>>>>> 97f5d8ccc1392d6c54dfc663b535a803fe2f1f9e
 			shynet::utils::Singleton<Datahelp>::instance().updata_db(temp[0], temp[1], fields_);
 			shynet::utils::Singleton<net::TimerReactorMgr>::instance().remove(timerid());
 			shynet::utils::Singleton<DataTimerMgr>::instance().remove(cachekey_);

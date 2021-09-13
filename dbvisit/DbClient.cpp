@@ -456,7 +456,11 @@ namespace dbvisit {
 				//缓存过期24小时
 				std::string accountid = "0";//账号id
 				std::string roleid = "0";//角色id
+<<<<<<< HEAD
 				auto temp = shynet::utils::StringOp::split(data->extend(), ",");
+=======
+				auto temp = shynet::utils::StringOp::spilt(data->extend(), ",");
+>>>>>>> 97f5d8ccc1392d6c54dfc663b535a803fe2f1f9e
 				if (temp.size() != 3) {
 					std::stringstream stream;
 					stream << "附加信息解析错误 extend:" << data->extend();

@@ -56,7 +56,11 @@ int main(int argc, char* argv[]) {
 
 	//连接db服务器
 	string dbstr = ini.get<const char*, string>(g_confname, "db", "");
+<<<<<<< HEAD
 	auto dblist = StringOp::split(dbstr, ",");
+=======
+	auto dblist = StringOp::spilt(dbstr, ",");
+>>>>>>> 97f5d8ccc1392d6c54dfc663b535a803fe2f1f9e
 	if (dblist.size() > 2 || dblist.size() == 0){
 		LOG_ERROR << "db配置错误:" << dbstr;
 	}

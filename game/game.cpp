@@ -53,7 +53,11 @@ int main(int argc, char* argv[]) {
 	Singleton<ThreadPool>::instance().start();
 
 	std::string luapath = ini.get<const char*, std::string>("game", "luapath", "");
+<<<<<<< HEAD
 	std::vector<std::string> vectpath = StringOp::split(luapath, ";");
+=======
+	std::vector<std::string> vectpath = StringOp::spilt(luapath, ";");
+>>>>>>> 97f5d8ccc1392d6c54dfc663b535a803fe2f1f9e
 	for (string pstr : vectpath) {
 		Singleton<ThreadPool>::get_instance().notifyTh().lock()->add(
 			std::make_shared<LuaFolderTask>(pstr, true)
@@ -62,7 +66,11 @@ int main(int argc, char* argv[]) {
 
 	//连接db服务器
 	string dbstr = ini.get<const char*, string>("game", "db", "");
+<<<<<<< HEAD
 	auto dblist = StringOp::split(dbstr, ",");
+=======
+	auto dblist = StringOp::spilt(dbstr, ",");
+>>>>>>> 97f5d8ccc1392d6c54dfc663b535a803fe2f1f9e
 	if (dblist.size() > 2 || dblist.size() == 0) {
 		LOG_ERROR << "db配置错误:" << dbstr;
 	}
@@ -79,7 +87,11 @@ int main(int argc, char* argv[]) {
 
 	//连接world服务器
 	string worldstr = ini.get<const char*, string>("game", "world", "");
+<<<<<<< HEAD
 	auto worldlist = StringOp::split(worldstr, ",");
+=======
+	auto worldlist = StringOp::spilt(worldstr, ",");
+>>>>>>> 97f5d8ccc1392d6c54dfc663b535a803fe2f1f9e
 	if (worldlist.size() > 2 || worldlist.size() == 0) {
 		LOG_ERROR << "world配置错误:" << worldstr;
 	}

@@ -7,7 +7,11 @@ namespace world {
 	HttpServer::HttpServer(std::shared_ptr<net::IPAddress> listen_addr) :
 		net::ListenEvent(listen_addr, true) {
 		LOG_INFO << "服务器http启动 [ip:" << listen_addr->ip() << ":" << listen_addr->port() << "]";
+<<<<<<< HEAD
 		shynet::utils::Singleton<HttpClientMgr>::instance().set_listen_addr(*listenaddr());
+=======
+		shynet::utils::Singleton<HttpClientMgr>::instance().listen_addr(*listenaddr());
+>>>>>>> 97f5d8ccc1392d6c54dfc663b535a803fe2f1f9e
 	}
 
 	HttpServer::~HttpServer() {

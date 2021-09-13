@@ -74,7 +74,11 @@ namespace shynet {
 						std::shared_ptr<ConnectHeartbeat> ht(
 							new ConnectHeartbeat(shconector, { shconector->heart_second() ,0L }));
 						utils::Singleton<TimerReactorMgr>::instance().add(ht);
+<<<<<<< HEAD
 						shconector->set_heart(ht);
+=======
+						shconector->heart(ht);
+>>>>>>> 97f5d8ccc1392d6c54dfc663b535a803fe2f1f9e
 					}
 					shconector->success();
 				}

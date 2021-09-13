@@ -110,7 +110,11 @@ int main(int argc, char* argv[]) {
 		Singleton<ThreadPool>::instance().start();
 
 		std::string luapath = ini.get<const char*, std::string>(g_confname, "luapath", "");
+<<<<<<< HEAD
 		std::vector<std::string> vectpath = StringOp::split(luapath, ";");
+=======
+		std::vector<std::string> vectpath = StringOp::spilt(luapath, ";");
+>>>>>>> 97f5d8ccc1392d6c54dfc663b535a803fe2f1f9e
 		for (string pstr : vectpath) {
 			Singleton<ThreadPool>::get_instance().notifyTh().lock()->add(
 				std::make_shared<LuaFolderTask>(pstr, true)

@@ -78,7 +78,11 @@ namespace dbvisit {
 		std::chrono::seconds seconds) {
 		ErrorCode error = getdata_from_cache(cachekey, out);
 		if (error == ErrorCode::NOT_DATA) {
+<<<<<<< HEAD
 			const auto temp = shynet::utils::StringOp::split(cachekey, "_");
+=======
+			const auto temp = shynet::utils::StringOp::spilt(cachekey, "_");
+>>>>>>> 97f5d8ccc1392d6c54dfc663b535a803fe2f1f9e
 			if (temp.size() < 2) {
 				LOG_WARN << "解析错误 cachekey:" << cachekey;
 				throw DataException("解析错误 cachekey:" + cachekey);
@@ -174,7 +178,11 @@ namespace dbvisit {
 		if (seconds.count() != 0) {
 			redis.expire(cachekey, seconds);
 		}
+<<<<<<< HEAD
 		std::vector<std::string> temp = shynet::utils::StringOp::split(cachekey, "_");
+=======
+		std::vector<std::string> temp = shynet::utils::StringOp::spilt(cachekey, "_");
+>>>>>>> 97f5d8ccc1392d6c54dfc663b535a803fe2f1f9e
 		if (temp.size() < 2) {
 			LOG_WARN << "解析错误 cachekey:" << cachekey;
 			return;
@@ -190,7 +198,11 @@ namespace dbvisit {
 			throw DataException("cachekey数据删除失败 cachekey:" + cachekey);
 		}
 		else {
+<<<<<<< HEAD
 			std::vector<std::string> temp = shynet::utils::StringOp::split(cachekey, "_");
+=======
+			std::vector<std::string> temp = shynet::utils::StringOp::spilt(cachekey, "_");
+>>>>>>> 97f5d8ccc1392d6c54dfc663b535a803fe2f1f9e
 			if (temp.size() < 2) {
 				LOG_WARN << "解析错误 cachekey:" << cachekey;
 				return;
@@ -220,7 +232,11 @@ namespace dbvisit {
 		if (seconds.count() != 0) {
 			redis.expire(cachekey, seconds);
 		}
+<<<<<<< HEAD
 		std::vector<std::string> temp = shynet::utils::StringOp::split(cachekey, "_");
+=======
+		std::vector<std::string> temp = shynet::utils::StringOp::spilt(cachekey, "_");
+>>>>>>> 97f5d8ccc1392d6c54dfc663b535a803fe2f1f9e
 		if (temp.size() < 2) {
 			LOG_WARN << "解析错误 cachekey:" << cachekey;
 			return;

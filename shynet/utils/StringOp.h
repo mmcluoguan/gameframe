@@ -25,6 +25,7 @@ namespace shynet {
 			/// <param name="c">分割符</param>
 			/// <param name="argv">拆分到的目标字符串数组</param>
 			/// <param name="size">目标字符串数组大小</param>
+<<<<<<< HEAD
 			static int split(char* target, const char* c, char** argv, int size);
 			/**
 		    * 用`sep`分割`s`
@@ -66,6 +67,10 @@ namespace shynet {
 		    *
 		    */
 			static std::vector<std::string> splitlines(const std::string& s, bool keep_ends = false);
+=======
+			static int spilt(char* target, const char* c, char** argv, int size);
+			static std::vector<std::string> spilt(const std::string& target, const char* c);
+>>>>>>> 97f5d8ccc1392d6c54dfc663b535a803fe2f1f9e
 
 			template<typename ... Args>
 			static std::string str_format(const std::string& format, Args ... args) {

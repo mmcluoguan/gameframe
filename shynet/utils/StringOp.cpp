@@ -5,7 +5,10 @@
 #include <unistd.h>
 #include <fcntl.h>
 #include <limits.h>
+<<<<<<< HEAD
 #include <sstream>
+=======
+>>>>>>> 97f5d8ccc1392d6c54dfc663b535a803fe2f1f9e
 
 namespace shynet {
 	namespace utils {
@@ -38,8 +41,12 @@ namespace shynet {
 			}
 			return p;
 		}
+<<<<<<< HEAD
 
 		int StringOp::split(char* target, const char* c, char** argv, int size) {
+=======
+		int StringOp::spilt(char* target, const char* c, char** argv, int size) {
+>>>>>>> 97f5d8ccc1392d6c54dfc663b535a803fe2f1f9e
 			int i = 0;
 			char* p = NULL;
 			char* tp;
@@ -52,6 +59,7 @@ namespace shynet {
 			return i;
 		}
 
+<<<<<<< HEAD
 		std::vector<std::string> StringOp::split(const std::string& s, char sep, bool keep_empty_strings, bool split_once) {
 			if (s.empty()) { return std::vector<std::string>(); }
 
@@ -194,6 +202,21 @@ namespace shynet {
 				ret.push_back(s.substr(l, r - l));
 			}
 			return ret;
+=======
+		std::vector<std::string> StringOp::spilt(const std::string& target, const char* c) {
+			std::vector<std::string> vts;
+			size_t last = 0;
+			size_t index = target.find_first_of(c, last);
+			while (index != std::string::npos) {
+				vts.push_back(target.substr(last, index - last));
+				last = index + 1;
+				index = target.find_first_of(c, last);
+			}
+			if (index - last > 0) {
+				vts.push_back(target.substr(last, index - last));
+			}
+			return vts;
+>>>>>>> 97f5d8ccc1392d6c54dfc663b535a803fe2f1f9e
 		}
 	}
 }

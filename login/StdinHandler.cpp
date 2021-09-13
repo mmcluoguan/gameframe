@@ -38,7 +38,11 @@ namespace login
 
 			char* order = shynet::utils::StringOp::trim(msg);
 			char* argv[20] = { 0 };
+<<<<<<< HEAD
 			int argc = shynet::utils::StringOp::split(order, " ", argv, 20);
+=======
+			int argc = shynet::utils::StringOp::spilt(order, " ", argv, 20);
+>>>>>>> 97f5d8ccc1392d6c54dfc663b535a803fe2f1f9e
 			if (argc > 0)
 			{
 				bool flag = false;
