@@ -13,10 +13,52 @@
 
 int g_gateconnect_id;
 
+#include "shynet/utils/Databuffer.h"
+#include "shynet/crypto/Md5.h"
+#include "shynet/utils/SkipList.h"
+#include "shynet/utils/Lru.h"
+
+void test() {
+	shynet::utils::Databuffer<> dt;
+	std::string origin = "abcde";
+	std::string res = shynet::crypto::md5::sum(origin);
+	assert(res == std::string("ab56b4d92b40713acc5af89985d4b786"));
+		
+	std::vector<int> aa;
+	int max = 10;
+	for (int i = 0; i < max; i++)
+	{
+		aa.push_back(5);//shynet::utils::Stuff::random(1, 5));
+	}
+	shynet::utils::SkipList<int, int> sl;
+	for (int i = 0; i < max; i++)
+	{
+		int a = aa[i];
+		sl.insert({ a,i });
+	}	
+	//sl.print();
+	shynet::utils::Lru<std::string, int> c(3);
+	c.put("chef", 1);
+	c.put("yoko", 2);
+	c.put("tom", 3);
+	c.put("jerry", 4); // 超过容器大小，淘汰最老的`chef`
+	bool exist;
+	int v;
+	exist = c.get("chef", &v);
+	assert(!exist);
+	exist = c.get("yoko", &v);
+	assert(exist && v == 2);
+	c.put("garfield", 5); // 超过容器大小，注意，由于`yoko`刚才读取时会更新热度，所以淘汰的是`tom`
+	exist = c.get("yoko", &v);
+	assert(exist && v == 2);
+	exist = c.get("tom", &v);
+	assert(!exist);
+}
+
 int main(int argc, char* argv[]) {
 
 	//test();
-
+	//return 0;
 	using namespace std;
 	using namespace shynet;
 	using namespace shynet::utils;

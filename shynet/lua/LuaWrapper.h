@@ -1,5 +1,5 @@
-﻿#pragma once
-#include "shynet/kaguya/kaguya.hpp"
+#pragma once
+#include <kaguya/kaguya.hpp>
 
 namespace shynet {
 	namespace lua {

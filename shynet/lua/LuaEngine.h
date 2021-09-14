@@ -1,6 +1,6 @@
 #pragma once
 #include "shynet/thread/Thread.h"
-#include "shynet/kaguya/kaguya.hpp"
+#include <kaguya/kaguya.hpp>
 #include "shynet/lua/LuaWrapper.h"
 #include "shynet/task/Task.h"
 #include "shynet/utils/Singleton.h"

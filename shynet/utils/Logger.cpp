@@ -87,7 +87,7 @@ namespace shynet {
 
 			char path[PATH_MAX] = { 0 };
 			char processname[NAME_MAX] = { 0 };
-			if (utils::Stuff::get_executable_path(path, processname, sizeof(path)) == -1) {
+			if (utils::Stuff::executable_path(path, processname, sizeof(path)) == -1) {
 				abort();
 			}
 			char* processname_end = strrchr(processname, '.');

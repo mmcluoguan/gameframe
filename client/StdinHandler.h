@@ -1,4 +1,4 @@
-﻿#pragma once
+#pragma once
 #include "shynet/events/EventHandler.h"
 
 namespace client
@@ -11,6 +11,7 @@ namespace client
 		void input(int fd) override;
 	private:
 		void quit_order(const char* od, int argc, char** argv, const char* optstr);
+		void info_order(const char* od, int argc, char** argv, const char* optstr);
 		void reconnect_order(const char* od, int argc, char** argv, const char* optstr);
 		void login_order(const char* od, int argc, char** argv, const char* optstr);
 	};

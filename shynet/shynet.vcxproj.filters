@@ -151,6 +151,9 @@
     <ClCompile Include="utils\Logger.cpp">
       <Filter>utils</Filter>
     </ClCompile>
+    <ClCompile Include="utils\FilePathOp.cpp">
+      <Filter>utils</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Basic.h" />
@@ -244,15 +247,6 @@
     <ClInclude Include="crypto\Url.h">
       <Filter>crypto</Filter>
     </ClInclude>
-    <ClInclude Include="fflua\fflua.h">
-      <Filter>fflua</Filter>
-    </ClInclude>
-    <ClInclude Include="fflua\fflua_register.h">
-      <Filter>fflua</Filter>
-    </ClInclude>
-    <ClInclude Include="fflua\fflua_type.h">
-      <Filter>fflua</Filter>
-    </ClInclude>
     <ClInclude Include="thread\ListenThread.h">
       <Filter>thread</Filter>
     </ClInclude>
@@ -279,12 +273,6 @@
     </ClInclude>
     <ClInclude Include="pool\MysqlPool.h">
       <Filter>pool</Filter>
-    </ClInclude>
-    <ClInclude Include="kaguya\kaguya.hpp">
-      <Filter>kaguya</Filter>
-    </ClInclude>
-    <ClInclude Include="kaguya\preprocess.hpp">
-      <Filter>kaguya</Filter>
     </ClInclude>
     <ClInclude Include="lua\LuaWrapper.h">
       <Filter>lua</Filter>
@@ -331,6 +319,30 @@
     <ClInclude Include="utils\Singleton.h">
       <Filter>utils</Filter>
     </ClInclude>
+    <ClInclude Include="crypto\Sha256.h">
+      <Filter>crypto</Filter>
+    </ClInclude>
+    <ClInclude Include="crypto\Md5.h">
+      <Filter>crypto</Filter>
+    </ClInclude>
+    <ClInclude Include="utils\Databuffer.h">
+      <Filter>utils</Filter>
+    </ClInclude>
+    <ClInclude Include="utils\SkipList.h">
+      <Filter>utils</Filter>
+    </ClInclude>
+    <ClInclude Include="utils\Hash.h">
+      <Filter>utils</Filter>
+    </ClInclude>
+    <ClInclude Include="utils\FilePathOp.h">
+      <Filter>utils</Filter>
+    </ClInclude>
+    <ClInclude Include="utils\Stringify_stl.h">
+      <Filter>utils</Filter>
+    </ClInclude>
+    <ClInclude Include="utils\Lru.h">
+      <Filter>utils</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="pool">
@@ -360,17 +372,11 @@
     <Filter Include="protocol">
       <UniqueIdentifier>{9b71b6b2-b942-4737-beb5-76f80f79d12a}</UniqueIdentifier>
     </Filter>
-    <Filter Include="fflua">
-      <UniqueIdentifier>{b6c925f6-cbe8-4a4d-bcbe-c6ae7ff19d5f}</UniqueIdentifier>
-    </Filter>
     <Filter Include="thread">
       <UniqueIdentifier>{4658e87f-753d-491a-b571-a19656fcda3f}</UniqueIdentifier>
     </Filter>
     <Filter Include="lua">
       <UniqueIdentifier>{577a98c2-f0c1-46ce-a230-02029308ab7a}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="kaguya">
-      <UniqueIdentifier>{4817fff1-b5c4-4b4c-8fb4-eb8b2b831099}</UniqueIdentifier>
     </Filter>
     <Filter Include="task">
       <UniqueIdentifier>{e2b3b197-8b3f-41c7-9bca-b2ca178ee547}</UniqueIdentifier>

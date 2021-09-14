@@ -2,8 +2,8 @@
 #include <queue>
 #include <mutex>
 #include <condition_variable>
+#include <kaguya/kaguya.hpp>
 #include "shynet/thread/Thread.h"
-#include "shynet/kaguya/kaguya.hpp"
 #include "shynet/task/Task.h"
 
 namespace shynet {

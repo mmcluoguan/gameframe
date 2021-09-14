@@ -6,6 +6,7 @@
 #include "shynet/utils/Singleton.h"
 #include "shynet/utils/StringOp.h"
 #include "shynet/utils/IniConfig.h"
+#include "shynet/utils/Stuff.h"
 #include "frmpub/protocc/client.pb.h"
 #include "client/GateConnector.h"
 
@@ -32,6 +33,8 @@ namespace client {
 			typedef std::tuple<const char*, const char*, std::function<void(const char*, int, char**, const char*)>> item;
 			item orders[] = {
 				item("quit",":",bind(&StdinHandler::quit_order, this,
+					std::placeholders::_1,std::placeholders::_2,std::placeholders::_3,std::placeholders::_4)),
+				item("info",":",bind(&StdinHandler::info_order, this,
 					std::placeholders::_1,std::placeholders::_2,std::placeholders::_3,std::placeholders::_4)),
 				item("reconnect",":",bind(&StdinHandler::reconnect_order, this,
 					std::placeholders::_1,std::placeholders::_2,std::placeholders::_3,std::placeholders::_4)),
@@ -66,6 +69,20 @@ namespace client {
 		struct timeval delay = { 2, 0 };
 		LOG_INFO << "捕获到一个退出命令,程序将在2秒后安全退出";
 		base()->loopexit(&delay);
+	}
+
+	void StdinHandler::info_order(const char* od, int argc, char** argv, const char* optstr) {
+		char path[PATH_MAX] = { 0 };
+		char processname[NAME_MAX] = { 0 };
+		shynet::utils::Stuff::executable_path(path, processname, sizeof(path));
+		LOG_INFO_BASE << "程序名:" << processname;
+		LOG_INFO_BASE << "使用线程数:" << shynet::utils::Stuff::num_of_threads();
+		LOG_INFO_BASE << "进程id:" << getpid();
+		shynet::utils::Stuff::mem_info mem;
+		shynet::utils::Stuff::obtain_mem_info(&mem);
+		LOG_INFO_BASE << "虚拟内存:" << mem.virt_kbytes << "kb";
+		LOG_INFO_BASE << "常驻内存:" << mem.res_kbytes << "kb";
+		LOG_INFO_BASE << "已运行时间:" << shynet::utils::Stuff::up_duration_seconds() << "s";
 	}
 
 	void StdinHandler::reconnect_order(const char* od, int argc, char** argv, const char* optstr) {

@@ -5,6 +5,7 @@
 #include "shynet/net/AcceptNewFd.h"
 #include "shynet/net/ConnectEvent.h"
 #include "shynet/utils/Logger.h"
+#include "shynet/utils/Stuff.h"
 
 namespace shynet {
 	namespace lua {
@@ -19,6 +20,10 @@ namespace shynet {
 				});
 
 			//注册函数
+			state["random"] = kaguya::function([](int min, int max) {
+				return shynet::utils::Stuff::random(min, max);
+				});
+
 			state["log"] = kaguya::function([](kaguya::VariadicArgType args) {
 				std::ostringstream stream;
 				for (auto v : args) {

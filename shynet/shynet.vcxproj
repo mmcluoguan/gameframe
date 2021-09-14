@@ -133,7 +133,9 @@
   <ItemGroup>
     <ClInclude Include="Basic.h" />
     <ClInclude Include="crypto\Base64.h" />
+    <ClInclude Include="crypto\Md5.h" />
     <ClInclude Include="crypto\Sha1.h" />
+    <ClInclude Include="crypto\Sha256.h" />
     <ClInclude Include="crypto\Url.h" />
     <ClInclude Include="events\EventBase.h" />
     <ClInclude Include="events\EventBuffer.h" />
@@ -144,11 +146,6 @@
     <ClInclude Include="events\EventHandler.h" />
     <ClInclude Include="events\EventLisenter.h" />
     <ClInclude Include="events\Streambuff.h" />
-    <ClInclude Include="fflua\fflua.h" />
-    <ClInclude Include="fflua\fflua_register.h" />
-    <ClInclude Include="fflua\fflua_type.h" />
-    <ClInclude Include="kaguya\kaguya.hpp" />
-    <ClInclude Include="kaguya\preprocess.hpp" />
     <ClInclude Include="lua\LuaEngine.h" />
     <ClInclude Include="lua\LuaWrapper.h" />
     <ClInclude Include="net\AcceptHeartbeat.h" />
@@ -185,10 +182,16 @@
     <ClInclude Include="thread\Thread.h" />
     <ClInclude Include="thread\TimerThread.h" />
     <ClInclude Include="thread\WorkThread.h" />
+    <ClInclude Include="utils\Databuffer.h" />
+    <ClInclude Include="utils\FilePathOp.h" />
+    <ClInclude Include="utils\Hash.h" />
     <ClInclude Include="utils\IdWorker.h" />
     <ClInclude Include="utils\IniConfig.h" />
     <ClInclude Include="utils\Logger.h" />
+    <ClInclude Include="utils\Lru.h" />
     <ClInclude Include="utils\Singleton.h" />
+    <ClInclude Include="utils\SkipList.h" />
+    <ClInclude Include="utils\Stringify_stl.h" />
     <ClInclude Include="utils\StringOp.h" />
     <ClInclude Include="utils\Stuff.h" />
   </ItemGroup>
@@ -238,6 +241,7 @@
     <ClCompile Include="thread\Thread.cpp" />
     <ClCompile Include="thread\TimerThread.cpp" />
     <ClCompile Include="thread\WorkThread.cpp" />
+    <ClCompile Include="utils\FilePathOp.cpp" />
     <ClCompile Include="utils\IdWorker.cpp" />
     <ClCompile Include="utils\IniConfig.cpp" />
     <ClCompile Include="utils\Logger.cpp" />
