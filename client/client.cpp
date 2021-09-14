@@ -13,9 +13,24 @@
 
 int g_gateconnect_id;
 
+#include "shynet/utils/Databuffer.h"
+#include "shynet/crypto/Md5.h"
+#include "shynet/utils/Skiplist.h"
+void test() {
+	shynet::utils::Databuffer<> dt;
+	std::string origin = "abcde";
+	std::string res = shynet::crypto::md5::sum(origin);
+	assert(res == std::string("ab56b4d92b40713acc5af89985d4b786"));
+	shynet::utils::Skiplist<int, int> gsl;
+	auto iter2 = gsl.rbegin();
+	for (; iter2 != gsl.rend(); ++iter2) {
+		iter2->first;
+	}
+}
+
 int main(int argc, char* argv[]) {
 
-	//test();
+	test();
 
 	using namespace std;
 	using namespace shynet;

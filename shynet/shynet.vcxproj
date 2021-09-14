@@ -133,7 +133,9 @@
   <ItemGroup>
     <ClInclude Include="Basic.h" />
     <ClInclude Include="crypto\Base64.h" />
+    <ClInclude Include="crypto\Md5.h" />
     <ClInclude Include="crypto\Sha1.h" />
+    <ClInclude Include="crypto\Sha256.h" />
     <ClInclude Include="crypto\Url.h" />
     <ClInclude Include="events\EventBase.h" />
     <ClInclude Include="events\EventBuffer.h" />
@@ -185,10 +187,12 @@
     <ClInclude Include="thread\Thread.h" />
     <ClInclude Include="thread\TimerThread.h" />
     <ClInclude Include="thread\WorkThread.h" />
+    <ClInclude Include="utils\Databuffer.h" />
     <ClInclude Include="utils\IdWorker.h" />
     <ClInclude Include="utils\IniConfig.h" />
     <ClInclude Include="utils\Logger.h" />
     <ClInclude Include="utils\Singleton.h" />
+    <ClInclude Include="utils\Skiplist.h" />
     <ClInclude Include="utils\StringOp.h" />
     <ClInclude Include="utils\Stuff.h" />
   </ItemGroup>

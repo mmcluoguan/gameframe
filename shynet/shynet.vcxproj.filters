@@ -331,6 +331,18 @@
     <ClInclude Include="utils\Singleton.h">
       <Filter>utils</Filter>
     </ClInclude>
+    <ClInclude Include="crypto\Sha256.h">
+      <Filter>crypto</Filter>
+    </ClInclude>
+    <ClInclude Include="crypto\Md5.h">
+      <Filter>crypto</Filter>
+    </ClInclude>
+    <ClInclude Include="utils\Databuffer.h">
+      <Filter>utils</Filter>
+    </ClInclude>
+    <ClInclude Include="utils\Skiplist.h">
+      <Filter>utils</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="pool">
