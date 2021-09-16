@@ -12,7 +12,7 @@ namespace shynet {
 		InotifyThread::InotifyThread(size_t index) : Thread(ThreadType::INOTIFY, index) {
 			notifyfd_ = inotify_init1(IN_NONBLOCK | IN_CLOEXEC);
 			if (notifyfd_ == -1) {
-				LOG_ERROR << "call inotify_init()";
+				throw SHYNETEXCEPTION("call inotify_init");
 			}
 		}
 
@@ -99,7 +99,7 @@ namespace shynet {
 				}
 				return FTW_CONTINUE;
 				}, 10, FTW_MOUNT | FTW_PHYS) == -1) {
-				LOG_ERROR << "call nftw()";
+				throw SHYNETEXCEPTION("call nftw");
 			}
 			for (int fd : g_wds) {
 				task_map_[fd] = task;
@@ -120,13 +120,18 @@ namespace shynet {
 		}
 
 		int InotifyThread::run() {
-			base_ = std::shared_ptr<events::EventBase>(new events::EventBase());
-			iobuf_ = std::shared_ptr<events::EventBuffer>(new events::EventBuffer(base_, notifyfd_, 0));
+			try {
+				base_ = std::shared_ptr<events::EventBase>(new events::EventBase());
+				iobuf_ = std::shared_ptr<events::EventBuffer>(new events::EventBuffer(base_, notifyfd_, 0));
 
-			iobuf_->setcb(ioreadcb, nullptr, nullptr, this);
-			iobuf_->enabled(EV_READ | EV_PERSIST);
-			pthread_barrier_wait(&g_barrier);
-			base_->loop(EVLOOP_NO_EXIT_ON_EMPTY);
+				iobuf_->setcb(ioreadcb, nullptr, nullptr, this);
+				iobuf_->enabled(EV_READ | EV_PERSIST);
+				pthread_barrier_wait(&g_barrier);
+				base_->loop(EVLOOP_NO_EXIT_ON_EMPTY);
+			}
+			catch (const std::exception& err) {
+				LOG_WARN << err.what();
+			}
 			return 0;
 		}
 

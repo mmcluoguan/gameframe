@@ -10,9 +10,8 @@ namespace shynet
 		static void readcb(struct bufferevent* bev, void* ptr)
 		{
 			EventConnector* conector = static_cast<EventConnector*>(ptr);
-			if (conector->buffer()->buffer() != bev)
-			{
-				LOG_ERROR << "call readcb";
+			if (conector->buffer()->buffer() != bev) {
+				throw SHYNETEXCEPTION("call readcb");
 			}
 			conector->input(conector->buffer());
 		}
@@ -20,9 +19,8 @@ namespace shynet
 		static void writecb(struct bufferevent* bev, void* ptr)
 		{
 			EventConnector* conector = static_cast<EventConnector*>(ptr);
-			if (conector->buffer()->buffer() != bev)
-			{
-				LOG_ERROR << "call writecb";
+			if (conector->buffer()->buffer() != bev) {
+				throw SHYNETEXCEPTION("call writecb");
 			}
 			conector->output(conector->buffer());
 		}
@@ -30,9 +28,8 @@ namespace shynet
 		static void eventcb(struct bufferevent* bev, short events, void* ptr)
 		{
 			EventConnector* conector = static_cast<EventConnector*>(ptr);
-			if (conector->buffer()->buffer() != bev)
-			{
-				LOG_ERROR << "call eventcb";
+			if (conector->buffer()->buffer() != bev) {
+				throw SHYNETEXCEPTION("call eventcb");
 			}
 			if (events & BEV_EVENT_CONNECTED)
 			{
@@ -85,9 +82,8 @@ namespace shynet
 		int EventConnector::connect_hostname(const char* hostname, int port)
 		{
 			dnsbase_ = evdns_base_new(base_->base(), 1);
-			if (dnsbase_ == nullptr)
-			{
-				LOG_ERROR << "call connect_hostname";
+			if (dnsbase_ == nullptr) {
+				throw SHYNETEXCEPTION("call evdns_base_new");
 			}
 			buffer_ = std::shared_ptr<EventBuffer>(new EventBuffer(base_, -1, BEV_OPT_CLOSE_ON_FREE | BEV_OPT_THREADSAFE));
 			buffer_->setcb(readcb, writecb, eventcb, this);
@@ -98,9 +94,8 @@ namespace shynet
 		int EventConnector::connect_ssl(sockaddr* address, int addrlen)
 		{
 			ctx_ = SSL_CTX_new(SSLv23_client_method());
-			if (ctx_ == nullptr)
-			{
-				LOG_ERROR << "call SSL_CTX_new";
+			if (ctx_ == nullptr) {
+				throw SHYNETEXCEPTION("call SSL_CTX_new");
 			}
 			bufferssl_ = std::shared_ptr<EventBufferSsl>(new EventBufferSsl(base_, -1, BUFFEREVENT_SSL_CONNECTING,
 				BEV_OPT_CLOSE_ON_FREE | BEV_OPT_THREADSAFE, ctx_));
@@ -112,14 +107,12 @@ namespace shynet
 		int EventConnector::connect_hostname_ssl(const char* hostname, int port)
 		{
 			dnsbase_ = evdns_base_new(base_->base(), 1);
-			if (dnsbase_ == nullptr)
-			{
-				LOG_ERROR << "call connect_hostname_ssl";
+			if (dnsbase_ == nullptr) {
+				throw SHYNETEXCEPTION("call evdns_base_new");
 			}
 			ctx_ = SSL_CTX_new(SSLv23_client_method());
-			if (ctx_ == nullptr)
-			{
-				LOG_ERROR << "call SSL_CTX_new";
+			if (ctx_ == nullptr) {
+				throw SHYNETEXCEPTION("call SSL_CTX_new");
 			}
 			bufferssl_ = std::shared_ptr<EventBufferSsl>(new EventBufferSsl(base_, -1, BUFFEREVENT_SSL_CONNECTING,
 				BEV_OPT_CLOSE_ON_FREE | BEV_OPT_THREADSAFE, ctx_));

@@ -23,7 +23,7 @@ void test() {
 	std::string origin = "abcde";
 	std::string res = shynet::crypto::md5::sum(origin);
 	assert(res == std::string("ab56b4d92b40713acc5af89985d4b786"));
-		
+
 	std::vector<int> aa;
 	int max = 10;
 	for (int i = 0; i < max; i++)
@@ -35,7 +35,7 @@ void test() {
 	{
 		int a = aa[i];
 		sl.insert({ a,i });
-	}	
+	}
 	//sl.print();
 	shynet::utils::Lru<std::string, int> c(3);
 	c.put("chef", 1);
@@ -57,7 +57,7 @@ void test() {
 
 int main(int argc, char* argv[]) {
 
-	//test();
+	test();
 	//return 0;
 	using namespace std;
 	using namespace shynet;
@@ -68,41 +68,45 @@ int main(int argc, char* argv[]) {
 	using namespace shynet::lua;
 	using namespace frmpub;
 	using namespace client;
+	try {
+		const char* file = "gameframe.ini";
+		IniConfig& ini = Singleton<IniConfig>::instance(std::move(file));
+		bool daemon = ini.get<bool, bool>("register", "daemon", false);
+		if (daemon) {
+			Stuff::daemon();
+			Singleton<IniConfig>::instance(std::move(string("gameframe.ini").c_str()));
+		}
 
-	const char* file = "gameframe.ini";
-	IniConfig& ini = Singleton<IniConfig>::instance(std::move(file));
-	bool daemon = ini.get<bool, bool>("register", "daemon", false);
-	if (daemon) {
-		Stuff::daemon();
-		Singleton<IniConfig>::instance(std::move(string("gameframe.ini").c_str()));
+		Stuff::create_coredump();
+		Logger::loglevel(Logger::LogLevel::DEBUG);
+		if (EventBase::usethread() == -1) {
+			LOG_ERROR << "call usethread";
+		}
+		EventBase::initssl();
+
+		Singleton<ThreadPool>::instance().start();
+
+		string gateip = ini.get<const char*, string>("gate", "ip", "127.0.0.1");
+		short gateport = ini.get<short, short>("gate", "port", short(25000));
+		shared_ptr<IPAddress> gateaddr(new IPAddress(gateip.c_str(), gateport));
+		shared_ptr<GateConnector> gateconnect(new GateConnector(gateaddr));
+		gateaddr.reset();
+		g_gateconnect_id = Singleton<ConnectReactorMgr>::instance().add(gateconnect);
+		gateconnect.reset();
+
+		shared_ptr<EventBase> base(new EventBase());
+		shared_ptr<StdinHandler> stdin(new StdinHandler(base, STDIN_FILENO));
+		shared_ptr<SigIntHandler> sigint(new SigIntHandler(base));
+		base->addevent(stdin, nullptr);
+		base->addevent(sigint, nullptr);
+		base->dispatch();
+
+		EventBase::cleanssl();
+		EventBase::event_shutdown();
+		google::protobuf::ShutdownProtobufLibrary();
 	}
-
-	Stuff::create_coredump();
-	Logger::loglevel(Logger::LogLevel::DEBUG);
-	if (EventBase::usethread() == -1) {
-		LOG_ERROR << "call usethread";
+	catch (const std::exception& err) {
+		LOG_WARN << err.what();
 	}
-	EventBase::initssl();
-
-	Singleton<ThreadPool>::instance().start();
-
-	string gateip = ini.get<const char*, string>("gate", "ip", "127.0.0.1");
-	short gateport = ini.get<short, short>("gate", "port", short(25000));
-	shared_ptr<IPAddress> gateaddr(new IPAddress(gateip.c_str(), gateport));
-	shared_ptr<GateConnector> gateconnect(new GateConnector(gateaddr));
-	gateaddr.reset();
-	g_gateconnect_id = Singleton<ConnectReactorMgr>::instance().add(gateconnect);
-	gateconnect.reset();
-
-	shared_ptr<EventBase> base(new EventBase());
-	shared_ptr<StdinHandler> stdin(new StdinHandler(base, STDIN_FILENO));
-	shared_ptr<SigIntHandler> sigint(new SigIntHandler(base));
-	base->addevent(stdin, nullptr);
-	base->addevent(sigint, nullptr);
-	base->dispatch();
-		
-	EventBase::cleanssl();
-	EventBase::event_shutdown();
-	google::protobuf::ShutdownProtobufLibrary();
 	return 0;
 }

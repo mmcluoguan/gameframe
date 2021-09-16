@@ -1,4 +1,6 @@
 #pragma once
+#include <string>
+
 // 无锁数据成员
 #define PROPERTY(Type, name) \
   public: \
@@ -32,6 +34,8 @@
 #define PROPERTY_STD_LOCK(name) PROPERTY_LOCK(std::mutex, name)
 #define PROPERTY_WITH_STD_LOCK(lockName, PropertyType, propertyName) PROPERTY_WITH_LOCK(std::lock_guard, std::mutex, lockName, PropertyType, propertyName)
 
+#define SHYNETEXCEPTION(err) ShynetException(std::string(err) + " -" + std::string(__FILE__) + " line:" + std::to_string(__LINE__));
+
 namespace shynet {
 	namespace utils {};
 	namespace events {};
@@ -47,6 +51,29 @@ namespace shynet {
 			INIT,
 			Parse,
 		};
+	};
+
+	/*
+	* 异常
+	*/
+	class ShynetException : public std::exception {
+	public:
+		explicit ShynetException(const std::string& msg) : msg_(msg) {}
+
+		ShynetException(const ShynetException&) = default;
+		ShynetException& operator=(const ShynetException&) = default;
+
+		ShynetException(ShynetException&&) = default;
+		ShynetException& operator=(ShynetException&&) = default;
+
+		virtual ~ShynetException() override = default;
+
+		virtual const char* what() const noexcept override {
+			return msg_.data();
+		}
+
+	private:
+		std::string msg_;
 	};
 
 	/// <summary>

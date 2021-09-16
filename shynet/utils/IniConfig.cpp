@@ -12,7 +12,9 @@ namespace shynet
 			reader.open(filename, std::ios::in);
 			if (reader.is_open() == false)
 			{
-				LOG_ERROR << "open:" << ((filename == nullptr) ? "null" : filename);
+				std::ostringstream err;
+				err << "open:" << ((filename == nullptr) ? "null" : filename);
+				throw SHYNETEXCEPTION(err.str());
 			}
 			else
 			{

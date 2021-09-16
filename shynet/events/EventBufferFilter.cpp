@@ -35,9 +35,8 @@ namespace shynet
 		{
 			buffer_ = bufferevent_filter_new(source->buffer(), inputfiltercb, outputfiltercb,
 				BEV_OPT_THREADSAFE, nullptr, this);
-			if (buffer_ == nullptr)
-			{
-				LOG_ERROR << "call bufferevent_filter_new";
+			if (buffer_ == nullptr) {
+				throw SHYNETEXCEPTION("call bufferevent_filter_new");
 			}
 		}
 		EventBufferFilter::~EventBufferFilter()

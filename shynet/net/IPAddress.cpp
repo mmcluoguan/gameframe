@@ -23,8 +23,11 @@ namespace shynet {
 				in6->sin6_addr = in6addr_any;
 				in6->sin6_port = htons(port);
 			}
-			else
-				LOG_ERROR << "family_:" << family_ << " invalid";
+			else {
+				std::ostringstream err;
+				err << "family_:" << family_ << " 无效";
+				throw SHYNETEXCEPTION(err.str());
+			}
 		}
 		IPAddress::IPAddress(const char* ip, unsigned short port) : ip_(ip) {
 			port_ = port;
@@ -46,7 +49,9 @@ namespace shynet {
 					family_ = AF_INET6;
 				}
 				else {
-					LOG_ERROR << "ip=" << ip << " invalid";
+					std::ostringstream err;
+					err << "ip=" << ip << " 无效";
+					throw SHYNETEXCEPTION(err.str());
 				}
 			}
 		}
@@ -57,21 +62,26 @@ namespace shynet {
 			if (family_ == AF_INET) {
 				char ipbuff[INET_ADDRSTRLEN] = { 0 };
 				struct sockaddr_in* in4 = (struct sockaddr_in*)&addrs_;
-				if (inet_ntop(family_, &in4->sin_addr, ipbuff, INET_ADDRSTRLEN) == nullptr)
-					LOG_ERROR << "call inet_ntop";
+				if (inet_ntop(family_, &in4->sin_addr, ipbuff, INET_ADDRSTRLEN) == nullptr) {
+					throw SHYNETEXCEPTION("call inet_ntop");
+				}
 				ip_ = std::string(ipbuff);
 				port_ = in4->sin_port;
 			}
 			else if (family_ == AF_INET6) {
 				char ipbuff[INET6_ADDRSTRLEN] = { 0 };
 				struct sockaddr_in6* in6 = (struct sockaddr_in6*)&addrs_;
-				if (inet_ntop(family_, &in6->sin6_addr, ipbuff, INET6_ADDRSTRLEN) == nullptr)
-					LOG_ERROR << "call inet_ntop";
+				if (inet_ntop(family_, &in6->sin6_addr, ipbuff, INET6_ADDRSTRLEN) == nullptr) {
+					throw SHYNETEXCEPTION("call inet_ntop");
+				}
 				ip_ = std::string(ipbuff);
 				port_ = in6->sin6_port;
 			}
-			else
-				LOG_ERROR << "family_:" << family_ << " invalid";
+			else{
+				std::ostringstream err;
+				err << "family_:" << family_ << " 无效";
+				throw SHYNETEXCEPTION(err.str());
+			}
 		}
 		const std::string IPAddress::ip() const {
 			return ip_;

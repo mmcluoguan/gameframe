@@ -25,59 +25,64 @@ int main(int argc, char* argv[]) {
 	using namespace frmpub;
 	using namespace gate;
 
-	const char* file = "gameframe.ini";
-	IniConfig& ini = Singleton<IniConfig>::instance(std::move(file));
-	bool daemon = ini.get<bool, bool>("gate", "daemon", false);
-	if (daemon) {
-		Stuff::daemon();
-		Singleton<IniConfig>::instance(std::move(string("gameframe.ini").c_str()));
+	try {
+		const char* file = "gameframe.ini";
+		IniConfig& ini = Singleton<IniConfig>::instance(std::move(file));
+		bool daemon = ini.get<bool, bool>("gate", "daemon", false);
+		if (daemon) {
+			Stuff::daemon();
+			Singleton<IniConfig>::instance(std::move(string("gameframe.ini").c_str()));
+		}
+
+		Stuff::create_coredump();
+		Logger::loglevel(Logger::LogLevel::DEBUG);
+		if (EventBase::usethread() == -1) {
+			LOG_ERROR << "call usethread";
+		}
+		EventBase::initssl();
+		int sid = ini.get<int, int>("gate", "sid", 0);
+		std::string pidfile = StringOp::str_format("./gate_%d.pid", sid);
+		Stuff::writepid(pidfile);
+
+		Singleton<LuaEngine>::instance(std::make_shared<gate::LuaWrapper>());
+		Singleton<ThreadPool>::instance().start();
+
+		LOG_DEBUG << "开启网关服服务器监听";
+		std::string gateip = ini.get<const char*, std::string>("gate", "ip", "127.0.0.1");
+		short gateport = ini.get<short, short>("gate", "port", short(25000));
+		std::shared_ptr<IPAddress> gateaddr(new IPAddress(gateip.c_str(), gateport));
+		std::shared_ptr<GateServer> gateserver(new GateServer(gateaddr));
+		Singleton<ListenReactorMgr>::instance().add(gateserver);
+
+		//连接world服务器
+		string worldstr = ini.get<const char*, string>("gate", "world", "");
+		auto worldlist = StringOp::split(worldstr, ",");
+		if (worldlist.size() > 2 || worldlist.size() == 0) {
+			LOG_ERROR << "world配置错误:" << worldstr;
+		}
+		for (auto& item : worldlist)
+		{
+			std::string worldip = ini.get<const char*, string>(item, "ip", "");
+			short worldport = ini.get<short, short>(item, "port", short(22000));
+			Singleton<ConnectReactorMgr>::instance().add(
+				std::shared_ptr<WorldConnector>(
+					new WorldConnector(std::shared_ptr<IPAddress>(
+						new IPAddress(worldip.c_str(), worldport)))));
+		}
+
+		shared_ptr<EventBase> base(new EventBase());
+		shared_ptr<StdinHandler> stdin(new StdinHandler(base, STDIN_FILENO));
+		shared_ptr<SigIntHandler> sigint(new SigIntHandler(base));
+		base->addevent(stdin, nullptr);
+		base->addevent(sigint, nullptr);
+
+		base->dispatch();
+		EventBase::cleanssl();
+		EventBase::event_shutdown();
+		google::protobuf::ShutdownProtobufLibrary();
 	}
-
-	Stuff::create_coredump();
-	Logger::loglevel(Logger::LogLevel::DEBUG);
-	if (EventBase::usethread() == -1) {
-		LOG_ERROR << "call usethread";
+	catch (const std::exception& err) {
+		LOG_WARN << err.what();
 	}
-	EventBase::initssl();
-	int sid = ini.get<int, int>("gate", "sid", 0);
-	std::string pidfile = StringOp::str_format("./gate_%d.pid", sid);
-	Stuff::writepid(pidfile);
-
-	Singleton<LuaEngine>::instance(std::make_shared<gate::LuaWrapper>());
-	Singleton<ThreadPool>::instance().start();
-
-	LOG_DEBUG << "开启网关服服务器监听";
-	std::string gateip = ini.get<const char*, std::string>("gate", "ip", "127.0.0.1");
-	short gateport = ini.get<short, short>("gate", "port", short(25000));
-	std::shared_ptr<IPAddress> gateaddr(new IPAddress(gateip.c_str(), gateport));
-	std::shared_ptr<GateServer> gateserver(new GateServer(gateaddr));
-	Singleton<ListenReactorMgr>::instance().add(gateserver);
-
-	//连接world服务器
-	string worldstr = ini.get<const char*, string>("gate", "world", "");
-	auto worldlist = StringOp::split(worldstr, ",");
-	if (worldlist.size() > 2 || worldlist.size() == 0) {
-		LOG_ERROR << "world配置错误:" << worldstr;
-	}
-	for (auto& item : worldlist)
-	{
-		std::string worldip = ini.get<const char*, string>(item, "ip", "");
-		short worldport = ini.get<short, short>(item, "port", short(22000));
-		Singleton<ConnectReactorMgr>::instance().add(
-			std::shared_ptr<WorldConnector>(
-				new WorldConnector(std::shared_ptr<IPAddress>(
-					new IPAddress(worldip.c_str(), worldport)))));
-	}
-
-	shared_ptr<EventBase> base(new EventBase());
-	shared_ptr<StdinHandler> stdin(new StdinHandler(base, STDIN_FILENO));
-	shared_ptr<SigIntHandler> sigint(new SigIntHandler(base));
-	base->addevent(stdin, nullptr);
-	base->addevent(sigint, nullptr);
-
-	base->dispatch();
-	EventBase::cleanssl();
-	EventBase::event_shutdown();
-	google::protobuf::ShutdownProtobufLibrary();
 	return 0;
 }

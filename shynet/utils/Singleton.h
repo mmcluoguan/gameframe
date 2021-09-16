@@ -23,7 +23,9 @@ namespace shynet {
 
 			static T& get_instance() {
 				if (instance_ == nullptr) {
-					LOG_ERROR << T::classname << " single is not initialized";
+					std::ostringstream err;
+					err << T::classname << " 单例没有初始化";
+					throw SHYNETEXCEPTION(err.str());
 				}
 				return *instance_;
 			}

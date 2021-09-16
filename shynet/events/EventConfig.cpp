@@ -8,9 +8,8 @@ namespace shynet
 		EventConfig::EventConfig()
 		{
 			config_ = event_config_new();
-			if (config_ == nullptr)
-			{
-				LOG_ERROR << "call event_config_new";
+			if (config_ == nullptr) {
+				throw SHYNETEXCEPTION("call event_config_new");
 			}
 		}
 		EventConfig::~EventConfig()

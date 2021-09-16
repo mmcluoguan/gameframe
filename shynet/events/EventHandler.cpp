@@ -38,7 +38,7 @@ namespace shynet
 			event_ = event_new(base->base(), fd, what, cbfunc, this);
 			if (event_ == nullptr)
 			{
-				LOG_ERROR << "call event_new";
+				throw SHYNETEXCEPTION("call event_new");
 			}
 		}
 		EventHandler::EventHandler()
@@ -57,13 +57,13 @@ namespace shynet
 
 		void EventHandler::event(std::shared_ptr<EventBase> base, evutil_socket_t fd, short what)
 		{
-			if (event_ != nullptr)
-				LOG_ERROR << "event existed " << "event:" << (void*)event_;
+			if (event_ != nullptr) {
+				throw SHYNETEXCEPTION("event 已经存在");
+			}
 			base_ = base;
 			event_ = event_new(base->base(), fd, what, cbfunc, this);
-			if (event_ == nullptr)
-			{
-				LOG_ERROR << "call event_new";
+			if (event_ == nullptr) {
+				throw SHYNETEXCEPTION("call event_new");
 			}
 		}
 

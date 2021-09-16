@@ -26,7 +26,8 @@ namespace shynet {
 				std::thread::id id = it->thread()->get_id();
 				LOG_TRACE << "over thread:[" << i << "]:" << std::hash<std::thread::id>()(id) << " wait";
 				try {
-					it->thread()->join();
+					if(it->thread()->joinable())
+						it->thread()->join();
 				}
 				catch(std::exception){
 					LOG_WARN << "over thread:[" << i << "]" << std::hash<std::thread::id>()(id) << " abort";

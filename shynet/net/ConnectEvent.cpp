@@ -18,7 +18,7 @@ namespace shynet {
 			if (enable_ssl_) {
 				ctx_ = SSL_CTX_new(SSLv23_client_method());
 				if (ctx_ == nullptr) {
-					LOG_ERROR << "call SSL_CTX_new";
+					throw SHYNETEXCEPTION("call SSL_CTX_new");
 				}
 			}
 		}
@@ -35,7 +35,7 @@ namespace shynet {
 			if (enable_ssl_) {
 				ctx_ = SSL_CTX_new(SSLv23_client_method());
 				if (ctx_ == nullptr) {
-					LOG_ERROR << "call SSL_CTX_new";
+					throw SHYNETEXCEPTION("call SSL_CTX_new");
 				}
 			}
 		}

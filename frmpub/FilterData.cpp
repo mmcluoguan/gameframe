@@ -184,7 +184,7 @@ namespace frmpub {
 			return send_json(&root, enves);
 		}
 		else {
-			LOG_ERROR << "不支持的封包类型";
+			LOG_WARN << "不支持的封包类型";
 		}
 		return 0;
 	}

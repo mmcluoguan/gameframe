@@ -10,9 +10,8 @@ namespace shynet
 		{
 			delflag_ = true;
 			buffer_ = evbuffer_new();
-			if (buffer_ == nullptr)
-			{
-				LOG_ERROR << "call evbuffer_new";
+			if (buffer_ == nullptr){
+				throw SHYNETEXCEPTION("call evbuffer_new");
 			}
 		}
 		Streambuff::Streambuff(evbuffer* buffer)

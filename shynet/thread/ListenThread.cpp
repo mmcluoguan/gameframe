@@ -31,7 +31,7 @@ namespace shynet {
 					break;
 				}
 				else if (len != sizeof(buf)) {
-					LOG_ERROR << "not enough data";
+					LOG_WARN << "没有足够的数据";
 				}
 				else {
 					int serverid = 0;
@@ -51,19 +51,24 @@ namespace shynet {
 
 
 		int ListenThread::run() {
-			LOG_TRACE << "ListenThread::run threadtype:" << (int)type();
+			try {
+				LOG_TRACE << "ListenThread::run threadtype:" << (int)type();
 
-			base_ = std::shared_ptr<events::EventBase>(new events::EventBase());
-			base_->make_pair_buffer(pair_);
-			pair_[0]->enabled(EV_WRITE);
-			pair_[0]->disable(EV_READ);
-			pair_[1]->enabled(EV_READ);
-			pair_[1]->disable(EV_WRITE);
-			pair_[1]->setcb(pipeReadcb, nullptr, nullptr, this);
-			pthread_barrier_wait(&g_barrier);
-			base_->loop(EVLOOP_NO_EXIT_ON_EMPTY);
-			pair_[0].reset();
-			pair_[1].reset();
+				base_ = std::shared_ptr<events::EventBase>(new events::EventBase());
+				base_->make_pair_buffer(pair_);
+				pair_[0]->enabled(EV_WRITE);
+				pair_[0]->disable(EV_READ);
+				pair_[1]->enabled(EV_READ);
+				pair_[1]->disable(EV_WRITE);
+				pair_[1]->setcb(pipeReadcb, nullptr, nullptr, this);
+				pthread_barrier_wait(&g_barrier);
+				base_->loop(EVLOOP_NO_EXIT_ON_EMPTY);
+				pair_[0].reset();
+				pair_[1].reset();
+			}
+			catch (const std::exception& err) {
+				LOG_WARN << err.what();
+			}
 			return 0;
 		}
 		int ListenThread::stop() {

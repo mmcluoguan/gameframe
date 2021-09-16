@@ -29,7 +29,7 @@ namespace shynet {
 			case ProtoType::WEBSOCKET:
 				return websocket_->process();
 			default:
-				LOG_ERROR << "未知的协议类型";
+				LOG_WARN << "未知的协议类型";
 				return -1;
 			}
 		}
@@ -56,7 +56,7 @@ namespace shynet {
 				return websocket_->send(data, len, protocol::WebSocket::FrameType::Binary);
 			}
 			default:
-				LOG_ERROR << "未知的协议类型";
+				LOG_WARN << "未知的协议类型";
 				return -1;
 			}
 			return -1;
@@ -77,7 +77,7 @@ namespace shynet {
 				return websocket_->send(nullptr, 0, protocol::WebSocket::FrameType::Ping);
 			}
 			default:
-				LOG_ERROR << "未知的协议类型";
+				LOG_WARN << "未知的协议类型";
 				return -1;
 			}
 			return -1;

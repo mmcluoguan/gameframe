@@ -85,13 +85,13 @@ namespace shynet {
 		void Stuff::create_coredump() {
 			struct rlimit core { RLIM_INFINITY, RLIM_INFINITY };
 			if (setrlimit(RLIMIT_CORE, &core) == -1) {
-				LOG_SYSERR << "call setrlimit";
+				throw SHYNETEXCEPTION("call setrlimit");
 			}
 		}
 
 		int Stuff::daemon() {
 			if (::daemon(1, 0) == -1) {
-				LOG_SYSERR << "call daemon";
+				throw SHYNETEXCEPTION("call daemon");
 			}
 			return getpid();
 		}
@@ -107,9 +107,7 @@ namespace shynet {
 			{
 				char path[PATH_MAX] = { 0 };
 				char processname[NAME_MAX] = { 0 };
-				if (Stuff::executable_path(path, processname, sizeof(path)) == -1) {
-					LOG_SYSERR << "call executable_path";
-				}
+				Stuff::executable_path(path, processname, sizeof(path));
 				char* processname_end = strrchr(processname, '.');
 				if (processname != nullptr) {
 					*processname_end = '\0';
@@ -123,10 +121,10 @@ namespace shynet {
 				delete[] pidfile;
 			}
 			if (fp == -1) {
-				LOG_SYSERR << "call open";
+				throw SHYNETEXCEPTION("call open");
 			}
 			if (lockf(fp, F_TLOCK, 0) < 0) {
-				LOG_SYSERR << "call lockf";
+				throw SHYNETEXCEPTION("call lockf");
 			}
 
 			char buf[64] = { 0 };
@@ -139,16 +137,21 @@ namespace shynet {
 		
 		int Stuff::executable_path(char* processdir, char* processname, size_t len) {
 			char* path_end;
-			if (readlink("/proc/self/exe", processdir, len) <= 0)
+			if (readlink("/proc/self/exe", processdir, len) <= 0) {
+				throw SHYNETEXCEPTION("call readlink");
 				return -1;
+			}
 			path_end = strrchr(processdir, '/');
-			if (path_end == NULL)
+			if (path_end == NULL) {
+				throw SHYNETEXCEPTION("找不到'/'");
 				return -1;
+			}
 			++path_end;
 			strcpy(processname, path_end);
 			*path_end = '\0';
 			return static_cast<int>(path_end - processdir);
 		}
+
 		void Stuff::random(void* buf, size_t len) {
 			bool done = false;
 			FILE* fp = fopen("/dev/urandom", "rb");

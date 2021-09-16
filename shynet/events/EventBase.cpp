@@ -12,23 +12,27 @@ namespace shynet {
 	namespace events {
 		EventBase::EventBase() {
 			const EventConfig cfg;
-			if (cfg.setfeatures(EV_FEATURE_ET) == -1)
-				LOG_ERROR << "call setfeatures(EV_FEATURE_ET)";
-			if (cfg.setfeatures(EV_FEATURE_O1) == -1)
-				LOG_ERROR << "call setfeatures(EV_FEATURE_O1)";
-			if (cfg.setflag(EVENT_BASE_FLAG_IGNORE_ENV) == -1)
-				LOG_ERROR << "call setflag(EVENT_BASE_FLAG_IGNORE_ENV)";
-			if (cfg.setflag(EVENT_BASE_FLAG_EPOLL_USE_CHANGELIST) == -1)
-				LOG_ERROR << "call setflag(EVENT_BASE_FLAG_EPOLL_USE_CHANGELIST)";
+			if (cfg.setfeatures(EV_FEATURE_ET) == -1) {
+				throw SHYNETEXCEPTION("call setfeatures(EV_FEATURE_ET)");
+			}
+			if (cfg.setfeatures(EV_FEATURE_O1) == -1) {
+				throw SHYNETEXCEPTION("call setfeatures(EV_FEATURE_O1)");
+			}
+			if (cfg.setflag(EVENT_BASE_FLAG_IGNORE_ENV) == -1){
+				throw SHYNETEXCEPTION("call setfeatures(EVENT_BASE_FLAG_IGNORE_ENV)");
+			}
+			if (cfg.setflag(EVENT_BASE_FLAG_EPOLL_USE_CHANGELIST) == -1) {
+				throw SHYNETEXCEPTION("call setflag(EVENT_BASE_FLAG_EPOLL_USE_CHANGELIST)");
+			}
 			base_ = event_base_new_with_config(cfg.config());
 			if (base_ == nullptr) {
-				LOG_ERROR << "call event_base_new_with_config";
+				throw SHYNETEXCEPTION("call event_base_new_with_config");
 			}
 		}
 		EventBase::EventBase(const EventConfig* cfg) {
 			base_ = event_base_new_with_config(cfg->config());
 			if (base_ == nullptr) {
-				LOG_ERROR << "call event_base_new_with_config";
+				throw SHYNETEXCEPTION("call event_base_new_with_config");
 			}
 		}
 		EventBase::~EventBase() {
@@ -86,11 +90,11 @@ namespace shynet {
 		}
 		void EventBase::make_pair_buffer(std::shared_ptr<EventBuffer> pair[2]) {
 			if (pair[0] != nullptr || pair[1] != nullptr) {
-				LOG_ERROR << "pair[0] != nullptr || pair[1] != nullptr";
+				throw SHYNETEXCEPTION("call make_pair_buffer");
 			}
 			struct bufferevent* ap[2] = { nullptr };
 			if (bufferevent_pair_new(base_, BEV_OPT_THREADSAFE | BEV_OPT_CLOSE_ON_FREE, ap) != 0) {
-				LOG_ERROR << "call bufferevent_pair_new";
+				throw SHYNETEXCEPTION("call bufferevent_pair_new");
 			}
 			pair[0] = std::shared_ptr<EventBuffer>(new EventBuffer(ap[0], true));
 			pair[1] = std::shared_ptr<EventBuffer>(new EventBuffer(ap[1], true));
