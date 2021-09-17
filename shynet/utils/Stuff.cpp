@@ -12,7 +12,6 @@
 #include <net/if.h>
 #include <netinet/in.h>
 #include <sys/ioctl.h>
-#include <utils/string_view.hpp>
 #include "shynet/utils/FilePathOp.h"
 #include "shynet/utils/Logger.h"
 
@@ -32,7 +31,7 @@ namespace shynet {
 				uint64_t out_bytes_;
 
 				bool parse(const std::string& interface) {
-					nonstd::string_view content = FilePathOp::read_file("/proc/net/dev", 65535).get();
+					std::string_view content = FilePathOp::read_file("/proc/net/dev", 65535).get();
 					if (content.empty()) { return false; }
 
 					std::string key = interface + ": ";
@@ -294,9 +293,9 @@ namespace shynet {
 
 		int32_t Stuff::num_of_threads()
 		{
-			nonstd::string_view str(status().get());
+			std::string_view str(status().get());
 			std::size_t pos = str.find("Threads:");
-			if (pos == nonstd::string_view::npos) {
+			if (pos == std::string_view::npos) {
 				return -1;
 			}
 			return std::atoi(str.data() + pos + 8);

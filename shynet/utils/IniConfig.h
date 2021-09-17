@@ -16,11 +16,11 @@ namespace shynet
 				std::string value;
 			};
 
-			typedef std::string section;
-			typedef std::string key;
-			typedef node value;
-			typedef std::unordered_map<key, value> nodes;
-			typedef std::unordered_map<section, nodes> serctions;
+			using section = std::string;
+			using key = std::string;
+			using value = node;
+			using nodes = std::unordered_map<key, value>;
+			using serctions = std::unordered_map<section, nodes>;
 		public:
 			static constexpr const char* classname = "IniConfig";
 			explicit IniConfig(const char* filename);

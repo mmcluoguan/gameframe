@@ -29,8 +29,8 @@ namespace shynet {
         template <typename KeyT, typename ValueT>
         class Lru : public Nocopy {
         public:
-            typedef std::pair<KeyT, ValueT> KvPair;
-            typedef std::list<KvPair> List;
+            using KvPair = std::pair<KeyT, ValueT>;
+            using List = std::list<KvPair> ;
 
         public:
             // @param cap 容器大小
@@ -92,7 +92,7 @@ namespace shynet {
                 return capacity_;
             }
         private:
-            typedef std::map<KeyT, typename List::iterator> Map;
+            using Map = std::map<KeyT, typename List::iterator>;
             const std::size_t capacity_;
             List              list_;
             Map               map_;

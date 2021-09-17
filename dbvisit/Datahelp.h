@@ -24,8 +24,8 @@ namespace dbvisit {
 		std::string _msg;
 	};
 
-	typedef std::list<std::unordered_map<std::string, std::string>> moredata;
-	typedef std::shared_ptr<moredata> moredataptr;
+	using moredata = std::list<std::unordered_map<std::string, std::string>> ;
+	using moredataptr = std::shared_ptr<moredata> ;
 
 	/// <summary>
 	/// 数据简易操作

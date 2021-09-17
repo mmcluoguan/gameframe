@@ -1,6 +1,7 @@
 #pragma once
 #include <mutex>
 #include <memory>
+#include <ostream>
 #include "shynet/utils/Logger.h"
 
 namespace shynet {

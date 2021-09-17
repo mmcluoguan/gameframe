@@ -7,7 +7,6 @@
 #include "shynet/utils/StringOp.h"
 #include "shynet/utils/IniConfig.h"
 #include "shynet/utils/Stuff.h"
-#include "frmpub/protocc/client.pb.h"
 #include "client/GateConnector.h"
 
 extern int optind, opterr, optopt;
@@ -30,7 +29,7 @@ namespace client {
 			LOG_WARN << "call read";
 		}
 		else {
-			typedef std::tuple<const char*, const char*, std::function<void(const char*, int, char**, const char*)>> item;
+			using item = std::tuple<const char*, const char*, std::function<void(const char*, int, char**, const char*)>>;
 			item orders[] = {
 				item("quit",":",bind(&StdinHandler::quit_order, this,
 					std::placeholders::_1,std::placeholders::_2,std::placeholders::_3,std::placeholders::_4)),
@@ -49,7 +48,8 @@ namespace client {
 				bool flag = false;
 				for (const auto& it : orders) {
 					if (strcmp(argv[0], std::get<0>(it)) == 0) {
-						std::get<2>(it)(std::get<0>(it), argc, argv, std::get<1>(it));
+						auto [arg0, arg1, argfun] = it;
+						argfun(arg0, argc, argv, arg1);
 						flag = true;
 					}
 				}

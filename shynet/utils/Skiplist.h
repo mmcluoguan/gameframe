@@ -18,7 +18,7 @@ namespace shynet
         class SkipList : public Nocopy
         {
         public:
-            typedef std::pair<Key, Score>    value_type;
+            using value_type = std::pair<Key, Score>;
 
             SkipList();
             virtual ~SkipList();
@@ -564,7 +564,7 @@ namespace shynet
 
             int32_t level = 1;
 
-            while ((random() & 0xFFFF) < (SKIPLIST_P * 0xFFFF))
+            while (double(random() & 0xFFFF) < (SKIPLIST_P * 0xFFFF))
             {
                 level += 1;
             }

@@ -29,7 +29,7 @@ namespace shynet {
 					if(it->thread()->joinable())
 						it->thread()->join();
 				}
-				catch(std::exception){
+				catch(const std::exception& err){
 					LOG_WARN << "over thread:[" << i << "]" << std::hash<std::thread::id>()(id) << " abort";
 					//分离异常终止的线程
 					it->thread()->detach();
