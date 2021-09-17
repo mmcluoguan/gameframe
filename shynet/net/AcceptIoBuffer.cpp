@@ -25,13 +25,13 @@ namespace shynet {
 			SSL_CTX* ctx) :
 			events::EventBuffer(base) {
 			if (enable_ssl) {
-				iobuf_ = std::shared_ptr<events::EventBufferSsl>(new events::EventBufferSsl(base, fd,
+				iobuf_ = std::make_shared<events::EventBufferSsl>(base, fd,
 					BUFFEREVENT_SSL_ACCEPTING,
-					BEV_OPT_CLOSE_ON_FREE | BEV_OPT_THREADSAFE, ctx));
+					BEV_OPT_CLOSE_ON_FREE | BEV_OPT_THREADSAFE, ctx);
 			}
 			else {
-				iobuf_ = std::shared_ptr<events::EventBuffer>(new events::EventBuffer(base, fd,
-					BEV_OPT_CLOSE_ON_FREE | BEV_OPT_THREADSAFE));
+				iobuf_ = std::make_shared<events::EventBuffer>(base, fd,
+					BEV_OPT_CLOSE_ON_FREE | BEV_OPT_THREADSAFE);
 			}
 			set_buffer(iobuf_->buffer());
 
@@ -53,7 +53,7 @@ namespace shynet {
 		void AcceptIoBuffer::io_readcb() {
 			std::shared_ptr<AcceptNewFd> aptnewfd = newfd_.lock();
 			if (aptnewfd != nullptr) {
-				std::shared_ptr<task::AcceptReadIoTask> io(new task::AcceptReadIoTask(aptnewfd));
+				std::shared_ptr<task::AcceptReadIoTask> io = std::make_shared<task::AcceptReadIoTask>(aptnewfd);
 				utils::Singleton<pool::ThreadPool>::instance().appendWork(io, fd());
 			}
 		}

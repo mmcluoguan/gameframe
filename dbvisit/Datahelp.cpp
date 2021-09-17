@@ -28,9 +28,9 @@ namespace dbvisit {
 		if (docs.count() == 1) {
 			mysqlx::DbDoc doc = docs.fetchOne();
 			//填充数据
-			for (auto& it : out) {
-				if (doc.hasField(it.first)) {
-					it.second = doc[it.first].operator std::string();
+			for (auto&& [key,value] : out) {
+				if (doc.hasField(key)) {
+					value = doc[key].operator std::string();
 				}
 			}
 		}
@@ -50,8 +50,8 @@ namespace dbvisit {
 		redis::Redis& redis = shynet::utils::Singleton<redis::Redis>::instance(std::string());
 		if (redis.exists(cachekey) == 1) {
 			std::vector<std::string> out_key;
-			for (auto& it : out) {
-				out_key.push_back(it.first);
+			for (auto&& [key, value] : out) {
+				out_key.push_back(key);
 			}
 			std::vector<redis::OptionalString> out_value;
 			redis.hmget(cachekey, out_key.begin(), out_key.end(), std::back_inserter(out_value));
@@ -125,9 +125,9 @@ namespace dbvisit {
 		mysqlx::Schema sch = mysql.fetch()->getDefaultSchema();
 		std::string where = shynet::utils::StringOp::str_format("_id='%s'", key.c_str());
 		mysqlx::CollectionModify md = sch.createCollection(tablename, true).modify(where);
-		for (const auto& it : fields) {
-			if (it.first != "_id") {
-				md.set(it.first, it.second);
+		for (auto&& [key,value] : fields) {
+			if (key != "_id") {
+				md.set(key, value);
 			}
 		}
 		if (md.execute().getAffectedItemsCount() == 0) {
@@ -141,9 +141,9 @@ namespace dbvisit {
 		mysqlx::Schema sch = mysql.fetch()->getDefaultSchema();
 		rapidjson::Document doc;
 		rapidjson::Value& data = doc.SetObject();
-		for (auto& it : fields) {
-			data.AddMember(rapidjson::StringRef(it.first.c_str()),
-				rapidjson::StringRef(it.second.c_str()),
+		for (auto&& [key,value] : fields) {
+			data.AddMember(rapidjson::StringRef(key.c_str()),
+				rapidjson::StringRef(value.c_str()),
 				doc.GetAllocator());
 		}
 		rapidjson::StringBuffer buffer;

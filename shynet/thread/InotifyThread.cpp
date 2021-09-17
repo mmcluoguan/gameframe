@@ -17,8 +17,8 @@ namespace shynet {
 		}
 
 		InotifyThread::~InotifyThread() {
-			for (auto& it : task_map_) {
-				inotify_rm_watch(notifyfd_, it.first);
+			for (auto&& [key, value] : task_map_) {
+				inotify_rm_watch(notifyfd_, key);
 			}
 		}
 
@@ -111,10 +111,10 @@ namespace shynet {
 		}
 
 		void InotifyThread::remove(std::shared_ptr<task::NotifyTask> task) {
-			for (auto& it : task->fdptahs()) {
-				inotify_rm_watch(notifyfd_, it.first);
+			for (auto&& [key, value] : task->fdptahs()) {
+				inotify_rm_watch(notifyfd_, key);
 				std::lock_guard<std::mutex> lock(task_mutex_);
-				task_map_.erase(it.first);
+				task_map_.erase(key);
 			}
 			task->fdptahs().clear();
 		}

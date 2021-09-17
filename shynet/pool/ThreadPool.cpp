@@ -29,7 +29,7 @@ namespace shynet {
 					if(it->thread()->joinable())
 						it->thread()->join();
 				}
-				catch(std::exception){
+				catch(const std::exception& err){
 					LOG_WARN << "over thread:[" << i << "]" << std::hash<std::thread::id>()(id) << " abort";
 					//分离异常终止的线程
 					it->thread()->detach();
@@ -55,7 +55,7 @@ namespace shynet {
 
 					for (size_t n = 0; n < acceptNum_; n++) {
 						i++;
-						std::shared_ptr<thread::AcceptThread> acceptTh(new thread::AcceptThread(i));
+						std::shared_ptr<thread::AcceptThread> acceptTh = std::make_shared<thread::AcceptThread>(i);
 						id = acceptTh->start()->get_id();
 						tifs_.push_back(acceptTh);
 						LOG_TRACE << "AcceptThread start [" << i << "]:" << std::hash<std::thread::id>()(id);
@@ -64,7 +64,7 @@ namespace shynet {
 
 					for (size_t n = 0; n < workNum_; n++) {
 						i++;
-						std::shared_ptr<thread::WorkThread> workerTh(new thread::WorkThread(i));
+						std::shared_ptr<thread::WorkThread> workerTh = std::make_shared<thread::WorkThread>(i);
 						id = workerTh->start()->get_id();
 						tifs_.push_back(workerTh);
 						LOG_TRACE << "WorkThread start [" << i << "]:" << std::hash<std::thread::id>()(id);

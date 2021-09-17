@@ -85,7 +85,7 @@ namespace shynet
 			if (dnsbase_ == nullptr) {
 				throw SHYNETEXCEPTION("call evdns_base_new");
 			}
-			buffer_ = std::shared_ptr<EventBuffer>(new EventBuffer(base_, -1, BEV_OPT_CLOSE_ON_FREE | BEV_OPT_THREADSAFE));
+			buffer_ = std::make_shared<EventBuffer>(base_, -1, BEV_OPT_CLOSE_ON_FREE | BEV_OPT_THREADSAFE);
 			buffer_->setcb(readcb, writecb, eventcb, this);
 			buffer_->enabled(EV_READ | EV_WRITE);
 			return bufferevent_socket_connect_hostname(buffer_->buffer(), dnsbase_, AF_UNSPEC, hostname, port);
@@ -97,8 +97,8 @@ namespace shynet
 			if (ctx_ == nullptr) {
 				throw SHYNETEXCEPTION("call SSL_CTX_new");
 			}
-			bufferssl_ = std::shared_ptr<EventBufferSsl>(new EventBufferSsl(base_, -1, BUFFEREVENT_SSL_CONNECTING,
-				BEV_OPT_CLOSE_ON_FREE | BEV_OPT_THREADSAFE, ctx_));
+			bufferssl_ = std::make_shared<EventBufferSsl>(base_, -1, BUFFEREVENT_SSL_CONNECTING,
+				BEV_OPT_CLOSE_ON_FREE | BEV_OPT_THREADSAFE, ctx_);
 			bufferssl_->setcb(readcb, writecb, eventcb, this);
 			bufferssl_->enabled(EV_READ | EV_WRITE);
 			return bufferevent_socket_connect(bufferssl_->buffer(), address, addrlen);
@@ -114,8 +114,8 @@ namespace shynet
 			if (ctx_ == nullptr) {
 				throw SHYNETEXCEPTION("call SSL_CTX_new");
 			}
-			bufferssl_ = std::shared_ptr<EventBufferSsl>(new EventBufferSsl(base_, -1, BUFFEREVENT_SSL_CONNECTING,
-				BEV_OPT_CLOSE_ON_FREE | BEV_OPT_THREADSAFE, ctx_));
+			bufferssl_ = std::make_shared<EventBufferSsl>(base_, -1, BUFFEREVENT_SSL_CONNECTING,
+				BEV_OPT_CLOSE_ON_FREE | BEV_OPT_THREADSAFE, ctx_);
 			bufferssl_->setcb(readcb, writecb, eventcb, this);
 			bufferssl_->enabled(EV_READ | EV_WRITE);
 			return bufferevent_socket_connect_hostname(bufferssl_->buffer(), dnsbase_, AF_UNSPEC, hostname, port);
@@ -123,7 +123,7 @@ namespace shynet
 
 		int EventConnector::connect(sockaddr* address, int addrlen)
 		{
-			buffer_ = std::shared_ptr<EventBuffer>(new EventBuffer(base_, -1, BEV_OPT_CLOSE_ON_FREE | BEV_OPT_THREADSAFE));
+			buffer_ = std::make_shared<EventBuffer>(base_, -1, BEV_OPT_CLOSE_ON_FREE | BEV_OPT_THREADSAFE);
 			buffer_->setcb(readcb, writecb, eventcb, this);
 			buffer_->enabled(EV_READ | EV_WRITE);
 			return bufferevent_socket_connect(buffer_->buffer(), address, addrlen);

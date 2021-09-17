@@ -49,9 +49,9 @@ namespace dbvisit {
 	}
 	std::shared_ptr<DbClient> DbClientMgr::find(std::string sid) {
 		std::lock_guard<std::mutex> lock(clis_mutex_);
-		for (auto& iter : clis_) {
-			if (std::to_string(iter.second->sif().sid()) == sid) {
-				return iter.second;
+		for (auto&& [key, value] : clis_) {
+			if (std::to_string(value->sif().sid()) == sid) {
+				return value;
 			}
 		}
 		return nullptr;

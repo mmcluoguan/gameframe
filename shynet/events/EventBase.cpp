@@ -96,8 +96,8 @@ namespace shynet {
 			if (bufferevent_pair_new(base_, BEV_OPT_THREADSAFE | BEV_OPT_CLOSE_ON_FREE, ap) != 0) {
 				throw SHYNETEXCEPTION("call bufferevent_pair_new");
 			}
-			pair[0] = std::shared_ptr<EventBuffer>(new EventBuffer(ap[0], true));
-			pair[1] = std::shared_ptr<EventBuffer>(new EventBuffer(ap[1], true));
+			pair[0] = std::make_shared<EventBuffer>(ap[0], true);
+			pair[1] = std::make_shared<EventBuffer>(ap[1], true);
 		}
 	}
 }

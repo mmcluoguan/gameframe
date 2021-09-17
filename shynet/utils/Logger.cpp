@@ -106,9 +106,9 @@ namespace shynet {
 				strncpy(g_logfilename, logfilename, strlen(logfilename));
 			}
 			g_logfile << msg << std::endl;
-			for (const auto& it : g_levelNames) {
-				if (strstr(msg, it.second.name) != nullptr) {
-					std::cout << it.second.color << msg << "\e[0m" << std::endl;
+			for (auto&& [key, value] : g_levelNames) {
+				if (strstr(msg, value.name) != nullptr) {
+					std::cout << value.color << msg << "\e[0m" << std::endl;
 					break;
 				}
 			}

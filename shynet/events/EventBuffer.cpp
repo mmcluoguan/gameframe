@@ -59,10 +59,10 @@ namespace shynet {
 			return bufferevent_write_buffer(buffer_, buffer->buffer());
 		}
 		std::shared_ptr<Streambuff> EventBuffer::inputbuffer() const {
-			return std::shared_ptr<Streambuff>(new Streambuff(bufferevent_get_input(buffer_)));
+			return std::make_shared<Streambuff>(bufferevent_get_input(buffer_));
 		}
 		std::shared_ptr<Streambuff> EventBuffer::outputbuffer() const {
-			return std::shared_ptr<Streambuff>(new Streambuff(bufferevent_get_output(buffer_)));
+			return std::make_shared<Streambuff>(bufferevent_get_output(buffer_));
 		}
 		void EventBuffer::setcb(bufferevent_data_cb readcb, bufferevent_data_cb writecb, bufferevent_event_cb eventcb, void* cbarg) const {
 			bufferevent_setcb(buffer_, readcb, writecb, eventcb, cbarg);

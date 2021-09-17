@@ -45,11 +45,11 @@ namespace login
 	std::shared_ptr<LoginClient> LoginClientMgr::find_from_sid(const std::string& sid) const
 	{
 		std::lock_guard<std::mutex> lock(clis_mutex_);
-		for (auto& it : clis_)
+		for (auto&& [key, value] : clis_)
 		{
-			if (std::to_string(it.second->sif().sid()) == sid)
+			if (std::to_string(value->sif().sid()) == sid)
 			{
-				return it.second;
+				return value;
 			}
 		}
 		return nullptr;

@@ -8,9 +8,9 @@ namespace gate {
 	}
 	int ConnectorMgr::sid_conv_connect_id(int sid) {
 		std::lock_guard<std::mutex> lock(connect_data_mutex_);
-		for (const auto& it : connect_datas_) {
-			if (it.second.sif.sid() == sid) {
-				return it.second.connect_id;
+		for (auto&& [key, value] : connect_datas_) {
+			if (value.sif.sid() == sid) {
+				return value.connect_id;
 			}
 		}
 		return 0;
@@ -43,17 +43,17 @@ namespace gate {
 			//如果指定login_id找不到,默认选择connect_num值最小的登录服务器
 			int min = -1;
 			int target_login_id = 0;
-			for (auto& it : connect_datas_) {
-				if (it.second.sif.st() == protocc::ServerType::LOGIN) {
+			for (auto&& [key, value] : connect_datas_) {
+				if (value.sif.st() == protocc::ServerType::LOGIN) {
 					if (min == -1) {
-						min = it.second.connect_num;
-						target_login_id = it.second.connect_id;
-						data = &(it.second);
+						min = value.connect_num;
+						target_login_id = value.connect_id;
+						data = &value;
 					}
-					else if (it.second.connect_num < min) {
-						min = it.second.connect_num;
-						target_login_id = it.second.connect_id;
-						data = &(it.second);
+					else if (value.connect_num < min) {
+						min = value.connect_num;
+						target_login_id = value.connect_id;
+						data = &value;
 					}
 				}
 			}
@@ -79,11 +79,11 @@ namespace gate {
 
 	bool ConnectorMgr::reduce_count(int connect_id) {
 		std::lock_guard<std::mutex> lock(connect_data_mutex_);
-		for (auto& it : connect_datas_) {
-			if (it.second.connect_id == connect_id) {
-				it.second.connect_num--;
-				if (it.second.connect_num < 0)
-					it.second.connect_num = 0;
+		for (auto&& [key, value] : connect_datas_) {
+			if (value.connect_id == connect_id) {
+				value.connect_num--;
+				if (value.connect_num < 0)
+					value.connect_num = 0;
 				return true;
 			}
 		}

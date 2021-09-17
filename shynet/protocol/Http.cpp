@@ -17,7 +17,7 @@ namespace shynet {
 				LOG_WARN << "接收的数据超过最大可接收容量:" << filter_->max_reve_buf_size;
 				return -1;
 			}
-			std::shared_ptr<events::Streambuff> restore(new events::Streambuff);
+			std::shared_ptr<events::Streambuff> restore = std::make_shared<events::Streambuff>();
 			while (inputbuffer->length() > 0) {
 				if (filter_->ident() == FilterProces::Identity::ACCEPTOR) {
 					int ret = process_requset(inputbuffer, restore);
@@ -185,10 +185,10 @@ namespace shynet {
 			stream << "Content-Type:" << content_type << "\r\n";
 			stream << "Content-Length:" << len << "\r\n";
 			if (server_heads != nullptr) {
-				for (const auto& it : *server_heads) {
-					if (it.second.empty())
+				for (auto&& [key, value] : *server_heads) {
+					if (value.empty())
 						continue;
-					stream << it.first << ":" << it.second << "\r\n";
+					stream << key << ":" << value << "\r\n";
 				}
 			}
 			stream << "\r\n";

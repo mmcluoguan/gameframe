@@ -23,13 +23,13 @@ namespace shynet {
 		ConnectIoBuffer::ConnectIoBuffer(std::shared_ptr<events::EventBase> base, bool enable_ssl, SSL_CTX* ctx) :
 			events::EventBuffer(base) {
 			if (enable_ssl) {
-				iobuf_ = std::shared_ptr<events::EventBufferSsl>(new events::EventBufferSsl(base, -1,
+				iobuf_ = std::make_shared<events::EventBufferSsl>(base, -1,
 					BUFFEREVENT_SSL_CONNECTING,
-					BEV_OPT_CLOSE_ON_FREE | BEV_OPT_THREADSAFE, ctx));
+					BEV_OPT_CLOSE_ON_FREE | BEV_OPT_THREADSAFE, ctx);
 			}
 			else {
-				iobuf_ = std::shared_ptr<events::EventBuffer>(new events::EventBuffer(base, -1,
-					BEV_OPT_CLOSE_ON_FREE | BEV_OPT_THREADSAFE));
+				iobuf_ = std::make_shared<events::EventBuffer>(base, -1,
+					BEV_OPT_CLOSE_ON_FREE | BEV_OPT_THREADSAFE);
 			}
 			set_buffer(iobuf_->buffer());
 

@@ -38,10 +38,10 @@ namespace gate {
 
 	std::shared_ptr<GateClient> GateClientMgr::find(const std::string& key) {
 		std::lock_guard<std::mutex> lock(clis_mutex_);
-		for (auto& iter : clis_) {
-			if (iter.second->set_accountid() == key ||
-				iter.second->set_platform_key() == key) {
-				return iter.second;
+		for (auto&& [k, value] : clis_) {
+			if (value->set_accountid() == key ||
+				value->set_platform_key() == key) {
+				return value;
 			}
 		}
 		return nullptr;

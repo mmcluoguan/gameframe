@@ -104,16 +104,16 @@ namespace frmpub {
 		int protobuf_handle(const char* original_data, size_t datalen);
 		int json_handle(const char* original_data, size_t datalen);
 
-		typedef std::function<int(std::shared_ptr<protocc::CommonObject> obj,
-			std::shared_ptr<std::stack<Envelope>> enves)> ProtoMsgBind;
+		using ProtoMsgBind = std::function<int(std::shared_ptr<protocc::CommonObject> obj,
+			std::shared_ptr<std::stack<Envelope>> enves)> ;
 		std::unordered_map<int, ProtoMsgBind> pmb_;
 
-		typedef std::function<int(std::shared_ptr<rapidjson::Document> doc,
-			std::shared_ptr<std::stack<Envelope>> enves)> JsonMsgBind;
+		using JsonMsgBind = std::function<int(std::shared_ptr<rapidjson::Document> doc,
+			std::shared_ptr<std::stack<Envelope>> enves)> ;
 		std::unordered_map<int, JsonMsgBind> jmb_;
 
-		typedef std::function<int(const char* original_data, size_t datalen,
-			std::shared_ptr<std::stack<Envelope>> enves)> NativeMsgBind;
+		using NativeMsgBind = std::function<int(const char* original_data, size_t datalen,
+			std::shared_ptr<std::stack<Envelope>> enves)> ;
 		std::unordered_map<int, NativeMsgBind> nmb_;
 
 		protocol::FilterProces* filter_ = nullptr;

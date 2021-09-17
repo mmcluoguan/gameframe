@@ -136,41 +136,57 @@
     <TargetExt>.so.1.0.1</TargetExt>
     <OutDir>../libs/</OutDir>
     <RemoteOutRelDir>$(RemoteProjectRelDir)/../libs/</RemoteOutRelDir>
+    <RemoteCppCompileToolExe>/opt/rh/devtoolset-10/root/usr/bin/g++</RemoteCppCompileToolExe>
+    <RemoteLdToolExe>/opt/rh/devtoolset-10/root/usr/bin/g++</RemoteLdToolExe>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|ARM'">
     <TargetExt>.so.1.0.1</TargetExt>
     <OutDir>../libs/</OutDir>
     <RemoteOutRelDir>$(RemoteProjectRelDir)/../libs/</RemoteOutRelDir>
+    <RemoteCppCompileToolExe>/opt/rh/devtoolset-10/root/usr/bin/g++</RemoteCppCompileToolExe>
+    <RemoteLdToolExe>/opt/rh/devtoolset-10/root/usr/bin/g++</RemoteLdToolExe>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|ARM64'">
     <TargetExt>.so.1.0.1</TargetExt>
     <OutDir>../libs/</OutDir>
     <RemoteOutRelDir>$(RemoteProjectRelDir)/../libs/</RemoteOutRelDir>
+    <RemoteCppCompileToolExe>/opt/rh/devtoolset-10/root/usr/bin/g++</RemoteCppCompileToolExe>
+    <RemoteLdToolExe>/opt/rh/devtoolset-10/root/usr/bin/g++</RemoteLdToolExe>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|ARM64'">
     <TargetExt>.so.1.0.1</TargetExt>
     <OutDir>../libs/</OutDir>
     <RemoteOutRelDir>$(RemoteProjectRelDir)/../libs/</RemoteOutRelDir>
+    <RemoteCppCompileToolExe>/opt/rh/devtoolset-10/root/usr/bin/g++</RemoteCppCompileToolExe>
+    <RemoteLdToolExe>/opt/rh/devtoolset-10/root/usr/bin/g++</RemoteLdToolExe>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <TargetExt>.so.1.0.1</TargetExt>
     <OutDir>../libs/</OutDir>
     <RemoteOutRelDir>$(RemoteProjectRelDir)/../libs/</RemoteOutRelDir>
+    <RemoteCppCompileToolExe>/opt/rh/devtoolset-10/root/usr/bin/g++</RemoteCppCompileToolExe>
+    <RemoteLdToolExe>/opt/rh/devtoolset-10/root/usr/bin/g++</RemoteLdToolExe>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <TargetExt>.so.1.0.1</TargetExt>
     <OutDir>../libs/</OutDir>
     <RemoteOutRelDir>$(RemoteProjectRelDir)/../libs/</RemoteOutRelDir>
+    <RemoteCppCompileToolExe>/opt/rh/devtoolset-10/root/usr/bin/g++</RemoteCppCompileToolExe>
+    <RemoteLdToolExe>/opt/rh/devtoolset-10/root/usr/bin/g++</RemoteLdToolExe>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x86'">
     <TargetExt>.so.1.0.1</TargetExt>
     <OutDir>../libs/</OutDir>
     <RemoteOutRelDir>$(RemoteProjectRelDir)/../libs/</RemoteOutRelDir>
+    <RemoteCppCompileToolExe>/opt/rh/devtoolset-10/root/usr/bin/g++</RemoteCppCompileToolExe>
+    <RemoteLdToolExe>/opt/rh/devtoolset-10/root/usr/bin/g++</RemoteLdToolExe>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x86'">
     <TargetExt>.so.1.0.1</TargetExt>
     <OutDir>../libs/</OutDir>
     <RemoteOutRelDir>$(RemoteProjectRelDir)/../libs/</RemoteOutRelDir>
+    <RemoteCppCompileToolExe>/opt/rh/devtoolset-10/root/usr/bin/g++</RemoteCppCompileToolExe>
+    <RemoteLdToolExe>/opt/rh/devtoolset-10/root/usr/bin/g++</RemoteLdToolExe>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|ARM'">
     <Link>
@@ -178,7 +194,8 @@
       <AdditionalLibraryDirectories>/root/gameframe/libs;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
     <ClCompile>
-      <AdditionalIncludeDirectories>$(SolutionDir);</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir);/opt/rh/devtoolset-9/root/usr/include/c++/9</AdditionalIncludeDirectories>
+      <CppLanguageStandard>c++17</CppLanguageStandard>
     </ClCompile>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|ARM'">
@@ -187,7 +204,8 @@
       <AdditionalLibraryDirectories>/root/gameframe/libs;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
     <ClCompile>
-      <AdditionalIncludeDirectories>$(SolutionDir);</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir);/opt/rh/devtoolset-9/root/usr/include/c++/9</AdditionalIncludeDirectories>
+      <CppLanguageStandard>c++17</CppLanguageStandard>
     </ClCompile>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|ARM64'">
@@ -196,7 +214,8 @@
       <AdditionalLibraryDirectories>/root/gameframe/libs;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
     <ClCompile>
-      <AdditionalIncludeDirectories>$(SolutionDir);</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir);/opt/rh/devtoolset-9/root/usr/include/c++/9</AdditionalIncludeDirectories>
+      <CppLanguageStandard>c++17</CppLanguageStandard>
     </ClCompile>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|ARM64'">
@@ -205,7 +224,8 @@
       <AdditionalLibraryDirectories>/root/gameframe/libs;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
     <ClCompile>
-      <AdditionalIncludeDirectories>$(SolutionDir);</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir);/opt/rh/devtoolset-9/root/usr/include/c++/9</AdditionalIncludeDirectories>
+      <CppLanguageStandard>c++17</CppLanguageStandard>
     </ClCompile>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -214,7 +234,8 @@
       <AdditionalLibraryDirectories>/root/gameframe/libs;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
     <ClCompile>
-      <AdditionalIncludeDirectories>$(SolutionDir);</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir);/opt/rh/devtoolset-9/root/usr/include/c++/9</AdditionalIncludeDirectories>
+      <CppLanguageStandard>c++17</CppLanguageStandard>
     </ClCompile>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -223,7 +244,8 @@
       <AdditionalLibraryDirectories>/root/gameframe/libs;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
     <ClCompile>
-      <AdditionalIncludeDirectories>$(SolutionDir);</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir);/opt/rh/devtoolset-9/root/usr/include/c++/9</AdditionalIncludeDirectories>
+      <CppLanguageStandard>c++17</CppLanguageStandard>
     </ClCompile>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x86'">
@@ -232,7 +254,8 @@
       <AdditionalLibraryDirectories>/root/gameframe/libs;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
     <ClCompile>
-      <AdditionalIncludeDirectories>$(SolutionDir);</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir);/opt/rh/devtoolset-9/root/usr/include/c++/9</AdditionalIncludeDirectories>
+      <CppLanguageStandard>c++17</CppLanguageStandard>
     </ClCompile>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x86'">
@@ -241,7 +264,8 @@
       <AdditionalLibraryDirectories>/root/gameframe/libs;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
     <ClCompile>
-      <AdditionalIncludeDirectories>$(SolutionDir);</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir);/opt/rh/devtoolset-9/root/usr/include/c++/9</AdditionalIncludeDirectories>
+      <CppLanguageStandard>c++17</CppLanguageStandard>
     </ClCompile>
   </ItemDefinitionGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

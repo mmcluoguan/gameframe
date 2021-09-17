@@ -37,7 +37,7 @@ namespace shynet {
 		}
 
 		void TimerEvent::timeout(int fd) {
-			std::shared_ptr<task::TimerTask> ttk(new task::TimerTask(timerid_));
+			std::shared_ptr<task::TimerTask> ttk = std::make_shared<task::TimerTask>(timerid_);
 			utils::Singleton<pool::ThreadPool>::instance().append(ttk);
 		}
 

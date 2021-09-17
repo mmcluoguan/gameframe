@@ -13,8 +13,8 @@ namespace shynet
 			void* ctx)
 		{
 			EventBufferFilter* filter = static_cast<EventBufferFilter*>(ctx);
-			std::shared_ptr<Streambuff> tsource(new Streambuff(source));
-			std::shared_ptr<Streambuff> tdest(new Streambuff(destination));
+			std::shared_ptr<Streambuff> tsource = std::make_shared<Streambuff>(source);
+			std::shared_ptr<Streambuff> tdest = std::make_shared<Streambuff>(destination);
 			return filter->infilter(tsource, tdest);
 		}
 
@@ -26,8 +26,8 @@ namespace shynet
 			void* ctx)
 		{
 			EventBufferFilter* filter = static_cast<EventBufferFilter*>(ctx);
-			std::shared_ptr<Streambuff> tsource(new Streambuff(source));
-			std::shared_ptr<Streambuff> tdest(new Streambuff(destination));
+			std::shared_ptr<Streambuff> tsource = std::make_shared<Streambuff>(source);
+			std::shared_ptr<Streambuff> tdest = std::make_shared<Streambuff>(destination);
 			return filter->outfilter(tsource, tdest);
 		}
 

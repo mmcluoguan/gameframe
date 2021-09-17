@@ -289,10 +289,10 @@ namespace dbvisit {
 				Datahelp::ErrorCode err = shynet::utils::Singleton<Datahelp>::instance().
 					getdata(msgc.cache_key(), data);
 				if (err == Datahelp::ErrorCode::OK) {
-					for (auto& it : data) {
+					for (auto&& [key, value] : data) {
 						auto field = msgs.add_fields();
-						field->set_key(it.first);
-						field->set_value(it.second);
+						field->set_key(key);
+						field->set_value(value);
 					}
 				}
 				else {
@@ -331,10 +331,10 @@ namespace dbvisit {
 					getdata_more_cache(msgc.condition(), data);
 				for (auto& i : *resdata) {
 					auto obj = msgs.add_objs();
-					for (auto& j : i) {
+					for (auto&& [key, value] : i) {
 						auto field = obj->add_fields();
-						field->set_key(j.first);
-						field->set_value(j.second);
+						field->set_key(key);
+						field->set_value(value);
 					}
 				}
 				if (resdata->size() == 0) {

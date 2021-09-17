@@ -6,23 +6,15 @@ namespace shynet
 	namespace utils {
         namespace {
 
-            /// everyone
             template <typename T>
             inline void hash_combine(size_t& seed, const T& val) {
                 seed ^= std::hash<T>()(val) + 0x9e3779b9 + (seed << 6) + (seed >> 2);
             }
 
-            /// last
-            template <typename T>
-            inline void hash_val(size_t& seed, const T& val) {
-                hash_combine(seed, val);
-            }
-
-            /// recursive
             template <typename T, typename... Types>
             inline void hash_val(size_t& seed, const T& val, const Types&... args) {
                 hash_combine(seed, val);
-                hash_val(seed, args...);
+                if constexpr (sizeof ...(args) > 0) hash_val(seed, args...);
             }
 
         }
@@ -34,7 +26,7 @@ namespace shynet
         template <typename... Types>
         inline size_t hash_val(const Types&... args) {
             size_t seed = 0;
-            inner::hash_val(seed, args...);
+            hash_val(seed, args...);
             return seed;
         }
 	}

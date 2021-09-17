@@ -17,6 +17,7 @@ int g_gateconnect_id;
 #include "shynet/crypto/Md5.h"
 #include "shynet/utils/SkipList.h"
 #include "shynet/utils/Lru.h"
+#include "shynet/utils/Hash.h"
 
 void test() {
 	shynet::utils::Databuffer<> dt;
@@ -53,6 +54,8 @@ void test() {
 	assert(exist && v == 2);
 	exist = c.get("tom", &v);
 	assert(!exist);
+
+	shynet::utils::hash_val(v, exist);
 }
 
 int main(int argc, char* argv[]) {

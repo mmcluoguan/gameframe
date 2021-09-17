@@ -328,9 +328,6 @@
     <ClInclude Include="utils\Databuffer.h">
       <Filter>utils</Filter>
     </ClInclude>
-    <ClInclude Include="utils\SkipList.h">
-      <Filter>utils</Filter>
-    </ClInclude>
     <ClInclude Include="utils\Hash.h">
       <Filter>utils</Filter>
     </ClInclude>
@@ -341,6 +338,9 @@
       <Filter>utils</Filter>
     </ClInclude>
     <ClInclude Include="utils\Lru.h">
+      <Filter>utils</Filter>
+    </ClInclude>
+    <ClInclude Include="utils\SkipList.h">
       <Filter>utils</Filter>
     </ClInclude>
   </ItemGroup>

@@ -36,11 +36,11 @@ namespace shynet {
 
 		std::shared_ptr<ConnectEvent> ConnectReactorMgr::find(const std::string ip, unsigned short port) {
 			std::lock_guard<std::mutex> lock(cnt_mutex_);
-			for (const auto& it : cnts_) {
-				if (it.second != nullptr) {
-					if (it.second->connect_addr()->ip() == ip &&
-						it.second->connect_addr()->port() == port) {
-						return it.second;
+			for (auto&& [key, value] : cnts_) {
+				if (value != nullptr) {
+					if (value->connect_addr()->ip() == ip &&
+						value->connect_addr()->port() == port) {
+						return value;
 					}
 				}
 			}

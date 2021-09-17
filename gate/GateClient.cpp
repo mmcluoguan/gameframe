@@ -227,9 +227,9 @@ namespace gate {
 		std::shared_ptr<std::stack<FilterData::Envelope>> enves) {
 		protocc::serverlist_client_gate_s msgs;
 		auto list = shynet::utils::Singleton<ConnectorMgr>::instance().connect_datas();
-		for (const auto& it : list) {
+		for (auto&& [key, value] : list) {
 			protocc::ServerInfo* sif = msgs.add_sifs();
-			*sif = it.second.sif;
+			*sif = value.sif;
 		}
 		send_proto(protocc::SERVERLIST_CLIENT_GATE_S, &msgs);
 		return 0;

@@ -98,7 +98,7 @@ namespace shynet
 					for (; capacity_ < need_len; capacity_ <<= 1);
 					DataType* new_buf = new DataType[capacity_];
 					memcpy(new_buf, data_ + read_index_, write_index_ - read_index_);
-					delete[]data_;
+					delete[] data_;
 					data_ = new_buf;
 				}
 				write_index_ -= read_index_;

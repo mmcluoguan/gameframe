@@ -101,9 +101,9 @@ namespace world {
 			*sif = this->sif();
 
 			auto clis = shynet::utils::Singleton<WorldClientMgr>::instance().clis();
-			for (auto& it : clis) {
-				if (it.second->sif().st() == protocc::ServerType::GATE) {
-					it.second->send_proto(protocc::SERONLINE_WORLD_GATE_G, &msgg);
+			for (auto&& [key, cli] : clis) {
+				if (cli->sif().st() == protocc::ServerType::GATE) {
+					cli->send_proto(protocc::SERONLINE_WORLD_GATE_G, &msgg);
 				}
 			}
 		}
@@ -132,9 +132,9 @@ namespace world {
 			*sif = this->sif();
 
 			auto clis = shynet::utils::Singleton<WorldClientMgr>::instance().clis();
-			for (auto& it : clis) {
-				if (it.second->sif().st() == protocc::ServerType::GATE) {
-					it.second->send_proto(protocc::SERONLINE_WORLD_GATE_G, &msgg);
+			for (auto&& [key, cli] : clis) {
+				if (cli->sif().st() == protocc::ServerType::GATE) {
+					cli->send_proto(protocc::SERONLINE_WORLD_GATE_G, &msgg);
 				}
 			}
 		}
@@ -158,11 +158,11 @@ namespace world {
 			protocc::register_gate_world_s msgs;
 			msgs.set_result(0);
 			auto clis = shynet::utils::Singleton<WorldClientMgr>::instance().clis();
-			for (auto& it : clis) {
-				if (it.second->sif().st() == protocc::ServerType::GAME ||
-					it.second->sif().st() == protocc::ServerType::LOGIN) {
+			for (auto&& [key, cli] : clis) {
+				if (cli->sif().st() == protocc::ServerType::GAME ||
+					cli->sif().st() == protocc::ServerType::LOGIN) {
 					protocc::ServerInfo* sif = msgs.add_sifs();
-					*sif = it.second->sif();
+					*sif = cli->sif();
 				}
 			}
 			send_proto(protocc::REGISTER_GATE_WORLD_S, &msgs);

@@ -28,8 +28,8 @@ namespace dbvisit {
 	}
 
 	void DataTimer::modify_cache_fields(const std::unordered_map<std::string, std::string>& data) {
-		for (const auto& it : data) {
-			fields_[it.first] = it.second;
+		for (auto&& [key, value] : data) {
+			fields_[key] = value;
 		}
 	}
 }

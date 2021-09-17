@@ -1,9 +1,11 @@
 #include "dbvisit/StdinHandler.h"
 #include <cstring>
 #include <unistd.h>
+#include <limits.h>
 #include <tuple>
 #include "shynet/utils/StringOp.h"
 #include "shynet/utils/Logger.h"
+#include "shynet/utils/Stuff.h"
 
 namespace dbvisit
 {
@@ -30,11 +32,11 @@ namespace dbvisit
 		}
 		else
 		{
-			typedef std::tuple<const char*, const char*, std::function<void(const char* od, int argc, char** argv, const char* optarg)>> item;
+			using item = std::tuple<const char*, const char*, std::function<void(const char* od, int argc, char** argv, const char* optarg)>>;
 			item orders[] = {
 				item("quit",":",bind(&StdinHandler::quit_order, this,
 					std::placeholders::_1,std::placeholders::_2,std::placeholders::_3,std::placeholders::_4)),
-				item("redis",":",bind(&StdinHandler::redis_order, this,
+				item("info",":",bind(&StdinHandler::info_order, this,
 					std::placeholders::_1,std::placeholders::_2,std::placeholders::_3,std::placeholders::_4)),
 			};
 
@@ -44,11 +46,11 @@ namespace dbvisit
 			if (argc > 0)
 			{
 				bool flag = false;
-				for (const auto& it : orders)
+				for (auto&& [item0, item1, itemfun] : orders)
 				{
-					if (strcmp(argv[0], std::get<0>(it)) == 0)
+					if (strcmp(argv[0], item0) == 0)
 					{
-						std::get<2>(it)(std::get<0>(it), argc, argv, std::get<1>(it));
+						itemfun(item0, argc, argv, item1);
 						flag = true;
 					}
 				}
@@ -71,8 +73,18 @@ namespace dbvisit
 		LOG_INFO << "捕获到一个退出命令,程序将在2秒后安全退出";
 		base()->loopexit(&delay);
 	}
-	void StdinHandler::redis_order(const char* od, int argc, char** argv, const char* optarg)
-	{
-
+	
+	void StdinHandler::info_order(const char* od, int argc, char** argv, const char* optstr) {
+		char path[PATH_MAX] = { 0 };
+		char processname[NAME_MAX] = { 0 };
+		shynet::utils::Stuff::executable_path(path, processname, sizeof(path));
+		LOG_INFO_BASE << "程序名:" << processname;
+		LOG_INFO_BASE << "使用线程数:" << shynet::utils::Stuff::num_of_threads();
+		LOG_INFO_BASE << "进程id:" << getpid();
+		shynet::utils::Stuff::mem_info mem;
+		shynet::utils::Stuff::obtain_mem_info(&mem);
+		LOG_INFO_BASE << "虚拟内存:" << mem.virt_kbytes << "kb";
+		LOG_INFO_BASE << "常驻内存:" << mem.res_kbytes << "kb";
+		LOG_INFO_BASE << "已运行时间:" << shynet::utils::Stuff::up_duration_seconds() << "s";
 	}
 }

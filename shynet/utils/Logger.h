@@ -6,7 +6,7 @@ namespace shynet {
 	namespace utils {
 		class Logger final : public Nocopy {
 		public:
-			typedef void(*OutputFunc)(const char* msg, size_t len);
+			using OutputFunc = void(*)(const char* msg, size_t len);
 			enum class LogLevel {
 				TRACE,
 				DEBUG,

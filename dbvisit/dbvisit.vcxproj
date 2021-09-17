@@ -85,34 +85,50 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|ARM'">
     <OutDir>../bin/</OutDir>
     <RemoteOutRelDir>$(RemoteProjectRelDir)/../bin</RemoteOutRelDir>
+    <RemoteCppCompileToolExe>/opt/rh/devtoolset-10/root/usr/bin/g++</RemoteCppCompileToolExe>
+    <RemoteLdToolExe>/opt/rh/devtoolset-10/root/usr/bin/g++</RemoteLdToolExe>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|ARM'">
     <OutDir>../bin/</OutDir>
     <RemoteOutRelDir>$(RemoteProjectRelDir)/../bin</RemoteOutRelDir>
+    <RemoteCppCompileToolExe>/opt/rh/devtoolset-10/root/usr/bin/g++</RemoteCppCompileToolExe>
+    <RemoteLdToolExe>/opt/rh/devtoolset-10/root/usr/bin/g++</RemoteLdToolExe>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|ARM64'">
     <OutDir>../bin/</OutDir>
     <RemoteOutRelDir>$(RemoteProjectRelDir)/../bin</RemoteOutRelDir>
+    <RemoteCppCompileToolExe>/opt/rh/devtoolset-10/root/usr/bin/g++</RemoteCppCompileToolExe>
+    <RemoteLdToolExe>/opt/rh/devtoolset-10/root/usr/bin/g++</RemoteLdToolExe>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|ARM64'">
     <OutDir>../bin/</OutDir>
     <RemoteOutRelDir>$(RemoteProjectRelDir)/../bin</RemoteOutRelDir>
+    <RemoteCppCompileToolExe>/opt/rh/devtoolset-10/root/usr/bin/g++</RemoteCppCompileToolExe>
+    <RemoteLdToolExe>/opt/rh/devtoolset-10/root/usr/bin/g++</RemoteLdToolExe>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <OutDir>../bin/</OutDir>
     <RemoteOutRelDir>$(RemoteProjectRelDir)/../bin</RemoteOutRelDir>
+    <RemoteCppCompileToolExe>/opt/rh/devtoolset-10/root/usr/bin/g++</RemoteCppCompileToolExe>
+    <RemoteLdToolExe>/opt/rh/devtoolset-10/root/usr/bin/g++</RemoteLdToolExe>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <OutDir>../bin/</OutDir>
     <RemoteOutRelDir>$(RemoteProjectRelDir)/../bin</RemoteOutRelDir>
+    <RemoteCppCompileToolExe>/opt/rh/devtoolset-10/root/usr/bin/g++</RemoteCppCompileToolExe>
+    <RemoteLdToolExe>/opt/rh/devtoolset-10/root/usr/bin/g++</RemoteLdToolExe>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x86'">
     <OutDir>../bin/</OutDir>
     <RemoteOutRelDir>$(RemoteProjectRelDir)/../bin</RemoteOutRelDir>
+    <RemoteCppCompileToolExe>/opt/rh/devtoolset-10/root/usr/bin/g++</RemoteCppCompileToolExe>
+    <RemoteLdToolExe>/opt/rh/devtoolset-10/root/usr/bin/g++</RemoteLdToolExe>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x86'">
     <OutDir>../bin/</OutDir>
     <RemoteOutRelDir>$(RemoteProjectRelDir)/../bin</RemoteOutRelDir>
+    <RemoteCppCompileToolExe>/opt/rh/devtoolset-10/root/usr/bin/g++</RemoteCppCompileToolExe>
+    <RemoteLdToolExe>/opt/rh/devtoolset-10/root/usr/bin/g++</RemoteLdToolExe>
   </PropertyGroup>
   <ItemGroup>
     <ClCompile Include="Datahelp.cpp" />
@@ -144,7 +160,7 @@
     </Link>
     <ClCompile>
       <AdditionalIncludeDirectories>$(SolutionDir)</AdditionalIncludeDirectories>
-      <CppLanguageStandard>c++11</CppLanguageStandard>
+      <CppLanguageStandard>c++17</CppLanguageStandard>
       <PreprocessorDefinitions>JEMALLOC_NO_DEMANGLE</PreprocessorDefinitions>
     </ClCompile>
   </ItemDefinitionGroup>
@@ -155,7 +171,7 @@
     </Link>
     <ClCompile>
       <AdditionalIncludeDirectories>$(SolutionDir)</AdditionalIncludeDirectories>
-      <CppLanguageStandard>c++11</CppLanguageStandard>
+      <CppLanguageStandard>c++17</CppLanguageStandard>
       <PreprocessorDefinitions>NDEBUG;JEMALLOC_NO_DEMANGLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
   </ItemDefinitionGroup>
@@ -166,7 +182,7 @@
     </Link>
     <ClCompile>
       <AdditionalIncludeDirectories>$(SolutionDir)</AdditionalIncludeDirectories>
-      <CppLanguageStandard>c++11</CppLanguageStandard>
+      <CppLanguageStandard>c++17</CppLanguageStandard>
       <PreprocessorDefinitions>JEMALLOC_NO_DEMANGLE</PreprocessorDefinitions>
     </ClCompile>
   </ItemDefinitionGroup>
@@ -177,7 +193,7 @@
     </Link>
     <ClCompile>
       <AdditionalIncludeDirectories>$(SolutionDir)</AdditionalIncludeDirectories>
-      <CppLanguageStandard>c++11</CppLanguageStandard>
+      <CppLanguageStandard>c++17</CppLanguageStandard>
       <PreprocessorDefinitions>NDEBUG;JEMALLOC_NO_DEMANGLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
   </ItemDefinitionGroup>
@@ -188,7 +204,7 @@
     </Link>
     <ClCompile>
       <AdditionalIncludeDirectories>$(SolutionDir)</AdditionalIncludeDirectories>
-      <CppLanguageStandard>c++11</CppLanguageStandard>
+      <CppLanguageStandard>c++17</CppLanguageStandard>
       <PreprocessorDefinitions>JEMALLOC_NO_DEMANGLE</PreprocessorDefinitions>
     </ClCompile>
   </ItemDefinitionGroup>
@@ -199,7 +215,7 @@
     </Link>
     <ClCompile>
       <AdditionalIncludeDirectories>$(SolutionDir)</AdditionalIncludeDirectories>
-      <CppLanguageStandard>c++11</CppLanguageStandard>
+      <CppLanguageStandard>c++17</CppLanguageStandard>
       <PreprocessorDefinitions>NDEBUG;JEMALLOC_NO_DEMANGLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
   </ItemDefinitionGroup>
@@ -210,7 +226,7 @@
     </Link>
     <ClCompile>
       <AdditionalIncludeDirectories>$(SolutionDir)</AdditionalIncludeDirectories>
-      <CppLanguageStandard>c++11</CppLanguageStandard>
+      <CppLanguageStandard>c++17</CppLanguageStandard>
       <PreprocessorDefinitions>JEMALLOC_NO_DEMANGLE</PreprocessorDefinitions>
     </ClCompile>
   </ItemDefinitionGroup>
@@ -221,7 +237,7 @@
     </Link>
     <ClCompile>
       <AdditionalIncludeDirectories>$(SolutionDir)</AdditionalIncludeDirectories>
-      <CppLanguageStandard>c++11</CppLanguageStandard>
+      <CppLanguageStandard>c++17</CppLanguageStandard>
       <PreprocessorDefinitions>NDEBUG;JEMALLOC_NO_DEMANGLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
   </ItemDefinitionGroup>

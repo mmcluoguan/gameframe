@@ -5,6 +5,7 @@
 #include <iomanip>
 #include <iostream>
 #include <algorithm>
+#include <jemalloc/jemalloc.h>
 
 namespace shynet
 {
@@ -18,7 +19,7 @@ namespace shynet
         class SkipList : public Nocopy
         {
         public:
-            typedef std::pair<Key, Score>    value_type;
+            using value_type = std::pair<Key, Score>;
 
             SkipList();
             virtual ~SkipList();
@@ -127,7 +128,7 @@ namespace shynet
             m_Size(0),
             m_Level(1)
         {
-            m_Head = new (malloc(sizeof(Node) + eMaxLevel * sizeof(typename Node::Level))) Node();
+            m_Head = new (je_malloc(sizeof(Node) + eMaxLevel * sizeof(typename Node::Level))) Node();
 
             for (uint32_t i = 0; i < eMaxLevel; ++i)
             {
@@ -142,12 +143,12 @@ namespace shynet
             Node* next = nullptr;
             Node* node = m_Head->levels[0].forward;
 
-            std::free(m_Head);
+            je_free(m_Head);
 
             while (node)
             {
                 next = node->levels[0].forward;
-                std::free(node);
+                je_free(node);
                 node = next;
             }
         }
@@ -196,7 +197,7 @@ namespace shynet
                 m_Level = level;
             }
 
-            x = new (malloc(sizeof(Node) + level * sizeof(typename Node::Level))) Node(value);
+            x = new (je_malloc(sizeof(Node) + level * sizeof(typename Node::Level))) Node(value);
             for (int32_t i = 0; i < level; ++i)
             {
                 x->levels[i].forward = update[i]->levels[i].forward;
@@ -251,7 +252,7 @@ namespace shynet
             if (x && x->key == value.first)
             {
                 eraseNode(x, update);
-                std::free(x);
+                je_free(x);
 
                 return true;
             }
@@ -475,7 +476,7 @@ namespace shynet
             while (node)
             {
                 next = node->forward(0);
-                std::free(node);
+                je_free(node);
                 node = next;
             }
 
@@ -564,7 +565,7 @@ namespace shynet
 
             int32_t level = 1;
 
-            while ((random() & 0xFFFF) < (SKIPLIST_P * 0xFFFF))
+            while (double(random() & 0xFFFF) < (SKIPLIST_P * 0xFFFF))
             {
                 level += 1;
             }

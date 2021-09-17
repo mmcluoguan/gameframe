@@ -94,41 +94,57 @@
     <OutDir>../libs/</OutDir>
     <TargetExt>.so.1.0.1</TargetExt>
     <RemoteOutRelDir>$(RemoteProjectRelDir)/../libs/</RemoteOutRelDir>
+    <RemoteCppCompileToolExe>/opt/rh/devtoolset-10/root/usr/bin/g++</RemoteCppCompileToolExe>
+    <RemoteLdToolExe>/opt/rh/devtoolset-10/root/usr/bin/g++</RemoteLdToolExe>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|ARM'">
     <OutDir>../libs/</OutDir>
     <TargetExt>.so.1.0.1</TargetExt>
     <RemoteOutRelDir>$(RemoteProjectRelDir)/../libs/</RemoteOutRelDir>
+    <RemoteCppCompileToolExe>/opt/rh/devtoolset-10/root/usr/bin/g++</RemoteCppCompileToolExe>
+    <RemoteLdToolExe>/opt/rh/devtoolset-10/root/usr/bin/g++</RemoteLdToolExe>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|ARM64'">
     <OutDir>../libs/</OutDir>
     <TargetExt>.so.1.0.1</TargetExt>
     <RemoteOutRelDir>$(RemoteProjectRelDir)/../libs/</RemoteOutRelDir>
+    <RemoteCppCompileToolExe>/opt/rh/devtoolset-10/root/usr/bin/g++</RemoteCppCompileToolExe>
+    <RemoteLdToolExe>/opt/rh/devtoolset-10/root/usr/bin/g++</RemoteLdToolExe>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|ARM64'">
     <OutDir>../libs/</OutDir>
     <TargetExt>.so.1.0.1</TargetExt>
     <RemoteOutRelDir>$(RemoteProjectRelDir)/../libs/</RemoteOutRelDir>
+    <RemoteCppCompileToolExe>/opt/rh/devtoolset-10/root/usr/bin/g++</RemoteCppCompileToolExe>
+    <RemoteLdToolExe>/opt/rh/devtoolset-10/root/usr/bin/g++</RemoteLdToolExe>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <OutDir>../libs/</OutDir>
     <TargetExt>.so.1.0.1</TargetExt>
     <RemoteOutRelDir>$(RemoteProjectRelDir)/../libs/</RemoteOutRelDir>
+    <RemoteCppCompileToolExe>/opt/rh/devtoolset-10/root/usr/bin/g++</RemoteCppCompileToolExe>
+    <RemoteLdToolExe>/opt/rh/devtoolset-10/root/usr/bin/g++</RemoteLdToolExe>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <OutDir>../libs/</OutDir>
     <TargetExt>.so.1.0.1</TargetExt>
     <RemoteOutRelDir>$(RemoteProjectRelDir)/../libs/</RemoteOutRelDir>
+    <RemoteCppCompileToolExe>/opt/rh/devtoolset-10/root/usr/bin/g++</RemoteCppCompileToolExe>
+    <RemoteLdToolExe>/opt/rh/devtoolset-10/root/usr/bin/g++</RemoteLdToolExe>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x86'">
     <OutDir>../libs/</OutDir>
     <TargetExt>.so.1.0.1</TargetExt>
     <RemoteOutRelDir>$(RemoteProjectRelDir)/../libs/</RemoteOutRelDir>
+    <RemoteCppCompileToolExe>/opt/rh/devtoolset-10/root/usr/bin/g++</RemoteCppCompileToolExe>
+    <RemoteLdToolExe>/opt/rh/devtoolset-10/root/usr/bin/g++</RemoteLdToolExe>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x86'">
     <OutDir>../libs/</OutDir>
     <TargetExt>.so.1.0.1</TargetExt>
     <RemoteOutRelDir>$(RemoteProjectRelDir)/../libs/</RemoteOutRelDir>
+    <RemoteCppCompileToolExe>/opt/rh/devtoolset-10/root/usr/bin/g++</RemoteCppCompileToolExe>
+    <RemoteLdToolExe>/opt/rh/devtoolset-10/root/usr/bin/g++</RemoteLdToolExe>
   </PropertyGroup>
   <ItemGroup>
     <ClInclude Include="Basic.h" />
@@ -251,73 +267,121 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|ARM'">
     <Link>
       <LibraryDependencies>jemalloc;event;event_pthreads;ssl;crypto;event_openssl;pthread;mysqlcppconn8;lua</LibraryDependencies>
+      <AdditionalOptions>
+      </AdditionalOptions>
     </Link>
     <ClCompile>
-      <AdditionalIncludeDirectories>$(SolutionDir)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir);/opt/rh/devtoolset-9/root/usr/include/c++/9</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>JEMALLOC_NO_DEMANGLE</PreprocessorDefinitions>
+      <CppLanguageStandard>c++17</CppLanguageStandard>
+      <AdditionalOptions>
+      </AdditionalOptions>
+      <CppAdditionalWarning>%(CppAdditionalWarning)</CppAdditionalWarning>
     </ClCompile>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|ARM64'">
     <Link>
       <LibraryDependencies>jemalloc;event;event_pthreads;ssl;crypto;event_openssl;pthread;mysqlcppconn8;lua</LibraryDependencies>
+      <AdditionalOptions>
+      </AdditionalOptions>
     </Link>
     <ClCompile>
-      <AdditionalIncludeDirectories>$(SolutionDir)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir);/opt/rh/devtoolset-9/root/usr/include/c++/9</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>JEMALLOC_NO_DEMANGLE</PreprocessorDefinitions>
+      <CppLanguageStandard>c++17</CppLanguageStandard>
+      <AdditionalOptions>
+      </AdditionalOptions>
+      <CppAdditionalWarning>%(CppAdditionalWarning)</CppAdditionalWarning>
     </ClCompile>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <Link>
       <LibraryDependencies>jemalloc;event;event_pthreads;ssl;crypto;event_openssl;pthread;mysqlcppconn8;lua</LibraryDependencies>
+      <AdditionalOptions>
+      </AdditionalOptions>
     </Link>
     <ClCompile>
-      <AdditionalIncludeDirectories>$(SolutionDir)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir);/opt/rh/devtoolset-9/root/usr/include/c++/9</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>JEMALLOC_NO_DEMANGLE</PreprocessorDefinitions>
+      <CppLanguageStandard>c++17</CppLanguageStandard>
+      <AdditionalOptions>
+      </AdditionalOptions>
+      <CppAdditionalWarning>%(CppAdditionalWarning)</CppAdditionalWarning>
     </ClCompile>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x86'">
     <Link>
       <LibraryDependencies>jemalloc;event;event_pthreads;ssl;crypto;event_openssl;pthread;mysqlcppconn8;lua</LibraryDependencies>
+      <AdditionalOptions>
+      </AdditionalOptions>
     </Link>
     <ClCompile>
-      <AdditionalIncludeDirectories>$(SolutionDir)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir);/opt/rh/devtoolset-9/root/usr/include/c++/9</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>JEMALLOC_NO_DEMANGLE</PreprocessorDefinitions>
+      <CppLanguageStandard>c++17</CppLanguageStandard>
+      <AdditionalOptions>
+      </AdditionalOptions>
+      <CppAdditionalWarning>%(CppAdditionalWarning)</CppAdditionalWarning>
     </ClCompile>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|ARM'">
     <ClCompile>
-      <AdditionalIncludeDirectories>$(SolutionDir)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir);/opt/rh/devtoolset-9/root/usr/include/c++/9</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>NDEBUG;JEMALLOC_NO_DEMANGLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <CppLanguageStandard>c++17</CppLanguageStandard>
+      <AdditionalOptions>
+      </AdditionalOptions>
+      <CppAdditionalWarning>%(CppAdditionalWarning)</CppAdditionalWarning>
     </ClCompile>
     <Link>
       <LibraryDependencies>jemalloc;event;event_pthreads;ssl;crypto;event_openssl;pthread;mysqlcppconn8;lua</LibraryDependencies>
+      <AdditionalOptions>
+      </AdditionalOptions>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|ARM64'">
     <ClCompile>
-      <AdditionalIncludeDirectories>$(SolutionDir)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir);/opt/rh/devtoolset-9/root/usr/include/c++/9</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>NDEBUG;JEMALLOC_NO_DEMANGLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <CppLanguageStandard>c++17</CppLanguageStandard>
+      <AdditionalOptions>
+      </AdditionalOptions>
+      <CppAdditionalWarning>%(CppAdditionalWarning)</CppAdditionalWarning>
     </ClCompile>
     <Link>
       <LibraryDependencies>jemalloc;event;event_pthreads;ssl;crypto;event_openssl;pthread;mysqlcppconn8;lua</LibraryDependencies>
+      <AdditionalOptions>
+      </AdditionalOptions>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
-      <AdditionalIncludeDirectories>$(SolutionDir)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir);/opt/rh/devtoolset-9/root/usr/include/c++/9</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>NDEBUG;JEMALLOC_NO_DEMANGLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <CppLanguageStandard>c++17</CppLanguageStandard>
+      <AdditionalOptions>
+      </AdditionalOptions>
+      <CppAdditionalWarning>%(CppAdditionalWarning)</CppAdditionalWarning>
     </ClCompile>
     <Link>
       <LibraryDependencies>jemalloc;event;event_pthreads;ssl;crypto;event_openssl;pthread;mysqlcppconn8;lua</LibraryDependencies>
+      <AdditionalOptions>
+      </AdditionalOptions>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x86'">
     <ClCompile>
-      <AdditionalIncludeDirectories>$(SolutionDir)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir);/opt/rh/devtoolset-9/root/usr/include/c++/9</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>NDEBUG;JEMALLOC_NO_DEMANGLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <CppLanguageStandard>c++17</CppLanguageStandard>
+      <AdditionalOptions>
+      </AdditionalOptions>
+      <CppAdditionalWarning>%(CppAdditionalWarning)</CppAdditionalWarning>
     </ClCompile>
     <Link>
       <LibraryDependencies>jemalloc;event;event_pthreads;ssl;crypto;event_openssl;pthread;mysqlcppconn8;lua</LibraryDependencies>
+      <AdditionalOptions>
+      </AdditionalOptions>
     </Link>
   </ItemDefinitionGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

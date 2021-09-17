@@ -18,9 +18,9 @@ namespace shynet {
 					cond_var_.wait(lock, [this] { return !this->queue_.empty(); });
 				}
 				else {
-					SessionPtr session(new mysqlx::Session(option_), fun_);
+					SessionPtr session (new mysqlx::Session(option_), fun_);
 					++use_num_;
-					return std::move(session);
+					return session;
 				}
 			}
 			++use_num_;
@@ -31,12 +31,10 @@ namespace shynet {
 			}
 			catch (const mysqlx::Error& err) {
 				sptr.release();
-				--use_num_;
 				SessionPtr session(new mysqlx::Session(option_), fun_);
-				++use_num_;
-				return std::move(session);
+				return session;
 			}
-			return std::move(sptr);
+			return sptr;
 		}
 		void MysqlPool::reclaim(mysqlx::Session* ses) {
 			if (enable_del_) {

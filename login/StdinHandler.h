@@ -14,5 +14,6 @@ namespace login
 		void input(int fd) override;
 	private:
 		void quit_order(const char* od, int argc, char** argv, const char* optarg);
+		void info_order(const char* od, int argc, char** argv, const char* optarg);
 	};
 }
