@@ -1,4 +1,6 @@
-#pragma once
+#ifndef SHYNET_UTILS_FILEPATHOP_H
+#define SHYNET_UTILS_FILEPATHOP_H
+
 #include "shynet/Basic.h"
 #include <memory>
 
@@ -113,3 +115,5 @@ namespace shynet {
 		};
 	}
 }
+
+#endif

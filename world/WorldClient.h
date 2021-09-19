@@ -1,4 +1,6 @@
-#pragma once
+#ifndef WORLD_WORLDCLIENT_H
+#define WORLD_WORLDCLIENT_H
+
 #include "frmpub/Client.h"
 #include "shynet/events/EventBuffer.h"
 
@@ -76,3 +78,5 @@ namespace world {
 		int connect_num_ = 0;
 	};
 }
+
+#endif

@@ -1,4 +1,6 @@
-#pragma once
+#ifndef GATE_STDINHANDLER_H
+#define GATE_STDINHANDLER_H
+
 #include "shynet/events/EventHandler.h"
 
 namespace gate {
@@ -15,3 +17,5 @@ namespace gate {
 		void info_order(const char* od, int argc, char** argv, const char* optarg);
 	};
 }
+
+#endif

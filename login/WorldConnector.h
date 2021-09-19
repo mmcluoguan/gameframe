@@ -1,4 +1,6 @@
-#pragma once
+#ifndef LOGIN_WORLDCONNECTOR_H
+#define LOGIN_WORLDCONNECTOR_H
+
 #include "frmpub/Connector.h"
 
 namespace login {
@@ -48,3 +50,5 @@ namespace login {
 			std::shared_ptr<std::stack<FilterData::Envelope>> enves);
 	};
 }
+
+#endif

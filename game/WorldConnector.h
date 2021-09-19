@@ -1,4 +1,6 @@
-#pragma once
+#ifndef GAME_WORLDCONNECTOR_H
+#define GAME_WORLDCONNECTOR_H
+
 #include "frmpub/Connector.h"
 
 namespace game {
@@ -36,3 +38,5 @@ namespace game {
 			std::shared_ptr<std::stack<FilterData::Envelope>> enves);
 	};
 }
+
+#endif

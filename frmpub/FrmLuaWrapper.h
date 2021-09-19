@@ -1,4 +1,6 @@
-﻿#pragma once
+#ifndef FRMPUB_FRMLUAWRAPPER_H
+#define FRMPUB_FRMLUAWRAPPER_H
+
 #include "shynet/lua/LuaWrapper.h"
 
 namespace frmpub {
@@ -13,3 +15,5 @@ namespace frmpub {
 		virtual void init(kaguya::State& state) override;
 	};
 }
+
+#endif

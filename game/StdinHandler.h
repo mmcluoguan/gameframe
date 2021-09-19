@@ -1,4 +1,6 @@
-#pragma once
+#ifndef GAME_STDINHANDLER_H
+#define GAME_STDINHANDLER_H
+
 #include "shynet/events/EventHandler.h"
 
 namespace game {
@@ -15,3 +17,5 @@ namespace game {
 		void info_order(const char* od, int argc, char** argv, const char* optarg);
 	};
 }
+
+#endif

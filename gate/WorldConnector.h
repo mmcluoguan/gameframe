@@ -1,4 +1,6 @@
-#pragma once
+#ifndef GATE_WORLDCONNECTOR_H
+#define GATE_WORLDCONNECTOR_H
+
 #include "frmpub/Connector.h"
 
 namespace gate {
@@ -54,3 +56,5 @@ namespace gate {
 	private:
 	};
 }
+
+#endif

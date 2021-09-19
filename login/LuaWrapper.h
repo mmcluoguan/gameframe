@@ -1,4 +1,6 @@
-#pragma once
+#ifndef LOGIN_LUAWRAPPER_H
+#define LOGIN_LUAWRAPPER_H
+
 #include "frmpub/FrmLuaWrapper.h"
 
 namespace login {
@@ -10,3 +12,5 @@ namespace login {
 		virtual void init(kaguya::State& state) override;
 	};
 }
+
+#endif

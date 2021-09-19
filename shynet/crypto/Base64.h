@@ -1,4 +1,6 @@
-#pragma once
+#ifndef SHYNET_CRYPTO_BASE64_H
+#define SHYNET_CRYPTO_BASE64_H
+
 #include <string>
 
 namespace shynet {
@@ -138,3 +140,5 @@ namespace shynet {
 
 	}
 }
+
+#endif

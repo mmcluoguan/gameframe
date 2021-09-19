@@ -1,4 +1,6 @@
-#pragma once
+#ifndef WORLD_WORLDSERVER_H
+#define WORLD_WORLDSERVER_H
+
 #include "shynet/net/ListenReactorMgr.h"
 
 namespace world {
@@ -22,3 +24,5 @@ namespace world {
 
 	};
 }
+
+#endif

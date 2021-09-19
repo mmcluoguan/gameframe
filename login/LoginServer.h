@@ -1,4 +1,6 @@
-#pragma once
+#ifndef LOGIN_LOGINSERVER_H
+#define LOGIN_LOGINSERVER_H
+
 #include "shynet/net/ListenReactorMgr.h"
 
 namespace login {
@@ -22,3 +24,5 @@ namespace login {
 
 	};
 }
+
+#endif

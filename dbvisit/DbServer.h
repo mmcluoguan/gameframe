@@ -1,4 +1,6 @@
-#pragma once
+#ifndef DBVISIT_DBSERVER_H
+#define DBVISIT_DBSERVER_H
+
 #include "shynet/net/ListenReactorMgr.h"
 
 namespace dbvisit {
@@ -23,3 +25,5 @@ namespace dbvisit {
 
 	};
 }
+
+#endif

@@ -1,4 +1,6 @@
-#pragma once
+#ifndef SHYNET_UTILS_LOGGER_H
+#define SHYNET_UTILS_LOGGER_H
+
 #include "shynet/Basic.h"
 #include <sstream>
 
@@ -67,3 +69,5 @@ namespace shynet {
 #define LOG_SYSFATAL shynet::utils::Logger(__FILE__, __LINE__, shynet::utils::Logger::LogLevel::FATAL,nullptr,errno).stream()
 #define LOG_DEBUG_BIN(x,l) if (shynet::utils::Logger::loglevel() <= shynet::utils::Logger::LogLevel::DEBUG) \
 	shynet::utils::Logger(__FILE__, __LINE__, shynet::utils::Logger::LogLevel::DEBUG, __func__).writelog((x), (l))
+
+#endif

@@ -1,4 +1,6 @@
-#pragma once
+#ifndef FRMPUB_BASIC_H
+#define FRMPUB_BASIC_H
+
 #include "frmpub/protocc/client.pb.h"
 #include "frmpub/protocc/internal.pb.h"
 #include "frmpub/protocc/common.pb.h"
@@ -38,3 +40,5 @@ namespace frmpub {
 		static size_t req_reply(void* ptr, size_t size, size_t nmemb, void* stream);
 	};
 }
+
+#endif

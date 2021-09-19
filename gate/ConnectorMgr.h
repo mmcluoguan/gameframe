@@ -1,4 +1,6 @@
-#pragma once
+#ifndef GATE_CONNECTORMGR_H
+#define GATE_CONNECTORMGR_H
+
 #include "gate/GameConnector.h"
 #include "gate/LoginConnector.h"
 #include "gate/WorldConnector.h"
@@ -95,3 +97,5 @@ namespace gate {
 		std::unordered_map<int, ConnectData> connect_datas_;
 	};
 }
+
+#endif

@@ -1,4 +1,6 @@
-#pragma once
+#ifndef GATE_SIGINTHANDLER_H
+#define GATE_SIGINTHANDLER_H
+
 #include "shynet/events/EventHandler.h"
 
 namespace gate {
@@ -12,3 +14,5 @@ namespace gate {
 		void signal(int signal) override;
 	};
 }
+
+#endif

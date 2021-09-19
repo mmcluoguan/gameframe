@@ -1,4 +1,6 @@
-﻿#pragma once
+#ifndef CLIENT_SIGINTHANDLER_H
+#define CLIENT_SIGINTHANDLER_H
+
 #include "shynet/events/EventHandler.h"
 
 namespace client {
@@ -9,3 +11,5 @@ namespace client {
 		void signal(int signal) override;
 	};
 }
+
+#endif

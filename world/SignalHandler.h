@@ -1,4 +1,6 @@
-#pragma once
+#ifndef WORLD_SIGINTHANDLER_H
+#define WORLD_SIGINTHANDLER_H
+
 #include "shynet/events/EventHandler.h"
 
 namespace world {
@@ -12,3 +14,5 @@ namespace world {
 		void signal(int signal) override;
 	};
 }
+
+#endif

@@ -1,4 +1,6 @@
-#pragma once
+#ifndef GAME_GAMECLIENTMGR_H
+#define GAME_GAMECLIENTMGR_H
+
 #include "game/GameClient.h"
 #include "shynet/utils/Singleton.h"
 #include <unordered_map>
@@ -37,3 +39,5 @@ namespace game {
 		std::unordered_map<int, std::shared_ptr<GameClient>> clis_;
 	};
 }
+
+#endif

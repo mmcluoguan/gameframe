@@ -1,4 +1,6 @@
-#pragma once
+#ifndef FRMPUB_RECONNECTTIMER_H
+#define FRMPUB_RECONNECTTIMER_H
+
 #include "shynet/net/ConnectReactorMgr.h"
 #include "shynet/net/IPAddress.h"
 #include "shynet/net/TimerReactorMgr.h"
@@ -24,3 +26,5 @@ namespace frmpub {
 		std::shared_ptr<net::IPAddress> connect_addr_;
 	};
 }
+
+#endif

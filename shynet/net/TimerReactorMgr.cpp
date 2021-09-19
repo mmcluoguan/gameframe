@@ -19,7 +19,7 @@ namespace shynet {
 				tth->notify(data, len);
 			}
 			else
-				LOG_WARN << "û�п��õ� TimerThread";
+				LOG_WARN << "没有可用的 TimerThread";
 		}
 
 		int TimerReactorMgr::add(std::shared_ptr<TimerEvent> v) {
@@ -28,7 +28,7 @@ namespace shynet {
 				std::lock_guard<std::mutex> lock(times_mutex_);
 				timerid++;
 				times_.insert({ timerid,v });
-				v->timerid(timerid);
+				v->set_timerid(timerid);
 			}
 			notify(&timerid, sizeof(timerid));
 			return timerid;

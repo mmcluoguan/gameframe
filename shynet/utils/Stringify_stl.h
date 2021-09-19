@@ -59,7 +59,8 @@
 
  *
  */
-#pragma once
+#ifndef SHYNET_UTILS_STRINGIFY_STL_H
+#define SHYNET_UTILS_STRINGIFY_STL_H
 
 #include <array>
 #include <deque>
@@ -313,5 +314,7 @@ namespace shynet {
 		}
 
 
-	}; // namespace chef
+	};
 }
+
+#endif

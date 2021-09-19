@@ -1,4 +1,6 @@
-#pragma once
+#ifndef SHYNET_PROTOCOL_TCPIP_H
+#define SHYNET_PROTOCOL_TCPIP_H
+
 #include "shynet/events/Streambuff.h"
 #include "shynet/Basic.h"
 
@@ -31,3 +33,5 @@ namespace shynet {
 		};
 	}
 }
+
+#endif

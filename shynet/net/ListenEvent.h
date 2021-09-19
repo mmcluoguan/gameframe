@@ -1,4 +1,6 @@
-#pragma once
+#ifndef SHYNET_NET_LISTENEVENT_H
+#define SHYNET_NET_LISTENEVENT_H
+
 #include "shynet/net/AcceptNewFd.h"
 #include "shynet/net/IPAddress.h"
 #include <openssl/err.h>
@@ -59,3 +61,5 @@ namespace shynet {
 		};
 	}
 }
+
+#endif

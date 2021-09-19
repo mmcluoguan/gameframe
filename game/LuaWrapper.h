@@ -1,4 +1,6 @@
-﻿#pragma once
+#ifndef GAME_LUAWRAPPER_H
+#define GAME_LUAWRAPPER_H
+
 #include "frmpub/FrmLuaWrapper.h"
 
 namespace game {
@@ -10,3 +12,5 @@ namespace game {
 		virtual void init(kaguya::State& state) override;
 	};
 }
+
+#endif

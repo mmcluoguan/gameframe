@@ -1,4 +1,6 @@
-#pragma once
+#ifndef WORLD_STDINHANDLER_H
+#define WORLD_STDINHANDLER_H
+
 #include "shynet/events/EventHandler.h"
 
 namespace world {
@@ -15,3 +17,5 @@ namespace world {
 		void info_order(const char* od, int argc, char** argv, const char* optarg);
 	};
 }
+
+#endif

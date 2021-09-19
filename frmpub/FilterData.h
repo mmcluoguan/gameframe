@@ -1,4 +1,6 @@
-#pragma once
+#ifndef FRMPUB_FILTERDATA_H
+#define FRMPUB_FILTERDATA_H
+
 #include "frmpub/Basic.h"
 #include "shynet/protocol/FilterProces.h"
 #include <rapidjson/document.h>
@@ -121,3 +123,5 @@ namespace frmpub {
 		ProtoData pd_ = ProtoData::NATIVE;
 	};
 }
+
+#endif

@@ -1,4 +1,6 @@
-#pragma once
+#ifndef SHYNET_LUA_LUAENGINE_H
+#define SHYNET_LUA_LUAENGINE_H
+
 #include "shynet/lua/LuaWrapper.h"
 #include "shynet/task/Task.h"
 #include "shynet/thread/Thread.h"
@@ -31,3 +33,5 @@ namespace shynet {
 		};
 	}
 }
+
+#endif

@@ -1,4 +1,6 @@
-#pragma once
+#ifndef FRMPUB_LUATIMERMGR_H
+#define FRMPUB_LUATIMERMGR_H
+
 #include "shynet/net/TimerEvent.h"
 #include "shynet/task/Task.h"
 #include "shynet/utils/Singleton.h"
@@ -42,6 +44,6 @@ namespace frmpub {
 	private:
 		std::unordered_set<int> timerids_;
 	};
-
-
 }
+
+#endif

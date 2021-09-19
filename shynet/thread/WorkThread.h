@@ -1,4 +1,6 @@
-#pragma once
+#ifndef SHYNET_THREAD_WORKTHREAD_H
+#define SHYNET_THREAD_WORKTHREAD_H
+
 #include "shynet/task/Task.h"
 #include "shynet/thread/Thread.h"
 #include <mutex>
@@ -23,3 +25,5 @@ namespace shynet {
 		};
 	}
 }
+
+#endif

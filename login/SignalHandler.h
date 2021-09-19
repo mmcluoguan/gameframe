@@ -1,4 +1,6 @@
-#pragma once
+#ifndef LOGIN_SIGINTHANDLER_H
+#define LOGIN_SIGINTHANDLER_H
+
 #include "shynet/events/EventHandler.h"
 
 namespace login {
@@ -12,3 +14,5 @@ namespace login {
 		void signal(int signal) override;
 	};
 }
+
+#endif

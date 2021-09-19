@@ -1,4 +1,6 @@
-#pragma once
+#ifndef SHYNET_THREAD_LUATHREAD_H
+#define SHYNET_THREAD_LUATHREAD_H
+
 #include "shynet/task/Task.h"
 #include "shynet/thread/Thread.h"
 #include <kaguya/kaguya.hpp>
@@ -31,3 +33,5 @@ namespace shynet {
 		};
 	}
 }
+
+#endif

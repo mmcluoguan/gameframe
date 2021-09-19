@@ -1,4 +1,6 @@
-#pragma once
+#ifndef SHYNET_TASK_NOTIFYTASK_H
+#define SHYNET_TASK_NOTIFYTASK_H
+
 #include "shynet/Basic.h"
 #include <sys/inotify.h>
 #include <unordered_map>
@@ -56,7 +58,7 @@ namespace shynet {
 			uint32_t mask_;
 			std::unordered_map<int, std::string> fdptahs_;
 		};
-
-
 	}
 }
+
+#endif

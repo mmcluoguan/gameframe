@@ -1,4 +1,6 @@
-#pragma once
+#ifndef SHYNET_UTILS_INICONFIG_H
+#define SHYNET_UTILS_INICONFIG_H
+
 #include "shynet/Basic.h"
 #include <sstream>
 #include <unordered_map>
@@ -53,3 +55,5 @@ namespace shynet {
 		};
 	}
 }
+
+#endif

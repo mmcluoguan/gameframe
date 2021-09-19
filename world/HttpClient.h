@@ -1,4 +1,6 @@
-#pragma once
+#ifndef WORLD_HTTPCLIENT_H
+#define WORLD_HTTPCLIENT_H
+
 #include "frmpub/Client.h"
 #include "shynet/events/EventBuffer.h"
 
@@ -29,3 +31,5 @@ namespace world {
 	private:
 	};
 }
+
+#endif

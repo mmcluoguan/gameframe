@@ -1,4 +1,6 @@
-#pragma once
+#ifndef WORLD_LUAWRAPPER_H
+#define WORLD_LUAWRAPPER_H
+
 #include "frmpub/FrmLuaWrapper.h"
 
 namespace world {
@@ -10,3 +12,5 @@ namespace world {
 		virtual void init(kaguya::State& state) override;
 	};
 }
+
+#endif

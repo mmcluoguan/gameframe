@@ -1,4 +1,6 @@
-#pragma once
+#ifndef FRMPUB_CLIENT_H
+#define FRMPUB_CLIENT_H
+
 #include "frmpub/FilterData.h"
 #include "shynet/events/EventBuffer.h"
 #include "shynet/net/AcceptNewFd.h"
@@ -56,3 +58,5 @@ namespace frmpub {
 		bool active_ = false;
 	};
 }
+
+#endif

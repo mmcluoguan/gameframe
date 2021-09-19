@@ -1,4 +1,6 @@
-#pragma once
+#ifndef SHYNET_CRYPTO_MD5_H
+#define SHYNET_CRYPTO_MD5_H
+
 #include <string>
 #include <cstddef>
 #include <cstring>
@@ -396,5 +398,6 @@ namespace shynet {
 			}
 		}
 	}
-
 }
+
+#endif

@@ -1,4 +1,6 @@
-#pragma once
+#ifndef SHYNET_POOL_THREADPOOL_H
+#define SHYNET_POOL_THREADPOOL_H
+
 #include "shynet/thread/AcceptThread.h"
 #include "shynet/thread/ConnectThread.h"
 #include "shynet/thread/InotifyThread.h"
@@ -127,3 +129,5 @@ namespace shynet {
 		};
 	}
 }
+
+#endif

@@ -1,4 +1,6 @@
-#pragma once
+#ifndef SHYNET_NET_CONNECTREACTORMGR_H
+#define SHYNET_NET_CONNECTREACTORMGR_H
+
 #include "shynet/net/ConnectEvent.h"
 #include "shynet/utils/Singleton.h"
 #include <unordered_map>
@@ -23,3 +25,5 @@ namespace shynet {
 		};
 	}
 }
+
+#endif

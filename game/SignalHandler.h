@@ -1,4 +1,6 @@
-﻿#pragma once
+#ifndef GAME_SIGINTHANDLER_H
+#define GAME_SIGINTHANDLER_H
+
 #include "shynet/events/EventHandler.h"
 
 namespace game {
@@ -12,3 +14,5 @@ namespace game {
 		void signal(int signal) override;
 	};
 }
+
+#endif

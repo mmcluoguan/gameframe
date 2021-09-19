@@ -1,4 +1,6 @@
-﻿#pragma once
+#ifndef SHYNET_NET_ACCEPTHEARTBEAT_H
+#define SHYNET_NET_ACCEPTHEARTBEAT_H
+
 #include "shynet/net/TimerReactorMgr.h"
 
 namespace shynet {
@@ -20,3 +22,5 @@ namespace shynet {
 
 	}
 }
+
+#endif

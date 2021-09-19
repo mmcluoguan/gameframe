@@ -1,4 +1,6 @@
-#pragma once
+#ifndef GATE_GATESERVER_H
+#define GATE_GATESERVER_H
+
 #include "shynet/net/ListenReactorMgr.h"
 
 namespace gate {
@@ -22,3 +24,5 @@ namespace gate {
 
 	};
 }
+
+#endif

@@ -1,4 +1,6 @@
-#pragma once
+#ifndef SHYNET_EVENTS_STREAMBUFF_H
+#define SHYNET_EVENTS_STREAMBUFF_H
+
 #include "shynet/Basic.h"
 #include <event2/buffer.h>
 #include <memory>
@@ -232,3 +234,5 @@ namespace shynet {
 		};
 	}
 }
+
+#endif

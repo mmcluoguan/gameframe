@@ -1,4 +1,6 @@
-#pragma once
+#ifndef FRMPUB_CONNECTOR_H
+#define FRMPUB_CONNECTOR_H
+
 #include "frmpub/FilterData.h"
 #include "frmpub/PingTimer.h"
 #include "shynet/net/ConnectEvent.h"
@@ -74,3 +76,5 @@ namespace frmpub {
 		std::string name_{ "Connector" };
 	};
 }
+
+#endif

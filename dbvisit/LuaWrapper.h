@@ -1,4 +1,6 @@
-#pragma once
+#ifndef DBVISIT_LUAWRAPPER_H
+#define DBVISIT_LUAWRAPPER_H
+
 #include "frmpub/FrmLuaWrapper.h"
 
 namespace dbvisit {
@@ -10,3 +12,5 @@ namespace dbvisit {
 		virtual void init(kaguya::State& state) override;
 	};
 }
+
+#endif

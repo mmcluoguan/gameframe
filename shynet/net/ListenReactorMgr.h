@@ -1,4 +1,6 @@
-#pragma once
+#ifndef SHYNET_NET_LISTENREACTORMGR_H
+#define SHYNET_NET_LISTENREACTORMGR_H
+
 #include "shynet/net/ListenEvent.h"
 #include "shynet/pool/ThreadPool.h"
 #include <unordered_map>
@@ -25,3 +27,5 @@ namespace shynet {
 		};
 	}
 }
+
+#endif

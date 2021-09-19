@@ -1,4 +1,6 @@
-#pragma once
+#ifndef DBVISIT_SIGINTHANDLER_H
+#define DBVISIT_SIGINTHANDLER_H
+
 #include "shynet/events/EventHandler.h"
 
 namespace dbvisit {
@@ -12,3 +14,5 @@ namespace dbvisit {
 		void signal(int signal) override;
 	};
 }
+
+#endif

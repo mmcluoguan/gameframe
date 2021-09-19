@@ -1,4 +1,6 @@
-#pragma once
+#ifndef SHYNET_NET_ACCEPTNEWFD_H
+#define SHYNET_NET_ACCEPTNEWFD_H
+
 #include "shynet/events/EventBuffer.h"
 #include "shynet/net/AcceptHeartbeat.h"
 #include "shynet/net/IPAddress.h"
@@ -95,3 +97,5 @@ namespace shynet {
 
 	}
 }
+
+#endif

@@ -1,4 +1,6 @@
-#pragma once
+#ifndef CLIENT_GATERECONNCTORTIMER_H
+#define CLIENT_GATERECONNCTORTIMER_H
+
 #include "client/GateConnector.h"
 #include "shynet/net/IPAddress.h"
 #include "shynet/net/TimerEvent.h"
@@ -19,3 +21,5 @@ namespace client {
 		std::shared_ptr<GateConnector::DisConnectData> data_;
 	};
 }
+
+#endif

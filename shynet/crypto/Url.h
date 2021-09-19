@@ -1,4 +1,6 @@
-#pragma once
+#ifndef SHYNET_CRYPTO_URL_H
+#define SHYNET_CRYPTO_URL_H
+
 #include <string>
 
 namespace shynet {
@@ -79,3 +81,5 @@ namespace shynet {
 		}
 	}
 }
+
+#endif

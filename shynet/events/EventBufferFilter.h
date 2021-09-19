@@ -1,4 +1,6 @@
-#pragma once
+#ifndef SHYNET_EVENTS_EVENTBUFFERFILTER_H
+#define SHYNET_EVENTS_EVENTBUFFERFILTER_H
+
 #include "shynet/events/EventBuffer.h"
 
 namespace shynet {
@@ -35,3 +37,5 @@ namespace shynet {
 		};
 	}
 }
+
+#endif
