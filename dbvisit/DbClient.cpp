@@ -1,18 +1,11 @@
 #include "dbvisit/DbClient.h"
-#include <cstring>
-#include "shynet/pool/MysqlPool.h"
-#include "shynet/lua/LuaEngine.h"
-#include "shynet/utils/StringOp.h"
-#include "shynet/utils/IdWorker.h"
-#include "frmpub/LuaCallBackTask.h"
-#include "frmpub/protocc/client.pb.h"
-#include "frmpub/protocc/game.pb.h"
-#include "frmpub/protocc/gate.pb.h"
-#include "frmpub/protocc/login.pb.h"
-#include "frmpub/protocc/world.pb.h"
-#include "frmpub/protocc/dbvisit.pb.h"
-#include "dbvisit/DbClientMgr.h"
 #include "dbvisit/Datahelp.h"
+#include "dbvisit/DbClientMgr.h"
+#include "frmpub/LuaCallBackTask.h"
+#include "shynet/lua/LuaEngine.h"
+#include "shynet/pool/MysqlPool.h"
+#include "shynet/utils/IdWorker.h"
+#include "shynet/utils/StringOp.h"
 
 namespace dbvisit {
 	DbClient::DbClient(std::shared_ptr<net::IPAddress> remote_addr,

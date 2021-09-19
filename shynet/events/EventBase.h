@@ -1,8 +1,8 @@
-﻿#pragma once
+#pragma once
+#include "shynet/events/EventConfig.h"
 #include <event2/event.h>
 #include <event2/thread.h>
 #include <memory>
-#include "shynet/events/EventConfig.h"
 
 namespace shynet
 {

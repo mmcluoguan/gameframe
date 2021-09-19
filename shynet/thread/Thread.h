@@ -1,6 +1,6 @@
 #pragma once
-#include <thread>
 #include <shynet/Basic.h>
+#include <thread>
 
 namespace shynet {
 	namespace thread {

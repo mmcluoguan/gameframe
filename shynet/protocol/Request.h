@@ -1,6 +1,6 @@
 #pragma once
-#include <map>
 #include "shynet/Basic.h"
+#include <map>
 
 namespace shynet {
 	namespace protocol {

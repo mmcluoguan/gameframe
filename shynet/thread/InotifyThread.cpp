@@ -1,9 +1,10 @@
 #include "shynet/thread/InotifyThread.h"
+#include "shynet/pool/ThreadPool.h"
+#include "shynet/utils/Logger.h"
 #include <sys/inotify.h>
 #include <fcntl.h>
 #include <ftw.h>
-#include "shynet/pool/ThreadPool.h"
-#include "shynet/utils/Logger.h"
+#include <list>
 
 namespace shynet {
 	extern pthread_barrier_t g_barrier;

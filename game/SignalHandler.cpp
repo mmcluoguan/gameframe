@@ -1,6 +1,6 @@
 #include "game/SignalHandler.h"
-#include <signal.h>
 #include "shynet/utils/Logger.h"
+#include <csignal>
 
 namespace game
 {

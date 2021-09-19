@@ -1,8 +1,7 @@
 #include "world/WorldClient.h"
-#include <cstring>
-#include "shynet/lua/LuaEngine.h"
-#include "frmpub/LuaCallBackTask.h"
 #include "world/WorldClientMgr.h"
+#include "frmpub/LuaCallBackTask.h"
+#include "shynet/lua/LuaEngine.h"
 
 namespace world {
 	WorldClient::WorldClient(std::shared_ptr<net::IPAddress> remote_addr,

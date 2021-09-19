@@ -1,6 +1,6 @@
 #include "dbvisit/DbClientMgr.h"
-#include "shynet/lua/LuaEngine.h"
 #include "frmpub/LuaCallBackTask.h"
+#include "shynet/lua/LuaEngine.h"
 
 namespace dbvisit {
 	DbClientMgr::DbClientMgr() {

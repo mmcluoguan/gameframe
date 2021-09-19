@@ -1,6 +1,6 @@
 #include "world/SignalHandler.h"
-#include <signal.h>
 #include "shynet/utils/Logger.h"
+#include <csignal>
 
 namespace world {
 	SigIntHandler::SigIntHandler(std::shared_ptr<events::EventBase> base) :

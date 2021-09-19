@@ -1,7 +1,6 @@
 #pragma once
-#include <list>
 #include "shynet/thread/AcceptThread.h"
-#include <shynet/utils/Singleton.h>
+#include "shynet/utils/Singleton.h"
 
 namespace shynet {
 	namespace net {

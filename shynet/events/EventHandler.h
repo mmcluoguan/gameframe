@@ -1,5 +1,4 @@
-﻿#pragma once
-#include <event2/event.h>
+#pragma once
 #include "shynet/events/EventBase.h"
 
 namespace shynet

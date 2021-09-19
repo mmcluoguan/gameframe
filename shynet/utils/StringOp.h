@@ -1,11 +1,9 @@
 #pragma once
-#include <atomic>
-#include <cstdint>
+#include "shynet/Basic.h"
+#include <functional>
 #include <memory>
 #include <string>
 #include <vector>
-#include <functional>
-#include "shynet/Basic.h"
 
 namespace shynet {
 	namespace utils {

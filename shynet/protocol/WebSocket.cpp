@@ -1,12 +1,11 @@
 #include "shynet/protocol/WebSocket.h"
-#include <cstring>
-#include <unistd.h>
-#include <jemalloc/jemalloc.h>
 #include "shynet/crypto/Sha1.h"
 #include "shynet/crypto/Base64.h"
 #include "shynet/protocol/FilterProces.h"
 #include "shynet/utils/Stuff.h"
 #include "shynet/utils/Logger.h"
+#include <jemalloc/jemalloc.h>
+#include <cstring>
 
 namespace shynet {
 	namespace protocol {

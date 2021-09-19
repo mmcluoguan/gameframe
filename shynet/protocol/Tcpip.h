@@ -1,5 +1,4 @@
 #pragma once
-#include <memory>
 #include "shynet/events/Streambuff.h"
 #include "shynet/Basic.h"
 

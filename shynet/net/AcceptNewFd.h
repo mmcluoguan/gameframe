@@ -1,5 +1,4 @@
 #pragma once
-#include <memory>
 #include "shynet/events/EventBuffer.h"
 #include "shynet/net/AcceptHeartbeat.h"
 #include "shynet/net/IPAddress.h"

@@ -1,7 +1,7 @@
 #pragma once
-#include <map>
-#include <list>
 #include "shynet/Basic.h"
+#include <list>
+#include <map>
 
 namespace shynet {
 	namespace utils {

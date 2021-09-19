@@ -1,7 +1,7 @@
 #pragma once
-#include "shynet/net/ConnectEvent.h"
 #include "frmpub/FilterData.h"
 #include "frmpub/PingTimer.h"
+#include "shynet/net/ConnectEvent.h"
 
 namespace frmpub {
 	/*

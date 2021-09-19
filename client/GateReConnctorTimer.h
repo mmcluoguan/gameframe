@@ -1,7 +1,7 @@
 #pragma once
+#include "client/GateConnector.h"
 #include "shynet/net/IPAddress.h"
 #include "shynet/net/TimerEvent.h"
-#include "client/GateConnector.h"
 
 namespace client {
 	class GateReConnctorTimer : public net::TimerEvent {

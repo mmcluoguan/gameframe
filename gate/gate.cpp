@@ -1,18 +1,18 @@
-#include <unistd.h>
-#include "shynet/events/EventHandler.h"
-#include "shynet/net/IPAddress.h"
-#include "shynet/net/ConnectReactorMgr.h"
-#include "shynet/pool/ThreadPool.h"
-#include "shynet/lua/LuaEngine.h"
-#include "shynet/utils/IniConfig.h"
-#include "shynet/utils/StringOp.h"
-#include "shynet/utils/Stuff.h"
 #include "gate/ConnectorMgr.h"
 #include "gate/GateClientMgr.h"
 #include "gate/GateServer.h"
+#include "gate/LuaWrapper.h"
 #include "gate/SignalHandler.h"
 #include "gate/StdinHandler.h"
-#include "gate/LuaWrapper.h"
+#include "shynet/events/EventHandler.h"
+#include "shynet/net/IPAddress.h"
+#include "shynet/net/ConnectReactorMgr.h"
+#include "shynet/lua/LuaEngine.h"
+#include "shynet/pool/ThreadPool.h"
+#include "shynet/utils/IniConfig.h"
+#include "shynet/utils/StringOp.h"
+#include "shynet/utils/Stuff.h"
+#include <unistd.h>
 
 int main(int argc, char* argv[]) {
 	using namespace std;

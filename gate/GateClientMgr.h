@@ -1,9 +1,8 @@
 #pragma once
-#include <memory>
+#include "gate/GateClient.h"
+#include "shynet/utils/Singleton.h"
 #include <mutex>
 #include <unordered_map>
-#include "shynet/utils/Singleton.h"
-#include "gate/GateClient.h"
 
 namespace gate {
 	/// <summary>

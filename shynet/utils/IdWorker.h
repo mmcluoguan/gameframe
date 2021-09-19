@@ -1,10 +1,6 @@
 #pragma once
-#include <mutex>
-#include <atomic>
-#include <chrono>
-#include <exception>
-#include <sstream>
 #include "shynet/utils/Singleton.h"
+#include <atomic>
 
 
 namespace shynet {

@@ -1,6 +1,6 @@
 #include "gate/GateClientMgr.h"
-#include "shynet/lua/LuaEngine.h"
 #include "frmpub/LuaCallBackTask.h"
+#include "shynet/lua/LuaEngine.h"
 
 namespace gate {
 	GateClientMgr::GateClientMgr() {

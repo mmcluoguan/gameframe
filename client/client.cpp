@@ -1,23 +1,24 @@
-#include <unistd.h>
-#include "shynet/utils/IniConfig.h"
-#include "shynet/utils/Stuff.h"
+#include "client/GateConnector.h"
+#include "client/StdinHandler.h"
+#include "client/SignalHandler.h"
 #include "shynet/events/EventHandler.h"
+#include "shynet/lua/LuaEngine.h"
 #include "shynet/net/IPAddress.h"
 #include "shynet/net/ConnectReactorMgr.h"
 #include "shynet/pool/ThreadPool.h"
-#include "shynet/lua/LuaEngine.h"
-#include "client/GateConnector.h"
-#include "client/SignalHandler.h"
-#include "client/StdinHandler.h"
-
+#include "shynet/utils/IniConfig.h"
+#include "shynet/utils/Stuff.h"
+#include <unistd.h>
+#include <iomanip>
 
 int g_gateconnect_id;
 
-#include "shynet/utils/Databuffer.h"
 #include "shynet/crypto/Md5.h"
-#include "shynet/utils/SkipList.h"
-#include "shynet/utils/Lru.h"
+#include "shynet/utils/Databuffer.h"
 #include "shynet/utils/Hash.h"
+#include "shynet/utils/Lru.h"
+#include "shynet/utils/SkipList.h"
+#include <cstddef>
 
 void test() {
 	shynet::utils::Databuffer<> dt;
@@ -55,13 +56,20 @@ void test() {
 	exist = c.get("tom", &v);
 	assert(!exist);
 
-	shynet::utils::hash_val(v, exist);
+	LOG_DEBUG << "hash code:" << shynet::utils::hash_val(v, exist);
+
+	std::byte bb{ 12 };
+	bb >>= 1;
+	LOG_DEBUG << std::to_integer<int>(bb);
+
+	std::shared_ptr<char[]> shccc(new char[10]{'a','1'});
+	LOG_DEBUG << shccc.get()[0];
 }
 
 int main(int argc, char* argv[]) {
 
 	test();
-	//return 0;
+	return 0;
 	using namespace std;
 	using namespace shynet;
 	using namespace shynet::utils;

@@ -1,11 +1,10 @@
 #include "shynet/utils/StringOp.h"
 #include <arpa/inet.h>
-#include <cstring>
 #include <sys/resource.h>
-#include <unistd.h>
 #include <fcntl.h>
-#include <limits.h>
 #include <sstream>
+#include <unistd.h>
+#include <cstring>
 
 namespace shynet {
 	namespace utils {

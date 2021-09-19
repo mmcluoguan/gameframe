@@ -1,5 +1,4 @@
 #include "shynet/events/EventHandler.h"
-#include <mutex>
 #include "shynet/utils/Logger.h"
 
 namespace shynet

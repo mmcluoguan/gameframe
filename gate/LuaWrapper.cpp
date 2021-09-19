@@ -1,10 +1,10 @@
 #include "gate/LuaWrapper.h"
-#include "shynet/utils/IniConfig.h"
-#include "gate/GateServer.h"
 #include "gate/GateClient.h"
-#include "gate/WorldConnector.h"
-#include "gate/LoginConnector.h"
+#include "gate/GateServer.h"
 #include "gate/GameConnector.h"
+#include "gate/LoginConnector.h"
+#include "gate/WorldConnector.h"
+#include "shynet/utils/IniConfig.h"
 
 namespace gate {
 	LuaWrapper::LuaWrapper() {

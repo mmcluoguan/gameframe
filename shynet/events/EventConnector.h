@@ -1,7 +1,7 @@
-﻿#pragma once
+#pragma once
+#include "shynet/events/EventBase.h"
 #include "shynet/events/EventBuffer.h"
 #include "shynet/events/EventBufferSsl.h"
-#include "shynet/events/EventBase.h"
 
 namespace shynet
 {

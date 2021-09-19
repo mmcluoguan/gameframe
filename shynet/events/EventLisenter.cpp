@@ -1,6 +1,6 @@
 #include "shynet/events/EventLisenter.h"
-#include <cstring>
 #include "shynet/utils/Logger.h"
+#include <cstring>
 
 namespace shynet
 {

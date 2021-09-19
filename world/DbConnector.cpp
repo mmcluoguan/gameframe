@@ -1,16 +1,14 @@
 #include "world/DbConnector.h"
-#include "shynet/events/Streambuff.h"
-#include "shynet/net/ConnectReactorMgr.h"
-#include "shynet/lua/LuaEngine.h"
-#include "shynet/utils/IniConfig.h"
-#include "frmpub/ReConnectTimer.h"
-#include "frmpub/LuaCallBackTask.h"
-#include "frmpub/protocc/world.pb.h"
+#include "world/ConnectorMgr.h"
+#include "world/HttpServer.h"
 #include "world/WorldClientMgr.h"
 #include "world/WorldServer.h"
-#include "world/HttpServer.h"
-#include "world/ConnectorMgr.h"
-
+#include "frmpub/LuaCallBackTask.h"
+#include "frmpub/ReConnectTimer.h"
+#include "shynet/events/Streambuff.h"
+#include "shynet/lua/LuaEngine.h"
+#include "shynet/net/ConnectReactorMgr.h"
+#include "shynet/utils/IniConfig.h"
 //配置参数
 extern const char* g_confname;
 

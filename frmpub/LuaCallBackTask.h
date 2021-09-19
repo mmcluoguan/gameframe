@@ -1,9 +1,8 @@
 #pragma once
+#include "frmpub/LuaRemoteDebug.h"
 #include "shynet/task/Task.h"
 #include "shynet/thread/Thread.h"
 #include "shynet/thread/LuaThread.h"
-#include "frmpub/LuaRemoteDebug.h"
-#include "frmpub/protocc/common.pb.h"
 
 namespace frmpub {
 	/*

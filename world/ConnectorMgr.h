@@ -1,8 +1,7 @@
 #pragma once
-#include <list>
-#include <mutex>
-#include "shynet/utils/Singleton.h"
 #include "world/DbConnector.h"
+#include "shynet/utils/Singleton.h"
+#include <list>
 
 namespace world {
 	/// <summary>

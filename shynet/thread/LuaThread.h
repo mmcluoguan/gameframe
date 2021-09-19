@@ -1,10 +1,10 @@
 #pragma once
+#include "shynet/task/Task.h"
+#include "shynet/thread/Thread.h"
+#include <kaguya/kaguya.hpp>
+#include <condition_variable>
 #include <queue>
 #include <mutex>
-#include <condition_variable>
-#include <kaguya/kaguya.hpp>
-#include "shynet/thread/Thread.h"
-#include "shynet/task/Task.h"
 
 namespace shynet {
 	namespace thread {

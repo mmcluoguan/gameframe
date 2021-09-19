@@ -1,6 +1,6 @@
 #pragma once
-#include "shynet/kaguya/kaguya.hpp"
 #include "shynet/utils/Singleton.h"
+#include <kaguya/kaguya.hpp>
 
 namespace frmpub {
 	/*

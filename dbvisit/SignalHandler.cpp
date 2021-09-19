@@ -1,12 +1,11 @@
 #include "dbvisit/SignalHandler.h"
-#include <signal.h>
-#include <sw/redis++/redis++.h>
-namespace redis = sw::redis;
+#include "frmpub/Basic.h"
 #include "shynet/utils/IniConfig.h"
 #include "shynet/utils/Singleton.h"
 #include "shynet/utils/StringOp.h"
-#include "frmpub/protocc/common.pb.h"
-#include "frmpub/Basic.h"
+#include <sw/redis++/redis++.h>
+namespace redis = sw::redis;
+#include <csignal>
 
 //配置参数
 extern const char* g_confname;

@@ -1,11 +1,11 @@
 #include "gate/GameConnector.h"
-#include "shynet/net/ConnectReactorMgr.h"
-#include "shynet/lua/LuaEngine.h"
-#include "shynet/utils/IniConfig.h"
-#include "frmpub/ReConnectTimer.h"
-#include "frmpub/LuaCallBackTask.h"
 #include "gate/ConnectorMgr.h"
 #include "gate/GateClientMgr.h"
+#include "frmpub/LuaCallBackTask.h"
+#include "frmpub/ReConnectTimer.h"
+#include "shynet/lua/LuaEngine.h"
+#include "shynet/net/ConnectReactorMgr.h"
+#include "shynet/utils/IniConfig.h"
 
 namespace gate {
 	GameConnector::GameConnector(std::shared_ptr<net::IPAddress> connect_addr) :

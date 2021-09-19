@@ -1,13 +1,11 @@
 #include "login/WorldConnector.h"
-#include "shynet/net/ConnectReactorMgr.h"
-#include "shynet/lua/LuaEngine.h"
-#include "shynet/utils/IniConfig.h"
-#include "frmpub/ReConnectTimer.h"
-#include "frmpub/LuaCallBackTask.h"
-#include "frmpub/protocc/login.pb.h"
-#include "frmpub/protocc/dbvisit.pb.h"
 #include "login/ConnectorMgr.h"
 #include "login/LoginClientMgr.h"
+#include "frmpub/LuaCallBackTask.h"
+#include "frmpub/ReConnectTimer.h"
+#include "shynet/lua/LuaEngine.h"
+#include "shynet/net/ConnectReactorMgr.h"
+#include "shynet/utils/IniConfig.h"
 
 namespace login {
 	WorldConnector::WorldConnector(std::shared_ptr<net::IPAddress> connect_addr) :

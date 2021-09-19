@@ -1,11 +1,9 @@
 #pragma once
-#include <mutex>
-#include <memory>
+#include "shynet/utils/Singleton.h"
+#include <mysqlx/xdevapi.h>
+#include <condition_variable>
 #include <functional>
 #include <queue>
-#include <condition_variable>
-#include <mysqlx/xdevapi.h>
-#include "shynet/utils/Singleton.h"
 
 namespace shynet {
 	namespace pool {

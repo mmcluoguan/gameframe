@@ -1,7 +1,7 @@
 #pragma once
-#include <event2/bufferevent.h>
 #include "shynet/events/EventBase.h"
 #include "shynet/events/Streambuff.h"
+#include <event2/bufferevent.h>
 
 namespace shynet {
 	namespace events {

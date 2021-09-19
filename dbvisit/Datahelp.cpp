@@ -1,15 +1,15 @@
 #include "dbvisit/Datahelp.h"
-#include <unordered_set>
-#include <sw/redis++/redis++.h>
-#include <rapidjson/document.h>
-#include <rapidjson/writer.h>
-#include <rapidjson/stringbuffer.h>
-namespace redis = sw::redis;
+#include "dbvisit/DataTimerMgr.h"
+#include "dbvisit/DataTimer.h"
 #include "shynet/net/TimerReactorMgr.h"
 #include "shynet/pool/MysqlPool.h"
 #include "shynet/utils/StringOp.h"
-#include "dbvisit/DataTimer.h"
-#include "dbvisit/DataTimerMgr.h"
+#include <sw/redis++/redis++.h>
+namespace redis = sw::redis;
+#include <rapidjson/document.h>
+#include <rapidjson/writer.h>
+#include <rapidjson/stringbuffer.h>
+#include <unordered_set>
 
 namespace dbvisit {
 	Datahelp::Datahelp() {

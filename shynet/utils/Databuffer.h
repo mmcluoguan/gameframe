@@ -1,9 +1,7 @@
 #pragma once
-#include <cinttypes>
-#include <cstddef>
+#include <algorithm>
 #include <cstring>
 #include <memory>
-#include <algorithm>
 
 namespace shynet
 {

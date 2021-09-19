@@ -1,6 +1,6 @@
 #pragma once
-#include "shynet/events/EventBuffer.h"
 #include "frmpub/Client.h"
+#include "shynet/events/EventBuffer.h"
 
 namespace world {
 	/// <summary>

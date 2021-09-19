@@ -1,6 +1,6 @@
 #include "frmpub/PingTimer.h"
-#include "shynet/net/TimerReactorMgr.h"
 #include "frmpub/Connector.h"
+#include "shynet/net/TimerReactorMgr.h"
 
 namespace frmpub {
 	PingTimer::PingTimer(const timeval val, Connector* connector) :

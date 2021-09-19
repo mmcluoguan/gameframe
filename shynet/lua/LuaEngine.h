@@ -1,8 +1,7 @@
 #pragma once
-#include "shynet/thread/Thread.h"
-#include <kaguya/kaguya.hpp>
 #include "shynet/lua/LuaWrapper.h"
 #include "shynet/task/Task.h"
+#include "shynet/thread/Thread.h"
 #include "shynet/utils/Singleton.h"
 
 namespace shynet {

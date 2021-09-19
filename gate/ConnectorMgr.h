@@ -1,11 +1,11 @@
 #pragma once
-#include <mutex>
-#include <unordered_map>
-#include <list>
-#include "shynet/utils/Singleton.h"
+#include "gate/GameConnector.h"
 #include "gate/LoginConnector.h"
 #include "gate/WorldConnector.h"
-#include "gate/GameConnector.h"
+#include "shynet/utils/Singleton.h"
+#include <list>
+#include <mutex>
+#include <unordered_map>
 
 namespace gate {
 	/// <summary>

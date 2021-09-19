@@ -1,7 +1,7 @@
 #include "gate/GateServer.h"
-#include "shynet/net/TimerReactorMgr.h"
 #include "gate/GateClient.h"
 #include "gate/GateClientMgr.h"
+#include "shynet/net/TimerReactorMgr.h"
 
 namespace gate
 {

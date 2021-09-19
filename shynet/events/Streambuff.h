@@ -1,7 +1,7 @@
-﻿#pragma once
-#include <memory>
-#include <event2/buffer.h>
+#pragma once
 #include "shynet/Basic.h"
+#include <event2/buffer.h>
+#include <memory>
 
 namespace shynet
 {

@@ -1,5 +1,4 @@
 #include "shynet/protocol/FilterProces.h"
-#include <cstring>
 #include "shynet/net/IPAddress.h"
 #include "shynet/utils/Logger.h"
 

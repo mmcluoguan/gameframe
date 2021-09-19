@@ -1,7 +1,7 @@
 #pragma once
-#include <unordered_map>
-#include <list>
 #include "shynet/utils/Singleton.h"
+#include <list>
+#include <unordered_map>
 
 namespace dbvisit {
 	class DataException : public std::exception {

@@ -1,7 +1,7 @@
 #pragma once
-#include "shynet/thread/Thread.h"
 #include "shynet/net/AcceptNewFd.h"
 #include "shynet/task/Task.h"
+#include "shynet/thread/Thread.h"
 
 namespace shynet {
 	namespace task {

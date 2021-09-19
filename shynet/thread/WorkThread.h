@@ -1,8 +1,8 @@
 #pragma once
+#include "shynet/task/Task.h"
+#include "shynet/thread/Thread.h"
 #include <mutex>
 #include <queue>
-#include "shynet/thread/Thread.h"
-#include "shynet/task/Task.h"
 
 namespace shynet {
 	namespace thread {

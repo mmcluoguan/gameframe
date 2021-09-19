@@ -2,7 +2,6 @@
 #include "frmpub/Client.h"
 #include "frmpub/Connector.h"
 #include "frmpub/LuaTimerTask.h"
-#include "frmpub/protocc/common.pb.h"
 
 namespace frmpub {
 	FrmLuaWrapper::FrmLuaWrapper() {

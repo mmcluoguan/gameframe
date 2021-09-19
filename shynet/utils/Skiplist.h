@@ -1,11 +1,8 @@
 #pragma once
-#include <stdint.h>
-#include <stdlib.h>
-#include <vector>
-#include <iomanip>
-#include <iostream>
-#include <algorithm>
 #include <jemalloc/jemalloc.h>
+#include <algorithm>
+#include <iostream>
+#include <vector>
 
 namespace shynet
 {

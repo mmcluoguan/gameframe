@@ -1,10 +1,8 @@
 #pragma once
+#include "frmpub/Client.h"
+#include "shynet/events/EventBuffer.h"
 #include <sw/redis++/redis++.h>
 namespace redis = sw::redis;
-#include <unordered_map>
-#include <functional>
-#include "shynet/events/EventBuffer.h"
-#include "frmpub/Client.h"
 
 namespace dbvisit {
 	/// <summary>

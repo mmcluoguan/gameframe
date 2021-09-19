@@ -1,5 +1,4 @@
 #include "frmpub/Client.h"
-#include <cstring>
 #include "shynet/utils/Logger.h"
 
 namespace frmpub {

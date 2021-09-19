@@ -1,8 +1,6 @@
 #pragma once
-#include <string>
-#include <stdint.h>
-#include <memory>
 #include "shynet/Basic.h"
+#include <memory>
 
 namespace shynet {
 	namespace utils {

@@ -1,7 +1,7 @@
 #pragma once
+#include "shynet/Basic.h"
 #include <sys/inotify.h>
 #include <unordered_map>
-#include "shynet/Basic.h"
 
 namespace shynet {
 	namespace task {

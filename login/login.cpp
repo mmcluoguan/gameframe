@@ -1,4 +1,9 @@
-#include <unistd.h>
+#include "login/ConnectorMgr.h"
+#include "login/DbConnector.h"
+#include "login/LoginServer.h"
+#include "login/LuaWrapper.h"
+#include "login/SignalHandler.h"
+#include "login/StdinHandler.h"
 #include "shynet/events/EventHandler.h"
 #include "shynet/net/IPAddress.h"
 #include "shynet/net/ConnectReactorMgr.h"
@@ -7,12 +12,7 @@
 #include "shynet/utils/IniConfig.h"
 #include "shynet/utils/StringOp.h"
 #include "shynet/utils/Stuff.h"
-#include "login/ConnectorMgr.h"
-#include "login/DbConnector.h"
-#include "login/LoginServer.h"
-#include "login/SignalHandler.h"
-#include "login/StdinHandler.h"
-#include "login/LuaWrapper.h"
+#include <unistd.h>
 
 int main(int argc, char* argv[]) {
 	using namespace std;

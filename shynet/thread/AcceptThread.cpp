@@ -1,8 +1,7 @@
 #include "shynet/thread/AcceptThread.h"
-#include <cstring>
-#include "shynet/net/ListenEvent.h"
 #include "shynet/net/AcceptHeartbeat.h"
 #include "shynet/net/AcceptIoBuffer.h"
+#include "shynet/net/ListenEvent.h"
 #include "shynet/utils/Logger.h"
 
 namespace shynet {

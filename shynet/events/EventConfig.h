@@ -1,6 +1,6 @@
-﻿#pragma once
-#include <event2/event.h>
+#pragma once
 #include "shynet/Basic.h"
+#include <event2/event.h>
 
 namespace shynet
 {

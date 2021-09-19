@@ -1,8 +1,6 @@
-﻿#pragma once
-#include <unordered_map>
-#include <functional>
-#include "shynet/net/AcceptNewFd.h"
+#pragma once
 #include "frmpub/Client.h"
+#include "shynet/net/AcceptNewFd.h"
 
 namespace game {
 	/// <summary>

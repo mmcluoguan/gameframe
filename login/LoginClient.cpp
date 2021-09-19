@@ -1,9 +1,8 @@
 #include "login/LoginClient.h"
-#include <cstring>
-#include "shynet/lua/LuaEngine.h"
-#include "frmpub/LuaCallBackTask.h"
 #include "login/ConnectorMgr.h"
 #include "login/LoginClientMgr.h"
+#include "frmpub/LuaCallBackTask.h"
+#include "shynet/lua/LuaEngine.h"
 
 namespace login {
 	LoginClient::LoginClient(std::shared_ptr<net::IPAddress> remote_addr,

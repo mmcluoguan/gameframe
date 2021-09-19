@@ -1,14 +1,13 @@
 #pragma once
-#include <string>
-#include <cassert>
-#include <sstream>
 #include <iomanip>
+#include <string>
+#include <sstream>
 #include <cinttypes>
 
 namespace shynet {
 	namespace crypto {
 		namespace sha256 {
-            namespace cryptlite__ {
+            namespace  {
 
 #define SHA256_SHR(bits,word)      ((word) >> (bits))
 #define SHA256_ROTL(bits,word)                         \
@@ -1063,7 +1062,7 @@ namespace shynet {
             */
 
             static void sum(unsigned char* in_data, std::size_t in_data_len, unsigned char digest[32] /*out*/) {
-                cryptlite__::sha256 ctx;
+                sha256 ctx;
                 ctx.input(in_data, in_data_len);
                 ctx.result(digest);
             }
@@ -1073,14 +1072,14 @@ namespace shynet {
              *
              */
             static std::string sum(const std::string& data) {
-                return cryptlite__::sha256::hash_hex(data);
+                return sha256::hash_hex(data);
             }
             static std::string sum(const char* data, std::size_t len) {
                 int i;
                 uint8_t digest[32];
                 std::ostringstream oss;
                 oss << std::hex << std::setfill('0');
-                cryptlite__::sha256 ctx;
+                sha256 ctx;
                 ctx.input((unsigned char*)data, len);
                 ctx.result(digest);
                 for (i = 0; i < 32; ++i)

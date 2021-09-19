@@ -1,8 +1,7 @@
 #include "game/GameClient.h"
-#include <cstring>
-#include "shynet/lua/LuaEngine.h"
-#include "frmpub/LuaCallBackTask.h"
 #include "game/GameClientMgr.h"
+#include "frmpub/LuaCallBackTask.h"
+#include "shynet/lua/LuaEngine.h"
 
 namespace game {
 	GameClient::GameClient(std::shared_ptr<net::IPAddress> remote_addr,

@@ -1,7 +1,7 @@
 #include "game/GameServer.h"
-#include "shynet/net/TimerReactorMgr.h"
-#include "game/GameClient.h"
 #include "game/GameClientMgr.h"
+#include "game/GameClient.h"
+#include "shynet/net/TimerReactorMgr.h"
 
 namespace game {
 	GameServer::GameServer(std::shared_ptr<net::IPAddress> listen_addr) :

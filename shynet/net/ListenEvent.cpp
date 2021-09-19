@@ -1,5 +1,4 @@
 #include "shynet/net/ListenEvent.h"
-#include <cstring>
 #include "shynet/net/AcceptReactorMgr.h"
 #include "shynet/net/ListenReactorMgr.h"
 

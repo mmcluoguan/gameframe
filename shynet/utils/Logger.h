@@ -1,6 +1,6 @@
 #pragma once
-#include <sstream>
 #include "shynet/Basic.h"
+#include <sstream>
 
 namespace shynet {
 	namespace utils {

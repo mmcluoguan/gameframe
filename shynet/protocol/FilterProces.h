@@ -1,12 +1,9 @@
 #pragma once
-#include <stack>
-#include <mutex>
-#include "shynet/net/IPAddress.h"
 #include "shynet/events/EventBuffer.h"
-#include "shynet/protocol/Tcpip.h"
+#include "shynet/net/IPAddress.h"
 #include "shynet/protocol/Http.h"
+#include "shynet/protocol/Tcpip.h"
 #include "shynet/protocol/WebSocket.h"
-#include "shynet/Basic.h"
 
 namespace shynet {
 	namespace protocol {

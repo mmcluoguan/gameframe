@@ -1,8 +1,6 @@
 #include "shynet/thread/ConnectThread.h"
-#include <cstring>
-#include <event2/dns.h>
-#include "shynet/net/ConnectReactorMgr.h"
 #include "shynet/net/ConnectIoBuffer.h"
+#include "shynet/net/ConnectReactorMgr.h"
 #include "shynet/utils/Logger.h"
 
 namespace shynet {

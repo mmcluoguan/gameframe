@@ -1,13 +1,13 @@
 #include "client/StdinHandler.h"
-#include <cstring>
-#include <unistd.h>
-#include <tuple>
+#include "client/GateConnector.h"
 #include "shynet/net/ConnectReactorMgr.h"
+#include "shynet/utils/IniConfig.h"
 #include "shynet/utils/Singleton.h"
 #include "shynet/utils/StringOp.h"
-#include "shynet/utils/IniConfig.h"
 #include "shynet/utils/Stuff.h"
-#include "client/GateConnector.h"
+#include <unistd.h>
+#include <tuple>
+#include <cstring>
 
 extern int optind, opterr, optopt;
 extern char* optarg;

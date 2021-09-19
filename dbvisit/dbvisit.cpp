@@ -1,24 +1,23 @@
-#include <unistd.h>
-#include <unordered_map>
-#include <google/protobuf/message.h>
-#include <sw/redis++/redis++.h>
-namespace redis = sw::redis;
+#include "dbvisit/DbClientMgr.h"
+#include "dbvisit/DbServer.h"
+#include "dbvisit/LuaWrapper.h"
+#include "dbvisit/StdinHandler.h"
+#include "dbvisit/SignalHandler.h"
+#include "frmpub/LuaFolderTask.h"
 #include "shynet/events/EventHandler.h"
+#include "shynet/lua/LuaEngine.h"
 #include "shynet/net/IPAddress.h"
 #include "shynet/pool/ThreadPool.h"
 #include "shynet/pool/MysqlPool.h"
-#include "shynet/lua/LuaEngine.h"
 #include "shynet/utils/IdWorker.h"
 #include "shynet/utils/IniConfig.h"
 #include "shynet/utils/StringOp.h"
 #include "shynet/utils/Stuff.h"
-#include "frmpub/Basic.h"
-#include "frmpub/LuaFolderTask.h"
-#include "dbvisit/DbServer.h"
-#include "dbvisit/StdinHandler.h"
-#include "dbvisit/SignalHandler.h"
-#include "dbvisit/DbClientMgr.h"
-#include "dbvisit/LuaWrapper.h"
+#include <google/protobuf/message.h>
+#include <sw/redis++/redis++.h>
+namespace redis = sw::redis;
+#include <unistd.h>
+#include <unordered_map>
 
 //配置参数
 const char* g_confname;

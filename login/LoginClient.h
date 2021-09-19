@@ -1,8 +1,6 @@
 #pragma once
-#include <unordered_map>
-#include <functional>
-#include "shynet/net/AcceptNewFd.h"
 #include "frmpub/Client.h"
+#include "shynet/net/AcceptNewFd.h"
 
 namespace login {
 	/// <summary>

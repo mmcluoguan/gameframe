@@ -1,9 +1,9 @@
 #pragma once
-#include <list>
-#include <mutex>
-#include "shynet/utils/Singleton.h"
 #include "login/DbConnector.h"
 #include "login/WorldConnector.h"
+#include "shynet/utils/Singleton.h"
+#include <list>
+#include <mutex>
 
 namespace login {
 	/// <summary>

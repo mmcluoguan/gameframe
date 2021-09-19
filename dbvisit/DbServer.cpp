@@ -1,8 +1,8 @@
 #include "dbvisit/DbServer.h"
-#include "shynet/net/TimerReactorMgr.h"
-#include "shynet/lua/LuaEngine.h"
-#include "dbvisit/DbClient.h"
 #include "dbvisit/DbClientMgr.h"
+#include "dbvisit/DbClient.h"
+#include "shynet/lua/LuaEngine.h"
+#include "shynet/net/TimerReactorMgr.h"
 
 namespace dbvisit
 {

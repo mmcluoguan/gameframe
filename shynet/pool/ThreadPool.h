@@ -1,18 +1,11 @@
 #pragma once
-#include <list>
-#include <memory>
-#include <mutex>
-#include <queue>
-#include <thread>
-#include <vector>
-#include <condition_variable>
-#include "shynet/thread/ListenThread.h"
 #include "shynet/thread/AcceptThread.h"
-#include "shynet/thread/WorkThread.h"
-#include "shynet/thread/TimerThread.h"
 #include "shynet/thread/ConnectThread.h"
-#include "shynet/thread/LuaThread.h"
 #include "shynet/thread/InotifyThread.h"
+#include "shynet/thread/ListenThread.h"
+#include "shynet/thread/LuaThread.h"
+#include "shynet/thread/TimerThread.h"
+#include "shynet/thread/WorkThread.h"
 #include "shynet/task/Task.h"
 #include "shynet/utils/Singleton.h"
 

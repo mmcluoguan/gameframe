@@ -1,5 +1,4 @@
 #include "shynet/events/Streambuff.h"
-#include <stdarg.h>
 #include "shynet/utils/Logger.h"
 
 namespace shynet

@@ -1,9 +1,9 @@
 #pragma once
-#include <list>
-#include <mutex>
-#include "shynet/utils/Singleton.h"
 #include "game/DbConnector.h"
 #include "game/WorldConnector.h"
+#include "shynet/utils/Singleton.h"
+#include <list>
+#include <mutex>
 
 namespace game {
 	/// <summary>

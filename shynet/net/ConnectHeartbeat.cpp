@@ -1,6 +1,6 @@
 #include "shynet/net/ConnectHeartbeat.h"
-#include "shynet/net/TimerReactorMgr.h"
 #include "shynet/net/ConnectEvent.h"
+#include "shynet/net/TimerReactorMgr.h"
 
 namespace shynet
 {
