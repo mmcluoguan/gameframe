@@ -74,7 +74,7 @@ namespace login {
 		send_proto(protocc::REGISTER_LOGIN_DBVISIT_C, &msgc);
 	}
 
-	int DbConnector::input_handle(std::shared_ptr<protocc::CommonObject> obj, 
+	int DbConnector::input_handle(std::shared_ptr<protocc::CommonObject> obj,
 		std::shared_ptr<std::stack<FilterData::Envelope>> enves) {
 		if (obj != nullptr) {
 			auto it = pmb_.find(obj->msgid());
@@ -99,7 +99,7 @@ namespace login {
 		Connector::close(active);
 	}
 
-	int DbConnector::errcode(std::shared_ptr<protocc::CommonObject> data, 
+	int DbConnector::errcode(std::shared_ptr<protocc::CommonObject> data,
 		std::shared_ptr<std::stack<FilterData::Envelope>> enves) {
 		protocc::errcode err;
 		if (err.ParseFromString(data->msgdata()) == true) {
@@ -113,7 +113,7 @@ namespace login {
 		return 0;
 	}
 
-	int DbConnector::register_login_dbvisit_s(std::shared_ptr<protocc::CommonObject> data, 
+	int DbConnector::register_login_dbvisit_s(std::shared_ptr<protocc::CommonObject> data,
 		std::shared_ptr<std::stack<FilterData::Envelope>> enves) {
 		protocc::register_login_dbvisit_s msgc;
 		if (msgc.ParseFromString(data->msgdata()) == true) {
@@ -129,8 +129,7 @@ namespace login {
 	}
 
 	int DbConnector::repeatlogin_client_gate_s(std::shared_ptr<protocc::CommonObject> data,
-		std::shared_ptr<std::stack<FilterData::Envelope>> enves)
-	{
+		std::shared_ptr<std::stack<FilterData::Envelope>> enves) {
 		auto gate = shynet::utils::Singleton<LoginClientMgr>::instance().find_from_sid(data->extend());
 		if (gate != nullptr) {
 			gate->send_proto(data.get(), enves.get());
@@ -143,20 +142,17 @@ namespace login {
 		return 0;
 	}
 
-	int DbConnector::login_client_gate_s(std::shared_ptr<protocc::CommonObject> data, 
-		std::shared_ptr<std::stack<FilterData::Envelope>> enves)
-	{
+	int DbConnector::login_client_gate_s(std::shared_ptr<protocc::CommonObject> data,
+		std::shared_ptr<std::stack<FilterData::Envelope>> enves) {
 		protocc::login_client_gate_s msgc;
 		if (msgc.ParseFromString(data->msgdata()) == true) {
-			if (msgc.result() == 0)
-			{
+			if (msgc.result() == 0) {
 				//判断登录前是否选择gamesid
-				if (data->extend().empty() == false){
+				if (data->extend().empty() == false) {
 					if (data->extend() == "0") {
 						//请求world选择gamesid
 						auto world = shynet::utils::Singleton<ConnectorMgr>::instance().world_connector();
-						if (world != nullptr)
-						{
+						if (world != nullptr) {
 							world->send_proto(data.get(), enves.get());
 						}
 						else {
@@ -187,8 +183,8 @@ namespace login {
 		return 0;
 	}
 
-	int DbConnector::forward_client_gate_c(std::shared_ptr<protocc::CommonObject> data, 
-		std::shared_ptr<std::stack<FilterData::Envelope>> enves){		
+	int DbConnector::forward_client_gate_c(std::shared_ptr<protocc::CommonObject> data,
+		std::shared_ptr<std::stack<FilterData::Envelope>> enves) {
 		if (enves->empty() == false) {
 			FilterData::Envelope& env = enves->top();
 			enves->pop();
@@ -207,7 +203,7 @@ namespace login {
 			}
 		}
 		else {
-			SEND_ERR(protocc::NO_ROUTING_INFO,"转发消息没有路由信息");
+			SEND_ERR(protocc::NO_ROUTING_INFO, "转发消息没有路由信息");
 		}
 		return 0;
 	}

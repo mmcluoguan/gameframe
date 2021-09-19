@@ -1,5 +1,6 @@
 #include "shynet/pool/ThreadPool.h"
 #include "shynet/utils/Logger.h"
+#include "shynet/utils/Stuff.h"
 
 namespace shynet {
 
@@ -26,10 +27,10 @@ namespace shynet {
 				std::thread::id id = it->thread()->get_id();
 				LOG_TRACE << "over thread:[" << i << "]:" << std::hash<std::thread::id>()(id) << " wait";
 				try {
-					if(it->thread()->joinable())
+					if (it->thread()->joinable())
 						it->thread()->join();
 				}
-				catch(const std::exception& err){
+				catch (const std::exception& err) {
 					LOG_WARN << "over thread:[" << i << "]" << std::hash<std::thread::id>()(id) << " abort";
 					//分离异常终止的线程
 					it->thread()->detach();

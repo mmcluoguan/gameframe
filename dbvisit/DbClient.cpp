@@ -78,7 +78,7 @@ namespace dbvisit {
 			redis.del(key);
 		}
 		catch (const std::exception& err) {
-			LOG_WARN << err.what();
+			THROW_EXCEPTION(err.what());
 		}
 		std::string str;
 		if (active()) {
@@ -137,7 +137,7 @@ namespace dbvisit {
 			}
 		}
 		catch (const std::exception& err) {
-			LOG_WARN << err.what();
+			THROW_EXCEPTION(err.what());
 		}
 		return false;
 	}
@@ -529,7 +529,7 @@ namespace dbvisit {
 						LOG_DEBUG << "从cache取出账号信息 accountid:" << accountid << " roleid:" << roleid;
 					}
 					else {
-						LOG_DEBUG << "缓存中没有账号数据";
+						LOG_WARN << "缓存中没有账号数据";
 						redis.del(msgc.platform_key());
 						result = 1;
 					}

@@ -1,12 +1,9 @@
 #pragma once
 #include "shynet/events/EventBuffer.h"
 
-namespace shynet
-{
-	namespace events
-	{
-		class EventBufferFilter final : public Nocopy
-		{
+namespace shynet {
+	namespace events {
+		class EventBufferFilter final : public Nocopy {
 		public:
 			explicit EventBufferFilter(const std::shared_ptr<EventBuffer> source);
 			~EventBufferFilter();

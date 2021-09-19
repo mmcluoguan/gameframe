@@ -1,5 +1,6 @@
 #pragma once
 #include <string>
+#include <cstring>
 
 // 无锁数据成员
 #define PROPERTY(Type, name) \
@@ -34,7 +35,7 @@
 #define PROPERTY_STD_LOCK(name) PROPERTY_LOCK(std::mutex, name)
 #define PROPERTY_WITH_STD_LOCK(lockName, PropertyType, propertyName) PROPERTY_WITH_LOCK(std::lock_guard, std::mutex, lockName, PropertyType, propertyName)
 
-#define SHYNETEXCEPTION(err) ShynetException(std::string(err) + " -" + std::string(__FILE__) + " line:" + std::to_string(__LINE__));
+#define THROW_EXCEPTION(err)  std::throw_with_nested(shynet::BaseException(std::string(err) + " -" + std::string(strrchr(__FILE__, '/')+1) + " line:" + std::to_string(__LINE__)));
 
 namespace shynet {
 	namespace utils {};
@@ -56,17 +57,17 @@ namespace shynet {
 	/*
 	* 异常
 	*/
-	class ShynetException : public std::exception {
+	class BaseException : public std::exception {
 	public:
-		explicit ShynetException(const std::string& msg) : msg_(msg) {}
+		explicit BaseException(const std::string& msg) : msg_(msg) {}
 
-		ShynetException(const ShynetException&) = default;
-		ShynetException& operator=(const ShynetException&) = default;
+		BaseException(const BaseException&) = default;
+		BaseException& operator=(const BaseException&) = default;
 
-		ShynetException(ShynetException&&) = default;
-		ShynetException& operator=(ShynetException&&) = default;
+		BaseException(BaseException&&) = default;
+		BaseException& operator=(BaseException&&) = default;
 
-		virtual ~ShynetException() override = default;
+		virtual ~BaseException() override = default;
 
 		virtual const char* what() const noexcept override {
 			return msg_.data();

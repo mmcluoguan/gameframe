@@ -3,6 +3,7 @@
 #include "shynet/net/AcceptIoBuffer.h"
 #include "shynet/net/ListenEvent.h"
 #include "shynet/utils/Logger.h"
+#include "shynet/utils/Stuff.h"
 
 namespace shynet {
 
@@ -14,8 +15,13 @@ namespace shynet {
 		}
 
 		static void pipeReadcb(struct bufferevent* bev, void* ptr) {
-			AcceptThread* rtk = reinterpret_cast<AcceptThread*>(ptr);
-			rtk->process(bev);
+			try {
+				AcceptThread* rtk = reinterpret_cast<AcceptThread*>(ptr);
+				rtk->process(bev);
+			}
+			catch (const std::exception& err) {
+				utils::Stuff::print_exception(err);
+			}
 		}
 
 		static std::mutex g_aptMutex;
@@ -28,7 +34,7 @@ namespace shynet {
 					break;
 				}
 				else if (len != sizeof(buf)) {
-					LOG_WARN << "没有足够的数据";
+					LOG_DEBUG << "没有足够的数据";
 				}
 				else {
 					uintptr_t* p = reinterpret_cast<uintptr_t*>(buf);
@@ -47,7 +53,7 @@ namespace shynet {
 						}
 						if (evutil_make_socket_nonblocking(apnf->listenfd()) < 0) {
 							evutil_closesocket(newfd);
-							LOG_WARN << "call evutil_make_socket_nonblocking";
+							THROW_EXCEPTION("call evutil_make_socket_nonblocking");
 						}
 					}
 					eventTot_++;
@@ -63,17 +69,12 @@ namespace shynet {
 
 					}
 					std::shared_ptr<net::AcceptNewFd> apnewfd = apnf->accept_newfd(newfdAddr, iobuf).lock();
-					if (apnewfd == nullptr) {
-						LOG_WARN << "the connection is blocked";
-					}
-					else {
-						iobuf->set_newfd(apnewfd);
-						if (apnewfd->enableHeart()) {
-							std::shared_ptr<net::AcceptHeartbeat> ht(
-								new net::AcceptHeartbeat(apnewfd, { apnewfd->heart_second() ,0L }));
-							utils::Singleton<net::TimerReactorMgr>::instance().add(ht);
-							apnewfd->set_heart(ht);
-						}
+					iobuf->set_newfd(apnewfd);
+					if (apnewfd->enableHeart()) {
+						std::shared_ptr<net::AcceptHeartbeat> ht(
+							new net::AcceptHeartbeat(apnewfd, { apnewfd->heart_second() ,0L }));
+						utils::Singleton<net::TimerReactorMgr>::instance().add(ht);
+						apnewfd->set_heart(ht);
 					}
 				}
 			} while (true);
@@ -95,7 +96,7 @@ namespace shynet {
 				pair_[1].reset();
 			}
 			catch (const std::exception& err) {
-				LOG_WARN << err.what();
+				utils::Stuff::print_exception(err);
 			}
 			return 0;
 		}

@@ -37,7 +37,7 @@ int main(int argc, char* argv[]) {
 		Stuff::create_coredump();
 		Logger::loglevel(Logger::LogLevel::DEBUG);
 		if (EventBase::usethread() == -1) {
-			LOG_ERROR << "call usethread";
+			THROW_EXCEPTION("call usethread");
 		}
 		EventBase::initssl();
 		int sid = ini.get<int, int>("gate", "sid", 0);
@@ -58,10 +58,9 @@ int main(int argc, char* argv[]) {
 		string worldstr = ini.get<const char*, string>("gate", "world", "");
 		auto worldlist = StringOp::split(worldstr, ",");
 		if (worldlist.size() > 2 || worldlist.size() == 0) {
-			LOG_ERROR << "world配置错误:" << worldstr;
+			THROW_EXCEPTION("world配置错误");
 		}
-		for (auto& item : worldlist)
-		{
+		for (auto& item : worldlist) {
 			std::string worldip = ini.get<const char*, string>(item, "ip", "");
 			short worldport = ini.get<short, short>(item, "port", short(22000));
 			Singleton<ConnectReactorMgr>::instance().add(
@@ -75,14 +74,13 @@ int main(int argc, char* argv[]) {
 		shared_ptr<SigIntHandler> sigint(new SigIntHandler(base));
 		base->addevent(stdin, nullptr);
 		base->addevent(sigint, nullptr);
-
 		base->dispatch();
-		EventBase::cleanssl();
-		EventBase::event_shutdown();
-		google::protobuf::ShutdownProtobufLibrary();
 	}
 	catch (const std::exception& err) {
-		LOG_WARN << err.what();
+		utils::Stuff::print_exception(err);
 	}
+	EventBase::cleanssl();
+	EventBase::event_shutdown();
+	google::protobuf::ShutdownProtobufLibrary();
 	return 0;
 }

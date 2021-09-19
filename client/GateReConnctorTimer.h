@@ -10,7 +10,7 @@ namespace client {
 			std::shared_ptr<net::IPAddress> connect_addr,
 			std::shared_ptr<GateConnector::DisConnectData> data,
 			const struct timeval val
-			);
+		);
 		~GateReConnctorTimer();
 
 		void timeout() override;

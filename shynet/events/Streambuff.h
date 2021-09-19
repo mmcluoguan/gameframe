@@ -3,12 +3,9 @@
 #include <event2/buffer.h>
 #include <memory>
 
-namespace shynet
-{
-	namespace events
-	{
-		class Streambuff final : public Nocopy
-		{
+namespace shynet {
+	namespace events {
+		class Streambuff final : public Nocopy {
 		public:
 			Streambuff();
 			explicit Streambuff(evbuffer* buffer);

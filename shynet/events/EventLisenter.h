@@ -2,12 +2,9 @@
 #include "shynet/events/EventBase.h"
 #include <event2/listener.h>
 
-namespace shynet
-{
-	namespace events
-	{
-		class EventLisenter : public Nocopy
-		{
+namespace shynet {
+	namespace events {
+		class EventLisenter : public Nocopy {
 		public:
 			EventLisenter(std::shared_ptr<EventBase> base, const sockaddr* sa, int socklen);
 			~EventLisenter();

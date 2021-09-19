@@ -4,12 +4,9 @@
 #include <openssl/err.h>
 #include <openssl/ssl.h>
 
-namespace shynet
-{
-	namespace events
-	{
-		class EventBufferSsl final : public EventBuffer
-		{
+namespace shynet {
+	namespace events {
+		class EventBufferSsl final : public EventBuffer {
 		public:
 			EventBufferSsl(std::shared_ptr<EventBase> base,
 				evutil_socket_t fd,

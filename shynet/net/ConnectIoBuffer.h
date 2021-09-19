@@ -2,12 +2,9 @@
 #include "shynet/events/EventBufferSsl.h"
 #include "shynet/net/ConnectEvent.h"
 
-namespace shynet
-{
-	namespace net
-	{
-		class ConnectIoBuffer : public events::EventBuffer
-		{
+namespace shynet {
+	namespace net {
+		class ConnectIoBuffer : public events::EventBuffer {
 		public:
 			ConnectIoBuffer(std::shared_ptr<events::EventBase> base, bool enable_ssl = false, SSL_CTX* ctx = nullptr);
 			~ConnectIoBuffer();

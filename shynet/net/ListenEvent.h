@@ -4,15 +4,12 @@
 #include <openssl/err.h>
 #include <openssl/ssl.h>
 
-namespace shynet
-{
-	namespace net
-	{
+namespace shynet {
+	namespace net {
 		/// <summary>
 		/// 服务器监听事件
 		/// </summary>
-		class ListenEvent : public events::EventHandler
-		{
+		class ListenEvent : public events::EventHandler {
 		public:
 			/// <summary>
 			/// 服务器监听事件

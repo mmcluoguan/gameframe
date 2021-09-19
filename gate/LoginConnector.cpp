@@ -56,7 +56,7 @@ namespace gate {
 		send_proto(protocc::REGISTER_GATE_LOGIN_C, &msgc);
 	}
 	int LoginConnector::input_handle(std::shared_ptr<protocc::CommonObject> obj, std::shared_ptr<std::stack<FilterData::Envelope>> enves) {
-		if (obj != nullptr) {			
+		if (obj != nullptr) {
 			//直接处理的登录服消息
 			auto it = pmb_.find(obj->msgid());
 			if (it != pmb_.end()) {
@@ -181,9 +181,8 @@ namespace gate {
 		}
 		return 0;
 	}
-	
-	int LoginConnector::repeatlogin_client_gate_s(std::shared_ptr<protocc::CommonObject> data, std::shared_ptr<std::stack<FilterData::Envelope>> enves)
-	{
+
+	int LoginConnector::repeatlogin_client_gate_s(std::shared_ptr<protocc::CommonObject> data, std::shared_ptr<std::stack<FilterData::Envelope>> enves) {
 		protocc::repeatlogin_client_gate_s msg;
 		if (msg.ParseFromString(data->msgdata()) == true) {
 			std::shared_ptr<GateClient> client = shynet::utils::Singleton<GateClientMgr>::instance().find(msg.aid());

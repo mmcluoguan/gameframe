@@ -3,15 +3,12 @@
 #include "shynet/events/EventBuffer.h"
 #include "shynet/events/EventBufferSsl.h"
 
-namespace shynet
-{
-	namespace events
-	{
+namespace shynet {
+	namespace events {
 		/// <summary>
 		/// 连接器
 		/// </summary>
-		class EventConnector : public Nocopy
-		{
+		class EventConnector : public Nocopy {
 		public:
 			explicit EventConnector(std::shared_ptr<EventBase> base);
 			~EventConnector();

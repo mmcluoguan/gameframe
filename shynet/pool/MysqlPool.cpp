@@ -18,7 +18,7 @@ namespace shynet {
 					cond_var_.wait(lock, [this] { return !this->queue_.empty(); });
 				}
 				else {
-					SessionPtr session (new mysqlx::Session(option_), fun_);
+					SessionPtr session(new mysqlx::Session(option_), fun_);
 					++use_num_;
 					return session;
 				}

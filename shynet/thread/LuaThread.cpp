@@ -1,6 +1,7 @@
 #include "shynet/thread/LuaThread.h"
 #include "shynet/lua/LuaEngine.h"
 #include "shynet/utils/Logger.h"
+#include "shynet/utils/Stuff.h"
 
 namespace shynet {
 	extern pthread_barrier_t g_barrier;
@@ -41,10 +42,15 @@ namespace shynet {
 							continue;
 					}
 					if (tk != nullptr) {
-						int ret = tk->run(this);
-						if (ret < 0) {
-							LOG_WARN << "thread[" << index() << "] exited abnormally";
-							return 0;
+						try {
+							int ret = tk->run(this);
+							if (ret < 0) {
+								LOG_WARN << "thread[" << index() << "] 线程异常退出";
+								return 0;
+							}
+						}
+						catch (const std::exception& err) {
+							utils::Stuff::print_exception(err);
 						}
 					}
 				}
@@ -56,7 +62,7 @@ namespace shynet {
 				luaState_ = nullptr;
 			}
 			catch (const std::exception& err) {
-				LOG_WARN << err.what();
+				utils::Stuff::print_exception(err);
 			}
 			return 0;
 		}

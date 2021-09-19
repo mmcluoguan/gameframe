@@ -28,7 +28,7 @@ namespace dbvisit {
 		//是否开启调试模式
 		shynet::utils::IniConfig& ini = shynet::utils::Singleton<shynet::utils::IniConfig>::get_instance();
 		std::string luadebugip = ini.get<const char*, std::string>(g_confname, "luadebugip", "");
-		if (!luadebugip.empty()){
+		if (!luadebugip.empty()) {
 			shynet::utils::Singleton<frmpub::LuaRemoteDebug>::instance().init(luadebugip).start(state);
 		}
 

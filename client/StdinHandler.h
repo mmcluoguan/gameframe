@@ -1,10 +1,8 @@
 #pragma once
 #include "shynet/events/EventHandler.h"
 
-namespace client
-{
-	class StdinHandler : public events::EventHandler
-	{
+namespace client {
+	class StdinHandler : public events::EventHandler {
 	public:
 		StdinHandler(std::shared_ptr<events::EventBase> base, evutil_socket_t fd);
 		~StdinHandler();

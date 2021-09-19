@@ -20,7 +20,6 @@ namespace frmpub {
 
 	int LuaFolderTask::notify_event(std::string path, uint32_t mask) {
 		if (mask & IN_MODIFY) {
-			//LOG_DEBUG << path << " 修改次数";
 			auto time_now = std::chrono::system_clock::now();
 			auto duration_in_ms = std::chrono::duration_cast<std::chrono::milliseconds>(time_now.time_since_epoch());
 			auto iter = g_filemodifys.find(path);

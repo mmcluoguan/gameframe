@@ -26,7 +26,7 @@ namespace shynet {
 			else {
 				std::ostringstream err;
 				err << "family_:" << family_ << " 无效";
-				throw SHYNETEXCEPTION(err.str());
+				THROW_EXCEPTION(err.str());
 			}
 		}
 		IPAddress::IPAddress(const char* ip, unsigned short port) : ip_(ip) {
@@ -51,7 +51,7 @@ namespace shynet {
 				else {
 					std::ostringstream err;
 					err << "ip=" << ip << " 无效";
-					throw SHYNETEXCEPTION(err.str());
+					THROW_EXCEPTION(err.str());
 				}
 			}
 		}
@@ -63,7 +63,7 @@ namespace shynet {
 				char ipbuff[INET_ADDRSTRLEN] = { 0 };
 				struct sockaddr_in* in4 = (struct sockaddr_in*)&addrs_;
 				if (inet_ntop(family_, &in4->sin_addr, ipbuff, INET_ADDRSTRLEN) == nullptr) {
-					throw SHYNETEXCEPTION("call inet_ntop");
+					THROW_EXCEPTION("call inet_ntop");
 				}
 				ip_ = std::string(ipbuff);
 				port_ = in4->sin_port;
@@ -72,15 +72,15 @@ namespace shynet {
 				char ipbuff[INET6_ADDRSTRLEN] = { 0 };
 				struct sockaddr_in6* in6 = (struct sockaddr_in6*)&addrs_;
 				if (inet_ntop(family_, &in6->sin6_addr, ipbuff, INET6_ADDRSTRLEN) == nullptr) {
-					throw SHYNETEXCEPTION("call inet_ntop");
+					THROW_EXCEPTION("call inet_ntop");
 				}
 				ip_ = std::string(ipbuff);
 				port_ = in6->sin6_port;
 			}
-			else{
+			else {
 				std::ostringstream err;
 				err << "family_:" << family_ << " 无效";
-				throw SHYNETEXCEPTION(err.str());
+				THROW_EXCEPTION(err.str());
 			}
 		}
 		const std::string IPAddress::ip() const {

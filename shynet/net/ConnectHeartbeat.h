@@ -1,13 +1,10 @@
 ﻿#pragma once
 #include "shynet/net/TimerEvent.h"
 
-namespace shynet
-{
-	namespace net
-	{
+namespace shynet {
+	namespace net {
 		class ConnectEvent;
-		class ConnectHeartbeat : public TimerEvent
-		{
+		class ConnectHeartbeat : public TimerEvent {
 		public:
 			ConnectHeartbeat(std::weak_ptr<ConnectEvent> cnv, const struct timeval val);
 			~ConnectHeartbeat();

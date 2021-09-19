@@ -2,6 +2,7 @@
 #include "shynet/net/ConnectIoBuffer.h"
 #include "shynet/net/ConnectReactorMgr.h"
 #include "shynet/utils/Logger.h"
+#include "shynet/utils/Stuff.h"
 
 namespace shynet {
 
@@ -15,8 +16,13 @@ namespace shynet {
 		}
 
 		static void pipeReadcb(struct bufferevent* bev, void* ptr) {
-			ConnectThread* cnt = reinterpret_cast<ConnectThread*>(ptr);
-			cnt->process(bev);
+			try {
+				ConnectThread* cnt = reinterpret_cast<ConnectThread*>(ptr);
+				cnt->process(bev);
+			}
+			catch (const std::exception& err) {
+				utils::Stuff::print_exception(err);
+			}
 		}
 
 
@@ -57,7 +63,7 @@ namespace shynet {
 						if (connect->enable_dns()) {
 							evdns_base* dnsbase = evdns_base_new(base_->base(), 1);
 							if (dnsbase == nullptr) {
-								throw SHYNETEXCEPTION("call connect_hostname")
+								THROW_EXCEPTION("call connect_hostname")
 							}
 							connect->dnsbase(dnsbase);
 							bufferevent_socket_connect_hostname(buffer->buffer(), dnsbase, AF_UNSPEC,
@@ -65,7 +71,7 @@ namespace shynet {
 						}
 						else {
 							if (bufferevent_socket_connect(buffer->buffer(), address, sizeof(sockaddr_storage)) == -1) {
-								throw SHYNETEXCEPTION("call bufferevent_socket_connect")
+								THROW_EXCEPTION("call bufferevent_socket_connect")
 							}
 						}
 					}
@@ -91,7 +97,7 @@ namespace shynet {
 				pair_[1].reset();
 			}
 			catch (const std::exception& err) {
-				LOG_WARN << err.what();
+				utils::Stuff::print_exception(err);
 			}
 			return 0;
 		}

@@ -28,14 +28,14 @@ namespace dbvisit {
 		if (docs.count() == 1) {
 			mysqlx::DbDoc doc = docs.fetchOne();
 			//填充数据
-			for (auto&& [key,value] : out) {
+			for (auto&& [key, value] : out) {
 				if (doc.hasField(key)) {
 					value = doc[key].operator std::string();
 				}
 			}
 		}
 		else if (docs.count() > 1) {
-			throw DataException("db数据不唯一 tablename:" + tablename + " key:" + key + " where:" + where);
+			LOG_WARN << "db数据不唯一 tablename:" << tablename << " key:" << key << " where:" + where;
 		}
 		else {
 			return ErrorCode::NOT_DATA;
@@ -80,8 +80,7 @@ namespace dbvisit {
 		if (error == ErrorCode::NOT_DATA) {
 			const auto temp = shynet::utils::StringOp::split(cachekey, "_");
 			if (temp.size() < 2) {
-				LOG_WARN << "解析错误 cachekey:" << cachekey;
-				throw DataException("解析错误 cachekey:" + cachekey);
+				THROW_EXCEPTION("解析错误 cachekey:" + cachekey);
 			}
 			error = getdata_from_db(temp[0], temp[1], out);
 			if (error == ErrorCode::OK) {
@@ -111,7 +110,7 @@ namespace dbvisit {
 			}
 		}
 		for (auto& key : keys) {
-		 	ErrorCode err = getdata_from_cache(key, out);
+			ErrorCode err = getdata_from_cache(key, out);
 			if (err == ErrorCode::OK) {
 				datalist->push_back(out);
 			}
@@ -125,13 +124,13 @@ namespace dbvisit {
 		mysqlx::Schema sch = mysql.fetch()->getDefaultSchema();
 		std::string where = shynet::utils::StringOp::str_format("_id='%s'", key.c_str());
 		mysqlx::CollectionModify md = sch.createCollection(tablename, true).modify(where);
-		for (auto&& [key,value] : fields) {
+		for (auto&& [key, value] : fields) {
 			if (key != "_id") {
 				md.set(key, value);
 			}
 		}
 		if (md.execute().getAffectedItemsCount() == 0) {
-			throw DataException("数据更新失败 tablename:" + tablename + " key:" + key);
+			LOG_WARN << "数据更新失败 tablename:" << tablename << " key:" << key;
 		}
 	}
 
@@ -141,7 +140,7 @@ namespace dbvisit {
 		mysqlx::Schema sch = mysql.fetch()->getDefaultSchema();
 		rapidjson::Document doc;
 		rapidjson::Value& data = doc.SetObject();
-		for (auto&& [key,value] : fields) {
+		for (auto&& [key, value] : fields) {
 			data.AddMember(rapidjson::StringRef(key.c_str()),
 				rapidjson::StringRef(value.c_str()),
 				doc.GetAllocator());
@@ -151,7 +150,7 @@ namespace dbvisit {
 		data.Accept(writer);
 		if (sch.createCollection(tablename, true).add(buffer.GetString())
 			.execute().getAffectedItemsCount() == 0) {
-			throw DataException("数据插入失败 tablename:" + tablename + " key:" + key);
+			LOG_WARN << "数据插入失败 tablename:" << tablename << " key:" << key;
 		}
 	}
 
@@ -161,7 +160,7 @@ namespace dbvisit {
 		std::string sql = shynet::utils::StringOp::str_format("_id='%s'", key.c_str());
 		if (sch.createCollection(tablename, true).remove(sql)
 			.execute().getAffectedItemsCount() == 0) {
-			throw DataException("数据删除失败 tablename:" + tablename + " key:" + key);
+			LOG_WARN << "数据删除失败 tablename:" << tablename << " key:" << key;
 		}
 	}
 
@@ -176,7 +175,7 @@ namespace dbvisit {
 		}
 		std::vector<std::string> temp = shynet::utils::StringOp::split(cachekey, "_");
 		if (temp.size() < 2) {
-			LOG_WARN << "解析错误 cachekey:" << cachekey;
+			THROW_EXCEPTION("解析错误 cachekey:" + cachekey);
 			return;
 		}
 		//立即写库				
@@ -187,12 +186,12 @@ namespace dbvisit {
 		redis::Redis& redis = shynet::utils::Singleton<redis::Redis>::instance(std::string());
 		long long ret = redis.del(cachekey);
 		if (ret == 0) {
-			throw DataException("cachekey数据删除失败 cachekey:" + cachekey);
+			LOG_WARN << "cachekey数据删除失败 cachekey:" << cachekey;
 		}
 		else {
 			std::vector<std::string> temp = shynet::utils::StringOp::split(cachekey, "_");
 			if (temp.size() < 2) {
-				LOG_WARN << "解析错误 cachekey:" << cachekey;
+				THROW_EXCEPTION("解析错误 cachekey:" + cachekey);
 				return;
 			}
 			delete_db(temp[0], temp[1]);
@@ -222,7 +221,7 @@ namespace dbvisit {
 		}
 		std::vector<std::string> temp = shynet::utils::StringOp::split(cachekey, "_");
 		if (temp.size() < 2) {
-			LOG_WARN << "解析错误 cachekey:" << cachekey;
+			THROW_EXCEPTION("解析错误 cachekey:" + cachekey);
 			return;
 		}
 		if (immediately) {

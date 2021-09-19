@@ -3,37 +3,36 @@
 #include <cstring>
 #include <memory>
 
-namespace shynet
-{
+namespace shynet {
 	namespace utils {
 		template <typename DataType = uint8_t, typename LenType = std::size_t>
 		class Databuffer {
 		public:
 			/**
-		    * @param init_capacity   初始化大小，后续不够时内部会自动扩容，两倍增长
-		    * @param shrink_capacity 收缩阀值，当申请内存大于<shrink_capacity>且实际使用小于<init_capacity>时会释发多余内存，
-		    *                        恢复成<init_capacity>
-		    *
-		    */
-			explicit Databuffer(LenType init_capacity = 16384, LenType shrink_capacity = 1048576) 
+			* @param init_capacity   初始化大小，后续不够时内部会自动扩容，两倍增长
+			* @param shrink_capacity 收缩阀值，当申请内存大于<shrink_capacity>且实际使用小于<init_capacity>时会释发多余内存，
+			*                        恢复成<init_capacity>
+			*
+			*/
+			explicit Databuffer(LenType init_capacity = 16384, LenType shrink_capacity = 1048576)
 				: init_capacity_(init_capacity)
 				, shrink_capacity_(shrink_capacity)
 				, capacity_(init_capacity)
 				, read_index_(0)
-				, write_index_(0){
+				, write_index_(0) {
 				data_ = new DataType[init_capacity];
 			}
 
 			/**
-		    * shynet::utils::basic_buffer(data, len);
-		    * 等价于
-		    * shynet::utils::basic_buffer buf(len, 2 * len);
-		    * buf.append(data, len);
-		    *
-		    * @param data 初始化数据，内部做内存拷贝
-		    * @param len  初始化数据长度
-		    *
-		    */
+			* shynet::utils::basic_buffer(data, len);
+			* 等价于
+			* shynet::utils::basic_buffer buf(len, 2 * len);
+			* buf.append(data, len);
+			*
+			* @param data 初始化数据，内部做内存拷贝
+			* @param len  初始化数据长度
+			*
+			*/
 			Databuffer(const DataType* data, LenType len)
 				: init_capacity_(len)
 				, shrink_capacity_(len * 2)
@@ -144,8 +143,7 @@ namespace shynet
 				if (write_index_ - read_index_ >= len) {
 					read_index_ += len;
 					if (write_index_ - read_index_ < init_capacity_ &&
-						capacity_ > shrink_capacity_)
-					{
+						capacity_ > shrink_capacity_) {
 						DataType* new_data = new DataType[init_capacity_];
 						memcpy(new_data, data_ + read_index_, write_index_ - read_index_);
 						write_index_ -= read_index_;
@@ -173,8 +171,8 @@ namespace shynet
 			}
 
 			/// 已申请内存大小
-			LenType capacity() const { 
-				return capacity_; 
+			LenType capacity() const {
+				return capacity_;
 			}
 
 			/**

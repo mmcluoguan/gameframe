@@ -72,19 +72,19 @@ namespace shynet {
 
 			// 将字节流逐个序列化为16进制FF格式，空格分开，<num_per_line>换行，可用于debug显示
 			static std::string bytes_to_hex(const uint8_t* buf, std::size_t len, std::size_t num_per_line = 8, bool with_ascii = true);
-		
+
 			/**
-		    * 获取域名对应的ip
-		    * @param domain 域名
-		    * @return ip
-		    *   成功例子：
-		    *     "www.baidu.com"
-		    *     "localhost"
-		    *     "58.96.168.38"
-		    *   失败例子：
-		    *     "not exist"
-		    *     "http://www.baidu.com"
-		    */
+			* 获取域名对应的ip
+			* @param domain 域名
+			* @return ip
+			*   成功例子：
+			*     "www.baidu.com"
+			*     "localhost"
+			*     "58.96.168.38"
+			*   失败例子：
+			*     "not exist"
+			*     "http://www.baidu.com"
+			*/
 			static std::string gethostbyname(const char* domain);
 
 			// 获取当前时间点，单位毫秒，一般用于计算两个时间点间的间隔用
@@ -112,16 +112,21 @@ namespace shynet {
 			static bool net_interfaces(std::set<std::string>* ifs);
 
 			/**
-		    * 获取当前时刻网卡收发数据量，可在两个时间点调用相减得到带宽
-		    *
-		    * @param interface 网卡名称 e.g. eth0
-		    * @param in        传出参数，当前共收了多少字节
-		    * @param out       传出参数，当前共发了多少字节
-		    *
-		    * @return 成功返回true，失败返回false
-		    *
-		    */
+			* 获取当前时刻网卡收发数据量，可在两个时间点调用相减得到带宽
+			*
+			* @param interface 网卡名称 e.g. eth0
+			* @param in        传出参数，当前共收了多少字节
+			* @param out       传出参数，当前共发了多少字节
+			*
+			* @return 成功返回true，失败返回false
+			*
+			*/
 			static bool net_interface_bytes(const std::string& netname, uint64_t* in, uint64_t* out);
+
+			/*
+			* 输出异常信息
+			*/
+			static void print_exception(const std::exception& e, int level = 0);
 		};
 	}
 }

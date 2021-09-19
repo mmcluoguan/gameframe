@@ -79,7 +79,7 @@ namespace gate {
 				auto world = mgr.world_connector();
 				if (world != nullptr) {
 					world->send_proto(protocc::CLIOFFLINE_GATE_ALL_C, &msg);
-				}				
+				}
 				int login_connect_id = mgr.sid_conv_connect_id(login_id_);
 				auto lg = mgr.login_connector(login_connect_id);
 				if (lg != nullptr) {
@@ -133,7 +133,7 @@ namespace gate {
 		std::shared_ptr<LoginConnector> login = connectMgr.select_login(login_connect_id);
 		if (login != nullptr) {
 			if (login_connect_id != login->set_login_conncet_id()) {
-				LOG_WARN << "负载均衡选择的login_connect_id:" << login->set_login_conncet_id();
+				LOG_DEBUG << "负载均衡选择的login_connect_id:" << login->set_login_conncet_id();
 			}
 			FilterData::Envelope enve;
 			enve.fd = iobuf()->fd();
@@ -163,6 +163,7 @@ namespace gate {
 				if (logininfo == nullptr) {
 					std::stringstream stream;
 					stream << "没有可用的" << frmpub::Basic::connectname(protocc::ServerType::LOGIN) << "连接";
+					SEND_ERR(protocc::LOGIN_NOT_EXIST, stream.str());
 					return 0;
 				}
 				int game_connect_id = connectMgr.sid_conv_connect_id(game_id_);
@@ -201,7 +202,7 @@ namespace gate {
 		int game_connect_id = shynet::utils::Singleton<ConnectorMgr>::instance().sid_conv_connect_id(game_id_);
 		std::shared_ptr<GameConnector> game = shynet::utils::Singleton<ConnectorMgr>::instance().
 			game_connector(game_connect_id);
-		if (game != nullptr) {			
+		if (game != nullptr) {
 			FilterData::Envelope enve;
 			enve.fd = iobuf()->fd();
 			enve.addr = *remote_addr()->sockaddr();

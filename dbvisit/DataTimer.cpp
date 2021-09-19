@@ -23,7 +23,7 @@ namespace dbvisit {
 			LOG_DEBUG << "更新数据到 tablename:" << temp[0] << " key:" << temp[1];
 		}
 		catch (std::exception& err) {
-			LOG_WARN << err.what();
+			THROW_EXCEPTION(err.what());
 		}
 	}
 

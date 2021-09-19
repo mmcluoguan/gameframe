@@ -161,7 +161,7 @@
     </Link>
     <ClCompile>
       <PreprocessorDefinitions>USE_DEBUG</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>$(SolutionDir)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir);/opt/rh/devtoolset-10/root/usr/include/c++/10</AdditionalIncludeDirectories>
       <CppLanguageStandard>c++17</CppLanguageStandard>
     </ClCompile>
   </ItemDefinitionGroup>
@@ -171,7 +171,7 @@
       <LibraryDependencies>shynet;frmpub;protobuf;lua</LibraryDependencies>
     </Link>
     <ClCompile>
-      <AdditionalIncludeDirectories>$(SolutionDir)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir);/opt/rh/devtoolset-10/root/usr/include/c++/10</AdditionalIncludeDirectories>
       <CppLanguageStandard>c++17</CppLanguageStandard>
     </ClCompile>
   </ItemDefinitionGroup>
@@ -182,7 +182,7 @@
     </Link>
     <ClCompile>
       <PreprocessorDefinitions>USE_DEBUG</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>$(SolutionDir)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir);/opt/rh/devtoolset-10/root/usr/include/c++/10</AdditionalIncludeDirectories>
       <CppLanguageStandard>c++17</CppLanguageStandard>
     </ClCompile>
   </ItemDefinitionGroup>
@@ -192,7 +192,7 @@
       <LibraryDependencies>shynet;frmpub;protobuf;lua</LibraryDependencies>
     </Link>
     <ClCompile>
-      <AdditionalIncludeDirectories>$(SolutionDir)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir);/opt/rh/devtoolset-10/root/usr/include/c++/10</AdditionalIncludeDirectories>
       <CppLanguageStandard>c++17</CppLanguageStandard>
     </ClCompile>
   </ItemDefinitionGroup>
@@ -203,7 +203,7 @@
     </Link>
     <ClCompile>
       <PreprocessorDefinitions>USE_DEBUG</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>$(SolutionDir)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir);/opt/rh/devtoolset-10/root/usr/include/c++/10</AdditionalIncludeDirectories>
       <CppLanguageStandard>c++17</CppLanguageStandard>
     </ClCompile>
   </ItemDefinitionGroup>
@@ -213,7 +213,7 @@
       <LibraryDependencies>shynet;frmpub;protobuf;lua</LibraryDependencies>
     </Link>
     <ClCompile>
-      <AdditionalIncludeDirectories>$(SolutionDir)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir);/opt/rh/devtoolset-10/root/usr/include/c++/10</AdditionalIncludeDirectories>
       <CppLanguageStandard>c++17</CppLanguageStandard>
     </ClCompile>
   </ItemDefinitionGroup>
@@ -224,7 +224,7 @@
     </Link>
     <ClCompile>
       <PreprocessorDefinitions>USE_DEBUG</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>$(SolutionDir)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir);/opt/rh/devtoolset-10/root/usr/include/c++/10</AdditionalIncludeDirectories>
       <CppLanguageStandard>c++17</CppLanguageStandard>
     </ClCompile>
   </ItemDefinitionGroup>
@@ -234,7 +234,7 @@
       <LibraryDependencies>shynet;frmpub;protobuf;lua</LibraryDependencies>
     </Link>
     <ClCompile>
-      <AdditionalIncludeDirectories>$(SolutionDir)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir);/opt/rh/devtoolset-10/root/usr/include/c++/10</AdditionalIncludeDirectories>
       <CppLanguageStandard>c++17</CppLanguageStandard>
     </ClCompile>
   </ItemDefinitionGroup>

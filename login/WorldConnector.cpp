@@ -69,7 +69,7 @@ namespace login {
 			if (it != pmb_.end()) {
 				return it->second(obj, enves);
 			}
-			else {		
+			else {
 				if (enves->empty() == false) {
 					return forward_world_gate_c(obj, enves);
 				}

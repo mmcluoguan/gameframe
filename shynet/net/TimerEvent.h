@@ -1,14 +1,11 @@
 #pragma once
 #include "shynet/events/EventHandler.h"
 
-namespace shynet
-{
-	namespace net
-	{
+namespace shynet {
+	namespace net {
 
 
-		class TimerEvent : public events::EventHandler
-		{
+		class TimerEvent : public events::EventHandler {
 		public:
 			/// <summary>
 			/// 计时器事件

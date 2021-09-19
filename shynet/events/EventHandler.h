@@ -1,16 +1,13 @@
 #pragma once
 #include "shynet/events/EventBase.h"
 
-namespace shynet
-{
-	namespace events
-	{
+namespace shynet {
+	namespace events {
 
 		/// <summary>
 		/// 事件处理器
 		/// </summary>
-		class EventHandler : public Nocopy
-		{
+		class EventHandler : public Nocopy {
 		public:
 			/// <summary>
 			/// 创建事件处理器,必须调用event设置反应堆

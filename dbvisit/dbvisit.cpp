@@ -35,9 +35,8 @@ int main(int argc, char* argv[]) {
 	using namespace dbvisit;
 	using namespace redis;
 
-	if (argc < 2)
-	{
-		LOG_ERROR << "没有配置参数";
+	if (argc < 2) {
+		THROW_EXCEPTION("没有配置参数");
 	}
 	try {
 		g_confname = argv[1];
@@ -97,7 +96,7 @@ int main(int argc, char* argv[]) {
 			Stuff::create_coredump();
 			Logger::loglevel(Logger::LogLevel::DEBUG);
 			if (EventBase::usethread() == -1) {
-				LOG_ERROR << "call usethread";
+				THROW_EXCEPTION("call usethread");
 			}
 			EventBase::initssl();
 			std::string pidfile = StringOp::str_format("./pid/%s.pid", g_confname);
@@ -124,18 +123,19 @@ int main(int argc, char* argv[]) {
 			shared_ptr<SigIntHandler> sigint(new SigIntHandler(base));
 			base->addevent(stdin, nullptr);
 			base->addevent(sigint, nullptr);
-
 			base->dispatch();
-			EventBase::cleanssl();
-			EventBase::event_shutdown();
 		}
 		else {
-			LOG_WARN << "已存在" << info["type"] << "_" << info["sid"] << " " << info["ip"] << ":" << info["port"];
+			std::stringstream err;
+			err << "已存在" << info["type"] << "_" << info["sid"] << " " << info["ip"] << ":" << info["port"];
+			THROW_EXCEPTION(err.str());
 		}
-		google::protobuf::ShutdownProtobufLibrary();
 	}
 	catch (const std::exception& err) {
-		LOG_WARN << err.what();
+		utils::Stuff::print_exception(err);
 	}
+	EventBase::cleanssl();
+	EventBase::event_shutdown();
+	google::protobuf::ShutdownProtobufLibrary();
 	return 0;
 }

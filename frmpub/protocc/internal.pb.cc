@@ -17,8 +17,8 @@
 
 PROTOBUF_PRAGMA_INIT_SEG
 namespace frmpub {
-namespace protocc {
-}  // namespace protocc
+	namespace protocc {
+	}  // namespace protocc
 }  // namespace frmpub
 static constexpr ::PROTOBUF_NAMESPACE_ID::Metadata* file_level_metadata_internal_2eproto = nullptr;
 static const ::PROTOBUF_NAMESPACE_ID::EnumDescriptor* file_level_enum_descriptors_internal_2eproto[1];
@@ -28,96 +28,96 @@ static constexpr ::PROTOBUF_NAMESPACE_ID::internal::MigrationSchema* schemas = n
 static constexpr ::PROTOBUF_NAMESPACE_ID::Message* const* file_default_instances = nullptr;
 
 const char descriptor_table_protodef_internal_2eproto[] PROTOBUF_SECTION_VARIABLE(protodesc_cold) =
-  "\n\016internal.proto\022\016frmpub.protocc*\260\007\n\rInt"
-  "ernalMsgId\022\027\n\023INTERNALMSGID_BEGIN\020\000\022\034\n\030R"
-  "EGISTER_WORLD_DBVISIT_C\020d\022\034\n\030REGISTER_WO"
-  "RLD_DBVISIT_S\020e\022\032\n\026SERONLINE_WORLD_GATE_"
-  "G\020f\022\035\n\030REGISTER_LOGIN_DBVISIT_C\020\311\001\022\035\n\030RE"
-  "GISTER_LOGIN_DBVISIT_S\020\312\001\022\033\n\026REGISTER_LO"
-  "GIN_WORLD_C\020\313\001\022\033\n\026REGISTER_LOGIN_WORLD_S"
-  "\020\314\001\022\034\n\027REGISTER_GAME_DBVISIT_C\020\255\002\022\034\n\027REG"
-  "ISTER_GAME_DBVISIT_S\020\256\002\022\032\n\025REGISTER_GAME"
-  "_WORLD_C\020\257\002\022\032\n\025REGISTER_GAME_WORLD_S\020\260\002\022"
-  "\034\n\027REGISTER_GATE_DBVISIT_C\020\221\003\022\034\n\027REGISTE"
-  "R_GATE_DBVISIT_S\020\222\003\022\032\n\025REGISTER_GATE_WOR"
-  "LD_C\020\223\003\022\032\n\025REGISTER_GATE_WORLD_S\020\224\003\022\032\n\025R"
-  "EGISTER_GATE_LOGIN_C\020\225\003\022\032\n\025REGISTER_GATE"
-  "_LOGIN_S\020\226\003\022\031\n\024REGISTER_GATE_GAME_C\020\227\003\022\031"
-  "\n\024REGISTER_GATE_GAME_S\020\230\003\022\032\n\025CLIOFFLINE_"
-  "GATE_ALL_C\020\231\003\022\034\n\027LOADDATA_FROM_DBVISIT_C"
-  "\020\365\003\022\034\n\027LOADDATA_FROM_DBVISIT_S\020\366\003\022!\n\034LOA"
-  "DDATA_MORE_FROM_DBVISIT_C\020\367\003\022!\n\034LOADDATA"
-  "_MORE_FROM_DBVISIT_S\020\370\003\022\034\n\027INSERTDATA_TO"
-  "_DBVISIT_C\020\371\003\022\034\n\027INSERTDATA_TO_DBVISIT_S"
-  "\020\372\003\022\030\n\023UPDATA_TO_DBVISIT_C\020\373\003\022\030\n\023UPDATA_"
-  "TO_DBVISIT_S\020\374\003\022\034\n\027DELETEDATA_TO_DBVISIT"
-  "_C\020\375\003\022\034\n\027DELETEDATA_TO_DBVISIT_S\020\376\003\022\026\n\021I"
-  "NTERNALMSGID_END\020\347\007b\006proto3"
-  ;
+"\n\016internal.proto\022\016frmpub.protocc*\260\007\n\rInt"
+"ernalMsgId\022\027\n\023INTERNALMSGID_BEGIN\020\000\022\034\n\030R"
+"EGISTER_WORLD_DBVISIT_C\020d\022\034\n\030REGISTER_WO"
+"RLD_DBVISIT_S\020e\022\032\n\026SERONLINE_WORLD_GATE_"
+"G\020f\022\035\n\030REGISTER_LOGIN_DBVISIT_C\020\311\001\022\035\n\030RE"
+"GISTER_LOGIN_DBVISIT_S\020\312\001\022\033\n\026REGISTER_LO"
+"GIN_WORLD_C\020\313\001\022\033\n\026REGISTER_LOGIN_WORLD_S"
+"\020\314\001\022\034\n\027REGISTER_GAME_DBVISIT_C\020\255\002\022\034\n\027REG"
+"ISTER_GAME_DBVISIT_S\020\256\002\022\032\n\025REGISTER_GAME"
+"_WORLD_C\020\257\002\022\032\n\025REGISTER_GAME_WORLD_S\020\260\002\022"
+"\034\n\027REGISTER_GATE_DBVISIT_C\020\221\003\022\034\n\027REGISTE"
+"R_GATE_DBVISIT_S\020\222\003\022\032\n\025REGISTER_GATE_WOR"
+"LD_C\020\223\003\022\032\n\025REGISTER_GATE_WORLD_S\020\224\003\022\032\n\025R"
+"EGISTER_GATE_LOGIN_C\020\225\003\022\032\n\025REGISTER_GATE"
+"_LOGIN_S\020\226\003\022\031\n\024REGISTER_GATE_GAME_C\020\227\003\022\031"
+"\n\024REGISTER_GATE_GAME_S\020\230\003\022\032\n\025CLIOFFLINE_"
+"GATE_ALL_C\020\231\003\022\034\n\027LOADDATA_FROM_DBVISIT_C"
+"\020\365\003\022\034\n\027LOADDATA_FROM_DBVISIT_S\020\366\003\022!\n\034LOA"
+"DDATA_MORE_FROM_DBVISIT_C\020\367\003\022!\n\034LOADDATA"
+"_MORE_FROM_DBVISIT_S\020\370\003\022\034\n\027INSERTDATA_TO"
+"_DBVISIT_C\020\371\003\022\034\n\027INSERTDATA_TO_DBVISIT_S"
+"\020\372\003\022\030\n\023UPDATA_TO_DBVISIT_C\020\373\003\022\030\n\023UPDATA_"
+"TO_DBVISIT_S\020\374\003\022\034\n\027DELETEDATA_TO_DBVISIT"
+"_C\020\375\003\022\034\n\027DELETEDATA_TO_DBVISIT_S\020\376\003\022\026\n\021I"
+"NTERNALMSGID_END\020\347\007b\006proto3"
+;
 static ::PROTOBUF_NAMESPACE_ID::internal::once_flag descriptor_table_internal_2eproto_once;
 const ::PROTOBUF_NAMESPACE_ID::internal::DescriptorTable descriptor_table_internal_2eproto = {
-  false, false, 987, descriptor_table_protodef_internal_2eproto, "internal.proto", 
+  false, false, 987, descriptor_table_protodef_internal_2eproto, "internal.proto",
   &descriptor_table_internal_2eproto_once, nullptr, 0, 0,
   schemas, file_default_instances, TableStruct_internal_2eproto::offsets,
   file_level_metadata_internal_2eproto, file_level_enum_descriptors_internal_2eproto, file_level_service_descriptors_internal_2eproto,
 };
-PROTOBUF_ATTRIBUTE_WEAK ::PROTOBUF_NAMESPACE_ID::Metadata
+PROTOBUF_ATTRIBUTE_WEAK::PROTOBUF_NAMESPACE_ID::Metadata
 descriptor_table_internal_2eproto_metadata_getter(int index) {
-  ::PROTOBUF_NAMESPACE_ID::internal::AssignDescriptors(&descriptor_table_internal_2eproto);
-  return descriptor_table_internal_2eproto.file_level_metadata[index];
+	::PROTOBUF_NAMESPACE_ID::internal::AssignDescriptors(&descriptor_table_internal_2eproto);
+	return descriptor_table_internal_2eproto.file_level_metadata[index];
 }
 
 // Force running AddDescriptors() at dynamic initialization time.
 PROTOBUF_ATTRIBUTE_INIT_PRIORITY static ::PROTOBUF_NAMESPACE_ID::internal::AddDescriptorsRunner dynamic_init_dummy_internal_2eproto(&descriptor_table_internal_2eproto);
 namespace frmpub {
-namespace protocc {
-const ::PROTOBUF_NAMESPACE_ID::EnumDescriptor* InternalMsgId_descriptor() {
-  ::PROTOBUF_NAMESPACE_ID::internal::AssignDescriptors(&descriptor_table_internal_2eproto);
-  return file_level_enum_descriptors_internal_2eproto[0];
-}
-bool InternalMsgId_IsValid(int value) {
-  switch (value) {
-    case 0:
-    case 100:
-    case 101:
-    case 102:
-    case 201:
-    case 202:
-    case 203:
-    case 204:
-    case 301:
-    case 302:
-    case 303:
-    case 304:
-    case 401:
-    case 402:
-    case 403:
-    case 404:
-    case 405:
-    case 406:
-    case 407:
-    case 408:
-    case 409:
-    case 501:
-    case 502:
-    case 503:
-    case 504:
-    case 505:
-    case 506:
-    case 507:
-    case 508:
-    case 509:
-    case 510:
-    case 999:
-      return true;
-    default:
-      return false;
-  }
-}
+	namespace protocc {
+		const ::PROTOBUF_NAMESPACE_ID::EnumDescriptor* InternalMsgId_descriptor() {
+			::PROTOBUF_NAMESPACE_ID::internal::AssignDescriptors(&descriptor_table_internal_2eproto);
+			return file_level_enum_descriptors_internal_2eproto[0];
+		}
+		bool InternalMsgId_IsValid(int value) {
+			switch (value) {
+			case 0:
+			case 100:
+			case 101:
+			case 102:
+			case 201:
+			case 202:
+			case 203:
+			case 204:
+			case 301:
+			case 302:
+			case 303:
+			case 304:
+			case 401:
+			case 402:
+			case 403:
+			case 404:
+			case 405:
+			case 406:
+			case 407:
+			case 408:
+			case 409:
+			case 501:
+			case 502:
+			case 503:
+			case 504:
+			case 505:
+			case 506:
+			case 507:
+			case 508:
+			case 509:
+			case 510:
+			case 999:
+				return true;
+			default:
+				return false;
+			}
+		}
 
 
-// @@protoc_insertion_point(namespace_scope)
-}  // namespace protocc
+		// @@protoc_insertion_point(namespace_scope)
+	}  // namespace protocc
 }  // namespace frmpub
 PROTOBUF_NAMESPACE_OPEN
 PROTOBUF_NAMESPACE_CLOSE

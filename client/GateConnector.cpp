@@ -108,7 +108,7 @@ namespace client {
 				return it->second(obj, enves);
 			}
 			else {
-				LOG_WARN << "消息" << frmpub::Basic::msgname(obj->msgid()) << " 没有处理函数";
+				LOG_DEBUG << "消息" << frmpub::Basic::msgname(obj->msgid()) << " 没有处理函数";
 			}
 		}
 		return 0;

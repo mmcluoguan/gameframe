@@ -9,15 +9,13 @@
 
 namespace shynet {
 	namespace utils {
-		int FilePathOp::exist(const std::string& name)
-		{
-			if (name.empty()) 
+		int FilePathOp::exist(const std::string& name) {
+			if (name.empty())
 				return -1;
 			struct stat st;
 			return stat(name.c_str(), &st);
 		}
-		int FilePathOp::is_dir(const std::string& pathname)
-		{
+		int FilePathOp::is_dir(const std::string& pathname) {
 			if (pathname.empty())
 				return -1;
 			struct stat st;
@@ -26,12 +24,10 @@ namespace shynet {
 			}
 			return S_ISDIR(st.st_mode) ? 0 : -1;
 		}
-		int FilePathOp::is_abs_path(const std::string& name)
-		{
+		int FilePathOp::is_abs_path(const std::string& name) {
 			return !name.empty() && (name[0] == '/');
 		}
-		int FilePathOp::mkdir_recursive(const std::string& pathname)
-		{
+		int FilePathOp::mkdir_recursive(const std::string& pathname) {
 			if (pathname.empty())
 				return -1;
 			char* path_dup = strdup(pathname.c_str());
@@ -54,8 +50,7 @@ namespace shynet {
 			free(path_dup);
 			return 0;
 		}
-		int FilePathOp::rm_file(const std::string& name)
-		{
+		int FilePathOp::rm_file(const std::string& name) {
 			if (name.empty())
 				return -1;
 			if (exist(name) == -1) {
@@ -69,8 +64,7 @@ namespace shynet {
 			}
 			return 0;
 		}
-		int FilePathOp::rmdir_recursive(const std::string& pathname)
-		{
+		int FilePathOp::rmdir_recursive(const std::string& pathname) {
 			if (pathname.empty())
 				return -1;
 			if (exist(pathname) == -1) {
@@ -122,28 +116,24 @@ namespace shynet {
 
 			return (::rmdir(pathname.c_str()) == 0 && ret == 0) ? 0 : -1;
 		}
-		int FilePathOp::rename(const std::string& src, const std::string& dst)
-		{
+		int FilePathOp::rename(const std::string& src, const std::string& dst) {
 			if (src.empty() || dst.empty())
 				return -1;
 			return ::rename(src.c_str(), dst.c_str());
 		}
-		int FilePathOp::write_file(const std::string& filename, const std::string& content, bool append)
-		{
+		int FilePathOp::write_file(const std::string& filename, const std::string& content, bool append) {
 			return write_file(filename, content.c_str(), content.length(), append);
 		}
-		int FilePathOp::write_file(const std::string& filename, const char* content, size_t content_size, bool append)
-		{
+		int FilePathOp::write_file(const std::string& filename, const char* content, size_t content_size, bool append) {
 			FILE* fp = fopen(filename.c_str(), append ? "ab" : "wb");
-			if (fp == nullptr){
+			if (fp == nullptr) {
 				return -1;
 			}
 			size_t written = fwrite(reinterpret_cast<const void*>(content), 1, content_size, fp);
 			fclose(fp);
 			return (written == content_size) ? 0 : -1;
 		}
-		int64_t FilePathOp::get_file_size(const std::string& filename)
-		{
+		int64_t FilePathOp::get_file_size(const std::string& filename) {
 			if (filename.empty())
 				return -1;
 			if (exist(filename) == -1 || is_dir(filename) == 0) {
@@ -155,16 +145,14 @@ namespace shynet {
 			}
 			return st.st_size;
 		}
-		std::unique_ptr<char[]> FilePathOp::read_file(const std::string& filename)
-		{
+		std::unique_ptr<char[]> FilePathOp::read_file(const std::string& filename) {
 			int64_t size = get_file_size(filename);
 			if (size <= 0) {
 				return nullptr;
 			}
 			return read_file(filename, size);
 		}
-		std::unique_ptr<char[]> FilePathOp::read_file(const std::string& filename, size_t content_size)
-		{
+		std::unique_ptr<char[]> FilePathOp::read_file(const std::string& filename, size_t content_size) {
 			if (content_size == 0) {
 				return nullptr;
 			}
@@ -175,8 +163,7 @@ namespace shynet {
 			}
 			return content;
 		}
-		int64_t FilePathOp::read_file(const std::string& filename, char* content, size_t content_size)
-		{
+		int64_t FilePathOp::read_file(const std::string& filename, char* content, size_t content_size) {
 			FILE* fp = fopen(filename.c_str(), "rb");
 			if (fp == nullptr) {
 				return -1;
@@ -186,8 +173,7 @@ namespace shynet {
 			return read_size;
 		}
 
-		std::unique_ptr<char[]> FilePathOp::read_link(const std::string& filename, size_t content_size)
-		{
+		std::unique_ptr<char[]> FilePathOp::read_link(const std::string& filename, size_t content_size) {
 			if (filename.empty() || content_size == 0) {
 				return nullptr;
 			}
@@ -198,8 +184,7 @@ namespace shynet {
 			}
 			return content;
 		}
-		std::string FilePathOp::join(const std::string& path, const std::string& filename)
-		{
+		std::string FilePathOp::join(const std::string& path, const std::string& filename) {
 			std::string ret;
 			size_t path_length = path.length();
 			size_t filename_length = filename.length();

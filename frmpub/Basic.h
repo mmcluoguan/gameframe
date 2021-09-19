@@ -14,8 +14,8 @@ namespace protocc = frmpub::protocc;
 #include <unordered_map>
 
 #ifndef SEND_ERR
-#define SEND_ERR(code,str) LOG_WARN << (str);send_errcode((code), (str));
-#define SEND_ERR_EX(code,str,enves) LOG_WARN << (str);send_errcode((code), (str),(enves));
+#define SEND_ERR(code,str) LOG_DEBUG <<(str);send_errcode((code), (str));
+#define SEND_ERR_EX(code,str,enves) LOG_DEBUG << (str);send_errcode((code), (str),(enves));
 #endif // !SEND_ERR
 
 namespace frmpub {

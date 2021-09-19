@@ -105,15 +105,15 @@ namespace frmpub {
 		int json_handle(const char* original_data, size_t datalen);
 
 		using ProtoMsgBind = std::function<int(std::shared_ptr<protocc::CommonObject> obj,
-			std::shared_ptr<std::stack<Envelope>> enves)> ;
+			std::shared_ptr<std::stack<Envelope>> enves)>;
 		std::unordered_map<int, ProtoMsgBind> pmb_;
 
 		using JsonMsgBind = std::function<int(std::shared_ptr<rapidjson::Document> doc,
-			std::shared_ptr<std::stack<Envelope>> enves)> ;
+			std::shared_ptr<std::stack<Envelope>> enves)>;
 		std::unordered_map<int, JsonMsgBind> jmb_;
 
 		using NativeMsgBind = std::function<int(const char* original_data, size_t datalen,
-			std::shared_ptr<std::stack<Envelope>> enves)> ;
+			std::shared_ptr<std::stack<Envelope>> enves)>;
 		std::unordered_map<int, NativeMsgBind> nmb_;
 
 		protocol::FilterProces* filter_ = nullptr;

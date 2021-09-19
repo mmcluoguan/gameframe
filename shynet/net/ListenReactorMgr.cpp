@@ -16,7 +16,7 @@ namespace shynet {
 				lth->notify(data, len);
 			}
 			else
-				LOG_WARN << "not available ListenThread";
+				LOG_WARN << "没有可用的 ListenThread";
 		}
 
 		int ListenReactorMgr::add(std::shared_ptr<ListenEvent> v) {

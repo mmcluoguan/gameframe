@@ -25,44 +25,44 @@ namespace shynet {
 			/// <param name="size">目标字符串数组大小</param>
 			static int split(char* target, const char* c, char** argv, int size);
 			/**
-		    * 用`sep`分割`s`
-		    *
-		    * @param keep_empty_strings 分割后的字符串数组，如果有元素为空，是否保留这个元素
-		    * @param split_once 如果为true，那么最多分割一次
-		    *
-		    * @return 分割后的字符串数组
-		    *
-		    * @NOTICE
-		    *   if keep_empty_strings:
-		    *     '-a-b' -> ['', 'a', 'b']
-		    *     'a-b-' -> ['a', 'b', '']
-		    *     'a--b' -> ['a', '', 'b']
-		    *
-		    *
-		    */
+			* 用`sep`分割`s`
+			*
+			* @param keep_empty_strings 分割后的字符串数组，如果有元素为空，是否保留这个元素
+			* @param split_once 如果为true，那么最多分割一次
+			*
+			* @return 分割后的字符串数组
+			*
+			* @NOTICE
+			*   if keep_empty_strings:
+			*     '-a-b' -> ['', 'a', 'b']
+			*     'a-b-' -> ['a', 'b', '']
+			*     'a--b' -> ['a', '', 'b']
+			*
+			*
+			*/
 			static std::vector<std::string> split(const std::string& s, char sep, bool keep_empty_strings = true, bool split_once = false);
 
 			/**
-		    * 允许分隔符是字符串
-		    * like s='ab--cd' and sep='--' -> ['ab', 'cd']
-		    *
-		    */
+			* 允许分隔符是字符串
+			* like s='ab--cd' and sep='--' -> ['ab', 'cd']
+			*
+			*/
 			static std::vector<std::string> split(const std::string& s, const std::string& sep, bool keep_empty_strings = true);
 			static std::vector<std::string> split(const std::string& s, const char* sep, bool keep_empty_strings = true);
 
 			/**
-		    * 可指定多个分隔符，一次到位~
-		    * like s='a-b*c' and sep='-*' -> ['a', 'b', 'c']
-		    *
-		    */
+			* 可指定多个分隔符，一次到位~
+			* like s='a-b*c' and sep='-*' -> ['a', 'b', 'c']
+			*
+			*/
 			static std::vector<std::string> split_any(const std::string& s, const std::string& charlist, bool keep_empty_strings = true);
 
 			/**
-		    * 用 '\r' 或 '\n' 或 '\r\n' 分割
-		    *
-		    * @param keep_ends 如果为true，则把该行的结束符（'\r'或'\n'或'\r\n'）跟在该行后
-		    *
-		    */
+			* 用 '\r' 或 '\n' 或 '\r\n' 分割
+			*
+			* @param keep_ends 如果为true，则把该行的结束符（'\r'或'\n'或'\r\n'）跟在该行后
+			*
+			*/
 			static std::vector<std::string> splitlines(const std::string& s, bool keep_ends = false);
 
 			template<typename ... Args>

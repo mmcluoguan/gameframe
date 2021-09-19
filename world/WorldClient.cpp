@@ -186,13 +186,11 @@ namespace world {
 		return 0;
 	}
 	int WorldClient::login_client_gate_s(std::shared_ptr<protocc::CommonObject> data,
-		std::shared_ptr<std::stack<FilterData::Envelope>> enves)
-	{
+		std::shared_ptr<std::stack<FilterData::Envelope>> enves) {
 		if (data->extend().empty() == false &&
 			data->extend() == "0") {
 			auto game = shynet::utils::Singleton<WorldClientMgr>::instance().select_game();
-			if (game != nullptr)
-			{
+			if (game != nullptr) {
 				data->set_extend(std::to_string(game->sif().sid()));
 				send_proto(data.get(), enves.get());
 			}

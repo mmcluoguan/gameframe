@@ -23,7 +23,7 @@ namespace world {
 		memset(&msg, 0, sizeof(msg));
 		ssize_t ret = read(fd, msg, sizeof(msg));
 		if (ret < 0) {
-			LOG_WARN << "call read";
+			THROW_EXCEPTION("call read");
 		}
 		else {
 			using item = std::tuple<const char*, const char*, std::function<void(const char* od, int argc, char** argv, const char* optarg)>>;
@@ -39,16 +39,14 @@ namespace world {
 			int argc = shynet::utils::StringOp::split(order, " ", argv, 20);
 			if (argc > 0) {
 				bool flag = false;
-				for (auto&& [item0, item1, itemfun] : orders)
-				{
-					if (strcmp(argv[0], item0) == 0)
-					{
+				for (auto&& [item0, item1, itemfun] : orders) {
+					if (strcmp(argv[0], item0) == 0) {
 						itemfun(item0, argc, argv, item1);
 						flag = true;
 					}
 				}
 				if (flag == false) {
-					LOG_WARN << "没有可执行的命令";
+					LOG_INFO << "没有可执行的命令";
 					LOG_INFO << "可执行的命令列表";
 					for (const auto& it : orders) {
 						LOG_INFO << "	<" << std::get<0>(it) << ">";

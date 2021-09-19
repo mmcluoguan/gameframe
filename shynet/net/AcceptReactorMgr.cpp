@@ -16,7 +16,7 @@ namespace shynet {
 				rtk->notify(data, len);
 			}
 			else
-				LOG_WARN << "not available AcceptThread";
+				LOG_WARN << "没有可用的 AcceptThread";
 		}
 
 		std::shared_ptr<thread::AcceptThread> AcceptReactorMgr::find_rtk() const {

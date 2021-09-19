@@ -14,10 +14,9 @@ namespace frmpub {
 		}
 		return *this;
 	}
-	
+
 	LuaRemoteDebug& LuaRemoteDebug::stop(kaguya::State& state) {
-		if (isinit_)
-		{
+		if (isinit_) {
 			state("require('mobdebug').done()");
 		}
 		return *this;

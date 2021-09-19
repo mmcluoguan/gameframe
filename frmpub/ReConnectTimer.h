@@ -3,23 +3,18 @@
 #include "shynet/net/IPAddress.h"
 #include "shynet/net/TimerReactorMgr.h"
 
-namespace frmpub
-{
+namespace frmpub {
 	template <class T>
-	class ReConnectTimer : public net::TimerEvent
-	{
+	class ReConnectTimer : public net::TimerEvent {
 	public:
 		ReConnectTimer(std::shared_ptr<net::IPAddress> connect_addr, const struct timeval val) :
-			net::TimerEvent(val, EV_TIMEOUT)
-		{
+			net::TimerEvent(val, EV_TIMEOUT) {
 			connect_addr_ = connect_addr;
 		}
-		~ReConnectTimer()
-		{
+		~ReConnectTimer() {
 		}
 
-		void timeout() override
-		{
+		void timeout() override {
 			shynet::utils::Singleton<net::TimerReactorMgr>::instance().remove(timerid());
 			std::shared_ptr<T> reconnect(new T(connect_addr_));
 			shynet::utils::Singleton<net::ConnectReactorMgr>::instance().add(reconnect);

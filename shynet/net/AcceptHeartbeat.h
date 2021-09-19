@@ -1,13 +1,10 @@
 ﻿#pragma once
 #include "shynet/net/TimerReactorMgr.h"
 
-namespace shynet
-{
-	namespace net
-	{
+namespace shynet {
+	namespace net {
 		class AcceptNewFd;
-		class AcceptHeartbeat : public TimerEvent
-		{
+		class AcceptHeartbeat : public TimerEvent {
 		public:
 			AcceptHeartbeat(std::weak_ptr<AcceptNewFd> newfd, const struct timeval val);
 			~AcceptHeartbeat();

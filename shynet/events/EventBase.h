@@ -4,18 +4,15 @@
 #include <event2/thread.h>
 #include <memory>
 
-namespace shynet
-{
-	namespace events
-	{
+namespace shynet {
+	namespace events {
 
 		class EventHandler;
 		class EventBuffer;
 		/// <summary>
 		/// 反应堆
 		/// </summary>
-		class EventBase final : public Nocopy
-		{
+		class EventBase final : public Nocopy {
 		public:
 			EventBase();
 			explicit EventBase(const EventConfig* cfg);

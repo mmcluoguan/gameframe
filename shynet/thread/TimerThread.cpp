@@ -1,5 +1,6 @@
 #include "shynet/thread/TimerThread.h"
 #include "shynet/net/TimerReactorMgr.h"
+#include "shynet/utils/Stuff.h"
 #include <cstring>
 
 namespace shynet {
@@ -18,8 +19,13 @@ namespace shynet {
 		}
 
 		static void pipeReadcb(struct bufferevent* bev, void* ptr) {
-			TimerThread* rtk = reinterpret_cast<TimerThread*>(ptr);
-			rtk->process(bev);
+			try {
+				TimerThread* rtk = reinterpret_cast<TimerThread*>(ptr);
+				rtk->process(bev);
+			}
+			catch (const std::exception& err) {
+				utils::Stuff::print_exception(err);
+			}
 		}
 
 		void TimerThread::process(bufferevent* bev) {
@@ -45,7 +51,7 @@ namespace shynet {
 						base_->addevent(timerEv, &timerEv->val());
 					}
 					else {
-						LOG_WARN << "timerid:" << timerid << " not exist";
+						LOG_TRACE << "timerid:" << timerid << " not exist";
 					}
 				}
 			} while (true);
@@ -68,7 +74,7 @@ namespace shynet {
 				pair_[1].reset();
 			}
 			catch (const std::exception& err) {
-				LOG_WARN << err.what();
+				utils::Stuff::print_exception(err);
 			}
 			return 0;
 		}

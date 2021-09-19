@@ -106,8 +106,8 @@ namespace game {
 	int DbConnector::register_game_dbvisit_s(std::shared_ptr<protocc::CommonObject> data, std::shared_ptr<std::stack<FilterData::Envelope>> enves) {
 		protocc::register_game_dbvisit_s msgc;
 		if (msgc.ParseFromString(data->msgdata()) == true) {
-			if (msgc.result() == 0) {				
-			}			
+			if (msgc.result() == 0) {
+			}
 		}
 		else {
 			std::stringstream stream;

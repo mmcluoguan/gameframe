@@ -103,11 +103,10 @@ namespace login {
 		return 0;
 	}
 
-	int LoginClient::login_client_gate_c(std::shared_ptr<protocc::CommonObject> data, 
-		std::shared_ptr<std::stack<FilterData::Envelope>> enves)
-	{
+	int LoginClient::login_client_gate_c(std::shared_ptr<protocc::CommonObject> data,
+		std::shared_ptr<std::stack<FilterData::Envelope>> enves) {
 		//以后接第3方登录sdk
-		return forward_client_gate_c(data,enves);
+		return forward_client_gate_c(data, enves);
 	}
 
 	int LoginClient::forward_client_gate_c(std::shared_ptr<protocc::CommonObject> data,
@@ -140,9 +139,8 @@ namespace login {
 		}
 		return 0;
 	}
-	int LoginClient::createrole_client_gate_s(std::shared_ptr<protocc::CommonObject> data, 
-		std::shared_ptr<std::stack<FilterData::Envelope>> enves)
-	{
+	int LoginClient::createrole_client_gate_s(std::shared_ptr<protocc::CommonObject> data,
+		std::shared_ptr<std::stack<FilterData::Envelope>> enves) {
 		protocc::createrole_client_gate_s msgc;
 		if (msgc.ParseFromString(data->msgdata()) == true) {
 			std::shared_ptr<DbConnector> db = shynet::utils::Singleton<ConnectorMgr>::instance().db_connector();

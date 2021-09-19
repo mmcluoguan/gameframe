@@ -24,8 +24,8 @@ namespace shynet {
 			public:
 				netdev()
 					: in_bytes_(0)
-					, out_bytes_(0)
-				{}
+					, out_bytes_(0) {
+				}
 
 				uint64_t in_bytes_;
 				uint64_t out_bytes_;
@@ -84,13 +84,13 @@ namespace shynet {
 		void Stuff::create_coredump() {
 			struct rlimit core { RLIM_INFINITY, RLIM_INFINITY };
 			if (setrlimit(RLIMIT_CORE, &core) == -1) {
-				throw SHYNETEXCEPTION("call setrlimit");
+				THROW_EXCEPTION("call setrlimit");
 			}
 		}
 
 		int Stuff::daemon() {
 			if (::daemon(1, 0) == -1) {
-				throw SHYNETEXCEPTION("call daemon");
+				THROW_EXCEPTION("call daemon");
 			}
 			return getpid();
 		}
@@ -99,11 +99,9 @@ namespace shynet {
 			writepid(pidfile.c_str());
 		}
 
-		void Stuff::writepid(const char* pidfile)
-		{
+		void Stuff::writepid(const char* pidfile) {
 			bool isfree = false;
-			if (pidfile == nullptr)
-			{
+			if (pidfile == nullptr) {
 				char path[PATH_MAX] = { 0 };
 				char processname[NAME_MAX] = { 0 };
 				Stuff::executable_path(path, processname, sizeof(path));
@@ -120,10 +118,10 @@ namespace shynet {
 				delete[] pidfile;
 			}
 			if (fp == -1) {
-				throw SHYNETEXCEPTION("call open");
+				THROW_EXCEPTION("call open");
 			}
 			if (lockf(fp, F_TLOCK, 0) < 0) {
-				throw SHYNETEXCEPTION("call lockf");
+				THROW_EXCEPTION("call lockf");
 			}
 
 			char buf[64] = { 0 };
@@ -133,16 +131,16 @@ namespace shynet {
 			::write(fp, buf, len);
 			close(fp);
 		}
-		
+
 		int Stuff::executable_path(char* processdir, char* processname, size_t len) {
 			char* path_end;
 			if (readlink("/proc/self/exe", processdir, len) <= 0) {
-				throw SHYNETEXCEPTION("call readlink");
+				THROW_EXCEPTION("call readlink");
 				return -1;
 			}
 			path_end = strrchr(processdir, '/');
 			if (path_end == NULL) {
-				throw SHYNETEXCEPTION("找不到'/'");
+				THROW_EXCEPTION("找不到'/'");
 				return -1;
 			}
 			++path_end;
@@ -198,9 +196,8 @@ namespace shynet {
 			ret |= high;
 			return ret;
 		}
-		
-		std::string Stuff::readable_bytes(uint64_t n)
-		{
+
+		std::string Stuff::readable_bytes(uint64_t n) {
 			char UNITS[] = { 'B', 'K', 'M', 'G', 'T', 'P', 'E' }; // 'Z' 'Y'
 			int index = 0;
 			for (; n >> (index * 10); index++) {
@@ -217,9 +214,8 @@ namespace shynet {
 			);
 			return std::string(buf);
 		}
-		
-		std::string Stuff::bytes_to_hex(const uint8_t* buf, std::size_t len, std::size_t num_per_line, bool with_ascii)
-		{
+
+		std::string Stuff::bytes_to_hex(const uint8_t* buf, std::size_t len, std::size_t num_per_line, bool with_ascii) {
 			if (!buf || len == 0 || num_per_line == 0) { return std::string(); }
 
 			static const std::string PRINTABLE_ASCII = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ!\"#$%&\'()*+,-./:;<=>?@[\\]^_`{|}~ ";
@@ -261,9 +257,8 @@ namespace shynet {
 
 			return oss.str();
 		}
-		
-		std::string Stuff::gethostbyname(const char* domain)
-		{
+
+		std::string Stuff::gethostbyname(const char* domain) {
 			struct hostent* ht = ::gethostbyname(domain);
 			if (ht == NULL || ht->h_length <= 0) { return std::string(); }
 
@@ -276,38 +271,33 @@ namespace shynet {
 			);
 			return std::string(result);
 		}
-		
-		uint64_t Stuff::tick_msec()
-		{
+
+		uint64_t Stuff::tick_msec() {
 			struct timespec ts;
 			clock_gettime(CLOCK_MONOTONIC, &ts);
 			return ts.tv_sec * 1000 + ts.tv_nsec / 1000000;
 		}
-		
-		uint64_t Stuff::unix_timestamp_msec()
-		{
+
+		uint64_t Stuff::unix_timestamp_msec() {
 			struct timeval tv;
 			gettimeofday(&tv, NULL);
 			return tv.tv_sec * 1000 + tv.tv_usec / 1000;
 		}
 
-		int32_t Stuff::num_of_threads()
-		{
+		int32_t Stuff::num_of_threads() {
 			std::string_view str(status().get());
 			std::size_t pos = str.find("Threads:");
 			if (pos == std::string_view::npos) {
 				return -1;
 			}
 			return std::atoi(str.data() + pos + 8);
-		}		
+		}
 
-		int64_t Stuff::boot_timestamp()
-		{
+		int64_t Stuff::boot_timestamp() {
 			return BOOT_TIMESTAMP;
 		}
 
-		int64_t Stuff::up_duration_seconds()
-		{
+		int64_t Stuff::up_duration_seconds() {
 			return std::time(NULL) - BOOT_TIMESTAMP;
 		}
 
@@ -319,12 +309,11 @@ namespace shynet {
 			mi->res_kbytes = ps.res_kbytes_;
 			return true;
 		}
-		bool Stuff::net_interfaces(std::set<std::string>* ifs)
-		{
+		bool Stuff::net_interfaces(std::set<std::string>* ifs) {
 			if (!ifs) { return false; }
 
-			struct ifreq ifr[64] = {0};
-			struct ifconf ifc ={0};
+			struct ifreq ifr[64] = { 0 };
+			struct ifconf ifc = { 0 };
 
 			int sock = socket(AF_INET, SOCK_DGRAM, IPPROTO_IP);
 			if (sock == -1) { return false; }
@@ -342,8 +331,7 @@ namespace shynet {
 			close(sock);
 			return true;
 		}
-		bool Stuff::net_interface_bytes(const std::string& netname, uint64_t* in, uint64_t* out)
-		{
+		bool Stuff::net_interface_bytes(const std::string& netname, uint64_t* in, uint64_t* out) {
 			netdev nd;
 			if (!nd.parse(netname)) { return false; }
 
@@ -351,6 +339,20 @@ namespace shynet {
 			if (out) { *out = nd.out_bytes_; }
 
 			return true;
+		}
+
+		void Stuff::print_exception(const std::exception& e, int level) {
+			LOG_ERROR << "异常层级: " << level << " 异常信息:" << e.what();
+			try {
+				if (auto ptr = dynamic_cast<const std::nested_exception*>(&e)) {
+					if (ptr->nested_ptr())
+						std::rethrow_exception(ptr->nested_ptr());
+				}
+			}
+			catch (const std::exception& e) {
+				print_exception(e, level + 1);
+			}
+			catch (...) {}
 		}
 	}
 }

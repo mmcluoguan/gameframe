@@ -24,7 +24,7 @@ namespace login {
 		void add_worldctor(int connectid);
 		void remove_worldctor(int connectid);
 		std::shared_ptr<WorldConnector> find_worldctor(int connectid);
-		
+
 	private:
 		std::list<int> dbctor_ids_;
 		std::mutex dbctor_ids_mtx_;

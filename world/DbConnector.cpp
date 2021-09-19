@@ -110,7 +110,7 @@ namespace world {
 		protocc::register_world_dbvisit_s msgc;
 		if (msgc.ParseFromString(data->msgdata()) == true) {
 			if (msgc.result() == 0) {
-			
+
 			}
 		}
 		else {

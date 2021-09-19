@@ -271,7 +271,7 @@
       </AdditionalOptions>
     </Link>
     <ClCompile>
-      <AdditionalIncludeDirectories>$(SolutionDir);/opt/rh/devtoolset-9/root/usr/include/c++/9</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir);/opt/rh/devtoolset-10/root/usr/include/c++/10</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>JEMALLOC_NO_DEMANGLE</PreprocessorDefinitions>
       <CppLanguageStandard>c++17</CppLanguageStandard>
       <AdditionalOptions>
@@ -286,7 +286,7 @@
       </AdditionalOptions>
     </Link>
     <ClCompile>
-      <AdditionalIncludeDirectories>$(SolutionDir);/opt/rh/devtoolset-9/root/usr/include/c++/9</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir);/opt/rh/devtoolset-10/root/usr/include/c++/10</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>JEMALLOC_NO_DEMANGLE</PreprocessorDefinitions>
       <CppLanguageStandard>c++17</CppLanguageStandard>
       <AdditionalOptions>
@@ -301,7 +301,7 @@
       </AdditionalOptions>
     </Link>
     <ClCompile>
-      <AdditionalIncludeDirectories>$(SolutionDir);/opt/rh/devtoolset-9/root/usr/include/c++/9</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir);/opt/rh/devtoolset-10/root/usr/include/c++/10</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>JEMALLOC_NO_DEMANGLE</PreprocessorDefinitions>
       <CppLanguageStandard>c++17</CppLanguageStandard>
       <AdditionalOptions>
@@ -316,7 +316,7 @@
       </AdditionalOptions>
     </Link>
     <ClCompile>
-      <AdditionalIncludeDirectories>$(SolutionDir);/opt/rh/devtoolset-9/root/usr/include/c++/9</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir);/opt/rh/devtoolset-10/root/usr/include/c++/10</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>JEMALLOC_NO_DEMANGLE</PreprocessorDefinitions>
       <CppLanguageStandard>c++17</CppLanguageStandard>
       <AdditionalOptions>
@@ -326,7 +326,7 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|ARM'">
     <ClCompile>
-      <AdditionalIncludeDirectories>$(SolutionDir);/opt/rh/devtoolset-9/root/usr/include/c++/9</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir);/opt/rh/devtoolset-10/root/usr/include/c++/10</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>NDEBUG;JEMALLOC_NO_DEMANGLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <CppLanguageStandard>c++17</CppLanguageStandard>
       <AdditionalOptions>
@@ -341,7 +341,7 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|ARM64'">
     <ClCompile>
-      <AdditionalIncludeDirectories>$(SolutionDir);/opt/rh/devtoolset-9/root/usr/include/c++/9</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir);/opt/rh/devtoolset-10/root/usr/include/c++/10</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>NDEBUG;JEMALLOC_NO_DEMANGLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <CppLanguageStandard>c++17</CppLanguageStandard>
       <AdditionalOptions>
@@ -356,7 +356,7 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
-      <AdditionalIncludeDirectories>$(SolutionDir);/opt/rh/devtoolset-9/root/usr/include/c++/9</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir);/opt/rh/devtoolset-10/root/usr/include/c++/10</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>NDEBUG;JEMALLOC_NO_DEMANGLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <CppLanguageStandard>c++17</CppLanguageStandard>
       <AdditionalOptions>
@@ -371,7 +371,7 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x86'">
     <ClCompile>
-      <AdditionalIncludeDirectories>$(SolutionDir);/opt/rh/devtoolset-9/root/usr/include/c++/9</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir);/opt/rh/devtoolset-10/root/usr/include/c++/10</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>NDEBUG;JEMALLOC_NO_DEMANGLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <CppLanguageStandard>c++17</CppLanguageStandard>
       <AdditionalOptions>

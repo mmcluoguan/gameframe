@@ -1,13 +1,11 @@
 #pragma once
 #include "shynet/net/ListenReactorMgr.h"
 
-namespace gate
-{
+namespace gate {
 	/// <summary>
 	/// 网关服务器
 	/// </summary>
-	class GateServer final : public net::ListenEvent
-	{
+	class GateServer final : public net::ListenEvent {
 	public:
 		explicit GateServer(std::shared_ptr<net::IPAddress> listen_addr);
 		~GateServer();

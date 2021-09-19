@@ -3,13 +3,11 @@
 #include "shynet/utils/Singleton.h"
 #include <unordered_map>
 
-namespace game
-{
+namespace game {
 	/// <summary>
 	/// 游戏服连接管理器
 	/// </summary>
-	class GameClientMgr final : public shynet::Nocopy
-	{
+	class GameClientMgr final : public shynet::Nocopy {
 		friend class shynet::utils::Singleton<GameClientMgr>;
 		GameClientMgr();
 	public:

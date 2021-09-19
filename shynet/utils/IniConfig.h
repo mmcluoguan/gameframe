@@ -3,13 +3,10 @@
 #include <sstream>
 #include <unordered_map>
 
-namespace shynet
-{
+namespace shynet {
 	namespace utils {
-		class IniConfig final : public Nocopy
-		{
-			struct node
-			{
+		class IniConfig final : public Nocopy {
+			struct node {
 				std::string section;
 				std::string key;
 				std::string value;
@@ -26,32 +23,25 @@ namespace shynet
 			~IniConfig();
 
 			template<class IN, class OUT >
-			OUT get(section sec, key k, const IN& defv) const
-			{
+			OUT get(section sec, key k, const IN& defv) const {
 				const auto& siter = content_.find(sec);
-				if (siter == content_.end())
-				{
+				if (siter == content_.end()) {
 					return defv;
 				}
-				else
-				{
+				else {
 					const auto& niter = siter->second.find(k);
-					if (niter == siter->second.end())
-					{
+					if (niter == siter->second.end()) {
 						return defv;
 					}
-					else
-					{
+					else {
 						std::stringstream istream;
 						istream << niter->second.value;
 						OUT t;
 						istream >> t;
-						if (istream.eof() && !istream.fail())
-						{
+						if (istream.eof() && !istream.fail()) {
 							return t;
 						}
-						else
-						{
+						else {
 							return defv;
 						}
 					}

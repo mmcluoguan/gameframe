@@ -21,7 +21,7 @@ namespace frmpub {
 		if (suffix_str.compare("pb") == 0) {
 			shynet::utils::Singleton<LuaRemoteDebug>::instance().start(state);
 
-			std::string script ="local pb = require('pb');pb.clear('%s');pb.loadfile('%s')";
+			std::string script = "local pb = require('pb');pb.clear('%s');pb.loadfile('%s')";
 			script = shynet::utils::StringOp::str_format(script, filepath_.c_str(), filepath_.c_str());
 			state(script);
 

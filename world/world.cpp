@@ -28,11 +28,11 @@ int main(int argc, char* argv[]) {
 	using namespace frmpub;
 	using namespace world;
 
-	if (argc < 2)
-	{
-		LOG_ERROR << "没有配置参数";
-	}
+
 	try {
+		if (argc < 2) {
+			THROW_EXCEPTION("没有配置参数");
+		}
 		g_confname = argv[1];
 
 		const char* file = "gameframe.ini";
@@ -46,7 +46,7 @@ int main(int argc, char* argv[]) {
 		Stuff::create_coredump();
 		Logger::loglevel(Logger::LogLevel::DEBUG);
 		if (EventBase::usethread() == -1) {
-			LOG_ERROR << "call usethread";
+			THROW_EXCEPTION("call usethread");
 		}
 		EventBase::initssl();
 		std::string pidfile = StringOp::str_format("./%s.pid", g_confname);
@@ -59,10 +59,9 @@ int main(int argc, char* argv[]) {
 		string dbstr = ini.get<const char*, string>(g_confname, "db", "");
 		auto dblist = StringOp::split(dbstr, ",");
 		if (dblist.size() > 2 || dblist.size() == 0) {
-			LOG_ERROR << "db配置错误:" << dbstr;
+			THROW_EXCEPTION("db配置错误");
 		}
-		for (auto& item : dblist)
-		{
+		for (auto& item : dblist) {
 			string dbip = ini.get<const char*, string>(item, "ip", "");
 			short dbport = ini.get<short, short>(item, "port", short(21000));
 			shared_ptr<IPAddress> dbaddr(new IPAddress(dbip.c_str(), dbport));
@@ -91,14 +90,13 @@ int main(int argc, char* argv[]) {
 		shared_ptr<SigIntHandler> sigint(new SigIntHandler(base));
 		base->addevent(stdin, nullptr);
 		base->addevent(sigint, nullptr);
-
 		base->dispatch();
-		EventBase::cleanssl();
-		EventBase::event_shutdown();
-		google::protobuf::ShutdownProtobufLibrary();
 	}
 	catch (const std::exception& err) {
-		LOG_WARN << err.what();
+		utils::Stuff::print_exception(err);
 	}
+	EventBase::cleanssl();
+	EventBase::event_shutdown();
+	google::protobuf::ShutdownProtobufLibrary();
 	return 0;
 }

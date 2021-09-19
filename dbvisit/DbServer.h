@@ -1,13 +1,11 @@
 #pragma once
 #include "shynet/net/ListenReactorMgr.h"
 
-namespace dbvisit
-{
+namespace dbvisit {
 	/// <summary>
 	/// 数据库服务器
 	/// </summary>
-	class DbServer final : public net::ListenEvent
-	{
+	class DbServer final : public net::ListenEvent {
 	public:
 		explicit DbServer(std::shared_ptr<net::IPAddress> listen_addr);
 		~DbServer();

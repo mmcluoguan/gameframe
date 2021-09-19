@@ -20,8 +20,7 @@ namespace shynet {
 		void Thread::set_index(size_t v) {
 			index_ = v;
 		}
-		std::shared_ptr<std::thread> Thread::start()
-		{
+		std::shared_ptr<std::thread> Thread::start() {
 			thread_ = std::make_shared<std::thread>(&Thread::run, this);
 			return thread_;
 		}

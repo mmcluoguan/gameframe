@@ -14,7 +14,7 @@ namespace shynet {
 			if (enable_ssl == true) {
 				ctx_ = SSL_CTX_new(SSLv23_server_method());
 				if (ctx_ == nullptr) {
-					throw SHYNETEXCEPTION("call SSL_new");
+					THROW_EXCEPTION("call SSL_new");
 				}
 				if (!SSL_CTX_use_certificate_chain_file(ctx_, "cert") ||
 					!SSL_CTX_use_PrivateKey_file(ctx_, "pkey", SSL_FILETYPE_PEM)) {
@@ -22,44 +22,44 @@ namespace shynet {
 						"and self-signed certificate,run:\n"
 						"  openssl genrsa -out pkey 2048\n"
 						"  openssl req -new -key pkey -out cert.req\n"
-						"  openssl x509 -req -days 365 -in cert.req -signkey pkey -out cert \n\t -";	
-					throw SHYNETEXCEPTION(str);
+						"  openssl x509 -req -days 365 -in cert.req -signkey pkey -out cert \n\t -";
+					THROW_EXCEPTION(str);
 				}
 			}
 
 			evutil_socket_t fd = socket(listen_addr_->family(), SOCK_STREAM, IPPROTO_IP);
 			if (fd == -1) {
-				throw SHYNETEXCEPTION("call socket");
+				THROW_EXCEPTION("call socket");
 			}
 
 			if (evutil_make_socket_nonblocking(fd) < 0) {
 				evutil_closesocket(fd);
-				throw SHYNETEXCEPTION("call evutil_make_socket_nonblocking");
+				THROW_EXCEPTION("call evutil_make_socket_nonblocking");
 			}
 			if (evutil_make_socket_closeonexec(fd) < 0) {
 				evutil_closesocket(fd);
-				throw SHYNETEXCEPTION("call evutil_make_socket_closeonexec");
+				THROW_EXCEPTION("call evutil_make_socket_closeonexec");
 			}
 			int on = 1;
 			if (setsockopt(fd, SOL_SOCKET, SO_KEEPALIVE, (void*)&on, sizeof(on)) < 0) {
 				evutil_closesocket(fd);
-				throw SHYNETEXCEPTION("call setsockopt");
+				THROW_EXCEPTION("call setsockopt");
 			}
 			if (evutil_make_listen_socket_reuseable(fd) < 0) {
 				evutil_closesocket(fd);
-				throw SHYNETEXCEPTION("call evutil_make_listen_socket_reuseable");
+				THROW_EXCEPTION("call evutil_make_listen_socket_reuseable");
 			}
 
 			if (bind(fd, (const struct sockaddr*)listen_addr_->sockaddr(), sizeof(sockaddr_storage)) < 0) {
 				evutil_closesocket(fd);
 				std::ostringstream err;
 				err << "call bind:" << EVUTIL_SOCKET_ERROR() << " " << evutil_socket_error_to_string(EVUTIL_SOCKET_ERROR()) << " -";
-				throw SHYNETEXCEPTION(err.str());
+				THROW_EXCEPTION(err.str());
 			}
 
 			if (listen(fd, 128) < 0) {
 				evutil_closesocket(fd);
-				throw SHYNETEXCEPTION("call listen");
+				THROW_EXCEPTION("call listen");
 			}
 			LOG_TRACE << "listen ip:" << listen_addr_->ip() << " port:" << listen_addr_->port();
 			listenfd_ = fd;

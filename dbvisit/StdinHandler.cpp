@@ -7,31 +7,25 @@
 #include <tuple>
 #include <cstring>
 
-namespace dbvisit
-{
+namespace dbvisit {
 	StdinHandler::StdinHandler(std::shared_ptr<events::EventBase> base, evutil_socket_t fd) :
-		events::EventHandler(base, fd, EV_READ | EV_PERSIST)
-	{
+		events::EventHandler(base, fd, EV_READ | EV_PERSIST) {
 	}
 
-	StdinHandler::~StdinHandler()
-	{
+	StdinHandler::~StdinHandler() {
 	}
 
 
 	extern int optind, opterr, optopt;
 
-	void StdinHandler::input(int fd)
-	{
+	void StdinHandler::input(int fd) {
 		char msg[1024];
 		memset(&msg, 0, sizeof(msg));
 		ssize_t ret = read(fd, msg, sizeof(msg));
-		if (ret < 0)
-		{
-			LOG_WARN << "call read";
+		if (ret < 0) {
+			THROW_EXCEPTION("call read");
 		}
-		else
-		{
+		else {
 			using item = std::tuple<const char*, const char*, std::function<void(const char* od, int argc, char** argv, const char* optarg)>>;
 			item orders[] = {
 				item("quit",":",bind(&StdinHandler::quit_order, this,
@@ -43,23 +37,18 @@ namespace dbvisit
 			char* order = shynet::utils::StringOp::trim(msg);
 			char* argv[20] = { 0 };
 			int argc = shynet::utils::StringOp::split(order, " ", argv, 20);
-			if (argc > 0)
-			{
+			if (argc > 0) {
 				bool flag = false;
-				for (auto&& [item0, item1, itemfun] : orders)
-				{
-					if (strcmp(argv[0], item0) == 0)
-					{
+				for (auto&& [item0, item1, itemfun] : orders) {
+					if (strcmp(argv[0], item0) == 0) {
 						itemfun(item0, argc, argv, item1);
 						flag = true;
 					}
 				}
-				if (flag == false)
-				{
-					LOG_WARN << "没有可执行的命令";
+				if (flag == false) {
+					LOG_INFO << "没有可执行的命令";
 					LOG_INFO << "可执行的命令列表";
-					for (const auto& it : orders)
-					{
+					for (const auto& it : orders) {
 						LOG_INFO << "	<" << std::get<0>(it) << ">";
 					}
 				}
@@ -67,13 +56,12 @@ namespace dbvisit
 		}
 	}
 
-	void StdinHandler::quit_order(const char* od, int argc, char** argv, const char* optarg)
-	{
+	void StdinHandler::quit_order(const char* od, int argc, char** argv, const char* optarg) {
 		struct timeval delay = { 2, 0 };
 		LOG_INFO << "捕获到一个退出命令,程序将在2秒后安全退出";
 		base()->loopexit(&delay);
 	}
-	
+
 	void StdinHandler::info_order(const char* od, int argc, char** argv, const char* optstr) {
 		char path[PATH_MAX] = { 0 };
 		char processname[NAME_MAX] = { 0 };

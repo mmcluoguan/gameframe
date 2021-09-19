@@ -1,13 +1,11 @@
 #pragma once
 #include "shynet/events/EventHandler.h"
 
-namespace dbvisit
-{
+namespace dbvisit {
 	/// <summary>
 	/// 终端输入处理
 	/// </summary>
-	class StdinHandler : public events::EventHandler
-	{
+	class StdinHandler : public events::EventHandler {
 	public:
 		StdinHandler(std::shared_ptr<events::EventBase> base, evutil_socket_t fd);
 		~StdinHandler();

@@ -6,7 +6,7 @@
 
 namespace shynet {
 	namespace protocol {
-		Tcpip::Tcpip(FilterProces* filter) : 
+		Tcpip::Tcpip(FilterProces* filter) :
 			filter_(filter),
 			total_original_data_(new char[filter_->max_reve_buf_size]) {
 		}
@@ -33,8 +33,7 @@ namespace shynet {
 					je_free(line);
 					FrameType ft;
 					size_t needlen = sizeof(char);
-					if (inputbuffer->length() >= needlen)
-					{
+					if (inputbuffer->length() >= needlen) {
 						//读取帧类型
 						inputbuffer->lock();
 						inputbuffer->remove(&ft, needlen);
@@ -107,8 +106,8 @@ namespace shynet {
 			return 0;
 		}
 
-		int Tcpip::send1(const void* data, size_t len, FrameType op) const
-		{			const char* head = "\r\n";
+		int Tcpip::send1(const void* data, size_t len, FrameType op) const {
+			const char* head = "\r\n";
 			uint32_t datalen = htonl(static_cast<uint32_t>(len));
 			size_t total_data_len = strlen(head) + sizeof(char) + sizeof(datalen) + len;
 			std::unique_ptr<char[]> data_buffer(new char[total_data_len]);
@@ -134,8 +133,7 @@ namespace shynet {
 
 			int ret = 0;
 			size_t pos = 0;
-			for (size_t i = 0; i < numtimes; ++i)
-			{
+			for (size_t i = 0; i < numtimes; ++i) {
 				ret = send1((const char*)data + pos, filter_->max_single_buf_size, FrameType::Continuation);
 				if (ret == -1) {
 					return ret;

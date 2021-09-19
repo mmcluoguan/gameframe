@@ -1,13 +1,11 @@
 #pragma once
 #include "shynet/net/ListenReactorMgr.h"
 
-namespace game
-{
+namespace game {
 	/// <summary>
 	/// 游戏服务器
 	/// </summary>
-	class GameServer final : public net::ListenEvent
-	{
+	class GameServer final : public net::ListenEvent {
 	public:
 		explicit GameServer(std::shared_ptr<net::IPAddress> listen_addr);
 		~GameServer();

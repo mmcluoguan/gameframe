@@ -11,13 +11,13 @@ namespace frmpub {
 	}
 	FilterData::~FilterData() {
 	}
-	int FilterData::message_handle(char* original_data, size_t datalen) {	
+	int FilterData::message_handle(char* original_data, size_t datalen) {
 		int ret = 0;
 		if (pd_ == ProtoData::NATIVE) {
 			ret = native_handle(original_data, datalen);
 		}
 		else if (pd_ == ProtoData::PROTOBUF) {
-			ret = protobuf_handle(original_data, datalen);			
+			ret = protobuf_handle(original_data, datalen);
 		}
 		else if (pd_ == ProtoData::JSON) {
 			ret = json_handle(original_data, datalen);
@@ -53,7 +53,7 @@ namespace frmpub {
 		if (obj.IsObject()) {
 			std::shared_ptr<std::stack<Envelope>> enves = std::make_shared<std::stack<Envelope>>();
 			auto iter = doc->FindMember("rs");
-			if (iter != doc->MemberEnd() && iter->value.IsArray()) {						
+			if (iter != doc->MemberEnd() && iter->value.IsArray()) {
 				for (rapidjson::SizeType i = iter->value.Size() - 1; i >= 0; i--) {
 					rapidjson::Value& item = iter->value[i];
 					auto fd_iter = item.FindMember("fd");

@@ -162,9 +162,6 @@ namespace shynet {
 			if (level_ == Logger::LogLevel::FATAL) {
 				abort();
 			}
-			else if (level_ == Logger::LogLevel::ERROR) {
-				exit(EXIT_FAILURE);
-			}
 		}
 
 		static const char* ullto4Str(int n) {

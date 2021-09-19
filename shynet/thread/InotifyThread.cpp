@@ -1,6 +1,7 @@
 #include "shynet/thread/InotifyThread.h"
 #include "shynet/pool/ThreadPool.h"
 #include "shynet/utils/Logger.h"
+#include "shynet/utils/Stuff.h"
 #include <sys/inotify.h>
 #include <fcntl.h>
 #include <ftw.h>
@@ -13,7 +14,7 @@ namespace shynet {
 		InotifyThread::InotifyThread(size_t index) : Thread(ThreadType::INOTIFY, index) {
 			notifyfd_ = inotify_init1(IN_NONBLOCK | IN_CLOEXEC);
 			if (notifyfd_ == -1) {
-				throw SHYNETEXCEPTION("call inotify_init");
+				THROW_EXCEPTION("call inotify_init");
 			}
 		}
 
@@ -25,7 +26,12 @@ namespace shynet {
 
 		static void ioreadcb(struct bufferevent* bev, void* ptr) {
 			InotifyThread* p = reinterpret_cast<InotifyThread*>(ptr);
-			p->io_readcb();
+			try {
+				p->io_readcb();
+			}
+			catch (const std::exception& err) {
+				utils::Stuff::print_exception(err);
+			}
 		}
 
 		void InotifyThread::io_readcb() {
@@ -67,6 +73,7 @@ namespace shynet {
 							if (ev.mask & IN_Q_OVERFLOW) LOG_TRACE << "事件队列溢出 " << path;
 							if (ev.mask & IN_MOVE_SELF) LOG_TRACE << "监控目录被移动 " << path;
 							if (ev.mask & IN_UNMOUNT) LOG_TRACE << "支持文件系统已卸载 " << path;
+
 							iter->second->notify_event(path, ev.mask);
 						}
 					}
@@ -100,7 +107,7 @@ namespace shynet {
 				}
 				return FTW_CONTINUE;
 				}, 10, FTW_MOUNT | FTW_PHYS) == -1) {
-				throw SHYNETEXCEPTION("call nftw");
+				THROW_EXCEPTION("call nftw");
 			}
 			for (int fd : g_wds) {
 				task_map_[fd] = task;
@@ -131,7 +138,7 @@ namespace shynet {
 				base_->loop(EVLOOP_NO_EXIT_ON_EMPTY);
 			}
 			catch (const std::exception& err) {
-				LOG_WARN << err.what();
+				utils::Stuff::print_exception(err);
 			}
 			return 0;
 		}

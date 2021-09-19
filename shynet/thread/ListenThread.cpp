@@ -1,6 +1,7 @@
 #include "shynet/thread/ListenThread.h"
 #include "shynet/net/ListenReactorMgr.h"
 #include "shynet/utils/Logger.h"
+#include "shynet/utils/Stuff.h"
 
 namespace shynet {
 
@@ -18,8 +19,13 @@ namespace shynet {
 		}
 
 		static void pipeReadcb(struct bufferevent* bev, void* ptr) {
-			ListenThread* rtk = reinterpret_cast<ListenThread*>(ptr);
-			rtk->process(bev);
+			try {
+				ListenThread* rtk = reinterpret_cast<ListenThread*>(ptr);
+				rtk->process(bev);
+			}
+			catch (const std::exception& err) {
+				utils::Stuff::print_exception(err);
+			}
 		}
 
 		void ListenThread::process(bufferevent* bev) {
@@ -67,7 +73,7 @@ namespace shynet {
 				pair_[1].reset();
 			}
 			catch (const std::exception& err) {
-				LOG_WARN << err.what();
+				shynet::utils::Stuff::print_exception(err);
 			}
 			return 0;
 		}

@@ -19,7 +19,7 @@ namespace shynet {
 				tth->notify(data, len);
 			}
 			else
-				LOG_WARN << "not available TimerThread";
+				LOG_WARN << "没有可用的 TimerThread";
 		}
 
 		int TimerReactorMgr::add(std::shared_ptr<TimerEvent> v) {

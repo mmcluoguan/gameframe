@@ -24,8 +24,7 @@ namespace gate {
 		connect_datas_[connect_id] = data;
 	}
 
-	ConnectorMgr::ConnectData* ConnectorMgr::find_connect_data(int connect_id)
-	{
+	ConnectorMgr::ConnectData* ConnectorMgr::find_connect_data(int connect_id) {
 		std::lock_guard<std::mutex> lock(connect_data_mutex_);
 		auto it = connect_datas_.find(connect_id);
 		if (it != connect_datas_.end()) {
@@ -90,26 +89,22 @@ namespace gate {
 		return false;
 	}
 
-	std::shared_ptr<WorldConnector> ConnectorMgr::world_connector()  {
-		if (worldctor_ids_.begin() != worldctor_ids_.end())
-		{
+	std::shared_ptr<WorldConnector> ConnectorMgr::world_connector() {
+		if (worldctor_ids_.begin() != worldctor_ids_.end()) {
 			return find_worldctor(*worldctor_ids_.begin());
 		}
 		return nullptr;
 	}
 
-	void ConnectorMgr::add_worldctor(int connectid)
-	{
+	void ConnectorMgr::add_worldctor(int connectid) {
 		std::lock_guard<std::mutex> lock(worldctor_ids_mtx_);
 		worldctor_ids_.push_back(connectid);
 	}
-	void ConnectorMgr::remove_worldctor(int connectid)
-	{
+	void ConnectorMgr::remove_worldctor(int connectid) {
 		std::lock_guard<std::mutex> lock(worldctor_ids_mtx_);
 		worldctor_ids_.remove(connectid);
 	}
-	std::shared_ptr<WorldConnector> ConnectorMgr::find_worldctor(int connectid)
-	{
+	std::shared_ptr<WorldConnector> ConnectorMgr::find_worldctor(int connectid) {
 		return std::dynamic_pointer_cast<WorldConnector>(
 			shynet::utils::Singleton<net::ConnectReactorMgr>::instance().find(connectid));
 	}

@@ -9,8 +9,8 @@
 
 namespace shynet {
 	namespace protocol {
-		WebSocket::WebSocket(FilterProces* filter) : 
-			filter_(filter), 
+		WebSocket::WebSocket(FilterProces* filter) :
+			filter_(filter),
 			total_original_data_(new char[filter_->max_reve_buf_size]) {
 
 		}
@@ -328,8 +328,7 @@ namespace shynet {
 			return filter_->iobuf()->write(buf.c_str(), buf.length());
 		}
 
-		int WebSocket::send1(const void* data, size_t len, FrameType op) const
-		{
+		int WebSocket::send1(const void* data, size_t len, FrameType op) const {
 			unsigned char header[10];
 			size_t header_len = 0;
 			header[0] = (uint8_t)((int)op | 128);
@@ -394,15 +393,14 @@ namespace shynet {
 
 			int ret = 0;
 			size_t pos = 0;
-			for (size_t i = 0; i < numtimes; ++i)
-			{
+			for (size_t i = 0; i < numtimes; ++i) {
 				ret = send1((const char*)data + pos, filter_->max_single_buf_size, FrameType::Continuation);
 				if (ret == -1) {
 					return ret;
 				}
 				pos += filter_->max_single_buf_size;
 			}
-			return send1((const char*)data + pos, remaining, op);			
+			return send1((const char*)data + pos, remaining, op);
 		}
 
 		int WebSocket::send(std::string data, FrameType op) const {

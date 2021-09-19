@@ -7,7 +7,7 @@ namespace shynet {
 			base_ = base;
 			buffer_ = bufferevent_socket_new(base->base(), fd, options);
 			if (buffer_ == nullptr) {
-				throw SHYNETEXCEPTION("call bufferevent_socket_new");
+				THROW_EXCEPTION("call bufferevent_socket_new");
 			}
 			delflag_ = true;
 		}

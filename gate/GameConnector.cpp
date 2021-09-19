@@ -124,8 +124,7 @@ namespace gate {
 			enves->pop();
 			std::shared_ptr<GateClient> client = shynet::utils::Singleton<GateClientMgr>::instance().find(env.fd);
 			if (client != nullptr) {
-				if (data->msgid() == protocc::CREATEROLE_CLIENT_GATE_S)
-				{
+				if (data->msgid() == protocc::CREATEROLE_CLIENT_GATE_S) {
 					protocc::createrole_client_gate_s createrole;
 					if (createrole.ParseFromString(data->msgdata()) == true) {
 						if (createrole.result() == 0) {
@@ -133,8 +132,7 @@ namespace gate {
 							ConnectorMgr& connectMgr = shynet::utils::Singleton<ConnectorMgr>::instance();
 							int login_connect_id = connectMgr.sid_conv_connect_id(client->set_login_id());
 							std::shared_ptr<LoginConnector> login = connectMgr.select_login(login_connect_id);
-							if (login != nullptr)
-							{
+							if (login != nullptr) {
 								login->send_proto(data.get(), enves.get());
 							}
 							else {

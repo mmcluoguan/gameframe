@@ -6,11 +6,11 @@
 namespace shynet {
 	namespace utils {
 
-		using UInt =uint32_t ;
-		using UInt64 = uint64_t ;
+		using UInt = uint32_t;
+		using UInt64 = uint64_t;
 
-		using AtomicUInt = std::atomic<UInt> ;
-		using AtomicUInt64 = std::atomic<UInt64> ;
+		using AtomicUInt = std::atomic<UInt>;
+		using AtomicUInt64 = std::atomic<UInt64>;
 
 		/**
 		 * 64bit id: 0000  0000  0000  0000  0000  0000  0000  0000  0000  0000  0000  0000  0000  0000  0000  0000
@@ -141,6 +141,6 @@ namespace shynet {
 		/*
 		* id生成器
 		*/
-		using IdWorker = SnowflakeIdWorker ;
+		using IdWorker = SnowflakeIdWorker;
 	}
 }

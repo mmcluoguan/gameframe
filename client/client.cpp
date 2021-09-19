@@ -28,13 +28,11 @@ void test() {
 
 	std::vector<int> aa;
 	int max = 10;
-	for (int i = 0; i < max; i++)
-	{
+	for (int i = 0; i < max; i++) {
 		aa.push_back(5);//shynet::utils::Stuff::random(1, 5));
 	}
 	shynet::utils::SkipList<int, int> sl;
-	for (int i = 0; i < max; i++)
-	{
+	for (int i = 0; i < max; i++) {
 		int a = aa[i];
 		sl.insert({ a,i });
 	}
@@ -62,7 +60,7 @@ void test() {
 	bb >>= 1;
 	LOG_DEBUG << std::to_integer<int>(bb);
 
-	std::shared_ptr<char[]> shccc(new char[10]{'a','1'});
+	std::shared_ptr<char[]> shccc(new char[10]{ 'a','1' });
 	LOG_DEBUG << shccc.get()[0];
 }
 
@@ -91,7 +89,7 @@ int main(int argc, char* argv[]) {
 		Stuff::create_coredump();
 		Logger::loglevel(Logger::LogLevel::DEBUG);
 		if (EventBase::usethread() == -1) {
-			LOG_ERROR << "call usethread";
+			THROW_EXCEPTION("call usethread");
 		}
 		EventBase::initssl();
 
@@ -111,13 +109,12 @@ int main(int argc, char* argv[]) {
 		base->addevent(stdin, nullptr);
 		base->addevent(sigint, nullptr);
 		base->dispatch();
-
-		EventBase::cleanssl();
-		EventBase::event_shutdown();
-		google::protobuf::ShutdownProtobufLibrary();
 	}
 	catch (const std::exception& err) {
-		LOG_WARN << err.what();
+		utils::Stuff::print_exception(err);
 	}
+	EventBase::cleanssl();
+	EventBase::event_shutdown();
+	google::protobuf::ShutdownProtobufLibrary();
 	return 0;
 }

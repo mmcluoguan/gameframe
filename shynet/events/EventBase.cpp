@@ -13,26 +13,26 @@ namespace shynet {
 		EventBase::EventBase() {
 			const EventConfig cfg;
 			if (cfg.setfeatures(EV_FEATURE_ET) == -1) {
-				throw SHYNETEXCEPTION("call setfeatures(EV_FEATURE_ET)");
+				THROW_EXCEPTION("call setfeatures(EV_FEATURE_ET)");
 			}
 			if (cfg.setfeatures(EV_FEATURE_O1) == -1) {
-				throw SHYNETEXCEPTION("call setfeatures(EV_FEATURE_O1)");
+				THROW_EXCEPTION("call setfeatures(EV_FEATURE_O1)");
 			}
-			if (cfg.setflag(EVENT_BASE_FLAG_IGNORE_ENV) == -1){
-				throw SHYNETEXCEPTION("call setfeatures(EVENT_BASE_FLAG_IGNORE_ENV)");
+			if (cfg.setflag(EVENT_BASE_FLAG_IGNORE_ENV) == -1) {
+				THROW_EXCEPTION("call setfeatures(EVENT_BASE_FLAG_IGNORE_ENV)");
 			}
 			if (cfg.setflag(EVENT_BASE_FLAG_EPOLL_USE_CHANGELIST) == -1) {
-				throw SHYNETEXCEPTION("call setflag(EVENT_BASE_FLAG_EPOLL_USE_CHANGELIST)");
+				THROW_EXCEPTION("call setflag(EVENT_BASE_FLAG_EPOLL_USE_CHANGELIST)");
 			}
 			base_ = event_base_new_with_config(cfg.config());
 			if (base_ == nullptr) {
-				throw SHYNETEXCEPTION("call event_base_new_with_config");
+				THROW_EXCEPTION("call event_base_new_with_config");
 			}
 		}
 		EventBase::EventBase(const EventConfig* cfg) {
 			base_ = event_base_new_with_config(cfg->config());
 			if (base_ == nullptr) {
-				throw SHYNETEXCEPTION("call event_base_new_with_config");
+				THROW_EXCEPTION("call event_base_new_with_config");
 			}
 		}
 		EventBase::~EventBase() {
@@ -90,11 +90,11 @@ namespace shynet {
 		}
 		void EventBase::make_pair_buffer(std::shared_ptr<EventBuffer> pair[2]) {
 			if (pair[0] != nullptr || pair[1] != nullptr) {
-				throw SHYNETEXCEPTION("call make_pair_buffer");
+				THROW_EXCEPTION("call make_pair_buffer");
 			}
 			struct bufferevent* ap[2] = { nullptr };
 			if (bufferevent_pair_new(base_, BEV_OPT_THREADSAFE | BEV_OPT_CLOSE_ON_FREE, ap) != 0) {
-				throw SHYNETEXCEPTION("call bufferevent_pair_new");
+				THROW_EXCEPTION("call bufferevent_pair_new");
 			}
 			pair[0] = std::make_shared<EventBuffer>(ap[0], true);
 			pair[1] = std::make_shared<EventBuffer>(ap[1], true);

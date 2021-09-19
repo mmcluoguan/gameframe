@@ -8,7 +8,7 @@
 
 namespace shynet {
 	namespace utils {
-		
+
 
 		std::string& StringOp::trim(std::string& xstr, std::function<int(int)> cb) {
 			if (xstr.empty()) {
@@ -94,8 +94,7 @@ namespace shynet {
 
 			return ret;
 		}
-		std::vector<std::string> StringOp::split(const std::string& s, const std::string& sep, bool keep_empty_strings)
-		{
+		std::vector<std::string> StringOp::split(const std::string& s, const std::string& sep, bool keep_empty_strings) {
 			std::vector<std::string> ret;
 			if (s.empty()) {
 				return ret;
@@ -126,12 +125,10 @@ namespace shynet {
 			}
 			return ret;
 		}
-		std::vector<std::string> StringOp::split(const std::string& s, const char* sep, bool keep_empty_strings)
-		{
+		std::vector<std::string> StringOp::split(const std::string& s, const char* sep, bool keep_empty_strings) {
 			return split(s, std::string(sep), keep_empty_strings);
 		}
-		std::vector<std::string> StringOp::split_any(const std::string& s, const std::string& charlist, bool keep_empty_strings)
-		{
+		std::vector<std::string> StringOp::split_any(const std::string& s, const std::string& charlist, bool keep_empty_strings) {
 			std::vector<std::string> ret;
 			if (s.empty()) {
 				return ret;
@@ -161,8 +158,7 @@ namespace shynet {
 			}
 			return ret;
 		}
-		std::vector<std::string> StringOp::splitlines(const std::string& s, bool keep_ends)
-		{
+		std::vector<std::string> StringOp::splitlines(const std::string& s, bool keep_ends) {
 			std::vector<std::string> ret;
 			if (s.empty()) {
 				return ret;

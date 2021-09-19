@@ -2,25 +2,19 @@
 #include "shynet/net/ConnectEvent.h"
 #include "shynet/net/TimerReactorMgr.h"
 
-namespace shynet
-{
+namespace shynet {
 
-	namespace net
-	{
+	namespace net {
 		ConnectHeartbeat::ConnectHeartbeat(std::weak_ptr<ConnectEvent> cnv, const struct timeval val) :
-			TimerEvent(val, EV_TIMEOUT)
-		{
+			TimerEvent(val, EV_TIMEOUT) {
 			cnv_ = cnv;
 		}
-		ConnectHeartbeat::~ConnectHeartbeat()
-		{
+		ConnectHeartbeat::~ConnectHeartbeat() {
 		}
-		void ConnectHeartbeat::timeout()
-		{
+		void ConnectHeartbeat::timeout() {
 			utils::Singleton<TimerReactorMgr>::instance().remove(timerid());
 			std::shared_ptr<ConnectEvent> cnv = cnv_.lock();
-			if (cnv != nullptr)
-			{
+			if (cnv != nullptr) {
 				cnv->timerout();
 			}
 		}

@@ -53,7 +53,7 @@ namespace shynet {
 				cnt->notify(data, len);
 			}
 			else
-				LOG_WARN << "not available ConnectThread";
+				LOG_WARN << "没有可用的 ConnectThread";
 		}
 
 	}

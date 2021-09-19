@@ -19,7 +19,7 @@ namespace game {
 
 		state["newid"] = kaguya::function([]() {
 			return shynet::utils::Singleton<shynet::utils::IdWorker>::get_instance().getid();
-			});		
+			});
 
 		state["GameServer_CPP"].setClass(kaguya::UserdataMetatable<GameServer, net::ListenEvent>()
 		);

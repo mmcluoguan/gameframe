@@ -2,16 +2,13 @@
 #include "shynet/Basic.h"
 #include <event2/event.h>
 
-namespace shynet
-{
-	namespace events
-	{
+namespace shynet {
+	namespace events {
 
 		/// <summary>
 		/// 反应堆配置
 		/// </summary>
-		class EventConfig final : public Nocopy
-		{
+		class EventConfig final : public Nocopy {
 		public:
 			EventConfig();
 			~EventConfig();
