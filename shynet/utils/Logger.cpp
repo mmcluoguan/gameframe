@@ -13,42 +13,6 @@
 
 namespace shynet {
 	namespace utils {
-		static constexpr const char* g_ename[] = {
-			/*   0 */ "",
-			/*   1 */ "EPERM", "ENOENT", "ESRCH", "EINTR", "EIO", "ENXIO",
-			/*   7 */ "E2BIG", "ENOEXEC", "EBADF", "ECHILD",
-			/*  11 */ "EAGAIN/EWOULDBLOCK", "ENOMEM", "EACCES", "EFAULT",
-			/*  15 */ "ENOTBLK", "EBUSY", "EEXIST", "EXDEV", "ENODEV",
-			/*  20 */ "ENOTDIR", "EISDIR", "EINVAL", "ENFILE", "EMFILE",
-			/*  25 */ "ENOTTY", "ETXTBSY", "EFBIG", "ENOSPC", "ESPIPE",
-			/*  30 */ "EROFS", "EMLINK", "EPIPE", "EDOM", "ERANGE",
-			/*  35 */ "EDEADLK/EDEADLOCK", "ENAMETOOLONG", "ENOLCK", "ENOSYS",
-			/*  39 */ "ENOTEMPTY", "ELOOP", "", "ENOMSG", "EIDRM", "ECHRNG",
-			/*  45 */ "EL2NSYNC", "EL3HLT", "EL3RST", "ELNRNG", "EUNATCH",
-			/*  50 */ "ENOCSI", "EL2HLT", "EBADE", "EBADR", "EXFULL", "ENOANO",
-			/*  56 */ "EBADRQC", "EBADSLT", "", "EBFONT", "ENOSTR", "ENODATA",
-			/*  62 */ "ETIME", "ENOSR", "ENONET", "ENOPKG", "EREMOTE",
-			/*  67 */ "ENOLINK", "EADV", "ESRMNT", "ECOMM", "EPROTO",
-			/*  72 */ "EMULTIHOP", "EDOTDOT", "EBADMSG", "EOVERFLOW",
-			/*  76 */ "ENOTUNIQ", "EBADFD", "EREMCHG", "ELIBACC", "ELIBBAD",
-			/*  81 */ "ELIBSCN", "ELIBMAX", "ELIBEXEC", "EILSEQ", "ERESTART",
-			/*  86 */ "ESTRPIPE", "EUSERS", "ENOTSOCK", "EDESTADDRREQ",
-			/*  90 */ "EMSGSIZE", "EPROTOTYPE", "ENOPROTOOPT",
-			/*  93 */ "EPROTONOSUPPORT", "ESOCKTNOSUPPORT",
-			/*  95 */ "EOPNOTSUPP/ENOTSUP", "EPFNOSUPPORT", "EAFNOSUPPORT",
-			/*  98 */ "EADDRINUSE", "EADDRNOTAVAIL", "ENETDOWN", "ENETUNREACH",
-			/* 102 */ "ENETRESET", "ECONNABORTED", "ECONNRESET", "ENOBUFS",
-			/* 106 */ "EISCONN", "ENOTCONN", "ESHUTDOWN", "ETOOMANYREFS",
-			/* 110 */ "ETIMEDOUT", "ECONNREFUSED", "EHOSTDOWN", "EHOSTUNREACH",
-			/* 114 */ "EALREADY", "EINPROGRESS", "ESTALE", "EUCLEAN",
-			/* 118 */ "ENOTNAM", "ENAVAIL", "EISNAM", "EREMOTEIO", "EDQUOT",
-			/* 123 */ "ENOMEDIUM", "EMEDIUMTYPE", "ECANCELED", "ENOKEY",
-			/* 127 */ "EKEYEXPIRED", "EKEYREVOKED", "EKEYREJECTED",
-			/* 130 */ "EOWNERDEAD", "ENOTRECOVERABLE", "ERFKILL", "EHWPOISON"
-		};
-
-		static constexpr  int g_maxename = 133;
-
 		struct LogInfo {
 			const char* name;
 			const char* color;
@@ -68,7 +32,6 @@ namespace shynet {
 		static std::mutex g_logMutex;
 		static std::ofstream g_logfile;
 		static char g_logfilename[100] = {};
-		static thread_local char t_errnobuf[512] = { 0 };
 
 		static void defaultOutput(const char* msg, size_t len) {
 			std::lock_guard<std::mutex> lock(g_logMutex);
@@ -143,10 +106,10 @@ namespace shynet {
 
 			ostream_ << "[" << g_levelNames[level].name << "] " << buf << "." << (time.tv_usec / 1000) << " ";
 			if (savedErrno != 0) {
-				ostream_ << "[" << ((savedErrno > 0 && savedErrno <= g_maxename) ? g_ename[savedErrno] : "?UNKNOWN?");
-				ostream_ << "(" << ((savedErrno > 0 && savedErrno <= g_maxename) ? savedErrno : -1) << ")";
-				strerror_r(savedErrno, t_errnobuf, sizeof t_errnobuf);
-				ostream_ << " " << t_errnobuf << "] ";
+				std::error_condition econd = std::system_category().default_error_condition(savedErrno);
+				ostream_ << "[" << econd.category().name();
+				ostream_ << "(" << econd.value() << ")";
+				ostream_ << " " << econd.message() << "] ";
 			}
 		}
 
