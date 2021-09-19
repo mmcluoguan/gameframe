@@ -78,7 +78,7 @@ namespace dbvisit {
 			redis.del(key);
 		}
 		catch (const std::exception& err) {
-			LOG_WARN << err.what();
+			THROW_EXCEPTION(err.what());
 		}
 		std::string str;
 		if (active()) {
@@ -137,7 +137,7 @@ namespace dbvisit {
 			}
 		}
 		catch (const std::exception& err) {
-			LOG_WARN << err.what();
+			THROW_EXCEPTION(err.what());
 		}
 		return false;
 	}

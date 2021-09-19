@@ -9,7 +9,7 @@ namespace shynet
 		{
 			config_ = event_config_new();
 			if (config_ == nullptr) {
-				throw SHYNETEXCEPTION("call event_config_new");
+				THROW_EXCEPTION("call event_config_new");
 			}
 		}
 		EventConfig::~EventConfig()

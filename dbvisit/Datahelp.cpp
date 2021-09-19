@@ -35,7 +35,7 @@ namespace dbvisit {
 			}
 		}
 		else if (docs.count() > 1) {
-			throw DataException("db数据不唯一 tablename:" + tablename + " key:" + key + " where:" + where);
+			THROW_EXCEPTION("db数据不唯一 tablename:" + tablename + " key:" + key + " where:" + where);
 		}
 		else {
 			return ErrorCode::NOT_DATA;
@@ -81,7 +81,7 @@ namespace dbvisit {
 			const auto temp = shynet::utils::StringOp::split(cachekey, "_");
 			if (temp.size() < 2) {
 				LOG_WARN << "解析错误 cachekey:" << cachekey;
-				throw DataException("解析错误 cachekey:" + cachekey);
+				THROW_EXCEPTION("解析错误 cachekey:" + cachekey);
 			}
 			error = getdata_from_db(temp[0], temp[1], out);
 			if (error == ErrorCode::OK) {
@@ -131,7 +131,7 @@ namespace dbvisit {
 			}
 		}
 		if (md.execute().getAffectedItemsCount() == 0) {
-			throw DataException("数据更新失败 tablename:" + tablename + " key:" + key);
+			THROW_EXCEPTION("数据更新失败 tablename:" + tablename + " key:" + key);
 		}
 	}
 
@@ -151,7 +151,7 @@ namespace dbvisit {
 		data.Accept(writer);
 		if (sch.createCollection(tablename, true).add(buffer.GetString())
 			.execute().getAffectedItemsCount() == 0) {
-			throw DataException("数据插入失败 tablename:" + tablename + " key:" + key);
+			THROW_EXCEPTION("数据插入失败 tablename:" + tablename + " key:" + key);
 		}
 	}
 
@@ -161,7 +161,7 @@ namespace dbvisit {
 		std::string sql = shynet::utils::StringOp::str_format("_id='%s'", key.c_str());
 		if (sch.createCollection(tablename, true).remove(sql)
 			.execute().getAffectedItemsCount() == 0) {
-			throw DataException("数据删除失败 tablename:" + tablename + " key:" + key);
+			THROW_EXCEPTION("数据删除失败 tablename:" + tablename + " key:" + key);
 		}
 	}
 
@@ -187,7 +187,7 @@ namespace dbvisit {
 		redis::Redis& redis = shynet::utils::Singleton<redis::Redis>::instance(std::string());
 		long long ret = redis.del(cachekey);
 		if (ret == 0) {
-			throw DataException("cachekey数据删除失败 cachekey:" + cachekey);
+			THROW_EXCEPTION("cachekey数据删除失败 cachekey:" + cachekey);
 		}
 		else {
 			std::vector<std::string> temp = shynet::utils::StringOp::split(cachekey, "_");

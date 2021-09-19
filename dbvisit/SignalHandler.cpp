@@ -33,7 +33,7 @@ namespace dbvisit
 			redis.del(key);
 		}
 		catch (const std::exception& err) {
-			LOG_WARN << err.what();
+			THROW_EXCEPTION(err.what());
 		}
 
 		struct timeval delay = { 2, 0 };

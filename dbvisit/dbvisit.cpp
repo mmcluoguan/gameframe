@@ -37,7 +37,7 @@ int main(int argc, char* argv[]) {
 
 	if (argc < 2)
 	{
-		LOG_ERROR << "没有配置参数";
+		THROW_EXCEPTION("没有配置参数");
 	}
 	try {
 		g_confname = argv[1];
@@ -97,7 +97,7 @@ int main(int argc, char* argv[]) {
 			Stuff::create_coredump();
 			Logger::loglevel(Logger::LogLevel::DEBUG);
 			if (EventBase::usethread() == -1) {
-				LOG_ERROR << "call usethread";
+				THROW_EXCEPTION("call usethread");
 			}
 			EventBase::initssl();
 			std::string pidfile = StringOp::str_format("./pid/%s.pid", g_confname);
@@ -135,7 +135,7 @@ int main(int argc, char* argv[]) {
 		google::protobuf::ShutdownProtobufLibrary();
 	}
 	catch (const std::exception& err) {
-		LOG_WARN << err.what();
+		THROW_EXCEPTION(err.what());
 	}
 	return 0;
 }

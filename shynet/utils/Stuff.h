@@ -122,6 +122,11 @@ namespace shynet {
 		    *
 		    */
 			static bool net_interface_bytes(const std::string& netname, uint64_t* in, uint64_t* out);
+
+			/*
+			* 输出异常信息
+			*/
+			static void print_exception(const std::exception& e, int level = 0);
 		};
 	}
 }

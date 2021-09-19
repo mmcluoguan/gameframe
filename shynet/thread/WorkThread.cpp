@@ -1,5 +1,6 @@
 #include "shynet/thread/WorkThread.h"
 #include "shynet/pool/ThreadPool.h"
+#include "shynet/utils/Stuff.h"
 
 namespace shynet {
 	namespace thread {
@@ -57,7 +58,7 @@ namespace shynet {
 				}
 			}
 			catch (const std::exception& err) {
-				LOG_WARN << err.what();
+				utils::Stuff::print_exception(err);
 			}
 			return 0;
 		}

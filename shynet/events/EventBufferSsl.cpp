@@ -10,11 +10,11 @@ namespace shynet
 		{
 			ssl_ = SSL_new(ctx);
 			if (ssl_ == nullptr) {
-				throw SHYNETEXCEPTION("call SSL_new");
+				THROW_EXCEPTION("call SSL_new");
 			}
 			bufferevent* buf = bufferevent_openssl_socket_new(base->base(), fd, ssl_, state, options);
 			if (buf == nullptr) {
-				throw SHYNETEXCEPTION("call bufferevent_openssl_socket_new");
+				THROW_EXCEPTION("call bufferevent_openssl_socket_new");
 			}
 			set_buffer(buf);
 		}

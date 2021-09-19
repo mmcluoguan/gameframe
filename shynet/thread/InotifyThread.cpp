@@ -1,6 +1,7 @@
 #include "shynet/thread/InotifyThread.h"
 #include "shynet/pool/ThreadPool.h"
 #include "shynet/utils/Logger.h"
+#include "shynet/utils/Stuff.h"
 #include <sys/inotify.h>
 #include <fcntl.h>
 #include <ftw.h>
@@ -13,7 +14,7 @@ namespace shynet {
 		InotifyThread::InotifyThread(size_t index) : Thread(ThreadType::INOTIFY, index) {
 			notifyfd_ = inotify_init1(IN_NONBLOCK | IN_CLOEXEC);
 			if (notifyfd_ == -1) {
-				throw SHYNETEXCEPTION("call inotify_init");
+				THROW_EXCEPTION("call inotify_init");
 			}
 		}
 
@@ -100,7 +101,7 @@ namespace shynet {
 				}
 				return FTW_CONTINUE;
 				}, 10, FTW_MOUNT | FTW_PHYS) == -1) {
-				throw SHYNETEXCEPTION("call nftw");
+				THROW_EXCEPTION("call nftw");
 			}
 			for (int fd : g_wds) {
 				task_map_[fd] = task;
@@ -131,7 +132,7 @@ namespace shynet {
 				base_->loop(EVLOOP_NO_EXIT_ON_EMPTY);
 			}
 			catch (const std::exception& err) {
-				LOG_WARN << err.what();
+				utils::Stuff::print_exception(err);
 			}
 			return 0;
 		}

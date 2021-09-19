@@ -4,26 +4,6 @@
 #include <unordered_map>
 
 namespace dbvisit {
-	class DataException : public std::exception {
-	public:
-		explicit DataException(const std::string& msg) : _msg(msg) {}
-
-		DataException(const DataException&) = default;
-		DataException& operator=(const DataException&) = default;
-
-		DataException(DataException&&) = default;
-		DataException& operator=(DataException&&) = default;
-
-		virtual ~DataException() override = default;
-
-		virtual const char* what() const noexcept override {
-			return _msg.data();
-		}
-
-	private:
-		std::string _msg;
-	};
-
 	using moredata = std::list<std::unordered_map<std::string, std::string>> ;
 	using moredataptr = std::shared_ptr<moredata> ;
 

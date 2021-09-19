@@ -91,7 +91,7 @@ int main(int argc, char* argv[]) {
 		Stuff::create_coredump();
 		Logger::loglevel(Logger::LogLevel::DEBUG);
 		if (EventBase::usethread() == -1) {
-			LOG_ERROR << "call usethread";
+			THROW_EXCEPTION("call usethread");
 		}
 		EventBase::initssl();
 
@@ -117,7 +117,7 @@ int main(int argc, char* argv[]) {
 		google::protobuf::ShutdownProtobufLibrary();
 	}
 	catch (const std::exception& err) {
-		LOG_WARN << err.what();
+		utils::Stuff::print_exception(err);
 	}
 	return 0;
 }

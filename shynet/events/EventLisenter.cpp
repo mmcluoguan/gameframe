@@ -30,7 +30,7 @@ namespace shynet
 				LEV_OPT_CLOSE_ON_FREE | LEV_OPT_REUSEABLE | LEV_OPT_THREADSAFE,
 				-1, sa, socklen);
 			if (listener_ == nullptr) {
-				throw SHYNETEXCEPTION("call evconnlistener_new_bind");
+				THROW_EXCEPTION("call evconnlistener_new_bind");
 			}
 			evconnlistener_set_error_cb(listener_, acb);
 		}

@@ -1,5 +1,6 @@
 #include "shynet/thread/TimerThread.h"
 #include "shynet/net/TimerReactorMgr.h"
+#include "shynet/utils/Stuff.h"
 #include <cstring>
 
 namespace shynet {
@@ -68,7 +69,7 @@ namespace shynet {
 				pair_[1].reset();
 			}
 			catch (const std::exception& err) {
-				LOG_WARN << err.what();
+				utils::Stuff::print_exception(err);
 			}
 			return 0;
 		}

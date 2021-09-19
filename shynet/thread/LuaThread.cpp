@@ -1,6 +1,7 @@
 #include "shynet/thread/LuaThread.h"
 #include "shynet/lua/LuaEngine.h"
 #include "shynet/utils/Logger.h"
+#include "shynet/utils/Stuff.h"
 
 namespace shynet {
 	extern pthread_barrier_t g_barrier;
@@ -56,7 +57,7 @@ namespace shynet {
 				luaState_ = nullptr;
 			}
 			catch (const std::exception& err) {
-				LOG_WARN << err.what();
+				utils::Stuff::print_exception(err);
 			}
 			return 0;
 		}

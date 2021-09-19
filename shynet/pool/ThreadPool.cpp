@@ -1,5 +1,6 @@
 #include "shynet/pool/ThreadPool.h"
 #include "shynet/utils/Logger.h"
+#include "shynet/utils/Stuff.h"
 
 namespace shynet {
 
@@ -30,6 +31,7 @@ namespace shynet {
 						it->thread()->join();
 				}
 				catch(const std::exception& err){
+					utils::Stuff::print_exception(err);
 					LOG_WARN << "over thread:[" << i << "]" << std::hash<std::thread::id>()(id) << " abort";
 					//分离异常终止的线程
 					it->thread()->detach();

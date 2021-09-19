@@ -14,7 +14,7 @@ namespace shynet
 			{
 				std::ostringstream err;
 				err << "open:" << ((filename == nullptr) ? "null" : filename);
-				throw SHYNETEXCEPTION(err.str());
+				THROW_EXCEPTION(err.str());
 			}
 			else
 			{

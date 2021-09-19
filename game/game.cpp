@@ -43,7 +43,7 @@ int main(int argc, char* argv[]) {
 		Stuff::create_coredump();
 		Logger::loglevel(Logger::LogLevel::DEBUG);
 		if (EventBase::usethread() == -1) {
-			LOG_ERROR << "call usethread";
+			THROW_EXCEPTION("call usethread");
 		}
 		EventBase::initssl();
 		int sid = ini.get<int, int>("game", "sid", 0);
@@ -65,7 +65,7 @@ int main(int argc, char* argv[]) {
 		string dbstr = ini.get<const char*, string>("game", "db", "");
 		auto dblist = StringOp::split(dbstr, ",");
 		if (dblist.size() > 2 || dblist.size() == 0) {
-			LOG_ERROR << "db配置错误:" << dbstr;
+			THROW_EXCEPTION("db配置错误");
 		}
 		for (auto& item : dblist)
 		{
@@ -82,7 +82,7 @@ int main(int argc, char* argv[]) {
 		string worldstr = ini.get<const char*, string>("game", "world", "");
 		auto worldlist = StringOp::split(worldstr, ",");
 		if (worldlist.size() > 2 || worldlist.size() == 0) {
-			LOG_ERROR << "world配置错误:" << worldstr;
+			THROW_EXCEPTION("world配置错误");
 		}
 		for (auto& item : worldlist)
 		{
@@ -113,7 +113,7 @@ int main(int argc, char* argv[]) {
 		google::protobuf::ShutdownProtobufLibrary();
 	}
 	catch (const std::exception& err) {
-		LOG_WARN << err.what();
+		utils::Stuff::print_exception(err);
 	}
 	return 0;
 }

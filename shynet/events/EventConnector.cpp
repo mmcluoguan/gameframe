@@ -11,7 +11,7 @@ namespace shynet
 		{
 			EventConnector* conector = static_cast<EventConnector*>(ptr);
 			if (conector->buffer()->buffer() != bev) {
-				throw SHYNETEXCEPTION("call readcb");
+				THROW_EXCEPTION("call readcb");
 			}
 			conector->input(conector->buffer());
 		}
@@ -20,7 +20,7 @@ namespace shynet
 		{
 			EventConnector* conector = static_cast<EventConnector*>(ptr);
 			if (conector->buffer()->buffer() != bev) {
-				throw SHYNETEXCEPTION("call writecb");
+				THROW_EXCEPTION("call writecb");
 			}
 			conector->output(conector->buffer());
 		}
@@ -29,7 +29,7 @@ namespace shynet
 		{
 			EventConnector* conector = static_cast<EventConnector*>(ptr);
 			if (conector->buffer()->buffer() != bev) {
-				throw SHYNETEXCEPTION("call eventcb");
+				THROW_EXCEPTION("call eventcb");
 			}
 			if (events & BEV_EVENT_CONNECTED)
 			{
@@ -83,7 +83,7 @@ namespace shynet
 		{
 			dnsbase_ = evdns_base_new(base_->base(), 1);
 			if (dnsbase_ == nullptr) {
-				throw SHYNETEXCEPTION("call evdns_base_new");
+				THROW_EXCEPTION("call evdns_base_new");
 			}
 			buffer_ = std::make_shared<EventBuffer>(base_, -1, BEV_OPT_CLOSE_ON_FREE | BEV_OPT_THREADSAFE);
 			buffer_->setcb(readcb, writecb, eventcb, this);
@@ -95,7 +95,7 @@ namespace shynet
 		{
 			ctx_ = SSL_CTX_new(SSLv23_client_method());
 			if (ctx_ == nullptr) {
-				throw SHYNETEXCEPTION("call SSL_CTX_new");
+				THROW_EXCEPTION("call SSL_CTX_new");
 			}
 			bufferssl_ = std::make_shared<EventBufferSsl>(base_, -1, BUFFEREVENT_SSL_CONNECTING,
 				BEV_OPT_CLOSE_ON_FREE | BEV_OPT_THREADSAFE, ctx_);
@@ -108,11 +108,11 @@ namespace shynet
 		{
 			dnsbase_ = evdns_base_new(base_->base(), 1);
 			if (dnsbase_ == nullptr) {
-				throw SHYNETEXCEPTION("call evdns_base_new");
+				THROW_EXCEPTION("call evdns_base_new");
 			}
 			ctx_ = SSL_CTX_new(SSLv23_client_method());
 			if (ctx_ == nullptr) {
-				throw SHYNETEXCEPTION("call SSL_CTX_new");
+				THROW_EXCEPTION("call SSL_CTX_new");
 			}
 			bufferssl_ = std::make_shared<EventBufferSsl>(base_, -1, BUFFEREVENT_SSL_CONNECTING,
 				BEV_OPT_CLOSE_ON_FREE | BEV_OPT_THREADSAFE, ctx_);

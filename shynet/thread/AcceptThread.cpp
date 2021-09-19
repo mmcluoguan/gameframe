@@ -3,6 +3,7 @@
 #include "shynet/net/AcceptIoBuffer.h"
 #include "shynet/net/ListenEvent.h"
 #include "shynet/utils/Logger.h"
+#include "shynet/utils/Stuff.h"
 
 namespace shynet {
 
@@ -95,7 +96,7 @@ namespace shynet {
 				pair_[1].reset();
 			}
 			catch (const std::exception& err) {
-				LOG_WARN << err.what();
+				utils::Stuff::print_exception(err);
 			}
 			return 0;
 		}

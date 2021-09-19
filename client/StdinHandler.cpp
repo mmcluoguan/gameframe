@@ -122,7 +122,7 @@ namespace client {
 				LOG_WARN << od << " 未知选项 (-" << (char)optopt << ")";
 				break;
 			default:
-				LOG_SYSFATAL << "call getopt";
+				THROW_EXCEPTION("call getopt");
 			}
 		}
 		if (optind < argc) {

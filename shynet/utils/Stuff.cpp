@@ -84,13 +84,13 @@ namespace shynet {
 		void Stuff::create_coredump() {
 			struct rlimit core { RLIM_INFINITY, RLIM_INFINITY };
 			if (setrlimit(RLIMIT_CORE, &core) == -1) {
-				throw SHYNETEXCEPTION("call setrlimit");
+				THROW_EXCEPTION("call setrlimit");
 			}
 		}
 
 		int Stuff::daemon() {
 			if (::daemon(1, 0) == -1) {
-				throw SHYNETEXCEPTION("call daemon");
+				THROW_EXCEPTION("call daemon");
 			}
 			return getpid();
 		}
@@ -120,10 +120,10 @@ namespace shynet {
 				delete[] pidfile;
 			}
 			if (fp == -1) {
-				throw SHYNETEXCEPTION("call open");
+				THROW_EXCEPTION("call open");
 			}
 			if (lockf(fp, F_TLOCK, 0) < 0) {
-				throw SHYNETEXCEPTION("call lockf");
+				THROW_EXCEPTION("call lockf");
 			}
 
 			char buf[64] = { 0 };
@@ -137,12 +137,12 @@ namespace shynet {
 		int Stuff::executable_path(char* processdir, char* processname, size_t len) {
 			char* path_end;
 			if (readlink("/proc/self/exe", processdir, len) <= 0) {
-				throw SHYNETEXCEPTION("call readlink");
+				THROW_EXCEPTION("call readlink");
 				return -1;
 			}
 			path_end = strrchr(processdir, '/');
 			if (path_end == NULL) {
-				throw SHYNETEXCEPTION("找不到'/'");
+				THROW_EXCEPTION("找不到'/'");
 				return -1;
 			}
 			++path_end;
@@ -351,6 +351,18 @@ namespace shynet {
 			if (out) { *out = nd.out_bytes_; }
 
 			return true;
+		}
+
+		void Stuff::print_exception(const std::exception& e, int level)
+		{
+			LOG_WARN << "异常层级: " << level << " 异常信息:" << e.what();
+			try {
+				std::rethrow_if_nested(e);
+			}
+			catch (const std::exception& e) {
+				print_exception(e, level + 1);
+			}
+			catch (...) {}
 		}
 	}
 }

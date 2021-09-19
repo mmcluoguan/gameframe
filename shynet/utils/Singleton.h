@@ -25,7 +25,7 @@ namespace shynet {
 				if (instance_ == nullptr) {
 					std::ostringstream err;
 					err << T::classname << " 单例没有初始化";
-					throw SHYNETEXCEPTION(err.str());
+					THROW_EXCEPTION(err.str());
 				}
 				return *instance_;
 			}
