@@ -12,6 +12,7 @@
 #include "shynet/utils/IniConfig.h"
 #include "shynet/utils/StringOp.h"
 #include "shynet/utils/Stuff.h"
+#include "sys/stat.h"
 #include <unistd.h>
 
 int main(int argc, char* argv[]) {
@@ -41,7 +42,11 @@ int main(int argc, char* argv[]) {
 		}
 		EventBase::initssl();
 		int sid = ini.get<int, int>("gate", "sid", 0);
-		std::string pidfile = StringOp::str_format("./gate_%d.pid", sid);
+		const char* pid_dir = "./pid/";
+		if (access(pid_dir, F_OK) == -1) {
+			mkdir(pid_dir, S_IRWXU);
+		}
+		std::string pidfile = StringOp::str_format("./%s/gate_%d.pid", pid_dir, sid);
 		Stuff::writepid(pidfile);
 
 		Singleton<LuaEngine>::instance(std::make_shared<gate::LuaWrapper>());
@@ -71,7 +76,7 @@ int main(int argc, char* argv[]) {
 
 		shared_ptr<EventBase> base(new EventBase());
 		shared_ptr<StdinHandler> stdin(new StdinHandler(base, STDIN_FILENO));
-		shared_ptr<SigIntHandler> sigint(new SigIntHandler(base));
+		shared_ptr<SignalHandler> sigint(new SignalHandler(base));
 		base->addevent(stdin, nullptr);
 		base->addevent(sigint, nullptr);
 		base->dispatch();

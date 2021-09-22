@@ -16,8 +16,8 @@
 #include <google/protobuf/message.h>
 #include <sw/redis++/redis++.h>
 namespace redis = sw::redis;
+#include <sys/stat.h>
 #include <unistd.h>
-#include <unordered_map>
 
 //配置参数
 const char* g_confname;
@@ -99,7 +99,11 @@ int main(int argc, char* argv[]) {
 				THROW_EXCEPTION("call usethread");
 			}
 			EventBase::initssl();
-			std::string pidfile = StringOp::str_format("./pid/%s.pid", g_confname);
+			const char* pid_dir = "./pid/";
+			if (access(pid_dir, F_OK) == -1) {
+				mkdir(pid_dir, S_IRWXU);
+			}
+			std::string pidfile = StringOp::str_format("./%s/%s.pid", pid_dir, g_confname);
 			Stuff::writepid(pidfile);
 
 			Singleton<LuaEngine>::instance(std::make_shared<dbvisit::LuaWrapper>());
@@ -120,7 +124,7 @@ int main(int argc, char* argv[]) {
 			shared_ptr<EventBase> base(new EventBase());
 
 			shared_ptr<StdinHandler> stdin(new StdinHandler(base, STDIN_FILENO));
-			shared_ptr<SigIntHandler> sigint(new SigIntHandler(base));
+			shared_ptr<SignalHandler> sigint(new SignalHandler(base));
 			base->addevent(stdin, nullptr);
 			base->addevent(sigint, nullptr);
 			base->dispatch();

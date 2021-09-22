@@ -18,6 +18,7 @@ int g_gateconnect_id;
 #include "shynet/utils/Hash.h"
 #include "shynet/utils/Lru.h"
 #include "shynet/utils/SkipList.h"
+#include <atomic>
 #include <cstddef>
 
 void test() {
@@ -54,14 +55,15 @@ void test() {
 	exist = c.get("tom", &v);
 	assert(!exist);
 
-	LOG_DEBUG << "hash code:" << shynet::utils::hash_val(v, exist);
+	//LOG_DEBUG << "hash code:" << shynet::utils::hash_val(v, exist);
 
 	std::byte bb{ 12 };
 	bb >>= 1;
-	LOG_DEBUG << std::to_integer<int>(bb);
+	//LOG_DEBUG << std::to_integer<int>(bb);
 
 	std::shared_ptr<char[]> shccc(new char[10]{ 'a','1' });
-	LOG_DEBUG << shccc.get()[0];
+	//LOG_DEBUG << shccc.get()[0];
+
 }
 
 int main(int argc, char* argv[]) {
@@ -105,7 +107,7 @@ int main(int argc, char* argv[]) {
 
 		shared_ptr<EventBase> base(new EventBase());
 		shared_ptr<StdinHandler> stdin(new StdinHandler(base, STDIN_FILENO));
-		shared_ptr<SigIntHandler> sigint(new SigIntHandler(base));
+		shared_ptr<SignalHandler> sigint(new SignalHandler(base));
 		base->addevent(stdin, nullptr);
 		base->addevent(sigint, nullptr);
 		base->dispatch();

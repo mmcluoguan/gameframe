@@ -118,9 +118,11 @@ namespace shynet {
 				delete[] pidfile;
 			}
 			if (fp == -1) {
+				close(fp);
 				THROW_EXCEPTION("call open");
 			}
 			if (lockf(fp, F_TLOCK, 0) < 0) {
+				close(fp);
 				THROW_EXCEPTION("call lockf");
 			}
 
