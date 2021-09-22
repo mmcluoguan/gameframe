@@ -1,4 +1,6 @@
-#pragma once
+#ifndef SHYNET_CRYPTO_SHA256_H
+#define SHYNET_CRYPTO_SHA256_H
+
 #include <iomanip>
 #include <string>
 #include <sstream>
@@ -1080,3 +1082,5 @@ namespace shynet {
 		}
 	}
 }
+
+#endif

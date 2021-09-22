@@ -1,4 +1,6 @@
-#pragma once
+#ifndef SHYNET_EVENTS_EVENTBASE_H
+#define SHYNET_EVENTS_EVENTBASE_H
+
 #include "shynet/events/EventConfig.h"
 #include <event2/event.h>
 #include <event2/thread.h>
@@ -85,3 +87,5 @@ namespace shynet {
 		};
 	}
 }
+
+#endif

@@ -1,4 +1,6 @@
-#pragma once
+#ifndef SHYNET_TASK_ACCEPTREADIOTASK_H
+#define SHYNET_TASK_ACCEPTREADIOTASK_H
+
 #include "shynet/net/AcceptNewFd.h"
 #include "shynet/task/Task.h"
 #include "shynet/thread/Thread.h"
@@ -16,3 +18,5 @@ namespace shynet {
 		};
 	}
 }
+
+#endif

@@ -1,4 +1,6 @@
-#pragma once
+#ifndef LOGIN_LOGINCLIENT_H
+#define LOGIN_LOGINCLIENT_H
+
 #include "frmpub/Client.h"
 #include "shynet/net/AcceptNewFd.h"
 
@@ -65,3 +67,5 @@ namespace login {
 			std::shared_ptr<std::stack<FilterData::Envelope>> enves);
 	};
 }
+
+#endif

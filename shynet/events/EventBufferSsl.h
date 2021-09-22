@@ -1,4 +1,6 @@
-#pragma once
+#ifndef SHYNET_EVENTS_EVENTBUFFERSSL_H
+#define SHYNET_EVENTS_EVENTBUFFERSSL_H
+
 #include "shynet/events/EventBuffer.h"
 #include <event2/bufferevent_ssl.h>
 #include <openssl/err.h>
@@ -20,3 +22,5 @@ namespace shynet {
 		};
 	}
 }
+
+#endif

@@ -1,4 +1,6 @@
-#pragma once
+#ifndef FRMPUB_LUAHOTFIXTASK_H
+#define FRMPUB_LUAHOTFIXTASK_H
+
 #include "shynet/task/Task.h"
 #include "shynet/thread/Thread.h"
 
@@ -16,3 +18,5 @@ namespace frmpub {
 		std::string filepath_;
 	};
 }
+
+#endif

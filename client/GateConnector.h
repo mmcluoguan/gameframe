@@ -1,4 +1,6 @@
-#pragma once
+#ifndef CLIENT_GATECONNECTOR_H
+#define CLIENT_GATECONNECTOR_H
+
 #include "frmpub/Connector.h"
 
 namespace client {
@@ -80,3 +82,5 @@ namespace client {
 		std::shared_ptr<DisConnectData> disconnect_ = nullptr;
 	};
 }
+
+#endif

@@ -1,4 +1,6 @@
-#pragma once
+#ifndef GAME_GAMECLIENT_H
+#define GAME_GAMECLIENT_H
+
 #include "frmpub/Client.h"
 #include "shynet/net/AcceptNewFd.h"
 
@@ -41,3 +43,5 @@ namespace game {
 			std::shared_ptr<std::stack<FilterData::Envelope>> enves);
 	};
 }
+
+#endif

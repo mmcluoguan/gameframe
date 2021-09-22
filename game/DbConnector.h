@@ -1,4 +1,6 @@
-#pragma once
+#ifndef GAME_DBCONNECTOR_H
+#define GAME_DBCONNECTOR_H
+
 #include "frmpub/Connector.h"
 
 namespace game {
@@ -42,3 +44,5 @@ namespace game {
 			std::shared_ptr<std::stack<FilterData::Envelope>> enves);
 	};
 }
+
+#endif

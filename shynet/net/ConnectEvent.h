@@ -1,4 +1,6 @@
-#pragma once
+#ifndef SHYNET_NET_CONNECTEVENT_H
+#define SHYNET_NET_CONNECTEVENT_H
+
 #include "shynet/events/EventHandler.h"
 #include "shynet/net/IPAddress.h"
 #include "shynet/net/ConnectHeartbeat.h"
@@ -141,3 +143,5 @@ namespace shynet {
 
 	}
 }
+
+#endif

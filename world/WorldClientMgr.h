@@ -1,4 +1,6 @@
-#pragma once
+#ifndef WORLD_WORLDCLIENTMGR_H
+#define WORLD_WORLDCLIENTMGR_H
+
 #include "world/WorldClient.h"
 #include "shynet/utils/Singleton.h"
 
@@ -41,3 +43,5 @@ namespace world {
 		std::unordered_map<int, std::shared_ptr<WorldClient>> clis_;
 	};
 }
+
+#endif

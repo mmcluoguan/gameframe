@@ -1,4 +1,6 @@
-#pragma once
+#ifndef SHYNET_BASIC_H
+#define SHYNET_BASIC_H
+
 #include <string>
 #include <cstring>
 
@@ -102,3 +104,5 @@ namespace protocol = shynet::protocol;
 namespace thread = shynet::thread;
 namespace lua = shynet::lua;
 namespace task = shynet::task;
+
+#endif

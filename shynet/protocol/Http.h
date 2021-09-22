@@ -1,4 +1,6 @@
-#pragma once
+#ifndef SHYNET_PROTOCOL_HTTP_H
+#define SHYNET_PROTOCOL_HTTP_H
+
 #include "shynet/events/Streambuff.h"
 #include "shynet/protocol/Request.h"
 #include "shynet/protocol/Responses.h"
@@ -48,3 +50,5 @@ namespace shynet {
 		};
 	}
 }
+
+#endif

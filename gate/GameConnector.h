@@ -1,4 +1,6 @@
-#pragma once
+#ifndef GATE_GAMECONNECTOR_H
+#define GATE_GAMECONNECTOR_H
+
 #include "frmpub/Connector.h"
 
 namespace gate {
@@ -51,3 +53,5 @@ namespace gate {
 		int game_connect_id_;
 	};
 }
+
+#endif

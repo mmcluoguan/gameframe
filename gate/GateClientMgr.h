@@ -1,4 +1,6 @@
-#pragma once
+#ifndef GATE_GATECLIENTMGR_H
+#define GATE_GATECLIENTMGR_H
+
 #include "gate/GateClient.h"
 #include "shynet/utils/Singleton.h"
 #include <mutex>
@@ -43,3 +45,5 @@ namespace gate {
 		std::unordered_map<int, std::shared_ptr<GateClient>> clis_;
 	};
 }
+
+#endif

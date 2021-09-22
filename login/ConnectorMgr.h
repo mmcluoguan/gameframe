@@ -1,4 +1,6 @@
-#pragma once
+#ifndef LOGIN_CONNECTORMGR_H
+#define LOGIN_CONNECTORMGR_H
+
 #include "login/DbConnector.h"
 #include "login/WorldConnector.h"
 #include "shynet/utils/Singleton.h"
@@ -32,3 +34,5 @@ namespace login {
 		std::mutex worldctor_ids_mtx_;
 	};
 }
+
+#endif

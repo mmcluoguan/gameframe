@@ -1,4 +1,6 @@
-#pragma once
+#ifndef SHYNET_UTILS_SINGLETON_H
+#define SHYNET_UTILS_SINGLETON_H
+
 #include "shynet/utils/Logger.h"
 #include <memory>
 #include <mutex>
@@ -45,3 +47,5 @@ namespace shynet {
 		std::once_flag Singleton<T>::onceflag_;
 	}
 }
+
+#endif

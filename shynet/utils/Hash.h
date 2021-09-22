@@ -1,4 +1,6 @@
-#pragma once
+#ifndef SHYNET_UTILS_HASH_H
+#define SHYNET_UTILS_HASH_H
+
 #include <functional>
 
 namespace shynet {
@@ -30,3 +32,5 @@ namespace shynet {
 		}
 	}
 }
+
+#endif

@@ -1,4 +1,6 @@
-#pragma once
+#ifndef FRMPUB_ONACCEPTTASK_H
+#define FRMPUB_ONACCEPTTASK_H
+
 #include "frmpub/LuaRemoteDebug.h"
 #include "shynet/task/Task.h"
 #include "shynet/thread/Thread.h"
@@ -127,3 +129,5 @@ namespace frmpub {
 		std::shared_ptr<std::stack<FilterData::Envelope>> enves_;
 	};
 }
+
+#endif

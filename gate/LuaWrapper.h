@@ -1,4 +1,6 @@
-#pragma once
+#ifndef GATE_LUAWRAPPER_H
+#define GATE_LUAWRAPPER_H
+
 #include "frmpub/FrmLuaWrapper.h"
 
 namespace gate {
@@ -10,3 +12,5 @@ namespace gate {
 		virtual void init(kaguya::State& state) override;
 	};
 }
+
+#endif

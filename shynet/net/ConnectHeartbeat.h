@@ -1,4 +1,6 @@
-﻿#pragma once
+#ifndef SHYNET_NET_CONNECTHEARTBEAT_H
+#define SHYNET_NET_CONNECTHEARTBEAT_H
+
 #include "shynet/net/TimerEvent.h"
 
 namespace shynet {
@@ -16,3 +18,5 @@ namespace shynet {
 
 	}
 }
+
+#endif

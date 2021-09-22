@@ -1,4 +1,6 @@
-#pragma once
+#ifndef SHYNET_UTILS_SKIPLIST_H
+#define SHYNET_UTILS_SKIPLIST_H
+
 #include <jemalloc/jemalloc.h>
 #include <algorithm>
 #include <iostream>
@@ -500,3 +502,5 @@ namespace shynet {
 
 	}
 }
+
+#endif

@@ -1,4 +1,6 @@
-#pragma once
+#ifndef GATE_LOGINCONNECTOR_H
+#define GATE_LOGINCONNECTOR_H
+
 #include "frmpub/Connector.h"
 
 namespace gate {
@@ -56,3 +58,5 @@ namespace gate {
 		int login_connect_id_;
 	};
 }
+
+#endif

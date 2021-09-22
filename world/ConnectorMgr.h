@@ -1,4 +1,6 @@
-#pragma once
+#ifndef WORLD_CONNECTORMGR_H
+#define WORLD_CONNECTORMGR_H
+
 #include "world/DbConnector.h"
 #include "shynet/utils/Singleton.h"
 #include <list>
@@ -23,3 +25,5 @@ namespace world {
 		std::mutex dbctor_ids_mtx_;
 	};
 }
+
+#endif

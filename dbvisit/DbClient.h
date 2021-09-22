@@ -1,4 +1,6 @@
-#pragma once
+#ifndef DBVISIT_DBCLIENT_H
+#define DBVISIT_DBCLIENT_H
+
 #include "frmpub/Client.h"
 #include "shynet/events/EventBuffer.h"
 #include <sw/redis++/redis++.h>
@@ -112,3 +114,5 @@ namespace dbvisit {
 			std::shared_ptr<std::stack<FilterData::Envelope>> enves);
 	};
 }
+
+#endif

@@ -1,4 +1,6 @@
-#pragma once
+#ifndef SHYNET_UTILS_DATABUFFER_H
+#define SHYNET_UTILS_DATABUFFER_H
+
 #include <algorithm>
 #include <cstring>
 #include <memory>
@@ -235,3 +237,5 @@ namespace shynet {
 		};
 	}
 }
+
+#endif

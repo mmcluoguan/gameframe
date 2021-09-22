@@ -51,7 +51,7 @@ namespace shynet {
 						base_->addevent(timerEv, &timerEv->val());
 					}
 					else {
-						LOG_TRACE << "timerid:" << timerid << " not exist";
+						LOG_TRACE << "set_timerid:" << timerid << " not exist";
 					}
 				}
 			} while (true);

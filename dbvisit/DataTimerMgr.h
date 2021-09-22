@@ -1,4 +1,6 @@
-#pragma once
+#ifndef DBVISIT_DATATIMERMGR_H
+#define DBVISIT_DATATIMERMGR_H
+
 #include "shynet/utils/Singleton.h"
 #include <unordered_map>
 
@@ -21,3 +23,5 @@ namespace dbvisit {
 		std::unordered_map<std::string, int> cachekey_timerids_;
 	};
 }
+
+#endif

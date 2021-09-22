@@ -1,4 +1,6 @@
-#pragma once
+#ifndef SHYNET_NET_IPADDRESS_H
+#define SHYNET_NET_IPADDRESS_H
+
 #include <arpa/inet.h>
 #include <string>
 
@@ -28,3 +30,5 @@ namespace shynet {
 		};
 	}
 }
+
+#endif

@@ -1,4 +1,6 @@
-#pragma once
+#ifndef FRMPUB_LUAREMOTEDEBUG_H
+#define FRMPUB_LUAREMOTEDEBUG_H
+
 #include "shynet/utils/Singleton.h"
 #include <kaguya/kaguya.hpp>
 
@@ -30,3 +32,5 @@ namespace frmpub {
 		bool isinit_ = false;
 	};
 }
+
+#endif

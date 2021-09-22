@@ -1,4 +1,6 @@
-#pragma once
+#ifndef DBVISIT_DATAHELP_H
+#define DBVISIT_DATAHELP_H
+
 #include "shynet/utils/Singleton.h"
 #include <list>
 #include <unordered_map>
@@ -120,3 +122,5 @@ namespace dbvisit {
 			std::chrono::seconds seconds = std::chrono::seconds(24 * 60 * 60));
 	};
 }
+
+#endif

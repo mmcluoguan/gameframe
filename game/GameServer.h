@@ -1,4 +1,6 @@
-#pragma once
+#ifndef GAME_GAMESERVER_H
+#define GAME_GAMESERVER_H
+
 #include "shynet/net/ListenReactorMgr.h"
 
 namespace game {
@@ -22,3 +24,5 @@ namespace game {
 
 	};
 }
+
+#endif

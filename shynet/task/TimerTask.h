@@ -1,4 +1,6 @@
-#pragma once
+#ifndef SHYNET_TASK_TIMERTASK_H
+#define SHYNET_TASK_TIMERTASK_H
+
 #include "shynet/task/Task.h"
 
 namespace shynet {
@@ -12,7 +14,7 @@ namespace shynet {
 		private:
 			int timerid_ = 0;
 		};
-
-
 	}
 }
+
+#endif

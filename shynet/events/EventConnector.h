@@ -1,4 +1,6 @@
-#pragma once
+#ifndef SHYNET_EVENTS_EVENTCONNECTOR_H
+#define SHYNET_EVENTS_EVENTCONNECTOR_H
+
 #include "shynet/events/EventBase.h"
 #include "shynet/events/EventBuffer.h"
 #include "shynet/events/EventBufferSsl.h"
@@ -76,3 +78,5 @@ namespace shynet {
 		};
 	}
 }
+
+#endif

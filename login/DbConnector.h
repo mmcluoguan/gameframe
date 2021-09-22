@@ -1,4 +1,6 @@
-#pragma once
+#ifndef LOGIN_DBCONNECTOR_H
+#define LOGIN_DBCONNECTOR_H
+
 #include "frmpub/Connector.h"
 
 namespace login {
@@ -60,3 +62,5 @@ namespace login {
 			std::shared_ptr<std::stack<FilterData::Envelope>> enves);
 	};
 }
+
+#endif

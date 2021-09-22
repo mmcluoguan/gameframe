@@ -1,4 +1,6 @@
-#pragma once
+#ifndef DBVISIT_DATATIMER_H
+#define DBVISIT_DATATIMER_H
+
 #include "shynet/net/TimerEvent.h"
 #include <unordered_map>
 
@@ -23,3 +25,5 @@ namespace dbvisit {
 		std::unordered_map<std::string, std::string> fields_;
 	};
 }
+
+#endif

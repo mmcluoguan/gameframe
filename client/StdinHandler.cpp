@@ -7,6 +7,8 @@
 #include "shynet/utils/Stuff.h"
 #include <unistd.h>
 #include <tuple>
+#include <chrono>
+#include <thread>
 #include <cstring>
 
 extern int optind, opterr, optopt;
@@ -91,7 +93,7 @@ namespace client {
 			std::shared_ptr<GateConnector::DisConnectData> ptr = gate->disconnect_data();
 			gate->close(net::ConnectEvent::CloseType::CLIENT_CLOSE);
 			gate.reset();
-			sleep(1);
+			std::this_thread::sleep_for(std::chrono::seconds(1));
 			shynet::utils::IniConfig& ini = shynet::utils::Singleton<shynet::utils::IniConfig>::get_instance();
 			std::string gateip = ini.get<const char*, std::string>("gate", "ip", "127.0.0.1");
 			short gateport = ini.get<short, short>("gate", "port", short(25000));

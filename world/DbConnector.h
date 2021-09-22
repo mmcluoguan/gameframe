@@ -1,4 +1,6 @@
-#pragma once
+#ifndef WORLD_DBCONNECTOR_H
+#define WORLD_DBCONNECTOR_H
+
 #include "frmpub/Connector.h"
 
 namespace world {
@@ -44,3 +46,5 @@ namespace world {
 	private:
 	};
 }
+
+#endif

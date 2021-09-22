@@ -1,4 +1,6 @@
-#pragma once
+#ifndef DBVISIT_STDINHANDLER_H
+#define DBVISIT_STDINHANDLER_H
+
 #include "shynet/events/EventHandler.h"
 
 namespace dbvisit {
@@ -15,3 +17,5 @@ namespace dbvisit {
 		void info_order(const char* od, int argc, char** argv, const char* optarg);
 	};
 }
+
+#endif

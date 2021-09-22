@@ -1,4 +1,6 @@
-#pragma once
+#ifndef GATE_GATECLIENT_H
+#define GATE_GATECLIENT_H
+
 #include "frmpub/Client.h"
 #include "shynet/net/AcceptNewFd.h"
 
@@ -80,3 +82,5 @@ namespace gate {
 		std::string platform_key_;
 	};
 }
+
+#endif

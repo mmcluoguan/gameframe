@@ -1,4 +1,6 @@
-#pragma once
+#ifndef SHYNET_THREAD_TIMERTHREAD_H
+#define SHYNET_THREAD_TIMERTHREAD_H
+
 #include "shynet/events/EventBuffer.h"
 #include "shynet/thread/Thread.h"
 
@@ -20,3 +22,5 @@ namespace shynet {
 		};
 	}
 }
+
+#endif

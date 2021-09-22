@@ -1,4 +1,6 @@
-#pragma once
+#ifndef SHYNET_PROTOCOL_FILTERPROCES_H
+#define SHYNET_PROTOCOL_FILTERPROCES_H
+
 #include "shynet/events/EventBuffer.h"
 #include "shynet/net/IPAddress.h"
 #include "shynet/protocol/Http.h"
@@ -104,3 +106,5 @@ namespace shynet {
 		};
 	}
 }
+
+#endif

@@ -1,4 +1,6 @@
-#pragma once
+#ifndef SHYNET_NET_TIMEREVENT_H
+#define SHYNET_NET_TIMEREVENT_H
+
 #include "shynet/events/EventHandler.h"
 
 namespace shynet {
@@ -32,7 +34,7 @@ namespace shynet {
 			* 获取设置计时器id
 			*/
 			int timerid() const;
-			void timerid(int timerid);
+			void set_timerid(int timerid);
 
 			/// <summary>
 			/// EV_TIMEOUT回调
@@ -53,3 +55,5 @@ namespace shynet {
 
 	}
 }
+
+#endif

@@ -1,4 +1,6 @@
-#pragma once
+#ifndef FRMPUB_LUAFOLDERTASK_H
+#define FRMPUB_LUAFOLDERTASK_H
+
 #include "shynet/task/NotifyTask.h"
 
 namespace frmpub {
@@ -18,3 +20,5 @@ namespace frmpub {
 
 	};
 }
+
+#endif

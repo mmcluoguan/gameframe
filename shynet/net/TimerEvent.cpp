@@ -32,7 +32,7 @@ namespace shynet {
 			return timerid_;
 		}
 
-		void TimerEvent::timerid(int timerid) {
+		void TimerEvent::set_timerid(int timerid) {
 			timerid_ = timerid;
 		}
 

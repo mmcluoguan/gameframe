@@ -1,4 +1,6 @@
-#pragma once
+#ifndef SHYNET_NET_ACCEPTIOBUFFER_H
+#define SHYNET_NET_ACCEPTIOBUFFER_H
+
 #include "shynet/events/EventBufferSsl.h"
 #include "shynet/net/AcceptNewFd.h"
 
@@ -22,3 +24,5 @@ namespace shynet {
 		};
 	}
 }
+
+#endif

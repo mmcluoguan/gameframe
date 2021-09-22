@@ -1,4 +1,6 @@
-#pragma once
+#ifndef SHYNET_UTILS_STRINGOP_H
+#define SHYNET_UTILS_STRINGOP_H
+
 #include "shynet/Basic.h"
 #include <functional>
 #include <memory>
@@ -80,3 +82,5 @@ namespace shynet {
 		};
 	}
 }
+
+#endif

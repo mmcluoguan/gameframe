@@ -1,4 +1,6 @@
-#pragma once
+#ifndef GAME_CONNECTORMGR_H
+#define GAME_CONNECTORMGR_H
+
 #include "game/DbConnector.h"
 #include "game/WorldConnector.h"
 #include "shynet/utils/Singleton.h"
@@ -31,3 +33,5 @@ namespace game {
 		std::mutex worldctor_ids_mtx_;
 	};
 }
+
+#endif

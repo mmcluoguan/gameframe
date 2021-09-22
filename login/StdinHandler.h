@@ -1,4 +1,6 @@
-#pragma once
+#ifndef LOGIN_STDINHANDLER_H
+#define LOGIN_STDINHANDLER_H
+
 #include "shynet/events/EventHandler.h"
 
 namespace login {
@@ -15,3 +17,5 @@ namespace login {
 		void info_order(const char* od, int argc, char** argv, const char* optarg);
 	};
 }
+
+#endif

@@ -1,4 +1,6 @@
-#pragma once
+#ifndef LOGIN_LOGINCLIENTMGR_H
+#define LOGIN_LOGINCLIENTMGR_H
+
 #include "login/LoginClient.h"
 #include "shynet/utils/Singleton.h"
 #include <unordered_map>
@@ -41,3 +43,5 @@ namespace login {
 		std::unordered_map<int, std::shared_ptr<LoginClient>> clis_;
 	};
 }
+
+#endif

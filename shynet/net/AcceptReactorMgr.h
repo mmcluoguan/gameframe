@@ -1,4 +1,6 @@
-#pragma once
+#ifndef SHYNET_NET_ACCEPTREACTORMGR_H
+#define SHYNET_NET_ACCEPTREACTORMGR_H
+
 #include "shynet/thread/AcceptThread.h"
 #include "shynet/utils/Singleton.h"
 
@@ -17,3 +19,5 @@ namespace shynet {
 		};
 	}
 }
+
+#endif

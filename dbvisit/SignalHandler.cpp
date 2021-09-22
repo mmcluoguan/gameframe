@@ -11,14 +11,14 @@ namespace redis = sw::redis;
 extern const char* g_confname;
 
 namespace dbvisit {
-	SigIntHandler::SigIntHandler(std::shared_ptr<events::EventBase> base) :
+	SignalHandler::SignalHandler(std::shared_ptr<events::EventBase> base) :
 		events::EventHandler(base, SIGINT, EV_SIGNAL | EV_PERSIST) {
 	}
 
-	SigIntHandler::~SigIntHandler() {
+	SignalHandler::~SignalHandler() {
 	}
 
-	void SigIntHandler::signal(int signal) {
+	void SignalHandler::signal(int signal) {
 		shynet::utils::IniConfig& ini = shynet::utils::Singleton<shynet::utils::IniConfig>::get_instance();
 		std::string type = frmpub::Basic::connectname(protocc::ServerType::DBVISIT);
 		int sid = ini.get<int, int>(g_confname, "sid", 1);

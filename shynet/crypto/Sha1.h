@@ -1,4 +1,5 @@
-#pragma once
+#ifndef SHYNET_CRYPTO_SHA1_H
+#define SHYNET_CRYPTO_SHA1_H
 
 namespace shynet {
 	namespace crypto {
@@ -142,3 +143,5 @@ namespace shynet {
 
 	}
 }
+
+#endif

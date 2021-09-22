@@ -3,7 +3,8 @@
 #include "shynet/thread/LuaThread.h"
 #include "shynet/utils/Singleton.h"
 #include "shynet/utils/StringOp.h"
-#include <unistd.h>
+#include <chrono>
+#include <thread>
 
 namespace frmpub {
 	LuaHotFixTask::LuaHotFixTask(std::string filepath) {
@@ -33,7 +34,7 @@ namespace frmpub {
 
 			std::string script = "require('%s');local hotfix=require('hotfix');hotfix:reloadmodule('%s')";
 			script = shynet::utils::StringOp::str_format(script, name_str.c_str(), name_str.c_str());
-			usleep(1000);//休眠1毫秒，为了让修改的文件加载时是最新的
+			std::this_thread::sleep_for(std::chrono::milliseconds(1)); //休眠1毫秒，为了让修改的文件加载时是最新的
 			state(script);
 
 			shynet::utils::Singleton<LuaRemoteDebug>::instance().stop(state);

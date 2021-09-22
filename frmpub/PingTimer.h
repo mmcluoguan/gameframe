@@ -1,4 +1,6 @@
-#pragma once
+#ifndef FRMPUB_PINGTIMER_H
+#define FRMPUB_PINGTIMER_H
+
 #include "shynet/net/IPAddress.h"
 #include "shynet/net/TimerEvent.h"
 
@@ -18,3 +20,5 @@ namespace frmpub {
 		Connector* connector_;
 	};
 }
+
+#endif

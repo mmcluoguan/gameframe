@@ -1,4 +1,6 @@
-#pragma once
+#ifndef CLIENT_STDINHANDLER_H
+#define CLIENT_STDINHANDLER_H
+
 #include "shynet/events/EventHandler.h"
 
 namespace client {
@@ -14,3 +16,5 @@ namespace client {
 		void login_order(const char* od, int argc, char** argv, const char* optstr);
 	};
 }
+
+#endif

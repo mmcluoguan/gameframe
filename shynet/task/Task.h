@@ -1,4 +1,6 @@
-#pragma once
+#ifndef SHYNET_TASK_TASK_H
+#define SHYNET_TASK_TASK_H
+
 #include "shynet/thread/Thread.h"
 
 namespace shynet {
@@ -12,3 +14,5 @@ namespace shynet {
 		};
 	}
 }
+
+#endif
