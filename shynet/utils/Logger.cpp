@@ -21,7 +21,7 @@ namespace shynet {
 		static bool g_islogdir = false;
 		static std::mutex g_logMutex;
 		static std::ofstream g_logfile;
-		static char g_logfilename[100] = {};
+		static char g_logfilename[NAME_MAX] = { 0 };
 
 		static std::map<Logger::LogLevel, LogInfo> levelNames() {
 			return {
@@ -68,7 +68,7 @@ namespace shynet {
 					g_logfile.close();
 				}
 				g_logfile.open(logfilename, std::ios::out | std::ios::app);
-				strncpy(g_logfilename, logfilename, strlen(logfilename));
+				strncpy(g_logfilename, logfilename, strlen(g_logfilename));
 			}
 			g_logfile << msg << std::endl;
 			for (auto&& [key, value] : levelNames()) {
@@ -142,7 +142,7 @@ namespace shynet {
 			size_t len = 0;
 			size_t lsize = 0;
 			size_t headlen = 0;
-			char szhead[64 + 1];
+			char szhead[64 + 1] = { 0 };
 			memset(szhead, 0, sizeof(szhead));
 			while (size > lsize && len + 10 < size_buf) {
 				if (lsize % 32 == 0) {
@@ -151,7 +151,7 @@ namespace shynet {
 					}
 
 					memset(szhead, 0, sizeof(szhead));
-					strncpy(szhead, ullto4Str(index++), sizeof(szhead) - 1);
+					strncpy(szhead, ullto4Str(index++), strlen(szhead) - 1);
 					headlen = strlen(szhead);
 					szhead[headlen++] = ' ';
 
