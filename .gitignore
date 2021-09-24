@@ -23,3 +23,4 @@
 /login/obj/x64/Debug
 /shynet/obj
 /upload
+libs/libshynet.so.1.0.1
