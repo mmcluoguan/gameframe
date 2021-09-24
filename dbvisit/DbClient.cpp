@@ -321,7 +321,7 @@ namespace dbvisit {
 				}
 
 				moredataptr resdata = shynet::utils::Singleton<Datahelp>::instance().
-					getdata_more_cache(msgc.condition(), data);
+					getdata_more(msgc.condition(), data);
 				for (auto& i : *resdata) {
 					auto obj = msgs.add_objs();
 					for (auto&& [key, value] : i) {

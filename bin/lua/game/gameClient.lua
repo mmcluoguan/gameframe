@@ -91,6 +91,7 @@ function gameClient:createrole_client_gate_c(msgid,msgdata,routing)
                     { key = '_id', value = tostring(item.id),},
                     { key = 'cfgid', value = tostring(item.cfgid),},
                     { key = 'num', value = tostring(item.num),},
+                    { key = 'roleid', value = tostring(roleObj.id),},
                 }
             }
             connectorMgr:dbConnector():send('insertdata_to_dbvisit_c',savedata)

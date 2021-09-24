@@ -71,6 +71,7 @@ function role:setlevel_client_gate_c(msgname,data,routing)
             { key = '_id', value = tostring(item.id),},
             { key = 'cfgid', value = tostring(item.cfgid),},
             { key = 'num', value = tostring(item.num),},
+            { key = 'roleid', value = tostring(self.id),},
         }
     }
     local connectorMgr = require ("lua/game/connectorMgr")

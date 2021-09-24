@@ -96,6 +96,25 @@ namespace dbvisit {
 		return error;
 	}
 
+	moredataptr Datahelp::getdata_more_db(const std::string& tablename,
+		const std::string& condition,
+		std::unordered_map<std::string, std::string>& out) {
+
+		moredataptr datalist = std::make_shared<moredata>();
+		pool::MysqlPool& mysql = shynet::utils::Singleton<pool::MysqlPool>::get_instance();
+		mysqlx::DocResult docs = mysql.fetch()->getDefaultSchema().createCollection(tablename, true).find(condition).execute();
+		for (mysqlx::DbDoc doc : docs.fetchAll()) {
+			//填充数据
+			for (auto&& [key, value] : out) {
+				if (doc.hasField(key)) {
+					value = doc[key].operator std::string();
+				}
+			}
+			datalist->push_back(out);
+		}
+		return datalist;
+	}
+
 	moredataptr Datahelp::getdata_more_cache(const std::string& condition,
 		std::unordered_map<std::string, std::string>& out) {
 
@@ -113,6 +132,40 @@ namespace dbvisit {
 			ErrorCode err = getdata_from_cache(key, out);
 			if (err == ErrorCode::OK) {
 				datalist->push_back(out);
+			}
+		}
+		return datalist;
+	}
+
+	moredataptr Datahelp::getdata_more(const std::string& condition,
+		std::unordered_map<std::string, std::string>& out,
+		bool updatacache,
+		std::chrono::seconds seconds)
+	{
+		moredataptr datalist = getdata_more_cache(condition, out);
+		if (datalist->empty())
+		{
+			auto vect = shynet::utils::StringOp::split(condition, "_");
+			if (vect.size() < 3)
+			{
+				THROW_EXCEPTION("解析错误 condition:" + condition);
+			}
+			auto where = shynet::utils::StringOp::str_format("roleid='%s'", vect[2].c_str());
+			datalist = getdata_more_db(vect[0], where, out);
+			if (updatacache)
+			{
+				for (auto& it : *datalist) {
+					std::string cache_key = condition;
+					auto pos = cache_key.find("*");
+					if (pos == std::string::npos)
+						THROW_EXCEPTION("找不到* condition:" + condition);
+					cache_key.replace(pos, 1, it["_id"]);
+					redis::Redis& redis = shynet::utils::Singleton<redis::Redis>::instance(std::string());
+					redis.hmset(cache_key, it.begin(), it.end());
+					if (seconds.count() != 0) {
+						redis.expire(cache_key, seconds);
+					}
+				}
 			}
 		}
 		return datalist;

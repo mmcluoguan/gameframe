@@ -96,6 +96,8 @@
     <RemoteOutRelDir>$(RemoteProjectRelDir)/../libs/</RemoteOutRelDir>
     <RemoteCppCompileToolExe>/opt/rh/devtoolset-10/root/usr/bin/g++</RemoteCppCompileToolExe>
     <RemoteLdToolExe>/opt/rh/devtoolset-10/root/usr/bin/g++</RemoteLdToolExe>
+    <EnableIncrementalBuild>WithNinja</EnableIncrementalBuild>
+    <EnableASAN>true</EnableASAN>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|ARM'">
     <OutDir>../libs/</OutDir>
@@ -103,6 +105,8 @@
     <RemoteOutRelDir>$(RemoteProjectRelDir)/../libs/</RemoteOutRelDir>
     <RemoteCppCompileToolExe>/opt/rh/devtoolset-10/root/usr/bin/g++</RemoteCppCompileToolExe>
     <RemoteLdToolExe>/opt/rh/devtoolset-10/root/usr/bin/g++</RemoteLdToolExe>
+    <EnableIncrementalBuild>WithNinja</EnableIncrementalBuild>
+    <EnableASAN>false</EnableASAN>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|ARM64'">
     <OutDir>../libs/</OutDir>
@@ -110,6 +114,8 @@
     <RemoteOutRelDir>$(RemoteProjectRelDir)/../libs/</RemoteOutRelDir>
     <RemoteCppCompileToolExe>/opt/rh/devtoolset-10/root/usr/bin/g++</RemoteCppCompileToolExe>
     <RemoteLdToolExe>/opt/rh/devtoolset-10/root/usr/bin/g++</RemoteLdToolExe>
+    <EnableIncrementalBuild>WithNinja</EnableIncrementalBuild>
+    <EnableASAN>true</EnableASAN>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|ARM64'">
     <OutDir>../libs/</OutDir>
@@ -117,6 +123,8 @@
     <RemoteOutRelDir>$(RemoteProjectRelDir)/../libs/</RemoteOutRelDir>
     <RemoteCppCompileToolExe>/opt/rh/devtoolset-10/root/usr/bin/g++</RemoteCppCompileToolExe>
     <RemoteLdToolExe>/opt/rh/devtoolset-10/root/usr/bin/g++</RemoteLdToolExe>
+    <EnableIncrementalBuild>WithNinja</EnableIncrementalBuild>
+    <EnableASAN>false</EnableASAN>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <OutDir>../libs/</OutDir>
@@ -124,6 +132,8 @@
     <RemoteOutRelDir>$(RemoteProjectRelDir)/../libs/</RemoteOutRelDir>
     <RemoteCppCompileToolExe>/opt/rh/devtoolset-10/root/usr/bin/g++</RemoteCppCompileToolExe>
     <RemoteLdToolExe>/opt/rh/devtoolset-10/root/usr/bin/g++</RemoteLdToolExe>
+    <EnableIncrementalBuild>WithNinja</EnableIncrementalBuild>
+    <EnableASAN>true</EnableASAN>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <OutDir>../libs/</OutDir>
@@ -131,6 +141,8 @@
     <RemoteOutRelDir>$(RemoteProjectRelDir)/../libs/</RemoteOutRelDir>
     <RemoteCppCompileToolExe>/opt/rh/devtoolset-10/root/usr/bin/g++</RemoteCppCompileToolExe>
     <RemoteLdToolExe>/opt/rh/devtoolset-10/root/usr/bin/g++</RemoteLdToolExe>
+    <EnableIncrementalBuild>WithNinja</EnableIncrementalBuild>
+    <EnableASAN>false</EnableASAN>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x86'">
     <OutDir>../libs/</OutDir>
@@ -138,6 +150,8 @@
     <RemoteOutRelDir>$(RemoteProjectRelDir)/../libs/</RemoteOutRelDir>
     <RemoteCppCompileToolExe>/opt/rh/devtoolset-10/root/usr/bin/g++</RemoteCppCompileToolExe>
     <RemoteLdToolExe>/opt/rh/devtoolset-10/root/usr/bin/g++</RemoteLdToolExe>
+    <EnableIncrementalBuild>WithNinja</EnableIncrementalBuild>
+    <EnableASAN>true</EnableASAN>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x86'">
     <OutDir>../libs/</OutDir>
@@ -145,6 +159,8 @@
     <RemoteOutRelDir>$(RemoteProjectRelDir)/../libs/</RemoteOutRelDir>
     <RemoteCppCompileToolExe>/opt/rh/devtoolset-10/root/usr/bin/g++</RemoteCppCompileToolExe>
     <RemoteLdToolExe>/opt/rh/devtoolset-10/root/usr/bin/g++</RemoteLdToolExe>
+    <EnableIncrementalBuild>WithNinja</EnableIncrementalBuild>
+    <EnableASAN>false</EnableASAN>
   </PropertyGroup>
   <ItemGroup>
     <ClInclude Include="Basic.h" />
@@ -269,14 +285,17 @@
       <LibraryDependencies>jemalloc;event;event_pthreads;ssl;crypto;event_openssl;pthread;mysqlcppconn8;lua</LibraryDependencies>
       <AdditionalOptions>
       </AdditionalOptions>
+      <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
     <ClCompile>
       <AdditionalIncludeDirectories>$(SolutionDir);/opt/rh/devtoolset-10/root/usr/include/c++/10</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>JEMALLOC_NO_DEMANGLE</PreprocessorDefinitions>
+      <PreprocessorDefinitions>JEMALLOC_NO_DEMANGLE;USE_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <CppLanguageStandard>c++17</CppLanguageStandard>
       <AdditionalOptions>
       </AdditionalOptions>
-      <CppAdditionalWarning>%(CppAdditionalWarning)</CppAdditionalWarning>
+      <CppAdditionalWarning>switch;no-deprecated-declarations;empty-body;conversion;return-type;parentheses;no-format;uninitialized;unreachable-code;unused-function;unused-value;unused-variable;%(CppAdditionalWarning)</CppAdditionalWarning>
+      <TreatWarningAsError>false</TreatWarningAsError>
+      <UnrollLoops>true</UnrollLoops>
     </ClCompile>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|ARM64'">
@@ -284,14 +303,17 @@
       <LibraryDependencies>jemalloc;event;event_pthreads;ssl;crypto;event_openssl;pthread;mysqlcppconn8;lua</LibraryDependencies>
       <AdditionalOptions>
       </AdditionalOptions>
+      <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
     <ClCompile>
       <AdditionalIncludeDirectories>$(SolutionDir);/opt/rh/devtoolset-10/root/usr/include/c++/10</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>JEMALLOC_NO_DEMANGLE</PreprocessorDefinitions>
+      <PreprocessorDefinitions>JEMALLOC_NO_DEMANGLE;USE_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <CppLanguageStandard>c++17</CppLanguageStandard>
       <AdditionalOptions>
       </AdditionalOptions>
-      <CppAdditionalWarning>%(CppAdditionalWarning)</CppAdditionalWarning>
+      <CppAdditionalWarning>switch;no-deprecated-declarations;empty-body;conversion;return-type;parentheses;no-format;uninitialized;unreachable-code;unused-function;unused-value;unused-variable;%(CppAdditionalWarning)</CppAdditionalWarning>
+      <TreatWarningAsError>false</TreatWarningAsError>
+      <UnrollLoops>true</UnrollLoops>
     </ClCompile>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -299,14 +321,17 @@
       <LibraryDependencies>jemalloc;event;event_pthreads;ssl;crypto;event_openssl;pthread;mysqlcppconn8;lua</LibraryDependencies>
       <AdditionalOptions>
       </AdditionalOptions>
+      <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
     <ClCompile>
       <AdditionalIncludeDirectories>$(SolutionDir);/opt/rh/devtoolset-10/root/usr/include/c++/10</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>JEMALLOC_NO_DEMANGLE</PreprocessorDefinitions>
+      <PreprocessorDefinitions>JEMALLOC_NO_DEMANGLE;USE_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <CppLanguageStandard>c++17</CppLanguageStandard>
       <AdditionalOptions>
       </AdditionalOptions>
-      <CppAdditionalWarning>%(CppAdditionalWarning)</CppAdditionalWarning>
+      <CppAdditionalWarning>switch;no-deprecated-declarations;empty-body;conversion;return-type;parentheses;no-format;uninitialized;unreachable-code;unused-function;unused-value;unused-variable;%(CppAdditionalWarning)</CppAdditionalWarning>
+      <TreatWarningAsError>false</TreatWarningAsError>
+      <UnrollLoops>true</UnrollLoops>
     </ClCompile>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x86'">
@@ -314,14 +339,17 @@
       <LibraryDependencies>jemalloc;event;event_pthreads;ssl;crypto;event_openssl;pthread;mysqlcppconn8;lua</LibraryDependencies>
       <AdditionalOptions>
       </AdditionalOptions>
+      <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
     <ClCompile>
       <AdditionalIncludeDirectories>$(SolutionDir);/opt/rh/devtoolset-10/root/usr/include/c++/10</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>JEMALLOC_NO_DEMANGLE</PreprocessorDefinitions>
+      <PreprocessorDefinitions>JEMALLOC_NO_DEMANGLE;USE_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <CppLanguageStandard>c++17</CppLanguageStandard>
       <AdditionalOptions>
       </AdditionalOptions>
-      <CppAdditionalWarning>%(CppAdditionalWarning)</CppAdditionalWarning>
+      <CppAdditionalWarning>switch;no-deprecated-declarations;empty-body;conversion;return-type;parentheses;no-format;uninitialized;unreachable-code;unused-function;unused-value;unused-variable;%(CppAdditionalWarning)</CppAdditionalWarning>
+      <TreatWarningAsError>false</TreatWarningAsError>
+      <UnrollLoops>true</UnrollLoops>
     </ClCompile>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|ARM'">
@@ -331,12 +359,15 @@
       <CppLanguageStandard>c++17</CppLanguageStandard>
       <AdditionalOptions>
       </AdditionalOptions>
-      <CppAdditionalWarning>%(CppAdditionalWarning)</CppAdditionalWarning>
+      <CppAdditionalWarning>switch;no-deprecated-declarations;empty-body;conversion;return-type;parentheses;no-format;uninitialized;unreachable-code;unused-function;unused-value;unused-variable;%(CppAdditionalWarning)</CppAdditionalWarning>
+      <TreatWarningAsError>false</TreatWarningAsError>
+      <UnrollLoops>true</UnrollLoops>
     </ClCompile>
     <Link>
       <LibraryDependencies>jemalloc;event;event_pthreads;ssl;crypto;event_openssl;pthread;mysqlcppconn8;lua</LibraryDependencies>
       <AdditionalOptions>
       </AdditionalOptions>
+      <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|ARM64'">
@@ -346,12 +377,15 @@
       <CppLanguageStandard>c++17</CppLanguageStandard>
       <AdditionalOptions>
       </AdditionalOptions>
-      <CppAdditionalWarning>%(CppAdditionalWarning)</CppAdditionalWarning>
+      <CppAdditionalWarning>switch;no-deprecated-declarations;empty-body;conversion;return-type;parentheses;no-format;uninitialized;unreachable-code;unused-function;unused-value;unused-variable;%(CppAdditionalWarning)</CppAdditionalWarning>
+      <TreatWarningAsError>false</TreatWarningAsError>
+      <UnrollLoops>true</UnrollLoops>
     </ClCompile>
     <Link>
       <LibraryDependencies>jemalloc;event;event_pthreads;ssl;crypto;event_openssl;pthread;mysqlcppconn8;lua</LibraryDependencies>
       <AdditionalOptions>
       </AdditionalOptions>
+      <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -361,12 +395,15 @@
       <CppLanguageStandard>c++17</CppLanguageStandard>
       <AdditionalOptions>
       </AdditionalOptions>
-      <CppAdditionalWarning>%(CppAdditionalWarning)</CppAdditionalWarning>
+      <CppAdditionalWarning>switch;no-deprecated-declarations;empty-body;conversion;return-type;parentheses;no-format;uninitialized;unreachable-code;unused-function;unused-value;unused-variable;%(CppAdditionalWarning)</CppAdditionalWarning>
+      <TreatWarningAsError>false</TreatWarningAsError>
+      <UnrollLoops>true</UnrollLoops>
     </ClCompile>
     <Link>
       <LibraryDependencies>jemalloc;event;event_pthreads;ssl;crypto;event_openssl;pthread;mysqlcppconn8;lua</LibraryDependencies>
       <AdditionalOptions>
       </AdditionalOptions>
+      <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x86'">
@@ -376,12 +413,15 @@
       <CppLanguageStandard>c++17</CppLanguageStandard>
       <AdditionalOptions>
       </AdditionalOptions>
-      <CppAdditionalWarning>%(CppAdditionalWarning)</CppAdditionalWarning>
+      <CppAdditionalWarning>switch;no-deprecated-declarations;empty-body;conversion;return-type;parentheses;no-format;uninitialized;unreachable-code;unused-function;unused-value;unused-variable;%(CppAdditionalWarning)</CppAdditionalWarning>
+      <TreatWarningAsError>false</TreatWarningAsError>
+      <UnrollLoops>true</UnrollLoops>
     </ClCompile>
     <Link>
       <LibraryDependencies>jemalloc;event;event_pthreads;ssl;crypto;event_openssl;pthread;mysqlcppconn8;lua</LibraryDependencies>
       <AdditionalOptions>
       </AdditionalOptions>
+      <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

@@ -1,5 +1,6 @@
 #include "dbvisit/SignalHandler.h"
 #include "frmpub/Basic.h"
+#include "shynet/events/EventBase.h"
 #include "shynet/utils/IniConfig.h"
 #include "shynet/utils/Singleton.h"
 #include "shynet/utils/StringOp.h"

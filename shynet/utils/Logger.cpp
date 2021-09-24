@@ -18,20 +18,22 @@ namespace shynet {
 			const char* color;
 		};
 
-		static std::map<Logger::LogLevel, LogInfo> g_levelNames = {
-			{Logger::LogLevel::TRACE,{"TRACE","\033[01;36m"}},
-			{Logger::LogLevel::DEBUG,{"DEBUG","\033[01;32m"}},
-			{Logger::LogLevel::LUA,{"LUA","\033[01;37m"}},
-			{Logger::LogLevel::INFO,{"INFO","\033[01;35m"}},
-			{Logger::LogLevel::WARN,{"WARN","\033[01;33m"}},
-			{Logger::LogLevel::ERROR,{"ERROR","\033[01;31m"}},
-			{Logger::LogLevel::FATAL,{"FATAL","\033[01;34m"}},
-		};
-
 		static bool g_islogdir = false;
 		static std::mutex g_logMutex;
 		static std::ofstream g_logfile;
 		static char g_logfilename[100] = {};
+
+		static std::map<Logger::LogLevel, LogInfo> levelNames() {
+			return {
+				{Logger::LogLevel::TRACE,{"TRACE","\033[01;36m"}},
+				{Logger::LogLevel::DEBUG,{"DEBUG","\033[01;32m"}},
+				{Logger::LogLevel::LUA,{"LUA","\033[01;37m"}},
+				{Logger::LogLevel::INFO,{"INFO","\033[01;35m"}},
+				{Logger::LogLevel::WARN,{"WARN","\033[01;33m"}},
+				{Logger::LogLevel::ERROR,{"ERROR","\033[01;31m"}},
+				{Logger::LogLevel::FATAL,{"FATAL","\033[01;34m"}},
+			};
+		}
 
 		static void defaultOutput(const char* msg, size_t len) {
 			std::lock_guard<std::mutex> lock(g_logMutex);
@@ -69,7 +71,7 @@ namespace shynet {
 				strncpy(g_logfilename, logfilename, strlen(logfilename));
 			}
 			g_logfile << msg << std::endl;
-			for (auto&& [key, value] : g_levelNames) {
+			for (auto&& [key, value] : levelNames()) {
 				if (strstr(msg, value.name) != nullptr) {
 					std::cout << value.color << msg << "\e[0m" << std::endl;
 					break;
@@ -104,7 +106,7 @@ namespace shynet {
 			struct timeval time;
 			gettimeofday(&time, NULL);
 
-			ostream_ << "[" << g_levelNames[level].name << "] " << buf << "." << (time.tv_usec / 1000) << " ";
+			ostream_ << "[" << levelNames()[level].name << "] " << buf << "." << (time.tv_usec / 1000) << " ";
 			if (savedErrno != 0) {
 				std::error_condition econd = std::system_category().default_error_condition(savedErrno);
 				ostream_ << "[" << econd.category().name();

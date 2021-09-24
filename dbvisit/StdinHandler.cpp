@@ -2,6 +2,7 @@
 #include "shynet/utils/Logger.h"
 #include "shynet/utils/StringOp.h"
 #include "shynet/utils/Stuff.h"
+#include <google/protobuf/message.h>
 #include <limits.h>
 #include <unistd.h>
 #include <tuple>

@@ -49,7 +49,7 @@ namespace dbvisit {
 			std::chrono::seconds seconds = std::chrono::seconds(24 * 60 * 60));
 
 		/// <summary>
-		/// 优先从cache获取hash数据,cache没有则从db获取，
+		/// 优先从cache获取1条hash数据,cache没有则从db获取，
 		/// 然后updatacache决定是否更新cache
 		/// </summary>
 		/// <param name="cachekey">cachekey定义规则为tablename_key</param>
@@ -63,11 +63,31 @@ namespace dbvisit {
 			std::chrono::seconds seconds = std::chrono::seconds(24 * 60 * 60));
 
 		/*
+		* 指定条件从db获取多条hash数据
+		*/
+		moredataptr getdata_more_db(const std::string& tablename,
+			const std::string& condition,
+			std::unordered_map<std::string, std::string>& out);
+
+		/*
 		* 指定条件从cache获取多条hash数据
 		*/
 		moredataptr getdata_more_cache(const std::string& condition,
 			std::unordered_map<std::string, std::string>& out);
 
+		/// <summary>
+		/// 优先从cache获取多条hash数据, cache没有则从db获取，
+		/// 然后updatacache决定是否更新cache
+		/// </summary>
+		/// <param name="condition">condition定义规则为tablename_*_roleid</param>
+		/// <param name="out">输出字典</param>
+		/// <param name="updatacache">从db获取后是否最后更新cache</param>
+		/// <param name="seconds">cache过期时间,默认24小时,值为0表示永不过期</param>
+		/// <returns>多条hash数据</returns>
+		moredataptr getdata_more(const std::string& condition,
+			std::unordered_map<std::string, std::string>& out,
+			bool updatacache = true,
+			std::chrono::seconds seconds = std::chrono::seconds(24 * 60 * 60));
 		/*
 		* 保存hash数据到db
 		*/

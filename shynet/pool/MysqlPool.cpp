@@ -38,6 +38,7 @@ namespace shynet {
 		}
 		void MysqlPool::reclaim(mysqlx::Session* ses) {
 			if (enable_del_) {
+				ses->close();
 				delete ses;
 				return;
 			}
