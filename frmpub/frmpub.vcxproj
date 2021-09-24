@@ -136,8 +136,8 @@
     <TargetExt>.so.1.0.1</TargetExt>
     <OutDir>../libs/</OutDir>
     <RemoteOutRelDir>$(RemoteProjectRelDir)/../libs/</RemoteOutRelDir>
-    <RemoteCppCompileToolExe>/opt/rh/devtoolset-10/root/usr/bin/g++</RemoteCppCompileToolExe>
-    <RemoteLdToolExe>/opt/rh/devtoolset-10/root/usr/bin/g++</RemoteLdToolExe>
+    <RemoteCppCompileToolExe>g++</RemoteCppCompileToolExe>
+    <RemoteLdToolExe>g++</RemoteLdToolExe>
     <EnableIncrementalBuild>WithNinja</EnableIncrementalBuild>
     <EnableASAN>true</EnableASAN>
   </PropertyGroup>
@@ -145,8 +145,8 @@
     <TargetExt>.so.1.0.1</TargetExt>
     <OutDir>../libs/</OutDir>
     <RemoteOutRelDir>$(RemoteProjectRelDir)/../libs/</RemoteOutRelDir>
-    <RemoteCppCompileToolExe>/opt/rh/devtoolset-10/root/usr/bin/g++</RemoteCppCompileToolExe>
-    <RemoteLdToolExe>/opt/rh/devtoolset-10/root/usr/bin/g++</RemoteLdToolExe>
+    <RemoteCppCompileToolExe>g++</RemoteCppCompileToolExe>
+    <RemoteLdToolExe>g++</RemoteLdToolExe>
     <EnableIncrementalBuild>WithNinja</EnableIncrementalBuild>
     <EnableASAN>false</EnableASAN>
   </PropertyGroup>
@@ -154,8 +154,8 @@
     <TargetExt>.so.1.0.1</TargetExt>
     <OutDir>../libs/</OutDir>
     <RemoteOutRelDir>$(RemoteProjectRelDir)/../libs/</RemoteOutRelDir>
-    <RemoteCppCompileToolExe>/opt/rh/devtoolset-10/root/usr/bin/g++</RemoteCppCompileToolExe>
-    <RemoteLdToolExe>/opt/rh/devtoolset-10/root/usr/bin/g++</RemoteLdToolExe>
+    <RemoteCppCompileToolExe>g++</RemoteCppCompileToolExe>
+    <RemoteLdToolExe>g++</RemoteLdToolExe>
     <EnableIncrementalBuild>WithNinja</EnableIncrementalBuild>
     <EnableASAN>true</EnableASAN>
   </PropertyGroup>
@@ -163,8 +163,8 @@
     <TargetExt>.so.1.0.1</TargetExt>
     <OutDir>../libs/</OutDir>
     <RemoteOutRelDir>$(RemoteProjectRelDir)/../libs/</RemoteOutRelDir>
-    <RemoteCppCompileToolExe>/opt/rh/devtoolset-10/root/usr/bin/g++</RemoteCppCompileToolExe>
-    <RemoteLdToolExe>/opt/rh/devtoolset-10/root/usr/bin/g++</RemoteLdToolExe>
+    <RemoteCppCompileToolExe>g++</RemoteCppCompileToolExe>
+    <RemoteLdToolExe>g++</RemoteLdToolExe>
     <EnableIncrementalBuild>WithNinja</EnableIncrementalBuild>
     <EnableASAN>false</EnableASAN>
   </PropertyGroup>
@@ -172,8 +172,8 @@
     <TargetExt>.so.1.0.1</TargetExt>
     <OutDir>../libs/</OutDir>
     <RemoteOutRelDir>$(RemoteProjectRelDir)/../libs/</RemoteOutRelDir>
-    <RemoteCppCompileToolExe>/opt/rh/devtoolset-10/root/usr/bin/g++</RemoteCppCompileToolExe>
-    <RemoteLdToolExe>/opt/rh/devtoolset-10/root/usr/bin/g++</RemoteLdToolExe>
+    <RemoteCppCompileToolExe>g++</RemoteCppCompileToolExe>
+    <RemoteLdToolExe>g++</RemoteLdToolExe>
     <EnableIncrementalBuild>WithNinja</EnableIncrementalBuild>
     <EnableASAN>true</EnableASAN>
   </PropertyGroup>
@@ -181,8 +181,8 @@
     <TargetExt>.so.1.0.1</TargetExt>
     <OutDir>../libs/</OutDir>
     <RemoteOutRelDir>$(RemoteProjectRelDir)/../libs/</RemoteOutRelDir>
-    <RemoteCppCompileToolExe>/opt/rh/devtoolset-10/root/usr/bin/g++</RemoteCppCompileToolExe>
-    <RemoteLdToolExe>/opt/rh/devtoolset-10/root/usr/bin/g++</RemoteLdToolExe>
+    <RemoteCppCompileToolExe>g++</RemoteCppCompileToolExe>
+    <RemoteLdToolExe>g++</RemoteLdToolExe>
     <EnableIncrementalBuild>WithNinja</EnableIncrementalBuild>
     <EnableASAN>false</EnableASAN>
   </PropertyGroup>
@@ -190,8 +190,8 @@
     <TargetExt>.so.1.0.1</TargetExt>
     <OutDir>../libs/</OutDir>
     <RemoteOutRelDir>$(RemoteProjectRelDir)/../libs/</RemoteOutRelDir>
-    <RemoteCppCompileToolExe>/opt/rh/devtoolset-10/root/usr/bin/g++</RemoteCppCompileToolExe>
-    <RemoteLdToolExe>/opt/rh/devtoolset-10/root/usr/bin/g++</RemoteLdToolExe>
+    <RemoteCppCompileToolExe>g++</RemoteCppCompileToolExe>
+    <RemoteLdToolExe>g++</RemoteLdToolExe>
     <EnableIncrementalBuild>WithNinja</EnableIncrementalBuild>
     <EnableASAN>true</EnableASAN>
   </PropertyGroup>
@@ -199,8 +199,8 @@
     <TargetExt>.so.1.0.1</TargetExt>
     <OutDir>../libs/</OutDir>
     <RemoteOutRelDir>$(RemoteProjectRelDir)/../libs/</RemoteOutRelDir>
-    <RemoteCppCompileToolExe>/opt/rh/devtoolset-10/root/usr/bin/g++</RemoteCppCompileToolExe>
-    <RemoteLdToolExe>/opt/rh/devtoolset-10/root/usr/bin/g++</RemoteLdToolExe>
+    <RemoteCppCompileToolExe>g++</RemoteCppCompileToolExe>
+    <RemoteLdToolExe>g++</RemoteLdToolExe>
     <EnableIncrementalBuild>WithNinja</EnableIncrementalBuild>
     <EnableASAN>false</EnableASAN>
   </PropertyGroup>
@@ -212,7 +212,7 @@
       </AdditionalOptions>
     </Link>
     <ClCompile>
-      <AdditionalIncludeDirectories>$(SolutionDir);/opt/rh/devtoolset-10/root/usr/include/c++/10</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)</AdditionalIncludeDirectories>
       <CppLanguageStandard>c++17</CppLanguageStandard>
       <StrictAliasing>false</StrictAliasing>
       <UnrollLoops>true</UnrollLoops>
@@ -227,7 +227,7 @@
       </AdditionalOptions>
     </Link>
     <ClCompile>
-      <AdditionalIncludeDirectories>$(SolutionDir);/opt/rh/devtoolset-10/root/usr/include/c++/10</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)</AdditionalIncludeDirectories>
       <CppLanguageStandard>c++17</CppLanguageStandard>
       <StrictAliasing>false</StrictAliasing>
       <UnrollLoops>true</UnrollLoops>
@@ -242,7 +242,7 @@
       </AdditionalOptions>
     </Link>
     <ClCompile>
-      <AdditionalIncludeDirectories>$(SolutionDir);/opt/rh/devtoolset-10/root/usr/include/c++/10</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)</AdditionalIncludeDirectories>
       <CppLanguageStandard>c++17</CppLanguageStandard>
       <StrictAliasing>false</StrictAliasing>
       <UnrollLoops>true</UnrollLoops>
@@ -257,7 +257,7 @@
       </AdditionalOptions>
     </Link>
     <ClCompile>
-      <AdditionalIncludeDirectories>$(SolutionDir);/opt/rh/devtoolset-10/root/usr/include/c++/10</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)</AdditionalIncludeDirectories>
       <CppLanguageStandard>c++17</CppLanguageStandard>
       <StrictAliasing>false</StrictAliasing>
       <UnrollLoops>true</UnrollLoops>
@@ -272,7 +272,7 @@
       </AdditionalOptions>
     </Link>
     <ClCompile>
-      <AdditionalIncludeDirectories>$(SolutionDir);/opt/rh/devtoolset-10/root/usr/include/c++/10</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)</AdditionalIncludeDirectories>
       <CppLanguageStandard>c++17</CppLanguageStandard>
       <StrictAliasing>false</StrictAliasing>
       <UnrollLoops>true</UnrollLoops>
@@ -287,7 +287,7 @@
       </AdditionalOptions>
     </Link>
     <ClCompile>
-      <AdditionalIncludeDirectories>$(SolutionDir);/opt/rh/devtoolset-10/root/usr/include/c++/10</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)</AdditionalIncludeDirectories>
       <CppLanguageStandard>c++17</CppLanguageStandard>
       <StrictAliasing>false</StrictAliasing>
       <UnrollLoops>true</UnrollLoops>
@@ -302,7 +302,7 @@
       </AdditionalOptions>
     </Link>
     <ClCompile>
-      <AdditionalIncludeDirectories>$(SolutionDir);/opt/rh/devtoolset-10/root/usr/include/c++/10</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)</AdditionalIncludeDirectories>
       <CppLanguageStandard>c++17</CppLanguageStandard>
       <StrictAliasing>false</StrictAliasing>
       <UnrollLoops>true</UnrollLoops>
@@ -317,7 +317,7 @@
       </AdditionalOptions>
     </Link>
     <ClCompile>
-      <AdditionalIncludeDirectories>$(SolutionDir);/opt/rh/devtoolset-10/root/usr/include/c++/10</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)</AdditionalIncludeDirectories>
       <CppLanguageStandard>c++17</CppLanguageStandard>
       <StrictAliasing>false</StrictAliasing>
       <UnrollLoops>true</UnrollLoops>

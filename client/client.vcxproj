@@ -99,64 +99,64 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|ARM'">
     <OutDir>../bin/</OutDir>
     <RemoteOutRelDir>$(RemoteProjectRelDir)/../bin</RemoteOutRelDir>
-    <RemoteCppCompileToolExe>/opt/rh/devtoolset-10/root/usr/bin/g++</RemoteCppCompileToolExe>
-    <RemoteLdToolExe>/opt/rh/devtoolset-10/root/usr/bin/g++</RemoteLdToolExe>
+    <RemoteCppCompileToolExe>g++</RemoteCppCompileToolExe>
+    <RemoteLdToolExe>g++</RemoteLdToolExe>
     <EnableASAN>true</EnableASAN>
     <EnableIncrementalBuild>WithNinja</EnableIncrementalBuild>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|ARM'">
     <OutDir>../bin/</OutDir>
     <RemoteOutRelDir>$(RemoteProjectRelDir)/../bin</RemoteOutRelDir>
-    <RemoteCppCompileToolExe>/opt/rh/devtoolset-10/root/usr/bin/g++</RemoteCppCompileToolExe>
-    <RemoteLdToolExe>/opt/rh/devtoolset-10/root/usr/bin/g++</RemoteLdToolExe>
+    <RemoteCppCompileToolExe>g++</RemoteCppCompileToolExe>
+    <RemoteLdToolExe>g++</RemoteLdToolExe>
     <EnableASAN>false</EnableASAN>
     <EnableIncrementalBuild>WithNinja</EnableIncrementalBuild>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|ARM64'">
     <OutDir>../bin/</OutDir>
     <RemoteOutRelDir>$(RemoteProjectRelDir)/../bin</RemoteOutRelDir>
-    <RemoteCppCompileToolExe>/opt/rh/devtoolset-10/root/usr/bin/g++</RemoteCppCompileToolExe>
-    <RemoteLdToolExe>/opt/rh/devtoolset-10/root/usr/bin/g++</RemoteLdToolExe>
+    <RemoteCppCompileToolExe>g++</RemoteCppCompileToolExe>
+    <RemoteLdToolExe>g++</RemoteLdToolExe>
     <EnableASAN>true</EnableASAN>
     <EnableIncrementalBuild>WithNinja</EnableIncrementalBuild>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|ARM64'">
     <OutDir>../bin/</OutDir>
     <RemoteOutRelDir>$(RemoteProjectRelDir)/../bin</RemoteOutRelDir>
-    <RemoteCppCompileToolExe>/opt/rh/devtoolset-10/root/usr/bin/g++</RemoteCppCompileToolExe>
-    <RemoteLdToolExe>/opt/rh/devtoolset-10/root/usr/bin/g++</RemoteLdToolExe>
+    <RemoteCppCompileToolExe>g++</RemoteCppCompileToolExe>
+    <RemoteLdToolExe>g++</RemoteLdToolExe>
     <EnableASAN>false</EnableASAN>
     <EnableIncrementalBuild>WithNinja</EnableIncrementalBuild>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <OutDir>../bin/</OutDir>
     <RemoteOutRelDir>$(RemoteProjectRelDir)/../bin</RemoteOutRelDir>
-    <RemoteCppCompileToolExe>/opt/rh/devtoolset-10/root/usr/bin/g++</RemoteCppCompileToolExe>
-    <RemoteLdToolExe>/opt/rh/devtoolset-10/root/usr/bin/g++</RemoteLdToolExe>
+    <RemoteCppCompileToolExe>g++</RemoteCppCompileToolExe>
+    <RemoteLdToolExe>g++</RemoteLdToolExe>
     <EnableASAN>true</EnableASAN>
     <EnableIncrementalBuild>WithNinja</EnableIncrementalBuild>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <OutDir>../bin/</OutDir>
     <RemoteOutRelDir>$(RemoteProjectRelDir)/../bin</RemoteOutRelDir>
-    <RemoteCppCompileToolExe>/opt/rh/devtoolset-10/root/usr/bin/g++</RemoteCppCompileToolExe>
-    <RemoteLdToolExe>/opt/rh/devtoolset-10/root/usr/bin/g++</RemoteLdToolExe>
+    <RemoteCppCompileToolExe>g++</RemoteCppCompileToolExe>
+    <RemoteLdToolExe>g++</RemoteLdToolExe>
     <EnableASAN>false</EnableASAN>
     <EnableIncrementalBuild>WithNinja</EnableIncrementalBuild>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x86'">
     <OutDir>../bin/</OutDir>
     <RemoteOutRelDir>$(RemoteProjectRelDir)/../bin</RemoteOutRelDir>
-    <RemoteCppCompileToolExe>/opt/rh/devtoolset-10/root/usr/bin/g++</RemoteCppCompileToolExe>
-    <RemoteLdToolExe>/opt/rh/devtoolset-10/root/usr/bin/g++</RemoteLdToolExe>
+    <RemoteCppCompileToolExe>g++</RemoteCppCompileToolExe>
+    <RemoteLdToolExe>g++</RemoteLdToolExe>
     <EnableASAN>true</EnableASAN>
     <EnableIncrementalBuild>WithNinja</EnableIncrementalBuild>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x86'">
     <OutDir>../bin/</OutDir>
     <RemoteOutRelDir>$(RemoteProjectRelDir)/../bin</RemoteOutRelDir>
-    <RemoteCppCompileToolExe>/opt/rh/devtoolset-10/root/usr/bin/g++</RemoteCppCompileToolExe>
-    <RemoteLdToolExe>/opt/rh/devtoolset-10/root/usr/bin/g++</RemoteLdToolExe>
+    <RemoteCppCompileToolExe>g++</RemoteCppCompileToolExe>
+    <RemoteLdToolExe>g++</RemoteLdToolExe>
     <EnableASAN>false</EnableASAN>
     <EnableIncrementalBuild>WithNinja</EnableIncrementalBuild>
   </PropertyGroup>
@@ -167,7 +167,7 @@
     </Link>
     <ClCompile>
       <PreprocessorDefinitions>JEMALLOC_NO_DEMANGLE;USE_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>$(SolutionDir);/opt/rh/devtoolset-10/root/usr/include/c++/10</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)</AdditionalIncludeDirectories>
       <CppLanguageStandard>c++17</CppLanguageStandard>
       <StrictAliasing>false</StrictAliasing>
       <UnrollLoops>true</UnrollLoops>
@@ -180,7 +180,7 @@
       <LibraryDependencies>shynet;frmpub;protobuf;lua;dl;jemalloc;</LibraryDependencies>
     </Link>
     <ClCompile>
-      <AdditionalIncludeDirectories>$(SolutionDir);/opt/rh/devtoolset-10/root/usr/include/c++/10</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)</AdditionalIncludeDirectories>
       <CppLanguageStandard>c++17</CppLanguageStandard>
       <PreprocessorDefinitions>NDEBUG;JEMALLOC_NO_DEMANGLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <StrictAliasing>false</StrictAliasing>
@@ -195,7 +195,7 @@
     </Link>
     <ClCompile>
       <PreprocessorDefinitions>JEMALLOC_NO_DEMANGLE;USE_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>$(SolutionDir);/opt/rh/devtoolset-10/root/usr/include/c++/10</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)</AdditionalIncludeDirectories>
       <CppLanguageStandard>c++17</CppLanguageStandard>
       <StrictAliasing>false</StrictAliasing>
       <UnrollLoops>true</UnrollLoops>
@@ -208,7 +208,7 @@
       <LibraryDependencies>shynet;frmpub;protobuf;lua;dl;jemalloc;</LibraryDependencies>
     </Link>
     <ClCompile>
-      <AdditionalIncludeDirectories>$(SolutionDir);/opt/rh/devtoolset-10/root/usr/include/c++/10</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)</AdditionalIncludeDirectories>
       <CppLanguageStandard>c++17</CppLanguageStandard>
       <PreprocessorDefinitions>NDEBUG;JEMALLOC_NO_DEMANGLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <StrictAliasing>false</StrictAliasing>
@@ -223,7 +223,7 @@
     </Link>
     <ClCompile>
       <PreprocessorDefinitions>JEMALLOC_NO_DEMANGLE;USE_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>$(SolutionDir);/opt/rh/devtoolset-10/root/usr/include/c++/10</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)</AdditionalIncludeDirectories>
       <CppLanguageStandard>c++17</CppLanguageStandard>
       <StrictAliasing>false</StrictAliasing>
       <UnrollLoops>true</UnrollLoops>
@@ -236,7 +236,7 @@
       <LibraryDependencies>shynet;frmpub;protobuf;lua;dl;jemalloc;</LibraryDependencies>
     </Link>
     <ClCompile>
-      <AdditionalIncludeDirectories>$(SolutionDir);/opt/rh/devtoolset-10/root/usr/include/c++/10</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)</AdditionalIncludeDirectories>
       <CppLanguageStandard>c++17</CppLanguageStandard>
       <PreprocessorDefinitions>NDEBUG;JEMALLOC_NO_DEMANGLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <StrictAliasing>false</StrictAliasing>
@@ -251,7 +251,7 @@
     </Link>
     <ClCompile>
       <PreprocessorDefinitions>JEMALLOC_NO_DEMANGLE;USE_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>$(SolutionDir);/opt/rh/devtoolset-10/root/usr/include/c++/10</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)</AdditionalIncludeDirectories>
       <CppLanguageStandard>c++17</CppLanguageStandard>
       <StrictAliasing>false</StrictAliasing>
       <UnrollLoops>true</UnrollLoops>
@@ -264,7 +264,7 @@
       <LibraryDependencies>shynet;frmpub;protobuf;lua;dl;jemalloc;</LibraryDependencies>
     </Link>
     <ClCompile>
-      <AdditionalIncludeDirectories>$(SolutionDir);/opt/rh/devtoolset-10/root/usr/include/c++/10</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)</AdditionalIncludeDirectories>
       <CppLanguageStandard>c++17</CppLanguageStandard>
       <PreprocessorDefinitions>NDEBUG;JEMALLOC_NO_DEMANGLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <StrictAliasing>false</StrictAliasing>
