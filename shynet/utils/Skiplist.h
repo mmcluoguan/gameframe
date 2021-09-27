@@ -1,506 +1,674 @@
 #ifndef SHYNET_UTILS_SKIPLIST_H
 #define SHYNET_UTILS_SKIPLIST_H
 
-#include <jemalloc/jemalloc.h>
-#include <algorithm>
+#include <chrono>
+#include <functional>
 #include <iostream>
+#include <random>
 #include <vector>
+#include <unordered_map>
 
 namespace shynet {
 	namespace utils {
 
-		//
-		// 跳表
-		//
+		/*
+		* 默认按照score降序排序，score相同按照key降序排序
+		*/
 		template <typename Key, typename Score>
-		class SkipList : public Nocopy {
-		public:
-			using value_type = std::pair<Key, Score>;
-
-			SkipList();
-			virtual ~SkipList();
-
-		public:
-			// inserts elements
-			void insert(const value_type& value);
-
-			// erase element
-			bool erase(const value_type& value);
-
-			// access the last element
-			void back(Key& key) const;
-
-			// access the first element
-			bool front(Key& key) const;
-
-			// get rank by score and key
-			uint32_t rank(const value_type& value) const;
-
-			// get key by rank
-			bool element(uint32_t rank, Key& key) const;
-			bool element(uint32_t rank, value_type& value) const;
-
-			// get ranklist
-			// index    - from rank, >= 1
-			// count    - get ranklist size
-			int32_t ranklist(uint32_t index, uint32_t count, std::vector<Key>& list) const;
-			int32_t ranklist(uint32_t index, uint32_t count, std::vector<value_type>& list) const;
-
-			// get score range [min, max]
-			int32_t range(const Score& min, const Score& max,
-				uint32_t count, std::vector<Key>& list, const std::vector<Key>& excepts = std::vector<Key>()) const;
-			int32_t range(const Score& min, const Score& max,
-				uint32_t count, std::vector<value_type>& list, const std::vector<Key>& excepts = std::vector<Key>()) const;
-
-			// clear
-			void clear();
-
-			// returns the number of elements
-			uint32_t size() const { return m_Size; }
-
-			// print for debug
-			void print(int32_t width = 4);
-
-		private:
-			struct Node;
-
-			enum {
-				eMaxLevel = 32,
-			};
-
-		private:
-			// 随机层数
-			int32_t randomLevel();
-
-			// 删除节点
-			void eraseNode(Node* node, Node** update);
-
-		private:
-			struct Node* m_Head;
-			struct Node* m_Tail;
-			uint32_t            m_Size;
-			int32_t             m_Level;
-		};
-
-		template <typename Key, typename Score>
-		struct SkipList<Key, Score>::Node {
-			struct Level {
-				Node* forward;
-				uint32_t    span;
-			};
-
-			Node()
-				: backward(nullptr) {
-			}
-
-			Node(const value_type& value)
-				: key(value.first),
-				score(value.second),
-				backward(nullptr) {
-			}
-
-			uint32_t span(int32_t l) const {
-				return levels[l].span;
-			}
-
-			Node* forward(int32_t l) const {
-				return levels[l].forward;
-			}
-
-			Key             key;
-			Score           score;
-			struct Node* backward;
-			struct Level    levels[];
-		};
-
-		template <typename Key, typename Score>
-		SkipList<Key, Score>::SkipList()
-			: m_Tail(nullptr),
-			m_Size(0),
-			m_Level(1) {
-			m_Head = new (je_malloc(sizeof(Node) + eMaxLevel * sizeof(typename Node::Level))) Node();
-
-			for (uint32_t i = 0; i < eMaxLevel; ++i) {
-				m_Head->levels[i].span = 0;
-				m_Head->levels[i].forward = nullptr;
-			}
-		}
-
-		template <typename Key, typename Score>
-		SkipList<Key, Score>::~SkipList() {
-			Node* next = nullptr;
-			Node* node = m_Head->levels[0].forward;
-
-			je_free(m_Head);
-
-			while (node) {
-				next = node->levels[0].forward;
-				je_free(node);
-				node = next;
-			}
-		}
-
-		template <typename Key, typename Score>
-		void SkipList<Key, Score>::insert(const value_type& value) {
-			int32_t level;
-			int32_t rank[eMaxLevel];
-
-			Node* x = m_Head;
-			Node* update[eMaxLevel];
-
-			// span 某一层两个相连节点间间隔距离
-			// rank记录的是经过路径(每一层)的最后一个节点是第几个
-			// update记录的是 经过路径(每一层)的最后一个节点的前驱点
-			for (int32_t i = m_Level - 1; i >= 0; --i) {
-				rank[i] = i == (m_Level - 1) ? 0 : rank[i + 1];
-				while (x->forward(i)
-					&& (x->forward(i)->score > value.second
-						|| (x->forward(i)->key < value.first
-							&& x->forward(i)->score == value.second))) {
-					rank[i] += x->span(i);
-					x = x->forward(i);
-				}
-
-				// 当前层需要更新的节点
-				update[i] = x;
-			}
-
-			// 随机层
-			level = randomLevel();
-
-			//
-			if (level > m_Level) {
-				for (int32_t i = m_Level; i < level; ++i) {
-					rank[i] = 0;
-					update[i] = m_Head;
-					update[i]->levels[i].span = m_Size;
-				}
-
-				m_Level = level;
-			}
-
-			x = new (je_malloc(sizeof(Node) + level * sizeof(typename Node::Level))) Node(value);
-			for (int32_t i = 0; i < level; ++i) {
-				x->levels[i].forward = update[i]->levels[i].forward;
-				update[i]->levels[i].forward = x;
-
-				/* update span covered by update[i] as x is inserted here */
-				x->levels[i].span = update[i]->levels[i].span - (rank[0] - rank[i]);
-				update[i]->levels[i].span = (rank[0] - rank[i]) + 1;
-			}
-
-			/* increment span for untouched levels */
-			for (int32_t i = level; i < m_Level; ++i) {
-				++update[i]->levels[i].span;
-			}
-
-			x->backward = (update[0] == m_Head) ? nullptr : update[0];
-
-			if (x->levels[0].forward) {
-				x->levels[0].forward->backward = x;
+		static int default_compare(const std::pair<const Key, Score>& a, const std::pair<const Key, Score>& b) {
+			if (a.first == b.first) {
+				return 0;
 			}
 			else {
-				m_Tail = x;
-			}
-
-			++m_Size;
-		}
-
-		template<typename Key, typename Score>
-		bool SkipList<Key, Score>::erase(const value_type& value) {
-			Node* x = m_Head;
-			Node* update[eMaxLevel];
-
-			for (int32_t i = m_Level - 1; i >= 0; --i) {
-				while (x->forward(i)
-					&& (x->forward(i)->score > value.second
-						|| (x->forward(i)->key < value.first
-							&& x->forward(i)->score == value.second))) {
-					x = x->forward(i);
+				//>升序 <降序
+				if (a.second < b.second) {
+					return 1;
 				}
-
-				update[i] = x;
-			}
-
-			x = x->levels[0].forward;
-
-			if (x && x->key == value.first) {
-				eraseNode(x, update);
-				je_free(x);
-
-				return true;
-			}
-
-			return false;
-		}
-
-		template<typename Key, typename Score>
-		bool SkipList<Key, Score>::front(Key& key) const {
-			Node* x = m_Head;
-
-			if (x->levels[0].forward) {
-				x = x->levels[0].forward;
-				key = x->key;
-
-				return true;
-			}
-
-			return false;
-		}
-
-		template<typename Key, typename Score>
-		void SkipList<Key, Score>::back(Key& key) const {
-			Node* x = m_Tail;
-
-			if (x) {
-				key = x->key;
-			}
-		}
-
-		template<typename Key, typename Score>
-		uint32_t SkipList<Key, Score>::rank(const value_type& value) const {
-			Node* x = m_Head;
-			uint32_t rank = 0;
-
-			for (int32_t i = m_Level - 1; i >= 0; --i) {
-				while (x->forward(i)
-					&& (x->forward(i)->score > value.second
-						|| (x->forward(i)->key <= value.first
-							&& x->forward(i)->score == value.second))) {
-					rank += x->span(i);
-					x = x->forward(i);
-				}
-
-				if (x != m_Head && x->key == value.first) {
-					return rank;
-				}
-			}
-
-			return 0;
-		}
-
-		template<typename Key, typename Score>
-		bool SkipList<Key, Score>::element(uint32_t rank, Key& key) const {
-			value_type value;
-
-			if (element(rank, value)) {
-				key = value.first;
-				return true;
-			}
-
-			return false;
-		}
-
-		template<typename Key, typename Score>
-		bool SkipList<Key, Score>::element(uint32_t rank, value_type& value) const {
-			Node* x = m_Head;
-			uint32_t traversed = 0;
-
-			for (int32_t i = m_Level - 1; i >= 0; --i) {
-				while (x->forward(i)
-					&& traversed + x->span(i) < rank) {
-					traversed += x->span(i);
-					x = x->forward(i);
-				}
-			}
-
-			++traversed;
-			x = x->forward(0);
-
-			if (x != nullptr) {
-				value = value_type(x->key, x->score);
-			}
-
-			return x != nullptr;
-		}
-
-		template<typename Key, typename Score>
-		int32_t SkipList<Key, Score>::ranklist(uint32_t index, uint32_t count, std::vector<Key>& list) const {
-			typename std::vector<value_type> rangelist;
-			int32_t nget = ranklist(index, count, rangelist);
-
-			for (size_t i = 0; i < rangelist.size(); ++i) {
-				list.push_back(rangelist[i].first);
-			}
-
-			return nget;
-		}
-
-		template<typename Key, typename Score>
-		int32_t SkipList<Key, Score>::ranklist(uint32_t index, uint32_t count, std::vector<value_type>& list) const {
-			Node* x = m_Head;
-			int32_t nget = 0;
-			uint32_t traversed = 0;
-
-			index = std::max(index, (uint32_t)1);
-
-			for (int32_t i = m_Level - 1; i >= 0; --i) {
-				while (x->forward(i)
-					&& traversed + x->span(i) < index) {
-					traversed += x->span(i);
-					x = x->forward(i);
-				}
-			}
-
-			++traversed;
-			x = x->forward(0);
-
-			while (x && traversed <= index + count - 1) {
-				Node* next = x->forward(0);
-
-				++nget;
-				++traversed;
-				list.push_back(value_type(x->key, x->score));
-
-				x = next;
-			}
-
-			return nget;
-		}
-
-		template<typename Key, typename Score>
-		int32_t SkipList<Key, Score>::range(const Score& min, const Score& max, uint32_t count, std::vector<Key>& list, const std::vector<Key>& excepts) const {
-			typename std::vector<value_type> rangelist;
-			int32_t nget = range(min, max, count, rangelist, excepts);
-
-			for (size_t i = 0; i < rangelist.size(); ++i) {
-				list.push_back(rangelist[i].first);
-			}
-
-			return nget;
-		}
-
-		template<typename Key, typename Score>
-		int32_t SkipList<Key, Score>::range(const Score& min, const Score& max, uint32_t count, std::vector<value_type>& list, const std::vector<Key>& excepts) const {
-			int32_t nget = 0;
-			Node* x = m_Head;
-
-			if (min > max) {
-				return 0;
-			}
-
-			if (m_Tail == nullptr || m_Tail->score > max) {
-				return 0;
-			}
-			if (m_Head->forward(0) == nullptr
-				|| m_Head->forward(0)->score < min) {
-				return 0;
-			}
-
-			for (int32_t i = m_Level - 1; i >= 0; --i) {
-				while (x->forward(i)
-					&& x->forward(i)->score > max) {
-					x = x->forward(i);
-				}
-			}
-
-			x = x->forward(0);
-
-			while (x
-				&& list.size() < count
-				&& (x->score > min || x->score == min)) {
-				if (excepts.end()
-					== std::find(excepts.begin(), excepts.end(), x->key)) {
-					++nget;
-					list.push_back(value_type(x->key, x->score));
-				}
-
-				x = x->forward(0);
-			}
-
-			return nget;
-		}
-
-		template<typename Key, typename Score>
-		void SkipList<Key, Score>::clear() {
-			Node* next = nullptr;
-			Node* node = m_Head->forward(0);
-
-			while (node) {
-				next = node->forward(0);
-				je_free(node);
-				node = next;
-			}
-
-			// 初始化head
-			for (int32_t i = 0; i < eMaxLevel; ++i) {
-				m_Head->levels[i].span = 0;
-				m_Head->levels[i].forward = nullptr;
-			}
-
-			m_Level = 1;
-			m_Size = 0;
-			m_Tail = nullptr;
-		}
-
-		template<typename Key, typename Score>
-		void SkipList<Key, Score>::print(int32_t width) {
-			Node* p = nullptr, * q = nullptr;
-
-			std::cout << "level :" << m_Level << std::endl;
-
-			//从最高层开始搜
-			for (int32_t i = m_Level - 1; i >= 0; --i) {
-				p = m_Head;
-
-				while ((q = p->forward(i)) != nullptr) {
-					for (int32_t j = 0; j < p->span(i) - 1; ++j) {
-						for (int32_t k = 0; k < width; ++k) {
-							std::cout << " ";
-						}
+				else if (a.second == b.second) {
+					if (a.first <= a.first)
+					{
+						return 1;
 					}
-
-					std::cout << std::setw(width) << "(" << q->key << "," << q->score << ")";
-
-					p = q;
-				}
-
-				std::cout << std::endl;
-			}
-
-			std::cout << std::endl;
-		}
-
-		template<typename Key, typename Score>
-		void SkipList<Key, Score>::eraseNode(Node* node, Node** update) {
-			for (int32_t i = 0; i < m_Level; ++i) {
-				if (update[i]->forward(i) == node) {
-					update[i]->levels[i].span += node->levels[i].span - 1;
-					update[i]->levels[i].forward = node->levels[i].forward;
+					return -1;
 				}
 				else {
-					update[i]->levels[i].span -= 1;
+					return -1;
+				}
+			}
+		}
+
+		//
+		// 跳表
+		// key不能相同，不同的key可以有相同的分数
+		//
+		template <typename Key, typename Score, typename Compare = decltype(std::bind(default_compare<Key, Score>, std::placeholders::_1, std::placeholders::_2)) >
+		class SkipList {
+
+		public:
+			using key_type = Key;
+			using value_type = std::pair<const Key, Score>;
+
+		private:
+			/*
+			* 内部节点
+			*/
+			struct node {
+			public:
+				friend class SkipList;
+
+				struct level_item {
+					node* prev_ = nullptr;
+					node* next_ = nullptr;
+				};
+			public:
+				explicit node(int height)
+					: height_(height), levels_(height) {}
+
+				explicit node(int height, const value_type& kv)
+					: kv_(kv), height_(height), levels_(height) {}
+
+			private:
+				value_type kv_;
+				int height_;
+				/*
+				* 排名
+				*/
+				uint32_t rank_ = 0;
+				std::vector<level_item> levels_;
+			};
+		public:
+			/*
+			* 正向迭代器
+			*/
+			class iterator {
+				friend class SkipList;
+			public:
+				iterator() = default;
+				explicit iterator(node* n) : node_(n) {}
+				iterator(const iterator& other) { node_ = other.node_; }
+				iterator& operator=(const iterator& other) {
+					node_ = other.node_;
+					return *this;
+				}
+				bool operator==(const iterator& other) const { return this->node_ == other.node_; }
+				bool operator!=(const iterator& other) const { return this->node_ != other.node_; }
+				value_type& operator*() const { return node_->kv_; }
+				value_type* operator->() const { return &(node_->kv_); }
+				uint32_t rank() const { return node_->rank_; }
+
+				iterator& operator++() {
+					node_ = node_->levels_[0].next_;
+					return *this;
+				}
+
+				iterator operator++(int) {
+					node* keeper = node_;
+					node_ = node_->levels_[0].next_;
+					return iterator(keeper);
+				}
+
+				iterator& operator--() {
+					node_ = node_->levels_[0].prev_;
+					return *this;
+				}
+
+				iterator operator--(int) {
+					node* keeper = node_;
+					node_ = node_->levels_[0].prev_;
+					return iterator(keeper);
+				}
+			private:
+				node* node_ = nullptr;
+			};
+			/*
+			* 逆向迭代器
+			*/
+			class reverse_iterator {
+				friend class SkipList;
+			public:
+				reverse_iterator() = default;
+				explicit reverse_iterator(node* n) : node_(n) {}
+				reverse_iterator(const reverse_iterator& other) { node_ = other.node_; }
+				reverse_iterator& operator=(const reverse_iterator& other) {
+					node_ = other.node_;
+					return *this;
+				}
+				bool operator==(const reverse_iterator& other) const { return this->node_ == other.node_; }
+				bool operator!=(const reverse_iterator& other) const { return this->node_ != other.node_; }
+				value_type& operator*() const { return node_->kv_; }
+				value_type* operator->() const { return &(node_->kv_); }
+				uint32_t rank() const { return node_->rank_; }
+
+				reverse_iterator& operator++() {
+					node_ = node_->levels_[0].prev_;
+					if (node_->levels_[0].prev_ == nullptr) { node_ = nullptr; }
+
+					return *this;
+				}
+
+				reverse_iterator operator++(int) {
+					node* keeper = node_;
+					node_ = node_->levels_[0].prev_;
+					if (node_->levels_[0].prev_ == nullptr) { node_ = nullptr; }
+
+					return reverse_iterator(keeper);
+				}
+
+				reverse_iterator& operator--() {
+					node_ = node_->levels_[0].next_;
+					return *this;
+				}
+
+				reverse_iterator operator--(int) {
+					node* keeper = node_;
+					node_ = node_->levels_[0].next_;
+					return reverse_iterator(keeper);
+				}
+			private:
+				node* node_ = nullptr;
+			};
+
+			/// <summary>
+			/// 空构造
+			/// </summary>
+			/// <param name="compare">排序函数</param>
+			SkipList(Compare compare = std::bind(default_compare<Key, Score>, std::placeholders::_1, std::placeholders::_2))
+				: random_generator_(std::chrono::system_clock::now().time_since_epoch().count()), compare_(compare)
+			{
+				head_ = new node(max_height_);
+			}
+
+			/// <summary>
+			/// 区间构造
+			/// </summary>
+			/// <param name="first"></param>
+			/// <param name="last"></param>
+			/// <param name="compare"></param>
+			SkipList(iterator first, iterator last, Compare compare = std::bind(default_compare<Key, Score>, std::placeholders::_1, std::placeholders::_2))
+				: random_generator_(std::chrono::system_clock::now().time_since_epoch().count()), compare_(compare)
+			{
+				head_ = new node(max_height_);
+				insert_range_effective_(first, last);
+			}
+
+			/*
+			* 复制构造
+			*/
+			SkipList(const SkipList& x)
+				: random_generator_(std::chrono::system_clock::now().time_since_epoch().count()), compare_(x.compare_)
+			{
+				head_ = new node(max_height_);
+				insert_range_effective_(x.begin(), x.end());
+			}
+
+			/*
+			* 移动构造
+			*/
+			SkipList(SkipList&& x)
+				: random_generator_(std::chrono::system_clock::now().time_since_epoch().count()), compare_(x.compare_)
+			{
+				head_ = new node(max_height_);
+				swap(x);
+			}
+
+			virtual ~SkipList() {
+				clear();
+				delete head_;
+			}
+
+			SkipList& operator=(const SkipList& x) {
+				clear();
+				insert_range_effective_(x.begin(), x.end());
+				return *this;
+			}
+
+			SkipList& operator=(SkipList&& x) {
+				clear();
+				swap(x);
+				return *this;
+			}
+
+			iterator begin() { return iterator(head_->levels_[0].next_); }
+			iterator begin() const { return iterator(head_->levels_[0].next_); }
+			iterator end() { return iterator(nullptr); }
+			iterator end() const { return iterator(nullptr); }
+
+			reverse_iterator rbegin() { return reverse_iterator(tail_); }
+			reverse_iterator rbegin() const { return reverse_iterator(tail_); }
+			reverse_iterator rend() { return reverse_iterator(nullptr); }
+			reverse_iterator rend() const { return reverse_iterator(nullptr); }
+
+			bool empty() const { return element_num_ == 0; }
+			std::size_t size() const { return element_num_; }
+
+			/*
+			* 通过key获取score,没有找到key,抛出异常
+			*/
+			Score& at(const key_type& k) {
+				iterator iter = find(k);
+				if (iter == end()) {
+					std::ostringstream err;
+					err << "key=" << k << " 不存在";
+					THROW_EXCEPTION(err.str());
+				}
+
+				return iter->second;
+			}
+			const Score& at(const key_type& k) const {
+				iterator iter = find(k);
+				if (iter == end()) {
+					std::ostringstream err;
+					err << "key=" << k << " 不存在";
+					THROW_EXCEPTION(err.str());
+				}
+
+				return iter->second;
+			}
+
+			/*
+			* 清空
+			*/
+			void clear() {
+				for (int i = max_height_ - 1; i > 0; i--) {
+					head_->levels_[i].next_ = nullptr;
+				}
+
+				node* p = head_->levels_[0].next_;
+				while (p) {
+					node* next = p->levels_[0].next_;
+					delete p;
+					p = next;
+				}
+				head_->levels_[0].next_ = nullptr;
+				current_height_ = 1;
+			}
+
+			/*
+			* 指定key,更新score,skiplist顺序将改变
+			*/
+			std::pair<iterator, bool> update(const key_type& k, const Score& score) {
+				auto iter = find(k);
+				if (iter != end()) {
+					if (iter->second == score) {
+						return std::make_pair(end(), false);
+					}
+					else {
+						erase(iter);
+						value_type val(k, score);
+						return insert(val);
+					}
+				}
+				return std::make_pair(end(), false);
+			}
+			/*
+			* 指定position,更新score,skiplist顺序将改变
+			*/
+			std::pair<iterator, bool> update(iterator position, const Score& score) {
+				if (position->second == score) {
+					return std::make_pair(end(), false);
+				}
+				else {
+					key_type key = position->first;
+					erase(position);
+					return insert({ key ,score });
 				}
 			}
 
-			if (node->levels[0].forward) {
-				node->levels[0].forward->backward = node->backward;
+			/*
+			* 插入val
+			*/
+			std::pair<iterator, bool> insert(const value_type& val) {
+				std::vector<node*> cache;
+				iterator iter = find_(val, nullptr, nullptr, &cache);
+				if (iter != end()) { return std::make_pair(iter, false); }
+
+				iter = insert_(val, cache);
+				return std::make_pair(iter, true);
 			}
-			else {
-				m_Tail = node->backward;
+			/*
+			* 在指定位置插入val
+			*/
+			iterator insert(iterator position, const value_type& val) {
+				std::vector<node*> cache;
+				iterator iter = find_(val, position.node_, nullptr, &cache);
+				if (iter != end()) { return iter; }
+
+				iter = find_(val, nullptr, position.node_, &cache);
+				if (iter != end()) { return iter; }
+
+				return insert_(val, cache);
+			}
+			/*
+			* 插入区间值
+			*/
+			void insert(iterator first, iterator last) {
+				insert_range_effective_(first, last);
 			}
 
-			while (m_Level > 1 && m_Head->levels[m_Level - 1].forward == nullptr) {
-				--m_Level;
+			/*
+			* 交换skiplist
+			*/
+			void swap(SkipList& x) {
+				std::swap(head_, x.head_);
+				std::swap(tail_, x.tail_);
+				std::swap(current_height_, x.current_height_);
+				std::swap(element_num_, x.element_num_);
+				std::swap(is_asc_, x.is_asc_);
+				std::swap(kvmap_, x.kvmap_);
 			}
 
-			--m_Size;
-		}
+			/*
+			* 通过指定排名获取位置
+			*/
+			iterator rank(uint32_t rank) const {
+				if (rank == 1)
+					return begin();
+				else if (rank > element_num_)
+					return end();
+				node* dummy = head_;
+				int h = current_height_;
 
-		template<typename Key, typename Score>
-		int32_t SkipList<Key, Score>::randomLevel() {
-#define SKIPLIST_P  0.25
+				for (int i = h - 1; i >= 0; i--) {
+					for (; ; ) {
+						if (dummy->levels_[i].next_ == nullptr) { break; }
 
-			int32_t level = 1;
-
-			while (double(random() & 0xFFFF) < (SKIPLIST_P * 0xFFFF)) {
-				level += 1;
+						int res;
+						if (rank == dummy->levels_[i].next_->rank_) {
+							res = 0;
+						}
+						else if (rank > dummy->levels_[i].next_->rank_) {
+							res = 1;
+						}
+						else {
+							res = -1;
+						}
+						if (res == 0) { return iterator(dummy->levels_[i].next_); }
+						else if (res < 0) { break; }
+						else if (res > 0) { dummy = dummy->levels_[i].next_; }
+					}
+				}
+				return end();
+			}
+			/*
+			* 通过指定起始排名和排名后count，获取排名区间
+			*/
+			std::pair<iterator, iterator> rank_rang(uint32_t rank, uint32_t count) const {
+				std::pair<iterator, iterator> rang = std::make_pair(end(), end());
+				uint32_t rankcount = rank + count;
+				for (; rank <= rankcount; rank++) {
+					auto it = this->rank(rank);
+					if (it != end()) {
+						if (rang.first == end()) {
+							rang.first = it;
+						}
+						else {
+							rang.second = ++it;
+						}
+					}
+					else {
+						break;
+					}
+				}
+				return rang;
 			}
 
-			return level < eMaxLevel ? level : eMaxLevel;
-		}
+			/*
+			* 通过k获取位置
+			*/
+			iterator find(const key_type& k) const {
+				auto kv_iter = kvmap_.find(k);
+				if (kv_iter != kvmap_.end()) {
+					value_type val(kv_iter->first, kv_iter->second);
+					return find_(val);
+				}
+				return end();
+			}
+			/*
+			* 通过指定[min,max]获取位置区间
+			*/
+			std::pair<iterator, iterator> find(const Score& min, const Score& max, size_t max_item_size = 100) {
+				std::pair<iterator, iterator> rang = std::make_pair(end(), end());
+				if (max >= min) {
+					node* dummy = head_;
+					for (int i = current_height_ - 1; i >= 0; i--) {
+						while (dummy->levels_[i].next_ &&
+							((is_asc_ == -1 && dummy->levels_[i].next_->kv_.second > max) ||
+								(is_asc_ == 1 && dummy->levels_[i].next_->kv_.second < min))
+							)
+						{
+							dummy = dummy->levels_[i].next_;
+						}
+					}
+					size_t total = 0;
+					dummy = dummy->levels_[0].next_;
+					while (dummy &&
+						((is_asc_ == -1 && dummy->kv_.second >= min) ||
+							(is_asc_ == 1 && dummy->kv_.second <= max))
+						)
+					{
+						if (total == 0) {
+							rang.first = iterator(dummy);
+						}
+						dummy = dummy->levels_[0].next_;
+						total++;
+						if (total >= max_item_size) {
+							break;
+						}
+					}
+					if (rang.first != end())
+						rang.second = iterator(dummy);
+				}
+				return rang;
+			}
 
+			/*
+			* 通过位置移除元素,返回移除元素的下一个位置
+			*/
+			iterator erase(iterator position) { return erase_(position); }
+			/*
+			* 通过key移除元素,返回移除元素的下一个位置
+			*/
+			iterator erase(const key_type& k) {
+				auto kv_iter = kvmap_.find(k);
+				if (kv_iter != kvmap_.end()) {
+					value_type val(kv_iter->first, kv_iter->second);
+					iterator iter = find_(val);
+					if (iter == end()) {
+						return end();
+					}
+					return erase_(iter);
+				}
+				return end();
+			}
+			/*
+			* 通过指定区间移除元素
+			*/
+			void erase(iterator first, iterator last) {
+				while (first != last) {
+					first = erase(first);
+				}
+			}
+
+			/*
+			* 调试
+			*/
+			const std::string debug_string() {
+				std::ostringstream info;
+				info << "<<<<<" << std::endl;
+				for (int i = current_height_ - 1; i >= 0; i--) {
+					info << " * ";
+					node* p = head_;
+					for (; p->levels_[i].next_; p = p->levels_[i].next_) {
+						//uint32_t span = p->levels_[i].next_->rank_ - p->rank_;
+						//info << std::string(span, ' ');
+						info << "(" << p->levels_[i].next_->kv_.first << ":" << p->levels_[i].next_->kv_.second
+							<< " rank:" << p->levels_[i].next_->rank_ << ") ";
+						//info << "(" << p->levels_[i].next_->kv_.first;
+					}
+					info << std::endl;
+				}
+				info << "-----" << std::endl;
+				return info.str();
+			}
+		private:
+			iterator erase_(iterator it) {
+				node* n = it.node_;
+
+				node* next = n->levels_[0].next_;
+				while (next)
+				{
+					next->rank_ = next->rank_ - 1;
+					next = next->levels_[0].next_;
+				}
+
+				iterator erase_next = end();
+				for (int i = n->height_ - 1; i >= 0; i--) {
+					erase_next = iterator(n->levels_[i].next_);
+					n->levels_[i].prev_->levels_[i].next_ = n->levels_[i].next_;
+					if (n->levels_[i].next_) {
+						n->levels_[i].next_->levels_[i].prev_ = n->levels_[i].prev_;
+					}
+				}
+
+				if (n->height_ != 1 && n->height_ == current_height_) {
+					for (; (current_height_ > 1) && (head_->levels_[current_height_ - 1].next_ == nullptr); current_height_--);
+				}
+
+				if (n == tail_) { tail_ = n->levels_[0].prev_ == head_ ? nullptr : n->levels_[0].prev_; }
+
+				element_num_--;
+				kvmap_.erase(n->kv_.first);
+				delete n;
+				return erase_next;
+			}
+
+			iterator find_(const value_type& k, node* bpos = nullptr, node* epos = nullptr, std::vector<node*>* cache = nullptr) const {
+				if (cache) { cache->reserve(max_height_); }
+
+				node* dummy = bpos ? bpos->levels_[0].prev_ : head_;
+				int h = bpos ? dummy->height_ : current_height_;
+
+				for (int i = h - 1; i >= 0; i--) {
+					for (; ; ) {
+						if (epos == nullptr && dummy->levels_[i].next_ == nullptr) { break; }
+						else if (epos != nullptr && (dummy->levels_[i].next_ == epos || dummy->levels_[i].next_ == nullptr)) { break; }
+
+						int res = compare_(k, dummy->levels_[i].next_->kv_);
+						if (res == 0) { return iterator(dummy->levels_[i].next_); }
+						else if (res < 0) { break; }
+						else if (res > 0) { dummy = dummy->levels_[i].next_; }
+					}
+					if (cache) { (*cache)[i] = dummy; }
+				}
+
+				return end();
+			}
+
+			iterator insert_(const value_type& kv, std::vector<node*>& cache) {
+				kvmap_[kv.first] = kv.second;
+				int height = random_height_();
+				if (height > current_height_) {
+					for (int i = height - 1; i >= current_height_; i--) {
+						cache[i] = head_;
+					}
+					current_height_ = height;
+				}
+
+				//比较输入值与位置关系，确定跳表顺序
+				if (is_asc_ == 0 && cache[0] != head_) {
+					if (kv.second > cache[0]->kv_.second) {
+						is_asc_ = 1;
+					}
+					else {
+						is_asc_ = -1;
+					}
+				}
+
+				node* nn = new node(height, kv);
+				for (int i = height - 1; i >= 0; i--) {
+					node* cn = cache[i];
+					nn->levels_[i].next_ = cn->levels_[i].next_;
+					nn->levels_[i].prev_ = cn;
+
+					if (cn->levels_[i].next_) {
+						cn->levels_[i].next_->levels_[i].prev_ = nn;
+					}
+
+					cn->levels_[i].next_ = nn;
+				}
+
+				nn->rank_ = cache[0]->rank_ + 1;
+				node* next = nn->levels_[0].next_;
+				while (next)
+				{
+					next->rank_ = next->levels_[0].prev_->rank_ + 1;
+					next = next->levels_[0].next_;
+				}
+
+				if (nn->levels_[0].next_ == nullptr) { tail_ = nn; }
+
+				element_num_++;
+				return iterator(nn);
+			}
+
+			void insert_range_effective_(iterator b, iterator e) {
+				iterator pos;
+				std::vector<node*> cache;
+				for (iterator iter = b; iter != e; ++iter) {
+					pos = find_(*iter, pos.node_, nullptr, &cache);
+					if (pos == end()) {
+						pos = insert_(*iter, cache);
+					}
+				}
+			}
+
+			int random_height_() {
+				int height = 1;
+				for (; height < max_height_ && (random_generator_() % branching_ == 0); height++);
+
+				return height;
+			}
+
+		private:
+			/*
+			* 最大层高
+			*/
+			static constexpr int max_height_ = 32;
+			/*
+			* 分层概率
+			*/
+			static constexpr int branching_ = 4;
+			/*
+			* 当前层高
+			*/
+			int current_height_ = 1;
+			/*
+			* 元素个数
+			*/
+			std::size_t element_num_ = 0;
+			/*
+			* 尾指针
+			*/
+			node* tail_ = nullptr;
+			/*
+			* 头指针
+			*/
+			node* head_;
+			/*
+			* 随机生成器
+			*/
+			std::mt19937 random_generator_;
+			//排序方式
+			Compare compare_;
+			/*
+			* 当前排序,1.升序,0.初始化,-1降序
+			*/
+			int is_asc_ = 0;
+			/*
+			* key,score映射
+			*/
+			std::unordered_map<Key, Score> kvmap_;
+		};
 	}
 }
-
 #endif
