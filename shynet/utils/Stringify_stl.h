@@ -296,7 +296,7 @@ namespace shynet {
 		std::string Stringify_stl(std::stack<T> val,
 			const Stringify_stl_one_style& style = STRINGIFY_STL_STYLE_ONE_DEFAULT
 		) {
-			CHEF_STRINGIFY_STL_NONITERATIVE(val, style, top);
+			STRINGIFY_STL_NONITERATIVE(val, style, top);
 		}
 
 		template <typename T>

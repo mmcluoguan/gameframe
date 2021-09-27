@@ -17,7 +17,8 @@ int g_gateconnect_id;
 #include "shynet/utils/Databuffer.h"
 #include "shynet/utils/Hash.h"
 #include "shynet/utils/Lru.h"
-#include "shynet/utils/SkipList.h"
+#include "SkipList.h"
+#include "shynet/utils/Stringify_stl.h"
 #include <atomic>
 #include <cstddef>
 
@@ -27,49 +28,60 @@ void test() {
 	std::string res = shynet::crypto::md5::sum(origin);
 	assert(res == std::string("ab56b4d92b40713acc5af89985d4b786"));
 
-	std::vector<int> aa;
-	int max = 10;
-	for (int i = 0; i < max; i++) {
-		aa.push_back(5);//shynet::utils::Stuff::random(1, 5));
+
+	shynet::utils::SkipList<std::string, int> sk;
+	sk.insert({ "a",100 });
+	sk.insert({ "b",200 });
+	sk.insert({ "c",150 });
+	sk.insert({ "d",200 });
+	sk.insert({ "f",150 });
+	sk.insert({ "g",250 });
+	sk.insert({ "h",210 });
+	sk.debug_print();
+	/*auto it = sk.find(80, 200);
+	for (; it.first != it.second; ++it.first)
+	{
+		auto& pair = *it.first;
+		std::cout << "(" << pair.first << "," << pair.second << ") ";
 	}
-	shynet::utils::SkipList<int, int> sl;
-	for (int i = 0; i < max; i++) {
-		int a = aa[i];
-		sl.insert({ a,i });
-	}
+	std::cout << std::endl;*/
+	//sk.erase(it.first, it.second);
+	//sk.debug_print();
+
+
 	//sl.print();
-	shynet::utils::Lru<std::string, int> c(3);
-	c.put("chef", 1);
-	c.put("yoko", 2);
-	c.put("tom", 3);
-	c.put("jerry", 4); // 超过容器大小，淘汰最老的`chef`
-	bool exist;
-	int v;
-	exist = c.get("chef", &v);
-	assert(!exist);
-	exist = c.get("yoko", &v);
-	assert(exist && v == 2);
-	c.put("garfield", 5); // 超过容器大小，注意，由于`yoko`刚才读取时会更新热度，所以淘汰的是`tom`
-	exist = c.get("yoko", &v);
-	assert(exist && v == 2);
-	exist = c.get("tom", &v);
-	assert(!exist);
+	//shynet::utils::Lru<std::string, int> c(3);
+	//c.put("chef", 1);
+	//c.put("yoko", 2);
+	//c.put("tom", 3);
+	//c.put("jerry", 4); // 超过容器大小，淘汰最老的`chef`
+	//bool exist;
+	//int v;
+	//exist = c.get("chef", &v);
+	//assert(!exist);
+	//exist = c.get("yoko", &v);
+	//assert(exist && v == 2);
+	//c.put("garfield", 5); // 超过容器大小，注意，由于`yoko`刚才读取时会更新热度，所以淘汰的是`tom`
+	//exist = c.get("yoko", &v);
+	//assert(exist && v == 2);
+	//exist = c.get("tom", &v);
+	//assert(!exist);
 
-	//LOG_DEBUG << "hash code:" << shynet::utils::hash_val(v, exist);
+	////LOG_DEBUG << "hash code:" << shynet::utils::hash_val(v, exist);
 
-	std::byte bb{ 12 };
-	bb >>= 1;
-	//LOG_DEBUG << std::to_integer<int>(bb);
+	//std::byte bb{ 12 };
+	//bb >>= 1;
+	////LOG_DEBUG << std::to_integer<int>(bb);
 
-	std::shared_ptr<char[]> shccc(new char[10]{ 'a','1' });
-	//LOG_DEBUG << shccc.get()[0];
+	//std::shared_ptr<char[]> shccc(new char[10]{ 'a','1' });
+	////LOG_DEBUG << shccc.get()[0];
 
 }
 
 int main(int argc, char* argv[]) {
 
-	//test();
-	//return 0;
+	test();
+	return 0;
 	using namespace std;
 	using namespace shynet;
 	using namespace shynet::utils;
