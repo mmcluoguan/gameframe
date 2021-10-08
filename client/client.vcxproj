@@ -45,7 +45,6 @@
     <ClInclude Include="GateConnector.h" />
     <ClInclude Include="GateReConnctorTimer.h" />
     <ClInclude Include="SignalHandler.h" />
-    <ClInclude Include="SkipList.h" />
     <ClInclude Include="StdinHandler.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
