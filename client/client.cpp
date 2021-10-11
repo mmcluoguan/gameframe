@@ -32,39 +32,40 @@ void test() {
 	sk.insert({ "a",100 });
 	sk.insert({ "b",200 });
 	sk.insert({ "c",150 });
-	sk.insert({ "d",200 });
-	sk.insert({ "f",150 });
+	sk.insert({ "d",210 });
+	sk.insert({ "f",90 });
 	sk.insert({ "g",250 });
 	sk.insert({ "h",210 });
-	std::cout << sk.debug_string();
+	//std::cout << sk.debug_string();
 	auto it = sk.update("h", 230);
-	sk.update(it.first, 330);
+	//std::cout << sk.debug_string();
+	sk.update(it.first, 250);
 	std::cout << sk.debug_string();
-	auto fit = sk.find("f");
-	std::cout << "(" << fit->first << "," << fit->second << ") " << std::endl;
-	sk.erase("d");
-	std::cout << sk.debug_string();
+	//auto fit = sk.find("f");
+	//std::cout << "(" << fit->first << "," << fit->second << "," << sk.pos_rank(fit) << ") " << std::endl;
+	//sk.erase("d");
+	//std::cout << sk.debug_string();
+	//auto rank_pos = sk.rank_pos(5);
+	//if (rank_pos != sk.end())
+	//	std::cout << "(" << rank_pos->first << "," << rank_pos->second << ") " << std::endl;
+	/*shynet::utils::SkipList<std::string, int> sk1(sk);
+		std::cout << sk1.debug_string();
+		shynet::utils::SkipList<std::string, int> sk2(std::move(sk1));
+		std::cout << sk1.debug_string();
+		std::cout << sk2.debug_string();
+		shynet::utils::SkipList<std::string, int> sk3 = std::move(sk2);
+		std::cout << sk2.debug_string();
+		std::cout << sk3.debug_string();*/
 
-	shynet::utils::SkipList<std::string, int> sk1(sk);
-	std::cout << sk1.debug_string();
-	shynet::utils::SkipList<std::string, int> sk2(std::move(sk1));
-	std::cout << sk1.debug_string();
-	std::cout << sk2.debug_string();
-	shynet::utils::SkipList<std::string, int> sk3 = std::move(sk2);
-	std::cout << sk2.debug_string();
-	std::cout << sk3.debug_string();
+		/*auto itff = sk.find(80, 200);
+			for (; itff.first != itff.second; ++itff.first) {
+				auto& pair = *itff.first;
+				std::cout << "(" << pair.first << "," << pair.second << ") ";
+			}
+			std::cout << std::endl;*/
 
-	auto itff = sk.find(80, 200);
-	for (; itff.first != itff.second; ++itff.first)
-	{
-		auto& pair = *itff.first;
-		std::cout << "(" << pair.first << "," << pair.second << ") ";
-	}
-	std::cout << std::endl;
-
-	auto rit = sk.rank_rang(2, 2);
-	for (; rit.first != rit.second; ++rit.first)
-	{
+	auto rit = sk.rank_rang(2, 1000);
+	for (; rit.first != rit.second; ++rit.first) {
 		auto& pair = *rit.first;
 		std::cout << "(" << pair.first << "," << pair.second << ") ";
 	}

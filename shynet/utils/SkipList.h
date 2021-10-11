@@ -16,24 +16,18 @@ namespace shynet {
 		*/
 		template <typename Key, typename Score>
 		static int default_compare(const std::pair<const Key, Score>& a, const std::pair<const Key, Score>& b) {
-			if (a.first == b.first) {
-				return 0;
+			//>升序 <降序
+			if (a.second < b.second) {
+				return 1;
 			}
-			else {
-				//>升序 <降序
-				if (a.second < b.second) {
+			else if (a.second == b.second) {
+				if (a.first >= b.first) {
 					return 1;
 				}
-				else if (a.second == b.second) {
-					if (a.first <= a.first)
-					{
-						return 1;
-					}
-					return -1;
-				}
-				else {
-					return -1;
-				}
+				return -1;
+			}
+			else {
+				return -1;
 			}
 		}
 
@@ -59,21 +53,20 @@ namespace shynet {
 				struct level_item {
 					node* prev_ = nullptr;
 					node* next_ = nullptr;
+					uint32_t span_ = 0;
 				};
 			public:
 				explicit node(int height)
-					: height_(height), levels_(height) {}
+					: height_(height), levels_(height) {
+				}
 
 				explicit node(int height, const value_type& kv)
-					: kv_(kv), height_(height), levels_(height) {}
+					: kv_(kv), height_(height), levels_(height) {
+				}
 
 			private:
 				value_type kv_;
 				int height_;
-				/*
-				* 排名
-				*/
-				uint32_t rank_ = 0;
 				std::vector<level_item> levels_;
 			};
 		public:
@@ -94,7 +87,6 @@ namespace shynet {
 				bool operator!=(const iterator& other) const { return this->node_ != other.node_; }
 				value_type& operator*() const { return node_->kv_; }
 				value_type* operator->() const { return &(node_->kv_); }
-				uint32_t rank() const { return node_->rank_; }
 
 				iterator& operator++() {
 					node_ = node_->levels_[0].next_;
@@ -137,7 +129,6 @@ namespace shynet {
 				bool operator!=(const reverse_iterator& other) const { return this->node_ != other.node_; }
 				value_type& operator*() const { return node_->kv_; }
 				value_type* operator->() const { return &(node_->kv_); }
-				uint32_t rank() const { return node_->rank_; }
 
 				reverse_iterator& operator++() {
 					node_ = node_->levels_[0].prev_;
@@ -173,8 +164,7 @@ namespace shynet {
 			/// </summary>
 			/// <param name="compare">排序函数</param>
 			SkipList(Compare compare = std::bind(default_compare<Key, Score>, std::placeholders::_1, std::placeholders::_2))
-				: random_generator_(std::chrono::system_clock::now().time_since_epoch().count()), compare_(compare)
-			{
+				: random_generator_(std::chrono::system_clock::now().time_since_epoch().count()), compare_(compare) {
 				head_ = new node(max_height_);
 			}
 
@@ -185,8 +175,7 @@ namespace shynet {
 			/// <param name="last"></param>
 			/// <param name="compare"></param>
 			SkipList(iterator first, iterator last, Compare compare = std::bind(default_compare<Key, Score>, std::placeholders::_1, std::placeholders::_2))
-				: random_generator_(std::chrono::system_clock::now().time_since_epoch().count()), compare_(compare)
-			{
+				: random_generator_(std::chrono::system_clock::now().time_since_epoch().count()), compare_(compare) {
 				head_ = new node(max_height_);
 				insert_range_effective_(first, last);
 			}
@@ -195,8 +184,7 @@ namespace shynet {
 			* 复制构造
 			*/
 			SkipList(const SkipList& x)
-				: random_generator_(std::chrono::system_clock::now().time_since_epoch().count()), compare_(x.compare_)
-			{
+				: random_generator_(std::chrono::system_clock::now().time_since_epoch().count()), compare_(x.compare_) {
 				head_ = new node(max_height_);
 				insert_range_effective_(x.begin(), x.end());
 			}
@@ -205,8 +193,7 @@ namespace shynet {
 			* 移动构造
 			*/
 			SkipList(SkipList&& x)
-				: random_generator_(std::chrono::system_clock::now().time_since_epoch().count()), compare_(x.compare_)
-			{
+				: random_generator_(std::chrono::system_clock::now().time_since_epoch().count()), compare_(x.compare_) {
 				head_ = new node(max_height_);
 				swap(x);
 			}
@@ -360,7 +347,7 @@ namespace shynet {
 			/*
 			* 通过指定排名获取位置
 			*/
-			iterator rank(uint32_t rank) const {
+			iterator rank_pos(uint32_t rank) const {
 				if (rank == 1)
 					return begin();
 				else if (rank > element_num_)
@@ -368,46 +355,43 @@ namespace shynet {
 				node* dummy = head_;
 				int h = current_height_;
 
+				uint32_t target = 0;
 				for (int i = h - 1; i >= 0; i--) {
-					for (; ; ) {
-						if (dummy->levels_[i].next_ == nullptr) { break; }
-
-						int res;
-						if (rank == dummy->levels_[i].next_->rank_) {
-							res = 0;
+					while (dummy->levels_[i].next_) {
+						target += dummy->levels_[i].next_->levels_[i].span_;
+						if (target == rank) {
+							return iterator(dummy->levels_[i].next_);
 						}
-						else if (rank > dummy->levels_[i].next_->rank_) {
-							res = 1;
+						else if (target > rank) {
+							target -= dummy->levels_[i].next_->levels_[i].span_;
+							dummy = dummy->levels_[i].next_->levels_[i].prev_;
+							break;
 						}
-						else {
-							res = -1;
-						}
-						if (res == 0) { return iterator(dummy->levels_[i].next_); }
-						else if (res < 0) { break; }
-						else if (res > 0) { dummy = dummy->levels_[i].next_; }
+						dummy = dummy->levels_[i].next_;
 					}
 				}
 				return end();
 			}
 			/*
-			* 通过指定起始排名和排名后count，获取排名区间
+			* 通过指定位置获取排名
 			*/
-			std::pair<iterator, iterator> rank_rang(uint32_t rank, uint32_t count) const {
+			uint32_t pos_rank(const iterator it) const {
+				node* next = head_->levels_[it.node_->height_ - 1].next_;
+				uint32_t rank = 0;
+				while (next) {
+					rank += next->levels_[it.node_->height_ - 1].span_;
+					next = next->levels_[it.node_->height_ - 1].next_;
+				}
+				return rank;
+			}
+			/*
+			* 通过指定起始排名到结束排名的前一名，获取排名区间[beg_rank,end_rank)
+			*/
+			std::pair<iterator, iterator> rank_rang(uint32_t beg_rank, uint32_t end_rank) const {
 				std::pair<iterator, iterator> rang = std::make_pair(end(), end());
-				uint32_t rankcount = rank + count;
-				for (; rank <= rankcount; rank++) {
-					auto it = this->rank(rank);
-					if (it != end()) {
-						if (rang.first == end()) {
-							rang.first = it;
-						}
-						else {
-							rang.second = ++it;
-						}
-					}
-					else {
-						break;
-					}
+				if (end_rank > beg_rank) {
+					rang.first = rank_pos(beg_rank);
+					rang.second = rank_pos(end_rank);
 				}
 				return rang;
 			}
@@ -434,8 +418,7 @@ namespace shynet {
 						while (dummy->levels_[i].next_ &&
 							((is_asc_ == -1 && dummy->levels_[i].next_->kv_.second > max) ||
 								(is_asc_ == 1 && dummy->levels_[i].next_->kv_.second < min))
-							)
-						{
+							) {
 							dummy = dummy->levels_[i].next_;
 						}
 					}
@@ -444,8 +427,7 @@ namespace shynet {
 					while (dummy &&
 						((is_asc_ == -1 && dummy->kv_.second >= min) ||
 							(is_asc_ == 1 && dummy->kv_.second <= max))
-						)
-					{
+						) {
 						if (total == 0) {
 							rang.first = iterator(dummy);
 						}
@@ -499,11 +481,8 @@ namespace shynet {
 					info << " * ";
 					node* p = head_;
 					for (; p->levels_[i].next_; p = p->levels_[i].next_) {
-						//uint32_t span = p->levels_[i].next_->rank_ - p->rank_;
-						//info << std::string(span, ' ');
 						info << "(" << p->levels_[i].next_->kv_.first << ":" << p->levels_[i].next_->kv_.second
-							<< " rank:" << p->levels_[i].next_->rank_ << ") ";
-						//info << "(" << p->levels_[i].next_->kv_.first;
+							<< " span:" << p->levels_[i].next_->levels_[i].span_ << ") ";
 					}
 					info << std::endl;
 				}
@@ -514,19 +493,24 @@ namespace shynet {
 			iterator erase_(iterator it) {
 				node* n = it.node_;
 
-				node* next = n->levels_[0].next_;
-				while (next)
-				{
-					next->rank_ = next->rank_ - 1;
-					next = next->levels_[0].next_;
-				}
-
 				iterator erase_next = end();
-				for (int i = n->height_ - 1; i >= 0; i--) {
-					erase_next = iterator(n->levels_[i].next_);
-					n->levels_[i].prev_->levels_[i].next_ = n->levels_[i].next_;
-					if (n->levels_[i].next_) {
-						n->levels_[i].next_->levels_[i].prev_ = n->levels_[i].prev_;
+				for (int i = 0; i <= current_height_ - 1; i++) {
+					if (i < n->height_) {
+						erase_next = iterator(n->levels_[i].next_);
+						n->levels_[i].prev_->levels_[i].next_ = n->levels_[i].next_;
+						if (n->levels_[i].next_) {
+							n->levels_[i].next_->levels_[i].prev_ = n->levels_[i].prev_;
+						}
+					}
+					else {
+						node* next = head_->levels_[i].next_;
+						while (next) {
+							int res = compare_(n->kv_, next->kv_);
+							if (res < 0) { break; }
+							else if (res > 0) { next = next->levels_[i].next_; }
+						}
+						if (next != nullptr)
+							next->levels_[i].span_--;
 					}
 				}
 
@@ -552,11 +536,19 @@ namespace shynet {
 					for (; ; ) {
 						if (epos == nullptr && dummy->levels_[i].next_ == nullptr) { break; }
 						else if (epos != nullptr && (dummy->levels_[i].next_ == epos || dummy->levels_[i].next_ == nullptr)) { break; }
-
-						int res = compare_(k, dummy->levels_[i].next_->kv_);
-						if (res == 0) { return iterator(dummy->levels_[i].next_); }
-						else if (res < 0) { break; }
-						else if (res > 0) { dummy = dummy->levels_[i].next_; }
+						if (k.first == dummy->levels_[i].next_->kv_.first) {
+							return iterator(dummy->levels_[i].next_);
+						}
+						else {
+							int res = compare_(k, dummy->levels_[i].next_->kv_);
+							if (res == 0) {
+								std::ostringstream err;
+								err << "res不能为0";
+								THROW_EXCEPTION(err.str());
+							}
+							else if (res < 0) { break; }
+							else if (res > 0) { dummy = dummy->levels_[i].next_; }
+						}
 					}
 					if (cache) { (*cache)[i] = dummy; }
 				}
@@ -567,6 +559,7 @@ namespace shynet {
 			iterator insert_(const value_type& kv, std::vector<node*>& cache) {
 				kvmap_[kv.first] = kv.second;
 				int height = random_height_();
+
 				if (height > current_height_) {
 					for (int i = height - 1; i >= current_height_; i--) {
 						cache[i] = head_;
@@ -585,30 +578,54 @@ namespace shynet {
 				}
 
 				node* nn = new node(height, kv);
-				for (int i = height - 1; i >= 0; i--) {
+				node* newptr = nn;
+				for (int i = 0; i <= current_height_ - 1; i++) {
 					node* cn = cache[i];
-					nn->levels_[i].next_ = cn->levels_[i].next_;
-					nn->levels_[i].prev_ = cn;
+					if (i < height) {
+						nn->levels_[i].next_ = cn->levels_[i].next_;
+						nn->levels_[i].prev_ = cn;
+						nn->levels_[i].span_ = 1;
 
-					if (cn->levels_[i].next_) {
-						cn->levels_[i].next_->levels_[i].prev_ = nn;
+						if (cn->levels_[i].next_) {
+							cn->levels_[i].next_->levels_[i].prev_ = nn;
+						}
+						cn->levels_[i].next_ = nn;
+					}
+					else {
+						nn = cn;
 					}
 
-					cn->levels_[i].next_ = nn;
+					if (i != 0) {
+						node* prev = nn->levels_[0].prev_;
+						if (prev != nullptr
+							&& nn->levels_[i].prev_ != nullptr) {
+							uint32_t span = 1;
+							while (prev != nullptr
+								&& prev != nn->levels_[i].prev_) {
+								span++;
+								prev = prev->levels_[0].prev_;
+							}
+							nn->levels_[i].span_ = span;
+						}
+
+						node* next = nn->levels_[0].next_;
+						if (next != nullptr
+							&& nn->levels_[i].next_ != nullptr) {
+							uint32_t span = 1;
+							while (next != nullptr
+								&& next != nn->levels_[i].next_) {
+								span++;
+								next = next->levels_[0].next_;
+							}
+							nn->levels_[i].next_->levels_[i].span_ = span;
+						}
+					}
 				}
 
-				nn->rank_ = cache[0]->rank_ + 1;
-				node* next = nn->levels_[0].next_;
-				while (next)
-				{
-					next->rank_ = next->levels_[0].prev_->rank_ + 1;
-					next = next->levels_[0].next_;
-				}
-
-				if (nn->levels_[0].next_ == nullptr) { tail_ = nn; }
+				if (newptr->levels_[0].next_ == nullptr) { tail_ = newptr; }
 
 				element_num_++;
-				return iterator(nn);
+				return iterator(newptr);
 			}
 
 			void insert_range_effective_(iterator b, iterator e) {
