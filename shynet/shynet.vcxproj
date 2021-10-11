@@ -222,7 +222,6 @@
     <ClInclude Include="utils\Logger.h" />
     <ClInclude Include="utils\Lru.h" />
     <ClInclude Include="utils\Singleton.h" />
-    <ClInclude Include="utils\SkipList.h" />
     <ClInclude Include="utils\Stringify_stl.h" />
     <ClInclude Include="utils\StringOp.h" />
     <ClInclude Include="utils\Stuff.h" />

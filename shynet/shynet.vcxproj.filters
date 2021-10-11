@@ -340,9 +340,6 @@
     <ClInclude Include="utils\Lru.h">
       <Filter>utils</Filter>
     </ClInclude>
-    <ClInclude Include="utils\SkipList.h">
-      <Filter>utils</Filter>
-    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="pool">
