@@ -463,6 +463,16 @@ namespace shynet {
 				return end();
 			}
 			/*
+			* 通过rank移除元素,返回移除元素的下一个位置
+			*/
+			iterator erase(uint32_t rank)
+			{
+				auto iter = rank_pos(rank);
+				if(iter != end())
+					return erase_();
+				return iter;
+			}
+			/*
 			* 通过指定区间移除元素
 			*/
 			void erase(iterator first, iterator last) {
