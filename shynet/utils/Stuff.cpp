@@ -1,6 +1,7 @@
 #include "shynet/utils/Stuff.h"
 #include "shynet/utils/FilePathOp.h"
 #include "shynet/utils/Logger.h"
+#include "shynet/debug/callstack.h"
 #include <arpa/inet.h>
 #include <netinet/in.h>
 #include <net/if.h>
@@ -349,7 +350,20 @@ namespace shynet {
 				if (auto ptr = dynamic_cast<const std::nested_exception*>(&e)) {
 					if (ptr->nested_ptr())
 						std::rethrow_exception(ptr->nested_ptr());
-				}
+					/*else
+					{
+						void* addresses[256];
+						int num_addresses = callstack(0, addresses, 256);
+
+						callstack_symbol_t symbols[256];
+						char  symbols_buffer[2048];
+						num_addresses = callstack_symbols(addresses, symbols, num_addresses, symbols_buffer, 2048);
+
+						int i;
+						for (i = 0; i < num_addresses; ++i)
+							printf("%3d) %-50s %s(%u)\n", i, symbols[i].function, symbols[i].file, symbols[i].line);
+					}*/
+				}				
 			}
 			catch (const std::exception& e) {
 				print_exception(e, level + 1);

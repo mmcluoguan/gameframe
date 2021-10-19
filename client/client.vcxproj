@@ -164,6 +164,7 @@
     <Link>
       <AdditionalLibraryDirectories>/root/gameframe/libs;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <LibraryDependencies>shynet;frmpub;protobuf;lua;dl;jemalloc;</LibraryDependencies>
+      <AdditionalOptions>-rdynamic %(AdditionalOptions)</AdditionalOptions>
     </Link>
     <ClCompile>
       <PreprocessorDefinitions>JEMALLOC_NO_DEMANGLE;USE_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
@@ -172,6 +173,8 @@
       <StrictAliasing>false</StrictAliasing>
       <UnrollLoops>true</UnrollLoops>
       <TreatWarningAsError>false</TreatWarningAsError>
+      <AdditionalOptions>
+      </AdditionalOptions>
     </ClCompile>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|ARM'">
@@ -192,6 +195,7 @@
     <Link>
       <AdditionalLibraryDirectories>/root/gameframe/libs;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <LibraryDependencies>shynet;frmpub;protobuf;lua;dl;jemalloc;</LibraryDependencies>
+      <AdditionalOptions>-rdynamic %(AdditionalOptions)</AdditionalOptions>
     </Link>
     <ClCompile>
       <PreprocessorDefinitions>JEMALLOC_NO_DEMANGLE;USE_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
@@ -200,6 +204,8 @@
       <StrictAliasing>false</StrictAliasing>
       <UnrollLoops>true</UnrollLoops>
       <TreatWarningAsError>false</TreatWarningAsError>
+      <AdditionalOptions>
+      </AdditionalOptions>
     </ClCompile>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|ARM64'">
@@ -220,6 +226,7 @@
     <Link>
       <AdditionalLibraryDirectories>/root/gameframe/libs;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <LibraryDependencies>shynet;frmpub;protobuf;lua;dl;jemalloc;</LibraryDependencies>
+      <AdditionalOptions>-rdynamic %(AdditionalOptions)</AdditionalOptions>
     </Link>
     <ClCompile>
       <PreprocessorDefinitions>JEMALLOC_NO_DEMANGLE;USE_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
@@ -228,6 +235,8 @@
       <StrictAliasing>false</StrictAliasing>
       <UnrollLoops>true</UnrollLoops>
       <TreatWarningAsError>false</TreatWarningAsError>
+      <AdditionalOptions>
+      </AdditionalOptions>
     </ClCompile>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -248,6 +257,7 @@
     <Link>
       <AdditionalLibraryDirectories>/root/gameframe/libs;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <LibraryDependencies>shynet;frmpub;protobuf;lua;dl;jemalloc;</LibraryDependencies>
+      <AdditionalOptions>-rdynamic %(AdditionalOptions)</AdditionalOptions>
     </Link>
     <ClCompile>
       <PreprocessorDefinitions>JEMALLOC_NO_DEMANGLE;USE_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
@@ -256,6 +266,8 @@
       <StrictAliasing>false</StrictAliasing>
       <UnrollLoops>true</UnrollLoops>
       <TreatWarningAsError>false</TreatWarningAsError>
+      <AdditionalOptions>
+      </AdditionalOptions>
     </ClCompile>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x86'">

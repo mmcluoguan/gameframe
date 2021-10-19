@@ -16,6 +16,7 @@ local keyItems =
     ["冲击波"] = items[2],
 }
 
+
 function __RELOAD()
     local data = { Items = items, IdItems = idItems, KeyItems = keyItems, }
     function data:getById(id)

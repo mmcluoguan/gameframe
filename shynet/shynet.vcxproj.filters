@@ -154,6 +154,9 @@
     <ClCompile Include="utils\FilePathOp.cpp">
       <Filter>utils</Filter>
     </ClCompile>
+    <ClCompile Include="debug\callstack.cpp">
+      <Filter>debug</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Basic.h" />
@@ -343,6 +346,9 @@
     <ClInclude Include="utils\SkipList.h">
       <Filter>utils</Filter>
     </ClInclude>
+    <ClInclude Include="debug\callstack.h">
+      <Filter>debug</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="pool">
@@ -383,6 +389,9 @@
     </Filter>
     <Filter Include="utils">
       <UniqueIdentifier>{0c04a382-75be-4e8b-976e-949635a7f4a6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="debug">
+      <UniqueIdentifier>{e23fe168-b4d6-47ef-9920-a5de25eb6a80}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

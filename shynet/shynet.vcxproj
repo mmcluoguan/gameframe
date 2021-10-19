@@ -169,6 +169,7 @@
     <ClInclude Include="crypto\Sha1.h" />
     <ClInclude Include="crypto\Sha256.h" />
     <ClInclude Include="crypto\Url.h" />
+    <ClInclude Include="debug\callstack.h" />
     <ClInclude Include="events\EventBase.h" />
     <ClInclude Include="events\EventBuffer.h" />
     <ClInclude Include="events\EventBufferFilter.h" />
@@ -228,6 +229,7 @@
     <ClInclude Include="utils\Stuff.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="debug\callstack.cpp" />
     <ClCompile Include="events\EventBase.cpp" />
     <ClCompile Include="events\EventBuffer.cpp" />
     <ClCompile Include="events\EventBufferFilter.cpp" />

@@ -53,7 +53,7 @@ namespace shynet {
 				struct level_item {
 					node* prev_ = nullptr;
 					node* next_ = nullptr;
-					uint32_t span_ = 0;
+					uint32_t span_ = 0; //同层节点到前一个节点的距离
 				};
 			public:
 				explicit node(int height)

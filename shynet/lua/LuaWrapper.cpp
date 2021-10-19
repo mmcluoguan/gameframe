@@ -13,6 +13,7 @@ namespace shynet {
 		}
 		LuaWrapper::~LuaWrapper() {
 		}
+
 		void LuaWrapper::init(kaguya::State& state) {
 			state.setErrorHandler([](int errCode, const char* szError) {
 				LOG_WARN << szError;
