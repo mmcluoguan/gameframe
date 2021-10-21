@@ -7,6 +7,7 @@ namespace shynet {
 pthread_barrier_t g_barrier;
 
 namespace pool {
+
     ThreadPool::ThreadPool(size_t workNum, size_t acceptNum)
     {
         acceptNum_ = acceptNum;

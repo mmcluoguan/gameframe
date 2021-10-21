@@ -80,6 +80,23 @@ void GameConnector::close(net::ConnectEvent::CloseType active)
 
     shynet::utils::Singleton<ConnectorMgr>::instance().remove(game_connect_id_);
     Connector::close(active);
+
+    //通知lua的onConnect函数
+    shynet::utils::Singleton<lua::LuaEngine>::get_instance().append(
+        std::make_shared<frmpub::OnConnectorTask<GameConnector>>(shared_from_this()));
+
+    //向游戏服注册服务器信息
+    protocc::register_gate_game_c msgc;
+    protocc::ServerInfo* sif = msgc.mutable_sif();
+    sif->set_ip(shynet::utils::Singleton<GateClientMgr>::instance().listen_addr().ip());
+    sif->set_port(shynet::utils::Singleton<GateClientMgr>::instance().listen_addr().port());
+    sif->set_st(protocc::ServerType::GATE);
+    shynet::utils::IniConfig& ini = shynet::utils::Singleton<shynet::utils::IniConfig>::get_instance();
+    int sid = ini.get<int, int>("gate", "sid", 1);
+    sif->set_sid(sid);
+    std::string name = ini.get<const char*, std::string>("gate", "name", "");
+    sif->set_name(name);
+    send_proto(protocc::REGISTER_GATE_GAME_C, &msgc);
 }
 
 int GameConnector::errcode(std::shared_ptr<protocc::CommonObject> data, std::shared_ptr<std::stack<FilterData::Envelope>> enves)

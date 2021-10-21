@@ -30,8 +30,8 @@ namespace net {
         short what() const { return what_; }
 
         /*
-   * 获取设置计时器id
-   */
+        * 获取设置计时器id
+        */
         int timerid() const { return timerid_; }
         void set_timerid(int timerid) { timerid_ = timerid; }
 

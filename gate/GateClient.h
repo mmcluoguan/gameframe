@@ -31,8 +31,8 @@ public:
     void close(bool active) override;
 
     /*
-		* 获取设置玩家账号id
-		*/
+	* 获取设置玩家账号id
+	*/
     void accountid(std::string t)
     {
         accountid_ = t;

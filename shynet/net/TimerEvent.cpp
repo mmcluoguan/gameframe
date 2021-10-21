@@ -12,11 +12,6 @@ namespace net {
     }
     TimerEvent::~TimerEvent() { }
 
-    /// <summary>
-    /// 重新设置超时时间，如果超时未触发，则延迟指定时间
-    /// </summary>
-    /// <param name="t"></param>
-
     void TimerEvent::set_val(const timeval& t)
     {
         if (event() != nullptr) {

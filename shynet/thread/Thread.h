@@ -43,6 +43,7 @@ namespace thread {
         {
             index_ = v;
         }
+
         std::shared_ptr<std::thread> thread() const
         {
             return thread_;

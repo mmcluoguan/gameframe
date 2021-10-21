@@ -32,8 +32,8 @@ public:
     void close(net::ConnectEvent::CloseType active) override;
 
     /*
-		* 获取或设置连接id
-		*/
+	* 获取或设置连接id
+	*/
     void game_conncet_id(int v)
     {
         game_connect_id_ = v;

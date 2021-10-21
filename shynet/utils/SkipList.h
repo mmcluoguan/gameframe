@@ -197,7 +197,11 @@ namespace utils {
             : random_generator_(std::chrono::system_clock::now().time_since_epoch().count())
             , compare_(compare)
         {
+<<<<<<< .merge_file_a29632
             head_ = new node(kMaxHeight_);
+=======
+            head_ = new node(max_height_);
+>>>>>>> .merge_file_a16888
         }
 
         /// <summary>
@@ -210,7 +214,11 @@ namespace utils {
             : random_generator_(std::chrono::system_clock::now().time_since_epoch().count())
             , compare_(compare)
         {
+<<<<<<< .merge_file_a29632
             head_ = new node(kMaxHeight_);
+=======
+            head_ = new node(max_height_);
+>>>>>>> .merge_file_a16888
             insert_range_effective_(first, last);
         }
 
@@ -221,7 +229,11 @@ namespace utils {
             : random_generator_(std::chrono::system_clock::now().time_since_epoch().count())
             , compare_(x.compare_)
         {
+<<<<<<< .merge_file_a29632
             head_ = new node(kMaxHeight_);
+=======
+            head_ = new node(max_height_);
+>>>>>>> .merge_file_a16888
             insert_range_effective_(x.begin(), x.end());
         }
 
@@ -232,7 +244,11 @@ namespace utils {
             : random_generator_(std::chrono::system_clock::now().time_since_epoch().count())
             , compare_(x.compare_)
         {
+<<<<<<< .merge_file_a29632
             head_ = new node(kMaxHeight_);
+=======
+            head_ = new node(max_height_);
+>>>>>>> .merge_file_a16888
             swap(x);
         }
 
@@ -300,7 +316,11 @@ namespace utils {
 			*/
         void clear()
         {
+<<<<<<< .merge_file_a29632
             for (int i = kMaxHeight_ - 1; i > 0; i--) {
+=======
+            for (int i = max_height_ - 1; i > 0; i--) {
+>>>>>>> .merge_file_a16888
                 head_->levels_[i].next_ = nullptr;
             }
 
@@ -601,7 +621,11 @@ namespace utils {
         iterator find_(const value_type& k, node* bpos = nullptr, node* epos = nullptr, std::vector<node*>* cache = nullptr) const
         {
             if (cache) {
+<<<<<<< .merge_file_a29632
                 cache->reserve(kMaxHeight_);
+=======
+                cache->reserve(max_height_);
+>>>>>>> .merge_file_a16888
             }
 
             node* dummy = bpos ? bpos->levels_[0].prev_ : head_;
@@ -725,7 +749,11 @@ namespace utils {
         int random_height_()
         {
             int height = 1;
+<<<<<<< .merge_file_a29632
             for (; height < kMaxHeight_ && (random_generator_() % kBranching_ == 0); height++)
+=======
+            for (; height < max_height_ && (random_generator_() % branching_ == 0); height++)
+>>>>>>> .merge_file_a16888
                 ;
 
             return height;
@@ -735,11 +763,19 @@ namespace utils {
         /*
 			* 最大层高
 			*/
+<<<<<<< .merge_file_a29632
         static constexpr int kMaxHeight_ = 32;
         /*
 			* 分层概率
 			*/
         static constexpr int kBranching_ = 4;
+=======
+        static constexpr int max_height_ = 32;
+        /*
+			* 分层概率
+			*/
+        static constexpr int branching_ = 4;
+>>>>>>> .merge_file_a16888
         /*
 			* 当前层高
 			*/

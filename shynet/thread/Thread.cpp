@@ -10,6 +10,7 @@ namespace thread {
     Thread::~Thread()
     {
     }
+
     std::shared_ptr<std::thread> Thread::start()
     {
         thread_ = std::make_shared<std::thread>(&Thread::run, this);

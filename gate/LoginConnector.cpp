@@ -80,6 +80,7 @@ void LoginConnector::close(net::ConnectEvent::CloseType active)
     shynet::utils::Singleton<ConnectorMgr>::instance().remove(login_connect_id_);
     Connector::close(active);
 }
+
 int LoginConnector::errcode(std::shared_ptr<protocc::CommonObject> data,
     std::shared_ptr<std::stack<FilterData::Envelope>> enves)
 {

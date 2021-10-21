@@ -4,7 +4,6 @@
 
 namespace shynet {
 namespace net {
-
     ListenEvent::ListenEvent(std::shared_ptr<net::IPAddress> listen_addr, bool enable_ssl)
         : events::EventHandler()
     {

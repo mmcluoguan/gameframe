@@ -46,6 +46,7 @@ std::unordered_map<int, std::shared_ptr<WorldClient>> WorldClientMgr::clis() con
     std::lock_guard<std::mutex> lock(clis_mutex_);
     return clis_;
 }
+
 std::shared_ptr<WorldClient> WorldClientMgr::select_game()
 {
     std::lock_guard<std::mutex> lock(clis_mutex_);
