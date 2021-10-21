@@ -5,19 +5,21 @@
 #include "shynet/utils/Singleton.h"
 
 namespace shynet {
-	namespace net {
+namespace net {
 
-		class AcceptReactorMgr final : public Nocopy {
-			friend class utils::Singleton<AcceptReactorMgr>;
-			AcceptReactorMgr();
-		public:
-			~AcceptReactorMgr();
+    class AcceptReactorMgr final : public Nocopy {
+        friend class utils::Singleton<AcceptReactorMgr>;
+        AcceptReactorMgr();
 
-			void notify(const void* data, size_t len);
-		private:
-			std::shared_ptr<thread::AcceptThread> find_rtk() const;
-		};
-	}
+    public:
+        ~AcceptReactorMgr();
+
+        void notify(const void* data, size_t len);
+
+    private:
+        std::shared_ptr<thread::AcceptThread> find_rtk() const;
+    };
+}
 }
 
 #endif

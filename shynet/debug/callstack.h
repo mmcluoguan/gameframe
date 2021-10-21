@@ -31,14 +31,14 @@
 
 #ifdef __cplusplus
 extern "C" {
-#endif  // __cplusplus
+#endif // __cplusplus
 
 typedef struct
 {
-	const char*  function; ///< name of function containing address of function.
-	const char*  file;     ///< file where symbol is defined, might not work on all platforms.
-	unsigned int line;     ///< line in file where symbol is defined, might not work on all platforms.
-	unsigned int offset;   ///< offset from start of function where call was made.
+    const char* function; ///< name of function containing address of function.
+    const char* file; ///< file where symbol is defined, might not work on all platforms.
+    unsigned int line; ///< line in file where symbol is defined, might not work on all platforms.
+    unsigned int offset; ///< offset from start of function where call was made.
 } callstack_symbol_t;
 
 /**
@@ -48,7 +48,7 @@ typedef struct
  * @param num_addresses size of addresses.
  * @return number of addresses in callstack.
  */
-int callstack( int skip_frames, void** addresses, int num_addresses );
+int callstack(int skip_frames, void** addresses, int num_addresses);
 
 /**
  * Translate addresses from, for example, callstack to symbol-names.
@@ -75,10 +75,10 @@ int callstack( int skip_frames, void** addresses, int num_addresses );
  *
  * @note On platforms that support it debug-output can be enabled by defining the environment variable DBGTOOLS_SYMBOL_DEBUG_OUTPUT.
  */
-int callstack_symbols( void** addresses, callstack_symbol_t* out_syms, int num_addresses, char* memory, int mem_size );
+int callstack_symbols(void** addresses, callstack_symbol_t* out_syms, int num_addresses, char* memory, int mem_size);
 
 #ifdef __cplusplus
 }
-#endif  // __cplusplus
+#endif // __cplusplus
 
 #endif // DEBUG_CALLSTACK_H_INCLUDED

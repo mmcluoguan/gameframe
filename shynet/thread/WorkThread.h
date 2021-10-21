@@ -7,23 +7,23 @@
 #include <queue>
 
 namespace shynet {
-	namespace thread {
-		class WorkThread : public Thread {
-		public:
-			explicit WorkThread(size_t index);
-			~WorkThread();
+namespace thread {
+    class WorkThread : public Thread {
+    public:
+        explicit WorkThread(size_t index);
+        ~WorkThread();
 
-			int run() override;
-			int stop() override;
+        int run() override;
+        int stop() override;
 
-			size_t addTask(std::shared_ptr<task::Task> tk);
+        size_t addTask(std::shared_ptr<task::Task> tk);
 
-		private:
-			std::mutex tasks_mutex_;
-			std::queue<std::shared_ptr<task::Task>> tasks_;
-			bool stop_ = false;
-		};
-	}
+    private:
+        std::mutex tasks_mutex_;
+        std::queue<std::shared_ptr<task::Task>> tasks_;
+        bool stop_ = false;
+    };
+}
 }
 
 #endif
