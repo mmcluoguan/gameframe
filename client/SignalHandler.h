@@ -4,12 +4,12 @@
 #include "shynet/events/EventHandler.h"
 
 namespace client {
-	class SignalHandler : public events::EventHandler {
-	public:
-		explicit SignalHandler(std::shared_ptr<events::EventBase> base);
-		~SignalHandler();
-		void signal(int signal) override;
-	};
+class SignalHandler : public events::EventHandler {
+public:
+    explicit SignalHandler(std::shared_ptr<events::EventBase> base);
+    ~SignalHandler();
+    void signal(int signal) override;
+};
 }
 
 #endif

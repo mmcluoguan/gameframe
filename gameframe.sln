@@ -6,9 +6,6 @@ MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "shynet", "shynet\shynet.vcxproj", "{5702E8BA-88DB-413C-885C-8E9F14CA50D1}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "frmpub", "frmpub\frmpub.vcxproj", "{6094C37A-DFF3-42D7-A289-933FA442B5DF}"
-	ProjectSection(ProjectDependencies) = postProject
-		{5702E8BA-88DB-413C-885C-8E9F14CA50D1} = {5702E8BA-88DB-413C-885C-8E9F14CA50D1}
-	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "app", "app", "{CA2521AF-200B-47A4-A8B4-5D42415F5DC8}"
 EndProject
