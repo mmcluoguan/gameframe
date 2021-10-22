@@ -1,9 +1,9 @@
 #ifndef CLIENT_GATERECONNCTORTIMER_H
 #define CLIENT_GATERECONNCTORTIMER_H
 
-#include "client/GateConnector.h"
-#include "shynet/net/IPAddress.h"
-#include "shynet/net/TimerEvent.h"
+#include "client/gateconnector.h"
+#include "shynet/net/ipaddress.h"
+#include "shynet/net/timerevent.h"
 
 namespace client {
 class GateReConnctorTimer : public net::TimerEvent {

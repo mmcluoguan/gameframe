@@ -1,6 +1,6 @@
-#include "shynet/utils/IniConfig.h"
-#include "shynet/utils/Logger.h"
-#include "shynet/utils/StringOp.h"
+#include "shynet/utils/iniconfig.h"
+#include "shynet/utils/logger.h"
+#include "shynet/utils/stringop.h"
 #include <fstream>
 
 namespace shynet {

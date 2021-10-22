@@ -1,6 +1,6 @@
-#include "shynet/pool/ThreadPool.h"
-#include "shynet/utils/Logger.h"
-#include "shynet/utils/Stuff.h"
+#include "shynet/pool/threadpool.h"
+#include "shynet/utils/logger.h"
+#include "shynet/utils/stuff.h"
 
 namespace shynet {
 

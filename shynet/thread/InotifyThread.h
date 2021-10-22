@@ -1,9 +1,9 @@
 #ifndef SHYNET_THREAD_INOTIFYTHREAD_H
 #define SHYNET_THREAD_INOTIFYTHREAD_H
 
-#include "shynet/events/EventBuffer.h"
-#include "shynet/task/NotifyTask.h"
-#include "shynet/thread/Thread.h"
+#include "shynet/events/eventbuffer.h"
+#include "shynet/task/notifytask.h"
+#include "shynet/thread/thread.h"
 #include <mutex>
 
 namespace shynet {

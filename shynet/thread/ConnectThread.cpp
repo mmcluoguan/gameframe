@@ -1,8 +1,8 @@
-#include "shynet/thread/ConnectThread.h"
-#include "shynet/net/ConnectIoBuffer.h"
-#include "shynet/net/ConnectReactorMgr.h"
-#include "shynet/utils/Logger.h"
-#include "shynet/utils/Stuff.h"
+#include "shynet/thread/connectthread.h"
+#include "shynet/net/connectiobuffer.h"
+#include "shynet/net/connectreactormgr.h"
+#include "shynet/utils/logger.h"
+#include "shynet/utils/stuff.h"
 
 namespace shynet {
 extern pthread_barrier_t g_barrier;

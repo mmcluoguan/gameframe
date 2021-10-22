@@ -1,7 +1,7 @@
 #ifndef SHYNET_THREAD_THREAD_H
 #define SHYNET_THREAD_THREAD_H
 
-#include <shynet/Basic.h>
+#include <shynet/basic.h>
 #include <thread>
 
 namespace shynet {

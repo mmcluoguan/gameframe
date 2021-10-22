@@ -1,7 +1,7 @@
 #ifndef FRMPUB_LUAREMOTEDEBUG_H
 #define FRMPUB_LUAREMOTEDEBUG_H
 
-#include "shynet/utils/Singleton.h"
+#include "shynet/utils/singleton.h"
 #include <kaguya/kaguya.hpp>
 
 namespace frmpub {

@@ -1,7 +1,7 @@
-#include "login/LoginServer.h"
-#include "login/LoginClient.h"
-#include "login/LoginClientMgr.h"
-#include "shynet/net/TimerReactorMgr.h"
+#include "login/loginserver.h"
+#include "login/loginclient.h"
+#include "login/loginclientmgr.h"
+#include "shynet/net/timerreactormgr.h"
 
 namespace login {
 LoginServer::LoginServer(std::shared_ptr<net::IPAddress> listen_addr)

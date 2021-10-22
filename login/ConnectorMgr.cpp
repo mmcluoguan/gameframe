@@ -1,5 +1,5 @@
-#include "login/ConnectorMgr.h"
-#include "shynet/net/ConnectReactorMgr.h"
+#include "login/connectormgr.h"
+#include "shynet/net/connectreactormgr.h"
 
 namespace login {
 ConnectorMgr::ConnectorMgr()

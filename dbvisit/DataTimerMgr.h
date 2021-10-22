@@ -1,7 +1,7 @@
 #ifndef DBVISIT_DATATIMERMGR_H
 #define DBVISIT_DATATIMERMGR_H
 
-#include "shynet/utils/Singleton.h"
+#include "shynet/utils/singleton.h"
 #include <unordered_map>
 
 namespace dbvisit {

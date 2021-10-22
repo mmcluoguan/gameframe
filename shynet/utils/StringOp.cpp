@@ -1,4 +1,4 @@
-#include "shynet/utils/StringOp.h"
+#include "shynet/utils/stringop.h"
 #include <arpa/inet.h>
 #include <cstring>
 #include <fcntl.h>

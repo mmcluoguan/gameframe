@@ -1,8 +1,8 @@
 #ifndef SHYNET_PROTOCOL_TCPIP_H
 #define SHYNET_PROTOCOL_TCPIP_H
 
-#include "shynet/Basic.h"
-#include "shynet/events/Streambuff.h"
+#include "shynet/basic.h"
+#include "shynet/events/streambuff.h"
 
 namespace shynet {
 namespace protocol {

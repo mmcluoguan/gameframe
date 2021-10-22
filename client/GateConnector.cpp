@@ -1,8 +1,8 @@
-#include "client/GateConnector.h"
-#include "client/GateReConnctorTimer.h"
-#include "frmpub/ReConnectTimer.h"
-#include "shynet/events/Streambuff.h"
-#include "shynet/net/ConnectReactorMgr.h"
+#include "client/gateconnector.h"
+#include "client/gatereconnctortimer.h"
+#include "frmpub/reconnecttimer.h"
+#include "shynet/events/streambuff.h"
+#include "shynet/net/connectreactormgr.h"
 
 namespace client {
 GateConnector::GateConnector(std::shared_ptr<net::IPAddress> connect_addr,

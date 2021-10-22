@@ -36,17 +36,17 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="client.cpp" />
-    <ClCompile Include="GateConnector.cpp" />
-    <ClCompile Include="GateReConnctorTimer.cpp" />
-    <ClCompile Include="SignalHandler.cpp" />
-    <ClCompile Include="StdinHandler.cpp" />
+    <ClCompile Include="gateconnector.cpp" />
+    <ClCompile Include="gatereconnctortimer.cpp" />
+    <ClCompile Include="signalhandler.cpp" />
+    <ClCompile Include="stdinhandler.cpp" />
     <ClCompile Include="test\010-TestCase.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="GateConnector.h" />
-    <ClInclude Include="GateReConnctorTimer.h" />
-    <ClInclude Include="SignalHandler.h" />
-    <ClInclude Include="StdinHandler.h" />
+    <ClInclude Include="gateconnector.h" />
+    <ClInclude Include="gatereconnctortimer.h" />
+    <ClInclude Include="signalhandler.h" />
+    <ClInclude Include="stdinhandler.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{ED8B3412-0F27-4788-9F88-7E00F700A174}</ProjectGuid>

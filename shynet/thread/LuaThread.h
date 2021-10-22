@@ -1,8 +1,8 @@
 #ifndef SHYNET_THREAD_LUATHREAD_H
 #define SHYNET_THREAD_LUATHREAD_H
 
-#include "shynet/task/Task.h"
-#include "shynet/thread/Thread.h"
+#include "shynet/task/task.h"
+#include "shynet/thread/thread.h"
 #include <condition_variable>
 #include <kaguya/kaguya.hpp>
 #include <mutex>

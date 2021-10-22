@@ -1,4 +1,4 @@
-#include "shynet/utils/IdWorker.h"
+#include "shynet/utils/idworker.h"
 #include <chrono>
 
 namespace shynet {

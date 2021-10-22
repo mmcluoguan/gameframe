@@ -1,7 +1,7 @@
 #ifndef LOGIN_LOGINSERVER_H
 #define LOGIN_LOGINSERVER_H
 
-#include "shynet/net/ListenReactorMgr.h"
+#include "shynet/net/listenreactormgr.h"
 
 namespace login {
 /// <summary>

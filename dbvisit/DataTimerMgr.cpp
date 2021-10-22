@@ -1,4 +1,4 @@
-#include "dbvisit/DataTimerMgr.h"
+#include "dbvisit/datatimermgr.h"
 
 namespace dbvisit {
 DataTimerMgr::DataTimerMgr()

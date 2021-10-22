@@ -1,8 +1,8 @@
 #ifndef FRMPUB_PINGTIMER_H
 #define FRMPUB_PINGTIMER_H
 
-#include "shynet/net/IPAddress.h"
-#include "shynet/net/TimerEvent.h"
+#include "shynet/net/ipaddress.h"
+#include "shynet/net/timerevent.h"
 
 namespace frmpub {
 class Connector;

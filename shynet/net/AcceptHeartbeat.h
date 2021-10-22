@@ -1,7 +1,7 @@
 #ifndef SHYNET_NET_ACCEPTHEARTBEAT_H
 #define SHYNET_NET_ACCEPTHEARTBEAT_H
 
-#include "shynet/net/TimerReactorMgr.h"
+#include "shynet/net/timerreactormgr.h"
 
 namespace shynet {
 namespace net {

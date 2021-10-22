@@ -1,7 +1,7 @@
 #ifndef FRMPUB_LUAFOLDERTASK_H
 #define FRMPUB_LUAFOLDERTASK_H
 
-#include "shynet/task/NotifyTask.h"
+#include "shynet/task/notifytask.h"
 
 namespace frmpub {
 /*

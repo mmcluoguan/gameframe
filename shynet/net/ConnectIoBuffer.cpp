@@ -1,7 +1,7 @@
-#include "shynet/net/ConnectIoBuffer.h"
-#include "shynet/net/TimerReactorMgr.h"
-#include "shynet/pool/ThreadPool.h"
-#include "shynet/task/ConnectReadIoTask.h"
+#include "shynet/net/connectiobuffer.h"
+#include "shynet/net/timerreactormgr.h"
+#include "shynet/pool/threadpool.h"
+#include "shynet/task/connectreadiotask.h"
 
 namespace shynet {
 namespace net {

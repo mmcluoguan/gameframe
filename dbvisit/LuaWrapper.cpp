@@ -1,10 +1,10 @@
-#include "dbvisit/LuaWrapper.h"
+#include "dbvisit/luawrapper.h"
 #include "dbvisit/DbClient.h"
-#include "dbvisit/DbClientMgr.h"
-#include "dbvisit/DbServer.h"
-#include "frmpub/LuaRemoteDebug.h"
-#include "shynet/utils/IniConfig.h"
-#include "shynet/utils/Singleton.h"
+#include "dbvisit/dbclientmgr.h"
+#include "dbvisit/dbserver.h"
+#include "frmpub/luaremotedebug.h"
+#include "shynet/utils/iniconfig.h"
+#include "shynet/utils/singleton.h"
 
 //配置参数
 extern const char* g_confname;

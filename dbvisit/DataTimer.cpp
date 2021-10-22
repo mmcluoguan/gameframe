@@ -1,8 +1,8 @@
-#include "dbvisit/DataTimer.h"
-#include "dbvisit/DataTimerMgr.h"
-#include "dbvisit/Datahelp.h"
-#include "shynet/net/TimerReactorMgr.h"
-#include "shynet/utils/StringOp.h"
+#include "dbvisit/datatimer.h"
+#include "dbvisit/datahelp.h"
+#include "dbvisit/datatimermgr.h"
+#include "shynet/net/timerreactormgr.h"
+#include "shynet/utils/stringop.h"
 #include <vector>
 
 namespace dbvisit {

@@ -1,7 +1,7 @@
 #ifndef SHYNET_EVENTS_EVENTBUFFERSSL_H
 #define SHYNET_EVENTS_EVENTBUFFERSSL_H
 
-#include "shynet/events/EventBuffer.h"
+#include "shynet/events/eventbuffer.h"
 #include <event2/bufferevent_ssl.h>
 #include <openssl/err.h>
 #include <openssl/ssl.h>

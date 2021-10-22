@@ -1,11 +1,11 @@
-#include "game/WorldConnector.h"
-#include "frmpub/LuaCallBackTask.h"
-#include "frmpub/ReConnectTimer.h"
-#include "game/ConnectorMgr.h"
-#include "game/GameClientMgr.h"
-#include "shynet/lua/LuaEngine.h"
-#include "shynet/net/ConnectReactorMgr.h"
-#include "shynet/utils/IniConfig.h"
+#include "game/worldconnector.h"
+#include "frmpub/luacallbacktask.h"
+#include "frmpub/reconnecttimer.h"
+#include "game/connectormgr.h"
+#include "game/gameclientmgr.h"
+#include "shynet/lua/luaengine.h"
+#include "shynet/net/connectreactormgr.h"
+#include "shynet/utils/iniconfig.h"
 
 namespace game {
 WorldConnector::WorldConnector(std::shared_ptr<net::IPAddress> connect_addr)

@@ -1,7 +1,7 @@
 #ifndef DBVISIT_DATAHELP_H
 #define DBVISIT_DATAHELP_H
 
-#include "shynet/utils/Singleton.h"
+#include "shynet/utils/singleton.h"
 #include <list>
 #include <unordered_map>
 

@@ -1,6 +1,6 @@
-#include "frmpub/Connector.h"
-#include "shynet/net/ConnectReactorMgr.h"
-#include "shynet/net/TimerReactorMgr.h"
+#include "frmpub/connector.h"
+#include "shynet/net/connectreactormgr.h"
+#include "shynet/net/timerreactormgr.h"
 
 namespace frmpub {
 Connector::Connector(std::shared_ptr<net::IPAddress> connect_addr,

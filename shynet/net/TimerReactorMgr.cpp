@@ -1,5 +1,5 @@
-#include "shynet/net/TimerReactorMgr.h"
-#include "shynet/pool/ThreadPool.h"
+#include "shynet/net/timerreactormgr.h"
+#include "shynet/pool/threadpool.h"
 #include "shynet/thread/TimerThread.h"
 
 namespace shynet {

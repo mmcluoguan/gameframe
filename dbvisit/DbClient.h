@@ -1,8 +1,8 @@
 #ifndef DBVISIT_DBCLIENT_H
 #define DBVISIT_DBCLIENT_H
 
-#include "frmpub/Client.h"
-#include "shynet/events/EventBuffer.h"
+#include "frmpub/client.h"
+#include "shynet/events/eventbuffer.h"
 #include <sw/redis++/redis++.h>
 namespace redis = sw::redis;
 

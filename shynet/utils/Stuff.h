@@ -1,7 +1,7 @@
 #ifndef SHYNET_UTILS_STUFF_H
 #define SHYNET_UTILS_STUFF_H
 
-#include "shynet/Basic.h"
+#include "shynet/basic.h"
 #include <functional>
 #include <random>
 #include <set>

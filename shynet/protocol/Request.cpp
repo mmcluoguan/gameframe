@@ -1,6 +1,6 @@
-#include "shynet/protocol/Request.h"
-#include "shynet/utils/Logger.h"
-#include "shynet/utils/StringOp.h"
+#include "shynet/protocol/request.h"
+#include "shynet/utils/logger.h"
+#include "shynet/utils/stringop.h"
 #include <cstring>
 
 namespace shynet {

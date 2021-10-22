@@ -1,7 +1,7 @@
 #ifndef LOGIN_WORLDCONNECTOR_H
 #define LOGIN_WORLDCONNECTOR_H
 
-#include "frmpub/Connector.h"
+#include "frmpub/connector.h"
 
 namespace login {
 /// <summary>

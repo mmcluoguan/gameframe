@@ -1,7 +1,7 @@
 #ifndef SHYNET_EVENTS_EVENTBUFFERFILTER_H
 #define SHYNET_EVENTS_EVENTBUFFERFILTER_H
 
-#include "shynet/events/EventBuffer.h"
+#include "shynet/events/eventbuffer.h"
 
 namespace shynet {
 namespace events {

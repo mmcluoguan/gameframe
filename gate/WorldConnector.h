@@ -1,7 +1,7 @@
 #ifndef GATE_WORLDCONNECTOR_H
 #define GATE_WORLDCONNECTOR_H
 
-#include "frmpub/Connector.h"
+#include "frmpub/connector.h"
 
 namespace gate {
 /// <summary>

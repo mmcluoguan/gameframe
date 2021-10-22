@@ -1,7 +1,7 @@
-#include "client/GateReConnctorTimer.h"
-#include "shynet/net/ConnectReactorMgr.h"
-#include "shynet/net/IPAddress.h"
-#include "shynet/net/TimerReactorMgr.h"
+#include "client/gatereconnctortimer.h"
+#include "shynet/net/connectreactormgr.h"
+#include "shynet/net/ipaddress.h"
+#include "shynet/net/timerreactormgr.h"
 
 extern int g_gateconnect_id;
 

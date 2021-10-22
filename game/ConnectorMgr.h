@@ -1,9 +1,9 @@
 #ifndef GAME_CONNECTORMGR_H
 #define GAME_CONNECTORMGR_H
 
-#include "game/DbConnector.h"
-#include "game/WorldConnector.h"
-#include "shynet/utils/Singleton.h"
+#include "game/dbconnector.h"
+#include "game/worldconnector.h"
+#include "shynet/utils/singleton.h"
 #include <list>
 #include <mutex>
 

@@ -1,8 +1,8 @@
 #ifndef WORLD_CONNECTORMGR_H
 #define WORLD_CONNECTORMGR_H
 
-#include "shynet/utils/Singleton.h"
-#include "world/DbConnector.h"
+#include "shynet/utils/singleton.h"
+#include "world/dbconnector.h"
 #include <list>
 
 namespace world {

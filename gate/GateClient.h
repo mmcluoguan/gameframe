@@ -1,8 +1,8 @@
 #ifndef GATE_GATECLIENT_H
 #define GATE_GATECLIENT_H
 
-#include "frmpub/Client.h"
-#include "shynet/net/AcceptNewFd.h"
+#include "frmpub/client.h"
+#include "shynet/net/acceptnewfd.h"
 
 namespace gate {
 /// <summary>

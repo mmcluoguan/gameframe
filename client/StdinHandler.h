@@ -1,7 +1,7 @@
 #ifndef CLIENT_STDINHANDLER_H
 #define CLIENT_STDINHANDLER_H
 
-#include "shynet/events/EventHandler.h"
+#include "shynet/events/eventhandler.h"
 
 namespace client {
 class StdinHandler : public events::EventHandler {

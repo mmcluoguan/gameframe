@@ -1,8 +1,8 @@
 #ifndef SHYNET_NET_TIMERREACTORMGR_H
 #define SHYNET_NET_TIMERREACTORMGR_H
 
-#include "shynet/net/TimerEvent.h"
-#include "shynet/utils/Singleton.h"
+#include "shynet/net/timerevent.h"
+#include "shynet/utils/singleton.h"
 #include <unordered_map>
 
 namespace shynet {

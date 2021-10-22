@@ -1,7 +1,7 @@
 #ifndef DBVISIT_DATATIMER_H
 #define DBVISIT_DATATIMER_H
 
-#include "shynet/net/TimerEvent.h"
+#include "shynet/net/timerevent.h"
 #include <unordered_map>
 
 namespace dbvisit {

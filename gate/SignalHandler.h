@@ -1,7 +1,7 @@
 #ifndef GATE_SIGINTHANDLER_H
 #define GATE_SIGINTHANDLER_H
 
-#include "shynet/events/EventHandler.h"
+#include "shynet/events/eventhandler.h"
 
 namespace gate {
 /// <summary>

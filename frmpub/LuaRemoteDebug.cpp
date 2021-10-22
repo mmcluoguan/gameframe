@@ -1,5 +1,5 @@
-#include "frmpub/LuaRemoteDebug.h"
-#include "shynet/utils/StringOp.h"
+#include "frmpub/luaremotedebug.h"
+#include "shynet/utils/stringop.h"
 
 namespace frmpub {
 LuaRemoteDebug& LuaRemoteDebug::init(const std::string debugip)

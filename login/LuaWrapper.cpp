@@ -1,10 +1,10 @@
-#include "login/LuaWrapper.h"
-#include "login/DbConnector.h"
-#include "login/LoginClient.h"
-#include "login/LoginClientMgr.h"
-#include "login/LoginServer.h"
-#include "login/WorldConnector.h"
-#include "shynet/utils/IniConfig.h"
+#include "login/luawrapper.h"
+#include "login/dbconnector.h"
+#include "login/loginclient.h"
+#include "login/loginclientmgr.h"
+#include "login/loginserver.h"
+#include "login/worldconnector.h"
+#include "shynet/utils/iniconfig.h"
 
 namespace login {
 LuaWrapper::LuaWrapper()

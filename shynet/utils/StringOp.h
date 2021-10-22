@@ -1,7 +1,7 @@
 #ifndef SHYNET_UTILS_STRINGOP_H
 #define SHYNET_UTILS_STRINGOP_H
 
-#include "shynet/Basic.h"
+#include "shynet/basic.h"
 #include <functional>
 #include <memory>
 #include <string>

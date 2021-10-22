@@ -1,5 +1,5 @@
-#include "shynet/events/EventBuffer.h"
-#include "shynet/utils/Logger.h"
+#include "shynet/events/eventbuffer.h"
+#include "shynet/utils/logger.h"
 
 namespace shynet {
 namespace events {

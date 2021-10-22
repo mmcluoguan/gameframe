@@ -1,5 +1,5 @@
-#include "game/SignalHandler.h"
-#include "shynet/utils/Logger.h"
+#include "game/signalhandler.h"
+#include "shynet/utils/logger.h"
 #include <csignal>
 
 namespace game {

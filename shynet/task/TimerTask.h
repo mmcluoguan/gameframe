@@ -1,7 +1,7 @@
 #ifndef SHYNET_TASK_TIMERTASK_H
 #define SHYNET_TASK_TIMERTASK_H
 
-#include "shynet/task/Task.h"
+#include "shynet/task/task.h"
 
 namespace shynet {
 namespace task {

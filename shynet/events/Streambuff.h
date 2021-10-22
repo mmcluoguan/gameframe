@@ -1,7 +1,7 @@
 #ifndef SHYNET_EVENTS_STREAMBUFF_H
 #define SHYNET_EVENTS_STREAMBUFF_H
 
-#include "shynet/Basic.h"
+#include "shynet/basic.h"
 #include <event2/buffer.h>
 #include <memory>
 

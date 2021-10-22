@@ -1,7 +1,7 @@
 #ifndef CLIENT_GATECONNECTOR_H
 #define CLIENT_GATECONNECTOR_H
 
-#include "frmpub/Connector.h"
+#include "frmpub/connector.h"
 
 namespace client {
 class GateConnector : public frmpub::Connector {

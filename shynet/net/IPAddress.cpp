@@ -1,5 +1,5 @@
-#include "shynet/net/IPAddress.h"
-#include "shynet/utils/Logger.h"
+#include "shynet/net/ipaddress.h"
+#include "shynet/utils/logger.h"
 #include <cstring>
 
 namespace shynet {

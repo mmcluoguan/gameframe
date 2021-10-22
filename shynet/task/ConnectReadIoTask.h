@@ -1,9 +1,9 @@
 #ifndef SHYNET_TASK_CONNECTREADIOTASK_H
 #define SHYNET_TASK_CONNECTREADIOTASK_H
 
-#include "shynet/net/ConnectEvent.h"
-#include "shynet/task/Task.h"
-#include "shynet/thread/Thread.h"
+#include "shynet/net/connectevent.h"
+#include "shynet/task/task.h"
+#include "shynet/thread/thread.h"
 
 namespace shynet {
 namespace task {

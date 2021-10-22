@@ -1,8 +1,8 @@
 #ifndef SHYNET_THREAD_LISTENTHREAD_H
 #define SHYNET_THREAD_LISTENTHREAD_H
 
-#include "shynet/events/EventBuffer.h"
-#include "shynet/thread/Thread.h"
+#include "shynet/events/eventbuffer.h"
+#include "shynet/thread/thread.h"
 
 namespace shynet {
 namespace thread {

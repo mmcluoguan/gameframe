@@ -1,41 +1,41 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <ClCompile Include="DbClient.cpp" />
-    <ClCompile Include="DbClientMgr.cpp" />
-    <ClCompile Include="DbServer.cpp" />
+    <ClCompile Include="dbclient.cpp" />
+    <ClCompile Include="dbclientmgr.cpp" />
+    <ClCompile Include="dbserver.cpp" />
     <ClCompile Include="dbvisit.cpp" />
-    <ClCompile Include="SignalHandler.cpp" />
-    <ClCompile Include="StdinHandler.cpp" />
-    <ClCompile Include="LuaWrapper.cpp">
+    <ClCompile Include="signalhandler.cpp" />
+    <ClCompile Include="stdinhandler.cpp" />
+    <ClCompile Include="luawrapper.cpp">
       <Filter>lua</Filter>
     </ClCompile>
-    <ClCompile Include="Datahelp.cpp">
+    <ClCompile Include="datahelp.cpp">
       <Filter>data</Filter>
     </ClCompile>
-    <ClCompile Include="DataTimer.cpp">
+    <ClCompile Include="datatimer.cpp">
       <Filter>data</Filter>
     </ClCompile>
-    <ClCompile Include="DataTimerMgr.cpp">
+    <ClCompile Include="datatimermgr.cpp">
       <Filter>data</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="DbClient.h" />
-    <ClInclude Include="DbClientMgr.h" />
-    <ClInclude Include="DbServer.h" />
-    <ClInclude Include="SignalHandler.h" />
-    <ClInclude Include="StdinHandler.h" />
-    <ClInclude Include="LuaWrapper.h">
+    <ClInclude Include="dbclient.h" />
+    <ClInclude Include="dbclientmgr.h" />
+    <ClInclude Include="dbserver.h" />
+    <ClInclude Include="signalhandler.h" />
+    <ClInclude Include="stdinhandler.h" />
+    <ClInclude Include="luawrapper.h">
       <Filter>lua</Filter>
     </ClInclude>
-    <ClInclude Include="Datahelp.h">
+    <ClInclude Include="datahelp.h">
       <Filter>data</Filter>
     </ClInclude>
-    <ClInclude Include="DataTimer.h">
+    <ClInclude Include="datatimer.h">
       <Filter>data</Filter>
     </ClInclude>
-    <ClInclude Include="DataTimerMgr.h">
+    <ClInclude Include="datatimermgr.h">
       <Filter>data</Filter>
     </ClInclude>
   </ItemGroup>

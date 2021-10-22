@@ -1,6 +1,6 @@
-#include "shynet/thread/WorkThread.h"
-#include "shynet/pool/ThreadPool.h"
-#include "shynet/utils/Stuff.h"
+#include "shynet/thread/workthread.h"
+#include "shynet/pool/threadpool.h"
+#include "shynet/utils/stuff.h"
 
 namespace shynet {
 namespace thread {

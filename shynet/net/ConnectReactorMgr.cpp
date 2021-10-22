@@ -1,7 +1,7 @@
-#include "shynet/net/ConnectReactorMgr.h"
-#include "shynet/pool/ThreadPool.h"
-#include "shynet/thread/ConnectThread.h"
-#include "shynet/utils/Logger.h"
+#include "shynet/net/connectreactormgr.h"
+#include "shynet/pool/threadpool.h"
+#include "shynet/thread/connectthread.h"
+#include "shynet/utils/logger.h"
 
 namespace shynet {
 namespace net {

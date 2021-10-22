@@ -1,9 +1,9 @@
 #ifndef LOGIN_CONNECTORMGR_H
 #define LOGIN_CONNECTORMGR_H
 
-#include "login/DbConnector.h"
-#include "login/WorldConnector.h"
-#include "shynet/utils/Singleton.h"
+#include "login/dbconnector.h"
+#include "login/worldconnector.h"
+#include "shynet/utils/singleton.h"
 #include <list>
 #include <mutex>
 

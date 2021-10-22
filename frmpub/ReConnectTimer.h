@@ -1,9 +1,9 @@
 #ifndef FRMPUB_RECONNECTTIMER_H
 #define FRMPUB_RECONNECTTIMER_H
 
-#include "shynet/net/ConnectReactorMgr.h"
-#include "shynet/net/IPAddress.h"
-#include "shynet/net/TimerReactorMgr.h"
+#include "shynet/net/connectreactormgr.h"
+#include "shynet/net/ipaddress.h"
+#include "shynet/net/timerreactormgr.h"
 
 namespace frmpub {
 template <class T>

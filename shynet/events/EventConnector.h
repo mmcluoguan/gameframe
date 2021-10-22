@@ -1,9 +1,9 @@
 #ifndef SHYNET_EVENTS_EVENTCONNECTOR_H
 #define SHYNET_EVENTS_EVENTCONNECTOR_H
 
-#include "shynet/events/EventBase.h"
-#include "shynet/events/EventBuffer.h"
-#include "shynet/events/EventBufferSsl.h"
+#include "shynet/events/eventbase.h"
+#include "shynet/events/eventbuffer.h"
+#include "shynet/events/eventbufferssl.h"
 
 namespace shynet {
 namespace events {

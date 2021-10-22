@@ -2,7 +2,7 @@
 #define DBVISIT_DBCLIENTMGR_H
 
 #include "dbvisit/DbClient.h"
-#include "shynet/utils/Singleton.h"
+#include "shynet/utils/singleton.h"
 #include <memory>
 #include <mutex>
 #include <unordered_map>

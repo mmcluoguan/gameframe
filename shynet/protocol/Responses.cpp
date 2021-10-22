@@ -1,6 +1,6 @@
-#include "shynet/protocol/Responses.h"
-#include "shynet/utils/Logger.h"
-#include "shynet/utils/StringOp.h"
+#include "shynet/protocol/responses.h"
+#include "shynet/utils/logger.h"
+#include "shynet/utils/stringop.h"
 #include <cstring>
 
 namespace shynet {

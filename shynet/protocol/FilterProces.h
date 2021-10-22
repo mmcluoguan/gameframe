@@ -1,11 +1,11 @@
 #ifndef SHYNET_PROTOCOL_FILTERPROCES_H
 #define SHYNET_PROTOCOL_FILTERPROCES_H
 
-#include "shynet/events/EventBuffer.h"
-#include "shynet/net/IPAddress.h"
-#include "shynet/protocol/Http.h"
-#include "shynet/protocol/Tcpip.h"
-#include "shynet/protocol/WebSocket.h"
+#include "shynet/events/eventbuffer.h"
+#include "shynet/net/ipaddress.h"
+#include "shynet/protocol/http.h"
+#include "shynet/protocol/tcpip.h"
+#include "shynet/protocol/websocket.h"
 
 namespace shynet {
 namespace protocol {

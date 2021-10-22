@@ -1,7 +1,7 @@
 #ifndef CLIENT_SIGINTHANDLER_H
 #define CLIENT_SIGINTHANDLER_H
 
-#include "shynet/events/EventHandler.h"
+#include "shynet/events/eventhandler.h"
 
 namespace client {
 class SignalHandler : public events::EventHandler {

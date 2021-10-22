@@ -1,8 +1,8 @@
 #ifndef SHYNET_THREAD_WORKTHREAD_H
 #define SHYNET_THREAD_WORKTHREAD_H
 
-#include "shynet/task/Task.h"
-#include "shynet/thread/Thread.h"
+#include "shynet/task/task.h"
+#include "shynet/thread/thread.h"
 #include <mutex>
 #include <queue>
 

@@ -35,27 +35,27 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="ConnectorMgr.cpp" />
-    <ClCompile Include="DbConnector.cpp" />
+    <ClCompile Include="connectormgr.cpp" />
+    <ClCompile Include="dbconnector.cpp" />
     <ClCompile Include="game.cpp" />
-    <ClCompile Include="GameClient.cpp" />
-    <ClCompile Include="GameClientMgr.cpp" />
-    <ClCompile Include="GameServer.cpp" />
-    <ClCompile Include="LuaWrapper.cpp" />
-    <ClCompile Include="WorldConnector.cpp" />
-    <ClCompile Include="SignalHandler.cpp" />
-    <ClCompile Include="StdinHandler.cpp" />
+    <ClCompile Include="gameclient.cpp" />
+    <ClCompile Include="gameclientmgr.cpp" />
+    <ClCompile Include="gameserver.cpp" />
+    <ClCompile Include="luawrapper.cpp" />
+    <ClCompile Include="worldconnector.cpp" />
+    <ClCompile Include="signalhandler.cpp" />
+    <ClCompile Include="stdinhandler.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="ConnectorMgr.h" />
-    <ClInclude Include="DbConnector.h" />
-    <ClInclude Include="GameClient.h" />
-    <ClInclude Include="GameClientMgr.h" />
-    <ClInclude Include="GameServer.h" />
-    <ClInclude Include="LuaWrapper.h" />
-    <ClInclude Include="WorldConnector.h" />
-    <ClInclude Include="SignalHandler.h" />
-    <ClInclude Include="StdinHandler.h" />
+    <ClInclude Include="connectormgr.h" />
+    <ClInclude Include="dbconnector.h" />
+    <ClInclude Include="gameclient.h" />
+    <ClInclude Include="gameclientmgr.h" />
+    <ClInclude Include="gameserver.h" />
+    <ClInclude Include="luawrapper.h" />
+    <ClInclude Include="worldconnector.h" />
+    <ClInclude Include="signalhandler.h" />
+    <ClInclude Include="stdinhandler.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{21E48B0B-3F57-436F-BA28-C690AE5BA86B}</ProjectGuid>

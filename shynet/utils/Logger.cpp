@@ -1,5 +1,5 @@
-#include "shynet/utils/Logger.h"
-#include "shynet/utils/Stuff.h"
+#include "shynet/utils/logger.h"
+#include "shynet/utils/stuff.h"
 #include <cstring>
 #include <fstream>
 #include <iostream>

@@ -147,27 +147,27 @@
     <EnableIncrementalBuild>WithNinja</EnableIncrementalBuild>
   </PropertyGroup>
   <ItemGroup>
-    <ClCompile Include="Datahelp.cpp" />
-    <ClCompile Include="DataTimer.cpp" />
-    <ClCompile Include="DataTimerMgr.cpp" />
-    <ClCompile Include="DbClient.cpp" />
-    <ClCompile Include="DbClientMgr.cpp" />
-    <ClCompile Include="DbServer.cpp" />
+    <ClCompile Include="datahelp.cpp" />
+    <ClCompile Include="datatimer.cpp" />
+    <ClCompile Include="datatimermgr.cpp" />
+    <ClCompile Include="dbclient.cpp" />
+    <ClCompile Include="dbclientmgr.cpp" />
+    <ClCompile Include="dbserver.cpp" />
     <ClCompile Include="dbvisit.cpp" />
-    <ClCompile Include="LuaWrapper.cpp" />
-    <ClCompile Include="SignalHandler.cpp" />
-    <ClCompile Include="StdinHandler.cpp" />
+    <ClCompile Include="luawrapper.cpp" />
+    <ClCompile Include="signalhandler.cpp" />
+    <ClCompile Include="stdinhandler.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Datahelp.h" />
-    <ClInclude Include="DataTimer.h" />
-    <ClInclude Include="DataTimerMgr.h" />
-    <ClInclude Include="DbClient.h" />
-    <ClInclude Include="DbClientMgr.h" />
-    <ClInclude Include="DbServer.h" />
-    <ClInclude Include="LuaWrapper.h" />
-    <ClInclude Include="SignalHandler.h" />
-    <ClInclude Include="StdinHandler.h" />
+    <ClInclude Include="datahelp.h" />
+    <ClInclude Include="datatimer.h" />
+    <ClInclude Include="datatimermgr.h" />
+    <ClInclude Include="dbclient.h" />
+    <ClInclude Include="dbclientmgr.h" />
+    <ClInclude Include="dbserver.h" />
+    <ClInclude Include="luawrapper.h" />
+    <ClInclude Include="signalhandler.h" />
+    <ClInclude Include="stdinhandler.h" />
   </ItemGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|ARM'">
     <Link>

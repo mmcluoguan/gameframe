@@ -1,7 +1,7 @@
 #ifndef GATE_LOGINCONNECTOR_H
 #define GATE_LOGINCONNECTOR_H
 
-#include "frmpub/Connector.h"
+#include "frmpub/connector.h"
 
 namespace gate {
 /// <summary>

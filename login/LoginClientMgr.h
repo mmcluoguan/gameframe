@@ -1,8 +1,8 @@
 #ifndef LOGIN_LOGINCLIENTMGR_H
 #define LOGIN_LOGINCLIENTMGR_H
 
-#include "login/LoginClient.h"
-#include "shynet/utils/Singleton.h"
+#include "login/loginclient.h"
+#include "shynet/utils/singleton.h"
 #include <unordered_map>
 
 namespace login {

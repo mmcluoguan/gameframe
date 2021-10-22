@@ -1,10 +1,10 @@
 #ifndef GATE_CONNECTORMGR_H
 #define GATE_CONNECTORMGR_H
 
-#include "gate/GameConnector.h"
-#include "gate/LoginConnector.h"
-#include "gate/WorldConnector.h"
-#include "shynet/utils/Singleton.h"
+#include "gate/gameconnector.h"
+#include "gate/loginconnector.h"
+#include "gate/worldconnector.h"
+#include "shynet/utils/singleton.h"
 #include <list>
 #include <mutex>
 #include <unordered_map>

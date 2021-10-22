@@ -1,7 +1,7 @@
 #ifndef SHYNET_PROTOCOL_RESPONSES_H
 #define SHYNET_PROTOCOL_RESPONSES_H
 
-#include "shynet/Basic.h"
+#include "shynet/basic.h"
 #include <map>
 
 namespace shynet {

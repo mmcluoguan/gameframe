@@ -1,5 +1,5 @@
-#include "game/ConnectorMgr.h"
-#include "shynet/net/ConnectReactorMgr.h"
+#include "game/connectormgr.h"
+#include "shynet/net/connectreactormgr.h"
 
 namespace game {
 ConnectorMgr::ConnectorMgr()

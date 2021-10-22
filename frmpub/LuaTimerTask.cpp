@@ -1,8 +1,8 @@
-#include "frmpub/LuaTimerTask.h"
-#include "frmpub/LuaRemoteDebug.h"
-#include "shynet/lua/LuaEngine.h"
-#include "shynet/net/TimerReactorMgr.h"
-#include "shynet/thread/LuaThread.h"
+#include "frmpub/luatimertask.h"
+#include "frmpub/luaremotedebug.h"
+#include "shynet/lua/luaengine.h"
+#include "shynet/net/timerreactormgr.h"
+#include "shynet/thread/luathread.h"
 
 namespace frmpub {
 LuaTimerMgr::LuaTimerTask::LuaTimerTask(int timerid)

@@ -1,10 +1,10 @@
 #ifndef FRMPUB_ONACCEPTTASK_H
 #define FRMPUB_ONACCEPTTASK_H
 
-#include "frmpub/LuaRemoteDebug.h"
-#include "shynet/task/Task.h"
-#include "shynet/thread/LuaThread.h"
-#include "shynet/thread/Thread.h"
+#include "frmpub/luaremotedebug.h"
+#include "shynet/task/task.h"
+#include "shynet/thread/luathread.h"
+#include "shynet/thread/thread.h"
 
 namespace frmpub {
 /*

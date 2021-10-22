@@ -1,11 +1,11 @@
-#include "world/HttpClient.h"
-#include "frmpub/LuaCallBackTask.h"
+#include "world/httpclient.h"
+#include "frmpub/luacallbacktask.h"
 #include "frmpub/protocc/game.pb.h"
 #include "frmpub/protocc/gate.pb.h"
 #include "frmpub/protocc/login.pb.h"
 #include "frmpub/protocc/world.pb.h"
-#include "shynet/lua/LuaEngine.h"
-#include "world/HttpClientMgr.h"
+#include "shynet/lua/luaengine.h"
+#include "world/httpclientmgr.h"
 
 namespace world {
 HttpClient::HttpClient(std::shared_ptr<net::IPAddress> remote_addr,

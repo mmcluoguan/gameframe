@@ -1,8 +1,8 @@
 #ifndef SHYNET_NET_CONNECTIOBUFFER_H
 #define SHYNET_NET_CONNECTIOBUFFER_H
 
-#include "shynet/events/EventBufferSsl.h"
-#include "shynet/net/ConnectEvent.h"
+#include "shynet/events/eventbufferssl.h"
+#include "shynet/net/connectevent.h"
 
 namespace shynet {
 namespace net {

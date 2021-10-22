@@ -1,10 +1,10 @@
-#include "client/StdinHandler.h"
-#include "client/GateConnector.h"
-#include "shynet/net/ConnectReactorMgr.h"
-#include "shynet/utils/IniConfig.h"
-#include "shynet/utils/Singleton.h"
-#include "shynet/utils/StringOp.h"
-#include "shynet/utils/Stuff.h"
+#include "client/stdinhandler.h"
+#include "client/gateconnector.h"
+#include "shynet/net/connectreactormgr.h"
+#include "shynet/utils/iniconfig.h"
+#include "shynet/utils/singleton.h"
+#include "shynet/utils/stringop.h"
+#include "shynet/utils/stuff.h"
 #include <chrono>
 #include <cstring>
 #include <thread>

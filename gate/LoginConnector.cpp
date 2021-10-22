@@ -1,11 +1,11 @@
-#include "gate/LoginConnector.h"
-#include "frmpub/LuaCallBackTask.h"
-#include "frmpub/ReConnectTimer.h"
-#include "gate/ConnectorMgr.h"
-#include "gate/GateClientMgr.h"
-#include "shynet/lua/LuaEngine.h"
-#include "shynet/net/ConnectReactorMgr.h"
-#include "shynet/utils/IniConfig.h"
+#include "gate/loginconnector.h"
+#include "frmpub/luacallbacktask.h"
+#include "frmpub/reconnecttimer.h"
+#include "gate/connectormgr.h"
+#include "gate/gateclientmgr.h"
+#include "shynet/lua/luaengine.h"
+#include "shynet/net/connectreactormgr.h"
+#include "shynet/utils/iniconfig.h"
 
 namespace gate {
 LoginConnector::LoginConnector(std::shared_ptr<net::IPAddress> connect_addr)

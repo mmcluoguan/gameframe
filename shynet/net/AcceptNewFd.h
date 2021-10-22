@@ -1,10 +1,10 @@
 #ifndef SHYNET_NET_ACCEPTNEWFD_H
 #define SHYNET_NET_ACCEPTNEWFD_H
 
-#include "shynet/events/EventBuffer.h"
-#include "shynet/net/AcceptHeartbeat.h"
-#include "shynet/net/IPAddress.h"
-#include "shynet/protocol/FilterProces.h"
+#include "shynet/events/eventbuffer.h"
+#include "shynet/net/acceptheartbeat.h"
+#include "shynet/net/ipaddress.h"
+#include "shynet/protocol/filterproces.h"
 
 namespace shynet {
 namespace net {

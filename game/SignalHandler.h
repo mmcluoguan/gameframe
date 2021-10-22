@@ -1,7 +1,7 @@
 #ifndef GAME_SIGINTHANDLER_H
 #define GAME_SIGINTHANDLER_H
 
-#include "shynet/events/EventHandler.h"
+#include "shynet/events/eventhandler.h"
 
 namespace game {
 /// <summary>

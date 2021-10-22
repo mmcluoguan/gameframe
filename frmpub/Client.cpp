@@ -1,5 +1,5 @@
-#include "frmpub/Client.h"
-#include "shynet/utils/Logger.h"
+#include "frmpub/client.h"
+#include "shynet/utils/logger.h"
 
 namespace frmpub {
 Client::Client(std::shared_ptr<net::IPAddress> remote_addr,

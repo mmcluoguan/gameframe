@@ -1,7 +1,7 @@
 #ifndef GAME_LUAWRAPPER_H
 #define GAME_LUAWRAPPER_H
 
-#include "frmpub/FrmLuaWrapper.h"
+#include "frmpub/frmluawrapper.h"
 
 namespace game {
 class LuaWrapper : public frmpub::FrmLuaWrapper {

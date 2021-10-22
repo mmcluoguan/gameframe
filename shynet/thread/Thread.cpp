@@ -1,4 +1,4 @@
-#include "shynet/thread/Thread.h"
+#include "shynet/thread/thread.h"
 
 namespace shynet {
 namespace thread {

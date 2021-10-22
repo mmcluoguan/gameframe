@@ -1,7 +1,7 @@
 #ifndef SHYNET_NET_TIMEREVENT_H
 #define SHYNET_NET_TIMEREVENT_H
 
-#include "shynet/events/EventHandler.h"
+#include "shynet/events/eventhandler.h"
 
 namespace shynet {
 namespace net {

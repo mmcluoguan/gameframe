@@ -1,9 +1,9 @@
-#include "shynet/protocol/WebSocket.h"
-#include "shynet/crypto/Base64.h"
-#include "shynet/crypto/Sha1.h"
-#include "shynet/protocol/FilterProces.h"
-#include "shynet/utils/Logger.h"
-#include "shynet/utils/Stuff.h"
+#include "shynet/protocol/websocket.h"
+#include "shynet/crypto/base64.h"
+#include "shynet/crypto/sha1.h"
+#include "shynet/protocol/filterproces.h"
+#include "shynet/utils/logger.h"
+#include "shynet/utils/stuff.h"
 #include <cstring>
 #include <jemalloc/jemalloc.h>
 

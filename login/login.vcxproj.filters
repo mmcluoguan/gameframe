@@ -1,49 +1,49 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <ClCompile Include="ConnectorMgr.cpp" />
+    <ClCompile Include="connectormgr.cpp" />
     <ClCompile Include="login.cpp" />
-    <ClCompile Include="SignalHandler.cpp" />
-    <ClCompile Include="StdinHandler.cpp" />
-    <ClCompile Include="DbConnector.cpp">
+    <ClCompile Include="signalhandler.cpp" />
+    <ClCompile Include="stdinhandler.cpp" />
+    <ClCompile Include="dbconnector.cpp">
       <Filter>db</Filter>
     </ClCompile>
-    <ClCompile Include="LoginClient.cpp">
+    <ClCompile Include="loginclient.cpp">
       <Filter>login</Filter>
     </ClCompile>
-    <ClCompile Include="LoginClientMgr.cpp">
+    <ClCompile Include="loginclientmgr.cpp">
       <Filter>login</Filter>
     </ClCompile>
-    <ClCompile Include="LoginServer.cpp">
+    <ClCompile Include="loginserver.cpp">
       <Filter>login</Filter>
     </ClCompile>
-    <ClCompile Include="WorldConnector.cpp">
+    <ClCompile Include="worldconnector.cpp">
       <Filter>world</Filter>
     </ClCompile>
-    <ClCompile Include="LuaWrapper.cpp">
+    <ClCompile Include="luawrapper.cpp">
       <Filter>lua</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="ConnectorMgr.h" />
-    <ClInclude Include="SignalHandler.h" />
-    <ClInclude Include="StdinHandler.h" />
-    <ClInclude Include="DbConnector.h">
+    <ClInclude Include="connectormgr.h" />
+    <ClInclude Include="signalhandler.h" />
+    <ClInclude Include="stdinhandler.h" />
+    <ClInclude Include="dbconnector.h">
       <Filter>db</Filter>
     </ClInclude>
-    <ClInclude Include="LoginClient.h">
+    <ClInclude Include="loginclient.h">
       <Filter>login</Filter>
     </ClInclude>
-    <ClInclude Include="LoginClientMgr.h">
+    <ClInclude Include="loginclientmgr.h">
       <Filter>login</Filter>
     </ClInclude>
-    <ClInclude Include="LoginServer.h">
+    <ClInclude Include="loginserver.h">
       <Filter>login</Filter>
     </ClInclude>
-    <ClInclude Include="WorldConnector.h">
+    <ClInclude Include="worldconnector.h">
       <Filter>world</Filter>
     </ClInclude>
-    <ClInclude Include="LuaWrapper.h">
+    <ClInclude Include="luawrapper.h">
       <Filter>lua</Filter>
     </ClInclude>
   </ItemGroup>

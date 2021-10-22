@@ -1,7 +1,7 @@
 #ifndef GAME_WORLDCONNECTOR_H
 #define GAME_WORLDCONNECTOR_H
 
-#include "frmpub/Connector.h"
+#include "frmpub/connector.h"
 
 namespace game {
 /// <summary>

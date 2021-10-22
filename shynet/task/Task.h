@@ -1,7 +1,7 @@
 #ifndef SHYNET_TASK_TASK_H
 #define SHYNET_TASK_TASK_H
 
-#include "shynet/thread/Thread.h"
+#include "shynet/thread/thread.h"
 
 namespace shynet {
 namespace task {

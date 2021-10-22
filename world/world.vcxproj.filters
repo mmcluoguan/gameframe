@@ -2,62 +2,62 @@
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
     <ClCompile Include="world.cpp" />
-    <ClCompile Include="SignalHandler.cpp" />
-    <ClCompile Include="StdinHandler.cpp" />
-    <ClCompile Include="DbConnector.cpp">
+    <ClCompile Include="signalhandler.cpp" />
+    <ClCompile Include="stdinhandler.cpp" />
+    <ClCompile Include="dbconnector.cpp">
       <Filter>db</Filter>
     </ClCompile>
-    <ClCompile Include="HttpClient.cpp">
+    <ClCompile Include="httpclient.cpp">
       <Filter>http</Filter>
     </ClCompile>
-    <ClCompile Include="HttpServer.cpp">
+    <ClCompile Include="httpserver.cpp">
       <Filter>http</Filter>
     </ClCompile>
-    <ClCompile Include="WorldClientMgr.cpp">
+    <ClCompile Include="worldclientmgr.cpp">
       <Filter>world</Filter>
     </ClCompile>
-    <ClCompile Include="WorldClient.cpp">
+    <ClCompile Include="worldclient.cpp">
       <Filter>world</Filter>
     </ClCompile>
-    <ClCompile Include="WorldServer.cpp">
+    <ClCompile Include="worldserver.cpp">
       <Filter>world</Filter>
     </ClCompile>
-    <ClCompile Include="HttpClientMgr.cpp">
+    <ClCompile Include="httpclientmgr.cpp">
       <Filter>http</Filter>
     </ClCompile>
-    <ClCompile Include="LuaWrapper.cpp">
+    <ClCompile Include="luawrapper.cpp">
       <Filter>lua</Filter>
     </ClCompile>
-    <ClCompile Include="ConnectorMgr.cpp" />
+    <ClCompile Include="connectormgr.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="SignalHandler.h" />
-    <ClInclude Include="StdinHandler.h" />
-    <ClInclude Include="DbConnector.h">
+    <ClInclude Include="signalhandler.h" />
+    <ClInclude Include="stdinhandler.h" />
+    <ClInclude Include="dbconnector.h">
       <Filter>db</Filter>
     </ClInclude>
-    <ClInclude Include="HttpClient.h">
+    <ClInclude Include="httpclient.h">
       <Filter>http</Filter>
     </ClInclude>
-    <ClInclude Include="HttpServer.h">
+    <ClInclude Include="httpserver.h">
       <Filter>http</Filter>
     </ClInclude>
-    <ClInclude Include="WorldClientMgr.h">
+    <ClInclude Include="worldclientmgr.h">
       <Filter>world</Filter>
     </ClInclude>
-    <ClInclude Include="WorldClient.h">
+    <ClInclude Include="worldclient.h">
       <Filter>world</Filter>
     </ClInclude>
-    <ClInclude Include="WorldServer.h">
+    <ClInclude Include="worldserver.h">
       <Filter>world</Filter>
     </ClInclude>
-    <ClInclude Include="HttpClientMgr.h">
+    <ClInclude Include="httpclientmgr.h">
       <Filter>http</Filter>
     </ClInclude>
-    <ClInclude Include="LuaWrapper.h">
+    <ClInclude Include="luawrapper.h">
       <Filter>lua</Filter>
     </ClInclude>
-    <ClInclude Include="ConnectorMgr.h" />
+    <ClInclude Include="connectormgr.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="db">

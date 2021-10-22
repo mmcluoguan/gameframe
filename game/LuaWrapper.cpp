@@ -1,11 +1,11 @@
-#include "game/LuaWrapper.h"
-#include "game/DbConnector.h"
-#include "game/GameClient.h"
-#include "game/GameServer.h"
-#include "game/WorldConnector.h"
-#include "shynet/utils/IdWorker.h"
-#include "shynet/utils/IniConfig.h"
-#include "shynet/utils/Singleton.h"
+#include "game/luawrapper.h"
+#include "game/dbconnector.h"
+#include "game/gameclient.h"
+#include "game/gameserver.h"
+#include "game/worldconnector.h"
+#include "shynet/utils/idworker.h"
+#include "shynet/utils/iniconfig.h"
+#include "shynet/utils/singleton.h"
 
 namespace game {
 LuaWrapper::LuaWrapper()

@@ -1,7 +1,7 @@
 #ifndef LOGIN_DBCONNECTOR_H
 #define LOGIN_DBCONNECTOR_H
 
-#include "frmpub/Connector.h"
+#include "frmpub/connector.h"
 
 namespace login {
 /*

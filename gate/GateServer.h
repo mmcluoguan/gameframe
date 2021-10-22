@@ -1,7 +1,7 @@
 #ifndef GATE_GATESERVER_H
 #define GATE_GATESERVER_H
 
-#include "shynet/net/ListenReactorMgr.h"
+#include "shynet/net/listenreactormgr.h"
 
 namespace gate {
 /// <summary>

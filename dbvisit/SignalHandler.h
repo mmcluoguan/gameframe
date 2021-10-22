@@ -1,7 +1,7 @@
 #ifndef DBVISIT_SIGINTHANDLER_H
 #define DBVISIT_SIGINTHANDLER_H
 
-#include "shynet/events/EventHandler.h"
+#include "shynet/events/eventhandler.h"
 
 namespace dbvisit {
 /// <summary>

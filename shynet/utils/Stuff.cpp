@@ -1,6 +1,6 @@
-#include "shynet/utils/Stuff.h"
-#include "shynet/utils/FilePathOp.h"
-#include "shynet/utils/Logger.h"
+#include "shynet/utils/stuff.h"
+#include "shynet/utils/filepathop.h"
+#include "shynet/utils/logger.h"
 #include <arpa/inet.h>
 #include <climits>
 #include <cstring>

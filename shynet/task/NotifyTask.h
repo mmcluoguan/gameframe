@@ -1,7 +1,7 @@
 #ifndef SHYNET_TASK_NOTIFYTASK_H
 #define SHYNET_TASK_NOTIFYTASK_H
 
-#include "shynet/Basic.h"
+#include "shynet/basic.h"
 #include <sys/inotify.h>
 #include <unordered_map>
 

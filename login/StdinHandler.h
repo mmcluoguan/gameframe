@@ -1,7 +1,7 @@
 #ifndef LOGIN_STDINHANDLER_H
 #define LOGIN_STDINHANDLER_H
 
-#include "shynet/events/EventHandler.h"
+#include "shynet/events/eventhandler.h"
 
 namespace login {
 /// <summary>

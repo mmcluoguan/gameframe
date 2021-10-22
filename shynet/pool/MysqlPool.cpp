@@ -1,4 +1,4 @@
-#include "shynet/pool/MysqlPool.h"
+#include "shynet/pool/mysqlpool.h"
 
 namespace shynet {
 namespace pool {

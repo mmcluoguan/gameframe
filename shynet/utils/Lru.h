@@ -1,7 +1,7 @@
 #ifndef SHYNET_UTILS_LRU_H
 #define SHYNET_UTILS_LRU_H
 
-#include "shynet/Basic.h"
+#include "shynet/basic.h"
 #include <list>
 #include <map>
 

@@ -1,5 +1,5 @@
-#include "world/SignalHandler.h"
-#include "shynet/utils/Logger.h"
+#include "world/signalhandler.h"
+#include "shynet/utils/logger.h"
 #include <csignal>
 
 namespace world {

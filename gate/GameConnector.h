@@ -1,7 +1,7 @@
 #ifndef GATE_GAMECONNECTOR_H
 #define GATE_GAMECONNECTOR_H
 
-#include "frmpub/Connector.h"
+#include "frmpub/connector.h"
 
 namespace gate {
 /// <summary>

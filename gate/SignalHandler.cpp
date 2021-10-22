@@ -1,5 +1,5 @@
-#include "gate/SignalHandler.h"
-#include "shynet/utils/Logger.h"
+#include "gate/signalhandler.h"
+#include "shynet/utils/logger.h"
 #include <csignal>
 
 namespace gate {

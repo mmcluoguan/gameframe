@@ -35,16 +35,16 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Basic.cpp" />
-    <ClCompile Include="Client.cpp" />
-    <ClCompile Include="Connector.cpp" />
-    <ClCompile Include="FilterData.cpp" />
-    <ClCompile Include="FrmLuaWrapper.cpp" />
-    <ClCompile Include="LuaFolderTask.cpp" />
-    <ClCompile Include="LuaHotFixTask.cpp" />
-    <ClCompile Include="LuaRemoteDebug.cpp" />
-    <ClCompile Include="LuaTimerTask.cpp" />
-    <ClCompile Include="PingTimer.cpp" />
+    <ClCompile Include="basic.cpp" />
+    <ClCompile Include="client.cpp" />
+    <ClCompile Include="connector.cpp" />
+    <ClCompile Include="filterdata.cpp" />
+    <ClCompile Include="frmluawrapper.cpp" />
+    <ClCompile Include="luafoldertask.cpp" />
+    <ClCompile Include="luahotfixtask.cpp" />
+    <ClCompile Include="luaremotedebug.cpp" />
+    <ClCompile Include="luatimertask.cpp" />
+    <ClCompile Include="pingtimer.cpp" />
     <ClCompile Include="protocc\client.pb.cc" />
     <ClCompile Include="protocc\common.pb.cc" />
     <ClCompile Include="protocc\dbvisit.pb.cc" />
@@ -55,17 +55,17 @@
     <ClCompile Include="protocc\world.pb.cc" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Basic.h" />
-    <ClInclude Include="Client.h" />
-    <ClInclude Include="Connector.h" />
-    <ClInclude Include="FilterData.h" />
-    <ClInclude Include="FrmLuaWrapper.h" />
-    <ClInclude Include="LuaFolderTask.h" />
-    <ClInclude Include="LuaHotFixTask.h" />
-    <ClInclude Include="LuaCallBackTask.h" />
-    <ClInclude Include="LuaRemoteDebug.h" />
-    <ClInclude Include="LuaTimerTask.h" />
-    <ClInclude Include="PingTimer.h" />
+    <ClInclude Include="basic.h" />
+    <ClInclude Include="client.h" />
+    <ClInclude Include="connector.h" />
+    <ClInclude Include="filterdata.h" />
+    <ClInclude Include="frmluawrapper.h" />
+    <ClInclude Include="luafoldertask.h" />
+    <ClInclude Include="luahotfixtask.h" />
+    <ClInclude Include="luacallbacktask.h" />
+    <ClInclude Include="luaremotedebug.h" />
+    <ClInclude Include="luatimertask.h" />
+    <ClInclude Include="pingtimer.h" />
     <ClInclude Include="protocc\client.pb.h" />
     <ClInclude Include="protocc\common.pb.h" />
     <ClInclude Include="protocc\dbvisit.pb.h" />
@@ -74,7 +74,7 @@
     <ClInclude Include="protocc\internal.pb.h" />
     <ClInclude Include="protocc\login.pb.h" />
     <ClInclude Include="protocc\world.pb.h" />
-    <ClInclude Include="ReConnectTimer.h" />
+    <ClInclude Include="reconnecttimer.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{6094c37a-dff3-42d7-a289-933fa442b5df}</ProjectGuid>

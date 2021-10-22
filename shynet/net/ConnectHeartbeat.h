@@ -1,7 +1,7 @@
 #ifndef SHYNET_NET_CONNECTHEARTBEAT_H
 #define SHYNET_NET_CONNECTHEARTBEAT_H
 
-#include "shynet/net/TimerEvent.h"
+#include "shynet/net/timerevent.h"
 
 namespace shynet {
 namespace net {

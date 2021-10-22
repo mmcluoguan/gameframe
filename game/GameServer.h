@@ -1,7 +1,7 @@
 #ifndef GAME_GAMESERVER_H
 #define GAME_GAMESERVER_H
 
-#include "shynet/net/ListenReactorMgr.h"
+#include "shynet/net/listenreactormgr.h"
 
 namespace game {
 /// <summary>

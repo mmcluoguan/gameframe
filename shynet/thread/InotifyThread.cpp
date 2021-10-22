@@ -1,7 +1,7 @@
-#include "shynet/thread/InotifyThread.h"
-#include "shynet/pool/ThreadPool.h"
-#include "shynet/utils/Logger.h"
-#include "shynet/utils/Stuff.h"
+#include "shynet/thread/inotifythread.h"
+#include "shynet/pool/threadpool.h"
+#include "shynet/utils/logger.h"
+#include "shynet/utils/stuff.h"
 #include <fcntl.h>
 #include <ftw.h>
 #include <list>

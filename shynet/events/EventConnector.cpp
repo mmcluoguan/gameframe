@@ -1,5 +1,5 @@
-#include "shynet/events/EventConnector.h"
-#include "shynet/utils/Logger.h"
+#include "shynet/events/eventconnector.h"
+#include "shynet/utils/logger.h"
 #include <cstring>
 #include <event2/dns.h>
 

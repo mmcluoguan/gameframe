@@ -1,7 +1,7 @@
 #ifndef GAME_DBCONNECTOR_H
 #define GAME_DBCONNECTOR_H
 
-#include "frmpub/Connector.h"
+#include "frmpub/connector.h"
 
 namespace game {
 /*

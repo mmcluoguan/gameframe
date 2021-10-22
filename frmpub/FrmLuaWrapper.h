@@ -1,7 +1,7 @@
 #ifndef FRMPUB_FRMLUAWRAPPER_H
 #define FRMPUB_FRMLUAWRAPPER_H
 
-#include "shynet/lua/LuaWrapper.h"
+#include "shynet/lua/luawrapper.h"
 
 namespace frmpub {
 /*

@@ -1,6 +1,6 @@
-#include "game/GameClientMgr.h"
-#include "frmpub/LuaCallBackTask.h"
-#include "shynet/lua/LuaEngine.h"
+#include "game/gameclientmgr.h"
+#include "frmpub/luacallbacktask.h"
+#include "shynet/lua/luaengine.h"
 
 namespace game {
 GameClientMgr::GameClientMgr()

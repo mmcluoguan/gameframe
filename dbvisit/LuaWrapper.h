@@ -1,7 +1,7 @@
 #ifndef DBVISIT_LUAWRAPPER_H
 #define DBVISIT_LUAWRAPPER_H
 
-#include "frmpub/FrmLuaWrapper.h"
+#include "frmpub/frmluawrapper.h"
 
 namespace dbvisit {
 class LuaWrapper : public frmpub::FrmLuaWrapper {

@@ -1,10 +1,10 @@
 #ifndef SHYNET_NET_CONNECTEVENT_H
 #define SHYNET_NET_CONNECTEVENT_H
 
-#include "shynet/events/EventHandler.h"
-#include "shynet/net/ConnectHeartbeat.h"
-#include "shynet/net/IPAddress.h"
-#include "shynet/protocol/FilterProces.h"
+#include "shynet/events/eventhandler.h"
+#include "shynet/net/connectheartbeat.h"
+#include "shynet/net/ipaddress.h"
+#include "shynet/protocol/filterproces.h"
 #include <event2/dns.h>
 #include <openssl/err.h>
 #include <openssl/ssl.h>

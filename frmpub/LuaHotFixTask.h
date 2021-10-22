@@ -1,8 +1,8 @@
 #ifndef FRMPUB_LUAHOTFIXTASK_H
 #define FRMPUB_LUAHOTFIXTASK_H
 
-#include "shynet/task/Task.h"
-#include "shynet/thread/Thread.h"
+#include "shynet/task/task.h"
+#include "shynet/thread/thread.h"
 
 namespace frmpub {
 /*

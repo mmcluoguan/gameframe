@@ -1,11 +1,11 @@
-#include "gate/GateClient.h"
-#include "frmpub/LuaCallBackTask.h"
-#include "gate/ConnectorMgr.h"
-#include "gate/GateClientMgr.h"
-#include "shynet/lua/LuaEngine.h"
-#include "shynet/net/ConnectReactorMgr.h"
-#include "shynet/utils/IniConfig.h"
-#include "shynet/utils/StringOp.h"
+#include "gate/gateclient.h"
+#include "frmpub/luacallbacktask.h"
+#include "gate/connectormgr.h"
+#include "gate/gateclientmgr.h"
+#include "shynet/lua/luaengine.h"
+#include "shynet/net/connectreactormgr.h"
+#include "shynet/utils/iniconfig.h"
+#include "shynet/utils/stringop.h"
 
 namespace gate {
 GateClient::GateClient(std::shared_ptr<net::IPAddress> remote_addr,

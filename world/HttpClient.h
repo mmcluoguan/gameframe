@@ -1,8 +1,8 @@
 #ifndef WORLD_HTTPCLIENT_H
 #define WORLD_HTTPCLIENT_H
 
-#include "frmpub/Client.h"
-#include "shynet/events/EventBuffer.h"
+#include "frmpub/client.h"
+#include "shynet/events/eventbuffer.h"
 
 namespace world {
 /// <summary>

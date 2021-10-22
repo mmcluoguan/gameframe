@@ -1,7 +1,7 @@
 #ifndef WORLD_SIGINTHANDLER_H
 #define WORLD_SIGINTHANDLER_H
 
-#include "shynet/events/EventHandler.h"
+#include "shynet/events/eventhandler.h"
 
 namespace world {
 /// <summary>

@@ -1,8 +1,8 @@
 #ifndef LOGIN_LOGINCLIENT_H
 #define LOGIN_LOGINCLIENT_H
 
-#include "frmpub/Client.h"
-#include "shynet/net/AcceptNewFd.h"
+#include "frmpub/client.h"
+#include "shynet/net/acceptnewfd.h"
 
 namespace login {
 /// <summary>

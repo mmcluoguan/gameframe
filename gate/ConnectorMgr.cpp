@@ -1,5 +1,5 @@
-#include "gate/ConnectorMgr.h"
-#include "shynet/net/ConnectReactorMgr.h"
+#include "gate/connectormgr.h"
+#include "shynet/net/connectreactormgr.h"
 
 namespace gate {
 ConnectorMgr::ConnectorMgr()

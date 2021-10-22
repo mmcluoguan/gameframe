@@ -1,10 +1,10 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <ClCompile Include="Connector.cpp" />
-    <ClCompile Include="PingTimer.cpp" />
-    <ClCompile Include="Client.cpp" />
-    <ClCompile Include="Basic.cpp" />
+    <ClCompile Include="connector.cpp" />
+    <ClCompile Include="pingtimer.cpp" />
+    <ClCompile Include="client.cpp" />
+    <ClCompile Include="basic.cpp" />
     <ClCompile Include="protocc\client.pb.cc">
       <Filter>protocc</Filter>
     </ClCompile>
@@ -23,23 +23,23 @@
     <ClCompile Include="protocc\login.pb.cc">
       <Filter>protocc</Filter>
     </ClCompile>
-    <ClCompile Include="FilterData.cpp" />
-    <ClCompile Include="FrmLuaWrapper.cpp">
+    <ClCompile Include="filterdata.cpp" />
+    <ClCompile Include="frmluawrapper.cpp">
       <Filter>lua</Filter>
     </ClCompile>
-    <ClCompile Include="LuaFolderTask.cpp">
+    <ClCompile Include="luafoldertask.cpp">
       <Filter>lua</Filter>
     </ClCompile>
-    <ClCompile Include="LuaHotFixTask.cpp">
+    <ClCompile Include="luahotfixtask.cpp">
       <Filter>lua</Filter>
     </ClCompile>
     <ClCompile Include="protocc\world.pb.cc">
       <Filter>protocc</Filter>
     </ClCompile>
-    <ClCompile Include="LuaRemoteDebug.cpp">
+    <ClCompile Include="luaremotedebug.cpp">
       <Filter>lua</Filter>
     </ClCompile>
-    <ClCompile Include="LuaTimerTask.cpp">
+    <ClCompile Include="luatimertask.cpp">
       <Filter>lua</Filter>
     </ClCompile>
     <ClCompile Include="protocc\dbvisit.pb.cc">
@@ -47,11 +47,11 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="PingTimer.h" />
-    <ClInclude Include="ReConnectTimer.h" />
-    <ClInclude Include="Connector.h" />
-    <ClInclude Include="Client.h" />
-    <ClInclude Include="Basic.h" />
+    <ClInclude Include="pingtimer.h" />
+    <ClInclude Include="reconnecttimer.h" />
+    <ClInclude Include="connector.h" />
+    <ClInclude Include="client.h" />
+    <ClInclude Include="basic.h" />
     <ClInclude Include="protocc\client.pb.h">
       <Filter>protocc</Filter>
     </ClInclude>
@@ -70,26 +70,26 @@
     <ClInclude Include="protocc\login.pb.h">
       <Filter>protocc</Filter>
     </ClInclude>
-    <ClInclude Include="FilterData.h" />
-    <ClInclude Include="FrmLuaWrapper.h">
+    <ClInclude Include="filterdata.h" />
+    <ClInclude Include="frmluawrapper.h">
       <Filter>lua</Filter>
     </ClInclude>
-    <ClInclude Include="LuaFolderTask.h">
+    <ClInclude Include="luafoldertask.h">
       <Filter>lua</Filter>
     </ClInclude>
-    <ClInclude Include="LuaHotFixTask.h">
+    <ClInclude Include="luahotfixtask.h">
       <Filter>lua</Filter>
     </ClInclude>
-    <ClInclude Include="LuaCallBackTask.h">
+    <ClInclude Include="luacallbacktask.h">
       <Filter>lua</Filter>
     </ClInclude>
     <ClInclude Include="protocc\world.pb.h">
       <Filter>protocc</Filter>
     </ClInclude>
-    <ClInclude Include="LuaRemoteDebug.h">
+    <ClInclude Include="luaremotedebug.h">
       <Filter>lua</Filter>
     </ClInclude>
-    <ClInclude Include="LuaTimerTask.h">
+    <ClInclude Include="luatimertask.h">
       <Filter>lua</Filter>
     </ClInclude>
     <ClInclude Include="protocc\dbvisit.pb.h">

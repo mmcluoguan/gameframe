@@ -1,9 +1,9 @@
 #ifndef SHYNET_TASK_ACCEPTREADIOTASK_H
 #define SHYNET_TASK_ACCEPTREADIOTASK_H
 
-#include "shynet/net/AcceptNewFd.h"
-#include "shynet/task/Task.h"
-#include "shynet/thread/Thread.h"
+#include "shynet/net/acceptnewfd.h"
+#include "shynet/task/task.h"
+#include "shynet/thread/thread.h"
 
 namespace shynet {
 namespace task {

@@ -1,15 +1,15 @@
 #ifndef SHYNET_POOL_THREADPOOL_H
 #define SHYNET_POOL_THREADPOOL_H
 
-#include "shynet/task/Task.h"
-#include "shynet/thread/AcceptThread.h"
-#include "shynet/thread/ConnectThread.h"
-#include "shynet/thread/InotifyThread.h"
-#include "shynet/thread/ListenThread.h"
-#include "shynet/thread/LuaThread.h"
+#include "shynet/task/task.h"
 #include "shynet/thread/TimerThread.h"
-#include "shynet/thread/WorkThread.h"
-#include "shynet/utils/Singleton.h"
+#include "shynet/thread/acceptthread.h"
+#include "shynet/thread/connectthread.h"
+#include "shynet/thread/inotifythread.h"
+#include "shynet/thread/listenthread.h"
+#include "shynet/thread/luathread.h"
+#include "shynet/thread/workthread.h"
+#include "shynet/utils/singleton.h"
 
 namespace shynet {
 namespace pool {

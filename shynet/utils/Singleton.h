@@ -1,7 +1,7 @@
 #ifndef SHYNET_UTILS_SINGLETON_H
 #define SHYNET_UTILS_SINGLETON_H
 
-#include "shynet/utils/Logger.h"
+#include "shynet/utils/logger.h"
 #include <memory>
 #include <mutex>
 

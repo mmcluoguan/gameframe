@@ -1,8 +1,8 @@
 #ifndef GAME_GAMECLIENT_H
 #define GAME_GAMECLIENT_H
 
-#include "frmpub/Client.h"
-#include "shynet/net/AcceptNewFd.h"
+#include "frmpub/client.h"
+#include "shynet/net/acceptnewfd.h"
 
 namespace game {
 /// <summary>

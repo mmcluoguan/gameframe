@@ -1,7 +1,7 @@
 #ifndef LOGIN_LUAWRAPPER_H
 #define LOGIN_LUAWRAPPER_H
 
-#include "frmpub/FrmLuaWrapper.h"
+#include "frmpub/frmluawrapper.h"
 
 namespace login {
 class LuaWrapper : public frmpub::FrmLuaWrapper {

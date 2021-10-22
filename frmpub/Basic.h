@@ -9,7 +9,7 @@
 #include "frmpub/protocc/internal.pb.h"
 #include "frmpub/protocc/login.pb.h"
 #include "frmpub/protocc/world.pb.h"
-#include "shynet/events/EventBuffer.h"
+#include "shynet/events/eventbuffer.h"
 #include <curl/curl.h>
 #include <stack>
 #include <unordered_map>

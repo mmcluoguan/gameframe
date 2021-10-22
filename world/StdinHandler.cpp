@@ -1,7 +1,7 @@
-#include "world/StdinHandler.h"
-#include "shynet/utils/Logger.h"
-#include "shynet/utils/StringOp.h"
-#include "shynet/utils/Stuff.h"
+#include "world/stdinhandler.h"
+#include "shynet/utils/logger.h"
+#include "shynet/utils/stringop.h"
+#include "shynet/utils/stuff.h"
 #include <cstring>
 #include <limits.h>
 #include <tuple>

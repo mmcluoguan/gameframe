@@ -1,9 +1,9 @@
 #ifndef FRMPUB_CONNECTOR_H
 #define FRMPUB_CONNECTOR_H
 
-#include "frmpub/FilterData.h"
-#include "frmpub/PingTimer.h"
-#include "shynet/net/ConnectEvent.h"
+#include "frmpub/filterdata.h"
+#include "frmpub/pingtimer.h"
+#include "shynet/net/connectevent.h"
 
 namespace frmpub {
 /*

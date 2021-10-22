@@ -1,9 +1,9 @@
 #ifndef FRMPUB_LUATIMERMGR_H
 #define FRMPUB_LUATIMERMGR_H
 
-#include "shynet/net/TimerEvent.h"
-#include "shynet/task/Task.h"
-#include "shynet/utils/Singleton.h"
+#include "shynet/net/timerevent.h"
+#include "shynet/task/task.h"
+#include "shynet/utils/singleton.h"
 #include <unordered_set>
 
 namespace frmpub {

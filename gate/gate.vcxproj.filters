@@ -1,55 +1,55 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <ClCompile Include="ConnectorMgr.cpp" />
+    <ClCompile Include="connectormgr.cpp" />
     <ClCompile Include="gate.cpp" />
-    <ClCompile Include="SignalHandler.cpp" />
-    <ClCompile Include="StdinHandler.cpp" />
-    <ClCompile Include="GameConnector.cpp">
+    <ClCompile Include="signalhandler.cpp" />
+    <ClCompile Include="stdinhandler.cpp" />
+    <ClCompile Include="gameconnector.cpp">
       <Filter>game</Filter>
     </ClCompile>
-    <ClCompile Include="LoginConnector.cpp">
+    <ClCompile Include="loginconnector.cpp">
       <Filter>login</Filter>
     </ClCompile>
-    <ClCompile Include="WorldConnector.cpp">
+    <ClCompile Include="worldconnector.cpp">
       <Filter>world</Filter>
     </ClCompile>
-    <ClCompile Include="GateServer.cpp">
+    <ClCompile Include="gateserver.cpp">
       <Filter>gate</Filter>
     </ClCompile>
-    <ClCompile Include="GateClientMgr.cpp">
+    <ClCompile Include="gateclientmgr.cpp">
       <Filter>gate</Filter>
     </ClCompile>
-    <ClCompile Include="GateClient.cpp">
+    <ClCompile Include="gateclient.cpp">
       <Filter>gate</Filter>
     </ClCompile>
-    <ClCompile Include="LuaWrapper.cpp">
+    <ClCompile Include="luawrapper.cpp">
       <Filter>lua</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="ConnectorMgr.h" />
-    <ClInclude Include="SignalHandler.h" />
-    <ClInclude Include="StdinHandler.h" />
-    <ClInclude Include="GameConnector.h">
+    <ClInclude Include="connectormgr.h" />
+    <ClInclude Include="signalhandler.h" />
+    <ClInclude Include="stdinhandler.h" />
+    <ClInclude Include="gameconnector.h">
       <Filter>game</Filter>
     </ClInclude>
-    <ClInclude Include="LoginConnector.h">
+    <ClInclude Include="loginconnector.h">
       <Filter>login</Filter>
     </ClInclude>
-    <ClInclude Include="WorldConnector.h">
+    <ClInclude Include="worldconnector.h">
       <Filter>world</Filter>
     </ClInclude>
-    <ClInclude Include="GateServer.h">
+    <ClInclude Include="gateserver.h">
       <Filter>gate</Filter>
     </ClInclude>
-    <ClInclude Include="GateClientMgr.h">
+    <ClInclude Include="gateclientmgr.h">
       <Filter>gate</Filter>
     </ClInclude>
-    <ClInclude Include="GateClient.h">
+    <ClInclude Include="gateclient.h">
       <Filter>gate</Filter>
     </ClInclude>
-    <ClInclude Include="LuaWrapper.h">
+    <ClInclude Include="luawrapper.h">
       <Filter>lua</Filter>
     </ClInclude>
   </ItemGroup>

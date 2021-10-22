@@ -1,8 +1,8 @@
 #ifndef SHYNET_EVENTS_EVENTBUFFER_H
 #define SHYNET_EVENTS_EVENTBUFFER_H
 
-#include "shynet/events/EventBase.h"
-#include "shynet/events/Streambuff.h"
+#include "shynet/events/eventbase.h"
+#include "shynet/events/streambuff.h"
 #include <event2/bufferevent.h>
 
 namespace shynet {

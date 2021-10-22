@@ -1,5 +1,5 @@
-#include "shynet/task/TimerTask.h"
-#include "shynet/net/TimerReactorMgr.h"
+#include "shynet/task/timertask.h"
+#include "shynet/net/timerreactormgr.h"
 
 namespace shynet {
 namespace task {

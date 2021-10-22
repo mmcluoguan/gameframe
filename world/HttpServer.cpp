@@ -1,7 +1,7 @@
-#include "world/HttpServer.h"
-#include "shynet/net/TimerReactorMgr.h"
-#include "world/HttpClient.h"
-#include "world/HttpClientMgr.h"
+#include "world/httpserver.h"
+#include "shynet/net/timerreactormgr.h"
+#include "world/httpclient.h"
+#include "world/httpclientmgr.h"
 
 namespace world {
 HttpServer::HttpServer(std::shared_ptr<net::IPAddress> listen_addr)

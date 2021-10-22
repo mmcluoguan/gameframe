@@ -1,9 +1,9 @@
 #ifndef FRMPUB_CLIENT_H
 #define FRMPUB_CLIENT_H
 
-#include "frmpub/FilterData.h"
-#include "shynet/events/EventBuffer.h"
-#include "shynet/net/AcceptNewFd.h"
+#include "frmpub/filterdata.h"
+#include "shynet/events/eventbuffer.h"
+#include "shynet/net/acceptnewfd.h"
 
 namespace frmpub {
 /// <summary>

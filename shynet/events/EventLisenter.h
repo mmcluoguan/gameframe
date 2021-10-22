@@ -1,7 +1,7 @@
 #ifndef SHYNET_EVENTS_EVENTLISENTER_H
 #define SHYNET_EVENTS_EVENTLISENTER_H
 
-#include "shynet/events/EventBase.h"
+#include "shynet/events/eventbase.h"
 #include <event2/listener.h>
 
 namespace shynet {

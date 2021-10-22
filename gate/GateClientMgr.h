@@ -1,8 +1,8 @@
 #ifndef GATE_GATECLIENTMGR_H
 #define GATE_GATECLIENTMGR_H
 
-#include "gate/GateClient.h"
-#include "shynet/utils/Singleton.h"
+#include "gate/gateclient.h"
+#include "shynet/utils/singleton.h"
 #include <mutex>
 #include <unordered_map>
 

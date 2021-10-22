@@ -2,19 +2,19 @@
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
     <ClCompile Include="client.cpp" />
-    <ClCompile Include="GateConnector.cpp" />
-    <ClCompile Include="GateReConnctorTimer.cpp" />
-    <ClCompile Include="SignalHandler.cpp" />
-    <ClCompile Include="StdinHandler.cpp" />
+    <ClCompile Include="gateconnector.cpp" />
+    <ClCompile Include="gatereconnctortimer.cpp" />
+    <ClCompile Include="signalhandler.cpp" />
+    <ClCompile Include="stdinhandler.cpp" />
     <ClCompile Include="test\010-TestCase.cpp">
       <Filter>test</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="GateConnector.h" />
-    <ClInclude Include="GateReConnctorTimer.h" />
-    <ClInclude Include="SignalHandler.h" />
-    <ClInclude Include="StdinHandler.h" />
+    <ClInclude Include="gateconnector.h" />
+    <ClInclude Include="gatereconnctortimer.h" />
+    <ClInclude Include="signalhandler.h" />
+    <ClInclude Include="stdinhandler.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="test">

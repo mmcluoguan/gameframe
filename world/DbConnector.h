@@ -1,7 +1,7 @@
 #ifndef WORLD_DBCONNECTOR_H
 #define WORLD_DBCONNECTOR_H
 
-#include "frmpub/Connector.h"
+#include "frmpub/connector.h"
 
 namespace world {
 /*

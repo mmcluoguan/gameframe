@@ -35,29 +35,29 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="ConnectorMgr.cpp" />
-    <ClCompile Include="GameConnector.cpp" />
+    <ClCompile Include="connectormgr.cpp" />
+    <ClCompile Include="gameconnector.cpp" />
     <ClCompile Include="gate.cpp" />
-    <ClCompile Include="GateClient.cpp" />
-    <ClCompile Include="GateClientMgr.cpp" />
-    <ClCompile Include="GateServer.cpp" />
-    <ClCompile Include="LoginConnector.cpp" />
-    <ClCompile Include="LuaWrapper.cpp" />
-    <ClCompile Include="WorldConnector.cpp" />
-    <ClCompile Include="SignalHandler.cpp" />
-    <ClCompile Include="StdinHandler.cpp" />
+    <ClCompile Include="gateclient.cpp" />
+    <ClCompile Include="gateclientmgr.cpp" />
+    <ClCompile Include="gateserver.cpp" />
+    <ClCompile Include="loginconnector.cpp" />
+    <ClCompile Include="luawrapper.cpp" />
+    <ClCompile Include="worldconnector.cpp" />
+    <ClCompile Include="signalhandler.cpp" />
+    <ClCompile Include="stdinhandler.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="ConnectorMgr.h" />
-    <ClInclude Include="GameConnector.h" />
-    <ClInclude Include="GateClient.h" />
-    <ClInclude Include="GateClientMgr.h" />
-    <ClInclude Include="GateServer.h" />
-    <ClInclude Include="LoginConnector.h" />
-    <ClInclude Include="LuaWrapper.h" />
-    <ClInclude Include="WorldConnector.h" />
-    <ClInclude Include="SignalHandler.h" />
-    <ClInclude Include="StdinHandler.h" />
+    <ClInclude Include="connectormgr.h" />
+    <ClInclude Include="gameconnector.h" />
+    <ClInclude Include="gateclient.h" />
+    <ClInclude Include="gateclientmgr.h" />
+    <ClInclude Include="gateserver.h" />
+    <ClInclude Include="loginconnector.h" />
+    <ClInclude Include="luawrapper.h" />
+    <ClInclude Include="worldconnector.h" />
+    <ClInclude Include="signalhandler.h" />
+    <ClInclude Include="stdinhandler.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{671466DF-E320-41AC-9535-462BCEDC1989}</ProjectGuid>

@@ -1,7 +1,7 @@
 #ifndef SHYNET_UTILS_LOGGER_H
 #define SHYNET_UTILS_LOGGER_H
 
-#include "shynet/Basic.h"
+#include "shynet/basic.h"
 #include <sstream>
 
 namespace shynet {

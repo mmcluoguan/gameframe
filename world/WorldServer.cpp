@@ -1,7 +1,7 @@
-#include "world/WorldServer.h"
-#include "shynet/net/TimerReactorMgr.h"
-#include "world/WorldClient.h"
-#include "world/WorldClientMgr.h"
+#include "world/worldserver.h"
+#include "shynet/net/timerreactormgr.h"
+#include "world/worldclient.h"
+#include "world/worldclientmgr.h"
 
 namespace world {
 WorldServer::WorldServer(std::shared_ptr<net::IPAddress> listen_addr)

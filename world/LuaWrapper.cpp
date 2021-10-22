@@ -1,13 +1,13 @@
-#include "world/LuaWrapper.h"
-#include "frmpub/LuaRemoteDebug.h"
-#include "shynet/utils/IniConfig.h"
-#include "world/DbConnector.h"
-#include "world/HttpClient.h"
-#include "world/HttpClientMgr.h"
-#include "world/HttpServer.h"
-#include "world/WorldClient.h"
-#include "world/WorldClientMgr.h"
-#include "world/WorldServer.h"
+#include "world/luawrapper.h"
+#include "frmpub/luaremotedebug.h"
+#include "shynet/utils/iniconfig.h"
+#include "world/dbconnector.h"
+#include "world/httpclient.h"
+#include "world/httpclientmgr.h"
+#include "world/httpserver.h"
+#include "world/worldclient.h"
+#include "world/worldclientmgr.h"
+#include "world/worldserver.h"
 
 //配置参数
 extern const char* g_confname;

@@ -1,7 +1,7 @@
-#include "gate/GateServer.h"
-#include "gate/GateClient.h"
-#include "gate/GateClientMgr.h"
-#include "shynet/net/TimerReactorMgr.h"
+#include "gate/gateserver.h"
+#include "gate/gateclient.h"
+#include "gate/gateclientmgr.h"
+#include "shynet/net/timerreactormgr.h"
 
 namespace gate {
 GateServer::GateServer(std::shared_ptr<net::IPAddress> listen_addr)

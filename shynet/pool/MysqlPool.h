@@ -1,7 +1,7 @@
 #ifndef SHYNET_POOL_MYSQLPOOL_H
 #define SHYNET_POOL_MYSQLPOOL_H
 
-#include "shynet/utils/Singleton.h"
+#include "shynet/utils/singleton.h"
 #include <condition_variable>
 #include <functional>
 #include <mysqlx/xdevapi.h>

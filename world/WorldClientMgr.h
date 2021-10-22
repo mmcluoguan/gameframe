@@ -1,8 +1,8 @@
 #ifndef WORLD_WORLDCLIENTMGR_H
 #define WORLD_WORLDCLIENTMGR_H
 
-#include "shynet/utils/Singleton.h"
-#include "world/WorldClient.h"
+#include "shynet/utils/singleton.h"
+#include "world/worldclient.h"
 
 namespace world {
 /// <summary>

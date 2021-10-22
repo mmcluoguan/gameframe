@@ -1,5 +1,5 @@
-#include "client/SignalHandler.h"
-#include "shynet/utils/Logger.h"
+#include "client/signalhandler.h"
+#include "shynet/utils/logger.h"
 #include <csignal>
 
 namespace client {

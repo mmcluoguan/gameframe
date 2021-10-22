@@ -1,7 +1,7 @@
 #ifndef SHYNET_EVENTS_EVENTHANDLER_H
 #define SHYNET_EVENTS_EVENTHANDLER_H
 
-#include "shynet/events/EventBase.h"
+#include "shynet/events/eventbase.h"
 
 namespace shynet {
 namespace events {

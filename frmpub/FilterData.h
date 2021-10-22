@@ -1,8 +1,8 @@
 #ifndef FRMPUB_FILTERDATA_H
 #define FRMPUB_FILTERDATA_H
 
-#include "frmpub/Basic.h"
-#include "shynet/protocol/FilterProces.h"
+#include "frmpub/basic.h"
+#include "shynet/protocol/filterproces.h"
 #include <rapidjson/document.h>
 
 namespace frmpub {

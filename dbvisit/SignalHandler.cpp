@@ -1,9 +1,9 @@
-#include "dbvisit/SignalHandler.h"
-#include "frmpub/Basic.h"
-#include "shynet/events/EventBase.h"
-#include "shynet/utils/IniConfig.h"
-#include "shynet/utils/Singleton.h"
-#include "shynet/utils/StringOp.h"
+#include "dbvisit/signalhandler.h"
+#include "frmpub/basic.h"
+#include "shynet/events/eventbase.h"
+#include "shynet/utils/iniconfig.h"
+#include "shynet/utils/singleton.h"
+#include "shynet/utils/stringop.h"
 #include <sw/redis++/redis++.h>
 namespace redis = sw::redis;
 #include <csignal>

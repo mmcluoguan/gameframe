@@ -1,6 +1,6 @@
-#include "shynet/lua/LuaEngine.h"
-#include "shynet/pool/ThreadPool.h"
-#include "shynet/utils/Logger.h"
+#include "shynet/lua/luaengine.h"
+#include "shynet/pool/threadpool.h"
+#include "shynet/utils/logger.h"
 
 namespace shynet {
 namespace lua {

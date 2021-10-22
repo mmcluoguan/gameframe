@@ -1,7 +1,7 @@
 #ifndef SHYNET_UTILS_IDWORKER_H
 #define SHYNET_UTILS_IDWORKER_H
 
-#include "shynet/utils/Singleton.h"
+#include "shynet/utils/singleton.h"
 #include <atomic>
 
 namespace shynet {

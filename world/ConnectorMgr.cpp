@@ -1,5 +1,5 @@
-#include "world/ConnectorMgr.h"
-#include "shynet/net/ConnectReactorMgr.h"
+#include "world/connectormgr.h"
+#include "shynet/net/connectreactormgr.h"
 
 namespace world {
 ConnectorMgr::ConnectorMgr()

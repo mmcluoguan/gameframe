@@ -1,10 +1,10 @@
 #ifndef SHYNET_LUA_LUAENGINE_H
 #define SHYNET_LUA_LUAENGINE_H
 
-#include "shynet/lua/LuaWrapper.h"
-#include "shynet/task/Task.h"
-#include "shynet/thread/Thread.h"
-#include "shynet/utils/Singleton.h"
+#include "shynet/lua/luawrapper.h"
+#include "shynet/task/task.h"
+#include "shynet/thread/thread.h"
+#include "shynet/utils/singleton.h"
 
 namespace shynet {
 namespace lua {

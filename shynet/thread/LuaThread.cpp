@@ -1,7 +1,7 @@
-#include "shynet/thread/LuaThread.h"
-#include "shynet/lua/LuaEngine.h"
-#include "shynet/utils/Logger.h"
-#include "shynet/utils/Stuff.h"
+#include "shynet/thread/luathread.h"
+#include "shynet/lua/luaengine.h"
+#include "shynet/utils/logger.h"
+#include "shynet/utils/stuff.h"
 
 namespace shynet {
 extern pthread_barrier_t g_barrier;
