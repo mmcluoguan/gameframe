@@ -1,5 +1,5 @@
 #include "dbvisit/dbserver.h"
-#include "dbvisit/DbClient.h"
+#include "dbvisit/dbclient.h"
 #include "dbvisit/dbclientmgr.h"
 #include "shynet/lua/luaengine.h"
 #include "shynet/net/timerreactormgr.h"

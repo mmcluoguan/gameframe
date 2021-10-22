@@ -1,4 +1,4 @@
-#include "dbvisit/DbClient.h"
+#include "dbvisit/dbclient.h"
 #include "dbvisit/datahelp.h"
 #include "dbvisit/dbclientmgr.h"
 #include "frmpub/luacallbacktask.h"

@@ -2,12 +2,12 @@
 #define SHYNET_POOL_THREADPOOL_H
 
 #include "shynet/task/task.h"
-#include "shynet/thread/TimerThread.h"
 #include "shynet/thread/acceptthread.h"
 #include "shynet/thread/connectthread.h"
 #include "shynet/thread/inotifythread.h"
 #include "shynet/thread/listenthread.h"
 #include "shynet/thread/luathread.h"
+#include "shynet/thread/timerthread.h"
 #include "shynet/thread/workthread.h"
 #include "shynet/utils/singleton.h"
 

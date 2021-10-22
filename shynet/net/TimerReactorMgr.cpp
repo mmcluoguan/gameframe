@@ -1,6 +1,6 @@
 #include "shynet/net/timerreactormgr.h"
 #include "shynet/pool/threadpool.h"
-#include "shynet/thread/TimerThread.h"
+#include "shynet/thread/timerthread.h"
 
 namespace shynet {
 namespace net {

@@ -1,7 +1,7 @@
 #ifndef DBVISIT_DBCLIENTMGR_H
 #define DBVISIT_DBCLIENTMGR_H
 
-#include "dbvisit/DbClient.h"
+#include "dbvisit/dbclient.h"
 #include "shynet/utils/singleton.h"
 #include <memory>
 #include <mutex>

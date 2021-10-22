@@ -1,5 +1,5 @@
 #include "dbvisit/luawrapper.h"
-#include "dbvisit/DbClient.h"
+#include "dbvisit/dbclient.h"
 #include "dbvisit/dbclientmgr.h"
 #include "dbvisit/dbserver.h"
 #include "frmpub/luaremotedebug.h"

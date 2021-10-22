@@ -1,4 +1,4 @@
-#include "shynet/thread/TimerThread.h"
+#include "shynet/thread/timerthread.h"
 #include "shynet/net/timerreactormgr.h"
 #include "shynet/utils/stuff.h"
 #include <cstring>
