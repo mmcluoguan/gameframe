@@ -38,15 +38,14 @@
     <ClCompile Include="client.cpp" />
     <ClCompile Include="gateconnector.cpp" />
     <ClCompile Include="gatereconnctortimer.cpp" />
-    <ClCompile Include="signalhandler.cpp" />
-    <ClCompile Include="stdinhandler.cpp" />
+    <ClCompile Include="readline_example.cpp" />
+    <ClCompile Include="consolehandler.cpp" />
     <ClCompile Include="test\010-TestCase.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="gateconnector.h" />
     <ClInclude Include="gatereconnctortimer.h" />
-    <ClInclude Include="signalhandler.h" />
-    <ClInclude Include="stdinhandler.h" />
+    <ClInclude Include="consolehandler.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{ED8B3412-0F27-4788-9F88-7E00F700A174}</ProjectGuid>

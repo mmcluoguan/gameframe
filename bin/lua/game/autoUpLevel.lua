@@ -38,5 +38,6 @@ function autoUpLevel:stop()
     timerMgr:unbind(self.timerid)
 end
 
+
 return autoUpLevel
 

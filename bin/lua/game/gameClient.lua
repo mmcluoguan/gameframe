@@ -3,11 +3,21 @@ local baseNet = require ("lua/common/baseNet")
 local connectorMgr = require ("lua/game/connectorMgr")
 local roleMgr =  require ("lua/game/roleMgr")
 local timerMgr = require("lua/common/timerMgr")
+local bagSystem = require("lua/game/bagSystem")
 
 local gameClient = {}
 --继承
 setmetatable(gameClient,baseNet)
 baseNet.__index = baseNet
+
+function __RELOAD(newchunk)
+    local acceptMgr = require("lua/game/acceptMgr")
+    for k,v in pairs(acceptMgr) do
+        if type(v) == "table" then
+            v:regMsg()
+        end
+    end
+end
 
 function gameClient:init()
     baseNet:init(self);
@@ -47,6 +57,7 @@ function gameClient:regMsg()
     self:regMsgEx('loadgoods_client_gate_c')
     self:regMsgEx('clioffline_gate_all_c')
     self:regMsgEx('reconnect_client_gate_s')
+    self:regMsgEx("gmorder_client_gate_c")
 end
 
 --延迟销毁角色数据
@@ -184,6 +195,38 @@ function gameClient:reconnect_client_gate_s(msgid,msgdata,routing)
         role.online = true
         log("玩家断线重连成功 id:",role.id)
     end
+end
+
+--gm命令
+function gameClient:gmorder_client_gate_c(msgid,msgdata,routing)
+    local msgtable = pb.decode("frmpub.protocc.gmorder_client_gate_c", msgdata)
+    local gmtable = {
+        result = 0,
+        order = msgtable.order,
+        desc = '成功',
+    };
+    print('1')
+    local role = roleMgr:find(msgtable.roleid)
+    if role ~= nil then
+        if msgtable.order == 'addgoods' then
+            print('3')
+            local cfgid = tonumber(msgtable.args[1])
+            local num = tonumber(msgtable.args[2])
+            if bagSystem:add_one_item(role,cfgid,num,module_name.gm) == nil then
+                gmtable.result = 2
+                gmtable.desc = '错误的配置id' .. cfgid
+            end
+        else
+            print('2')
+            gmtable.result = 2;
+            gmtable.desc = '非法的命令'
+        end
+    else
+        print('4')
+        gmtable.result = 1;
+        gmtable.desc = '没有此角色'
+    end
+    self:send("gmorder_client_gate_s",gmtable,routing)
 end
 
 return gameClient;

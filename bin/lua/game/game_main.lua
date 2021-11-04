@@ -1,4 +1,5 @@
 require('strings')
+require("lua/game/define")
 local acceptMgr = require ("lua/game/acceptMgr")
 local connectorMgr =require ("lua/game/connectorMgr")
 
@@ -30,9 +31,6 @@ function onMessage(cli,msgid,msgdata,routing)
     end    
 end
 
-function test(args)
-    log("定时执行:",args)
-end
-
 local autoUpLevel = require("lua/game/autoUpLevel")
 autoUpLevel:start()
+

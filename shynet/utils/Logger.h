@@ -72,6 +72,7 @@ namespace utils {
     if (shynet::utils::Logger::loglevel() <= shynet::utils::Logger::LogLevel::INFO) \
     shynet::utils::Logger(nullptr, 0).stream()
 #define LOG_WARN shynet::utils::Logger(__FILE__, __LINE__, shynet::utils::Logger::LogLevel::WARN).stream()
+#define LOG_WARN_BASE shynet::utils::Logger(nullptr, 0, shynet::utils::Logger::LogLevel::WARN).stream()
 #define LOG_ERROR shynet::utils::Logger(__FILE__, __LINE__, shynet::utils::Logger::LogLevel::ERROR).stream()
 #define LOG_FATAL shynet::utils::Logger(__FILE__, __LINE__, shynet::utils::Logger::LogLevel::FATAL).stream()
 #define LOG_SYSERR shynet::utils::Logger(__FILE__, __LINE__, shynet::utils::Logger::LogLevel::ERROR, nullptr, errno).stream()

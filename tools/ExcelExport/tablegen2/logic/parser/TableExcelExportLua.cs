@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Text;
@@ -141,17 +141,14 @@ namespace tablegen2.logic
             sb.AppendLine();
 
             sb.Append(
-@"function __RELOAD()
-    local data = { Items = items, IdItems = idItems, KeyItems = keyItems, }
-    function data:getById(id)
-        return self.IdItems[id]
-    end
-    function data:getByKey(key)
-        return self.KeyItems[key]
-    end
-    return data
+@"local data = { Items = items, IdItems = idItems, KeyItems = keyItems, reloaddata = 1 }
+function data:getById(id)
+    return self.IdItems[id]
 end
-return __RELOAD()
+function data:getByKey(key)
+    return self.KeyItems[key]
+end
+return data
 ");
 
             File.WriteAllBytes(filePath, Encoding.UTF8.GetBytes(sb.ToString()));

@@ -119,10 +119,10 @@ int LoginConnector::forward_login_client_c(std::shared_ptr<protocc::CommonObject
                 protocc::login_client_gate_s msgc;
                 if (msgc.ParseFromString(data->msgdata()) == true) {
                     if (msgc.result() == 0) {
-                        client->accountid(msgc.aid());
+                        client->set_accountid(msgc.aid());
                         if (data->extend().empty() == false) {
                             //从扩展信息中取出gamesid
-                            client->game_id(atoi(data->extend().c_str()));
+                            client->set_game_id(atoi(data->extend().c_str()));
                         }
                     }
                 } else {
@@ -134,9 +134,9 @@ int LoginConnector::forward_login_client_c(std::shared_ptr<protocc::CommonObject
                 protocc::reconnect_client_gate_s msgc;
                 if (msgc.ParseFromString(data->msgdata()) == true) {
                     if (msgc.result() == 0) {
-                        client->accountid(msgc.aid());
-                        client->login_id(msgc.loginid());
-                        client->game_id(msgc.gameid());
+                        client->set_accountid(msgc.aid());
+                        client->set_login_id(msgc.loginid());
+                        client->set_game_id(msgc.gameid());
 
                         //通知游戏服玩家断线重连成功
                         int conncetid = shynet::utils::Singleton<ConnectorMgr>::instance().sid_conv_connect_id(msgc.gameid());

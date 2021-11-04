@@ -1,4 +1,5 @@
 #include "game/luawrapper.h"
+#include "frmpub/luaremotedebug.h"
 #include "game/dbconnector.h"
 #include "game/gameclient.h"
 #include "game/gameserver.h"
@@ -32,8 +33,14 @@ void LuaWrapper::init(kaguya::State& state)
 
     state["WorldConnector_CPP"].setClass(kaguya::UserdataMetatable<WorldConnector, frmpub::Connector>());
 
-    //载入lua文件
+    //是否开启调试模式
     shynet::utils::IniConfig& ini = shynet::utils::Singleton<shynet::utils::IniConfig>::get_instance();
+    std::string luadebugip = ini.get<const char*, std::string>("game", "luadebugip", "");
+    if (!luadebugip.empty()) {
+        shynet::utils::Singleton<frmpub::LuaRemoteDebug>::instance().init(luadebugip).start(state);
+    }
+
+    //载入lua文件
     std::string luafile = ini.get<const char*, std::string>("game", "luafile", "lua/game/game_main.lua");
     state.dofile(luafile);
 }

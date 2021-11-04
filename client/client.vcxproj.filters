@@ -4,17 +4,18 @@
     <ClCompile Include="client.cpp" />
     <ClCompile Include="gateconnector.cpp" />
     <ClCompile Include="gatereconnctortimer.cpp" />
-    <ClCompile Include="signalhandler.cpp" />
-    <ClCompile Include="stdinhandler.cpp" />
+    <ClCompile Include="consolehandler.cpp" />
     <ClCompile Include="test\010-TestCase.cpp">
+      <Filter>test</Filter>
+    </ClCompile>
+    <ClCompile Include="readline_example.cpp">
       <Filter>test</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="gateconnector.h" />
     <ClInclude Include="gatereconnctortimer.h" />
-    <ClInclude Include="signalhandler.h" />
-    <ClInclude Include="stdinhandler.h" />
+    <ClInclude Include="consolehandler.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="test">

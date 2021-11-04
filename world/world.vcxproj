@@ -158,8 +158,6 @@
     <ClCompile Include="worldclient.cpp" />
     <ClCompile Include="world.cpp" />
     <ClCompile Include="worldserver.cpp" />
-    <ClCompile Include="signalhandler.cpp" />
-    <ClCompile Include="stdinhandler.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="connectormgr.h" />
@@ -171,8 +169,6 @@
     <ClInclude Include="worldclientmgr.h" />
     <ClInclude Include="worldclient.h" />
     <ClInclude Include="worldserver.h" />
-    <ClInclude Include="signalhandler.h" />
-    <ClInclude Include="stdinhandler.h" />
   </ItemGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|ARM'">
     <Link>

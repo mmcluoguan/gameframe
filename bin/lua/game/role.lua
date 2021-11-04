@@ -1,6 +1,15 @@
 --角色表
 local role = {}
 
+function __RELOAD(newchunk)
+    local roleMgr = require("lua/game/roleMgr")
+    for k,v in pairs(roleMgr) do
+        if type(v) == "table" then
+            v:initMsg()
+        end
+    end
+end
+
 function role:new(id,fd)
     local o = {}
     setmetatable(o,self)
@@ -26,8 +35,12 @@ function role:new(id,fd)
     --星级
     o.star = 0
 
-    o:regMsg("setlevel_client_gate_c")
+    o:initMsg()
     return o
+end
+
+function role:initMsg()
+    self:regMsg("setlevel_client_gate_c")
 end
 
 function role:regMsg(msgname)
@@ -57,25 +70,6 @@ end
 --重置角色等级
 function role:setlevel_client_gate_c(msgname,data,routing)
     self.level = 1
-    --获得物品
-    local item = {
-        id = newid(),
-        cfgid = random(10,20),
-        num = random(10,20),
-    }
-    table.insert(self.goods,#self.goods + 1,item)
-    log("重置角色等级 id:",self.id,"获得物品 goodsid:",item.id)
-    local savedata = {
-        cache_key = 'goods_' .. item.id .. "_" .. self.id,
-        fields = {
-            { key = '_id', value = tostring(item.id),},
-            { key = 'cfgid', value = tostring(item.cfgid),},
-            { key = 'num', value = tostring(item.num),},
-            { key = 'roleid', value = tostring(self.id),},
-        }
-    }
-    local connectorMgr = require ("lua/game/connectorMgr")
-    connectorMgr:dbConnector():send('insertdata_to_dbvisit_c',savedata)
 end
 
 return role

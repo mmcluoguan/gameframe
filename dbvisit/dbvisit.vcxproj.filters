@@ -5,8 +5,6 @@
     <ClCompile Include="dbclientmgr.cpp" />
     <ClCompile Include="dbserver.cpp" />
     <ClCompile Include="dbvisit.cpp" />
-    <ClCompile Include="signalhandler.cpp" />
-    <ClCompile Include="stdinhandler.cpp" />
     <ClCompile Include="luawrapper.cpp">
       <Filter>lua</Filter>
     </ClCompile>
@@ -24,8 +22,6 @@
     <ClInclude Include="dbclient.h" />
     <ClInclude Include="dbclientmgr.h" />
     <ClInclude Include="dbserver.h" />
-    <ClInclude Include="signalhandler.h" />
-    <ClInclude Include="stdinhandler.h" />
     <ClInclude Include="luawrapper.h">
       <Filter>lua</Filter>
     </ClInclude>

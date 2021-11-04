@@ -28,6 +28,11 @@ public:
     /// <returns></returns>
     std::shared_ptr<GateConnector::DisConnectData> disconnect_data();
 
+    int64_t roleid()
+    {
+        return roleid_;
+    }
+
 private:
     /// <summary>
     /// 服务器通用错误信息
@@ -73,6 +78,11 @@ private:
 		* 加载角色物品数据结果
 		*/
     int loadgoods_client_gate_s(std::shared_ptr<protocc::CommonObject> data,
+        std::shared_ptr<std::stack<FilterData::Envelope>> enves);
+    /*
+		* gm操作结果
+		*/
+    int gmorder_client_gate_s(std::shared_ptr<protocc::CommonObject> data,
         std::shared_ptr<std::stack<FilterData::Envelope>> enves);
 
 private:

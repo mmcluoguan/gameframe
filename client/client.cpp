@@ -1,11 +1,11 @@
+#include "client/consolehandler.h"
 #include "client/gateconnector.h"
-#include "client/signalhandler.h"
-#include "client/stdinhandler.h"
 #include "shynet/events/eventhandler.h"
 #include "shynet/lua/luaengine.h"
 #include "shynet/net/connectreactormgr.h"
 #include "shynet/net/ipaddress.h"
 #include "shynet/pool/threadpool.h"
+#include "shynet/signal/signalhandler.h"
 #include "shynet/utils/iniconfig.h"
 #include "shynet/utils/stuff.h"
 #include <iomanip>
@@ -317,13 +317,13 @@ void test2()
     assert(vis1.result[2].second == "asdf");
 }
 
-int main1(int argc, char* argv[])
+int main(int argc, char* argv[])
 {
 
     //test();
     //test1();
-    test2();
-    return 0;
+    //test2();
+    //return 0;
     using namespace std;
     using namespace shynet;
     using namespace shynet::utils;
@@ -331,6 +331,7 @@ int main1(int argc, char* argv[])
     using namespace shynet::pool;
     using namespace shynet::net;
     using namespace shynet::lua;
+    using namespace shynet::signal;
     using namespace frmpub;
     using namespace client;
     try {
@@ -360,8 +361,8 @@ int main1(int argc, char* argv[])
         gateconnect.reset();
 
         shared_ptr<EventBase> base(new EventBase());
-        shared_ptr<StdinHandler> stdin(new StdinHandler(base, STDIN_FILENO));
-        shared_ptr<SignalHandler> sigint(new SignalHandler(base));
+        ConsoleHandler* stdin = &Singleton<ConsoleHandler>::instance(base);
+        SignalHandler* sigint = &Singleton<SignalHandler>::instance(base);
         base->addevent(stdin, nullptr);
         base->addevent(sigint, nullptr);
         base->dispatch();

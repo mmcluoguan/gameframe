@@ -155,8 +155,6 @@
     <ClCompile Include="dbserver.cpp" />
     <ClCompile Include="dbvisit.cpp" />
     <ClCompile Include="luawrapper.cpp" />
-    <ClCompile Include="signalhandler.cpp" />
-    <ClCompile Include="stdinhandler.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="datahelp.h" />
@@ -166,8 +164,6 @@
     <ClInclude Include="dbclientmgr.h" />
     <ClInclude Include="dbserver.h" />
     <ClInclude Include="luawrapper.h" />
-    <ClInclude Include="signalhandler.h" />
-    <ClInclude Include="stdinhandler.h" />
   </ItemGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|ARM'">
     <Link>

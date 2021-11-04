@@ -138,7 +138,7 @@ int GameConnector::forward_game_client_c(std::shared_ptr<protocc::CommonObject> 
                     if (createrole.result() == 0) {
                         //通知login修改account关联role
                         ConnectorMgr& connectMgr = shynet::utils::Singleton<ConnectorMgr>::instance();
-                        int login_connect_id = connectMgr.sid_conv_connect_id(client->set_login_id());
+                        int login_connect_id = connectMgr.sid_conv_connect_id(client->login_id());
                         std::shared_ptr<LoginConnector> login = connectMgr.select_login(login_connect_id);
                         if (login != nullptr) {
                             login->send_proto(data.get(), enves.get());

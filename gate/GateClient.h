@@ -33,22 +33,22 @@ public:
     /*
 	* 获取设置玩家账号id
 	*/
-    void accountid(std::string t)
+    void set_accountid(std::string t)
     {
         accountid_ = t;
     }
-    std::string set_accountid() const
+    std::string accountid() const
     {
         return accountid_;
     }
     /*
 		* 获取设置玩家平台key
 		*/
-    void platform_key(std::string t)
+    void set_platform_key(std::string t)
     {
         platform_key_ = t;
     }
-    std::string set_platform_key() const
+    std::string platform_key() const
     {
         return platform_key_;
     }
@@ -56,11 +56,11 @@ public:
     /*
 		* 获取设置选择的登录服id
 		*/
-    void login_id(int t)
+    void set_login_id(int t)
     {
         login_id_ = t;
     }
-    int set_login_id() const
+    int login_id() const
     {
         return login_id_;
     }
@@ -68,11 +68,11 @@ public:
     /*
 		* 获取设置选择的游戏服id
 		*/
-    void game_id(int t)
+    void set_game_id(int t)
     {
         game_id_ = t;
     }
-    int set_game_id() const
+    int game_id() const
     {
         return game_id_;
     }

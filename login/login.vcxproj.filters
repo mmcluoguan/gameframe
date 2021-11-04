@@ -3,8 +3,6 @@
   <ItemGroup>
     <ClCompile Include="connectormgr.cpp" />
     <ClCompile Include="login.cpp" />
-    <ClCompile Include="signalhandler.cpp" />
-    <ClCompile Include="stdinhandler.cpp" />
     <ClCompile Include="dbconnector.cpp">
       <Filter>db</Filter>
     </ClCompile>
@@ -26,8 +24,6 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="connectormgr.h" />
-    <ClInclude Include="signalhandler.h" />
-    <ClInclude Include="stdinhandler.h" />
     <ClInclude Include="dbconnector.h">
       <Filter>db</Filter>
     </ClInclude>

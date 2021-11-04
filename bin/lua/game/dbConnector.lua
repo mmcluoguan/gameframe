@@ -7,6 +7,14 @@ local dbConnector = {}
 setmetatable(dbConnector,baseNet)
 baseNet.__index = baseNet
 
+function __RELOAD(newchunk)
+    local connectorMgr = require("lua/game/connectorMgr")
+    local db = connectorMgr:dbConnector()
+    if db ~= nil then
+        db:regMsg()
+    end
+end
+
 function dbConnector:init()
     baseNet:init(self);
 end
@@ -105,11 +113,15 @@ function dbConnector:loadgoods_client_gate_c(roleid,objs)
     roleObj.online = true
     for i = 1, #objs do
         roleObj.goods[i] = {}
+        --物品在数组中的位置
+        roleObj.goods[i].pos = i
         for j = 1, #objs[i].fields do
             local key = objs[i].fields[j].key
             local value = objs[i].fields[j].value
             if key == '_id' then
                 roleObj.goods[i].id = tonumber(value)
+                --物品id与物品数据映射
+                roleObj.goods[tonumber(value)] = roleObj.goods[i]
             elseif key == 'cfgid' then
                 roleObj.goods[i].cfgid = tonumber(value)
             elseif key == 'num' then

@@ -3,13 +3,13 @@
 #include "game/dbconnector.h"
 #include "game/gameserver.h"
 #include "game/luawrapper.h"
-#include "game/signalhandler.h"
-#include "game/stdinhandler.h"
 #include "shynet/events/eventhandler.h"
+#include "shynet/io/stdinhandler.h"
 #include "shynet/lua/luaengine.h"
 #include "shynet/net/connectreactormgr.h"
 #include "shynet/net/ipaddress.h"
 #include "shynet/pool/threadpool.h"
+#include "shynet/signal/signalhandler.h"
 #include "shynet/utils/idworker.h"
 #include "shynet/utils/iniconfig.h"
 #include "shynet/utils/stringop.h"
@@ -26,6 +26,8 @@ int main(int argc, char* argv[])
     using namespace shynet::pool;
     using namespace shynet::net;
     using namespace shynet::lua;
+    using namespace shynet::io;
+    using namespace shynet::signal;
     using namespace frmpub;
     using namespace game;
 
@@ -66,6 +68,13 @@ int main(int argc, char* argv[])
                 std::make_shared<LuaFolderTask>(pstr, true));
         }
 
+        LOG_DEBUG << "开启游戏服服务器监听";
+        std::string gameip = ini.get<const char*, std::string>("game", "ip", "127.0.0.1");
+        short gameport = ini.get<short, short>("game", "port", short(24000));
+        std::shared_ptr<IPAddress> gameaddr(new IPAddress(gameip.c_str(), gameport));
+        std::shared_ptr<GameServer> gameserver(new GameServer(gameaddr));
+        Singleton<ListenReactorMgr>::instance().add(gameserver);
+
         //连接db服务器
         string dbstr = ini.get<const char*, string>("game", "db", "");
         auto dblist = StringOp::split(dbstr, ",");
@@ -97,16 +106,9 @@ int main(int argc, char* argv[])
                         new IPAddress(worldip.c_str(), worldport)))));
         }
 
-        LOG_DEBUG << "开启游戏服服务器监听";
-        std::string gameip = ini.get<const char*, std::string>("game", "ip", "127.0.0.1");
-        short gameport = ini.get<short, short>("game", "port", short(24000));
-        std::shared_ptr<IPAddress> gameaddr(new IPAddress(gameip.c_str(), gameport));
-        std::shared_ptr<GameServer> gameserver(new GameServer(gameaddr));
-        Singleton<ListenReactorMgr>::instance().add(gameserver);
-
         shared_ptr<EventBase> base(new EventBase());
-        shared_ptr<StdinHandler> stdin(new StdinHandler(base, STDIN_FILENO));
-        shared_ptr<SignalHandler> sigint(new SignalHandler(base));
+        StdinHandler* stdin = &Singleton<StdinHandler>::instance(base);
+        SignalHandler* sigint = &Singleton<SignalHandler>::instance(base);
         base->addevent(stdin, nullptr);
         base->addevent(sigint, nullptr);
         base->dispatch();

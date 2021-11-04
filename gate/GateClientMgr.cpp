@@ -45,7 +45,7 @@ std::shared_ptr<GateClient> GateClientMgr::find(const std::string& key)
 {
     std::lock_guard<std::mutex> lock(clis_mutex_);
     for (auto&& [k, value] : clis_) {
-        if (value->set_accountid() == key || value->set_platform_key() == key) {
+        if (value->accountid() == key || value->platform_key() == key) {
             return value;
         }
     }

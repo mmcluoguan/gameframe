@@ -53,6 +53,10 @@ namespace events {
 };
 namespace net {
 };
+namespace io {
+};
+namespace signal {
+};
 namespace pool {
 };
 namespace crypto {
@@ -124,5 +128,7 @@ namespace protocol = shynet::protocol;
 namespace thread = shynet::thread;
 namespace lua = shynet::lua;
 namespace task = shynet::task;
+namespace io = shynet::io;
+namespace signals = shynet::signal;
 
 #endif

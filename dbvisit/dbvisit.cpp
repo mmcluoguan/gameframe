@@ -1,14 +1,14 @@
 #include "dbvisit/dbclientmgr.h"
 #include "dbvisit/dbserver.h"
 #include "dbvisit/luawrapper.h"
-#include "dbvisit/signalhandler.h"
-#include "dbvisit/stdinhandler.h"
 #include "frmpub/luafoldertask.h"
 #include "shynet/events/eventhandler.h"
+#include "shynet/io/stdinhandler.h"
 #include "shynet/lua/luaengine.h"
 #include "shynet/net/ipaddress.h"
 #include "shynet/pool/mysqlpool.h"
 #include "shynet/pool/threadpool.h"
+#include "shynet/signal/signalhandler.h"
 #include "shynet/utils/idworker.h"
 #include "shynet/utils/iniconfig.h"
 #include "shynet/utils/stringop.h"
@@ -31,6 +31,8 @@ int main(int argc, char* argv[])
     using namespace shynet::pool;
     using namespace shynet::net;
     using namespace shynet::lua;
+    using namespace shynet::io;
+    using namespace shynet::signal;
     using namespace frmpub;
     using namespace frmpub::protocc;
     using namespace dbvisit;
@@ -121,8 +123,8 @@ int main(int argc, char* argv[])
 
             shared_ptr<EventBase> base(new EventBase());
 
-            shared_ptr<StdinHandler> stdin(new StdinHandler(base, STDIN_FILENO));
-            shared_ptr<SignalHandler> sigint(new SignalHandler(base));
+            StdinHandler* stdin = &Singleton<StdinHandler>::instance(base);
+            SignalHandler* sigint = &Singleton<SignalHandler>::instance(base);
             base->addevent(stdin, nullptr);
             base->addevent(sigint, nullptr);
             base->dispatch();

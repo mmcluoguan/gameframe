@@ -154,6 +154,12 @@
     <ClCompile Include="utils\filepathop.cpp">
       <Filter>utils</Filter>
     </ClCompile>
+    <ClCompile Include="io\stdinhandler.cpp">
+      <Filter>io</Filter>
+    </ClCompile>
+    <ClCompile Include="signal\signalhandler.cpp">
+      <Filter>signal</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="basic.h" />
@@ -343,6 +349,12 @@
     <ClInclude Include="utils\skiplist.h">
       <Filter>utils</Filter>
     </ClInclude>
+    <ClInclude Include="io\stdinhandler.h">
+      <Filter>io</Filter>
+    </ClInclude>
+    <ClInclude Include="signal\signalhandler.h">
+      <Filter>signal</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="pool">
@@ -383,6 +395,12 @@
     </Filter>
     <Filter Include="utils">
       <UniqueIdentifier>{0c04a382-75be-4e8b-976e-949635a7f4a6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="io">
+      <UniqueIdentifier>{e3c9ee2d-8c49-42da-b86a-078b2b400618}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="signal">
+      <UniqueIdentifier>{5f863c25-1550-495a-94c1-2aaa317b032c}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

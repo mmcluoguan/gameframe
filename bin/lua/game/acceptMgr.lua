@@ -1,5 +1,4 @@
 local gameClient =require ("lua/game/gameClient")
-
 --接收管理器
 local acceptMgr = {}
 

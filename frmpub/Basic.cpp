@@ -64,6 +64,8 @@ std::unordered_map<int, std::string> Basic::client_msgname_ {
     { (int)protocc::ClientMsgId::SETLEVEL_CLIENT_GATE_S, "SETLEVEL_CLIENT_GATE_S" },
     { (int)protocc::ClientMsgId::LOADGOODS_CLIENT_GATE_C, "LOADGOODS_CLIENT_GATE_C" },
     { (int)protocc::ClientMsgId::LOADGOODS_CLIENT_GATE_S, "LOADGOODS_CLIENT_GATE_S" },
+    { (int)protocc::ClientMsgId::GMORDER_CLIENT_GATE_C, "GMORDER_CLIENT_GATE_C" },
+    { (int)protocc::ClientMsgId::GMORDER_CLIENT_GATE_S, "GMORDER_CLIENT_GATE_S" },
     { (int)protocc::ClientMsgId::CLIENT_GAME_END, "CLIENT_GAME_END" },
 
 };

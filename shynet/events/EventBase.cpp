@@ -73,9 +73,17 @@ namespace events {
     }
     int EventBase::addevent(const std::shared_ptr<EventHandler> handler, const timeval* tv) const
     {
+        return addevent(handler.get(), tv);
+    }
+    int EventBase::addevent(const EventHandler* handler, const timeval* tv) const
+    {
         return event_add(handler->event(), tv);
     }
     int EventBase::delevent(const std::shared_ptr<EventHandler> handler) const
+    {
+        return delevent(handler.get());
+    }
+    int EventBase::delevent(const EventHandler* handler) const
     {
         return event_del(handler->event());
     }

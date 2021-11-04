@@ -173,8 +173,8 @@ function hotfix:checkchunktype(oldchunk, chunk)
     local chunkey_type = type(chunk)
 
     if oldchunkey_type ~= "boolean" and oldchunk == chunk then
-        ERROR("oldchunk == chunk and not return")
-        return false
+        --ERROR("oldchunk == chunk and not return")
+        --return false
     end
 
     if oldchunk ~= nil and oldchunkey_type ~= chunkey_type then
@@ -231,7 +231,7 @@ function hotfix:checkchunktype(oldchunk, chunk)
     local reloadEnv = setmetatable({}, reloadEnvMT)
     setfenv(__reload, reloadEnv)
 
-    local succ = pcall(__reload)
+    local succ = pcall(__reload,chunk)
     -- __reload()
 
     if not succ then
@@ -259,10 +259,9 @@ function hotfix:findloader(name)
             table.insert(errMsg, ret)
         end
     end
-    ERROR("module:%s not found:%s", name, table.concat(msg))
+    ERROR("module:%s not found:%s", name, table.concat(errMsg))
     return nil
 end
-
 
 function hotfix:reloadmodule(modname)
     if package.loaded[modname] == nil then
@@ -302,8 +301,74 @@ function hotfix:reloadchunk(modname, src)
     end
 
     -- ckOrBool is a chunk or boolean
+    hotfix:reloadlocal(oldchunk,ckOrBool)
     hotfix:checkchunktype(oldchunk, ckOrBool)
     hotfix:clear()
+    return ckOrBool
+end
+
+function hotfix:copytable(oldtable,newtable,reloaddata_flag)
+    for key,value in pairs(newtable) do
+        local newobj_type = type(value)
+        if newobj_type ~= 'table' then
+          if newobj_type == 'function' then
+            oldtable[key] = value
+          elseif newobj_type == "userdata" or newobj_type == "thread" then
+            WARN("not support %s, %s", key, newobj_type)
+          else
+            if reloaddata_flag ~= nil then
+              oldtable[key] = value
+            end
+          end
+        else         
+          local tag = string.format("%s %s", tostring(oldtable), tostring(newtable))
+          if hotfix.table_mark[tag] then
+              DEBUG("reloadtable is same %s", tag)
+              return
+          end
+          hotfix.table_mark[tag] = true
+          
+          hotfix:copytable(oldtable[key],value,reloaddata_flag)
+        end
+    end    
+end
+
+function hotfix:reloadlocal(oldchunk,newchunk)
+    local oldchunkey_type = type(oldchunk)
+    local chunkey_type = type(newchunk)
+    if oldchunk ~= nil and oldchunkey_type ~= chunkey_type then
+        ERROR("oldchunkey_type:%s != chunkey_type:%s", oldchunkey_type, chunkey_type)
+        return false
+    end
+    
+    local metatable = getmetatable(newchunk)
+    if metatable ~= nil then
+      setmetatable(oldchunk, metatable)
+    end
+    
+    local reloaddata_flag = nil
+    if chunkey_type == 'table' then
+        reloaddata_flag = rawget(newchunk, 'reloaddata') --是否更新数据,默认nil,不更新数据
+    end
+    
+    if chunkey_type == 'table' then
+        for name,newobj in pairs(newchunk) do
+            local newobj_type = type(newobj)
+            if newobj_type == "table" then
+                hotfix:copytable(oldchunk[name],newobj,reloaddata_flag)
+            elseif newobj_type == "userdata" or newobj_type == "thread" then
+                WARN("not support %s, %s", name, newobj_type)
+            else
+                if newobj_type == 'function' then
+                    oldchunk[name] = newobj
+                else
+                    if newobj_type ~= nil then
+                        oldchunk[name] = newobj
+                    end
+                end            
+            end
+        end
+    end
 end
 
 function hotfix:reloadfunc(name, oldfunc, newfunc)
@@ -435,7 +500,7 @@ function hotfix:reloadtable(oldtable, newtable)
         else
             if oldvalue == value then
                 goto continue
-            end           
+            end
             rawset(oldtable, name, value)
             --[[if not oldvalue then
                 DEBUG("set new variable, objType:%s, name:%s, newobj:%s",

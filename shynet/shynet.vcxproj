@@ -178,6 +178,7 @@
     <ClInclude Include="events\eventhandler.h" />
     <ClInclude Include="events\eventlisenter.h" />
     <ClInclude Include="events\streambuff.h" />
+    <ClInclude Include="io\stdinhandler.h" />
     <ClInclude Include="lua\luaengine.h" />
     <ClInclude Include="lua\luawrapper.h" />
     <ClInclude Include="net\acceptheartbeat.h" />
@@ -201,6 +202,7 @@
     <ClInclude Include="protocol\responses.h" />
     <ClInclude Include="protocol\tcpip.h" />
     <ClInclude Include="protocol\websocket.h" />
+    <ClInclude Include="signal\signalhandler.h" />
     <ClInclude Include="task\acceptreadiotask.h" />
     <ClInclude Include="task\connectreadiotask.h" />
     <ClInclude Include="task\notifytask.h" />
@@ -237,6 +239,7 @@
     <ClCompile Include="events\eventhandler.cpp" />
     <ClCompile Include="events\eventlisenter.cpp" />
     <ClCompile Include="events\streambuff.cpp" />
+    <ClCompile Include="io\stdinhandler.cpp" />
     <ClCompile Include="lua\luaengine.cpp" />
     <ClCompile Include="lua\luawrapper.cpp" />
     <ClCompile Include="net\acceptheartbeat.cpp" />
@@ -260,6 +263,7 @@
     <ClCompile Include="protocol\responses.cpp" />
     <ClCompile Include="protocol\tcpip.cpp" />
     <ClCompile Include="protocol\websocket.cpp" />
+    <ClCompile Include="signal\signalhandler.cpp" />
     <ClCompile Include="task\acceptreadiotask.cpp" />
     <ClCompile Include="task\connectreadiotask.cpp" />
     <ClCompile Include="task\notifytask.cpp" />
@@ -282,7 +286,7 @@
   </ItemGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|ARM'">
     <Link>
-      <LibraryDependencies>jemalloc;event;event_pthreads;ssl;crypto;event_openssl;pthread;mysqlcppconn8;lua</LibraryDependencies>
+      <LibraryDependencies>jemalloc;event;event_pthreads;ssl;crypto;event_openssl;pthread;mysqlcppconn8;lua;readline</LibraryDependencies>
       <AdditionalOptions>
       </AdditionalOptions>
       <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
@@ -300,7 +304,7 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|ARM64'">
     <Link>
-      <LibraryDependencies>jemalloc;event;event_pthreads;ssl;crypto;event_openssl;pthread;mysqlcppconn8;lua</LibraryDependencies>
+      <LibraryDependencies>jemalloc;event;event_pthreads;ssl;crypto;event_openssl;pthread;mysqlcppconn8;lua;readline</LibraryDependencies>
       <AdditionalOptions>
       </AdditionalOptions>
       <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
@@ -318,7 +322,7 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <Link>
-      <LibraryDependencies>jemalloc;event;event_pthreads;ssl;crypto;event_openssl;pthread;mysqlcppconn8;lua</LibraryDependencies>
+      <LibraryDependencies>jemalloc;event;event_pthreads;ssl;crypto;event_openssl;pthread;mysqlcppconn8;lua;readline</LibraryDependencies>
       <AdditionalOptions>
       </AdditionalOptions>
       <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
@@ -336,7 +340,7 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x86'">
     <Link>
-      <LibraryDependencies>jemalloc;event;event_pthreads;ssl;crypto;event_openssl;pthread;mysqlcppconn8;lua</LibraryDependencies>
+      <LibraryDependencies>jemalloc;event;event_pthreads;ssl;crypto;event_openssl;pthread;mysqlcppconn8;lua;readline</LibraryDependencies>
       <AdditionalOptions>
       </AdditionalOptions>
       <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
@@ -364,7 +368,7 @@
       <UnrollLoops>true</UnrollLoops>
     </ClCompile>
     <Link>
-      <LibraryDependencies>jemalloc;event;event_pthreads;ssl;crypto;event_openssl;pthread;mysqlcppconn8;lua</LibraryDependencies>
+      <LibraryDependencies>jemalloc;event;event_pthreads;ssl;crypto;event_openssl;pthread;mysqlcppconn8;lua;readline</LibraryDependencies>
       <AdditionalOptions>
       </AdditionalOptions>
       <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
@@ -382,7 +386,7 @@
       <UnrollLoops>true</UnrollLoops>
     </ClCompile>
     <Link>
-      <LibraryDependencies>jemalloc;event;event_pthreads;ssl;crypto;event_openssl;pthread;mysqlcppconn8;lua</LibraryDependencies>
+      <LibraryDependencies>jemalloc;event;event_pthreads;ssl;crypto;event_openssl;pthread;mysqlcppconn8;lua;readline</LibraryDependencies>
       <AdditionalOptions>
       </AdditionalOptions>
       <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
@@ -400,7 +404,7 @@
       <UnrollLoops>true</UnrollLoops>
     </ClCompile>
     <Link>
-      <LibraryDependencies>jemalloc;event;event_pthreads;ssl;crypto;event_openssl;pthread;mysqlcppconn8;lua</LibraryDependencies>
+      <LibraryDependencies>jemalloc;event;event_pthreads;ssl;crypto;event_openssl;pthread;mysqlcppconn8;lua;readline</LibraryDependencies>
       <AdditionalOptions>
       </AdditionalOptions>
       <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
@@ -418,7 +422,7 @@
       <UnrollLoops>true</UnrollLoops>
     </ClCompile>
     <Link>
-      <LibraryDependencies>jemalloc;event;event_pthreads;ssl;crypto;event_openssl;pthread;mysqlcppconn8;lua</LibraryDependencies>
+      <LibraryDependencies>jemalloc;event;event_pthreads;ssl;crypto;event_openssl;pthread;mysqlcppconn8;lua;readline</LibraryDependencies>
       <AdditionalOptions>
       </AdditionalOptions>
       <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>

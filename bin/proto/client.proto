@@ -29,6 +29,8 @@ enum ClientMsgId {
   SETLEVEL_CLIENT_GATE_S = 1206;
   LOADGOODS_CLIENT_GATE_C = 1207; //加载角色物品数据
   LOADGOODS_CLIENT_GATE_S = 1208;
+  GMORDER_CLIENT_GATE_C = 1209;   //gm命令
+  GMORDER_CLIENT_GATE_S = 1210;
   CLIENT_GAME_END = 1299;
 
   CLIENTMSGID_END = 5000;
@@ -129,4 +131,17 @@ message loadgoods_client_gate_s{
     }
 
     repeated Goods goods = 1; //物品列表
+}
+
+//gm命令
+message gmorder_client_gate_c {
+  int64 roleid = 1;
+  string order = 2; //命令
+  repeated string args = 3;//参数
+}
+
+message gmorder_client_gate_s {
+  int32 result  = 1; //0成功,1没有此角色,2非法的命令或参数,3逻辑错误
+  string order = 2; //命令
+  string desc = 3; //描述
 }

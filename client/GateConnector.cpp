@@ -35,6 +35,8 @@ GateConnector::GateConnector(std::shared_ptr<net::IPAddress> connect_addr,
             std::bind(&GateConnector::loadrole_client_gate_s, this, std::placeholders::_1, std::placeholders::_2) },
         { protocc::LOADGOODS_CLIENT_GATE_S,
             std::bind(&GateConnector::loadgoods_client_gate_s, this, std::placeholders::_1, std::placeholders::_2) },
+        { protocc::GMORDER_CLIENT_GATE_S,
+            std::bind(&GateConnector::gmorder_client_gate_s, this, std::placeholders::_1, std::placeholders::_2) },
     };
 }
 GateConnector::~GateConnector()
@@ -273,6 +275,18 @@ int GateConnector::loadgoods_client_gate_s(std::shared_ptr<protocc::CommonObject
         SEND_ERR(protocc::MESSAGE_PARSING_ERROR, stream.str());
     }
 
+    return 0;
+}
+int GateConnector::gmorder_client_gate_s(std::shared_ptr<protocc::CommonObject> data, std::shared_ptr<std::stack<FilterData::Envelope>> enves)
+{
+    protocc::gmorder_client_gate_s msgs;
+    if (msgs.ParseFromString(data->msgdata()) == true) {
+        LOG_DEBUG << "gm命令:" << msgs.order() << " 操作结果:" << msgs.desc();
+    } else {
+        std::stringstream stream;
+        stream << "消息" << frmpub::Basic::msgname(data->msgid()) << "解析错误";
+        SEND_ERR(protocc::MESSAGE_PARSING_ERROR, stream.str());
+    }
     return 0;
 }
 }

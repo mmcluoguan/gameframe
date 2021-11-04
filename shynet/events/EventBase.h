@@ -64,12 +64,14 @@ namespace events {
         /// <param name="tv">超时时间</param>
         /// <returns>0成功,-1失败</returns>
         int addevent(const std::shared_ptr<EventHandler> handler, const timeval* tv) const;
+        int addevent(const EventHandler* handler, const timeval* tv) const;
         /// <summary>
         /// 从反应堆中移除事件处理器
         /// </summary>
         /// <param name="handler">事件处理器</param>
         /// <returns>0成功,-1失败</returns>
         int delevent(const std::shared_ptr<EventHandler> handler) const;
+        int delevent(const EventHandler* handler) const;
 
         /// <summary>
         /// 创建成对的EventBuffer到pair数组,

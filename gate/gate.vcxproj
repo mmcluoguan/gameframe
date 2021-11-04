@@ -44,8 +44,6 @@
     <ClCompile Include="loginconnector.cpp" />
     <ClCompile Include="luawrapper.cpp" />
     <ClCompile Include="worldconnector.cpp" />
-    <ClCompile Include="signalhandler.cpp" />
-    <ClCompile Include="stdinhandler.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="connectormgr.h" />
@@ -56,8 +54,6 @@
     <ClInclude Include="loginconnector.h" />
     <ClInclude Include="luawrapper.h" />
     <ClInclude Include="worldconnector.h" />
-    <ClInclude Include="signalhandler.h" />
-    <ClInclude Include="stdinhandler.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{671466DF-E320-41AC-9535-462BCEDC1989}</ProjectGuid>

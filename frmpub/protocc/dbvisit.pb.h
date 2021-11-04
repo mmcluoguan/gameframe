@@ -37,60 +37,60 @@
 #define PROTOBUF_INTERNAL_EXPORT_dbvisit_2eproto
 PROTOBUF_NAMESPACE_OPEN
 namespace internal {
-	class AnyMetadata;
+class AnyMetadata;
 }  // namespace internal
 PROTOBUF_NAMESPACE_CLOSE
 
 // Internal implementation detail -- do not use these members.
 struct TableStruct_dbvisit_2eproto {
-	static const ::PROTOBUF_NAMESPACE_ID::internal::ParseTableField entries[]
-		PROTOBUF_SECTION_VARIABLE(protodesc_cold);
-	static const ::PROTOBUF_NAMESPACE_ID::internal::AuxiliaryParseTableField aux[]
-		PROTOBUF_SECTION_VARIABLE(protodesc_cold);
-	static const ::PROTOBUF_NAMESPACE_ID::internal::ParseTable schema[11]
-		PROTOBUF_SECTION_VARIABLE(protodesc_cold);
-	static const ::PROTOBUF_NAMESPACE_ID::internal::FieldMetadata field_metadata[];
-	static const ::PROTOBUF_NAMESPACE_ID::internal::SerializationTable serialization_table[];
-	static const ::PROTOBUF_NAMESPACE_ID::uint32 offsets[];
+  static const ::PROTOBUF_NAMESPACE_ID::internal::ParseTableField entries[]
+    PROTOBUF_SECTION_VARIABLE(protodesc_cold);
+  static const ::PROTOBUF_NAMESPACE_ID::internal::AuxiliaryParseTableField aux[]
+    PROTOBUF_SECTION_VARIABLE(protodesc_cold);
+  static const ::PROTOBUF_NAMESPACE_ID::internal::ParseTable schema[11]
+    PROTOBUF_SECTION_VARIABLE(protodesc_cold);
+  static const ::PROTOBUF_NAMESPACE_ID::internal::FieldMetadata field_metadata[];
+  static const ::PROTOBUF_NAMESPACE_ID::internal::SerializationTable serialization_table[];
+  static const ::PROTOBUF_NAMESPACE_ID::uint32 offsets[];
 };
 extern const ::PROTOBUF_NAMESPACE_ID::internal::DescriptorTable descriptor_table_dbvisit_2eproto;
 ::PROTOBUF_NAMESPACE_ID::Metadata descriptor_table_dbvisit_2eproto_metadata_getter(int index);
 namespace frmpub {
-	namespace protocc {
-		class deletedata_to_dbvisit_c;
-		struct deletedata_to_dbvisit_cDefaultTypeInternal;
-		extern deletedata_to_dbvisit_cDefaultTypeInternal _deletedata_to_dbvisit_c_default_instance_;
-		class deletedata_to_dbvisit_s;
-		struct deletedata_to_dbvisit_sDefaultTypeInternal;
-		extern deletedata_to_dbvisit_sDefaultTypeInternal _deletedata_to_dbvisit_s_default_instance_;
-		class insertdata_to_dbvisit_c;
-		struct insertdata_to_dbvisit_cDefaultTypeInternal;
-		extern insertdata_to_dbvisit_cDefaultTypeInternal _insertdata_to_dbvisit_c_default_instance_;
-		class insertdata_to_dbvisit_s;
-		struct insertdata_to_dbvisit_sDefaultTypeInternal;
-		extern insertdata_to_dbvisit_sDefaultTypeInternal _insertdata_to_dbvisit_s_default_instance_;
-		class loaddata_from_dbvisit_c;
-		struct loaddata_from_dbvisit_cDefaultTypeInternal;
-		extern loaddata_from_dbvisit_cDefaultTypeInternal _loaddata_from_dbvisit_c_default_instance_;
-		class loaddata_from_dbvisit_s;
-		struct loaddata_from_dbvisit_sDefaultTypeInternal;
-		extern loaddata_from_dbvisit_sDefaultTypeInternal _loaddata_from_dbvisit_s_default_instance_;
-		class loaddata_more_from_dbvisit_c;
-		struct loaddata_more_from_dbvisit_cDefaultTypeInternal;
-		extern loaddata_more_from_dbvisit_cDefaultTypeInternal _loaddata_more_from_dbvisit_c_default_instance_;
-		class loaddata_more_from_dbvisit_s;
-		struct loaddata_more_from_dbvisit_sDefaultTypeInternal;
-		extern loaddata_more_from_dbvisit_sDefaultTypeInternal _loaddata_more_from_dbvisit_s_default_instance_;
-		class loaddata_more_from_dbvisit_s_item;
-		struct loaddata_more_from_dbvisit_s_itemDefaultTypeInternal;
-		extern loaddata_more_from_dbvisit_s_itemDefaultTypeInternal _loaddata_more_from_dbvisit_s_item_default_instance_;
-		class updata_to_dbvisit_c;
-		struct updata_to_dbvisit_cDefaultTypeInternal;
-		extern updata_to_dbvisit_cDefaultTypeInternal _updata_to_dbvisit_c_default_instance_;
-		class updata_to_dbvisit_s;
-		struct updata_to_dbvisit_sDefaultTypeInternal;
-		extern updata_to_dbvisit_sDefaultTypeInternal _updata_to_dbvisit_s_default_instance_;
-	}  // namespace protocc
+namespace protocc {
+class deletedata_to_dbvisit_c;
+struct deletedata_to_dbvisit_cDefaultTypeInternal;
+extern deletedata_to_dbvisit_cDefaultTypeInternal _deletedata_to_dbvisit_c_default_instance_;
+class deletedata_to_dbvisit_s;
+struct deletedata_to_dbvisit_sDefaultTypeInternal;
+extern deletedata_to_dbvisit_sDefaultTypeInternal _deletedata_to_dbvisit_s_default_instance_;
+class insertdata_to_dbvisit_c;
+struct insertdata_to_dbvisit_cDefaultTypeInternal;
+extern insertdata_to_dbvisit_cDefaultTypeInternal _insertdata_to_dbvisit_c_default_instance_;
+class insertdata_to_dbvisit_s;
+struct insertdata_to_dbvisit_sDefaultTypeInternal;
+extern insertdata_to_dbvisit_sDefaultTypeInternal _insertdata_to_dbvisit_s_default_instance_;
+class loaddata_from_dbvisit_c;
+struct loaddata_from_dbvisit_cDefaultTypeInternal;
+extern loaddata_from_dbvisit_cDefaultTypeInternal _loaddata_from_dbvisit_c_default_instance_;
+class loaddata_from_dbvisit_s;
+struct loaddata_from_dbvisit_sDefaultTypeInternal;
+extern loaddata_from_dbvisit_sDefaultTypeInternal _loaddata_from_dbvisit_s_default_instance_;
+class loaddata_more_from_dbvisit_c;
+struct loaddata_more_from_dbvisit_cDefaultTypeInternal;
+extern loaddata_more_from_dbvisit_cDefaultTypeInternal _loaddata_more_from_dbvisit_c_default_instance_;
+class loaddata_more_from_dbvisit_s;
+struct loaddata_more_from_dbvisit_sDefaultTypeInternal;
+extern loaddata_more_from_dbvisit_sDefaultTypeInternal _loaddata_more_from_dbvisit_s_default_instance_;
+class loaddata_more_from_dbvisit_s_item;
+struct loaddata_more_from_dbvisit_s_itemDefaultTypeInternal;
+extern loaddata_more_from_dbvisit_s_itemDefaultTypeInternal _loaddata_more_from_dbvisit_s_item_default_instance_;
+class updata_to_dbvisit_c;
+struct updata_to_dbvisit_cDefaultTypeInternal;
+extern updata_to_dbvisit_cDefaultTypeInternal _updata_to_dbvisit_c_default_instance_;
+class updata_to_dbvisit_s;
+struct updata_to_dbvisit_sDefaultTypeInternal;
+extern updata_to_dbvisit_sDefaultTypeInternal _updata_to_dbvisit_s_default_instance_;
+}  // namespace protocc
 }  // namespace frmpub
 PROTOBUF_NAMESPACE_OPEN
 template<> ::frmpub::protocc::deletedata_to_dbvisit_c* Arena::CreateMaybeMessage<::frmpub::protocc::deletedata_to_dbvisit_c>(Arena*);
@@ -106,3246 +106,3209 @@ template<> ::frmpub::protocc::updata_to_dbvisit_c* Arena::CreateMaybeMessage<::f
 template<> ::frmpub::protocc::updata_to_dbvisit_s* Arena::CreateMaybeMessage<::frmpub::protocc::updata_to_dbvisit_s>(Arena*);
 PROTOBUF_NAMESPACE_CLOSE
 namespace frmpub {
-	namespace protocc {
-
-		// ===================================================================
-
-		class loaddata_from_dbvisit_c PROTOBUF_FINAL :
-			public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:frmpub.protocc.loaddata_from_dbvisit_c) */ {
-		public:
-			inline loaddata_from_dbvisit_c() : loaddata_from_dbvisit_c(nullptr) {}
-			virtual ~loaddata_from_dbvisit_c();
-			explicit constexpr loaddata_from_dbvisit_c(::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized);
-
-			loaddata_from_dbvisit_c(const loaddata_from_dbvisit_c& from);
-			loaddata_from_dbvisit_c(loaddata_from_dbvisit_c&& from) noexcept
-				: loaddata_from_dbvisit_c() {
-				*this = ::std::move(from);
-			}
-
-			inline loaddata_from_dbvisit_c& operator=(const loaddata_from_dbvisit_c& from) {
-				CopyFrom(from);
-				return *this;
-			}
-			inline loaddata_from_dbvisit_c& operator=(loaddata_from_dbvisit_c&& from) noexcept {
-				if (GetArena() == from.GetArena()) {
-					if (this != &from) InternalSwap(&from);
-				}
-				else {
-					CopyFrom(from);
-				}
-				return *this;
-			}
-
-			static const ::PROTOBUF_NAMESPACE_ID::Descriptor* descriptor() {
-				return GetDescriptor();
-			}
-			static const ::PROTOBUF_NAMESPACE_ID::Descriptor* GetDescriptor() {
-				return GetMetadataStatic().descriptor;
-			}
-			static const ::PROTOBUF_NAMESPACE_ID::Reflection* GetReflection() {
-				return GetMetadataStatic().reflection;
-			}
-			static const loaddata_from_dbvisit_c& default_instance() {
-				return *internal_default_instance();
-			}
-			static inline const loaddata_from_dbvisit_c* internal_default_instance() {
-				return reinterpret_cast<const loaddata_from_dbvisit_c*>(
-					&_loaddata_from_dbvisit_c_default_instance_);
-			}
-			static constexpr int kIndexInFileMessages =
-				0;
-
-			friend void swap(loaddata_from_dbvisit_c& a, loaddata_from_dbvisit_c& b) {
-				a.Swap(&b);
-			}
-			inline void Swap(loaddata_from_dbvisit_c* other) {
-				if (other == this) return;
-				if (GetArena() == other->GetArena()) {
-					InternalSwap(other);
-				}
-				else {
-					::PROTOBUF_NAMESPACE_ID::internal::GenericSwap(this, other);
-				}
-			}
-			void UnsafeArenaSwap(loaddata_from_dbvisit_c* other) {
-				if (other == this) return;
-				GOOGLE_DCHECK(GetArena() == other->GetArena());
-				InternalSwap(other);
-			}
-
-			// implements Message ----------------------------------------------
-
-			inline loaddata_from_dbvisit_c* New() const final {
-				return CreateMaybeMessage<loaddata_from_dbvisit_c>(nullptr);
-			}
-
-			loaddata_from_dbvisit_c* New(::PROTOBUF_NAMESPACE_ID::Arena* arena) const final {
-				return CreateMaybeMessage<loaddata_from_dbvisit_c>(arena);
-			}
-			void CopyFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) final;
-			void MergeFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) final;
-			void CopyFrom(const loaddata_from_dbvisit_c& from);
-			void MergeFrom(const loaddata_from_dbvisit_c& from);
-			PROTOBUF_ATTRIBUTE_REINITIALIZES void Clear() final;
-			bool IsInitialized() const final;
-
-			size_t ByteSizeLong() const final;
-			const char* _InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) final;
-			::PROTOBUF_NAMESPACE_ID::uint8* _InternalSerialize(
-				::PROTOBUF_NAMESPACE_ID::uint8* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const final;
-			int GetCachedSize() const final { return _cached_size_.Get(); }
-
-		private:
-			inline void SharedCtor();
-			inline void SharedDtor();
-			void SetCachedSize(int size) const final;
-			void InternalSwap(loaddata_from_dbvisit_c* other);
-			friend class ::PROTOBUF_NAMESPACE_ID::internal::AnyMetadata;
-			static ::PROTOBUF_NAMESPACE_ID::StringPiece FullMessageName() {
-				return "frmpub.protocc.loaddata_from_dbvisit_c";
-			}
-		protected:
-			explicit loaddata_from_dbvisit_c(::PROTOBUF_NAMESPACE_ID::Arena* arena);
-		private:
-			static void ArenaDtor(void* object);
-			inline void RegisterArenaDtor(::PROTOBUF_NAMESPACE_ID::Arena* arena);
-		public:
-
-			::PROTOBUF_NAMESPACE_ID::Metadata GetMetadata() const final;
-		private:
-			static ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadataStatic() {
-				return ::descriptor_table_dbvisit_2eproto_metadata_getter(kIndexInFileMessages);
-			}
-
-		public:
-
-			// nested types ----------------------------------------------------
-
-			// accessors -------------------------------------------------------
-
-			enum : int {
-				kFieldsFieldNumber = 4,
-				kTagFieldNumber = 1,
-				kCacheKeyFieldNumber = 2,
-			};
-			// repeated .frmpub.protocc.FieldsEntry fields = 4;
-			int fields_size() const;
-		private:
-			int _internal_fields_size() const;
-		public:
-			void clear_fields();
-			::frmpub::protocc::FieldsEntry* mutable_fields(int index);
-			::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::frmpub::protocc::FieldsEntry >*
-				mutable_fields();
-		private:
-			const ::frmpub::protocc::FieldsEntry& _internal_fields(int index) const;
-			::frmpub::protocc::FieldsEntry* _internal_add_fields();
-		public:
-			const ::frmpub::protocc::FieldsEntry& fields(int index) const;
-			::frmpub::protocc::FieldsEntry* add_fields();
-			const ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::frmpub::protocc::FieldsEntry >&
-				fields() const;
-
-			// string tag = 1;
-			void clear_tag();
-			const std::string& tag() const;
-			void set_tag(const std::string& value);
-			void set_tag(std::string&& value);
-			void set_tag(const char* value);
-			void set_tag(const char* value, size_t size);
-			std::string* mutable_tag();
-			std::string* release_tag();
-			void set_allocated_tag(std::string* tag);
-		private:
-			const std::string& _internal_tag() const;
-			void _internal_set_tag(const std::string& value);
-			std::string* _internal_mutable_tag();
-		public:
-
-			// string cache_key = 2;
-			void clear_cache_key();
-			const std::string& cache_key() const;
-			void set_cache_key(const std::string& value);
-			void set_cache_key(std::string&& value);
-			void set_cache_key(const char* value);
-			void set_cache_key(const char* value, size_t size);
-			std::string* mutable_cache_key();
-			std::string* release_cache_key();
-			void set_allocated_cache_key(std::string* cache_key);
-		private:
-			const std::string& _internal_cache_key() const;
-			void _internal_set_cache_key(const std::string& value);
-			std::string* _internal_mutable_cache_key();
-		public:
-
-			// @@protoc_insertion_point(class_scope:frmpub.protocc.loaddata_from_dbvisit_c)
-		private:
-			class _Internal;
-
-			template <typename T> friend class ::PROTOBUF_NAMESPACE_ID::Arena::InternalHelper;
-			typedef void InternalArenaConstructable_;
-			typedef void DestructorSkippable_;
-			::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::frmpub::protocc::FieldsEntry > fields_;
-			::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr tag_;
-			::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr cache_key_;
-			mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
-			friend struct ::TableStruct_dbvisit_2eproto;
-		};
-		// -------------------------------------------------------------------
-
-		class loaddata_from_dbvisit_s PROTOBUF_FINAL :
-			public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:frmpub.protocc.loaddata_from_dbvisit_s) */ {
-		public:
-			inline loaddata_from_dbvisit_s() : loaddata_from_dbvisit_s(nullptr) {}
-			virtual ~loaddata_from_dbvisit_s();
-			explicit constexpr loaddata_from_dbvisit_s(::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized);
-
-			loaddata_from_dbvisit_s(const loaddata_from_dbvisit_s& from);
-			loaddata_from_dbvisit_s(loaddata_from_dbvisit_s&& from) noexcept
-				: loaddata_from_dbvisit_s() {
-				*this = ::std::move(from);
-			}
-
-			inline loaddata_from_dbvisit_s& operator=(const loaddata_from_dbvisit_s& from) {
-				CopyFrom(from);
-				return *this;
-			}
-			inline loaddata_from_dbvisit_s& operator=(loaddata_from_dbvisit_s&& from) noexcept {
-				if (GetArena() == from.GetArena()) {
-					if (this != &from) InternalSwap(&from);
-				}
-				else {
-					CopyFrom(from);
-				}
-				return *this;
-			}
-
-			static const ::PROTOBUF_NAMESPACE_ID::Descriptor* descriptor() {
-				return GetDescriptor();
-			}
-			static const ::PROTOBUF_NAMESPACE_ID::Descriptor* GetDescriptor() {
-				return GetMetadataStatic().descriptor;
-			}
-			static const ::PROTOBUF_NAMESPACE_ID::Reflection* GetReflection() {
-				return GetMetadataStatic().reflection;
-			}
-			static const loaddata_from_dbvisit_s& default_instance() {
-				return *internal_default_instance();
-			}
-			static inline const loaddata_from_dbvisit_s* internal_default_instance() {
-				return reinterpret_cast<const loaddata_from_dbvisit_s*>(
-					&_loaddata_from_dbvisit_s_default_instance_);
-			}
-			static constexpr int kIndexInFileMessages =
-				1;
-
-			friend void swap(loaddata_from_dbvisit_s& a, loaddata_from_dbvisit_s& b) {
-				a.Swap(&b);
-			}
-			inline void Swap(loaddata_from_dbvisit_s* other) {
-				if (other == this) return;
-				if (GetArena() == other->GetArena()) {
-					InternalSwap(other);
-				}
-				else {
-					::PROTOBUF_NAMESPACE_ID::internal::GenericSwap(this, other);
-				}
-			}
-			void UnsafeArenaSwap(loaddata_from_dbvisit_s* other) {
-				if (other == this) return;
-				GOOGLE_DCHECK(GetArena() == other->GetArena());
-				InternalSwap(other);
-			}
-
-			// implements Message ----------------------------------------------
-
-			inline loaddata_from_dbvisit_s* New() const final {
-				return CreateMaybeMessage<loaddata_from_dbvisit_s>(nullptr);
-			}
-
-			loaddata_from_dbvisit_s* New(::PROTOBUF_NAMESPACE_ID::Arena* arena) const final {
-				return CreateMaybeMessage<loaddata_from_dbvisit_s>(arena);
-			}
-			void CopyFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) final;
-			void MergeFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) final;
-			void CopyFrom(const loaddata_from_dbvisit_s& from);
-			void MergeFrom(const loaddata_from_dbvisit_s& from);
-			PROTOBUF_ATTRIBUTE_REINITIALIZES void Clear() final;
-			bool IsInitialized() const final;
-
-			size_t ByteSizeLong() const final;
-			const char* _InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) final;
-			::PROTOBUF_NAMESPACE_ID::uint8* _InternalSerialize(
-				::PROTOBUF_NAMESPACE_ID::uint8* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const final;
-			int GetCachedSize() const final { return _cached_size_.Get(); }
-
-		private:
-			inline void SharedCtor();
-			inline void SharedDtor();
-			void SetCachedSize(int size) const final;
-			void InternalSwap(loaddata_from_dbvisit_s* other);
-			friend class ::PROTOBUF_NAMESPACE_ID::internal::AnyMetadata;
-			static ::PROTOBUF_NAMESPACE_ID::StringPiece FullMessageName() {
-				return "frmpub.protocc.loaddata_from_dbvisit_s";
-			}
-		protected:
-			explicit loaddata_from_dbvisit_s(::PROTOBUF_NAMESPACE_ID::Arena* arena);
-		private:
-			static void ArenaDtor(void* object);
-			inline void RegisterArenaDtor(::PROTOBUF_NAMESPACE_ID::Arena* arena);
-		public:
-
-			::PROTOBUF_NAMESPACE_ID::Metadata GetMetadata() const final;
-		private:
-			static ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadataStatic() {
-				return ::descriptor_table_dbvisit_2eproto_metadata_getter(kIndexInFileMessages);
-			}
-
-		public:
-
-			// nested types ----------------------------------------------------
-
-			// accessors -------------------------------------------------------
-
-			enum : int {
-				kFieldsFieldNumber = 3,
-				kTagFieldNumber = 2,
-				kResultFieldNumber = 1,
-			};
-			// repeated .frmpub.protocc.FieldsEntry fields = 3;
-			int fields_size() const;
-		private:
-			int _internal_fields_size() const;
-		public:
-			void clear_fields();
-			::frmpub::protocc::FieldsEntry* mutable_fields(int index);
-			::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::frmpub::protocc::FieldsEntry >*
-				mutable_fields();
-		private:
-			const ::frmpub::protocc::FieldsEntry& _internal_fields(int index) const;
-			::frmpub::protocc::FieldsEntry* _internal_add_fields();
-		public:
-			const ::frmpub::protocc::FieldsEntry& fields(int index) const;
-			::frmpub::protocc::FieldsEntry* add_fields();
-			const ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::frmpub::protocc::FieldsEntry >&
-				fields() const;
-
-			// string tag = 2;
-			void clear_tag();
-			const std::string& tag() const;
-			void set_tag(const std::string& value);
-			void set_tag(std::string&& value);
-			void set_tag(const char* value);
-			void set_tag(const char* value, size_t size);
-			std::string* mutable_tag();
-			std::string* release_tag();
-			void set_allocated_tag(std::string* tag);
-		private:
-			const std::string& _internal_tag() const;
-			void _internal_set_tag(const std::string& value);
-			std::string* _internal_mutable_tag();
-		public:
-
-			// int32 result = 1;
-			void clear_result();
-			::PROTOBUF_NAMESPACE_ID::int32 result() const;
-			void set_result(::PROTOBUF_NAMESPACE_ID::int32 value);
-		private:
-			::PROTOBUF_NAMESPACE_ID::int32 _internal_result() const;
-			void _internal_set_result(::PROTOBUF_NAMESPACE_ID::int32 value);
-		public:
-
-			// @@protoc_insertion_point(class_scope:frmpub.protocc.loaddata_from_dbvisit_s)
-		private:
-			class _Internal;
-
-			template <typename T> friend class ::PROTOBUF_NAMESPACE_ID::Arena::InternalHelper;
-			typedef void InternalArenaConstructable_;
-			typedef void DestructorSkippable_;
-			::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::frmpub::protocc::FieldsEntry > fields_;
-			::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr tag_;
-			::PROTOBUF_NAMESPACE_ID::int32 result_;
-			mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
-			friend struct ::TableStruct_dbvisit_2eproto;
-		};
-		// -------------------------------------------------------------------
-
-		class loaddata_more_from_dbvisit_c PROTOBUF_FINAL :
-			public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:frmpub.protocc.loaddata_more_from_dbvisit_c) */ {
-		public:
-			inline loaddata_more_from_dbvisit_c() : loaddata_more_from_dbvisit_c(nullptr) {}
-			virtual ~loaddata_more_from_dbvisit_c();
-			explicit constexpr loaddata_more_from_dbvisit_c(::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized);
-
-			loaddata_more_from_dbvisit_c(const loaddata_more_from_dbvisit_c& from);
-			loaddata_more_from_dbvisit_c(loaddata_more_from_dbvisit_c&& from) noexcept
-				: loaddata_more_from_dbvisit_c() {
-				*this = ::std::move(from);
-			}
-
-			inline loaddata_more_from_dbvisit_c& operator=(const loaddata_more_from_dbvisit_c& from) {
-				CopyFrom(from);
-				return *this;
-			}
-			inline loaddata_more_from_dbvisit_c& operator=(loaddata_more_from_dbvisit_c&& from) noexcept {
-				if (GetArena() == from.GetArena()) {
-					if (this != &from) InternalSwap(&from);
-				}
-				else {
-					CopyFrom(from);
-				}
-				return *this;
-			}
-
-			static const ::PROTOBUF_NAMESPACE_ID::Descriptor* descriptor() {
-				return GetDescriptor();
-			}
-			static const ::PROTOBUF_NAMESPACE_ID::Descriptor* GetDescriptor() {
-				return GetMetadataStatic().descriptor;
-			}
-			static const ::PROTOBUF_NAMESPACE_ID::Reflection* GetReflection() {
-				return GetMetadataStatic().reflection;
-			}
-			static const loaddata_more_from_dbvisit_c& default_instance() {
-				return *internal_default_instance();
-			}
-			static inline const loaddata_more_from_dbvisit_c* internal_default_instance() {
-				return reinterpret_cast<const loaddata_more_from_dbvisit_c*>(
-					&_loaddata_more_from_dbvisit_c_default_instance_);
-			}
-			static constexpr int kIndexInFileMessages =
-				2;
-
-			friend void swap(loaddata_more_from_dbvisit_c& a, loaddata_more_from_dbvisit_c& b) {
-				a.Swap(&b);
-			}
-			inline void Swap(loaddata_more_from_dbvisit_c* other) {
-				if (other == this) return;
-				if (GetArena() == other->GetArena()) {
-					InternalSwap(other);
-				}
-				else {
-					::PROTOBUF_NAMESPACE_ID::internal::GenericSwap(this, other);
-				}
-			}
-			void UnsafeArenaSwap(loaddata_more_from_dbvisit_c* other) {
-				if (other == this) return;
-				GOOGLE_DCHECK(GetArena() == other->GetArena());
-				InternalSwap(other);
-			}
-
-			// implements Message ----------------------------------------------
-
-			inline loaddata_more_from_dbvisit_c* New() const final {
-				return CreateMaybeMessage<loaddata_more_from_dbvisit_c>(nullptr);
-			}
-
-			loaddata_more_from_dbvisit_c* New(::PROTOBUF_NAMESPACE_ID::Arena* arena) const final {
-				return CreateMaybeMessage<loaddata_more_from_dbvisit_c>(arena);
-			}
-			void CopyFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) final;
-			void MergeFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) final;
-			void CopyFrom(const loaddata_more_from_dbvisit_c& from);
-			void MergeFrom(const loaddata_more_from_dbvisit_c& from);
-			PROTOBUF_ATTRIBUTE_REINITIALIZES void Clear() final;
-			bool IsInitialized() const final;
-
-			size_t ByteSizeLong() const final;
-			const char* _InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) final;
-			::PROTOBUF_NAMESPACE_ID::uint8* _InternalSerialize(
-				::PROTOBUF_NAMESPACE_ID::uint8* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const final;
-			int GetCachedSize() const final { return _cached_size_.Get(); }
-
-		private:
-			inline void SharedCtor();
-			inline void SharedDtor();
-			void SetCachedSize(int size) const final;
-			void InternalSwap(loaddata_more_from_dbvisit_c* other);
-			friend class ::PROTOBUF_NAMESPACE_ID::internal::AnyMetadata;
-			static ::PROTOBUF_NAMESPACE_ID::StringPiece FullMessageName() {
-				return "frmpub.protocc.loaddata_more_from_dbvisit_c";
-			}
-		protected:
-			explicit loaddata_more_from_dbvisit_c(::PROTOBUF_NAMESPACE_ID::Arena* arena);
-		private:
-			static void ArenaDtor(void* object);
-			inline void RegisterArenaDtor(::PROTOBUF_NAMESPACE_ID::Arena* arena);
-		public:
-
-			::PROTOBUF_NAMESPACE_ID::Metadata GetMetadata() const final;
-		private:
-			static ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadataStatic() {
-				return ::descriptor_table_dbvisit_2eproto_metadata_getter(kIndexInFileMessages);
-			}
-
-		public:
-
-			// nested types ----------------------------------------------------
-
-			// accessors -------------------------------------------------------
-
-			enum : int {
-				kFieldsFieldNumber = 3,
-				kTagFieldNumber = 1,
-				kConditionFieldNumber = 2,
-			};
-			// repeated .frmpub.protocc.FieldsEntry fields = 3;
-			int fields_size() const;
-		private:
-			int _internal_fields_size() const;
-		public:
-			void clear_fields();
-			::frmpub::protocc::FieldsEntry* mutable_fields(int index);
-			::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::frmpub::protocc::FieldsEntry >*
-				mutable_fields();
-		private:
-			const ::frmpub::protocc::FieldsEntry& _internal_fields(int index) const;
-			::frmpub::protocc::FieldsEntry* _internal_add_fields();
-		public:
-			const ::frmpub::protocc::FieldsEntry& fields(int index) const;
-			::frmpub::protocc::FieldsEntry* add_fields();
-			const ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::frmpub::protocc::FieldsEntry >&
-				fields() const;
-
-			// string tag = 1;
-			void clear_tag();
-			const std::string& tag() const;
-			void set_tag(const std::string& value);
-			void set_tag(std::string&& value);
-			void set_tag(const char* value);
-			void set_tag(const char* value, size_t size);
-			std::string* mutable_tag();
-			std::string* release_tag();
-			void set_allocated_tag(std::string* tag);
-		private:
-			const std::string& _internal_tag() const;
-			void _internal_set_tag(const std::string& value);
-			std::string* _internal_mutable_tag();
-		public:
-
-			// string condition = 2;
-			void clear_condition();
-			const std::string& condition() const;
-			void set_condition(const std::string& value);
-			void set_condition(std::string&& value);
-			void set_condition(const char* value);
-			void set_condition(const char* value, size_t size);
-			std::string* mutable_condition();
-			std::string* release_condition();
-			void set_allocated_condition(std::string* condition);
-		private:
-			const std::string& _internal_condition() const;
-			void _internal_set_condition(const std::string& value);
-			std::string* _internal_mutable_condition();
-		public:
-
-			// @@protoc_insertion_point(class_scope:frmpub.protocc.loaddata_more_from_dbvisit_c)
-		private:
-			class _Internal;
-
-			template <typename T> friend class ::PROTOBUF_NAMESPACE_ID::Arena::InternalHelper;
-			typedef void InternalArenaConstructable_;
-			typedef void DestructorSkippable_;
-			::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::frmpub::protocc::FieldsEntry > fields_;
-			::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr tag_;
-			::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr condition_;
-			mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
-			friend struct ::TableStruct_dbvisit_2eproto;
-		};
-		// -------------------------------------------------------------------
-
-		class loaddata_more_from_dbvisit_s_item PROTOBUF_FINAL :
-			public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:frmpub.protocc.loaddata_more_from_dbvisit_s.item) */ {
-		public:
-			inline loaddata_more_from_dbvisit_s_item() : loaddata_more_from_dbvisit_s_item(nullptr) {}
-			virtual ~loaddata_more_from_dbvisit_s_item();
-			explicit constexpr loaddata_more_from_dbvisit_s_item(::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized);
-
-			loaddata_more_from_dbvisit_s_item(const loaddata_more_from_dbvisit_s_item& from);
-			loaddata_more_from_dbvisit_s_item(loaddata_more_from_dbvisit_s_item&& from) noexcept
-				: loaddata_more_from_dbvisit_s_item() {
-				*this = ::std::move(from);
-			}
-
-			inline loaddata_more_from_dbvisit_s_item& operator=(const loaddata_more_from_dbvisit_s_item& from) {
-				CopyFrom(from);
-				return *this;
-			}
-			inline loaddata_more_from_dbvisit_s_item& operator=(loaddata_more_from_dbvisit_s_item&& from) noexcept {
-				if (GetArena() == from.GetArena()) {
-					if (this != &from) InternalSwap(&from);
-				}
-				else {
-					CopyFrom(from);
-				}
-				return *this;
-			}
-
-			static const ::PROTOBUF_NAMESPACE_ID::Descriptor* descriptor() {
-				return GetDescriptor();
-			}
-			static const ::PROTOBUF_NAMESPACE_ID::Descriptor* GetDescriptor() {
-				return GetMetadataStatic().descriptor;
-			}
-			static const ::PROTOBUF_NAMESPACE_ID::Reflection* GetReflection() {
-				return GetMetadataStatic().reflection;
-			}
-			static const loaddata_more_from_dbvisit_s_item& default_instance() {
-				return *internal_default_instance();
-			}
-			static inline const loaddata_more_from_dbvisit_s_item* internal_default_instance() {
-				return reinterpret_cast<const loaddata_more_from_dbvisit_s_item*>(
-					&_loaddata_more_from_dbvisit_s_item_default_instance_);
-			}
-			static constexpr int kIndexInFileMessages =
-				3;
-
-			friend void swap(loaddata_more_from_dbvisit_s_item& a, loaddata_more_from_dbvisit_s_item& b) {
-				a.Swap(&b);
-			}
-			inline void Swap(loaddata_more_from_dbvisit_s_item* other) {
-				if (other == this) return;
-				if (GetArena() == other->GetArena()) {
-					InternalSwap(other);
-				}
-				else {
-					::PROTOBUF_NAMESPACE_ID::internal::GenericSwap(this, other);
-				}
-			}
-			void UnsafeArenaSwap(loaddata_more_from_dbvisit_s_item* other) {
-				if (other == this) return;
-				GOOGLE_DCHECK(GetArena() == other->GetArena());
-				InternalSwap(other);
-			}
-
-			// implements Message ----------------------------------------------
-
-			inline loaddata_more_from_dbvisit_s_item* New() const final {
-				return CreateMaybeMessage<loaddata_more_from_dbvisit_s_item>(nullptr);
-			}
-
-			loaddata_more_from_dbvisit_s_item* New(::PROTOBUF_NAMESPACE_ID::Arena* arena) const final {
-				return CreateMaybeMessage<loaddata_more_from_dbvisit_s_item>(arena);
-			}
-			void CopyFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) final;
-			void MergeFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) final;
-			void CopyFrom(const loaddata_more_from_dbvisit_s_item& from);
-			void MergeFrom(const loaddata_more_from_dbvisit_s_item& from);
-			PROTOBUF_ATTRIBUTE_REINITIALIZES void Clear() final;
-			bool IsInitialized() const final;
-
-			size_t ByteSizeLong() const final;
-			const char* _InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) final;
-			::PROTOBUF_NAMESPACE_ID::uint8* _InternalSerialize(
-				::PROTOBUF_NAMESPACE_ID::uint8* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const final;
-			int GetCachedSize() const final { return _cached_size_.Get(); }
-
-		private:
-			inline void SharedCtor();
-			inline void SharedDtor();
-			void SetCachedSize(int size) const final;
-			void InternalSwap(loaddata_more_from_dbvisit_s_item* other);
-			friend class ::PROTOBUF_NAMESPACE_ID::internal::AnyMetadata;
-			static ::PROTOBUF_NAMESPACE_ID::StringPiece FullMessageName() {
-				return "frmpub.protocc.loaddata_more_from_dbvisit_s.item";
-			}
-		protected:
-			explicit loaddata_more_from_dbvisit_s_item(::PROTOBUF_NAMESPACE_ID::Arena* arena);
-		private:
-			static void ArenaDtor(void* object);
-			inline void RegisterArenaDtor(::PROTOBUF_NAMESPACE_ID::Arena* arena);
-		public:
-
-			::PROTOBUF_NAMESPACE_ID::Metadata GetMetadata() const final;
-		private:
-			static ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadataStatic() {
-				return ::descriptor_table_dbvisit_2eproto_metadata_getter(kIndexInFileMessages);
-			}
-
-		public:
-
-			// nested types ----------------------------------------------------
-
-			// accessors -------------------------------------------------------
-
-			enum : int {
-				kFieldsFieldNumber = 1,
-			};
-			// repeated .frmpub.protocc.FieldsEntry fields = 1;
-			int fields_size() const;
-		private:
-			int _internal_fields_size() const;
-		public:
-			void clear_fields();
-			::frmpub::protocc::FieldsEntry* mutable_fields(int index);
-			::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::frmpub::protocc::FieldsEntry >*
-				mutable_fields();
-		private:
-			const ::frmpub::protocc::FieldsEntry& _internal_fields(int index) const;
-			::frmpub::protocc::FieldsEntry* _internal_add_fields();
-		public:
-			const ::frmpub::protocc::FieldsEntry& fields(int index) const;
-			::frmpub::protocc::FieldsEntry* add_fields();
-			const ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::frmpub::protocc::FieldsEntry >&
-				fields() const;
-
-			// @@protoc_insertion_point(class_scope:frmpub.protocc.loaddata_more_from_dbvisit_s.item)
-		private:
-			class _Internal;
-
-			template <typename T> friend class ::PROTOBUF_NAMESPACE_ID::Arena::InternalHelper;
-			typedef void InternalArenaConstructable_;
-			typedef void DestructorSkippable_;
-			::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::frmpub::protocc::FieldsEntry > fields_;
-			mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
-			friend struct ::TableStruct_dbvisit_2eproto;
-		};
-		// -------------------------------------------------------------------
-
-		class loaddata_more_from_dbvisit_s PROTOBUF_FINAL :
-			public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:frmpub.protocc.loaddata_more_from_dbvisit_s) */ {
-		public:
-			inline loaddata_more_from_dbvisit_s() : loaddata_more_from_dbvisit_s(nullptr) {}
-			virtual ~loaddata_more_from_dbvisit_s();
-			explicit constexpr loaddata_more_from_dbvisit_s(::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized);
-
-			loaddata_more_from_dbvisit_s(const loaddata_more_from_dbvisit_s& from);
-			loaddata_more_from_dbvisit_s(loaddata_more_from_dbvisit_s&& from) noexcept
-				: loaddata_more_from_dbvisit_s() {
-				*this = ::std::move(from);
-			}
-
-			inline loaddata_more_from_dbvisit_s& operator=(const loaddata_more_from_dbvisit_s& from) {
-				CopyFrom(from);
-				return *this;
-			}
-			inline loaddata_more_from_dbvisit_s& operator=(loaddata_more_from_dbvisit_s&& from) noexcept {
-				if (GetArena() == from.GetArena()) {
-					if (this != &from) InternalSwap(&from);
-				}
-				else {
-					CopyFrom(from);
-				}
-				return *this;
-			}
-
-			static const ::PROTOBUF_NAMESPACE_ID::Descriptor* descriptor() {
-				return GetDescriptor();
-			}
-			static const ::PROTOBUF_NAMESPACE_ID::Descriptor* GetDescriptor() {
-				return GetMetadataStatic().descriptor;
-			}
-			static const ::PROTOBUF_NAMESPACE_ID::Reflection* GetReflection() {
-				return GetMetadataStatic().reflection;
-			}
-			static const loaddata_more_from_dbvisit_s& default_instance() {
-				return *internal_default_instance();
-			}
-			static inline const loaddata_more_from_dbvisit_s* internal_default_instance() {
-				return reinterpret_cast<const loaddata_more_from_dbvisit_s*>(
-					&_loaddata_more_from_dbvisit_s_default_instance_);
-			}
-			static constexpr int kIndexInFileMessages =
-				4;
-
-			friend void swap(loaddata_more_from_dbvisit_s& a, loaddata_more_from_dbvisit_s& b) {
-				a.Swap(&b);
-			}
-			inline void Swap(loaddata_more_from_dbvisit_s* other) {
-				if (other == this) return;
-				if (GetArena() == other->GetArena()) {
-					InternalSwap(other);
-				}
-				else {
-					::PROTOBUF_NAMESPACE_ID::internal::GenericSwap(this, other);
-				}
-			}
-			void UnsafeArenaSwap(loaddata_more_from_dbvisit_s* other) {
-				if (other == this) return;
-				GOOGLE_DCHECK(GetArena() == other->GetArena());
-				InternalSwap(other);
-			}
-
-			// implements Message ----------------------------------------------
-
-			inline loaddata_more_from_dbvisit_s* New() const final {
-				return CreateMaybeMessage<loaddata_more_from_dbvisit_s>(nullptr);
-			}
-
-			loaddata_more_from_dbvisit_s* New(::PROTOBUF_NAMESPACE_ID::Arena* arena) const final {
-				return CreateMaybeMessage<loaddata_more_from_dbvisit_s>(arena);
-			}
-			void CopyFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) final;
-			void MergeFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) final;
-			void CopyFrom(const loaddata_more_from_dbvisit_s& from);
-			void MergeFrom(const loaddata_more_from_dbvisit_s& from);
-			PROTOBUF_ATTRIBUTE_REINITIALIZES void Clear() final;
-			bool IsInitialized() const final;
-
-			size_t ByteSizeLong() const final;
-			const char* _InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) final;
-			::PROTOBUF_NAMESPACE_ID::uint8* _InternalSerialize(
-				::PROTOBUF_NAMESPACE_ID::uint8* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const final;
-			int GetCachedSize() const final { return _cached_size_.Get(); }
-
-		private:
-			inline void SharedCtor();
-			inline void SharedDtor();
-			void SetCachedSize(int size) const final;
-			void InternalSwap(loaddata_more_from_dbvisit_s* other);
-			friend class ::PROTOBUF_NAMESPACE_ID::internal::AnyMetadata;
-			static ::PROTOBUF_NAMESPACE_ID::StringPiece FullMessageName() {
-				return "frmpub.protocc.loaddata_more_from_dbvisit_s";
-			}
-		protected:
-			explicit loaddata_more_from_dbvisit_s(::PROTOBUF_NAMESPACE_ID::Arena* arena);
-		private:
-			static void ArenaDtor(void* object);
-			inline void RegisterArenaDtor(::PROTOBUF_NAMESPACE_ID::Arena* arena);
-		public:
-
-			::PROTOBUF_NAMESPACE_ID::Metadata GetMetadata() const final;
-		private:
-			static ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadataStatic() {
-				return ::descriptor_table_dbvisit_2eproto_metadata_getter(kIndexInFileMessages);
-			}
-
-		public:
-
-			// nested types ----------------------------------------------------
-
-			typedef loaddata_more_from_dbvisit_s_item item;
-
-			// accessors -------------------------------------------------------
-
-			enum : int {
-				kObjsFieldNumber = 3,
-				kTagFieldNumber = 2,
-				kResultFieldNumber = 1,
-			};
-			// repeated .frmpub.protocc.loaddata_more_from_dbvisit_s.item objs = 3;
-			int objs_size() const;
-		private:
-			int _internal_objs_size() const;
-		public:
-			void clear_objs();
-			::frmpub::protocc::loaddata_more_from_dbvisit_s_item* mutable_objs(int index);
-			::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::frmpub::protocc::loaddata_more_from_dbvisit_s_item >*
-				mutable_objs();
-		private:
-			const ::frmpub::protocc::loaddata_more_from_dbvisit_s_item& _internal_objs(int index) const;
-			::frmpub::protocc::loaddata_more_from_dbvisit_s_item* _internal_add_objs();
-		public:
-			const ::frmpub::protocc::loaddata_more_from_dbvisit_s_item& objs(int index) const;
-			::frmpub::protocc::loaddata_more_from_dbvisit_s_item* add_objs();
-			const ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::frmpub::protocc::loaddata_more_from_dbvisit_s_item >&
-				objs() const;
-
-			// string tag = 2;
-			void clear_tag();
-			const std::string& tag() const;
-			void set_tag(const std::string& value);
-			void set_tag(std::string&& value);
-			void set_tag(const char* value);
-			void set_tag(const char* value, size_t size);
-			std::string* mutable_tag();
-			std::string* release_tag();
-			void set_allocated_tag(std::string* tag);
-		private:
-			const std::string& _internal_tag() const;
-			void _internal_set_tag(const std::string& value);
-			std::string* _internal_mutable_tag();
-		public:
-
-			// int32 result = 1;
-			void clear_result();
-			::PROTOBUF_NAMESPACE_ID::int32 result() const;
-			void set_result(::PROTOBUF_NAMESPACE_ID::int32 value);
-		private:
-			::PROTOBUF_NAMESPACE_ID::int32 _internal_result() const;
-			void _internal_set_result(::PROTOBUF_NAMESPACE_ID::int32 value);
-		public:
-
-			// @@protoc_insertion_point(class_scope:frmpub.protocc.loaddata_more_from_dbvisit_s)
-		private:
-			class _Internal;
-
-			template <typename T> friend class ::PROTOBUF_NAMESPACE_ID::Arena::InternalHelper;
-			typedef void InternalArenaConstructable_;
-			typedef void DestructorSkippable_;
-			::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::frmpub::protocc::loaddata_more_from_dbvisit_s_item > objs_;
-			::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr tag_;
-			::PROTOBUF_NAMESPACE_ID::int32 result_;
-			mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
-			friend struct ::TableStruct_dbvisit_2eproto;
-		};
-		// -------------------------------------------------------------------
-
-		class insertdata_to_dbvisit_c PROTOBUF_FINAL :
-			public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:frmpub.protocc.insertdata_to_dbvisit_c) */ {
-		public:
-			inline insertdata_to_dbvisit_c() : insertdata_to_dbvisit_c(nullptr) {}
-			virtual ~insertdata_to_dbvisit_c();
-			explicit constexpr insertdata_to_dbvisit_c(::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized);
-
-			insertdata_to_dbvisit_c(const insertdata_to_dbvisit_c& from);
-			insertdata_to_dbvisit_c(insertdata_to_dbvisit_c&& from) noexcept
-				: insertdata_to_dbvisit_c() {
-				*this = ::std::move(from);
-			}
-
-			inline insertdata_to_dbvisit_c& operator=(const insertdata_to_dbvisit_c& from) {
-				CopyFrom(from);
-				return *this;
-			}
-			inline insertdata_to_dbvisit_c& operator=(insertdata_to_dbvisit_c&& from) noexcept {
-				if (GetArena() == from.GetArena()) {
-					if (this != &from) InternalSwap(&from);
-				}
-				else {
-					CopyFrom(from);
-				}
-				return *this;
-			}
-
-			static const ::PROTOBUF_NAMESPACE_ID::Descriptor* descriptor() {
-				return GetDescriptor();
-			}
-			static const ::PROTOBUF_NAMESPACE_ID::Descriptor* GetDescriptor() {
-				return GetMetadataStatic().descriptor;
-			}
-			static const ::PROTOBUF_NAMESPACE_ID::Reflection* GetReflection() {
-				return GetMetadataStatic().reflection;
-			}
-			static const insertdata_to_dbvisit_c& default_instance() {
-				return *internal_default_instance();
-			}
-			static inline const insertdata_to_dbvisit_c* internal_default_instance() {
-				return reinterpret_cast<const insertdata_to_dbvisit_c*>(
-					&_insertdata_to_dbvisit_c_default_instance_);
-			}
-			static constexpr int kIndexInFileMessages =
-				5;
-
-			friend void swap(insertdata_to_dbvisit_c& a, insertdata_to_dbvisit_c& b) {
-				a.Swap(&b);
-			}
-			inline void Swap(insertdata_to_dbvisit_c* other) {
-				if (other == this) return;
-				if (GetArena() == other->GetArena()) {
-					InternalSwap(other);
-				}
-				else {
-					::PROTOBUF_NAMESPACE_ID::internal::GenericSwap(this, other);
-				}
-			}
-			void UnsafeArenaSwap(insertdata_to_dbvisit_c* other) {
-				if (other == this) return;
-				GOOGLE_DCHECK(GetArena() == other->GetArena());
-				InternalSwap(other);
-			}
-
-			// implements Message ----------------------------------------------
-
-			inline insertdata_to_dbvisit_c* New() const final {
-				return CreateMaybeMessage<insertdata_to_dbvisit_c>(nullptr);
-			}
-
-			insertdata_to_dbvisit_c* New(::PROTOBUF_NAMESPACE_ID::Arena* arena) const final {
-				return CreateMaybeMessage<insertdata_to_dbvisit_c>(arena);
-			}
-			void CopyFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) final;
-			void MergeFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) final;
-			void CopyFrom(const insertdata_to_dbvisit_c& from);
-			void MergeFrom(const insertdata_to_dbvisit_c& from);
-			PROTOBUF_ATTRIBUTE_REINITIALIZES void Clear() final;
-			bool IsInitialized() const final;
-
-			size_t ByteSizeLong() const final;
-			const char* _InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) final;
-			::PROTOBUF_NAMESPACE_ID::uint8* _InternalSerialize(
-				::PROTOBUF_NAMESPACE_ID::uint8* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const final;
-			int GetCachedSize() const final { return _cached_size_.Get(); }
-
-		private:
-			inline void SharedCtor();
-			inline void SharedDtor();
-			void SetCachedSize(int size) const final;
-			void InternalSwap(insertdata_to_dbvisit_c* other);
-			friend class ::PROTOBUF_NAMESPACE_ID::internal::AnyMetadata;
-			static ::PROTOBUF_NAMESPACE_ID::StringPiece FullMessageName() {
-				return "frmpub.protocc.insertdata_to_dbvisit_c";
-			}
-		protected:
-			explicit insertdata_to_dbvisit_c(::PROTOBUF_NAMESPACE_ID::Arena* arena);
-		private:
-			static void ArenaDtor(void* object);
-			inline void RegisterArenaDtor(::PROTOBUF_NAMESPACE_ID::Arena* arena);
-		public:
-
-			::PROTOBUF_NAMESPACE_ID::Metadata GetMetadata() const final;
-		private:
-			static ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadataStatic() {
-				return ::descriptor_table_dbvisit_2eproto_metadata_getter(kIndexInFileMessages);
-			}
-
-		public:
-
-			// nested types ----------------------------------------------------
-
-			// accessors -------------------------------------------------------
-
-			enum : int {
-				kFieldsFieldNumber = 3,
-				kTagFieldNumber = 1,
-				kCacheKeyFieldNumber = 2,
-			};
-			// repeated .frmpub.protocc.FieldsEntry fields = 3;
-			int fields_size() const;
-		private:
-			int _internal_fields_size() const;
-		public:
-			void clear_fields();
-			::frmpub::protocc::FieldsEntry* mutable_fields(int index);
-			::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::frmpub::protocc::FieldsEntry >*
-				mutable_fields();
-		private:
-			const ::frmpub::protocc::FieldsEntry& _internal_fields(int index) const;
-			::frmpub::protocc::FieldsEntry* _internal_add_fields();
-		public:
-			const ::frmpub::protocc::FieldsEntry& fields(int index) const;
-			::frmpub::protocc::FieldsEntry* add_fields();
-			const ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::frmpub::protocc::FieldsEntry >&
-				fields() const;
-
-			// string tag = 1;
-			void clear_tag();
-			const std::string& tag() const;
-			void set_tag(const std::string& value);
-			void set_tag(std::string&& value);
-			void set_tag(const char* value);
-			void set_tag(const char* value, size_t size);
-			std::string* mutable_tag();
-			std::string* release_tag();
-			void set_allocated_tag(std::string* tag);
-		private:
-			const std::string& _internal_tag() const;
-			void _internal_set_tag(const std::string& value);
-			std::string* _internal_mutable_tag();
-		public:
-
-			// string cache_key = 2;
-			void clear_cache_key();
-			const std::string& cache_key() const;
-			void set_cache_key(const std::string& value);
-			void set_cache_key(std::string&& value);
-			void set_cache_key(const char* value);
-			void set_cache_key(const char* value, size_t size);
-			std::string* mutable_cache_key();
-			std::string* release_cache_key();
-			void set_allocated_cache_key(std::string* cache_key);
-		private:
-			const std::string& _internal_cache_key() const;
-			void _internal_set_cache_key(const std::string& value);
-			std::string* _internal_mutable_cache_key();
-		public:
-
-			// @@protoc_insertion_point(class_scope:frmpub.protocc.insertdata_to_dbvisit_c)
-		private:
-			class _Internal;
-
-			template <typename T> friend class ::PROTOBUF_NAMESPACE_ID::Arena::InternalHelper;
-			typedef void InternalArenaConstructable_;
-			typedef void DestructorSkippable_;
-			::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::frmpub::protocc::FieldsEntry > fields_;
-			::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr tag_;
-			::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr cache_key_;
-			mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
-			friend struct ::TableStruct_dbvisit_2eproto;
-		};
-		// -------------------------------------------------------------------
-
-		class insertdata_to_dbvisit_s PROTOBUF_FINAL :
-			public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:frmpub.protocc.insertdata_to_dbvisit_s) */ {
-		public:
-			inline insertdata_to_dbvisit_s() : insertdata_to_dbvisit_s(nullptr) {}
-			virtual ~insertdata_to_dbvisit_s();
-			explicit constexpr insertdata_to_dbvisit_s(::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized);
-
-			insertdata_to_dbvisit_s(const insertdata_to_dbvisit_s& from);
-			insertdata_to_dbvisit_s(insertdata_to_dbvisit_s&& from) noexcept
-				: insertdata_to_dbvisit_s() {
-				*this = ::std::move(from);
-			}
-
-			inline insertdata_to_dbvisit_s& operator=(const insertdata_to_dbvisit_s& from) {
-				CopyFrom(from);
-				return *this;
-			}
-			inline insertdata_to_dbvisit_s& operator=(insertdata_to_dbvisit_s&& from) noexcept {
-				if (GetArena() == from.GetArena()) {
-					if (this != &from) InternalSwap(&from);
-				}
-				else {
-					CopyFrom(from);
-				}
-				return *this;
-			}
-
-			static const ::PROTOBUF_NAMESPACE_ID::Descriptor* descriptor() {
-				return GetDescriptor();
-			}
-			static const ::PROTOBUF_NAMESPACE_ID::Descriptor* GetDescriptor() {
-				return GetMetadataStatic().descriptor;
-			}
-			static const ::PROTOBUF_NAMESPACE_ID::Reflection* GetReflection() {
-				return GetMetadataStatic().reflection;
-			}
-			static const insertdata_to_dbvisit_s& default_instance() {
-				return *internal_default_instance();
-			}
-			static inline const insertdata_to_dbvisit_s* internal_default_instance() {
-				return reinterpret_cast<const insertdata_to_dbvisit_s*>(
-					&_insertdata_to_dbvisit_s_default_instance_);
-			}
-			static constexpr int kIndexInFileMessages =
-				6;
-
-			friend void swap(insertdata_to_dbvisit_s& a, insertdata_to_dbvisit_s& b) {
-				a.Swap(&b);
-			}
-			inline void Swap(insertdata_to_dbvisit_s* other) {
-				if (other == this) return;
-				if (GetArena() == other->GetArena()) {
-					InternalSwap(other);
-				}
-				else {
-					::PROTOBUF_NAMESPACE_ID::internal::GenericSwap(this, other);
-				}
-			}
-			void UnsafeArenaSwap(insertdata_to_dbvisit_s* other) {
-				if (other == this) return;
-				GOOGLE_DCHECK(GetArena() == other->GetArena());
-				InternalSwap(other);
-			}
-
-			// implements Message ----------------------------------------------
-
-			inline insertdata_to_dbvisit_s* New() const final {
-				return CreateMaybeMessage<insertdata_to_dbvisit_s>(nullptr);
-			}
-
-			insertdata_to_dbvisit_s* New(::PROTOBUF_NAMESPACE_ID::Arena* arena) const final {
-				return CreateMaybeMessage<insertdata_to_dbvisit_s>(arena);
-			}
-			void CopyFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) final;
-			void MergeFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) final;
-			void CopyFrom(const insertdata_to_dbvisit_s& from);
-			void MergeFrom(const insertdata_to_dbvisit_s& from);
-			PROTOBUF_ATTRIBUTE_REINITIALIZES void Clear() final;
-			bool IsInitialized() const final;
-
-			size_t ByteSizeLong() const final;
-			const char* _InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) final;
-			::PROTOBUF_NAMESPACE_ID::uint8* _InternalSerialize(
-				::PROTOBUF_NAMESPACE_ID::uint8* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const final;
-			int GetCachedSize() const final { return _cached_size_.Get(); }
-
-		private:
-			inline void SharedCtor();
-			inline void SharedDtor();
-			void SetCachedSize(int size) const final;
-			void InternalSwap(insertdata_to_dbvisit_s* other);
-			friend class ::PROTOBUF_NAMESPACE_ID::internal::AnyMetadata;
-			static ::PROTOBUF_NAMESPACE_ID::StringPiece FullMessageName() {
-				return "frmpub.protocc.insertdata_to_dbvisit_s";
-			}
-		protected:
-			explicit insertdata_to_dbvisit_s(::PROTOBUF_NAMESPACE_ID::Arena* arena);
-		private:
-			static void ArenaDtor(void* object);
-			inline void RegisterArenaDtor(::PROTOBUF_NAMESPACE_ID::Arena* arena);
-		public:
-
-			::PROTOBUF_NAMESPACE_ID::Metadata GetMetadata() const final;
-		private:
-			static ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadataStatic() {
-				return ::descriptor_table_dbvisit_2eproto_metadata_getter(kIndexInFileMessages);
-			}
-
-		public:
-
-			// nested types ----------------------------------------------------
-
-			// accessors -------------------------------------------------------
-
-			enum : int {
-				kTagFieldNumber = 2,
-				kResultFieldNumber = 1,
-			};
-			// string tag = 2;
-			void clear_tag();
-			const std::string& tag() const;
-			void set_tag(const std::string& value);
-			void set_tag(std::string&& value);
-			void set_tag(const char* value);
-			void set_tag(const char* value, size_t size);
-			std::string* mutable_tag();
-			std::string* release_tag();
-			void set_allocated_tag(std::string* tag);
-		private:
-			const std::string& _internal_tag() const;
-			void _internal_set_tag(const std::string& value);
-			std::string* _internal_mutable_tag();
-		public:
-
-			// int32 result = 1;
-			void clear_result();
-			::PROTOBUF_NAMESPACE_ID::int32 result() const;
-			void set_result(::PROTOBUF_NAMESPACE_ID::int32 value);
-		private:
-			::PROTOBUF_NAMESPACE_ID::int32 _internal_result() const;
-			void _internal_set_result(::PROTOBUF_NAMESPACE_ID::int32 value);
-		public:
-
-			// @@protoc_insertion_point(class_scope:frmpub.protocc.insertdata_to_dbvisit_s)
-		private:
-			class _Internal;
-
-			template <typename T> friend class ::PROTOBUF_NAMESPACE_ID::Arena::InternalHelper;
-			typedef void InternalArenaConstructable_;
-			typedef void DestructorSkippable_;
-			::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr tag_;
-			::PROTOBUF_NAMESPACE_ID::int32 result_;
-			mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
-			friend struct ::TableStruct_dbvisit_2eproto;
-		};
-		// -------------------------------------------------------------------
-
-		class updata_to_dbvisit_c PROTOBUF_FINAL :
-			public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:frmpub.protocc.updata_to_dbvisit_c) */ {
-		public:
-			inline updata_to_dbvisit_c() : updata_to_dbvisit_c(nullptr) {}
-			virtual ~updata_to_dbvisit_c();
-			explicit constexpr updata_to_dbvisit_c(::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized);
-
-			updata_to_dbvisit_c(const updata_to_dbvisit_c& from);
-			updata_to_dbvisit_c(updata_to_dbvisit_c&& from) noexcept
-				: updata_to_dbvisit_c() {
-				*this = ::std::move(from);
-			}
-
-			inline updata_to_dbvisit_c& operator=(const updata_to_dbvisit_c& from) {
-				CopyFrom(from);
-				return *this;
-			}
-			inline updata_to_dbvisit_c& operator=(updata_to_dbvisit_c&& from) noexcept {
-				if (GetArena() == from.GetArena()) {
-					if (this != &from) InternalSwap(&from);
-				}
-				else {
-					CopyFrom(from);
-				}
-				return *this;
-			}
-
-			static const ::PROTOBUF_NAMESPACE_ID::Descriptor* descriptor() {
-				return GetDescriptor();
-			}
-			static const ::PROTOBUF_NAMESPACE_ID::Descriptor* GetDescriptor() {
-				return GetMetadataStatic().descriptor;
-			}
-			static const ::PROTOBUF_NAMESPACE_ID::Reflection* GetReflection() {
-				return GetMetadataStatic().reflection;
-			}
-			static const updata_to_dbvisit_c& default_instance() {
-				return *internal_default_instance();
-			}
-			static inline const updata_to_dbvisit_c* internal_default_instance() {
-				return reinterpret_cast<const updata_to_dbvisit_c*>(
-					&_updata_to_dbvisit_c_default_instance_);
-			}
-			static constexpr int kIndexInFileMessages =
-				7;
-
-			friend void swap(updata_to_dbvisit_c& a, updata_to_dbvisit_c& b) {
-				a.Swap(&b);
-			}
-			inline void Swap(updata_to_dbvisit_c* other) {
-				if (other == this) return;
-				if (GetArena() == other->GetArena()) {
-					InternalSwap(other);
-				}
-				else {
-					::PROTOBUF_NAMESPACE_ID::internal::GenericSwap(this, other);
-				}
-			}
-			void UnsafeArenaSwap(updata_to_dbvisit_c* other) {
-				if (other == this) return;
-				GOOGLE_DCHECK(GetArena() == other->GetArena());
-				InternalSwap(other);
-			}
-
-			// implements Message ----------------------------------------------
-
-			inline updata_to_dbvisit_c* New() const final {
-				return CreateMaybeMessage<updata_to_dbvisit_c>(nullptr);
-			}
-
-			updata_to_dbvisit_c* New(::PROTOBUF_NAMESPACE_ID::Arena* arena) const final {
-				return CreateMaybeMessage<updata_to_dbvisit_c>(arena);
-			}
-			void CopyFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) final;
-			void MergeFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) final;
-			void CopyFrom(const updata_to_dbvisit_c& from);
-			void MergeFrom(const updata_to_dbvisit_c& from);
-			PROTOBUF_ATTRIBUTE_REINITIALIZES void Clear() final;
-			bool IsInitialized() const final;
-
-			size_t ByteSizeLong() const final;
-			const char* _InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) final;
-			::PROTOBUF_NAMESPACE_ID::uint8* _InternalSerialize(
-				::PROTOBUF_NAMESPACE_ID::uint8* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const final;
-			int GetCachedSize() const final { return _cached_size_.Get(); }
-
-		private:
-			inline void SharedCtor();
-			inline void SharedDtor();
-			void SetCachedSize(int size) const final;
-			void InternalSwap(updata_to_dbvisit_c* other);
-			friend class ::PROTOBUF_NAMESPACE_ID::internal::AnyMetadata;
-			static ::PROTOBUF_NAMESPACE_ID::StringPiece FullMessageName() {
-				return "frmpub.protocc.updata_to_dbvisit_c";
-			}
-		protected:
-			explicit updata_to_dbvisit_c(::PROTOBUF_NAMESPACE_ID::Arena* arena);
-		private:
-			static void ArenaDtor(void* object);
-			inline void RegisterArenaDtor(::PROTOBUF_NAMESPACE_ID::Arena* arena);
-		public:
-
-			::PROTOBUF_NAMESPACE_ID::Metadata GetMetadata() const final;
-		private:
-			static ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadataStatic() {
-				return ::descriptor_table_dbvisit_2eproto_metadata_getter(kIndexInFileMessages);
-			}
-
-		public:
-
-			// nested types ----------------------------------------------------
-
-			// accessors -------------------------------------------------------
-
-			enum : int {
-				kFieldsFieldNumber = 3,
-				kTagFieldNumber = 1,
-				kCacheKeyFieldNumber = 2,
-			};
-			// repeated .frmpub.protocc.FieldsEntry fields = 3;
-			int fields_size() const;
-		private:
-			int _internal_fields_size() const;
-		public:
-			void clear_fields();
-			::frmpub::protocc::FieldsEntry* mutable_fields(int index);
-			::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::frmpub::protocc::FieldsEntry >*
-				mutable_fields();
-		private:
-			const ::frmpub::protocc::FieldsEntry& _internal_fields(int index) const;
-			::frmpub::protocc::FieldsEntry* _internal_add_fields();
-		public:
-			const ::frmpub::protocc::FieldsEntry& fields(int index) const;
-			::frmpub::protocc::FieldsEntry* add_fields();
-			const ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::frmpub::protocc::FieldsEntry >&
-				fields() const;
-
-			// string tag = 1;
-			void clear_tag();
-			const std::string& tag() const;
-			void set_tag(const std::string& value);
-			void set_tag(std::string&& value);
-			void set_tag(const char* value);
-			void set_tag(const char* value, size_t size);
-			std::string* mutable_tag();
-			std::string* release_tag();
-			void set_allocated_tag(std::string* tag);
-		private:
-			const std::string& _internal_tag() const;
-			void _internal_set_tag(const std::string& value);
-			std::string* _internal_mutable_tag();
-		public:
-
-			// string cache_key = 2;
-			void clear_cache_key();
-			const std::string& cache_key() const;
-			void set_cache_key(const std::string& value);
-			void set_cache_key(std::string&& value);
-			void set_cache_key(const char* value);
-			void set_cache_key(const char* value, size_t size);
-			std::string* mutable_cache_key();
-			std::string* release_cache_key();
-			void set_allocated_cache_key(std::string* cache_key);
-		private:
-			const std::string& _internal_cache_key() const;
-			void _internal_set_cache_key(const std::string& value);
-			std::string* _internal_mutable_cache_key();
-		public:
-
-			// @@protoc_insertion_point(class_scope:frmpub.protocc.updata_to_dbvisit_c)
-		private:
-			class _Internal;
-
-			template <typename T> friend class ::PROTOBUF_NAMESPACE_ID::Arena::InternalHelper;
-			typedef void InternalArenaConstructable_;
-			typedef void DestructorSkippable_;
-			::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::frmpub::protocc::FieldsEntry > fields_;
-			::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr tag_;
-			::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr cache_key_;
-			mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
-			friend struct ::TableStruct_dbvisit_2eproto;
-		};
-		// -------------------------------------------------------------------
-
-		class updata_to_dbvisit_s PROTOBUF_FINAL :
-			public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:frmpub.protocc.updata_to_dbvisit_s) */ {
-		public:
-			inline updata_to_dbvisit_s() : updata_to_dbvisit_s(nullptr) {}
-			virtual ~updata_to_dbvisit_s();
-			explicit constexpr updata_to_dbvisit_s(::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized);
-
-			updata_to_dbvisit_s(const updata_to_dbvisit_s& from);
-			updata_to_dbvisit_s(updata_to_dbvisit_s&& from) noexcept
-				: updata_to_dbvisit_s() {
-				*this = ::std::move(from);
-			}
-
-			inline updata_to_dbvisit_s& operator=(const updata_to_dbvisit_s& from) {
-				CopyFrom(from);
-				return *this;
-			}
-			inline updata_to_dbvisit_s& operator=(updata_to_dbvisit_s&& from) noexcept {
-				if (GetArena() == from.GetArena()) {
-					if (this != &from) InternalSwap(&from);
-				}
-				else {
-					CopyFrom(from);
-				}
-				return *this;
-			}
-
-			static const ::PROTOBUF_NAMESPACE_ID::Descriptor* descriptor() {
-				return GetDescriptor();
-			}
-			static const ::PROTOBUF_NAMESPACE_ID::Descriptor* GetDescriptor() {
-				return GetMetadataStatic().descriptor;
-			}
-			static const ::PROTOBUF_NAMESPACE_ID::Reflection* GetReflection() {
-				return GetMetadataStatic().reflection;
-			}
-			static const updata_to_dbvisit_s& default_instance() {
-				return *internal_default_instance();
-			}
-			static inline const updata_to_dbvisit_s* internal_default_instance() {
-				return reinterpret_cast<const updata_to_dbvisit_s*>(
-					&_updata_to_dbvisit_s_default_instance_);
-			}
-			static constexpr int kIndexInFileMessages =
-				8;
-
-			friend void swap(updata_to_dbvisit_s& a, updata_to_dbvisit_s& b) {
-				a.Swap(&b);
-			}
-			inline void Swap(updata_to_dbvisit_s* other) {
-				if (other == this) return;
-				if (GetArena() == other->GetArena()) {
-					InternalSwap(other);
-				}
-				else {
-					::PROTOBUF_NAMESPACE_ID::internal::GenericSwap(this, other);
-				}
-			}
-			void UnsafeArenaSwap(updata_to_dbvisit_s* other) {
-				if (other == this) return;
-				GOOGLE_DCHECK(GetArena() == other->GetArena());
-				InternalSwap(other);
-			}
-
-			// implements Message ----------------------------------------------
-
-			inline updata_to_dbvisit_s* New() const final {
-				return CreateMaybeMessage<updata_to_dbvisit_s>(nullptr);
-			}
-
-			updata_to_dbvisit_s* New(::PROTOBUF_NAMESPACE_ID::Arena* arena) const final {
-				return CreateMaybeMessage<updata_to_dbvisit_s>(arena);
-			}
-			void CopyFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) final;
-			void MergeFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) final;
-			void CopyFrom(const updata_to_dbvisit_s& from);
-			void MergeFrom(const updata_to_dbvisit_s& from);
-			PROTOBUF_ATTRIBUTE_REINITIALIZES void Clear() final;
-			bool IsInitialized() const final;
-
-			size_t ByteSizeLong() const final;
-			const char* _InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) final;
-			::PROTOBUF_NAMESPACE_ID::uint8* _InternalSerialize(
-				::PROTOBUF_NAMESPACE_ID::uint8* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const final;
-			int GetCachedSize() const final { return _cached_size_.Get(); }
-
-		private:
-			inline void SharedCtor();
-			inline void SharedDtor();
-			void SetCachedSize(int size) const final;
-			void InternalSwap(updata_to_dbvisit_s* other);
-			friend class ::PROTOBUF_NAMESPACE_ID::internal::AnyMetadata;
-			static ::PROTOBUF_NAMESPACE_ID::StringPiece FullMessageName() {
-				return "frmpub.protocc.updata_to_dbvisit_s";
-			}
-		protected:
-			explicit updata_to_dbvisit_s(::PROTOBUF_NAMESPACE_ID::Arena* arena);
-		private:
-			static void ArenaDtor(void* object);
-			inline void RegisterArenaDtor(::PROTOBUF_NAMESPACE_ID::Arena* arena);
-		public:
-
-			::PROTOBUF_NAMESPACE_ID::Metadata GetMetadata() const final;
-		private:
-			static ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadataStatic() {
-				return ::descriptor_table_dbvisit_2eproto_metadata_getter(kIndexInFileMessages);
-			}
-
-		public:
-
-			// nested types ----------------------------------------------------
-
-			// accessors -------------------------------------------------------
-
-			enum : int {
-				kTagFieldNumber = 2,
-				kResultFieldNumber = 1,
-			};
-			// string tag = 2;
-			void clear_tag();
-			const std::string& tag() const;
-			void set_tag(const std::string& value);
-			void set_tag(std::string&& value);
-			void set_tag(const char* value);
-			void set_tag(const char* value, size_t size);
-			std::string* mutable_tag();
-			std::string* release_tag();
-			void set_allocated_tag(std::string* tag);
-		private:
-			const std::string& _internal_tag() const;
-			void _internal_set_tag(const std::string& value);
-			std::string* _internal_mutable_tag();
-		public:
-
-			// int32 result = 1;
-			void clear_result();
-			::PROTOBUF_NAMESPACE_ID::int32 result() const;
-			void set_result(::PROTOBUF_NAMESPACE_ID::int32 value);
-		private:
-			::PROTOBUF_NAMESPACE_ID::int32 _internal_result() const;
-			void _internal_set_result(::PROTOBUF_NAMESPACE_ID::int32 value);
-		public:
-
-			// @@protoc_insertion_point(class_scope:frmpub.protocc.updata_to_dbvisit_s)
-		private:
-			class _Internal;
-
-			template <typename T> friend class ::PROTOBUF_NAMESPACE_ID::Arena::InternalHelper;
-			typedef void InternalArenaConstructable_;
-			typedef void DestructorSkippable_;
-			::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr tag_;
-			::PROTOBUF_NAMESPACE_ID::int32 result_;
-			mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
-			friend struct ::TableStruct_dbvisit_2eproto;
-		};
-		// -------------------------------------------------------------------
-
-		class deletedata_to_dbvisit_c PROTOBUF_FINAL :
-			public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:frmpub.protocc.deletedata_to_dbvisit_c) */ {
-		public:
-			inline deletedata_to_dbvisit_c() : deletedata_to_dbvisit_c(nullptr) {}
-			virtual ~deletedata_to_dbvisit_c();
-			explicit constexpr deletedata_to_dbvisit_c(::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized);
-
-			deletedata_to_dbvisit_c(const deletedata_to_dbvisit_c& from);
-			deletedata_to_dbvisit_c(deletedata_to_dbvisit_c&& from) noexcept
-				: deletedata_to_dbvisit_c() {
-				*this = ::std::move(from);
-			}
-
-			inline deletedata_to_dbvisit_c& operator=(const deletedata_to_dbvisit_c& from) {
-				CopyFrom(from);
-				return *this;
-			}
-			inline deletedata_to_dbvisit_c& operator=(deletedata_to_dbvisit_c&& from) noexcept {
-				if (GetArena() == from.GetArena()) {
-					if (this != &from) InternalSwap(&from);
-				}
-				else {
-					CopyFrom(from);
-				}
-				return *this;
-			}
-
-			static const ::PROTOBUF_NAMESPACE_ID::Descriptor* descriptor() {
-				return GetDescriptor();
-			}
-			static const ::PROTOBUF_NAMESPACE_ID::Descriptor* GetDescriptor() {
-				return GetMetadataStatic().descriptor;
-			}
-			static const ::PROTOBUF_NAMESPACE_ID::Reflection* GetReflection() {
-				return GetMetadataStatic().reflection;
-			}
-			static const deletedata_to_dbvisit_c& default_instance() {
-				return *internal_default_instance();
-			}
-			static inline const deletedata_to_dbvisit_c* internal_default_instance() {
-				return reinterpret_cast<const deletedata_to_dbvisit_c*>(
-					&_deletedata_to_dbvisit_c_default_instance_);
-			}
-			static constexpr int kIndexInFileMessages =
-				9;
-
-			friend void swap(deletedata_to_dbvisit_c& a, deletedata_to_dbvisit_c& b) {
-				a.Swap(&b);
-			}
-			inline void Swap(deletedata_to_dbvisit_c* other) {
-				if (other == this) return;
-				if (GetArena() == other->GetArena()) {
-					InternalSwap(other);
-				}
-				else {
-					::PROTOBUF_NAMESPACE_ID::internal::GenericSwap(this, other);
-				}
-			}
-			void UnsafeArenaSwap(deletedata_to_dbvisit_c* other) {
-				if (other == this) return;
-				GOOGLE_DCHECK(GetArena() == other->GetArena());
-				InternalSwap(other);
-			}
-
-			// implements Message ----------------------------------------------
-
-			inline deletedata_to_dbvisit_c* New() const final {
-				return CreateMaybeMessage<deletedata_to_dbvisit_c>(nullptr);
-			}
-
-			deletedata_to_dbvisit_c* New(::PROTOBUF_NAMESPACE_ID::Arena* arena) const final {
-				return CreateMaybeMessage<deletedata_to_dbvisit_c>(arena);
-			}
-			void CopyFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) final;
-			void MergeFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) final;
-			void CopyFrom(const deletedata_to_dbvisit_c& from);
-			void MergeFrom(const deletedata_to_dbvisit_c& from);
-			PROTOBUF_ATTRIBUTE_REINITIALIZES void Clear() final;
-			bool IsInitialized() const final;
-
-			size_t ByteSizeLong() const final;
-			const char* _InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) final;
-			::PROTOBUF_NAMESPACE_ID::uint8* _InternalSerialize(
-				::PROTOBUF_NAMESPACE_ID::uint8* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const final;
-			int GetCachedSize() const final { return _cached_size_.Get(); }
-
-		private:
-			inline void SharedCtor();
-			inline void SharedDtor();
-			void SetCachedSize(int size) const final;
-			void InternalSwap(deletedata_to_dbvisit_c* other);
-			friend class ::PROTOBUF_NAMESPACE_ID::internal::AnyMetadata;
-			static ::PROTOBUF_NAMESPACE_ID::StringPiece FullMessageName() {
-				return "frmpub.protocc.deletedata_to_dbvisit_c";
-			}
-		protected:
-			explicit deletedata_to_dbvisit_c(::PROTOBUF_NAMESPACE_ID::Arena* arena);
-		private:
-			static void ArenaDtor(void* object);
-			inline void RegisterArenaDtor(::PROTOBUF_NAMESPACE_ID::Arena* arena);
-		public:
-
-			::PROTOBUF_NAMESPACE_ID::Metadata GetMetadata() const final;
-		private:
-			static ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadataStatic() {
-				return ::descriptor_table_dbvisit_2eproto_metadata_getter(kIndexInFileMessages);
-			}
-
-		public:
-
-			// nested types ----------------------------------------------------
-
-			// accessors -------------------------------------------------------
-
-			enum : int {
-				kTagFieldNumber = 1,
-				kCacheKeyFieldNumber = 2,
-			};
-			// string tag = 1;
-			void clear_tag();
-			const std::string& tag() const;
-			void set_tag(const std::string& value);
-			void set_tag(std::string&& value);
-			void set_tag(const char* value);
-			void set_tag(const char* value, size_t size);
-			std::string* mutable_tag();
-			std::string* release_tag();
-			void set_allocated_tag(std::string* tag);
-		private:
-			const std::string& _internal_tag() const;
-			void _internal_set_tag(const std::string& value);
-			std::string* _internal_mutable_tag();
-		public:
-
-			// string cache_key = 2;
-			void clear_cache_key();
-			const std::string& cache_key() const;
-			void set_cache_key(const std::string& value);
-			void set_cache_key(std::string&& value);
-			void set_cache_key(const char* value);
-			void set_cache_key(const char* value, size_t size);
-			std::string* mutable_cache_key();
-			std::string* release_cache_key();
-			void set_allocated_cache_key(std::string* cache_key);
-		private:
-			const std::string& _internal_cache_key() const;
-			void _internal_set_cache_key(const std::string& value);
-			std::string* _internal_mutable_cache_key();
-		public:
-
-			// @@protoc_insertion_point(class_scope:frmpub.protocc.deletedata_to_dbvisit_c)
-		private:
-			class _Internal;
-
-			template <typename T> friend class ::PROTOBUF_NAMESPACE_ID::Arena::InternalHelper;
-			typedef void InternalArenaConstructable_;
-			typedef void DestructorSkippable_;
-			::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr tag_;
-			::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr cache_key_;
-			mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
-			friend struct ::TableStruct_dbvisit_2eproto;
-		};
-		// -------------------------------------------------------------------
-
-		class deletedata_to_dbvisit_s PROTOBUF_FINAL :
-			public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:frmpub.protocc.deletedata_to_dbvisit_s) */ {
-		public:
-			inline deletedata_to_dbvisit_s() : deletedata_to_dbvisit_s(nullptr) {}
-			virtual ~deletedata_to_dbvisit_s();
-			explicit constexpr deletedata_to_dbvisit_s(::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized);
-
-			deletedata_to_dbvisit_s(const deletedata_to_dbvisit_s& from);
-			deletedata_to_dbvisit_s(deletedata_to_dbvisit_s&& from) noexcept
-				: deletedata_to_dbvisit_s() {
-				*this = ::std::move(from);
-			}
-
-			inline deletedata_to_dbvisit_s& operator=(const deletedata_to_dbvisit_s& from) {
-				CopyFrom(from);
-				return *this;
-			}
-			inline deletedata_to_dbvisit_s& operator=(deletedata_to_dbvisit_s&& from) noexcept {
-				if (GetArena() == from.GetArena()) {
-					if (this != &from) InternalSwap(&from);
-				}
-				else {
-					CopyFrom(from);
-				}
-				return *this;
-			}
-
-			static const ::PROTOBUF_NAMESPACE_ID::Descriptor* descriptor() {
-				return GetDescriptor();
-			}
-			static const ::PROTOBUF_NAMESPACE_ID::Descriptor* GetDescriptor() {
-				return GetMetadataStatic().descriptor;
-			}
-			static const ::PROTOBUF_NAMESPACE_ID::Reflection* GetReflection() {
-				return GetMetadataStatic().reflection;
-			}
-			static const deletedata_to_dbvisit_s& default_instance() {
-				return *internal_default_instance();
-			}
-			static inline const deletedata_to_dbvisit_s* internal_default_instance() {
-				return reinterpret_cast<const deletedata_to_dbvisit_s*>(
-					&_deletedata_to_dbvisit_s_default_instance_);
-			}
-			static constexpr int kIndexInFileMessages =
-				10;
-
-			friend void swap(deletedata_to_dbvisit_s& a, deletedata_to_dbvisit_s& b) {
-				a.Swap(&b);
-			}
-			inline void Swap(deletedata_to_dbvisit_s* other) {
-				if (other == this) return;
-				if (GetArena() == other->GetArena()) {
-					InternalSwap(other);
-				}
-				else {
-					::PROTOBUF_NAMESPACE_ID::internal::GenericSwap(this, other);
-				}
-			}
-			void UnsafeArenaSwap(deletedata_to_dbvisit_s* other) {
-				if (other == this) return;
-				GOOGLE_DCHECK(GetArena() == other->GetArena());
-				InternalSwap(other);
-			}
-
-			// implements Message ----------------------------------------------
-
-			inline deletedata_to_dbvisit_s* New() const final {
-				return CreateMaybeMessage<deletedata_to_dbvisit_s>(nullptr);
-			}
-
-			deletedata_to_dbvisit_s* New(::PROTOBUF_NAMESPACE_ID::Arena* arena) const final {
-				return CreateMaybeMessage<deletedata_to_dbvisit_s>(arena);
-			}
-			void CopyFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) final;
-			void MergeFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) final;
-			void CopyFrom(const deletedata_to_dbvisit_s& from);
-			void MergeFrom(const deletedata_to_dbvisit_s& from);
-			PROTOBUF_ATTRIBUTE_REINITIALIZES void Clear() final;
-			bool IsInitialized() const final;
-
-			size_t ByteSizeLong() const final;
-			const char* _InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) final;
-			::PROTOBUF_NAMESPACE_ID::uint8* _InternalSerialize(
-				::PROTOBUF_NAMESPACE_ID::uint8* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const final;
-			int GetCachedSize() const final { return _cached_size_.Get(); }
-
-		private:
-			inline void SharedCtor();
-			inline void SharedDtor();
-			void SetCachedSize(int size) const final;
-			void InternalSwap(deletedata_to_dbvisit_s* other);
-			friend class ::PROTOBUF_NAMESPACE_ID::internal::AnyMetadata;
-			static ::PROTOBUF_NAMESPACE_ID::StringPiece FullMessageName() {
-				return "frmpub.protocc.deletedata_to_dbvisit_s";
-			}
-		protected:
-			explicit deletedata_to_dbvisit_s(::PROTOBUF_NAMESPACE_ID::Arena* arena);
-		private:
-			static void ArenaDtor(void* object);
-			inline void RegisterArenaDtor(::PROTOBUF_NAMESPACE_ID::Arena* arena);
-		public:
-
-			::PROTOBUF_NAMESPACE_ID::Metadata GetMetadata() const final;
-		private:
-			static ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadataStatic() {
-				return ::descriptor_table_dbvisit_2eproto_metadata_getter(kIndexInFileMessages);
-			}
-
-		public:
-
-			// nested types ----------------------------------------------------
-
-			// accessors -------------------------------------------------------
-
-			enum : int {
-				kTagFieldNumber = 2,
-				kResultFieldNumber = 1,
-			};
-			// string tag = 2;
-			void clear_tag();
-			const std::string& tag() const;
-			void set_tag(const std::string& value);
-			void set_tag(std::string&& value);
-			void set_tag(const char* value);
-			void set_tag(const char* value, size_t size);
-			std::string* mutable_tag();
-			std::string* release_tag();
-			void set_allocated_tag(std::string* tag);
-		private:
-			const std::string& _internal_tag() const;
-			void _internal_set_tag(const std::string& value);
-			std::string* _internal_mutable_tag();
-		public:
-
-			// int32 result = 1;
-			void clear_result();
-			::PROTOBUF_NAMESPACE_ID::int32 result() const;
-			void set_result(::PROTOBUF_NAMESPACE_ID::int32 value);
-		private:
-			::PROTOBUF_NAMESPACE_ID::int32 _internal_result() const;
-			void _internal_set_result(::PROTOBUF_NAMESPACE_ID::int32 value);
-		public:
-
-			// @@protoc_insertion_point(class_scope:frmpub.protocc.deletedata_to_dbvisit_s)
-		private:
-			class _Internal;
-
-			template <typename T> friend class ::PROTOBUF_NAMESPACE_ID::Arena::InternalHelper;
-			typedef void InternalArenaConstructable_;
-			typedef void DestructorSkippable_;
-			::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr tag_;
-			::PROTOBUF_NAMESPACE_ID::int32 result_;
-			mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
-			friend struct ::TableStruct_dbvisit_2eproto;
-		};
-		// ===================================================================
-
-
-		// ===================================================================
+namespace protocc {
+
+// ===================================================================
+
+class loaddata_from_dbvisit_c PROTOBUF_FINAL :
+    public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:frmpub.protocc.loaddata_from_dbvisit_c) */ {
+ public:
+  inline loaddata_from_dbvisit_c() : loaddata_from_dbvisit_c(nullptr) {}
+  virtual ~loaddata_from_dbvisit_c();
+  explicit constexpr loaddata_from_dbvisit_c(::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized);
+
+  loaddata_from_dbvisit_c(const loaddata_from_dbvisit_c& from);
+  loaddata_from_dbvisit_c(loaddata_from_dbvisit_c&& from) noexcept
+    : loaddata_from_dbvisit_c() {
+    *this = ::std::move(from);
+  }
+
+  inline loaddata_from_dbvisit_c& operator=(const loaddata_from_dbvisit_c& from) {
+    CopyFrom(from);
+    return *this;
+  }
+  inline loaddata_from_dbvisit_c& operator=(loaddata_from_dbvisit_c&& from) noexcept {
+    if (GetArena() == from.GetArena()) {
+      if (this != &from) InternalSwap(&from);
+    } else {
+      CopyFrom(from);
+    }
+    return *this;
+  }
+
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* descriptor() {
+    return GetDescriptor();
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* GetDescriptor() {
+    return GetMetadataStatic().descriptor;
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Reflection* GetReflection() {
+    return GetMetadataStatic().reflection;
+  }
+  static const loaddata_from_dbvisit_c& default_instance() {
+    return *internal_default_instance();
+  }
+  static inline const loaddata_from_dbvisit_c* internal_default_instance() {
+    return reinterpret_cast<const loaddata_from_dbvisit_c*>(
+               &_loaddata_from_dbvisit_c_default_instance_);
+  }
+  static constexpr int kIndexInFileMessages =
+    0;
+
+  friend void swap(loaddata_from_dbvisit_c& a, loaddata_from_dbvisit_c& b) {
+    a.Swap(&b);
+  }
+  inline void Swap(loaddata_from_dbvisit_c* other) {
+    if (other == this) return;
+    if (GetArena() == other->GetArena()) {
+      InternalSwap(other);
+    } else {
+      ::PROTOBUF_NAMESPACE_ID::internal::GenericSwap(this, other);
+    }
+  }
+  void UnsafeArenaSwap(loaddata_from_dbvisit_c* other) {
+    if (other == this) return;
+    GOOGLE_DCHECK(GetArena() == other->GetArena());
+    InternalSwap(other);
+  }
+
+  // implements Message ----------------------------------------------
+
+  inline loaddata_from_dbvisit_c* New() const final {
+    return CreateMaybeMessage<loaddata_from_dbvisit_c>(nullptr);
+  }
+
+  loaddata_from_dbvisit_c* New(::PROTOBUF_NAMESPACE_ID::Arena* arena) const final {
+    return CreateMaybeMessage<loaddata_from_dbvisit_c>(arena);
+  }
+  void CopyFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) final;
+  void MergeFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) final;
+  void CopyFrom(const loaddata_from_dbvisit_c& from);
+  void MergeFrom(const loaddata_from_dbvisit_c& from);
+  PROTOBUF_ATTRIBUTE_REINITIALIZES void Clear() final;
+  bool IsInitialized() const final;
+
+  size_t ByteSizeLong() const final;
+  const char* _InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) final;
+  ::PROTOBUF_NAMESPACE_ID::uint8* _InternalSerialize(
+      ::PROTOBUF_NAMESPACE_ID::uint8* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const final;
+  int GetCachedSize() const final { return _cached_size_.Get(); }
+
+  private:
+  inline void SharedCtor();
+  inline void SharedDtor();
+  void SetCachedSize(int size) const final;
+  void InternalSwap(loaddata_from_dbvisit_c* other);
+  friend class ::PROTOBUF_NAMESPACE_ID::internal::AnyMetadata;
+  static ::PROTOBUF_NAMESPACE_ID::StringPiece FullMessageName() {
+    return "frmpub.protocc.loaddata_from_dbvisit_c";
+  }
+  protected:
+  explicit loaddata_from_dbvisit_c(::PROTOBUF_NAMESPACE_ID::Arena* arena);
+  private:
+  static void ArenaDtor(void* object);
+  inline void RegisterArenaDtor(::PROTOBUF_NAMESPACE_ID::Arena* arena);
+  public:
+
+  ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadata() const final;
+  private:
+  static ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadataStatic() {
+    return ::descriptor_table_dbvisit_2eproto_metadata_getter(kIndexInFileMessages);
+  }
+
+  public:
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  enum : int {
+    kFieldsFieldNumber = 4,
+    kTagFieldNumber = 1,
+    kCacheKeyFieldNumber = 2,
+  };
+  // repeated .frmpub.protocc.FieldsEntry fields = 4;
+  int fields_size() const;
+  private:
+  int _internal_fields_size() const;
+  public:
+  void clear_fields();
+  ::frmpub::protocc::FieldsEntry* mutable_fields(int index);
+  ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::frmpub::protocc::FieldsEntry >*
+      mutable_fields();
+  private:
+  const ::frmpub::protocc::FieldsEntry& _internal_fields(int index) const;
+  ::frmpub::protocc::FieldsEntry* _internal_add_fields();
+  public:
+  const ::frmpub::protocc::FieldsEntry& fields(int index) const;
+  ::frmpub::protocc::FieldsEntry* add_fields();
+  const ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::frmpub::protocc::FieldsEntry >&
+      fields() const;
+
+  // string tag = 1;
+  void clear_tag();
+  const std::string& tag() const;
+  void set_tag(const std::string& value);
+  void set_tag(std::string&& value);
+  void set_tag(const char* value);
+  void set_tag(const char* value, size_t size);
+  std::string* mutable_tag();
+  std::string* release_tag();
+  void set_allocated_tag(std::string* tag);
+  private:
+  const std::string& _internal_tag() const;
+  void _internal_set_tag(const std::string& value);
+  std::string* _internal_mutable_tag();
+  public:
+
+  // string cache_key = 2;
+  void clear_cache_key();
+  const std::string& cache_key() const;
+  void set_cache_key(const std::string& value);
+  void set_cache_key(std::string&& value);
+  void set_cache_key(const char* value);
+  void set_cache_key(const char* value, size_t size);
+  std::string* mutable_cache_key();
+  std::string* release_cache_key();
+  void set_allocated_cache_key(std::string* cache_key);
+  private:
+  const std::string& _internal_cache_key() const;
+  void _internal_set_cache_key(const std::string& value);
+  std::string* _internal_mutable_cache_key();
+  public:
+
+  // @@protoc_insertion_point(class_scope:frmpub.protocc.loaddata_from_dbvisit_c)
+ private:
+  class _Internal;
+
+  template <typename T> friend class ::PROTOBUF_NAMESPACE_ID::Arena::InternalHelper;
+  typedef void InternalArenaConstructable_;
+  typedef void DestructorSkippable_;
+  ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::frmpub::protocc::FieldsEntry > fields_;
+  ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr tag_;
+  ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr cache_key_;
+  mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
+  friend struct ::TableStruct_dbvisit_2eproto;
+};
+// -------------------------------------------------------------------
+
+class loaddata_from_dbvisit_s PROTOBUF_FINAL :
+    public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:frmpub.protocc.loaddata_from_dbvisit_s) */ {
+ public:
+  inline loaddata_from_dbvisit_s() : loaddata_from_dbvisit_s(nullptr) {}
+  virtual ~loaddata_from_dbvisit_s();
+  explicit constexpr loaddata_from_dbvisit_s(::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized);
+
+  loaddata_from_dbvisit_s(const loaddata_from_dbvisit_s& from);
+  loaddata_from_dbvisit_s(loaddata_from_dbvisit_s&& from) noexcept
+    : loaddata_from_dbvisit_s() {
+    *this = ::std::move(from);
+  }
+
+  inline loaddata_from_dbvisit_s& operator=(const loaddata_from_dbvisit_s& from) {
+    CopyFrom(from);
+    return *this;
+  }
+  inline loaddata_from_dbvisit_s& operator=(loaddata_from_dbvisit_s&& from) noexcept {
+    if (GetArena() == from.GetArena()) {
+      if (this != &from) InternalSwap(&from);
+    } else {
+      CopyFrom(from);
+    }
+    return *this;
+  }
+
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* descriptor() {
+    return GetDescriptor();
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* GetDescriptor() {
+    return GetMetadataStatic().descriptor;
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Reflection* GetReflection() {
+    return GetMetadataStatic().reflection;
+  }
+  static const loaddata_from_dbvisit_s& default_instance() {
+    return *internal_default_instance();
+  }
+  static inline const loaddata_from_dbvisit_s* internal_default_instance() {
+    return reinterpret_cast<const loaddata_from_dbvisit_s*>(
+               &_loaddata_from_dbvisit_s_default_instance_);
+  }
+  static constexpr int kIndexInFileMessages =
+    1;
+
+  friend void swap(loaddata_from_dbvisit_s& a, loaddata_from_dbvisit_s& b) {
+    a.Swap(&b);
+  }
+  inline void Swap(loaddata_from_dbvisit_s* other) {
+    if (other == this) return;
+    if (GetArena() == other->GetArena()) {
+      InternalSwap(other);
+    } else {
+      ::PROTOBUF_NAMESPACE_ID::internal::GenericSwap(this, other);
+    }
+  }
+  void UnsafeArenaSwap(loaddata_from_dbvisit_s* other) {
+    if (other == this) return;
+    GOOGLE_DCHECK(GetArena() == other->GetArena());
+    InternalSwap(other);
+  }
+
+  // implements Message ----------------------------------------------
+
+  inline loaddata_from_dbvisit_s* New() const final {
+    return CreateMaybeMessage<loaddata_from_dbvisit_s>(nullptr);
+  }
+
+  loaddata_from_dbvisit_s* New(::PROTOBUF_NAMESPACE_ID::Arena* arena) const final {
+    return CreateMaybeMessage<loaddata_from_dbvisit_s>(arena);
+  }
+  void CopyFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) final;
+  void MergeFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) final;
+  void CopyFrom(const loaddata_from_dbvisit_s& from);
+  void MergeFrom(const loaddata_from_dbvisit_s& from);
+  PROTOBUF_ATTRIBUTE_REINITIALIZES void Clear() final;
+  bool IsInitialized() const final;
+
+  size_t ByteSizeLong() const final;
+  const char* _InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) final;
+  ::PROTOBUF_NAMESPACE_ID::uint8* _InternalSerialize(
+      ::PROTOBUF_NAMESPACE_ID::uint8* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const final;
+  int GetCachedSize() const final { return _cached_size_.Get(); }
+
+  private:
+  inline void SharedCtor();
+  inline void SharedDtor();
+  void SetCachedSize(int size) const final;
+  void InternalSwap(loaddata_from_dbvisit_s* other);
+  friend class ::PROTOBUF_NAMESPACE_ID::internal::AnyMetadata;
+  static ::PROTOBUF_NAMESPACE_ID::StringPiece FullMessageName() {
+    return "frmpub.protocc.loaddata_from_dbvisit_s";
+  }
+  protected:
+  explicit loaddata_from_dbvisit_s(::PROTOBUF_NAMESPACE_ID::Arena* arena);
+  private:
+  static void ArenaDtor(void* object);
+  inline void RegisterArenaDtor(::PROTOBUF_NAMESPACE_ID::Arena* arena);
+  public:
+
+  ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadata() const final;
+  private:
+  static ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadataStatic() {
+    return ::descriptor_table_dbvisit_2eproto_metadata_getter(kIndexInFileMessages);
+  }
+
+  public:
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  enum : int {
+    kFieldsFieldNumber = 3,
+    kTagFieldNumber = 2,
+    kResultFieldNumber = 1,
+  };
+  // repeated .frmpub.protocc.FieldsEntry fields = 3;
+  int fields_size() const;
+  private:
+  int _internal_fields_size() const;
+  public:
+  void clear_fields();
+  ::frmpub::protocc::FieldsEntry* mutable_fields(int index);
+  ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::frmpub::protocc::FieldsEntry >*
+      mutable_fields();
+  private:
+  const ::frmpub::protocc::FieldsEntry& _internal_fields(int index) const;
+  ::frmpub::protocc::FieldsEntry* _internal_add_fields();
+  public:
+  const ::frmpub::protocc::FieldsEntry& fields(int index) const;
+  ::frmpub::protocc::FieldsEntry* add_fields();
+  const ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::frmpub::protocc::FieldsEntry >&
+      fields() const;
+
+  // string tag = 2;
+  void clear_tag();
+  const std::string& tag() const;
+  void set_tag(const std::string& value);
+  void set_tag(std::string&& value);
+  void set_tag(const char* value);
+  void set_tag(const char* value, size_t size);
+  std::string* mutable_tag();
+  std::string* release_tag();
+  void set_allocated_tag(std::string* tag);
+  private:
+  const std::string& _internal_tag() const;
+  void _internal_set_tag(const std::string& value);
+  std::string* _internal_mutable_tag();
+  public:
+
+  // int32 result = 1;
+  void clear_result();
+  ::PROTOBUF_NAMESPACE_ID::int32 result() const;
+  void set_result(::PROTOBUF_NAMESPACE_ID::int32 value);
+  private:
+  ::PROTOBUF_NAMESPACE_ID::int32 _internal_result() const;
+  void _internal_set_result(::PROTOBUF_NAMESPACE_ID::int32 value);
+  public:
+
+  // @@protoc_insertion_point(class_scope:frmpub.protocc.loaddata_from_dbvisit_s)
+ private:
+  class _Internal;
+
+  template <typename T> friend class ::PROTOBUF_NAMESPACE_ID::Arena::InternalHelper;
+  typedef void InternalArenaConstructable_;
+  typedef void DestructorSkippable_;
+  ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::frmpub::protocc::FieldsEntry > fields_;
+  ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr tag_;
+  ::PROTOBUF_NAMESPACE_ID::int32 result_;
+  mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
+  friend struct ::TableStruct_dbvisit_2eproto;
+};
+// -------------------------------------------------------------------
+
+class loaddata_more_from_dbvisit_c PROTOBUF_FINAL :
+    public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:frmpub.protocc.loaddata_more_from_dbvisit_c) */ {
+ public:
+  inline loaddata_more_from_dbvisit_c() : loaddata_more_from_dbvisit_c(nullptr) {}
+  virtual ~loaddata_more_from_dbvisit_c();
+  explicit constexpr loaddata_more_from_dbvisit_c(::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized);
+
+  loaddata_more_from_dbvisit_c(const loaddata_more_from_dbvisit_c& from);
+  loaddata_more_from_dbvisit_c(loaddata_more_from_dbvisit_c&& from) noexcept
+    : loaddata_more_from_dbvisit_c() {
+    *this = ::std::move(from);
+  }
+
+  inline loaddata_more_from_dbvisit_c& operator=(const loaddata_more_from_dbvisit_c& from) {
+    CopyFrom(from);
+    return *this;
+  }
+  inline loaddata_more_from_dbvisit_c& operator=(loaddata_more_from_dbvisit_c&& from) noexcept {
+    if (GetArena() == from.GetArena()) {
+      if (this != &from) InternalSwap(&from);
+    } else {
+      CopyFrom(from);
+    }
+    return *this;
+  }
+
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* descriptor() {
+    return GetDescriptor();
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* GetDescriptor() {
+    return GetMetadataStatic().descriptor;
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Reflection* GetReflection() {
+    return GetMetadataStatic().reflection;
+  }
+  static const loaddata_more_from_dbvisit_c& default_instance() {
+    return *internal_default_instance();
+  }
+  static inline const loaddata_more_from_dbvisit_c* internal_default_instance() {
+    return reinterpret_cast<const loaddata_more_from_dbvisit_c*>(
+               &_loaddata_more_from_dbvisit_c_default_instance_);
+  }
+  static constexpr int kIndexInFileMessages =
+    2;
+
+  friend void swap(loaddata_more_from_dbvisit_c& a, loaddata_more_from_dbvisit_c& b) {
+    a.Swap(&b);
+  }
+  inline void Swap(loaddata_more_from_dbvisit_c* other) {
+    if (other == this) return;
+    if (GetArena() == other->GetArena()) {
+      InternalSwap(other);
+    } else {
+      ::PROTOBUF_NAMESPACE_ID::internal::GenericSwap(this, other);
+    }
+  }
+  void UnsafeArenaSwap(loaddata_more_from_dbvisit_c* other) {
+    if (other == this) return;
+    GOOGLE_DCHECK(GetArena() == other->GetArena());
+    InternalSwap(other);
+  }
+
+  // implements Message ----------------------------------------------
+
+  inline loaddata_more_from_dbvisit_c* New() const final {
+    return CreateMaybeMessage<loaddata_more_from_dbvisit_c>(nullptr);
+  }
+
+  loaddata_more_from_dbvisit_c* New(::PROTOBUF_NAMESPACE_ID::Arena* arena) const final {
+    return CreateMaybeMessage<loaddata_more_from_dbvisit_c>(arena);
+  }
+  void CopyFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) final;
+  void MergeFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) final;
+  void CopyFrom(const loaddata_more_from_dbvisit_c& from);
+  void MergeFrom(const loaddata_more_from_dbvisit_c& from);
+  PROTOBUF_ATTRIBUTE_REINITIALIZES void Clear() final;
+  bool IsInitialized() const final;
+
+  size_t ByteSizeLong() const final;
+  const char* _InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) final;
+  ::PROTOBUF_NAMESPACE_ID::uint8* _InternalSerialize(
+      ::PROTOBUF_NAMESPACE_ID::uint8* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const final;
+  int GetCachedSize() const final { return _cached_size_.Get(); }
+
+  private:
+  inline void SharedCtor();
+  inline void SharedDtor();
+  void SetCachedSize(int size) const final;
+  void InternalSwap(loaddata_more_from_dbvisit_c* other);
+  friend class ::PROTOBUF_NAMESPACE_ID::internal::AnyMetadata;
+  static ::PROTOBUF_NAMESPACE_ID::StringPiece FullMessageName() {
+    return "frmpub.protocc.loaddata_more_from_dbvisit_c";
+  }
+  protected:
+  explicit loaddata_more_from_dbvisit_c(::PROTOBUF_NAMESPACE_ID::Arena* arena);
+  private:
+  static void ArenaDtor(void* object);
+  inline void RegisterArenaDtor(::PROTOBUF_NAMESPACE_ID::Arena* arena);
+  public:
+
+  ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadata() const final;
+  private:
+  static ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadataStatic() {
+    return ::descriptor_table_dbvisit_2eproto_metadata_getter(kIndexInFileMessages);
+  }
+
+  public:
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  enum : int {
+    kFieldsFieldNumber = 3,
+    kTagFieldNumber = 1,
+    kConditionFieldNumber = 2,
+  };
+  // repeated .frmpub.protocc.FieldsEntry fields = 3;
+  int fields_size() const;
+  private:
+  int _internal_fields_size() const;
+  public:
+  void clear_fields();
+  ::frmpub::protocc::FieldsEntry* mutable_fields(int index);
+  ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::frmpub::protocc::FieldsEntry >*
+      mutable_fields();
+  private:
+  const ::frmpub::protocc::FieldsEntry& _internal_fields(int index) const;
+  ::frmpub::protocc::FieldsEntry* _internal_add_fields();
+  public:
+  const ::frmpub::protocc::FieldsEntry& fields(int index) const;
+  ::frmpub::protocc::FieldsEntry* add_fields();
+  const ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::frmpub::protocc::FieldsEntry >&
+      fields() const;
+
+  // string tag = 1;
+  void clear_tag();
+  const std::string& tag() const;
+  void set_tag(const std::string& value);
+  void set_tag(std::string&& value);
+  void set_tag(const char* value);
+  void set_tag(const char* value, size_t size);
+  std::string* mutable_tag();
+  std::string* release_tag();
+  void set_allocated_tag(std::string* tag);
+  private:
+  const std::string& _internal_tag() const;
+  void _internal_set_tag(const std::string& value);
+  std::string* _internal_mutable_tag();
+  public:
+
+  // string condition = 2;
+  void clear_condition();
+  const std::string& condition() const;
+  void set_condition(const std::string& value);
+  void set_condition(std::string&& value);
+  void set_condition(const char* value);
+  void set_condition(const char* value, size_t size);
+  std::string* mutable_condition();
+  std::string* release_condition();
+  void set_allocated_condition(std::string* condition);
+  private:
+  const std::string& _internal_condition() const;
+  void _internal_set_condition(const std::string& value);
+  std::string* _internal_mutable_condition();
+  public:
+
+  // @@protoc_insertion_point(class_scope:frmpub.protocc.loaddata_more_from_dbvisit_c)
+ private:
+  class _Internal;
+
+  template <typename T> friend class ::PROTOBUF_NAMESPACE_ID::Arena::InternalHelper;
+  typedef void InternalArenaConstructable_;
+  typedef void DestructorSkippable_;
+  ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::frmpub::protocc::FieldsEntry > fields_;
+  ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr tag_;
+  ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr condition_;
+  mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
+  friend struct ::TableStruct_dbvisit_2eproto;
+};
+// -------------------------------------------------------------------
+
+class loaddata_more_from_dbvisit_s_item PROTOBUF_FINAL :
+    public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:frmpub.protocc.loaddata_more_from_dbvisit_s.item) */ {
+ public:
+  inline loaddata_more_from_dbvisit_s_item() : loaddata_more_from_dbvisit_s_item(nullptr) {}
+  virtual ~loaddata_more_from_dbvisit_s_item();
+  explicit constexpr loaddata_more_from_dbvisit_s_item(::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized);
+
+  loaddata_more_from_dbvisit_s_item(const loaddata_more_from_dbvisit_s_item& from);
+  loaddata_more_from_dbvisit_s_item(loaddata_more_from_dbvisit_s_item&& from) noexcept
+    : loaddata_more_from_dbvisit_s_item() {
+    *this = ::std::move(from);
+  }
+
+  inline loaddata_more_from_dbvisit_s_item& operator=(const loaddata_more_from_dbvisit_s_item& from) {
+    CopyFrom(from);
+    return *this;
+  }
+  inline loaddata_more_from_dbvisit_s_item& operator=(loaddata_more_from_dbvisit_s_item&& from) noexcept {
+    if (GetArena() == from.GetArena()) {
+      if (this != &from) InternalSwap(&from);
+    } else {
+      CopyFrom(from);
+    }
+    return *this;
+  }
+
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* descriptor() {
+    return GetDescriptor();
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* GetDescriptor() {
+    return GetMetadataStatic().descriptor;
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Reflection* GetReflection() {
+    return GetMetadataStatic().reflection;
+  }
+  static const loaddata_more_from_dbvisit_s_item& default_instance() {
+    return *internal_default_instance();
+  }
+  static inline const loaddata_more_from_dbvisit_s_item* internal_default_instance() {
+    return reinterpret_cast<const loaddata_more_from_dbvisit_s_item*>(
+               &_loaddata_more_from_dbvisit_s_item_default_instance_);
+  }
+  static constexpr int kIndexInFileMessages =
+    3;
+
+  friend void swap(loaddata_more_from_dbvisit_s_item& a, loaddata_more_from_dbvisit_s_item& b) {
+    a.Swap(&b);
+  }
+  inline void Swap(loaddata_more_from_dbvisit_s_item* other) {
+    if (other == this) return;
+    if (GetArena() == other->GetArena()) {
+      InternalSwap(other);
+    } else {
+      ::PROTOBUF_NAMESPACE_ID::internal::GenericSwap(this, other);
+    }
+  }
+  void UnsafeArenaSwap(loaddata_more_from_dbvisit_s_item* other) {
+    if (other == this) return;
+    GOOGLE_DCHECK(GetArena() == other->GetArena());
+    InternalSwap(other);
+  }
+
+  // implements Message ----------------------------------------------
+
+  inline loaddata_more_from_dbvisit_s_item* New() const final {
+    return CreateMaybeMessage<loaddata_more_from_dbvisit_s_item>(nullptr);
+  }
+
+  loaddata_more_from_dbvisit_s_item* New(::PROTOBUF_NAMESPACE_ID::Arena* arena) const final {
+    return CreateMaybeMessage<loaddata_more_from_dbvisit_s_item>(arena);
+  }
+  void CopyFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) final;
+  void MergeFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) final;
+  void CopyFrom(const loaddata_more_from_dbvisit_s_item& from);
+  void MergeFrom(const loaddata_more_from_dbvisit_s_item& from);
+  PROTOBUF_ATTRIBUTE_REINITIALIZES void Clear() final;
+  bool IsInitialized() const final;
+
+  size_t ByteSizeLong() const final;
+  const char* _InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) final;
+  ::PROTOBUF_NAMESPACE_ID::uint8* _InternalSerialize(
+      ::PROTOBUF_NAMESPACE_ID::uint8* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const final;
+  int GetCachedSize() const final { return _cached_size_.Get(); }
+
+  private:
+  inline void SharedCtor();
+  inline void SharedDtor();
+  void SetCachedSize(int size) const final;
+  void InternalSwap(loaddata_more_from_dbvisit_s_item* other);
+  friend class ::PROTOBUF_NAMESPACE_ID::internal::AnyMetadata;
+  static ::PROTOBUF_NAMESPACE_ID::StringPiece FullMessageName() {
+    return "frmpub.protocc.loaddata_more_from_dbvisit_s.item";
+  }
+  protected:
+  explicit loaddata_more_from_dbvisit_s_item(::PROTOBUF_NAMESPACE_ID::Arena* arena);
+  private:
+  static void ArenaDtor(void* object);
+  inline void RegisterArenaDtor(::PROTOBUF_NAMESPACE_ID::Arena* arena);
+  public:
+
+  ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadata() const final;
+  private:
+  static ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadataStatic() {
+    return ::descriptor_table_dbvisit_2eproto_metadata_getter(kIndexInFileMessages);
+  }
+
+  public:
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  enum : int {
+    kFieldsFieldNumber = 1,
+  };
+  // repeated .frmpub.protocc.FieldsEntry fields = 1;
+  int fields_size() const;
+  private:
+  int _internal_fields_size() const;
+  public:
+  void clear_fields();
+  ::frmpub::protocc::FieldsEntry* mutable_fields(int index);
+  ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::frmpub::protocc::FieldsEntry >*
+      mutable_fields();
+  private:
+  const ::frmpub::protocc::FieldsEntry& _internal_fields(int index) const;
+  ::frmpub::protocc::FieldsEntry* _internal_add_fields();
+  public:
+  const ::frmpub::protocc::FieldsEntry& fields(int index) const;
+  ::frmpub::protocc::FieldsEntry* add_fields();
+  const ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::frmpub::protocc::FieldsEntry >&
+      fields() const;
+
+  // @@protoc_insertion_point(class_scope:frmpub.protocc.loaddata_more_from_dbvisit_s.item)
+ private:
+  class _Internal;
+
+  template <typename T> friend class ::PROTOBUF_NAMESPACE_ID::Arena::InternalHelper;
+  typedef void InternalArenaConstructable_;
+  typedef void DestructorSkippable_;
+  ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::frmpub::protocc::FieldsEntry > fields_;
+  mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
+  friend struct ::TableStruct_dbvisit_2eproto;
+};
+// -------------------------------------------------------------------
+
+class loaddata_more_from_dbvisit_s PROTOBUF_FINAL :
+    public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:frmpub.protocc.loaddata_more_from_dbvisit_s) */ {
+ public:
+  inline loaddata_more_from_dbvisit_s() : loaddata_more_from_dbvisit_s(nullptr) {}
+  virtual ~loaddata_more_from_dbvisit_s();
+  explicit constexpr loaddata_more_from_dbvisit_s(::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized);
+
+  loaddata_more_from_dbvisit_s(const loaddata_more_from_dbvisit_s& from);
+  loaddata_more_from_dbvisit_s(loaddata_more_from_dbvisit_s&& from) noexcept
+    : loaddata_more_from_dbvisit_s() {
+    *this = ::std::move(from);
+  }
+
+  inline loaddata_more_from_dbvisit_s& operator=(const loaddata_more_from_dbvisit_s& from) {
+    CopyFrom(from);
+    return *this;
+  }
+  inline loaddata_more_from_dbvisit_s& operator=(loaddata_more_from_dbvisit_s&& from) noexcept {
+    if (GetArena() == from.GetArena()) {
+      if (this != &from) InternalSwap(&from);
+    } else {
+      CopyFrom(from);
+    }
+    return *this;
+  }
+
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* descriptor() {
+    return GetDescriptor();
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* GetDescriptor() {
+    return GetMetadataStatic().descriptor;
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Reflection* GetReflection() {
+    return GetMetadataStatic().reflection;
+  }
+  static const loaddata_more_from_dbvisit_s& default_instance() {
+    return *internal_default_instance();
+  }
+  static inline const loaddata_more_from_dbvisit_s* internal_default_instance() {
+    return reinterpret_cast<const loaddata_more_from_dbvisit_s*>(
+               &_loaddata_more_from_dbvisit_s_default_instance_);
+  }
+  static constexpr int kIndexInFileMessages =
+    4;
+
+  friend void swap(loaddata_more_from_dbvisit_s& a, loaddata_more_from_dbvisit_s& b) {
+    a.Swap(&b);
+  }
+  inline void Swap(loaddata_more_from_dbvisit_s* other) {
+    if (other == this) return;
+    if (GetArena() == other->GetArena()) {
+      InternalSwap(other);
+    } else {
+      ::PROTOBUF_NAMESPACE_ID::internal::GenericSwap(this, other);
+    }
+  }
+  void UnsafeArenaSwap(loaddata_more_from_dbvisit_s* other) {
+    if (other == this) return;
+    GOOGLE_DCHECK(GetArena() == other->GetArena());
+    InternalSwap(other);
+  }
+
+  // implements Message ----------------------------------------------
+
+  inline loaddata_more_from_dbvisit_s* New() const final {
+    return CreateMaybeMessage<loaddata_more_from_dbvisit_s>(nullptr);
+  }
+
+  loaddata_more_from_dbvisit_s* New(::PROTOBUF_NAMESPACE_ID::Arena* arena) const final {
+    return CreateMaybeMessage<loaddata_more_from_dbvisit_s>(arena);
+  }
+  void CopyFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) final;
+  void MergeFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) final;
+  void CopyFrom(const loaddata_more_from_dbvisit_s& from);
+  void MergeFrom(const loaddata_more_from_dbvisit_s& from);
+  PROTOBUF_ATTRIBUTE_REINITIALIZES void Clear() final;
+  bool IsInitialized() const final;
+
+  size_t ByteSizeLong() const final;
+  const char* _InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) final;
+  ::PROTOBUF_NAMESPACE_ID::uint8* _InternalSerialize(
+      ::PROTOBUF_NAMESPACE_ID::uint8* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const final;
+  int GetCachedSize() const final { return _cached_size_.Get(); }
+
+  private:
+  inline void SharedCtor();
+  inline void SharedDtor();
+  void SetCachedSize(int size) const final;
+  void InternalSwap(loaddata_more_from_dbvisit_s* other);
+  friend class ::PROTOBUF_NAMESPACE_ID::internal::AnyMetadata;
+  static ::PROTOBUF_NAMESPACE_ID::StringPiece FullMessageName() {
+    return "frmpub.protocc.loaddata_more_from_dbvisit_s";
+  }
+  protected:
+  explicit loaddata_more_from_dbvisit_s(::PROTOBUF_NAMESPACE_ID::Arena* arena);
+  private:
+  static void ArenaDtor(void* object);
+  inline void RegisterArenaDtor(::PROTOBUF_NAMESPACE_ID::Arena* arena);
+  public:
+
+  ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadata() const final;
+  private:
+  static ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadataStatic() {
+    return ::descriptor_table_dbvisit_2eproto_metadata_getter(kIndexInFileMessages);
+  }
+
+  public:
+
+  // nested types ----------------------------------------------------
+
+  typedef loaddata_more_from_dbvisit_s_item item;
+
+  // accessors -------------------------------------------------------
+
+  enum : int {
+    kObjsFieldNumber = 3,
+    kTagFieldNumber = 2,
+    kResultFieldNumber = 1,
+  };
+  // repeated .frmpub.protocc.loaddata_more_from_dbvisit_s.item objs = 3;
+  int objs_size() const;
+  private:
+  int _internal_objs_size() const;
+  public:
+  void clear_objs();
+  ::frmpub::protocc::loaddata_more_from_dbvisit_s_item* mutable_objs(int index);
+  ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::frmpub::protocc::loaddata_more_from_dbvisit_s_item >*
+      mutable_objs();
+  private:
+  const ::frmpub::protocc::loaddata_more_from_dbvisit_s_item& _internal_objs(int index) const;
+  ::frmpub::protocc::loaddata_more_from_dbvisit_s_item* _internal_add_objs();
+  public:
+  const ::frmpub::protocc::loaddata_more_from_dbvisit_s_item& objs(int index) const;
+  ::frmpub::protocc::loaddata_more_from_dbvisit_s_item* add_objs();
+  const ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::frmpub::protocc::loaddata_more_from_dbvisit_s_item >&
+      objs() const;
+
+  // string tag = 2;
+  void clear_tag();
+  const std::string& tag() const;
+  void set_tag(const std::string& value);
+  void set_tag(std::string&& value);
+  void set_tag(const char* value);
+  void set_tag(const char* value, size_t size);
+  std::string* mutable_tag();
+  std::string* release_tag();
+  void set_allocated_tag(std::string* tag);
+  private:
+  const std::string& _internal_tag() const;
+  void _internal_set_tag(const std::string& value);
+  std::string* _internal_mutable_tag();
+  public:
+
+  // int32 result = 1;
+  void clear_result();
+  ::PROTOBUF_NAMESPACE_ID::int32 result() const;
+  void set_result(::PROTOBUF_NAMESPACE_ID::int32 value);
+  private:
+  ::PROTOBUF_NAMESPACE_ID::int32 _internal_result() const;
+  void _internal_set_result(::PROTOBUF_NAMESPACE_ID::int32 value);
+  public:
+
+  // @@protoc_insertion_point(class_scope:frmpub.protocc.loaddata_more_from_dbvisit_s)
+ private:
+  class _Internal;
+
+  template <typename T> friend class ::PROTOBUF_NAMESPACE_ID::Arena::InternalHelper;
+  typedef void InternalArenaConstructable_;
+  typedef void DestructorSkippable_;
+  ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::frmpub::protocc::loaddata_more_from_dbvisit_s_item > objs_;
+  ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr tag_;
+  ::PROTOBUF_NAMESPACE_ID::int32 result_;
+  mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
+  friend struct ::TableStruct_dbvisit_2eproto;
+};
+// -------------------------------------------------------------------
+
+class insertdata_to_dbvisit_c PROTOBUF_FINAL :
+    public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:frmpub.protocc.insertdata_to_dbvisit_c) */ {
+ public:
+  inline insertdata_to_dbvisit_c() : insertdata_to_dbvisit_c(nullptr) {}
+  virtual ~insertdata_to_dbvisit_c();
+  explicit constexpr insertdata_to_dbvisit_c(::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized);
+
+  insertdata_to_dbvisit_c(const insertdata_to_dbvisit_c& from);
+  insertdata_to_dbvisit_c(insertdata_to_dbvisit_c&& from) noexcept
+    : insertdata_to_dbvisit_c() {
+    *this = ::std::move(from);
+  }
+
+  inline insertdata_to_dbvisit_c& operator=(const insertdata_to_dbvisit_c& from) {
+    CopyFrom(from);
+    return *this;
+  }
+  inline insertdata_to_dbvisit_c& operator=(insertdata_to_dbvisit_c&& from) noexcept {
+    if (GetArena() == from.GetArena()) {
+      if (this != &from) InternalSwap(&from);
+    } else {
+      CopyFrom(from);
+    }
+    return *this;
+  }
+
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* descriptor() {
+    return GetDescriptor();
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* GetDescriptor() {
+    return GetMetadataStatic().descriptor;
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Reflection* GetReflection() {
+    return GetMetadataStatic().reflection;
+  }
+  static const insertdata_to_dbvisit_c& default_instance() {
+    return *internal_default_instance();
+  }
+  static inline const insertdata_to_dbvisit_c* internal_default_instance() {
+    return reinterpret_cast<const insertdata_to_dbvisit_c*>(
+               &_insertdata_to_dbvisit_c_default_instance_);
+  }
+  static constexpr int kIndexInFileMessages =
+    5;
+
+  friend void swap(insertdata_to_dbvisit_c& a, insertdata_to_dbvisit_c& b) {
+    a.Swap(&b);
+  }
+  inline void Swap(insertdata_to_dbvisit_c* other) {
+    if (other == this) return;
+    if (GetArena() == other->GetArena()) {
+      InternalSwap(other);
+    } else {
+      ::PROTOBUF_NAMESPACE_ID::internal::GenericSwap(this, other);
+    }
+  }
+  void UnsafeArenaSwap(insertdata_to_dbvisit_c* other) {
+    if (other == this) return;
+    GOOGLE_DCHECK(GetArena() == other->GetArena());
+    InternalSwap(other);
+  }
+
+  // implements Message ----------------------------------------------
+
+  inline insertdata_to_dbvisit_c* New() const final {
+    return CreateMaybeMessage<insertdata_to_dbvisit_c>(nullptr);
+  }
+
+  insertdata_to_dbvisit_c* New(::PROTOBUF_NAMESPACE_ID::Arena* arena) const final {
+    return CreateMaybeMessage<insertdata_to_dbvisit_c>(arena);
+  }
+  void CopyFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) final;
+  void MergeFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) final;
+  void CopyFrom(const insertdata_to_dbvisit_c& from);
+  void MergeFrom(const insertdata_to_dbvisit_c& from);
+  PROTOBUF_ATTRIBUTE_REINITIALIZES void Clear() final;
+  bool IsInitialized() const final;
+
+  size_t ByteSizeLong() const final;
+  const char* _InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) final;
+  ::PROTOBUF_NAMESPACE_ID::uint8* _InternalSerialize(
+      ::PROTOBUF_NAMESPACE_ID::uint8* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const final;
+  int GetCachedSize() const final { return _cached_size_.Get(); }
+
+  private:
+  inline void SharedCtor();
+  inline void SharedDtor();
+  void SetCachedSize(int size) const final;
+  void InternalSwap(insertdata_to_dbvisit_c* other);
+  friend class ::PROTOBUF_NAMESPACE_ID::internal::AnyMetadata;
+  static ::PROTOBUF_NAMESPACE_ID::StringPiece FullMessageName() {
+    return "frmpub.protocc.insertdata_to_dbvisit_c";
+  }
+  protected:
+  explicit insertdata_to_dbvisit_c(::PROTOBUF_NAMESPACE_ID::Arena* arena);
+  private:
+  static void ArenaDtor(void* object);
+  inline void RegisterArenaDtor(::PROTOBUF_NAMESPACE_ID::Arena* arena);
+  public:
+
+  ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadata() const final;
+  private:
+  static ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadataStatic() {
+    return ::descriptor_table_dbvisit_2eproto_metadata_getter(kIndexInFileMessages);
+  }
+
+  public:
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  enum : int {
+    kFieldsFieldNumber = 3,
+    kTagFieldNumber = 1,
+    kCacheKeyFieldNumber = 2,
+  };
+  // repeated .frmpub.protocc.FieldsEntry fields = 3;
+  int fields_size() const;
+  private:
+  int _internal_fields_size() const;
+  public:
+  void clear_fields();
+  ::frmpub::protocc::FieldsEntry* mutable_fields(int index);
+  ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::frmpub::protocc::FieldsEntry >*
+      mutable_fields();
+  private:
+  const ::frmpub::protocc::FieldsEntry& _internal_fields(int index) const;
+  ::frmpub::protocc::FieldsEntry* _internal_add_fields();
+  public:
+  const ::frmpub::protocc::FieldsEntry& fields(int index) const;
+  ::frmpub::protocc::FieldsEntry* add_fields();
+  const ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::frmpub::protocc::FieldsEntry >&
+      fields() const;
+
+  // string tag = 1;
+  void clear_tag();
+  const std::string& tag() const;
+  void set_tag(const std::string& value);
+  void set_tag(std::string&& value);
+  void set_tag(const char* value);
+  void set_tag(const char* value, size_t size);
+  std::string* mutable_tag();
+  std::string* release_tag();
+  void set_allocated_tag(std::string* tag);
+  private:
+  const std::string& _internal_tag() const;
+  void _internal_set_tag(const std::string& value);
+  std::string* _internal_mutable_tag();
+  public:
+
+  // string cache_key = 2;
+  void clear_cache_key();
+  const std::string& cache_key() const;
+  void set_cache_key(const std::string& value);
+  void set_cache_key(std::string&& value);
+  void set_cache_key(const char* value);
+  void set_cache_key(const char* value, size_t size);
+  std::string* mutable_cache_key();
+  std::string* release_cache_key();
+  void set_allocated_cache_key(std::string* cache_key);
+  private:
+  const std::string& _internal_cache_key() const;
+  void _internal_set_cache_key(const std::string& value);
+  std::string* _internal_mutable_cache_key();
+  public:
+
+  // @@protoc_insertion_point(class_scope:frmpub.protocc.insertdata_to_dbvisit_c)
+ private:
+  class _Internal;
+
+  template <typename T> friend class ::PROTOBUF_NAMESPACE_ID::Arena::InternalHelper;
+  typedef void InternalArenaConstructable_;
+  typedef void DestructorSkippable_;
+  ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::frmpub::protocc::FieldsEntry > fields_;
+  ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr tag_;
+  ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr cache_key_;
+  mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
+  friend struct ::TableStruct_dbvisit_2eproto;
+};
+// -------------------------------------------------------------------
+
+class insertdata_to_dbvisit_s PROTOBUF_FINAL :
+    public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:frmpub.protocc.insertdata_to_dbvisit_s) */ {
+ public:
+  inline insertdata_to_dbvisit_s() : insertdata_to_dbvisit_s(nullptr) {}
+  virtual ~insertdata_to_dbvisit_s();
+  explicit constexpr insertdata_to_dbvisit_s(::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized);
+
+  insertdata_to_dbvisit_s(const insertdata_to_dbvisit_s& from);
+  insertdata_to_dbvisit_s(insertdata_to_dbvisit_s&& from) noexcept
+    : insertdata_to_dbvisit_s() {
+    *this = ::std::move(from);
+  }
+
+  inline insertdata_to_dbvisit_s& operator=(const insertdata_to_dbvisit_s& from) {
+    CopyFrom(from);
+    return *this;
+  }
+  inline insertdata_to_dbvisit_s& operator=(insertdata_to_dbvisit_s&& from) noexcept {
+    if (GetArena() == from.GetArena()) {
+      if (this != &from) InternalSwap(&from);
+    } else {
+      CopyFrom(from);
+    }
+    return *this;
+  }
+
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* descriptor() {
+    return GetDescriptor();
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* GetDescriptor() {
+    return GetMetadataStatic().descriptor;
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Reflection* GetReflection() {
+    return GetMetadataStatic().reflection;
+  }
+  static const insertdata_to_dbvisit_s& default_instance() {
+    return *internal_default_instance();
+  }
+  static inline const insertdata_to_dbvisit_s* internal_default_instance() {
+    return reinterpret_cast<const insertdata_to_dbvisit_s*>(
+               &_insertdata_to_dbvisit_s_default_instance_);
+  }
+  static constexpr int kIndexInFileMessages =
+    6;
+
+  friend void swap(insertdata_to_dbvisit_s& a, insertdata_to_dbvisit_s& b) {
+    a.Swap(&b);
+  }
+  inline void Swap(insertdata_to_dbvisit_s* other) {
+    if (other == this) return;
+    if (GetArena() == other->GetArena()) {
+      InternalSwap(other);
+    } else {
+      ::PROTOBUF_NAMESPACE_ID::internal::GenericSwap(this, other);
+    }
+  }
+  void UnsafeArenaSwap(insertdata_to_dbvisit_s* other) {
+    if (other == this) return;
+    GOOGLE_DCHECK(GetArena() == other->GetArena());
+    InternalSwap(other);
+  }
+
+  // implements Message ----------------------------------------------
+
+  inline insertdata_to_dbvisit_s* New() const final {
+    return CreateMaybeMessage<insertdata_to_dbvisit_s>(nullptr);
+  }
+
+  insertdata_to_dbvisit_s* New(::PROTOBUF_NAMESPACE_ID::Arena* arena) const final {
+    return CreateMaybeMessage<insertdata_to_dbvisit_s>(arena);
+  }
+  void CopyFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) final;
+  void MergeFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) final;
+  void CopyFrom(const insertdata_to_dbvisit_s& from);
+  void MergeFrom(const insertdata_to_dbvisit_s& from);
+  PROTOBUF_ATTRIBUTE_REINITIALIZES void Clear() final;
+  bool IsInitialized() const final;
+
+  size_t ByteSizeLong() const final;
+  const char* _InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) final;
+  ::PROTOBUF_NAMESPACE_ID::uint8* _InternalSerialize(
+      ::PROTOBUF_NAMESPACE_ID::uint8* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const final;
+  int GetCachedSize() const final { return _cached_size_.Get(); }
+
+  private:
+  inline void SharedCtor();
+  inline void SharedDtor();
+  void SetCachedSize(int size) const final;
+  void InternalSwap(insertdata_to_dbvisit_s* other);
+  friend class ::PROTOBUF_NAMESPACE_ID::internal::AnyMetadata;
+  static ::PROTOBUF_NAMESPACE_ID::StringPiece FullMessageName() {
+    return "frmpub.protocc.insertdata_to_dbvisit_s";
+  }
+  protected:
+  explicit insertdata_to_dbvisit_s(::PROTOBUF_NAMESPACE_ID::Arena* arena);
+  private:
+  static void ArenaDtor(void* object);
+  inline void RegisterArenaDtor(::PROTOBUF_NAMESPACE_ID::Arena* arena);
+  public:
+
+  ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadata() const final;
+  private:
+  static ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadataStatic() {
+    return ::descriptor_table_dbvisit_2eproto_metadata_getter(kIndexInFileMessages);
+  }
+
+  public:
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  enum : int {
+    kTagFieldNumber = 2,
+    kResultFieldNumber = 1,
+  };
+  // string tag = 2;
+  void clear_tag();
+  const std::string& tag() const;
+  void set_tag(const std::string& value);
+  void set_tag(std::string&& value);
+  void set_tag(const char* value);
+  void set_tag(const char* value, size_t size);
+  std::string* mutable_tag();
+  std::string* release_tag();
+  void set_allocated_tag(std::string* tag);
+  private:
+  const std::string& _internal_tag() const;
+  void _internal_set_tag(const std::string& value);
+  std::string* _internal_mutable_tag();
+  public:
+
+  // int32 result = 1;
+  void clear_result();
+  ::PROTOBUF_NAMESPACE_ID::int32 result() const;
+  void set_result(::PROTOBUF_NAMESPACE_ID::int32 value);
+  private:
+  ::PROTOBUF_NAMESPACE_ID::int32 _internal_result() const;
+  void _internal_set_result(::PROTOBUF_NAMESPACE_ID::int32 value);
+  public:
+
+  // @@protoc_insertion_point(class_scope:frmpub.protocc.insertdata_to_dbvisit_s)
+ private:
+  class _Internal;
+
+  template <typename T> friend class ::PROTOBUF_NAMESPACE_ID::Arena::InternalHelper;
+  typedef void InternalArenaConstructable_;
+  typedef void DestructorSkippable_;
+  ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr tag_;
+  ::PROTOBUF_NAMESPACE_ID::int32 result_;
+  mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
+  friend struct ::TableStruct_dbvisit_2eproto;
+};
+// -------------------------------------------------------------------
+
+class updata_to_dbvisit_c PROTOBUF_FINAL :
+    public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:frmpub.protocc.updata_to_dbvisit_c) */ {
+ public:
+  inline updata_to_dbvisit_c() : updata_to_dbvisit_c(nullptr) {}
+  virtual ~updata_to_dbvisit_c();
+  explicit constexpr updata_to_dbvisit_c(::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized);
+
+  updata_to_dbvisit_c(const updata_to_dbvisit_c& from);
+  updata_to_dbvisit_c(updata_to_dbvisit_c&& from) noexcept
+    : updata_to_dbvisit_c() {
+    *this = ::std::move(from);
+  }
+
+  inline updata_to_dbvisit_c& operator=(const updata_to_dbvisit_c& from) {
+    CopyFrom(from);
+    return *this;
+  }
+  inline updata_to_dbvisit_c& operator=(updata_to_dbvisit_c&& from) noexcept {
+    if (GetArena() == from.GetArena()) {
+      if (this != &from) InternalSwap(&from);
+    } else {
+      CopyFrom(from);
+    }
+    return *this;
+  }
+
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* descriptor() {
+    return GetDescriptor();
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* GetDescriptor() {
+    return GetMetadataStatic().descriptor;
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Reflection* GetReflection() {
+    return GetMetadataStatic().reflection;
+  }
+  static const updata_to_dbvisit_c& default_instance() {
+    return *internal_default_instance();
+  }
+  static inline const updata_to_dbvisit_c* internal_default_instance() {
+    return reinterpret_cast<const updata_to_dbvisit_c*>(
+               &_updata_to_dbvisit_c_default_instance_);
+  }
+  static constexpr int kIndexInFileMessages =
+    7;
+
+  friend void swap(updata_to_dbvisit_c& a, updata_to_dbvisit_c& b) {
+    a.Swap(&b);
+  }
+  inline void Swap(updata_to_dbvisit_c* other) {
+    if (other == this) return;
+    if (GetArena() == other->GetArena()) {
+      InternalSwap(other);
+    } else {
+      ::PROTOBUF_NAMESPACE_ID::internal::GenericSwap(this, other);
+    }
+  }
+  void UnsafeArenaSwap(updata_to_dbvisit_c* other) {
+    if (other == this) return;
+    GOOGLE_DCHECK(GetArena() == other->GetArena());
+    InternalSwap(other);
+  }
+
+  // implements Message ----------------------------------------------
+
+  inline updata_to_dbvisit_c* New() const final {
+    return CreateMaybeMessage<updata_to_dbvisit_c>(nullptr);
+  }
+
+  updata_to_dbvisit_c* New(::PROTOBUF_NAMESPACE_ID::Arena* arena) const final {
+    return CreateMaybeMessage<updata_to_dbvisit_c>(arena);
+  }
+  void CopyFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) final;
+  void MergeFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) final;
+  void CopyFrom(const updata_to_dbvisit_c& from);
+  void MergeFrom(const updata_to_dbvisit_c& from);
+  PROTOBUF_ATTRIBUTE_REINITIALIZES void Clear() final;
+  bool IsInitialized() const final;
+
+  size_t ByteSizeLong() const final;
+  const char* _InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) final;
+  ::PROTOBUF_NAMESPACE_ID::uint8* _InternalSerialize(
+      ::PROTOBUF_NAMESPACE_ID::uint8* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const final;
+  int GetCachedSize() const final { return _cached_size_.Get(); }
+
+  private:
+  inline void SharedCtor();
+  inline void SharedDtor();
+  void SetCachedSize(int size) const final;
+  void InternalSwap(updata_to_dbvisit_c* other);
+  friend class ::PROTOBUF_NAMESPACE_ID::internal::AnyMetadata;
+  static ::PROTOBUF_NAMESPACE_ID::StringPiece FullMessageName() {
+    return "frmpub.protocc.updata_to_dbvisit_c";
+  }
+  protected:
+  explicit updata_to_dbvisit_c(::PROTOBUF_NAMESPACE_ID::Arena* arena);
+  private:
+  static void ArenaDtor(void* object);
+  inline void RegisterArenaDtor(::PROTOBUF_NAMESPACE_ID::Arena* arena);
+  public:
+
+  ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadata() const final;
+  private:
+  static ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadataStatic() {
+    return ::descriptor_table_dbvisit_2eproto_metadata_getter(kIndexInFileMessages);
+  }
+
+  public:
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  enum : int {
+    kFieldsFieldNumber = 3,
+    kTagFieldNumber = 1,
+    kCacheKeyFieldNumber = 2,
+  };
+  // repeated .frmpub.protocc.FieldsEntry fields = 3;
+  int fields_size() const;
+  private:
+  int _internal_fields_size() const;
+  public:
+  void clear_fields();
+  ::frmpub::protocc::FieldsEntry* mutable_fields(int index);
+  ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::frmpub::protocc::FieldsEntry >*
+      mutable_fields();
+  private:
+  const ::frmpub::protocc::FieldsEntry& _internal_fields(int index) const;
+  ::frmpub::protocc::FieldsEntry* _internal_add_fields();
+  public:
+  const ::frmpub::protocc::FieldsEntry& fields(int index) const;
+  ::frmpub::protocc::FieldsEntry* add_fields();
+  const ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::frmpub::protocc::FieldsEntry >&
+      fields() const;
+
+  // string tag = 1;
+  void clear_tag();
+  const std::string& tag() const;
+  void set_tag(const std::string& value);
+  void set_tag(std::string&& value);
+  void set_tag(const char* value);
+  void set_tag(const char* value, size_t size);
+  std::string* mutable_tag();
+  std::string* release_tag();
+  void set_allocated_tag(std::string* tag);
+  private:
+  const std::string& _internal_tag() const;
+  void _internal_set_tag(const std::string& value);
+  std::string* _internal_mutable_tag();
+  public:
+
+  // string cache_key = 2;
+  void clear_cache_key();
+  const std::string& cache_key() const;
+  void set_cache_key(const std::string& value);
+  void set_cache_key(std::string&& value);
+  void set_cache_key(const char* value);
+  void set_cache_key(const char* value, size_t size);
+  std::string* mutable_cache_key();
+  std::string* release_cache_key();
+  void set_allocated_cache_key(std::string* cache_key);
+  private:
+  const std::string& _internal_cache_key() const;
+  void _internal_set_cache_key(const std::string& value);
+  std::string* _internal_mutable_cache_key();
+  public:
+
+  // @@protoc_insertion_point(class_scope:frmpub.protocc.updata_to_dbvisit_c)
+ private:
+  class _Internal;
+
+  template <typename T> friend class ::PROTOBUF_NAMESPACE_ID::Arena::InternalHelper;
+  typedef void InternalArenaConstructable_;
+  typedef void DestructorSkippable_;
+  ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::frmpub::protocc::FieldsEntry > fields_;
+  ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr tag_;
+  ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr cache_key_;
+  mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
+  friend struct ::TableStruct_dbvisit_2eproto;
+};
+// -------------------------------------------------------------------
+
+class updata_to_dbvisit_s PROTOBUF_FINAL :
+    public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:frmpub.protocc.updata_to_dbvisit_s) */ {
+ public:
+  inline updata_to_dbvisit_s() : updata_to_dbvisit_s(nullptr) {}
+  virtual ~updata_to_dbvisit_s();
+  explicit constexpr updata_to_dbvisit_s(::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized);
+
+  updata_to_dbvisit_s(const updata_to_dbvisit_s& from);
+  updata_to_dbvisit_s(updata_to_dbvisit_s&& from) noexcept
+    : updata_to_dbvisit_s() {
+    *this = ::std::move(from);
+  }
+
+  inline updata_to_dbvisit_s& operator=(const updata_to_dbvisit_s& from) {
+    CopyFrom(from);
+    return *this;
+  }
+  inline updata_to_dbvisit_s& operator=(updata_to_dbvisit_s&& from) noexcept {
+    if (GetArena() == from.GetArena()) {
+      if (this != &from) InternalSwap(&from);
+    } else {
+      CopyFrom(from);
+    }
+    return *this;
+  }
+
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* descriptor() {
+    return GetDescriptor();
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* GetDescriptor() {
+    return GetMetadataStatic().descriptor;
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Reflection* GetReflection() {
+    return GetMetadataStatic().reflection;
+  }
+  static const updata_to_dbvisit_s& default_instance() {
+    return *internal_default_instance();
+  }
+  static inline const updata_to_dbvisit_s* internal_default_instance() {
+    return reinterpret_cast<const updata_to_dbvisit_s*>(
+               &_updata_to_dbvisit_s_default_instance_);
+  }
+  static constexpr int kIndexInFileMessages =
+    8;
+
+  friend void swap(updata_to_dbvisit_s& a, updata_to_dbvisit_s& b) {
+    a.Swap(&b);
+  }
+  inline void Swap(updata_to_dbvisit_s* other) {
+    if (other == this) return;
+    if (GetArena() == other->GetArena()) {
+      InternalSwap(other);
+    } else {
+      ::PROTOBUF_NAMESPACE_ID::internal::GenericSwap(this, other);
+    }
+  }
+  void UnsafeArenaSwap(updata_to_dbvisit_s* other) {
+    if (other == this) return;
+    GOOGLE_DCHECK(GetArena() == other->GetArena());
+    InternalSwap(other);
+  }
+
+  // implements Message ----------------------------------------------
+
+  inline updata_to_dbvisit_s* New() const final {
+    return CreateMaybeMessage<updata_to_dbvisit_s>(nullptr);
+  }
+
+  updata_to_dbvisit_s* New(::PROTOBUF_NAMESPACE_ID::Arena* arena) const final {
+    return CreateMaybeMessage<updata_to_dbvisit_s>(arena);
+  }
+  void CopyFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) final;
+  void MergeFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) final;
+  void CopyFrom(const updata_to_dbvisit_s& from);
+  void MergeFrom(const updata_to_dbvisit_s& from);
+  PROTOBUF_ATTRIBUTE_REINITIALIZES void Clear() final;
+  bool IsInitialized() const final;
+
+  size_t ByteSizeLong() const final;
+  const char* _InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) final;
+  ::PROTOBUF_NAMESPACE_ID::uint8* _InternalSerialize(
+      ::PROTOBUF_NAMESPACE_ID::uint8* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const final;
+  int GetCachedSize() const final { return _cached_size_.Get(); }
+
+  private:
+  inline void SharedCtor();
+  inline void SharedDtor();
+  void SetCachedSize(int size) const final;
+  void InternalSwap(updata_to_dbvisit_s* other);
+  friend class ::PROTOBUF_NAMESPACE_ID::internal::AnyMetadata;
+  static ::PROTOBUF_NAMESPACE_ID::StringPiece FullMessageName() {
+    return "frmpub.protocc.updata_to_dbvisit_s";
+  }
+  protected:
+  explicit updata_to_dbvisit_s(::PROTOBUF_NAMESPACE_ID::Arena* arena);
+  private:
+  static void ArenaDtor(void* object);
+  inline void RegisterArenaDtor(::PROTOBUF_NAMESPACE_ID::Arena* arena);
+  public:
+
+  ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadata() const final;
+  private:
+  static ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadataStatic() {
+    return ::descriptor_table_dbvisit_2eproto_metadata_getter(kIndexInFileMessages);
+  }
+
+  public:
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  enum : int {
+    kTagFieldNumber = 2,
+    kResultFieldNumber = 1,
+  };
+  // string tag = 2;
+  void clear_tag();
+  const std::string& tag() const;
+  void set_tag(const std::string& value);
+  void set_tag(std::string&& value);
+  void set_tag(const char* value);
+  void set_tag(const char* value, size_t size);
+  std::string* mutable_tag();
+  std::string* release_tag();
+  void set_allocated_tag(std::string* tag);
+  private:
+  const std::string& _internal_tag() const;
+  void _internal_set_tag(const std::string& value);
+  std::string* _internal_mutable_tag();
+  public:
+
+  // int32 result = 1;
+  void clear_result();
+  ::PROTOBUF_NAMESPACE_ID::int32 result() const;
+  void set_result(::PROTOBUF_NAMESPACE_ID::int32 value);
+  private:
+  ::PROTOBUF_NAMESPACE_ID::int32 _internal_result() const;
+  void _internal_set_result(::PROTOBUF_NAMESPACE_ID::int32 value);
+  public:
+
+  // @@protoc_insertion_point(class_scope:frmpub.protocc.updata_to_dbvisit_s)
+ private:
+  class _Internal;
+
+  template <typename T> friend class ::PROTOBUF_NAMESPACE_ID::Arena::InternalHelper;
+  typedef void InternalArenaConstructable_;
+  typedef void DestructorSkippable_;
+  ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr tag_;
+  ::PROTOBUF_NAMESPACE_ID::int32 result_;
+  mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
+  friend struct ::TableStruct_dbvisit_2eproto;
+};
+// -------------------------------------------------------------------
+
+class deletedata_to_dbvisit_c PROTOBUF_FINAL :
+    public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:frmpub.protocc.deletedata_to_dbvisit_c) */ {
+ public:
+  inline deletedata_to_dbvisit_c() : deletedata_to_dbvisit_c(nullptr) {}
+  virtual ~deletedata_to_dbvisit_c();
+  explicit constexpr deletedata_to_dbvisit_c(::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized);
+
+  deletedata_to_dbvisit_c(const deletedata_to_dbvisit_c& from);
+  deletedata_to_dbvisit_c(deletedata_to_dbvisit_c&& from) noexcept
+    : deletedata_to_dbvisit_c() {
+    *this = ::std::move(from);
+  }
+
+  inline deletedata_to_dbvisit_c& operator=(const deletedata_to_dbvisit_c& from) {
+    CopyFrom(from);
+    return *this;
+  }
+  inline deletedata_to_dbvisit_c& operator=(deletedata_to_dbvisit_c&& from) noexcept {
+    if (GetArena() == from.GetArena()) {
+      if (this != &from) InternalSwap(&from);
+    } else {
+      CopyFrom(from);
+    }
+    return *this;
+  }
+
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* descriptor() {
+    return GetDescriptor();
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* GetDescriptor() {
+    return GetMetadataStatic().descriptor;
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Reflection* GetReflection() {
+    return GetMetadataStatic().reflection;
+  }
+  static const deletedata_to_dbvisit_c& default_instance() {
+    return *internal_default_instance();
+  }
+  static inline const deletedata_to_dbvisit_c* internal_default_instance() {
+    return reinterpret_cast<const deletedata_to_dbvisit_c*>(
+               &_deletedata_to_dbvisit_c_default_instance_);
+  }
+  static constexpr int kIndexInFileMessages =
+    9;
+
+  friend void swap(deletedata_to_dbvisit_c& a, deletedata_to_dbvisit_c& b) {
+    a.Swap(&b);
+  }
+  inline void Swap(deletedata_to_dbvisit_c* other) {
+    if (other == this) return;
+    if (GetArena() == other->GetArena()) {
+      InternalSwap(other);
+    } else {
+      ::PROTOBUF_NAMESPACE_ID::internal::GenericSwap(this, other);
+    }
+  }
+  void UnsafeArenaSwap(deletedata_to_dbvisit_c* other) {
+    if (other == this) return;
+    GOOGLE_DCHECK(GetArena() == other->GetArena());
+    InternalSwap(other);
+  }
+
+  // implements Message ----------------------------------------------
+
+  inline deletedata_to_dbvisit_c* New() const final {
+    return CreateMaybeMessage<deletedata_to_dbvisit_c>(nullptr);
+  }
+
+  deletedata_to_dbvisit_c* New(::PROTOBUF_NAMESPACE_ID::Arena* arena) const final {
+    return CreateMaybeMessage<deletedata_to_dbvisit_c>(arena);
+  }
+  void CopyFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) final;
+  void MergeFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) final;
+  void CopyFrom(const deletedata_to_dbvisit_c& from);
+  void MergeFrom(const deletedata_to_dbvisit_c& from);
+  PROTOBUF_ATTRIBUTE_REINITIALIZES void Clear() final;
+  bool IsInitialized() const final;
+
+  size_t ByteSizeLong() const final;
+  const char* _InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) final;
+  ::PROTOBUF_NAMESPACE_ID::uint8* _InternalSerialize(
+      ::PROTOBUF_NAMESPACE_ID::uint8* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const final;
+  int GetCachedSize() const final { return _cached_size_.Get(); }
+
+  private:
+  inline void SharedCtor();
+  inline void SharedDtor();
+  void SetCachedSize(int size) const final;
+  void InternalSwap(deletedata_to_dbvisit_c* other);
+  friend class ::PROTOBUF_NAMESPACE_ID::internal::AnyMetadata;
+  static ::PROTOBUF_NAMESPACE_ID::StringPiece FullMessageName() {
+    return "frmpub.protocc.deletedata_to_dbvisit_c";
+  }
+  protected:
+  explicit deletedata_to_dbvisit_c(::PROTOBUF_NAMESPACE_ID::Arena* arena);
+  private:
+  static void ArenaDtor(void* object);
+  inline void RegisterArenaDtor(::PROTOBUF_NAMESPACE_ID::Arena* arena);
+  public:
+
+  ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadata() const final;
+  private:
+  static ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadataStatic() {
+    return ::descriptor_table_dbvisit_2eproto_metadata_getter(kIndexInFileMessages);
+  }
+
+  public:
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  enum : int {
+    kTagFieldNumber = 1,
+    kCacheKeyFieldNumber = 2,
+  };
+  // string tag = 1;
+  void clear_tag();
+  const std::string& tag() const;
+  void set_tag(const std::string& value);
+  void set_tag(std::string&& value);
+  void set_tag(const char* value);
+  void set_tag(const char* value, size_t size);
+  std::string* mutable_tag();
+  std::string* release_tag();
+  void set_allocated_tag(std::string* tag);
+  private:
+  const std::string& _internal_tag() const;
+  void _internal_set_tag(const std::string& value);
+  std::string* _internal_mutable_tag();
+  public:
+
+  // string cache_key = 2;
+  void clear_cache_key();
+  const std::string& cache_key() const;
+  void set_cache_key(const std::string& value);
+  void set_cache_key(std::string&& value);
+  void set_cache_key(const char* value);
+  void set_cache_key(const char* value, size_t size);
+  std::string* mutable_cache_key();
+  std::string* release_cache_key();
+  void set_allocated_cache_key(std::string* cache_key);
+  private:
+  const std::string& _internal_cache_key() const;
+  void _internal_set_cache_key(const std::string& value);
+  std::string* _internal_mutable_cache_key();
+  public:
+
+  // @@protoc_insertion_point(class_scope:frmpub.protocc.deletedata_to_dbvisit_c)
+ private:
+  class _Internal;
+
+  template <typename T> friend class ::PROTOBUF_NAMESPACE_ID::Arena::InternalHelper;
+  typedef void InternalArenaConstructable_;
+  typedef void DestructorSkippable_;
+  ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr tag_;
+  ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr cache_key_;
+  mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
+  friend struct ::TableStruct_dbvisit_2eproto;
+};
+// -------------------------------------------------------------------
+
+class deletedata_to_dbvisit_s PROTOBUF_FINAL :
+    public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:frmpub.protocc.deletedata_to_dbvisit_s) */ {
+ public:
+  inline deletedata_to_dbvisit_s() : deletedata_to_dbvisit_s(nullptr) {}
+  virtual ~deletedata_to_dbvisit_s();
+  explicit constexpr deletedata_to_dbvisit_s(::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized);
+
+  deletedata_to_dbvisit_s(const deletedata_to_dbvisit_s& from);
+  deletedata_to_dbvisit_s(deletedata_to_dbvisit_s&& from) noexcept
+    : deletedata_to_dbvisit_s() {
+    *this = ::std::move(from);
+  }
+
+  inline deletedata_to_dbvisit_s& operator=(const deletedata_to_dbvisit_s& from) {
+    CopyFrom(from);
+    return *this;
+  }
+  inline deletedata_to_dbvisit_s& operator=(deletedata_to_dbvisit_s&& from) noexcept {
+    if (GetArena() == from.GetArena()) {
+      if (this != &from) InternalSwap(&from);
+    } else {
+      CopyFrom(from);
+    }
+    return *this;
+  }
+
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* descriptor() {
+    return GetDescriptor();
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* GetDescriptor() {
+    return GetMetadataStatic().descriptor;
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Reflection* GetReflection() {
+    return GetMetadataStatic().reflection;
+  }
+  static const deletedata_to_dbvisit_s& default_instance() {
+    return *internal_default_instance();
+  }
+  static inline const deletedata_to_dbvisit_s* internal_default_instance() {
+    return reinterpret_cast<const deletedata_to_dbvisit_s*>(
+               &_deletedata_to_dbvisit_s_default_instance_);
+  }
+  static constexpr int kIndexInFileMessages =
+    10;
+
+  friend void swap(deletedata_to_dbvisit_s& a, deletedata_to_dbvisit_s& b) {
+    a.Swap(&b);
+  }
+  inline void Swap(deletedata_to_dbvisit_s* other) {
+    if (other == this) return;
+    if (GetArena() == other->GetArena()) {
+      InternalSwap(other);
+    } else {
+      ::PROTOBUF_NAMESPACE_ID::internal::GenericSwap(this, other);
+    }
+  }
+  void UnsafeArenaSwap(deletedata_to_dbvisit_s* other) {
+    if (other == this) return;
+    GOOGLE_DCHECK(GetArena() == other->GetArena());
+    InternalSwap(other);
+  }
+
+  // implements Message ----------------------------------------------
+
+  inline deletedata_to_dbvisit_s* New() const final {
+    return CreateMaybeMessage<deletedata_to_dbvisit_s>(nullptr);
+  }
+
+  deletedata_to_dbvisit_s* New(::PROTOBUF_NAMESPACE_ID::Arena* arena) const final {
+    return CreateMaybeMessage<deletedata_to_dbvisit_s>(arena);
+  }
+  void CopyFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) final;
+  void MergeFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) final;
+  void CopyFrom(const deletedata_to_dbvisit_s& from);
+  void MergeFrom(const deletedata_to_dbvisit_s& from);
+  PROTOBUF_ATTRIBUTE_REINITIALIZES void Clear() final;
+  bool IsInitialized() const final;
+
+  size_t ByteSizeLong() const final;
+  const char* _InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) final;
+  ::PROTOBUF_NAMESPACE_ID::uint8* _InternalSerialize(
+      ::PROTOBUF_NAMESPACE_ID::uint8* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const final;
+  int GetCachedSize() const final { return _cached_size_.Get(); }
+
+  private:
+  inline void SharedCtor();
+  inline void SharedDtor();
+  void SetCachedSize(int size) const final;
+  void InternalSwap(deletedata_to_dbvisit_s* other);
+  friend class ::PROTOBUF_NAMESPACE_ID::internal::AnyMetadata;
+  static ::PROTOBUF_NAMESPACE_ID::StringPiece FullMessageName() {
+    return "frmpub.protocc.deletedata_to_dbvisit_s";
+  }
+  protected:
+  explicit deletedata_to_dbvisit_s(::PROTOBUF_NAMESPACE_ID::Arena* arena);
+  private:
+  static void ArenaDtor(void* object);
+  inline void RegisterArenaDtor(::PROTOBUF_NAMESPACE_ID::Arena* arena);
+  public:
+
+  ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadata() const final;
+  private:
+  static ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadataStatic() {
+    return ::descriptor_table_dbvisit_2eproto_metadata_getter(kIndexInFileMessages);
+  }
+
+  public:
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  enum : int {
+    kTagFieldNumber = 2,
+    kResultFieldNumber = 1,
+  };
+  // string tag = 2;
+  void clear_tag();
+  const std::string& tag() const;
+  void set_tag(const std::string& value);
+  void set_tag(std::string&& value);
+  void set_tag(const char* value);
+  void set_tag(const char* value, size_t size);
+  std::string* mutable_tag();
+  std::string* release_tag();
+  void set_allocated_tag(std::string* tag);
+  private:
+  const std::string& _internal_tag() const;
+  void _internal_set_tag(const std::string& value);
+  std::string* _internal_mutable_tag();
+  public:
+
+  // int32 result = 1;
+  void clear_result();
+  ::PROTOBUF_NAMESPACE_ID::int32 result() const;
+  void set_result(::PROTOBUF_NAMESPACE_ID::int32 value);
+  private:
+  ::PROTOBUF_NAMESPACE_ID::int32 _internal_result() const;
+  void _internal_set_result(::PROTOBUF_NAMESPACE_ID::int32 value);
+  public:
+
+  // @@protoc_insertion_point(class_scope:frmpub.protocc.deletedata_to_dbvisit_s)
+ private:
+  class _Internal;
+
+  template <typename T> friend class ::PROTOBUF_NAMESPACE_ID::Arena::InternalHelper;
+  typedef void InternalArenaConstructable_;
+  typedef void DestructorSkippable_;
+  ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr tag_;
+  ::PROTOBUF_NAMESPACE_ID::int32 result_;
+  mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
+  friend struct ::TableStruct_dbvisit_2eproto;
+};
+// ===================================================================
+
+
+// ===================================================================
 
 #ifdef __GNUC__
-#pragma GCC diagnostic push
-#pragma GCC diagnostic ignored "-Wstrict-aliasing"
+  #pragma GCC diagnostic push
+  #pragma GCC diagnostic ignored "-Wstrict-aliasing"
 #endif  // __GNUC__
 // loaddata_from_dbvisit_c
 
 // string tag = 1;
-		inline void loaddata_from_dbvisit_c::clear_tag() {
-			tag_.ClearToEmpty();
-		}
-		inline const std::string& loaddata_from_dbvisit_c::tag() const {
-			// @@protoc_insertion_point(field_get:frmpub.protocc.loaddata_from_dbvisit_c.tag)
-			return _internal_tag();
-		}
-		inline void loaddata_from_dbvisit_c::set_tag(const std::string& value) {
-			_internal_set_tag(value);
-			// @@protoc_insertion_point(field_set:frmpub.protocc.loaddata_from_dbvisit_c.tag)
-		}
-		inline std::string* loaddata_from_dbvisit_c::mutable_tag() {
-			// @@protoc_insertion_point(field_mutable:frmpub.protocc.loaddata_from_dbvisit_c.tag)
-			return _internal_mutable_tag();
-		}
-		inline const std::string& loaddata_from_dbvisit_c::_internal_tag() const {
-			return tag_.Get();
-		}
-		inline void loaddata_from_dbvisit_c::_internal_set_tag(const std::string& value) {
-
-			tag_.Set(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, value, GetArena());
-		}
-		inline void loaddata_from_dbvisit_c::set_tag(std::string&& value) {
-
-			tag_.Set(
-				::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, ::std::move(value), GetArena());
-			// @@protoc_insertion_point(field_set_rvalue:frmpub.protocc.loaddata_from_dbvisit_c.tag)
-		}
-		inline void loaddata_from_dbvisit_c::set_tag(const char* value) {
-			GOOGLE_DCHECK(value != nullptr);
-
-			tag_.Set(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, ::std::string(value), GetArena());
-			// @@protoc_insertion_point(field_set_char:frmpub.protocc.loaddata_from_dbvisit_c.tag)
-		}
-		inline void loaddata_from_dbvisit_c::set_tag(const char* value,
-			size_t size) {
-
-			tag_.Set(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, ::std::string(
-				reinterpret_cast<const char*>(value), size), GetArena());
-			// @@protoc_insertion_point(field_set_pointer:frmpub.protocc.loaddata_from_dbvisit_c.tag)
-		}
-		inline std::string* loaddata_from_dbvisit_c::_internal_mutable_tag() {
-
-			return tag_.Mutable(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, GetArena());
-		}
-		inline std::string* loaddata_from_dbvisit_c::release_tag() {
-			// @@protoc_insertion_point(field_release:frmpub.protocc.loaddata_from_dbvisit_c.tag)
-			return tag_.Release(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArena());
-		}
-		inline void loaddata_from_dbvisit_c::set_allocated_tag(std::string* tag) {
-			if (tag != nullptr) {
-
-			}
-			else {
-
-			}
-			tag_.SetAllocated(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), tag,
-				GetArena());
-			// @@protoc_insertion_point(field_set_allocated:frmpub.protocc.loaddata_from_dbvisit_c.tag)
-		}
-
-		// string cache_key = 2;
-		inline void loaddata_from_dbvisit_c::clear_cache_key() {
-			cache_key_.ClearToEmpty();
-		}
-		inline const std::string& loaddata_from_dbvisit_c::cache_key() const {
-			// @@protoc_insertion_point(field_get:frmpub.protocc.loaddata_from_dbvisit_c.cache_key)
-			return _internal_cache_key();
-		}
-		inline void loaddata_from_dbvisit_c::set_cache_key(const std::string& value) {
-			_internal_set_cache_key(value);
-			// @@protoc_insertion_point(field_set:frmpub.protocc.loaddata_from_dbvisit_c.cache_key)
-		}
-		inline std::string* loaddata_from_dbvisit_c::mutable_cache_key() {
-			// @@protoc_insertion_point(field_mutable:frmpub.protocc.loaddata_from_dbvisit_c.cache_key)
-			return _internal_mutable_cache_key();
-		}
-		inline const std::string& loaddata_from_dbvisit_c::_internal_cache_key() const {
-			return cache_key_.Get();
-		}
-		inline void loaddata_from_dbvisit_c::_internal_set_cache_key(const std::string& value) {
-
-			cache_key_.Set(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, value, GetArena());
-		}
-		inline void loaddata_from_dbvisit_c::set_cache_key(std::string&& value) {
-
-			cache_key_.Set(
-				::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, ::std::move(value), GetArena());
-			// @@protoc_insertion_point(field_set_rvalue:frmpub.protocc.loaddata_from_dbvisit_c.cache_key)
-		}
-		inline void loaddata_from_dbvisit_c::set_cache_key(const char* value) {
-			GOOGLE_DCHECK(value != nullptr);
-
-			cache_key_.Set(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, ::std::string(value), GetArena());
-			// @@protoc_insertion_point(field_set_char:frmpub.protocc.loaddata_from_dbvisit_c.cache_key)
-		}
-		inline void loaddata_from_dbvisit_c::set_cache_key(const char* value,
-			size_t size) {
-
-			cache_key_.Set(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, ::std::string(
-				reinterpret_cast<const char*>(value), size), GetArena());
-			// @@protoc_insertion_point(field_set_pointer:frmpub.protocc.loaddata_from_dbvisit_c.cache_key)
-		}
-		inline std::string* loaddata_from_dbvisit_c::_internal_mutable_cache_key() {
-
-			return cache_key_.Mutable(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, GetArena());
-		}
-		inline std::string* loaddata_from_dbvisit_c::release_cache_key() {
-			// @@protoc_insertion_point(field_release:frmpub.protocc.loaddata_from_dbvisit_c.cache_key)
-			return cache_key_.Release(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArena());
-		}
-		inline void loaddata_from_dbvisit_c::set_allocated_cache_key(std::string* cache_key) {
-			if (cache_key != nullptr) {
-
-			}
-			else {
-
-			}
-			cache_key_.SetAllocated(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), cache_key,
-				GetArena());
-			// @@protoc_insertion_point(field_set_allocated:frmpub.protocc.loaddata_from_dbvisit_c.cache_key)
-		}
-
-		// repeated .frmpub.protocc.FieldsEntry fields = 4;
-		inline int loaddata_from_dbvisit_c::_internal_fields_size() const {
-			return fields_.size();
-		}
-		inline int loaddata_from_dbvisit_c::fields_size() const {
-			return _internal_fields_size();
-		}
-		inline ::frmpub::protocc::FieldsEntry* loaddata_from_dbvisit_c::mutable_fields(int index) {
-			// @@protoc_insertion_point(field_mutable:frmpub.protocc.loaddata_from_dbvisit_c.fields)
-			return fields_.Mutable(index);
-		}
-		inline ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::frmpub::protocc::FieldsEntry >*
-			loaddata_from_dbvisit_c::mutable_fields() {
-			// @@protoc_insertion_point(field_mutable_list:frmpub.protocc.loaddata_from_dbvisit_c.fields)
-			return &fields_;
-		}
-		inline const ::frmpub::protocc::FieldsEntry& loaddata_from_dbvisit_c::_internal_fields(int index) const {
-			return fields_.Get(index);
-		}
-		inline const ::frmpub::protocc::FieldsEntry& loaddata_from_dbvisit_c::fields(int index) const {
-			// @@protoc_insertion_point(field_get:frmpub.protocc.loaddata_from_dbvisit_c.fields)
-			return _internal_fields(index);
-		}
-		inline ::frmpub::protocc::FieldsEntry* loaddata_from_dbvisit_c::_internal_add_fields() {
-			return fields_.Add();
-		}
-		inline ::frmpub::protocc::FieldsEntry* loaddata_from_dbvisit_c::add_fields() {
-			// @@protoc_insertion_point(field_add:frmpub.protocc.loaddata_from_dbvisit_c.fields)
-			return _internal_add_fields();
-		}
-		inline const ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::frmpub::protocc::FieldsEntry >&
-			loaddata_from_dbvisit_c::fields() const {
-			// @@protoc_insertion_point(field_list:frmpub.protocc.loaddata_from_dbvisit_c.fields)
-			return fields_;
-		}
-
-		// -------------------------------------------------------------------
-
-		// loaddata_from_dbvisit_s
-
-		// int32 result = 1;
-		inline void loaddata_from_dbvisit_s::clear_result() {
-			result_ = 0;
-		}
-		inline ::PROTOBUF_NAMESPACE_ID::int32 loaddata_from_dbvisit_s::_internal_result() const {
-			return result_;
-		}
-		inline ::PROTOBUF_NAMESPACE_ID::int32 loaddata_from_dbvisit_s::result() const {
-			// @@protoc_insertion_point(field_get:frmpub.protocc.loaddata_from_dbvisit_s.result)
-			return _internal_result();
-		}
-		inline void loaddata_from_dbvisit_s::_internal_set_result(::PROTOBUF_NAMESPACE_ID::int32 value) {
-
-			result_ = value;
-		}
-		inline void loaddata_from_dbvisit_s::set_result(::PROTOBUF_NAMESPACE_ID::int32 value) {
-			_internal_set_result(value);
-			// @@protoc_insertion_point(field_set:frmpub.protocc.loaddata_from_dbvisit_s.result)
-		}
-
-		// string tag = 2;
-		inline void loaddata_from_dbvisit_s::clear_tag() {
-			tag_.ClearToEmpty();
-		}
-		inline const std::string& loaddata_from_dbvisit_s::tag() const {
-			// @@protoc_insertion_point(field_get:frmpub.protocc.loaddata_from_dbvisit_s.tag)
-			return _internal_tag();
-		}
-		inline void loaddata_from_dbvisit_s::set_tag(const std::string& value) {
-			_internal_set_tag(value);
-			// @@protoc_insertion_point(field_set:frmpub.protocc.loaddata_from_dbvisit_s.tag)
-		}
-		inline std::string* loaddata_from_dbvisit_s::mutable_tag() {
-			// @@protoc_insertion_point(field_mutable:frmpub.protocc.loaddata_from_dbvisit_s.tag)
-			return _internal_mutable_tag();
-		}
-		inline const std::string& loaddata_from_dbvisit_s::_internal_tag() const {
-			return tag_.Get();
-		}
-		inline void loaddata_from_dbvisit_s::_internal_set_tag(const std::string& value) {
-
-			tag_.Set(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, value, GetArena());
-		}
-		inline void loaddata_from_dbvisit_s::set_tag(std::string&& value) {
-
-			tag_.Set(
-				::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, ::std::move(value), GetArena());
-			// @@protoc_insertion_point(field_set_rvalue:frmpub.protocc.loaddata_from_dbvisit_s.tag)
-		}
-		inline void loaddata_from_dbvisit_s::set_tag(const char* value) {
-			GOOGLE_DCHECK(value != nullptr);
-
-			tag_.Set(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, ::std::string(value), GetArena());
-			// @@protoc_insertion_point(field_set_char:frmpub.protocc.loaddata_from_dbvisit_s.tag)
-		}
-		inline void loaddata_from_dbvisit_s::set_tag(const char* value,
-			size_t size) {
-
-			tag_.Set(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, ::std::string(
-				reinterpret_cast<const char*>(value), size), GetArena());
-			// @@protoc_insertion_point(field_set_pointer:frmpub.protocc.loaddata_from_dbvisit_s.tag)
-		}
-		inline std::string* loaddata_from_dbvisit_s::_internal_mutable_tag() {
-
-			return tag_.Mutable(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, GetArena());
-		}
-		inline std::string* loaddata_from_dbvisit_s::release_tag() {
-			// @@protoc_insertion_point(field_release:frmpub.protocc.loaddata_from_dbvisit_s.tag)
-			return tag_.Release(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArena());
-		}
-		inline void loaddata_from_dbvisit_s::set_allocated_tag(std::string* tag) {
-			if (tag != nullptr) {
-
-			}
-			else {
-
-			}
-			tag_.SetAllocated(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), tag,
-				GetArena());
-			// @@protoc_insertion_point(field_set_allocated:frmpub.protocc.loaddata_from_dbvisit_s.tag)
-		}
-
-		// repeated .frmpub.protocc.FieldsEntry fields = 3;
-		inline int loaddata_from_dbvisit_s::_internal_fields_size() const {
-			return fields_.size();
-		}
-		inline int loaddata_from_dbvisit_s::fields_size() const {
-			return _internal_fields_size();
-		}
-		inline ::frmpub::protocc::FieldsEntry* loaddata_from_dbvisit_s::mutable_fields(int index) {
-			// @@protoc_insertion_point(field_mutable:frmpub.protocc.loaddata_from_dbvisit_s.fields)
-			return fields_.Mutable(index);
-		}
-		inline ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::frmpub::protocc::FieldsEntry >*
-			loaddata_from_dbvisit_s::mutable_fields() {
-			// @@protoc_insertion_point(field_mutable_list:frmpub.protocc.loaddata_from_dbvisit_s.fields)
-			return &fields_;
-		}
-		inline const ::frmpub::protocc::FieldsEntry& loaddata_from_dbvisit_s::_internal_fields(int index) const {
-			return fields_.Get(index);
-		}
-		inline const ::frmpub::protocc::FieldsEntry& loaddata_from_dbvisit_s::fields(int index) const {
-			// @@protoc_insertion_point(field_get:frmpub.protocc.loaddata_from_dbvisit_s.fields)
-			return _internal_fields(index);
-		}
-		inline ::frmpub::protocc::FieldsEntry* loaddata_from_dbvisit_s::_internal_add_fields() {
-			return fields_.Add();
-		}
-		inline ::frmpub::protocc::FieldsEntry* loaddata_from_dbvisit_s::add_fields() {
-			// @@protoc_insertion_point(field_add:frmpub.protocc.loaddata_from_dbvisit_s.fields)
-			return _internal_add_fields();
-		}
-		inline const ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::frmpub::protocc::FieldsEntry >&
-			loaddata_from_dbvisit_s::fields() const {
-			// @@protoc_insertion_point(field_list:frmpub.protocc.loaddata_from_dbvisit_s.fields)
-			return fields_;
-		}
-
-		// -------------------------------------------------------------------
-
-		// loaddata_more_from_dbvisit_c
-
-		// string tag = 1;
-		inline void loaddata_more_from_dbvisit_c::clear_tag() {
-			tag_.ClearToEmpty();
-		}
-		inline const std::string& loaddata_more_from_dbvisit_c::tag() const {
-			// @@protoc_insertion_point(field_get:frmpub.protocc.loaddata_more_from_dbvisit_c.tag)
-			return _internal_tag();
-		}
-		inline void loaddata_more_from_dbvisit_c::set_tag(const std::string& value) {
-			_internal_set_tag(value);
-			// @@protoc_insertion_point(field_set:frmpub.protocc.loaddata_more_from_dbvisit_c.tag)
-		}
-		inline std::string* loaddata_more_from_dbvisit_c::mutable_tag() {
-			// @@protoc_insertion_point(field_mutable:frmpub.protocc.loaddata_more_from_dbvisit_c.tag)
-			return _internal_mutable_tag();
-		}
-		inline const std::string& loaddata_more_from_dbvisit_c::_internal_tag() const {
-			return tag_.Get();
-		}
-		inline void loaddata_more_from_dbvisit_c::_internal_set_tag(const std::string& value) {
-
-			tag_.Set(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, value, GetArena());
-		}
-		inline void loaddata_more_from_dbvisit_c::set_tag(std::string&& value) {
-
-			tag_.Set(
-				::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, ::std::move(value), GetArena());
-			// @@protoc_insertion_point(field_set_rvalue:frmpub.protocc.loaddata_more_from_dbvisit_c.tag)
-		}
-		inline void loaddata_more_from_dbvisit_c::set_tag(const char* value) {
-			GOOGLE_DCHECK(value != nullptr);
-
-			tag_.Set(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, ::std::string(value), GetArena());
-			// @@protoc_insertion_point(field_set_char:frmpub.protocc.loaddata_more_from_dbvisit_c.tag)
-		}
-		inline void loaddata_more_from_dbvisit_c::set_tag(const char* value,
-			size_t size) {
-
-			tag_.Set(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, ::std::string(
-				reinterpret_cast<const char*>(value), size), GetArena());
-			// @@protoc_insertion_point(field_set_pointer:frmpub.protocc.loaddata_more_from_dbvisit_c.tag)
-		}
-		inline std::string* loaddata_more_from_dbvisit_c::_internal_mutable_tag() {
-
-			return tag_.Mutable(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, GetArena());
-		}
-		inline std::string* loaddata_more_from_dbvisit_c::release_tag() {
-			// @@protoc_insertion_point(field_release:frmpub.protocc.loaddata_more_from_dbvisit_c.tag)
-			return tag_.Release(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArena());
-		}
-		inline void loaddata_more_from_dbvisit_c::set_allocated_tag(std::string* tag) {
-			if (tag != nullptr) {
-
-			}
-			else {
-
-			}
-			tag_.SetAllocated(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), tag,
-				GetArena());
-			// @@protoc_insertion_point(field_set_allocated:frmpub.protocc.loaddata_more_from_dbvisit_c.tag)
-		}
-
-		// string condition = 2;
-		inline void loaddata_more_from_dbvisit_c::clear_condition() {
-			condition_.ClearToEmpty();
-		}
-		inline const std::string& loaddata_more_from_dbvisit_c::condition() const {
-			// @@protoc_insertion_point(field_get:frmpub.protocc.loaddata_more_from_dbvisit_c.condition)
-			return _internal_condition();
-		}
-		inline void loaddata_more_from_dbvisit_c::set_condition(const std::string& value) {
-			_internal_set_condition(value);
-			// @@protoc_insertion_point(field_set:frmpub.protocc.loaddata_more_from_dbvisit_c.condition)
-		}
-		inline std::string* loaddata_more_from_dbvisit_c::mutable_condition() {
-			// @@protoc_insertion_point(field_mutable:frmpub.protocc.loaddata_more_from_dbvisit_c.condition)
-			return _internal_mutable_condition();
-		}
-		inline const std::string& loaddata_more_from_dbvisit_c::_internal_condition() const {
-			return condition_.Get();
-		}
-		inline void loaddata_more_from_dbvisit_c::_internal_set_condition(const std::string& value) {
-
-			condition_.Set(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, value, GetArena());
-		}
-		inline void loaddata_more_from_dbvisit_c::set_condition(std::string&& value) {
-
-			condition_.Set(
-				::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, ::std::move(value), GetArena());
-			// @@protoc_insertion_point(field_set_rvalue:frmpub.protocc.loaddata_more_from_dbvisit_c.condition)
-		}
-		inline void loaddata_more_from_dbvisit_c::set_condition(const char* value) {
-			GOOGLE_DCHECK(value != nullptr);
-
-			condition_.Set(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, ::std::string(value), GetArena());
-			// @@protoc_insertion_point(field_set_char:frmpub.protocc.loaddata_more_from_dbvisit_c.condition)
-		}
-		inline void loaddata_more_from_dbvisit_c::set_condition(const char* value,
-			size_t size) {
-
-			condition_.Set(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, ::std::string(
-				reinterpret_cast<const char*>(value), size), GetArena());
-			// @@protoc_insertion_point(field_set_pointer:frmpub.protocc.loaddata_more_from_dbvisit_c.condition)
-		}
-		inline std::string* loaddata_more_from_dbvisit_c::_internal_mutable_condition() {
-
-			return condition_.Mutable(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, GetArena());
-		}
-		inline std::string* loaddata_more_from_dbvisit_c::release_condition() {
-			// @@protoc_insertion_point(field_release:frmpub.protocc.loaddata_more_from_dbvisit_c.condition)
-			return condition_.Release(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArena());
-		}
-		inline void loaddata_more_from_dbvisit_c::set_allocated_condition(std::string* condition) {
-			if (condition != nullptr) {
-
-			}
-			else {
-
-			}
-			condition_.SetAllocated(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), condition,
-				GetArena());
-			// @@protoc_insertion_point(field_set_allocated:frmpub.protocc.loaddata_more_from_dbvisit_c.condition)
-		}
-
-		// repeated .frmpub.protocc.FieldsEntry fields = 3;
-		inline int loaddata_more_from_dbvisit_c::_internal_fields_size() const {
-			return fields_.size();
-		}
-		inline int loaddata_more_from_dbvisit_c::fields_size() const {
-			return _internal_fields_size();
-		}
-		inline ::frmpub::protocc::FieldsEntry* loaddata_more_from_dbvisit_c::mutable_fields(int index) {
-			// @@protoc_insertion_point(field_mutable:frmpub.protocc.loaddata_more_from_dbvisit_c.fields)
-			return fields_.Mutable(index);
-		}
-		inline ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::frmpub::protocc::FieldsEntry >*
-			loaddata_more_from_dbvisit_c::mutable_fields() {
-			// @@protoc_insertion_point(field_mutable_list:frmpub.protocc.loaddata_more_from_dbvisit_c.fields)
-			return &fields_;
-		}
-		inline const ::frmpub::protocc::FieldsEntry& loaddata_more_from_dbvisit_c::_internal_fields(int index) const {
-			return fields_.Get(index);
-		}
-		inline const ::frmpub::protocc::FieldsEntry& loaddata_more_from_dbvisit_c::fields(int index) const {
-			// @@protoc_insertion_point(field_get:frmpub.protocc.loaddata_more_from_dbvisit_c.fields)
-			return _internal_fields(index);
-		}
-		inline ::frmpub::protocc::FieldsEntry* loaddata_more_from_dbvisit_c::_internal_add_fields() {
-			return fields_.Add();
-		}
-		inline ::frmpub::protocc::FieldsEntry* loaddata_more_from_dbvisit_c::add_fields() {
-			// @@protoc_insertion_point(field_add:frmpub.protocc.loaddata_more_from_dbvisit_c.fields)
-			return _internal_add_fields();
-		}
-		inline const ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::frmpub::protocc::FieldsEntry >&
-			loaddata_more_from_dbvisit_c::fields() const {
-			// @@protoc_insertion_point(field_list:frmpub.protocc.loaddata_more_from_dbvisit_c.fields)
-			return fields_;
-		}
-
-		// -------------------------------------------------------------------
-
-		// loaddata_more_from_dbvisit_s_item
-
-		// repeated .frmpub.protocc.FieldsEntry fields = 1;
-		inline int loaddata_more_from_dbvisit_s_item::_internal_fields_size() const {
-			return fields_.size();
-		}
-		inline int loaddata_more_from_dbvisit_s_item::fields_size() const {
-			return _internal_fields_size();
-		}
-		inline ::frmpub::protocc::FieldsEntry* loaddata_more_from_dbvisit_s_item::mutable_fields(int index) {
-			// @@protoc_insertion_point(field_mutable:frmpub.protocc.loaddata_more_from_dbvisit_s.item.fields)
-			return fields_.Mutable(index);
-		}
-		inline ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::frmpub::protocc::FieldsEntry >*
-			loaddata_more_from_dbvisit_s_item::mutable_fields() {
-			// @@protoc_insertion_point(field_mutable_list:frmpub.protocc.loaddata_more_from_dbvisit_s.item.fields)
-			return &fields_;
-		}
-		inline const ::frmpub::protocc::FieldsEntry& loaddata_more_from_dbvisit_s_item::_internal_fields(int index) const {
-			return fields_.Get(index);
-		}
-		inline const ::frmpub::protocc::FieldsEntry& loaddata_more_from_dbvisit_s_item::fields(int index) const {
-			// @@protoc_insertion_point(field_get:frmpub.protocc.loaddata_more_from_dbvisit_s.item.fields)
-			return _internal_fields(index);
-		}
-		inline ::frmpub::protocc::FieldsEntry* loaddata_more_from_dbvisit_s_item::_internal_add_fields() {
-			return fields_.Add();
-		}
-		inline ::frmpub::protocc::FieldsEntry* loaddata_more_from_dbvisit_s_item::add_fields() {
-			// @@protoc_insertion_point(field_add:frmpub.protocc.loaddata_more_from_dbvisit_s.item.fields)
-			return _internal_add_fields();
-		}
-		inline const ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::frmpub::protocc::FieldsEntry >&
-			loaddata_more_from_dbvisit_s_item::fields() const {
-			// @@protoc_insertion_point(field_list:frmpub.protocc.loaddata_more_from_dbvisit_s.item.fields)
-			return fields_;
-		}
-
-		// -------------------------------------------------------------------
-
-		// loaddata_more_from_dbvisit_s
-
-		// int32 result = 1;
-		inline void loaddata_more_from_dbvisit_s::clear_result() {
-			result_ = 0;
-		}
-		inline ::PROTOBUF_NAMESPACE_ID::int32 loaddata_more_from_dbvisit_s::_internal_result() const {
-			return result_;
-		}
-		inline ::PROTOBUF_NAMESPACE_ID::int32 loaddata_more_from_dbvisit_s::result() const {
-			// @@protoc_insertion_point(field_get:frmpub.protocc.loaddata_more_from_dbvisit_s.result)
-			return _internal_result();
-		}
-		inline void loaddata_more_from_dbvisit_s::_internal_set_result(::PROTOBUF_NAMESPACE_ID::int32 value) {
-
-			result_ = value;
-		}
-		inline void loaddata_more_from_dbvisit_s::set_result(::PROTOBUF_NAMESPACE_ID::int32 value) {
-			_internal_set_result(value);
-			// @@protoc_insertion_point(field_set:frmpub.protocc.loaddata_more_from_dbvisit_s.result)
-		}
-
-		// string tag = 2;
-		inline void loaddata_more_from_dbvisit_s::clear_tag() {
-			tag_.ClearToEmpty();
-		}
-		inline const std::string& loaddata_more_from_dbvisit_s::tag() const {
-			// @@protoc_insertion_point(field_get:frmpub.protocc.loaddata_more_from_dbvisit_s.tag)
-			return _internal_tag();
-		}
-		inline void loaddata_more_from_dbvisit_s::set_tag(const std::string& value) {
-			_internal_set_tag(value);
-			// @@protoc_insertion_point(field_set:frmpub.protocc.loaddata_more_from_dbvisit_s.tag)
-		}
-		inline std::string* loaddata_more_from_dbvisit_s::mutable_tag() {
-			// @@protoc_insertion_point(field_mutable:frmpub.protocc.loaddata_more_from_dbvisit_s.tag)
-			return _internal_mutable_tag();
-		}
-		inline const std::string& loaddata_more_from_dbvisit_s::_internal_tag() const {
-			return tag_.Get();
-		}
-		inline void loaddata_more_from_dbvisit_s::_internal_set_tag(const std::string& value) {
-
-			tag_.Set(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, value, GetArena());
-		}
-		inline void loaddata_more_from_dbvisit_s::set_tag(std::string&& value) {
-
-			tag_.Set(
-				::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, ::std::move(value), GetArena());
-			// @@protoc_insertion_point(field_set_rvalue:frmpub.protocc.loaddata_more_from_dbvisit_s.tag)
-		}
-		inline void loaddata_more_from_dbvisit_s::set_tag(const char* value) {
-			GOOGLE_DCHECK(value != nullptr);
-
-			tag_.Set(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, ::std::string(value), GetArena());
-			// @@protoc_insertion_point(field_set_char:frmpub.protocc.loaddata_more_from_dbvisit_s.tag)
-		}
-		inline void loaddata_more_from_dbvisit_s::set_tag(const char* value,
-			size_t size) {
-
-			tag_.Set(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, ::std::string(
-				reinterpret_cast<const char*>(value), size), GetArena());
-			// @@protoc_insertion_point(field_set_pointer:frmpub.protocc.loaddata_more_from_dbvisit_s.tag)
-		}
-		inline std::string* loaddata_more_from_dbvisit_s::_internal_mutable_tag() {
-
-			return tag_.Mutable(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, GetArena());
-		}
-		inline std::string* loaddata_more_from_dbvisit_s::release_tag() {
-			// @@protoc_insertion_point(field_release:frmpub.protocc.loaddata_more_from_dbvisit_s.tag)
-			return tag_.Release(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArena());
-		}
-		inline void loaddata_more_from_dbvisit_s::set_allocated_tag(std::string* tag) {
-			if (tag != nullptr) {
-
-			}
-			else {
-
-			}
-			tag_.SetAllocated(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), tag,
-				GetArena());
-			// @@protoc_insertion_point(field_set_allocated:frmpub.protocc.loaddata_more_from_dbvisit_s.tag)
-		}
-
-		// repeated .frmpub.protocc.loaddata_more_from_dbvisit_s.item objs = 3;
-		inline int loaddata_more_from_dbvisit_s::_internal_objs_size() const {
-			return objs_.size();
-		}
-		inline int loaddata_more_from_dbvisit_s::objs_size() const {
-			return _internal_objs_size();
-		}
-		inline void loaddata_more_from_dbvisit_s::clear_objs() {
-			objs_.Clear();
-		}
-		inline ::frmpub::protocc::loaddata_more_from_dbvisit_s_item* loaddata_more_from_dbvisit_s::mutable_objs(int index) {
-			// @@protoc_insertion_point(field_mutable:frmpub.protocc.loaddata_more_from_dbvisit_s.objs)
-			return objs_.Mutable(index);
-		}
-		inline ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::frmpub::protocc::loaddata_more_from_dbvisit_s_item >*
-			loaddata_more_from_dbvisit_s::mutable_objs() {
-			// @@protoc_insertion_point(field_mutable_list:frmpub.protocc.loaddata_more_from_dbvisit_s.objs)
-			return &objs_;
-		}
-		inline const ::frmpub::protocc::loaddata_more_from_dbvisit_s_item& loaddata_more_from_dbvisit_s::_internal_objs(int index) const {
-			return objs_.Get(index);
-		}
-		inline const ::frmpub::protocc::loaddata_more_from_dbvisit_s_item& loaddata_more_from_dbvisit_s::objs(int index) const {
-			// @@protoc_insertion_point(field_get:frmpub.protocc.loaddata_more_from_dbvisit_s.objs)
-			return _internal_objs(index);
-		}
-		inline ::frmpub::protocc::loaddata_more_from_dbvisit_s_item* loaddata_more_from_dbvisit_s::_internal_add_objs() {
-			return objs_.Add();
-		}
-		inline ::frmpub::protocc::loaddata_more_from_dbvisit_s_item* loaddata_more_from_dbvisit_s::add_objs() {
-			// @@protoc_insertion_point(field_add:frmpub.protocc.loaddata_more_from_dbvisit_s.objs)
-			return _internal_add_objs();
-		}
-		inline const ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::frmpub::protocc::loaddata_more_from_dbvisit_s_item >&
-			loaddata_more_from_dbvisit_s::objs() const {
-			// @@protoc_insertion_point(field_list:frmpub.protocc.loaddata_more_from_dbvisit_s.objs)
-			return objs_;
-		}
-
-		// -------------------------------------------------------------------
-
-		// insertdata_to_dbvisit_c
-
-		// string tag = 1;
-		inline void insertdata_to_dbvisit_c::clear_tag() {
-			tag_.ClearToEmpty();
-		}
-		inline const std::string& insertdata_to_dbvisit_c::tag() const {
-			// @@protoc_insertion_point(field_get:frmpub.protocc.insertdata_to_dbvisit_c.tag)
-			return _internal_tag();
-		}
-		inline void insertdata_to_dbvisit_c::set_tag(const std::string& value) {
-			_internal_set_tag(value);
-			// @@protoc_insertion_point(field_set:frmpub.protocc.insertdata_to_dbvisit_c.tag)
-		}
-		inline std::string* insertdata_to_dbvisit_c::mutable_tag() {
-			// @@protoc_insertion_point(field_mutable:frmpub.protocc.insertdata_to_dbvisit_c.tag)
-			return _internal_mutable_tag();
-		}
-		inline const std::string& insertdata_to_dbvisit_c::_internal_tag() const {
-			return tag_.Get();
-		}
-		inline void insertdata_to_dbvisit_c::_internal_set_tag(const std::string& value) {
-
-			tag_.Set(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, value, GetArena());
-		}
-		inline void insertdata_to_dbvisit_c::set_tag(std::string&& value) {
-
-			tag_.Set(
-				::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, ::std::move(value), GetArena());
-			// @@protoc_insertion_point(field_set_rvalue:frmpub.protocc.insertdata_to_dbvisit_c.tag)
-		}
-		inline void insertdata_to_dbvisit_c::set_tag(const char* value) {
-			GOOGLE_DCHECK(value != nullptr);
-
-			tag_.Set(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, ::std::string(value), GetArena());
-			// @@protoc_insertion_point(field_set_char:frmpub.protocc.insertdata_to_dbvisit_c.tag)
-		}
-		inline void insertdata_to_dbvisit_c::set_tag(const char* value,
-			size_t size) {
-
-			tag_.Set(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, ::std::string(
-				reinterpret_cast<const char*>(value), size), GetArena());
-			// @@protoc_insertion_point(field_set_pointer:frmpub.protocc.insertdata_to_dbvisit_c.tag)
-		}
-		inline std::string* insertdata_to_dbvisit_c::_internal_mutable_tag() {
-
-			return tag_.Mutable(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, GetArena());
-		}
-		inline std::string* insertdata_to_dbvisit_c::release_tag() {
-			// @@protoc_insertion_point(field_release:frmpub.protocc.insertdata_to_dbvisit_c.tag)
-			return tag_.Release(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArena());
-		}
-		inline void insertdata_to_dbvisit_c::set_allocated_tag(std::string* tag) {
-			if (tag != nullptr) {
-
-			}
-			else {
-
-			}
-			tag_.SetAllocated(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), tag,
-				GetArena());
-			// @@protoc_insertion_point(field_set_allocated:frmpub.protocc.insertdata_to_dbvisit_c.tag)
-		}
-
-		// string cache_key = 2;
-		inline void insertdata_to_dbvisit_c::clear_cache_key() {
-			cache_key_.ClearToEmpty();
-		}
-		inline const std::string& insertdata_to_dbvisit_c::cache_key() const {
-			// @@protoc_insertion_point(field_get:frmpub.protocc.insertdata_to_dbvisit_c.cache_key)
-			return _internal_cache_key();
-		}
-		inline void insertdata_to_dbvisit_c::set_cache_key(const std::string& value) {
-			_internal_set_cache_key(value);
-			// @@protoc_insertion_point(field_set:frmpub.protocc.insertdata_to_dbvisit_c.cache_key)
-		}
-		inline std::string* insertdata_to_dbvisit_c::mutable_cache_key() {
-			// @@protoc_insertion_point(field_mutable:frmpub.protocc.insertdata_to_dbvisit_c.cache_key)
-			return _internal_mutable_cache_key();
-		}
-		inline const std::string& insertdata_to_dbvisit_c::_internal_cache_key() const {
-			return cache_key_.Get();
-		}
-		inline void insertdata_to_dbvisit_c::_internal_set_cache_key(const std::string& value) {
-
-			cache_key_.Set(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, value, GetArena());
-		}
-		inline void insertdata_to_dbvisit_c::set_cache_key(std::string&& value) {
-
-			cache_key_.Set(
-				::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, ::std::move(value), GetArena());
-			// @@protoc_insertion_point(field_set_rvalue:frmpub.protocc.insertdata_to_dbvisit_c.cache_key)
-		}
-		inline void insertdata_to_dbvisit_c::set_cache_key(const char* value) {
-			GOOGLE_DCHECK(value != nullptr);
-
-			cache_key_.Set(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, ::std::string(value), GetArena());
-			// @@protoc_insertion_point(field_set_char:frmpub.protocc.insertdata_to_dbvisit_c.cache_key)
-		}
-		inline void insertdata_to_dbvisit_c::set_cache_key(const char* value,
-			size_t size) {
-
-			cache_key_.Set(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, ::std::string(
-				reinterpret_cast<const char*>(value), size), GetArena());
-			// @@protoc_insertion_point(field_set_pointer:frmpub.protocc.insertdata_to_dbvisit_c.cache_key)
-		}
-		inline std::string* insertdata_to_dbvisit_c::_internal_mutable_cache_key() {
-
-			return cache_key_.Mutable(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, GetArena());
-		}
-		inline std::string* insertdata_to_dbvisit_c::release_cache_key() {
-			// @@protoc_insertion_point(field_release:frmpub.protocc.insertdata_to_dbvisit_c.cache_key)
-			return cache_key_.Release(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArena());
-		}
-		inline void insertdata_to_dbvisit_c::set_allocated_cache_key(std::string* cache_key) {
-			if (cache_key != nullptr) {
-
-			}
-			else {
-
-			}
-			cache_key_.SetAllocated(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), cache_key,
-				GetArena());
-			// @@protoc_insertion_point(field_set_allocated:frmpub.protocc.insertdata_to_dbvisit_c.cache_key)
-		}
-
-		// repeated .frmpub.protocc.FieldsEntry fields = 3;
-		inline int insertdata_to_dbvisit_c::_internal_fields_size() const {
-			return fields_.size();
-		}
-		inline int insertdata_to_dbvisit_c::fields_size() const {
-			return _internal_fields_size();
-		}
-		inline ::frmpub::protocc::FieldsEntry* insertdata_to_dbvisit_c::mutable_fields(int index) {
-			// @@protoc_insertion_point(field_mutable:frmpub.protocc.insertdata_to_dbvisit_c.fields)
-			return fields_.Mutable(index);
-		}
-		inline ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::frmpub::protocc::FieldsEntry >*
-			insertdata_to_dbvisit_c::mutable_fields() {
-			// @@protoc_insertion_point(field_mutable_list:frmpub.protocc.insertdata_to_dbvisit_c.fields)
-			return &fields_;
-		}
-		inline const ::frmpub::protocc::FieldsEntry& insertdata_to_dbvisit_c::_internal_fields(int index) const {
-			return fields_.Get(index);
-		}
-		inline const ::frmpub::protocc::FieldsEntry& insertdata_to_dbvisit_c::fields(int index) const {
-			// @@protoc_insertion_point(field_get:frmpub.protocc.insertdata_to_dbvisit_c.fields)
-			return _internal_fields(index);
-		}
-		inline ::frmpub::protocc::FieldsEntry* insertdata_to_dbvisit_c::_internal_add_fields() {
-			return fields_.Add();
-		}
-		inline ::frmpub::protocc::FieldsEntry* insertdata_to_dbvisit_c::add_fields() {
-			// @@protoc_insertion_point(field_add:frmpub.protocc.insertdata_to_dbvisit_c.fields)
-			return _internal_add_fields();
-		}
-		inline const ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::frmpub::protocc::FieldsEntry >&
-			insertdata_to_dbvisit_c::fields() const {
-			// @@protoc_insertion_point(field_list:frmpub.protocc.insertdata_to_dbvisit_c.fields)
-			return fields_;
-		}
-
-		// -------------------------------------------------------------------
-
-		// insertdata_to_dbvisit_s
-
-		// int32 result = 1;
-		inline void insertdata_to_dbvisit_s::clear_result() {
-			result_ = 0;
-		}
-		inline ::PROTOBUF_NAMESPACE_ID::int32 insertdata_to_dbvisit_s::_internal_result() const {
-			return result_;
-		}
-		inline ::PROTOBUF_NAMESPACE_ID::int32 insertdata_to_dbvisit_s::result() const {
-			// @@protoc_insertion_point(field_get:frmpub.protocc.insertdata_to_dbvisit_s.result)
-			return _internal_result();
-		}
-		inline void insertdata_to_dbvisit_s::_internal_set_result(::PROTOBUF_NAMESPACE_ID::int32 value) {
-
-			result_ = value;
-		}
-		inline void insertdata_to_dbvisit_s::set_result(::PROTOBUF_NAMESPACE_ID::int32 value) {
-			_internal_set_result(value);
-			// @@protoc_insertion_point(field_set:frmpub.protocc.insertdata_to_dbvisit_s.result)
-		}
-
-		// string tag = 2;
-		inline void insertdata_to_dbvisit_s::clear_tag() {
-			tag_.ClearToEmpty();
-		}
-		inline const std::string& insertdata_to_dbvisit_s::tag() const {
-			// @@protoc_insertion_point(field_get:frmpub.protocc.insertdata_to_dbvisit_s.tag)
-			return _internal_tag();
-		}
-		inline void insertdata_to_dbvisit_s::set_tag(const std::string& value) {
-			_internal_set_tag(value);
-			// @@protoc_insertion_point(field_set:frmpub.protocc.insertdata_to_dbvisit_s.tag)
-		}
-		inline std::string* insertdata_to_dbvisit_s::mutable_tag() {
-			// @@protoc_insertion_point(field_mutable:frmpub.protocc.insertdata_to_dbvisit_s.tag)
-			return _internal_mutable_tag();
-		}
-		inline const std::string& insertdata_to_dbvisit_s::_internal_tag() const {
-			return tag_.Get();
-		}
-		inline void insertdata_to_dbvisit_s::_internal_set_tag(const std::string& value) {
-
-			tag_.Set(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, value, GetArena());
-		}
-		inline void insertdata_to_dbvisit_s::set_tag(std::string&& value) {
-
-			tag_.Set(
-				::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, ::std::move(value), GetArena());
-			// @@protoc_insertion_point(field_set_rvalue:frmpub.protocc.insertdata_to_dbvisit_s.tag)
-		}
-		inline void insertdata_to_dbvisit_s::set_tag(const char* value) {
-			GOOGLE_DCHECK(value != nullptr);
-
-			tag_.Set(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, ::std::string(value), GetArena());
-			// @@protoc_insertion_point(field_set_char:frmpub.protocc.insertdata_to_dbvisit_s.tag)
-		}
-		inline void insertdata_to_dbvisit_s::set_tag(const char* value,
-			size_t size) {
-
-			tag_.Set(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, ::std::string(
-				reinterpret_cast<const char*>(value), size), GetArena());
-			// @@protoc_insertion_point(field_set_pointer:frmpub.protocc.insertdata_to_dbvisit_s.tag)
-		}
-		inline std::string* insertdata_to_dbvisit_s::_internal_mutable_tag() {
-
-			return tag_.Mutable(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, GetArena());
-		}
-		inline std::string* insertdata_to_dbvisit_s::release_tag() {
-			// @@protoc_insertion_point(field_release:frmpub.protocc.insertdata_to_dbvisit_s.tag)
-			return tag_.Release(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArena());
-		}
-		inline void insertdata_to_dbvisit_s::set_allocated_tag(std::string* tag) {
-			if (tag != nullptr) {
-
-			}
-			else {
-
-			}
-			tag_.SetAllocated(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), tag,
-				GetArena());
-			// @@protoc_insertion_point(field_set_allocated:frmpub.protocc.insertdata_to_dbvisit_s.tag)
-		}
-
-		// -------------------------------------------------------------------
-
-		// updata_to_dbvisit_c
-
-		// string tag = 1;
-		inline void updata_to_dbvisit_c::clear_tag() {
-			tag_.ClearToEmpty();
-		}
-		inline const std::string& updata_to_dbvisit_c::tag() const {
-			// @@protoc_insertion_point(field_get:frmpub.protocc.updata_to_dbvisit_c.tag)
-			return _internal_tag();
-		}
-		inline void updata_to_dbvisit_c::set_tag(const std::string& value) {
-			_internal_set_tag(value);
-			// @@protoc_insertion_point(field_set:frmpub.protocc.updata_to_dbvisit_c.tag)
-		}
-		inline std::string* updata_to_dbvisit_c::mutable_tag() {
-			// @@protoc_insertion_point(field_mutable:frmpub.protocc.updata_to_dbvisit_c.tag)
-			return _internal_mutable_tag();
-		}
-		inline const std::string& updata_to_dbvisit_c::_internal_tag() const {
-			return tag_.Get();
-		}
-		inline void updata_to_dbvisit_c::_internal_set_tag(const std::string& value) {
-
-			tag_.Set(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, value, GetArena());
-		}
-		inline void updata_to_dbvisit_c::set_tag(std::string&& value) {
-
-			tag_.Set(
-				::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, ::std::move(value), GetArena());
-			// @@protoc_insertion_point(field_set_rvalue:frmpub.protocc.updata_to_dbvisit_c.tag)
-		}
-		inline void updata_to_dbvisit_c::set_tag(const char* value) {
-			GOOGLE_DCHECK(value != nullptr);
-
-			tag_.Set(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, ::std::string(value), GetArena());
-			// @@protoc_insertion_point(field_set_char:frmpub.protocc.updata_to_dbvisit_c.tag)
-		}
-		inline void updata_to_dbvisit_c::set_tag(const char* value,
-			size_t size) {
-
-			tag_.Set(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, ::std::string(
-				reinterpret_cast<const char*>(value), size), GetArena());
-			// @@protoc_insertion_point(field_set_pointer:frmpub.protocc.updata_to_dbvisit_c.tag)
-		}
-		inline std::string* updata_to_dbvisit_c::_internal_mutable_tag() {
-
-			return tag_.Mutable(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, GetArena());
-		}
-		inline std::string* updata_to_dbvisit_c::release_tag() {
-			// @@protoc_insertion_point(field_release:frmpub.protocc.updata_to_dbvisit_c.tag)
-			return tag_.Release(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArena());
-		}
-		inline void updata_to_dbvisit_c::set_allocated_tag(std::string* tag) {
-			if (tag != nullptr) {
-
-			}
-			else {
-
-			}
-			tag_.SetAllocated(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), tag,
-				GetArena());
-			// @@protoc_insertion_point(field_set_allocated:frmpub.protocc.updata_to_dbvisit_c.tag)
-		}
-
-		// string cache_key = 2;
-		inline void updata_to_dbvisit_c::clear_cache_key() {
-			cache_key_.ClearToEmpty();
-		}
-		inline const std::string& updata_to_dbvisit_c::cache_key() const {
-			// @@protoc_insertion_point(field_get:frmpub.protocc.updata_to_dbvisit_c.cache_key)
-			return _internal_cache_key();
-		}
-		inline void updata_to_dbvisit_c::set_cache_key(const std::string& value) {
-			_internal_set_cache_key(value);
-			// @@protoc_insertion_point(field_set:frmpub.protocc.updata_to_dbvisit_c.cache_key)
-		}
-		inline std::string* updata_to_dbvisit_c::mutable_cache_key() {
-			// @@protoc_insertion_point(field_mutable:frmpub.protocc.updata_to_dbvisit_c.cache_key)
-			return _internal_mutable_cache_key();
-		}
-		inline const std::string& updata_to_dbvisit_c::_internal_cache_key() const {
-			return cache_key_.Get();
-		}
-		inline void updata_to_dbvisit_c::_internal_set_cache_key(const std::string& value) {
-
-			cache_key_.Set(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, value, GetArena());
-		}
-		inline void updata_to_dbvisit_c::set_cache_key(std::string&& value) {
-
-			cache_key_.Set(
-				::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, ::std::move(value), GetArena());
-			// @@protoc_insertion_point(field_set_rvalue:frmpub.protocc.updata_to_dbvisit_c.cache_key)
-		}
-		inline void updata_to_dbvisit_c::set_cache_key(const char* value) {
-			GOOGLE_DCHECK(value != nullptr);
-
-			cache_key_.Set(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, ::std::string(value), GetArena());
-			// @@protoc_insertion_point(field_set_char:frmpub.protocc.updata_to_dbvisit_c.cache_key)
-		}
-		inline void updata_to_dbvisit_c::set_cache_key(const char* value,
-			size_t size) {
-
-			cache_key_.Set(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, ::std::string(
-				reinterpret_cast<const char*>(value), size), GetArena());
-			// @@protoc_insertion_point(field_set_pointer:frmpub.protocc.updata_to_dbvisit_c.cache_key)
-		}
-		inline std::string* updata_to_dbvisit_c::_internal_mutable_cache_key() {
-
-			return cache_key_.Mutable(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, GetArena());
-		}
-		inline std::string* updata_to_dbvisit_c::release_cache_key() {
-			// @@protoc_insertion_point(field_release:frmpub.protocc.updata_to_dbvisit_c.cache_key)
-			return cache_key_.Release(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArena());
-		}
-		inline void updata_to_dbvisit_c::set_allocated_cache_key(std::string* cache_key) {
-			if (cache_key != nullptr) {
-
-			}
-			else {
-
-			}
-			cache_key_.SetAllocated(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), cache_key,
-				GetArena());
-			// @@protoc_insertion_point(field_set_allocated:frmpub.protocc.updata_to_dbvisit_c.cache_key)
-		}
-
-		// repeated .frmpub.protocc.FieldsEntry fields = 3;
-		inline int updata_to_dbvisit_c::_internal_fields_size() const {
-			return fields_.size();
-		}
-		inline int updata_to_dbvisit_c::fields_size() const {
-			return _internal_fields_size();
-		}
-		inline ::frmpub::protocc::FieldsEntry* updata_to_dbvisit_c::mutable_fields(int index) {
-			// @@protoc_insertion_point(field_mutable:frmpub.protocc.updata_to_dbvisit_c.fields)
-			return fields_.Mutable(index);
-		}
-		inline ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::frmpub::protocc::FieldsEntry >*
-			updata_to_dbvisit_c::mutable_fields() {
-			// @@protoc_insertion_point(field_mutable_list:frmpub.protocc.updata_to_dbvisit_c.fields)
-			return &fields_;
-		}
-		inline const ::frmpub::protocc::FieldsEntry& updata_to_dbvisit_c::_internal_fields(int index) const {
-			return fields_.Get(index);
-		}
-		inline const ::frmpub::protocc::FieldsEntry& updata_to_dbvisit_c::fields(int index) const {
-			// @@protoc_insertion_point(field_get:frmpub.protocc.updata_to_dbvisit_c.fields)
-			return _internal_fields(index);
-		}
-		inline ::frmpub::protocc::FieldsEntry* updata_to_dbvisit_c::_internal_add_fields() {
-			return fields_.Add();
-		}
-		inline ::frmpub::protocc::FieldsEntry* updata_to_dbvisit_c::add_fields() {
-			// @@protoc_insertion_point(field_add:frmpub.protocc.updata_to_dbvisit_c.fields)
-			return _internal_add_fields();
-		}
-		inline const ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::frmpub::protocc::FieldsEntry >&
-			updata_to_dbvisit_c::fields() const {
-			// @@protoc_insertion_point(field_list:frmpub.protocc.updata_to_dbvisit_c.fields)
-			return fields_;
-		}
-
-		// -------------------------------------------------------------------
-
-		// updata_to_dbvisit_s
-
-		// int32 result = 1;
-		inline void updata_to_dbvisit_s::clear_result() {
-			result_ = 0;
-		}
-		inline ::PROTOBUF_NAMESPACE_ID::int32 updata_to_dbvisit_s::_internal_result() const {
-			return result_;
-		}
-		inline ::PROTOBUF_NAMESPACE_ID::int32 updata_to_dbvisit_s::result() const {
-			// @@protoc_insertion_point(field_get:frmpub.protocc.updata_to_dbvisit_s.result)
-			return _internal_result();
-		}
-		inline void updata_to_dbvisit_s::_internal_set_result(::PROTOBUF_NAMESPACE_ID::int32 value) {
-
-			result_ = value;
-		}
-		inline void updata_to_dbvisit_s::set_result(::PROTOBUF_NAMESPACE_ID::int32 value) {
-			_internal_set_result(value);
-			// @@protoc_insertion_point(field_set:frmpub.protocc.updata_to_dbvisit_s.result)
-		}
-
-		// string tag = 2;
-		inline void updata_to_dbvisit_s::clear_tag() {
-			tag_.ClearToEmpty();
-		}
-		inline const std::string& updata_to_dbvisit_s::tag() const {
-			// @@protoc_insertion_point(field_get:frmpub.protocc.updata_to_dbvisit_s.tag)
-			return _internal_tag();
-		}
-		inline void updata_to_dbvisit_s::set_tag(const std::string& value) {
-			_internal_set_tag(value);
-			// @@protoc_insertion_point(field_set:frmpub.protocc.updata_to_dbvisit_s.tag)
-		}
-		inline std::string* updata_to_dbvisit_s::mutable_tag() {
-			// @@protoc_insertion_point(field_mutable:frmpub.protocc.updata_to_dbvisit_s.tag)
-			return _internal_mutable_tag();
-		}
-		inline const std::string& updata_to_dbvisit_s::_internal_tag() const {
-			return tag_.Get();
-		}
-		inline void updata_to_dbvisit_s::_internal_set_tag(const std::string& value) {
-
-			tag_.Set(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, value, GetArena());
-		}
-		inline void updata_to_dbvisit_s::set_tag(std::string&& value) {
-
-			tag_.Set(
-				::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, ::std::move(value), GetArena());
-			// @@protoc_insertion_point(field_set_rvalue:frmpub.protocc.updata_to_dbvisit_s.tag)
-		}
-		inline void updata_to_dbvisit_s::set_tag(const char* value) {
-			GOOGLE_DCHECK(value != nullptr);
-
-			tag_.Set(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, ::std::string(value), GetArena());
-			// @@protoc_insertion_point(field_set_char:frmpub.protocc.updata_to_dbvisit_s.tag)
-		}
-		inline void updata_to_dbvisit_s::set_tag(const char* value,
-			size_t size) {
-
-			tag_.Set(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, ::std::string(
-				reinterpret_cast<const char*>(value), size), GetArena());
-			// @@protoc_insertion_point(field_set_pointer:frmpub.protocc.updata_to_dbvisit_s.tag)
-		}
-		inline std::string* updata_to_dbvisit_s::_internal_mutable_tag() {
-
-			return tag_.Mutable(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, GetArena());
-		}
-		inline std::string* updata_to_dbvisit_s::release_tag() {
-			// @@protoc_insertion_point(field_release:frmpub.protocc.updata_to_dbvisit_s.tag)
-			return tag_.Release(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArena());
-		}
-		inline void updata_to_dbvisit_s::set_allocated_tag(std::string* tag) {
-			if (tag != nullptr) {
-
-			}
-			else {
-
-			}
-			tag_.SetAllocated(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), tag,
-				GetArena());
-			// @@protoc_insertion_point(field_set_allocated:frmpub.protocc.updata_to_dbvisit_s.tag)
-		}
-
-		// -------------------------------------------------------------------
-
-		// deletedata_to_dbvisit_c
-
-		// string tag = 1;
-		inline void deletedata_to_dbvisit_c::clear_tag() {
-			tag_.ClearToEmpty();
-		}
-		inline const std::string& deletedata_to_dbvisit_c::tag() const {
-			// @@protoc_insertion_point(field_get:frmpub.protocc.deletedata_to_dbvisit_c.tag)
-			return _internal_tag();
-		}
-		inline void deletedata_to_dbvisit_c::set_tag(const std::string& value) {
-			_internal_set_tag(value);
-			// @@protoc_insertion_point(field_set:frmpub.protocc.deletedata_to_dbvisit_c.tag)
-		}
-		inline std::string* deletedata_to_dbvisit_c::mutable_tag() {
-			// @@protoc_insertion_point(field_mutable:frmpub.protocc.deletedata_to_dbvisit_c.tag)
-			return _internal_mutable_tag();
-		}
-		inline const std::string& deletedata_to_dbvisit_c::_internal_tag() const {
-			return tag_.Get();
-		}
-		inline void deletedata_to_dbvisit_c::_internal_set_tag(const std::string& value) {
-
-			tag_.Set(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, value, GetArena());
-		}
-		inline void deletedata_to_dbvisit_c::set_tag(std::string&& value) {
-
-			tag_.Set(
-				::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, ::std::move(value), GetArena());
-			// @@protoc_insertion_point(field_set_rvalue:frmpub.protocc.deletedata_to_dbvisit_c.tag)
-		}
-		inline void deletedata_to_dbvisit_c::set_tag(const char* value) {
-			GOOGLE_DCHECK(value != nullptr);
-
-			tag_.Set(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, ::std::string(value), GetArena());
-			// @@protoc_insertion_point(field_set_char:frmpub.protocc.deletedata_to_dbvisit_c.tag)
-		}
-		inline void deletedata_to_dbvisit_c::set_tag(const char* value,
-			size_t size) {
-
-			tag_.Set(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, ::std::string(
-				reinterpret_cast<const char*>(value), size), GetArena());
-			// @@protoc_insertion_point(field_set_pointer:frmpub.protocc.deletedata_to_dbvisit_c.tag)
-		}
-		inline std::string* deletedata_to_dbvisit_c::_internal_mutable_tag() {
-
-			return tag_.Mutable(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, GetArena());
-		}
-		inline std::string* deletedata_to_dbvisit_c::release_tag() {
-			// @@protoc_insertion_point(field_release:frmpub.protocc.deletedata_to_dbvisit_c.tag)
-			return tag_.Release(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArena());
-		}
-		inline void deletedata_to_dbvisit_c::set_allocated_tag(std::string* tag) {
-			if (tag != nullptr) {
-
-			}
-			else {
-
-			}
-			tag_.SetAllocated(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), tag,
-				GetArena());
-			// @@protoc_insertion_point(field_set_allocated:frmpub.protocc.deletedata_to_dbvisit_c.tag)
-		}
-
-		// string cache_key = 2;
-		inline void deletedata_to_dbvisit_c::clear_cache_key() {
-			cache_key_.ClearToEmpty();
-		}
-		inline const std::string& deletedata_to_dbvisit_c::cache_key() const {
-			// @@protoc_insertion_point(field_get:frmpub.protocc.deletedata_to_dbvisit_c.cache_key)
-			return _internal_cache_key();
-		}
-		inline void deletedata_to_dbvisit_c::set_cache_key(const std::string& value) {
-			_internal_set_cache_key(value);
-			// @@protoc_insertion_point(field_set:frmpub.protocc.deletedata_to_dbvisit_c.cache_key)
-		}
-		inline std::string* deletedata_to_dbvisit_c::mutable_cache_key() {
-			// @@protoc_insertion_point(field_mutable:frmpub.protocc.deletedata_to_dbvisit_c.cache_key)
-			return _internal_mutable_cache_key();
-		}
-		inline const std::string& deletedata_to_dbvisit_c::_internal_cache_key() const {
-			return cache_key_.Get();
-		}
-		inline void deletedata_to_dbvisit_c::_internal_set_cache_key(const std::string& value) {
-
-			cache_key_.Set(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, value, GetArena());
-		}
-		inline void deletedata_to_dbvisit_c::set_cache_key(std::string&& value) {
-
-			cache_key_.Set(
-				::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, ::std::move(value), GetArena());
-			// @@protoc_insertion_point(field_set_rvalue:frmpub.protocc.deletedata_to_dbvisit_c.cache_key)
-		}
-		inline void deletedata_to_dbvisit_c::set_cache_key(const char* value) {
-			GOOGLE_DCHECK(value != nullptr);
-
-			cache_key_.Set(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, ::std::string(value), GetArena());
-			// @@protoc_insertion_point(field_set_char:frmpub.protocc.deletedata_to_dbvisit_c.cache_key)
-		}
-		inline void deletedata_to_dbvisit_c::set_cache_key(const char* value,
-			size_t size) {
-
-			cache_key_.Set(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, ::std::string(
-				reinterpret_cast<const char*>(value), size), GetArena());
-			// @@protoc_insertion_point(field_set_pointer:frmpub.protocc.deletedata_to_dbvisit_c.cache_key)
-		}
-		inline std::string* deletedata_to_dbvisit_c::_internal_mutable_cache_key() {
-
-			return cache_key_.Mutable(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, GetArena());
-		}
-		inline std::string* deletedata_to_dbvisit_c::release_cache_key() {
-			// @@protoc_insertion_point(field_release:frmpub.protocc.deletedata_to_dbvisit_c.cache_key)
-			return cache_key_.Release(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArena());
-		}
-		inline void deletedata_to_dbvisit_c::set_allocated_cache_key(std::string* cache_key) {
-			if (cache_key != nullptr) {
-
-			}
-			else {
-
-			}
-			cache_key_.SetAllocated(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), cache_key,
-				GetArena());
-			// @@protoc_insertion_point(field_set_allocated:frmpub.protocc.deletedata_to_dbvisit_c.cache_key)
-		}
-
-		// -------------------------------------------------------------------
-
-		// deletedata_to_dbvisit_s
-
-		// int32 result = 1;
-		inline void deletedata_to_dbvisit_s::clear_result() {
-			result_ = 0;
-		}
-		inline ::PROTOBUF_NAMESPACE_ID::int32 deletedata_to_dbvisit_s::_internal_result() const {
-			return result_;
-		}
-		inline ::PROTOBUF_NAMESPACE_ID::int32 deletedata_to_dbvisit_s::result() const {
-			// @@protoc_insertion_point(field_get:frmpub.protocc.deletedata_to_dbvisit_s.result)
-			return _internal_result();
-		}
-		inline void deletedata_to_dbvisit_s::_internal_set_result(::PROTOBUF_NAMESPACE_ID::int32 value) {
-
-			result_ = value;
-		}
-		inline void deletedata_to_dbvisit_s::set_result(::PROTOBUF_NAMESPACE_ID::int32 value) {
-			_internal_set_result(value);
-			// @@protoc_insertion_point(field_set:frmpub.protocc.deletedata_to_dbvisit_s.result)
-		}
-
-		// string tag = 2;
-		inline void deletedata_to_dbvisit_s::clear_tag() {
-			tag_.ClearToEmpty();
-		}
-		inline const std::string& deletedata_to_dbvisit_s::tag() const {
-			// @@protoc_insertion_point(field_get:frmpub.protocc.deletedata_to_dbvisit_s.tag)
-			return _internal_tag();
-		}
-		inline void deletedata_to_dbvisit_s::set_tag(const std::string& value) {
-			_internal_set_tag(value);
-			// @@protoc_insertion_point(field_set:frmpub.protocc.deletedata_to_dbvisit_s.tag)
-		}
-		inline std::string* deletedata_to_dbvisit_s::mutable_tag() {
-			// @@protoc_insertion_point(field_mutable:frmpub.protocc.deletedata_to_dbvisit_s.tag)
-			return _internal_mutable_tag();
-		}
-		inline const std::string& deletedata_to_dbvisit_s::_internal_tag() const {
-			return tag_.Get();
-		}
-		inline void deletedata_to_dbvisit_s::_internal_set_tag(const std::string& value) {
-
-			tag_.Set(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, value, GetArena());
-		}
-		inline void deletedata_to_dbvisit_s::set_tag(std::string&& value) {
-
-			tag_.Set(
-				::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, ::std::move(value), GetArena());
-			// @@protoc_insertion_point(field_set_rvalue:frmpub.protocc.deletedata_to_dbvisit_s.tag)
-		}
-		inline void deletedata_to_dbvisit_s::set_tag(const char* value) {
-			GOOGLE_DCHECK(value != nullptr);
-
-			tag_.Set(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, ::std::string(value), GetArena());
-			// @@protoc_insertion_point(field_set_char:frmpub.protocc.deletedata_to_dbvisit_s.tag)
-		}
-		inline void deletedata_to_dbvisit_s::set_tag(const char* value,
-			size_t size) {
-
-			tag_.Set(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, ::std::string(
-				reinterpret_cast<const char*>(value), size), GetArena());
-			// @@protoc_insertion_point(field_set_pointer:frmpub.protocc.deletedata_to_dbvisit_s.tag)
-		}
-		inline std::string* deletedata_to_dbvisit_s::_internal_mutable_tag() {
-
-			return tag_.Mutable(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, GetArena());
-		}
-		inline std::string* deletedata_to_dbvisit_s::release_tag() {
-			// @@protoc_insertion_point(field_release:frmpub.protocc.deletedata_to_dbvisit_s.tag)
-			return tag_.Release(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArena());
-		}
-		inline void deletedata_to_dbvisit_s::set_allocated_tag(std::string* tag) {
-			if (tag != nullptr) {
-
-			}
-			else {
-
-			}
-			tag_.SetAllocated(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), tag,
-				GetArena());
-			// @@protoc_insertion_point(field_set_allocated:frmpub.protocc.deletedata_to_dbvisit_s.tag)
-		}
+inline void loaddata_from_dbvisit_c::clear_tag() {
+  tag_.ClearToEmpty();
+}
+inline const std::string& loaddata_from_dbvisit_c::tag() const {
+  // @@protoc_insertion_point(field_get:frmpub.protocc.loaddata_from_dbvisit_c.tag)
+  return _internal_tag();
+}
+inline void loaddata_from_dbvisit_c::set_tag(const std::string& value) {
+  _internal_set_tag(value);
+  // @@protoc_insertion_point(field_set:frmpub.protocc.loaddata_from_dbvisit_c.tag)
+}
+inline std::string* loaddata_from_dbvisit_c::mutable_tag() {
+  // @@protoc_insertion_point(field_mutable:frmpub.protocc.loaddata_from_dbvisit_c.tag)
+  return _internal_mutable_tag();
+}
+inline const std::string& loaddata_from_dbvisit_c::_internal_tag() const {
+  return tag_.Get();
+}
+inline void loaddata_from_dbvisit_c::_internal_set_tag(const std::string& value) {
+  
+  tag_.Set(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, value, GetArena());
+}
+inline void loaddata_from_dbvisit_c::set_tag(std::string&& value) {
+  
+  tag_.Set(
+    ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, ::std::move(value), GetArena());
+  // @@protoc_insertion_point(field_set_rvalue:frmpub.protocc.loaddata_from_dbvisit_c.tag)
+}
+inline void loaddata_from_dbvisit_c::set_tag(const char* value) {
+  GOOGLE_DCHECK(value != nullptr);
+  
+  tag_.Set(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, ::std::string(value), GetArena());
+  // @@protoc_insertion_point(field_set_char:frmpub.protocc.loaddata_from_dbvisit_c.tag)
+}
+inline void loaddata_from_dbvisit_c::set_tag(const char* value,
+    size_t size) {
+  
+  tag_.Set(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, ::std::string(
+      reinterpret_cast<const char*>(value), size), GetArena());
+  // @@protoc_insertion_point(field_set_pointer:frmpub.protocc.loaddata_from_dbvisit_c.tag)
+}
+inline std::string* loaddata_from_dbvisit_c::_internal_mutable_tag() {
+  
+  return tag_.Mutable(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, GetArena());
+}
+inline std::string* loaddata_from_dbvisit_c::release_tag() {
+  // @@protoc_insertion_point(field_release:frmpub.protocc.loaddata_from_dbvisit_c.tag)
+  return tag_.Release(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArena());
+}
+inline void loaddata_from_dbvisit_c::set_allocated_tag(std::string* tag) {
+  if (tag != nullptr) {
+    
+  } else {
+    
+  }
+  tag_.SetAllocated(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), tag,
+      GetArena());
+  // @@protoc_insertion_point(field_set_allocated:frmpub.protocc.loaddata_from_dbvisit_c.tag)
+}
+
+// string cache_key = 2;
+inline void loaddata_from_dbvisit_c::clear_cache_key() {
+  cache_key_.ClearToEmpty();
+}
+inline const std::string& loaddata_from_dbvisit_c::cache_key() const {
+  // @@protoc_insertion_point(field_get:frmpub.protocc.loaddata_from_dbvisit_c.cache_key)
+  return _internal_cache_key();
+}
+inline void loaddata_from_dbvisit_c::set_cache_key(const std::string& value) {
+  _internal_set_cache_key(value);
+  // @@protoc_insertion_point(field_set:frmpub.protocc.loaddata_from_dbvisit_c.cache_key)
+}
+inline std::string* loaddata_from_dbvisit_c::mutable_cache_key() {
+  // @@protoc_insertion_point(field_mutable:frmpub.protocc.loaddata_from_dbvisit_c.cache_key)
+  return _internal_mutable_cache_key();
+}
+inline const std::string& loaddata_from_dbvisit_c::_internal_cache_key() const {
+  return cache_key_.Get();
+}
+inline void loaddata_from_dbvisit_c::_internal_set_cache_key(const std::string& value) {
+  
+  cache_key_.Set(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, value, GetArena());
+}
+inline void loaddata_from_dbvisit_c::set_cache_key(std::string&& value) {
+  
+  cache_key_.Set(
+    ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, ::std::move(value), GetArena());
+  // @@protoc_insertion_point(field_set_rvalue:frmpub.protocc.loaddata_from_dbvisit_c.cache_key)
+}
+inline void loaddata_from_dbvisit_c::set_cache_key(const char* value) {
+  GOOGLE_DCHECK(value != nullptr);
+  
+  cache_key_.Set(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, ::std::string(value), GetArena());
+  // @@protoc_insertion_point(field_set_char:frmpub.protocc.loaddata_from_dbvisit_c.cache_key)
+}
+inline void loaddata_from_dbvisit_c::set_cache_key(const char* value,
+    size_t size) {
+  
+  cache_key_.Set(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, ::std::string(
+      reinterpret_cast<const char*>(value), size), GetArena());
+  // @@protoc_insertion_point(field_set_pointer:frmpub.protocc.loaddata_from_dbvisit_c.cache_key)
+}
+inline std::string* loaddata_from_dbvisit_c::_internal_mutable_cache_key() {
+  
+  return cache_key_.Mutable(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, GetArena());
+}
+inline std::string* loaddata_from_dbvisit_c::release_cache_key() {
+  // @@protoc_insertion_point(field_release:frmpub.protocc.loaddata_from_dbvisit_c.cache_key)
+  return cache_key_.Release(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArena());
+}
+inline void loaddata_from_dbvisit_c::set_allocated_cache_key(std::string* cache_key) {
+  if (cache_key != nullptr) {
+    
+  } else {
+    
+  }
+  cache_key_.SetAllocated(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), cache_key,
+      GetArena());
+  // @@protoc_insertion_point(field_set_allocated:frmpub.protocc.loaddata_from_dbvisit_c.cache_key)
+}
+
+// repeated .frmpub.protocc.FieldsEntry fields = 4;
+inline int loaddata_from_dbvisit_c::_internal_fields_size() const {
+  return fields_.size();
+}
+inline int loaddata_from_dbvisit_c::fields_size() const {
+  return _internal_fields_size();
+}
+inline ::frmpub::protocc::FieldsEntry* loaddata_from_dbvisit_c::mutable_fields(int index) {
+  // @@protoc_insertion_point(field_mutable:frmpub.protocc.loaddata_from_dbvisit_c.fields)
+  return fields_.Mutable(index);
+}
+inline ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::frmpub::protocc::FieldsEntry >*
+loaddata_from_dbvisit_c::mutable_fields() {
+  // @@protoc_insertion_point(field_mutable_list:frmpub.protocc.loaddata_from_dbvisit_c.fields)
+  return &fields_;
+}
+inline const ::frmpub::protocc::FieldsEntry& loaddata_from_dbvisit_c::_internal_fields(int index) const {
+  return fields_.Get(index);
+}
+inline const ::frmpub::protocc::FieldsEntry& loaddata_from_dbvisit_c::fields(int index) const {
+  // @@protoc_insertion_point(field_get:frmpub.protocc.loaddata_from_dbvisit_c.fields)
+  return _internal_fields(index);
+}
+inline ::frmpub::protocc::FieldsEntry* loaddata_from_dbvisit_c::_internal_add_fields() {
+  return fields_.Add();
+}
+inline ::frmpub::protocc::FieldsEntry* loaddata_from_dbvisit_c::add_fields() {
+  // @@protoc_insertion_point(field_add:frmpub.protocc.loaddata_from_dbvisit_c.fields)
+  return _internal_add_fields();
+}
+inline const ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::frmpub::protocc::FieldsEntry >&
+loaddata_from_dbvisit_c::fields() const {
+  // @@protoc_insertion_point(field_list:frmpub.protocc.loaddata_from_dbvisit_c.fields)
+  return fields_;
+}
+
+// -------------------------------------------------------------------
+
+// loaddata_from_dbvisit_s
+
+// int32 result = 1;
+inline void loaddata_from_dbvisit_s::clear_result() {
+  result_ = 0;
+}
+inline ::PROTOBUF_NAMESPACE_ID::int32 loaddata_from_dbvisit_s::_internal_result() const {
+  return result_;
+}
+inline ::PROTOBUF_NAMESPACE_ID::int32 loaddata_from_dbvisit_s::result() const {
+  // @@protoc_insertion_point(field_get:frmpub.protocc.loaddata_from_dbvisit_s.result)
+  return _internal_result();
+}
+inline void loaddata_from_dbvisit_s::_internal_set_result(::PROTOBUF_NAMESPACE_ID::int32 value) {
+  
+  result_ = value;
+}
+inline void loaddata_from_dbvisit_s::set_result(::PROTOBUF_NAMESPACE_ID::int32 value) {
+  _internal_set_result(value);
+  // @@protoc_insertion_point(field_set:frmpub.protocc.loaddata_from_dbvisit_s.result)
+}
+
+// string tag = 2;
+inline void loaddata_from_dbvisit_s::clear_tag() {
+  tag_.ClearToEmpty();
+}
+inline const std::string& loaddata_from_dbvisit_s::tag() const {
+  // @@protoc_insertion_point(field_get:frmpub.protocc.loaddata_from_dbvisit_s.tag)
+  return _internal_tag();
+}
+inline void loaddata_from_dbvisit_s::set_tag(const std::string& value) {
+  _internal_set_tag(value);
+  // @@protoc_insertion_point(field_set:frmpub.protocc.loaddata_from_dbvisit_s.tag)
+}
+inline std::string* loaddata_from_dbvisit_s::mutable_tag() {
+  // @@protoc_insertion_point(field_mutable:frmpub.protocc.loaddata_from_dbvisit_s.tag)
+  return _internal_mutable_tag();
+}
+inline const std::string& loaddata_from_dbvisit_s::_internal_tag() const {
+  return tag_.Get();
+}
+inline void loaddata_from_dbvisit_s::_internal_set_tag(const std::string& value) {
+  
+  tag_.Set(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, value, GetArena());
+}
+inline void loaddata_from_dbvisit_s::set_tag(std::string&& value) {
+  
+  tag_.Set(
+    ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, ::std::move(value), GetArena());
+  // @@protoc_insertion_point(field_set_rvalue:frmpub.protocc.loaddata_from_dbvisit_s.tag)
+}
+inline void loaddata_from_dbvisit_s::set_tag(const char* value) {
+  GOOGLE_DCHECK(value != nullptr);
+  
+  tag_.Set(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, ::std::string(value), GetArena());
+  // @@protoc_insertion_point(field_set_char:frmpub.protocc.loaddata_from_dbvisit_s.tag)
+}
+inline void loaddata_from_dbvisit_s::set_tag(const char* value,
+    size_t size) {
+  
+  tag_.Set(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, ::std::string(
+      reinterpret_cast<const char*>(value), size), GetArena());
+  // @@protoc_insertion_point(field_set_pointer:frmpub.protocc.loaddata_from_dbvisit_s.tag)
+}
+inline std::string* loaddata_from_dbvisit_s::_internal_mutable_tag() {
+  
+  return tag_.Mutable(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, GetArena());
+}
+inline std::string* loaddata_from_dbvisit_s::release_tag() {
+  // @@protoc_insertion_point(field_release:frmpub.protocc.loaddata_from_dbvisit_s.tag)
+  return tag_.Release(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArena());
+}
+inline void loaddata_from_dbvisit_s::set_allocated_tag(std::string* tag) {
+  if (tag != nullptr) {
+    
+  } else {
+    
+  }
+  tag_.SetAllocated(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), tag,
+      GetArena());
+  // @@protoc_insertion_point(field_set_allocated:frmpub.protocc.loaddata_from_dbvisit_s.tag)
+}
+
+// repeated .frmpub.protocc.FieldsEntry fields = 3;
+inline int loaddata_from_dbvisit_s::_internal_fields_size() const {
+  return fields_.size();
+}
+inline int loaddata_from_dbvisit_s::fields_size() const {
+  return _internal_fields_size();
+}
+inline ::frmpub::protocc::FieldsEntry* loaddata_from_dbvisit_s::mutable_fields(int index) {
+  // @@protoc_insertion_point(field_mutable:frmpub.protocc.loaddata_from_dbvisit_s.fields)
+  return fields_.Mutable(index);
+}
+inline ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::frmpub::protocc::FieldsEntry >*
+loaddata_from_dbvisit_s::mutable_fields() {
+  // @@protoc_insertion_point(field_mutable_list:frmpub.protocc.loaddata_from_dbvisit_s.fields)
+  return &fields_;
+}
+inline const ::frmpub::protocc::FieldsEntry& loaddata_from_dbvisit_s::_internal_fields(int index) const {
+  return fields_.Get(index);
+}
+inline const ::frmpub::protocc::FieldsEntry& loaddata_from_dbvisit_s::fields(int index) const {
+  // @@protoc_insertion_point(field_get:frmpub.protocc.loaddata_from_dbvisit_s.fields)
+  return _internal_fields(index);
+}
+inline ::frmpub::protocc::FieldsEntry* loaddata_from_dbvisit_s::_internal_add_fields() {
+  return fields_.Add();
+}
+inline ::frmpub::protocc::FieldsEntry* loaddata_from_dbvisit_s::add_fields() {
+  // @@protoc_insertion_point(field_add:frmpub.protocc.loaddata_from_dbvisit_s.fields)
+  return _internal_add_fields();
+}
+inline const ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::frmpub::protocc::FieldsEntry >&
+loaddata_from_dbvisit_s::fields() const {
+  // @@protoc_insertion_point(field_list:frmpub.protocc.loaddata_from_dbvisit_s.fields)
+  return fields_;
+}
+
+// -------------------------------------------------------------------
+
+// loaddata_more_from_dbvisit_c
+
+// string tag = 1;
+inline void loaddata_more_from_dbvisit_c::clear_tag() {
+  tag_.ClearToEmpty();
+}
+inline const std::string& loaddata_more_from_dbvisit_c::tag() const {
+  // @@protoc_insertion_point(field_get:frmpub.protocc.loaddata_more_from_dbvisit_c.tag)
+  return _internal_tag();
+}
+inline void loaddata_more_from_dbvisit_c::set_tag(const std::string& value) {
+  _internal_set_tag(value);
+  // @@protoc_insertion_point(field_set:frmpub.protocc.loaddata_more_from_dbvisit_c.tag)
+}
+inline std::string* loaddata_more_from_dbvisit_c::mutable_tag() {
+  // @@protoc_insertion_point(field_mutable:frmpub.protocc.loaddata_more_from_dbvisit_c.tag)
+  return _internal_mutable_tag();
+}
+inline const std::string& loaddata_more_from_dbvisit_c::_internal_tag() const {
+  return tag_.Get();
+}
+inline void loaddata_more_from_dbvisit_c::_internal_set_tag(const std::string& value) {
+  
+  tag_.Set(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, value, GetArena());
+}
+inline void loaddata_more_from_dbvisit_c::set_tag(std::string&& value) {
+  
+  tag_.Set(
+    ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, ::std::move(value), GetArena());
+  // @@protoc_insertion_point(field_set_rvalue:frmpub.protocc.loaddata_more_from_dbvisit_c.tag)
+}
+inline void loaddata_more_from_dbvisit_c::set_tag(const char* value) {
+  GOOGLE_DCHECK(value != nullptr);
+  
+  tag_.Set(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, ::std::string(value), GetArena());
+  // @@protoc_insertion_point(field_set_char:frmpub.protocc.loaddata_more_from_dbvisit_c.tag)
+}
+inline void loaddata_more_from_dbvisit_c::set_tag(const char* value,
+    size_t size) {
+  
+  tag_.Set(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, ::std::string(
+      reinterpret_cast<const char*>(value), size), GetArena());
+  // @@protoc_insertion_point(field_set_pointer:frmpub.protocc.loaddata_more_from_dbvisit_c.tag)
+}
+inline std::string* loaddata_more_from_dbvisit_c::_internal_mutable_tag() {
+  
+  return tag_.Mutable(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, GetArena());
+}
+inline std::string* loaddata_more_from_dbvisit_c::release_tag() {
+  // @@protoc_insertion_point(field_release:frmpub.protocc.loaddata_more_from_dbvisit_c.tag)
+  return tag_.Release(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArena());
+}
+inline void loaddata_more_from_dbvisit_c::set_allocated_tag(std::string* tag) {
+  if (tag != nullptr) {
+    
+  } else {
+    
+  }
+  tag_.SetAllocated(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), tag,
+      GetArena());
+  // @@protoc_insertion_point(field_set_allocated:frmpub.protocc.loaddata_more_from_dbvisit_c.tag)
+}
+
+// string condition = 2;
+inline void loaddata_more_from_dbvisit_c::clear_condition() {
+  condition_.ClearToEmpty();
+}
+inline const std::string& loaddata_more_from_dbvisit_c::condition() const {
+  // @@protoc_insertion_point(field_get:frmpub.protocc.loaddata_more_from_dbvisit_c.condition)
+  return _internal_condition();
+}
+inline void loaddata_more_from_dbvisit_c::set_condition(const std::string& value) {
+  _internal_set_condition(value);
+  // @@protoc_insertion_point(field_set:frmpub.protocc.loaddata_more_from_dbvisit_c.condition)
+}
+inline std::string* loaddata_more_from_dbvisit_c::mutable_condition() {
+  // @@protoc_insertion_point(field_mutable:frmpub.protocc.loaddata_more_from_dbvisit_c.condition)
+  return _internal_mutable_condition();
+}
+inline const std::string& loaddata_more_from_dbvisit_c::_internal_condition() const {
+  return condition_.Get();
+}
+inline void loaddata_more_from_dbvisit_c::_internal_set_condition(const std::string& value) {
+  
+  condition_.Set(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, value, GetArena());
+}
+inline void loaddata_more_from_dbvisit_c::set_condition(std::string&& value) {
+  
+  condition_.Set(
+    ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, ::std::move(value), GetArena());
+  // @@protoc_insertion_point(field_set_rvalue:frmpub.protocc.loaddata_more_from_dbvisit_c.condition)
+}
+inline void loaddata_more_from_dbvisit_c::set_condition(const char* value) {
+  GOOGLE_DCHECK(value != nullptr);
+  
+  condition_.Set(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, ::std::string(value), GetArena());
+  // @@protoc_insertion_point(field_set_char:frmpub.protocc.loaddata_more_from_dbvisit_c.condition)
+}
+inline void loaddata_more_from_dbvisit_c::set_condition(const char* value,
+    size_t size) {
+  
+  condition_.Set(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, ::std::string(
+      reinterpret_cast<const char*>(value), size), GetArena());
+  // @@protoc_insertion_point(field_set_pointer:frmpub.protocc.loaddata_more_from_dbvisit_c.condition)
+}
+inline std::string* loaddata_more_from_dbvisit_c::_internal_mutable_condition() {
+  
+  return condition_.Mutable(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, GetArena());
+}
+inline std::string* loaddata_more_from_dbvisit_c::release_condition() {
+  // @@protoc_insertion_point(field_release:frmpub.protocc.loaddata_more_from_dbvisit_c.condition)
+  return condition_.Release(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArena());
+}
+inline void loaddata_more_from_dbvisit_c::set_allocated_condition(std::string* condition) {
+  if (condition != nullptr) {
+    
+  } else {
+    
+  }
+  condition_.SetAllocated(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), condition,
+      GetArena());
+  // @@protoc_insertion_point(field_set_allocated:frmpub.protocc.loaddata_more_from_dbvisit_c.condition)
+}
+
+// repeated .frmpub.protocc.FieldsEntry fields = 3;
+inline int loaddata_more_from_dbvisit_c::_internal_fields_size() const {
+  return fields_.size();
+}
+inline int loaddata_more_from_dbvisit_c::fields_size() const {
+  return _internal_fields_size();
+}
+inline ::frmpub::protocc::FieldsEntry* loaddata_more_from_dbvisit_c::mutable_fields(int index) {
+  // @@protoc_insertion_point(field_mutable:frmpub.protocc.loaddata_more_from_dbvisit_c.fields)
+  return fields_.Mutable(index);
+}
+inline ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::frmpub::protocc::FieldsEntry >*
+loaddata_more_from_dbvisit_c::mutable_fields() {
+  // @@protoc_insertion_point(field_mutable_list:frmpub.protocc.loaddata_more_from_dbvisit_c.fields)
+  return &fields_;
+}
+inline const ::frmpub::protocc::FieldsEntry& loaddata_more_from_dbvisit_c::_internal_fields(int index) const {
+  return fields_.Get(index);
+}
+inline const ::frmpub::protocc::FieldsEntry& loaddata_more_from_dbvisit_c::fields(int index) const {
+  // @@protoc_insertion_point(field_get:frmpub.protocc.loaddata_more_from_dbvisit_c.fields)
+  return _internal_fields(index);
+}
+inline ::frmpub::protocc::FieldsEntry* loaddata_more_from_dbvisit_c::_internal_add_fields() {
+  return fields_.Add();
+}
+inline ::frmpub::protocc::FieldsEntry* loaddata_more_from_dbvisit_c::add_fields() {
+  // @@protoc_insertion_point(field_add:frmpub.protocc.loaddata_more_from_dbvisit_c.fields)
+  return _internal_add_fields();
+}
+inline const ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::frmpub::protocc::FieldsEntry >&
+loaddata_more_from_dbvisit_c::fields() const {
+  // @@protoc_insertion_point(field_list:frmpub.protocc.loaddata_more_from_dbvisit_c.fields)
+  return fields_;
+}
+
+// -------------------------------------------------------------------
+
+// loaddata_more_from_dbvisit_s_item
+
+// repeated .frmpub.protocc.FieldsEntry fields = 1;
+inline int loaddata_more_from_dbvisit_s_item::_internal_fields_size() const {
+  return fields_.size();
+}
+inline int loaddata_more_from_dbvisit_s_item::fields_size() const {
+  return _internal_fields_size();
+}
+inline ::frmpub::protocc::FieldsEntry* loaddata_more_from_dbvisit_s_item::mutable_fields(int index) {
+  // @@protoc_insertion_point(field_mutable:frmpub.protocc.loaddata_more_from_dbvisit_s.item.fields)
+  return fields_.Mutable(index);
+}
+inline ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::frmpub::protocc::FieldsEntry >*
+loaddata_more_from_dbvisit_s_item::mutable_fields() {
+  // @@protoc_insertion_point(field_mutable_list:frmpub.protocc.loaddata_more_from_dbvisit_s.item.fields)
+  return &fields_;
+}
+inline const ::frmpub::protocc::FieldsEntry& loaddata_more_from_dbvisit_s_item::_internal_fields(int index) const {
+  return fields_.Get(index);
+}
+inline const ::frmpub::protocc::FieldsEntry& loaddata_more_from_dbvisit_s_item::fields(int index) const {
+  // @@protoc_insertion_point(field_get:frmpub.protocc.loaddata_more_from_dbvisit_s.item.fields)
+  return _internal_fields(index);
+}
+inline ::frmpub::protocc::FieldsEntry* loaddata_more_from_dbvisit_s_item::_internal_add_fields() {
+  return fields_.Add();
+}
+inline ::frmpub::protocc::FieldsEntry* loaddata_more_from_dbvisit_s_item::add_fields() {
+  // @@protoc_insertion_point(field_add:frmpub.protocc.loaddata_more_from_dbvisit_s.item.fields)
+  return _internal_add_fields();
+}
+inline const ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::frmpub::protocc::FieldsEntry >&
+loaddata_more_from_dbvisit_s_item::fields() const {
+  // @@protoc_insertion_point(field_list:frmpub.protocc.loaddata_more_from_dbvisit_s.item.fields)
+  return fields_;
+}
+
+// -------------------------------------------------------------------
+
+// loaddata_more_from_dbvisit_s
+
+// int32 result = 1;
+inline void loaddata_more_from_dbvisit_s::clear_result() {
+  result_ = 0;
+}
+inline ::PROTOBUF_NAMESPACE_ID::int32 loaddata_more_from_dbvisit_s::_internal_result() const {
+  return result_;
+}
+inline ::PROTOBUF_NAMESPACE_ID::int32 loaddata_more_from_dbvisit_s::result() const {
+  // @@protoc_insertion_point(field_get:frmpub.protocc.loaddata_more_from_dbvisit_s.result)
+  return _internal_result();
+}
+inline void loaddata_more_from_dbvisit_s::_internal_set_result(::PROTOBUF_NAMESPACE_ID::int32 value) {
+  
+  result_ = value;
+}
+inline void loaddata_more_from_dbvisit_s::set_result(::PROTOBUF_NAMESPACE_ID::int32 value) {
+  _internal_set_result(value);
+  // @@protoc_insertion_point(field_set:frmpub.protocc.loaddata_more_from_dbvisit_s.result)
+}
+
+// string tag = 2;
+inline void loaddata_more_from_dbvisit_s::clear_tag() {
+  tag_.ClearToEmpty();
+}
+inline const std::string& loaddata_more_from_dbvisit_s::tag() const {
+  // @@protoc_insertion_point(field_get:frmpub.protocc.loaddata_more_from_dbvisit_s.tag)
+  return _internal_tag();
+}
+inline void loaddata_more_from_dbvisit_s::set_tag(const std::string& value) {
+  _internal_set_tag(value);
+  // @@protoc_insertion_point(field_set:frmpub.protocc.loaddata_more_from_dbvisit_s.tag)
+}
+inline std::string* loaddata_more_from_dbvisit_s::mutable_tag() {
+  // @@protoc_insertion_point(field_mutable:frmpub.protocc.loaddata_more_from_dbvisit_s.tag)
+  return _internal_mutable_tag();
+}
+inline const std::string& loaddata_more_from_dbvisit_s::_internal_tag() const {
+  return tag_.Get();
+}
+inline void loaddata_more_from_dbvisit_s::_internal_set_tag(const std::string& value) {
+  
+  tag_.Set(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, value, GetArena());
+}
+inline void loaddata_more_from_dbvisit_s::set_tag(std::string&& value) {
+  
+  tag_.Set(
+    ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, ::std::move(value), GetArena());
+  // @@protoc_insertion_point(field_set_rvalue:frmpub.protocc.loaddata_more_from_dbvisit_s.tag)
+}
+inline void loaddata_more_from_dbvisit_s::set_tag(const char* value) {
+  GOOGLE_DCHECK(value != nullptr);
+  
+  tag_.Set(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, ::std::string(value), GetArena());
+  // @@protoc_insertion_point(field_set_char:frmpub.protocc.loaddata_more_from_dbvisit_s.tag)
+}
+inline void loaddata_more_from_dbvisit_s::set_tag(const char* value,
+    size_t size) {
+  
+  tag_.Set(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, ::std::string(
+      reinterpret_cast<const char*>(value), size), GetArena());
+  // @@protoc_insertion_point(field_set_pointer:frmpub.protocc.loaddata_more_from_dbvisit_s.tag)
+}
+inline std::string* loaddata_more_from_dbvisit_s::_internal_mutable_tag() {
+  
+  return tag_.Mutable(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, GetArena());
+}
+inline std::string* loaddata_more_from_dbvisit_s::release_tag() {
+  // @@protoc_insertion_point(field_release:frmpub.protocc.loaddata_more_from_dbvisit_s.tag)
+  return tag_.Release(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArena());
+}
+inline void loaddata_more_from_dbvisit_s::set_allocated_tag(std::string* tag) {
+  if (tag != nullptr) {
+    
+  } else {
+    
+  }
+  tag_.SetAllocated(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), tag,
+      GetArena());
+  // @@protoc_insertion_point(field_set_allocated:frmpub.protocc.loaddata_more_from_dbvisit_s.tag)
+}
+
+// repeated .frmpub.protocc.loaddata_more_from_dbvisit_s.item objs = 3;
+inline int loaddata_more_from_dbvisit_s::_internal_objs_size() const {
+  return objs_.size();
+}
+inline int loaddata_more_from_dbvisit_s::objs_size() const {
+  return _internal_objs_size();
+}
+inline void loaddata_more_from_dbvisit_s::clear_objs() {
+  objs_.Clear();
+}
+inline ::frmpub::protocc::loaddata_more_from_dbvisit_s_item* loaddata_more_from_dbvisit_s::mutable_objs(int index) {
+  // @@protoc_insertion_point(field_mutable:frmpub.protocc.loaddata_more_from_dbvisit_s.objs)
+  return objs_.Mutable(index);
+}
+inline ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::frmpub::protocc::loaddata_more_from_dbvisit_s_item >*
+loaddata_more_from_dbvisit_s::mutable_objs() {
+  // @@protoc_insertion_point(field_mutable_list:frmpub.protocc.loaddata_more_from_dbvisit_s.objs)
+  return &objs_;
+}
+inline const ::frmpub::protocc::loaddata_more_from_dbvisit_s_item& loaddata_more_from_dbvisit_s::_internal_objs(int index) const {
+  return objs_.Get(index);
+}
+inline const ::frmpub::protocc::loaddata_more_from_dbvisit_s_item& loaddata_more_from_dbvisit_s::objs(int index) const {
+  // @@protoc_insertion_point(field_get:frmpub.protocc.loaddata_more_from_dbvisit_s.objs)
+  return _internal_objs(index);
+}
+inline ::frmpub::protocc::loaddata_more_from_dbvisit_s_item* loaddata_more_from_dbvisit_s::_internal_add_objs() {
+  return objs_.Add();
+}
+inline ::frmpub::protocc::loaddata_more_from_dbvisit_s_item* loaddata_more_from_dbvisit_s::add_objs() {
+  // @@protoc_insertion_point(field_add:frmpub.protocc.loaddata_more_from_dbvisit_s.objs)
+  return _internal_add_objs();
+}
+inline const ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::frmpub::protocc::loaddata_more_from_dbvisit_s_item >&
+loaddata_more_from_dbvisit_s::objs() const {
+  // @@protoc_insertion_point(field_list:frmpub.protocc.loaddata_more_from_dbvisit_s.objs)
+  return objs_;
+}
+
+// -------------------------------------------------------------------
+
+// insertdata_to_dbvisit_c
+
+// string tag = 1;
+inline void insertdata_to_dbvisit_c::clear_tag() {
+  tag_.ClearToEmpty();
+}
+inline const std::string& insertdata_to_dbvisit_c::tag() const {
+  // @@protoc_insertion_point(field_get:frmpub.protocc.insertdata_to_dbvisit_c.tag)
+  return _internal_tag();
+}
+inline void insertdata_to_dbvisit_c::set_tag(const std::string& value) {
+  _internal_set_tag(value);
+  // @@protoc_insertion_point(field_set:frmpub.protocc.insertdata_to_dbvisit_c.tag)
+}
+inline std::string* insertdata_to_dbvisit_c::mutable_tag() {
+  // @@protoc_insertion_point(field_mutable:frmpub.protocc.insertdata_to_dbvisit_c.tag)
+  return _internal_mutable_tag();
+}
+inline const std::string& insertdata_to_dbvisit_c::_internal_tag() const {
+  return tag_.Get();
+}
+inline void insertdata_to_dbvisit_c::_internal_set_tag(const std::string& value) {
+  
+  tag_.Set(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, value, GetArena());
+}
+inline void insertdata_to_dbvisit_c::set_tag(std::string&& value) {
+  
+  tag_.Set(
+    ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, ::std::move(value), GetArena());
+  // @@protoc_insertion_point(field_set_rvalue:frmpub.protocc.insertdata_to_dbvisit_c.tag)
+}
+inline void insertdata_to_dbvisit_c::set_tag(const char* value) {
+  GOOGLE_DCHECK(value != nullptr);
+  
+  tag_.Set(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, ::std::string(value), GetArena());
+  // @@protoc_insertion_point(field_set_char:frmpub.protocc.insertdata_to_dbvisit_c.tag)
+}
+inline void insertdata_to_dbvisit_c::set_tag(const char* value,
+    size_t size) {
+  
+  tag_.Set(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, ::std::string(
+      reinterpret_cast<const char*>(value), size), GetArena());
+  // @@protoc_insertion_point(field_set_pointer:frmpub.protocc.insertdata_to_dbvisit_c.tag)
+}
+inline std::string* insertdata_to_dbvisit_c::_internal_mutable_tag() {
+  
+  return tag_.Mutable(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, GetArena());
+}
+inline std::string* insertdata_to_dbvisit_c::release_tag() {
+  // @@protoc_insertion_point(field_release:frmpub.protocc.insertdata_to_dbvisit_c.tag)
+  return tag_.Release(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArena());
+}
+inline void insertdata_to_dbvisit_c::set_allocated_tag(std::string* tag) {
+  if (tag != nullptr) {
+    
+  } else {
+    
+  }
+  tag_.SetAllocated(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), tag,
+      GetArena());
+  // @@protoc_insertion_point(field_set_allocated:frmpub.protocc.insertdata_to_dbvisit_c.tag)
+}
+
+// string cache_key = 2;
+inline void insertdata_to_dbvisit_c::clear_cache_key() {
+  cache_key_.ClearToEmpty();
+}
+inline const std::string& insertdata_to_dbvisit_c::cache_key() const {
+  // @@protoc_insertion_point(field_get:frmpub.protocc.insertdata_to_dbvisit_c.cache_key)
+  return _internal_cache_key();
+}
+inline void insertdata_to_dbvisit_c::set_cache_key(const std::string& value) {
+  _internal_set_cache_key(value);
+  // @@protoc_insertion_point(field_set:frmpub.protocc.insertdata_to_dbvisit_c.cache_key)
+}
+inline std::string* insertdata_to_dbvisit_c::mutable_cache_key() {
+  // @@protoc_insertion_point(field_mutable:frmpub.protocc.insertdata_to_dbvisit_c.cache_key)
+  return _internal_mutable_cache_key();
+}
+inline const std::string& insertdata_to_dbvisit_c::_internal_cache_key() const {
+  return cache_key_.Get();
+}
+inline void insertdata_to_dbvisit_c::_internal_set_cache_key(const std::string& value) {
+  
+  cache_key_.Set(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, value, GetArena());
+}
+inline void insertdata_to_dbvisit_c::set_cache_key(std::string&& value) {
+  
+  cache_key_.Set(
+    ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, ::std::move(value), GetArena());
+  // @@protoc_insertion_point(field_set_rvalue:frmpub.protocc.insertdata_to_dbvisit_c.cache_key)
+}
+inline void insertdata_to_dbvisit_c::set_cache_key(const char* value) {
+  GOOGLE_DCHECK(value != nullptr);
+  
+  cache_key_.Set(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, ::std::string(value), GetArena());
+  // @@protoc_insertion_point(field_set_char:frmpub.protocc.insertdata_to_dbvisit_c.cache_key)
+}
+inline void insertdata_to_dbvisit_c::set_cache_key(const char* value,
+    size_t size) {
+  
+  cache_key_.Set(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, ::std::string(
+      reinterpret_cast<const char*>(value), size), GetArena());
+  // @@protoc_insertion_point(field_set_pointer:frmpub.protocc.insertdata_to_dbvisit_c.cache_key)
+}
+inline std::string* insertdata_to_dbvisit_c::_internal_mutable_cache_key() {
+  
+  return cache_key_.Mutable(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, GetArena());
+}
+inline std::string* insertdata_to_dbvisit_c::release_cache_key() {
+  // @@protoc_insertion_point(field_release:frmpub.protocc.insertdata_to_dbvisit_c.cache_key)
+  return cache_key_.Release(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArena());
+}
+inline void insertdata_to_dbvisit_c::set_allocated_cache_key(std::string* cache_key) {
+  if (cache_key != nullptr) {
+    
+  } else {
+    
+  }
+  cache_key_.SetAllocated(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), cache_key,
+      GetArena());
+  // @@protoc_insertion_point(field_set_allocated:frmpub.protocc.insertdata_to_dbvisit_c.cache_key)
+}
+
+// repeated .frmpub.protocc.FieldsEntry fields = 3;
+inline int insertdata_to_dbvisit_c::_internal_fields_size() const {
+  return fields_.size();
+}
+inline int insertdata_to_dbvisit_c::fields_size() const {
+  return _internal_fields_size();
+}
+inline ::frmpub::protocc::FieldsEntry* insertdata_to_dbvisit_c::mutable_fields(int index) {
+  // @@protoc_insertion_point(field_mutable:frmpub.protocc.insertdata_to_dbvisit_c.fields)
+  return fields_.Mutable(index);
+}
+inline ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::frmpub::protocc::FieldsEntry >*
+insertdata_to_dbvisit_c::mutable_fields() {
+  // @@protoc_insertion_point(field_mutable_list:frmpub.protocc.insertdata_to_dbvisit_c.fields)
+  return &fields_;
+}
+inline const ::frmpub::protocc::FieldsEntry& insertdata_to_dbvisit_c::_internal_fields(int index) const {
+  return fields_.Get(index);
+}
+inline const ::frmpub::protocc::FieldsEntry& insertdata_to_dbvisit_c::fields(int index) const {
+  // @@protoc_insertion_point(field_get:frmpub.protocc.insertdata_to_dbvisit_c.fields)
+  return _internal_fields(index);
+}
+inline ::frmpub::protocc::FieldsEntry* insertdata_to_dbvisit_c::_internal_add_fields() {
+  return fields_.Add();
+}
+inline ::frmpub::protocc::FieldsEntry* insertdata_to_dbvisit_c::add_fields() {
+  // @@protoc_insertion_point(field_add:frmpub.protocc.insertdata_to_dbvisit_c.fields)
+  return _internal_add_fields();
+}
+inline const ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::frmpub::protocc::FieldsEntry >&
+insertdata_to_dbvisit_c::fields() const {
+  // @@protoc_insertion_point(field_list:frmpub.protocc.insertdata_to_dbvisit_c.fields)
+  return fields_;
+}
+
+// -------------------------------------------------------------------
+
+// insertdata_to_dbvisit_s
+
+// int32 result = 1;
+inline void insertdata_to_dbvisit_s::clear_result() {
+  result_ = 0;
+}
+inline ::PROTOBUF_NAMESPACE_ID::int32 insertdata_to_dbvisit_s::_internal_result() const {
+  return result_;
+}
+inline ::PROTOBUF_NAMESPACE_ID::int32 insertdata_to_dbvisit_s::result() const {
+  // @@protoc_insertion_point(field_get:frmpub.protocc.insertdata_to_dbvisit_s.result)
+  return _internal_result();
+}
+inline void insertdata_to_dbvisit_s::_internal_set_result(::PROTOBUF_NAMESPACE_ID::int32 value) {
+  
+  result_ = value;
+}
+inline void insertdata_to_dbvisit_s::set_result(::PROTOBUF_NAMESPACE_ID::int32 value) {
+  _internal_set_result(value);
+  // @@protoc_insertion_point(field_set:frmpub.protocc.insertdata_to_dbvisit_s.result)
+}
+
+// string tag = 2;
+inline void insertdata_to_dbvisit_s::clear_tag() {
+  tag_.ClearToEmpty();
+}
+inline const std::string& insertdata_to_dbvisit_s::tag() const {
+  // @@protoc_insertion_point(field_get:frmpub.protocc.insertdata_to_dbvisit_s.tag)
+  return _internal_tag();
+}
+inline void insertdata_to_dbvisit_s::set_tag(const std::string& value) {
+  _internal_set_tag(value);
+  // @@protoc_insertion_point(field_set:frmpub.protocc.insertdata_to_dbvisit_s.tag)
+}
+inline std::string* insertdata_to_dbvisit_s::mutable_tag() {
+  // @@protoc_insertion_point(field_mutable:frmpub.protocc.insertdata_to_dbvisit_s.tag)
+  return _internal_mutable_tag();
+}
+inline const std::string& insertdata_to_dbvisit_s::_internal_tag() const {
+  return tag_.Get();
+}
+inline void insertdata_to_dbvisit_s::_internal_set_tag(const std::string& value) {
+  
+  tag_.Set(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, value, GetArena());
+}
+inline void insertdata_to_dbvisit_s::set_tag(std::string&& value) {
+  
+  tag_.Set(
+    ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, ::std::move(value), GetArena());
+  // @@protoc_insertion_point(field_set_rvalue:frmpub.protocc.insertdata_to_dbvisit_s.tag)
+}
+inline void insertdata_to_dbvisit_s::set_tag(const char* value) {
+  GOOGLE_DCHECK(value != nullptr);
+  
+  tag_.Set(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, ::std::string(value), GetArena());
+  // @@protoc_insertion_point(field_set_char:frmpub.protocc.insertdata_to_dbvisit_s.tag)
+}
+inline void insertdata_to_dbvisit_s::set_tag(const char* value,
+    size_t size) {
+  
+  tag_.Set(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, ::std::string(
+      reinterpret_cast<const char*>(value), size), GetArena());
+  // @@protoc_insertion_point(field_set_pointer:frmpub.protocc.insertdata_to_dbvisit_s.tag)
+}
+inline std::string* insertdata_to_dbvisit_s::_internal_mutable_tag() {
+  
+  return tag_.Mutable(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, GetArena());
+}
+inline std::string* insertdata_to_dbvisit_s::release_tag() {
+  // @@protoc_insertion_point(field_release:frmpub.protocc.insertdata_to_dbvisit_s.tag)
+  return tag_.Release(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArena());
+}
+inline void insertdata_to_dbvisit_s::set_allocated_tag(std::string* tag) {
+  if (tag != nullptr) {
+    
+  } else {
+    
+  }
+  tag_.SetAllocated(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), tag,
+      GetArena());
+  // @@protoc_insertion_point(field_set_allocated:frmpub.protocc.insertdata_to_dbvisit_s.tag)
+}
+
+// -------------------------------------------------------------------
+
+// updata_to_dbvisit_c
+
+// string tag = 1;
+inline void updata_to_dbvisit_c::clear_tag() {
+  tag_.ClearToEmpty();
+}
+inline const std::string& updata_to_dbvisit_c::tag() const {
+  // @@protoc_insertion_point(field_get:frmpub.protocc.updata_to_dbvisit_c.tag)
+  return _internal_tag();
+}
+inline void updata_to_dbvisit_c::set_tag(const std::string& value) {
+  _internal_set_tag(value);
+  // @@protoc_insertion_point(field_set:frmpub.protocc.updata_to_dbvisit_c.tag)
+}
+inline std::string* updata_to_dbvisit_c::mutable_tag() {
+  // @@protoc_insertion_point(field_mutable:frmpub.protocc.updata_to_dbvisit_c.tag)
+  return _internal_mutable_tag();
+}
+inline const std::string& updata_to_dbvisit_c::_internal_tag() const {
+  return tag_.Get();
+}
+inline void updata_to_dbvisit_c::_internal_set_tag(const std::string& value) {
+  
+  tag_.Set(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, value, GetArena());
+}
+inline void updata_to_dbvisit_c::set_tag(std::string&& value) {
+  
+  tag_.Set(
+    ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, ::std::move(value), GetArena());
+  // @@protoc_insertion_point(field_set_rvalue:frmpub.protocc.updata_to_dbvisit_c.tag)
+}
+inline void updata_to_dbvisit_c::set_tag(const char* value) {
+  GOOGLE_DCHECK(value != nullptr);
+  
+  tag_.Set(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, ::std::string(value), GetArena());
+  // @@protoc_insertion_point(field_set_char:frmpub.protocc.updata_to_dbvisit_c.tag)
+}
+inline void updata_to_dbvisit_c::set_tag(const char* value,
+    size_t size) {
+  
+  tag_.Set(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, ::std::string(
+      reinterpret_cast<const char*>(value), size), GetArena());
+  // @@protoc_insertion_point(field_set_pointer:frmpub.protocc.updata_to_dbvisit_c.tag)
+}
+inline std::string* updata_to_dbvisit_c::_internal_mutable_tag() {
+  
+  return tag_.Mutable(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, GetArena());
+}
+inline std::string* updata_to_dbvisit_c::release_tag() {
+  // @@protoc_insertion_point(field_release:frmpub.protocc.updata_to_dbvisit_c.tag)
+  return tag_.Release(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArena());
+}
+inline void updata_to_dbvisit_c::set_allocated_tag(std::string* tag) {
+  if (tag != nullptr) {
+    
+  } else {
+    
+  }
+  tag_.SetAllocated(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), tag,
+      GetArena());
+  // @@protoc_insertion_point(field_set_allocated:frmpub.protocc.updata_to_dbvisit_c.tag)
+}
+
+// string cache_key = 2;
+inline void updata_to_dbvisit_c::clear_cache_key() {
+  cache_key_.ClearToEmpty();
+}
+inline const std::string& updata_to_dbvisit_c::cache_key() const {
+  // @@protoc_insertion_point(field_get:frmpub.protocc.updata_to_dbvisit_c.cache_key)
+  return _internal_cache_key();
+}
+inline void updata_to_dbvisit_c::set_cache_key(const std::string& value) {
+  _internal_set_cache_key(value);
+  // @@protoc_insertion_point(field_set:frmpub.protocc.updata_to_dbvisit_c.cache_key)
+}
+inline std::string* updata_to_dbvisit_c::mutable_cache_key() {
+  // @@protoc_insertion_point(field_mutable:frmpub.protocc.updata_to_dbvisit_c.cache_key)
+  return _internal_mutable_cache_key();
+}
+inline const std::string& updata_to_dbvisit_c::_internal_cache_key() const {
+  return cache_key_.Get();
+}
+inline void updata_to_dbvisit_c::_internal_set_cache_key(const std::string& value) {
+  
+  cache_key_.Set(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, value, GetArena());
+}
+inline void updata_to_dbvisit_c::set_cache_key(std::string&& value) {
+  
+  cache_key_.Set(
+    ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, ::std::move(value), GetArena());
+  // @@protoc_insertion_point(field_set_rvalue:frmpub.protocc.updata_to_dbvisit_c.cache_key)
+}
+inline void updata_to_dbvisit_c::set_cache_key(const char* value) {
+  GOOGLE_DCHECK(value != nullptr);
+  
+  cache_key_.Set(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, ::std::string(value), GetArena());
+  // @@protoc_insertion_point(field_set_char:frmpub.protocc.updata_to_dbvisit_c.cache_key)
+}
+inline void updata_to_dbvisit_c::set_cache_key(const char* value,
+    size_t size) {
+  
+  cache_key_.Set(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, ::std::string(
+      reinterpret_cast<const char*>(value), size), GetArena());
+  // @@protoc_insertion_point(field_set_pointer:frmpub.protocc.updata_to_dbvisit_c.cache_key)
+}
+inline std::string* updata_to_dbvisit_c::_internal_mutable_cache_key() {
+  
+  return cache_key_.Mutable(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, GetArena());
+}
+inline std::string* updata_to_dbvisit_c::release_cache_key() {
+  // @@protoc_insertion_point(field_release:frmpub.protocc.updata_to_dbvisit_c.cache_key)
+  return cache_key_.Release(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArena());
+}
+inline void updata_to_dbvisit_c::set_allocated_cache_key(std::string* cache_key) {
+  if (cache_key != nullptr) {
+    
+  } else {
+    
+  }
+  cache_key_.SetAllocated(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), cache_key,
+      GetArena());
+  // @@protoc_insertion_point(field_set_allocated:frmpub.protocc.updata_to_dbvisit_c.cache_key)
+}
+
+// repeated .frmpub.protocc.FieldsEntry fields = 3;
+inline int updata_to_dbvisit_c::_internal_fields_size() const {
+  return fields_.size();
+}
+inline int updata_to_dbvisit_c::fields_size() const {
+  return _internal_fields_size();
+}
+inline ::frmpub::protocc::FieldsEntry* updata_to_dbvisit_c::mutable_fields(int index) {
+  // @@protoc_insertion_point(field_mutable:frmpub.protocc.updata_to_dbvisit_c.fields)
+  return fields_.Mutable(index);
+}
+inline ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::frmpub::protocc::FieldsEntry >*
+updata_to_dbvisit_c::mutable_fields() {
+  // @@protoc_insertion_point(field_mutable_list:frmpub.protocc.updata_to_dbvisit_c.fields)
+  return &fields_;
+}
+inline const ::frmpub::protocc::FieldsEntry& updata_to_dbvisit_c::_internal_fields(int index) const {
+  return fields_.Get(index);
+}
+inline const ::frmpub::protocc::FieldsEntry& updata_to_dbvisit_c::fields(int index) const {
+  // @@protoc_insertion_point(field_get:frmpub.protocc.updata_to_dbvisit_c.fields)
+  return _internal_fields(index);
+}
+inline ::frmpub::protocc::FieldsEntry* updata_to_dbvisit_c::_internal_add_fields() {
+  return fields_.Add();
+}
+inline ::frmpub::protocc::FieldsEntry* updata_to_dbvisit_c::add_fields() {
+  // @@protoc_insertion_point(field_add:frmpub.protocc.updata_to_dbvisit_c.fields)
+  return _internal_add_fields();
+}
+inline const ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::frmpub::protocc::FieldsEntry >&
+updata_to_dbvisit_c::fields() const {
+  // @@protoc_insertion_point(field_list:frmpub.protocc.updata_to_dbvisit_c.fields)
+  return fields_;
+}
+
+// -------------------------------------------------------------------
+
+// updata_to_dbvisit_s
+
+// int32 result = 1;
+inline void updata_to_dbvisit_s::clear_result() {
+  result_ = 0;
+}
+inline ::PROTOBUF_NAMESPACE_ID::int32 updata_to_dbvisit_s::_internal_result() const {
+  return result_;
+}
+inline ::PROTOBUF_NAMESPACE_ID::int32 updata_to_dbvisit_s::result() const {
+  // @@protoc_insertion_point(field_get:frmpub.protocc.updata_to_dbvisit_s.result)
+  return _internal_result();
+}
+inline void updata_to_dbvisit_s::_internal_set_result(::PROTOBUF_NAMESPACE_ID::int32 value) {
+  
+  result_ = value;
+}
+inline void updata_to_dbvisit_s::set_result(::PROTOBUF_NAMESPACE_ID::int32 value) {
+  _internal_set_result(value);
+  // @@protoc_insertion_point(field_set:frmpub.protocc.updata_to_dbvisit_s.result)
+}
+
+// string tag = 2;
+inline void updata_to_dbvisit_s::clear_tag() {
+  tag_.ClearToEmpty();
+}
+inline const std::string& updata_to_dbvisit_s::tag() const {
+  // @@protoc_insertion_point(field_get:frmpub.protocc.updata_to_dbvisit_s.tag)
+  return _internal_tag();
+}
+inline void updata_to_dbvisit_s::set_tag(const std::string& value) {
+  _internal_set_tag(value);
+  // @@protoc_insertion_point(field_set:frmpub.protocc.updata_to_dbvisit_s.tag)
+}
+inline std::string* updata_to_dbvisit_s::mutable_tag() {
+  // @@protoc_insertion_point(field_mutable:frmpub.protocc.updata_to_dbvisit_s.tag)
+  return _internal_mutable_tag();
+}
+inline const std::string& updata_to_dbvisit_s::_internal_tag() const {
+  return tag_.Get();
+}
+inline void updata_to_dbvisit_s::_internal_set_tag(const std::string& value) {
+  
+  tag_.Set(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, value, GetArena());
+}
+inline void updata_to_dbvisit_s::set_tag(std::string&& value) {
+  
+  tag_.Set(
+    ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, ::std::move(value), GetArena());
+  // @@protoc_insertion_point(field_set_rvalue:frmpub.protocc.updata_to_dbvisit_s.tag)
+}
+inline void updata_to_dbvisit_s::set_tag(const char* value) {
+  GOOGLE_DCHECK(value != nullptr);
+  
+  tag_.Set(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, ::std::string(value), GetArena());
+  // @@protoc_insertion_point(field_set_char:frmpub.protocc.updata_to_dbvisit_s.tag)
+}
+inline void updata_to_dbvisit_s::set_tag(const char* value,
+    size_t size) {
+  
+  tag_.Set(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, ::std::string(
+      reinterpret_cast<const char*>(value), size), GetArena());
+  // @@protoc_insertion_point(field_set_pointer:frmpub.protocc.updata_to_dbvisit_s.tag)
+}
+inline std::string* updata_to_dbvisit_s::_internal_mutable_tag() {
+  
+  return tag_.Mutable(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, GetArena());
+}
+inline std::string* updata_to_dbvisit_s::release_tag() {
+  // @@protoc_insertion_point(field_release:frmpub.protocc.updata_to_dbvisit_s.tag)
+  return tag_.Release(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArena());
+}
+inline void updata_to_dbvisit_s::set_allocated_tag(std::string* tag) {
+  if (tag != nullptr) {
+    
+  } else {
+    
+  }
+  tag_.SetAllocated(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), tag,
+      GetArena());
+  // @@protoc_insertion_point(field_set_allocated:frmpub.protocc.updata_to_dbvisit_s.tag)
+}
+
+// -------------------------------------------------------------------
+
+// deletedata_to_dbvisit_c
+
+// string tag = 1;
+inline void deletedata_to_dbvisit_c::clear_tag() {
+  tag_.ClearToEmpty();
+}
+inline const std::string& deletedata_to_dbvisit_c::tag() const {
+  // @@protoc_insertion_point(field_get:frmpub.protocc.deletedata_to_dbvisit_c.tag)
+  return _internal_tag();
+}
+inline void deletedata_to_dbvisit_c::set_tag(const std::string& value) {
+  _internal_set_tag(value);
+  // @@protoc_insertion_point(field_set:frmpub.protocc.deletedata_to_dbvisit_c.tag)
+}
+inline std::string* deletedata_to_dbvisit_c::mutable_tag() {
+  // @@protoc_insertion_point(field_mutable:frmpub.protocc.deletedata_to_dbvisit_c.tag)
+  return _internal_mutable_tag();
+}
+inline const std::string& deletedata_to_dbvisit_c::_internal_tag() const {
+  return tag_.Get();
+}
+inline void deletedata_to_dbvisit_c::_internal_set_tag(const std::string& value) {
+  
+  tag_.Set(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, value, GetArena());
+}
+inline void deletedata_to_dbvisit_c::set_tag(std::string&& value) {
+  
+  tag_.Set(
+    ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, ::std::move(value), GetArena());
+  // @@protoc_insertion_point(field_set_rvalue:frmpub.protocc.deletedata_to_dbvisit_c.tag)
+}
+inline void deletedata_to_dbvisit_c::set_tag(const char* value) {
+  GOOGLE_DCHECK(value != nullptr);
+  
+  tag_.Set(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, ::std::string(value), GetArena());
+  // @@protoc_insertion_point(field_set_char:frmpub.protocc.deletedata_to_dbvisit_c.tag)
+}
+inline void deletedata_to_dbvisit_c::set_tag(const char* value,
+    size_t size) {
+  
+  tag_.Set(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, ::std::string(
+      reinterpret_cast<const char*>(value), size), GetArena());
+  // @@protoc_insertion_point(field_set_pointer:frmpub.protocc.deletedata_to_dbvisit_c.tag)
+}
+inline std::string* deletedata_to_dbvisit_c::_internal_mutable_tag() {
+  
+  return tag_.Mutable(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, GetArena());
+}
+inline std::string* deletedata_to_dbvisit_c::release_tag() {
+  // @@protoc_insertion_point(field_release:frmpub.protocc.deletedata_to_dbvisit_c.tag)
+  return tag_.Release(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArena());
+}
+inline void deletedata_to_dbvisit_c::set_allocated_tag(std::string* tag) {
+  if (tag != nullptr) {
+    
+  } else {
+    
+  }
+  tag_.SetAllocated(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), tag,
+      GetArena());
+  // @@protoc_insertion_point(field_set_allocated:frmpub.protocc.deletedata_to_dbvisit_c.tag)
+}
+
+// string cache_key = 2;
+inline void deletedata_to_dbvisit_c::clear_cache_key() {
+  cache_key_.ClearToEmpty();
+}
+inline const std::string& deletedata_to_dbvisit_c::cache_key() const {
+  // @@protoc_insertion_point(field_get:frmpub.protocc.deletedata_to_dbvisit_c.cache_key)
+  return _internal_cache_key();
+}
+inline void deletedata_to_dbvisit_c::set_cache_key(const std::string& value) {
+  _internal_set_cache_key(value);
+  // @@protoc_insertion_point(field_set:frmpub.protocc.deletedata_to_dbvisit_c.cache_key)
+}
+inline std::string* deletedata_to_dbvisit_c::mutable_cache_key() {
+  // @@protoc_insertion_point(field_mutable:frmpub.protocc.deletedata_to_dbvisit_c.cache_key)
+  return _internal_mutable_cache_key();
+}
+inline const std::string& deletedata_to_dbvisit_c::_internal_cache_key() const {
+  return cache_key_.Get();
+}
+inline void deletedata_to_dbvisit_c::_internal_set_cache_key(const std::string& value) {
+  
+  cache_key_.Set(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, value, GetArena());
+}
+inline void deletedata_to_dbvisit_c::set_cache_key(std::string&& value) {
+  
+  cache_key_.Set(
+    ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, ::std::move(value), GetArena());
+  // @@protoc_insertion_point(field_set_rvalue:frmpub.protocc.deletedata_to_dbvisit_c.cache_key)
+}
+inline void deletedata_to_dbvisit_c::set_cache_key(const char* value) {
+  GOOGLE_DCHECK(value != nullptr);
+  
+  cache_key_.Set(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, ::std::string(value), GetArena());
+  // @@protoc_insertion_point(field_set_char:frmpub.protocc.deletedata_to_dbvisit_c.cache_key)
+}
+inline void deletedata_to_dbvisit_c::set_cache_key(const char* value,
+    size_t size) {
+  
+  cache_key_.Set(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, ::std::string(
+      reinterpret_cast<const char*>(value), size), GetArena());
+  // @@protoc_insertion_point(field_set_pointer:frmpub.protocc.deletedata_to_dbvisit_c.cache_key)
+}
+inline std::string* deletedata_to_dbvisit_c::_internal_mutable_cache_key() {
+  
+  return cache_key_.Mutable(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, GetArena());
+}
+inline std::string* deletedata_to_dbvisit_c::release_cache_key() {
+  // @@protoc_insertion_point(field_release:frmpub.protocc.deletedata_to_dbvisit_c.cache_key)
+  return cache_key_.Release(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArena());
+}
+inline void deletedata_to_dbvisit_c::set_allocated_cache_key(std::string* cache_key) {
+  if (cache_key != nullptr) {
+    
+  } else {
+    
+  }
+  cache_key_.SetAllocated(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), cache_key,
+      GetArena());
+  // @@protoc_insertion_point(field_set_allocated:frmpub.protocc.deletedata_to_dbvisit_c.cache_key)
+}
+
+// -------------------------------------------------------------------
+
+// deletedata_to_dbvisit_s
+
+// int32 result = 1;
+inline void deletedata_to_dbvisit_s::clear_result() {
+  result_ = 0;
+}
+inline ::PROTOBUF_NAMESPACE_ID::int32 deletedata_to_dbvisit_s::_internal_result() const {
+  return result_;
+}
+inline ::PROTOBUF_NAMESPACE_ID::int32 deletedata_to_dbvisit_s::result() const {
+  // @@protoc_insertion_point(field_get:frmpub.protocc.deletedata_to_dbvisit_s.result)
+  return _internal_result();
+}
+inline void deletedata_to_dbvisit_s::_internal_set_result(::PROTOBUF_NAMESPACE_ID::int32 value) {
+  
+  result_ = value;
+}
+inline void deletedata_to_dbvisit_s::set_result(::PROTOBUF_NAMESPACE_ID::int32 value) {
+  _internal_set_result(value);
+  // @@protoc_insertion_point(field_set:frmpub.protocc.deletedata_to_dbvisit_s.result)
+}
+
+// string tag = 2;
+inline void deletedata_to_dbvisit_s::clear_tag() {
+  tag_.ClearToEmpty();
+}
+inline const std::string& deletedata_to_dbvisit_s::tag() const {
+  // @@protoc_insertion_point(field_get:frmpub.protocc.deletedata_to_dbvisit_s.tag)
+  return _internal_tag();
+}
+inline void deletedata_to_dbvisit_s::set_tag(const std::string& value) {
+  _internal_set_tag(value);
+  // @@protoc_insertion_point(field_set:frmpub.protocc.deletedata_to_dbvisit_s.tag)
+}
+inline std::string* deletedata_to_dbvisit_s::mutable_tag() {
+  // @@protoc_insertion_point(field_mutable:frmpub.protocc.deletedata_to_dbvisit_s.tag)
+  return _internal_mutable_tag();
+}
+inline const std::string& deletedata_to_dbvisit_s::_internal_tag() const {
+  return tag_.Get();
+}
+inline void deletedata_to_dbvisit_s::_internal_set_tag(const std::string& value) {
+  
+  tag_.Set(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, value, GetArena());
+}
+inline void deletedata_to_dbvisit_s::set_tag(std::string&& value) {
+  
+  tag_.Set(
+    ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, ::std::move(value), GetArena());
+  // @@protoc_insertion_point(field_set_rvalue:frmpub.protocc.deletedata_to_dbvisit_s.tag)
+}
+inline void deletedata_to_dbvisit_s::set_tag(const char* value) {
+  GOOGLE_DCHECK(value != nullptr);
+  
+  tag_.Set(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, ::std::string(value), GetArena());
+  // @@protoc_insertion_point(field_set_char:frmpub.protocc.deletedata_to_dbvisit_s.tag)
+}
+inline void deletedata_to_dbvisit_s::set_tag(const char* value,
+    size_t size) {
+  
+  tag_.Set(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, ::std::string(
+      reinterpret_cast<const char*>(value), size), GetArena());
+  // @@protoc_insertion_point(field_set_pointer:frmpub.protocc.deletedata_to_dbvisit_s.tag)
+}
+inline std::string* deletedata_to_dbvisit_s::_internal_mutable_tag() {
+  
+  return tag_.Mutable(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, GetArena());
+}
+inline std::string* deletedata_to_dbvisit_s::release_tag() {
+  // @@protoc_insertion_point(field_release:frmpub.protocc.deletedata_to_dbvisit_s.tag)
+  return tag_.Release(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArena());
+}
+inline void deletedata_to_dbvisit_s::set_allocated_tag(std::string* tag) {
+  if (tag != nullptr) {
+    
+  } else {
+    
+  }
+  tag_.SetAllocated(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), tag,
+      GetArena());
+  // @@protoc_insertion_point(field_set_allocated:frmpub.protocc.deletedata_to_dbvisit_s.tag)
+}
 
 #ifdef __GNUC__
-#pragma GCC diagnostic pop
+  #pragma GCC diagnostic pop
 #endif  // __GNUC__
-		// -------------------------------------------------------------------
+// -------------------------------------------------------------------
 
-		// -------------------------------------------------------------------
+// -------------------------------------------------------------------
 
-		// -------------------------------------------------------------------
+// -------------------------------------------------------------------
 
-		// -------------------------------------------------------------------
+// -------------------------------------------------------------------
 
-		// -------------------------------------------------------------------
+// -------------------------------------------------------------------
 
-		// -------------------------------------------------------------------
+// -------------------------------------------------------------------
 
-		// -------------------------------------------------------------------
+// -------------------------------------------------------------------
 
-		// -------------------------------------------------------------------
+// -------------------------------------------------------------------
 
-		// -------------------------------------------------------------------
+// -------------------------------------------------------------------
 
-		// -------------------------------------------------------------------
+// -------------------------------------------------------------------
 
 
-		// @@protoc_insertion_point(namespace_scope)
+// @@protoc_insertion_point(namespace_scope)
 
-	}  // namespace protocc
+}  // namespace protocc
 }  // namespace frmpub
 
 // @@protoc_insertion_point(global_scope)

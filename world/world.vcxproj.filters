@@ -2,8 +2,6 @@
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
     <ClCompile Include="world.cpp" />
-    <ClCompile Include="signalhandler.cpp" />
-    <ClCompile Include="stdinhandler.cpp" />
     <ClCompile Include="dbconnector.cpp">
       <Filter>db</Filter>
     </ClCompile>
@@ -31,8 +29,6 @@
     <ClCompile Include="connectormgr.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="signalhandler.h" />
-    <ClInclude Include="stdinhandler.h" />
     <ClInclude Include="dbconnector.h">
       <Filter>db</Filter>
     </ClInclude>

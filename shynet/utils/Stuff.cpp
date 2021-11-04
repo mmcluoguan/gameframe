@@ -317,7 +317,8 @@ namespace utils {
 
     int32_t Stuff::num_of_threads()
     {
-        std::string_view str(status().get());
+        std::unique_ptr<char[]> ptr = status();
+        std::string_view str(ptr.get());
         std::size_t pos = str.find("Threads:");
         if (pos == std::string_view::npos) {
             return -1;
