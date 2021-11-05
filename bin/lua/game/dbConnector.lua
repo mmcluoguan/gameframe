@@ -19,7 +19,7 @@ end
 function dbConnector:loaddata_from_dbvisit_s(msgid,msgdata,routing)
     local gameClientFd = routing:top():fd()
     routing:pop()
-    local gameClient = acceptMgr:find(gameClientFd)
+    local gameClient = AcceptMgr:find(gameClientFd)
     if gameClient ~= nil then
         local msgs = pb.decode("frmpub.protocc.loaddata_from_dbvisit_s", msgdata)
         local temp = split(msgs.tag,',')
@@ -43,7 +43,7 @@ end
 function dbConnector:loaddata_more_from_dbvisit_s(msgid,msgdata,routing)
     local gameClientFd = routing:top():fd()
     routing:pop()
-    local gameClient = acceptMgr:find(gameClientFd)
+    local gameClient = AcceptMgr:find(gameClientFd)
     if gameClient ~= nil then
         local msgs = pb.decode("frmpub.protocc.loaddata_more_from_dbvisit_s", msgdata)
         local temp = split(msgs.tag,',')
@@ -64,10 +64,10 @@ function dbConnector:loadrole_client_gate_c(roleid,fields,gameClientFd)
     local msgtable = {
         result = 0,
     }
-    local roleObj = roleMgr:find(roleid)
+    local roleObj = RoleMgr:find(roleid)
     if roleObj == nil then
         roleObj = role:new(roleid,gameClientFd)
-        roleMgr:add(roleObj)
+        RoleMgr:add(roleObj)
     end
     roleObj.online = true
     for i = 1, #fields do
@@ -88,7 +88,7 @@ end
 
 --加载角色物品结果
 function dbConnector:loadgoods_client_gate_c(roleid,objs)
-    local roleObj = roleMgr:find(roleid)
+    local roleObj = RoleMgr:find(roleid)
     assert(roleObj,"没有角色 roleid:" .. roleid)
     for i = 1, #objs do
         roleObj.goods[i] = {}

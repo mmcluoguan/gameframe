@@ -1,27 +1,27 @@
 require('strings')
 require('lua/common/utils')
 require("lua/game/define")
-acceptMgr = require ("lua/game/acceptMgr")
-connectorMgr = require ("lua/game/connectorMgr")
-roleMgr =  require ("lua/game/roleMgr")
-timerMgr = require("lua/common/timerMgr")
-bagSystem = require("lua/game/bagSystem")
-gmSystem = require("lua/game/gmSystem")
+AcceptMgr = require ("lua/game/acceptMgr")
+ConnectorMgr = require ("lua/game/connectorMgr")
+RoleMgr =  require ("lua/game/roleMgr")
+TimerMgr = require("lua/common/timerMgr")
+BagSystem = require("lua/game/bagSystem")
+GmSystem = require("lua/game/gmSystem")
 
 --接收新客户端
 function onAccept(client)
-    acceptMgr:add(client)
+    AcceptMgr:add(client)
 end
 
 --客户端断开
 function onClose(fd)
-    acceptMgr:remove(fd)
-    connectorMgr:remove(fd)
+    AcceptMgr:remove(fd)
+    ConnectorMgr:remove(fd)
 end
 
 --连接服务器
 function onConnect(connector)
-    connectorMgr:add(connector)
+    ConnectorMgr:add(connector)
 end
 
 --处理网络数据
@@ -29,10 +29,10 @@ function onMessage(cli,msgid,msgdata,routing)
     --print("onMessage",msgid,#msgdata)
     if cli:ident() == 0 then
         --接收身份
-        acceptMgr:find(cli:fd()):handle_message(msgid,msgdata,routing)
+        AcceptMgr:find(cli:fd()):handle_message(msgid,msgdata,routing)
     elseif cli:ident() == 1 then
         --连接身份
-        connectorMgr:find(cli:fd()):handle_message(msgid,msgdata,routing)
+        ConnectorMgr:find(cli:fd()):handle_message(msgid,msgdata,routing)
     end    
 end
 

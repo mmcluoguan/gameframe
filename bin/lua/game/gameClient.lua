@@ -20,7 +20,7 @@ function gameClient:defaultHandle(msgid,msgname,data,routing)
         --解包roleid
         local msgtable = pb.decode("frmpub.protocc." .. msgname, data)
         if msgtable.roleid ~= nil then
-            local role = roleMgr:find(msgtable.roleid)
+            local role = RoleMgr:find(msgtable.roleid)
             if role ~= nil then
                 --socket与角色关联
                 role.fd = self.id
@@ -42,7 +42,7 @@ end
 function gameClient:cleanRoleObj(role)
     print(role.online)
     if role.online == false then
-        roleMgr:remove(role.id)
+        RoleMgr:remove(role.id)
     end
 end
 
@@ -51,7 +51,7 @@ function gameClient:createrole_client_gate_c(msgid,msgdata,routing)
     local msgtable = pb.decode("frmpub.protocc.createrole_client_gate_c", msgdata)
     local msgdata={}
     msgdata.result = 0;
-    if roleMgr:findby_accountid(msgtable.aid) == nil then
+    if RoleMgr:findby_accountid(msgtable.aid) == nil then
         --创建角色
         local role = require("lua/game/role")
         local roleObj = role:new(newid(),self.id)
@@ -66,7 +66,7 @@ function gameClient:createrole_client_gate_c(msgid,msgdata,routing)
                 { key = 'star', value = tostring(roleObj.star),},
             }
         }
-        connectorMgr:dbConnector():send('insertdata_to_dbvisit_c',savedata)
+        ConnectorMgr:dbConnector():send('insertdata_to_dbvisit_c',savedata)
         --默认初始化3个物品
         -- for i = 1, 3 do
         --     local item = {
@@ -97,7 +97,7 @@ end
 --加载角色数据
 function gameClient:loadrole_client_gate_c(msgid,msgdata,routing)
     local msgtable = pb.decode("frmpub.protocc.loadrole_client_gate_c", msgdata)
-    local role = roleMgr:find(msgtable.roleid)
+    local role = RoleMgr:find(msgtable.roleid)
     if role ~= nil then
         --在本地内存中获取
         log("在本地内存中获取角色数据 roleid:",role.id)
@@ -123,14 +123,14 @@ function gameClient:loadrole_client_gate_c(msgid,msgdata,routing)
                 {key = 'accountid', value = '',},
             },
         };
-        connectorMgr:dbConnector():send('loaddata_from_dbvisit_c',roledata,routing)
+        ConnectorMgr:dbConnector():send('loaddata_from_dbvisit_c',roledata,routing)
     end
 end
 
 --加载角色物品数据
 function gameClient:loadgoods_client_gate_c(msgid,msgdata,routing)
     local msgtable = pb.decode("frmpub.protocc.loadgoods_client_gate_c", msgdata)
-    local role = roleMgr:find(msgtable.roleid)
+    local role = RoleMgr:find(msgtable.roleid)
     if role ~= nil and get_tablekey_size(role.goods) ~= 0 then
         --在本地内存中获取
         log("在本地内存中获取角色物品数据 roleid:",role.id)
@@ -156,27 +156,27 @@ function gameClient:loadgoods_client_gate_c(msgid,msgdata,routing)
                 {key = 'num', value = '',},
             },
         }
-        connectorMgr:dbConnector():send('loaddata_more_from_dbvisit_c',goodsdata,routing)
+        ConnectorMgr:dbConnector():send('loaddata_more_from_dbvisit_c',goodsdata,routing)
     end
 end
 
 --玩家下线
 function gameClient:clioffline_gate_all_c(msgid,msgdata,routing)
     local msgtable = pb.decode("frmpub.protocc.clioffline_gate_all_c", msgdata)
-    local role = roleMgr:findby_accountid(msgtable.aid)
+    local role = RoleMgr:findby_accountid(msgtable.aid)
     if role ~= nil then
         --延迟10s销毁角色数据
         log('角色下线,延迟10s销毁角色数据 roleid:',role.id)
         role.online = false;
-        timerMgr:unbind(role.destroy_timerid)
-        role.destroy_timerid = timerMgr:bind(1000*10,false,gameClient,'cleanRoleObj',self,role)
+        TimerMgr:unbind(role.destroy_timerid)
+        role.destroy_timerid = TimerMgr:bind(1000*10,false,gameClient,'cleanRoleObj',self,role)
     end
 end
 
 --玩家断线重连成功
 function gameClient:reconnect_client_gate_s(msgid,msgdata,routing)
     local msgtable = pb.decode("frmpub.protocc.reconnect_client_gate_s", msgdata)
-    local role = roleMgr:findby_accountid(msgtable.aid)
+    local role = RoleMgr:findby_accountid(msgtable.aid)
     if role ~= nil then
         role.online = true
         log("玩家断线重连成功 id:",role.id)
@@ -193,9 +193,9 @@ function gameClient:gmorder_client_gate_c(msgid,msgdata,routing)
     };
     
     if msgtable.order == 'addgoods' then
-        gmSystem:addgoods(msgtable,gmtable,routing)
+        GmSystem:addgoods(msgtable,gmtable,routing)
     elseif msgtable.order == 'delgoods' then
-        gmSystem:delgoods(msgtable,gmtable,routing)
+        GmSystem:delgoods(msgtable,gmtable,routing)
     else
         gmtable.result = 2;
         gmtable.desc = '非法的命令'

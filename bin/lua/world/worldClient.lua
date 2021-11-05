@@ -1,5 +1,5 @@
 local baseNet = require ("lua/common/baseNet")
-local connectorMgr = require ("lua/world/connectorMgr")
+ConnectorMgr = require ("lua/world/connectorMgr")
 
 local worldClient = {}
 --继承

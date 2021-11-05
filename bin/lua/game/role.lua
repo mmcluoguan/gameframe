@@ -37,7 +37,7 @@ function role:send(msg, msgdata,routing)
     if routing == nil then
         routing = self.routing
     end
-    local gameclient = acceptMgr:find(self.fd)
+    local gameclient = AcceptMgr:find(self.fd)
     if gameclient ~= nil then
        return gameclient:send(msg, msgdata,routing)
     else
