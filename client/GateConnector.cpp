@@ -1,5 +1,6 @@
 #include "client/gateconnector.h"
 #include "client/gatereconnctortimer.h"
+#include "client/role.h"
 #include "frmpub/reconnecttimer.h"
 #include "shynet/events/streambuff.h"
 #include "shynet/net/connectreactormgr.h"
@@ -31,10 +32,6 @@ GateConnector::GateConnector(std::shared_ptr<net::IPAddress> connect_addr,
             std::bind(&GateConnector::reconnect_client_gate_s, this, std::placeholders::_1, std::placeholders::_2) },
         { protocc::CREATEROLE_CLIENT_GATE_S,
             std::bind(&GateConnector::createrole_client_gate_s, this, std::placeholders::_1, std::placeholders::_2) },
-        { protocc::LOADROLE_CLIENT_GATE_S,
-            std::bind(&GateConnector::loadrole_client_gate_s, this, std::placeholders::_1, std::placeholders::_2) },
-        { protocc::LOADGOODS_CLIENT_GATE_S,
-            std::bind(&GateConnector::loadgoods_client_gate_s, this, std::placeholders::_1, std::placeholders::_2) },
         { protocc::GMORDER_CLIENT_GATE_S,
             std::bind(&GateConnector::gmorder_client_gate_s, this, std::placeholders::_1, std::placeholders::_2) },
     };
@@ -62,6 +59,7 @@ GateConnector::~GateConnector()
 void GateConnector::complete()
 {
     LOG_INFO << "连接服务器gate成功 [ip:" << connect_addr()->ip() << ":" << connect_addr()->port() << "]";
+    shynet::utils::Singleton<Role>::instance().set_gate(shared_from_this());
     if (disconnect_ == nullptr) {
         //获取服务器列表
         send_proto(protocc::SERVERLIST_CLIENT_GATE_C);
@@ -86,11 +84,16 @@ void GateConnector::complete()
 int GateConnector::input_handle(std::shared_ptr<protocc::CommonObject> obj, std::shared_ptr<std::stack<FilterData::Envelope>> enves)
 {
     if (obj != nullptr) {
+        LOG_DEBUG << "消息" << frmpub::Basic::msgname(100);
         auto it = pmb_.find(obj->msgid());
         if (it != pmb_.end()) {
             return it->second(obj, enves);
         } else {
-            LOG_DEBUG << "消息" << frmpub::Basic::msgname(obj->msgid()) << " 没有处理函数";
+            if (roleid_ != 0) {
+                return shynet::utils::Singleton<Role>::get_instance().input_handle(obj, enves);
+            } else {
+                LOG_DEBUG << "消息" << frmpub::Basic::msgname(obj->msgid()) << " 没有处理函数";
+            }
         }
     }
     return 0;
@@ -145,7 +148,7 @@ int GateConnector::selectserver_client_gate_s(std::shared_ptr<protocc::CommonObj
     protocc::selectserver_client_gate_s msgs;
     if (msgs.ParseFromString(data->msgdata()) == true) {
         protocc::login_client_gate_c msgc;
-        msgc.set_platform_key("aaaa_123456");
+        msgc.set_platform_key(platform_key_);
         send_proto(protocc::LOGIN_CLIENT_GATE_C, &msgc);
         LOG_DEBUG << "登陆";
     } else {
@@ -164,6 +167,7 @@ int GateConnector::login_client_gate_s(std::shared_ptr<protocc::CommonObject> da
         if (msgc.result() == 0) {
             accountid_ = msgc.aid();
             roleid_ = msgc.roleid();
+            shynet::utils::Singleton<Role>::get_instance().set_accountid(accountid_);
             if (roleid_ == 0) {
                 //创建角色
                 protocc::createrole_client_gate_c msg;
@@ -199,13 +203,10 @@ int GateConnector::reconnect_client_gate_s(std::shared_ptr<protocc::CommonObject
     if (msgs.ParseFromString(data->msgdata()) == true) {
         LOG_DEBUG << "断线重连结果:" << msgs.result();
         if (msgs.result() == 0) {
-            protocc::setlevel_client_gate_c msgc;
-            msgc.set_roleid(roleid_);
-            send_proto(protocc::SETLEVEL_CLIENT_GATE_C, &msgc);
-            LOG_DEBUG << "设置角色等级为1";
+
         } else {
             protocc::login_client_gate_c msgc;
-            msgc.set_platform_key("aaaa_123456");
+            msgc.set_platform_key(platform_key_);
             send_proto(protocc::LOGIN_CLIENT_GATE_C, &msgc);
             LOG_DEBUG << "登陆";
         }
@@ -225,6 +226,7 @@ int client::GateConnector::createrole_client_gate_s(std::shared_ptr<protocc::Com
         LOG_DEBUG << "创建角色结果:" << msgc.result();
         if (msgc.result() == 0) {
             roleid_ = msgc.roleid();
+            shynet::utils::Singleton<Role>::get_instance().set_id(roleid_);
             //加载角色数据
             protocc::loadrole_client_gate_c msg;
             msg.set_roleid(roleid_);
@@ -240,43 +242,6 @@ int client::GateConnector::createrole_client_gate_s(std::shared_ptr<protocc::Com
     return 0;
 }
 
-int client::GateConnector::loadrole_client_gate_s(std::shared_ptr<protocc::CommonObject> data,
-    std::shared_ptr<std::stack<FilterData::Envelope>> enves)
-{
-    protocc::loadrole_client_gate_s msgs;
-    if (msgs.ParseFromString(data->msgdata()) == true) {
-        LOG_DEBUG << "加载角色结果:" << msgs.result() << " roleid:" << msgs.roleid() << " level:" << msgs.level();
-
-        protocc::loadgoods_client_gate_c msgc;
-        msgc.set_roleid(roleid_);
-        send_proto(protocc::LOADGOODS_CLIENT_GATE_C, &msgc);
-        LOG_DEBUG << "加载角色物品数据";
-    } else {
-        std::stringstream stream;
-        stream << "消息" << frmpub::Basic::msgname(data->msgid()) << "解析错误";
-        SEND_ERR(protocc::MESSAGE_PARSING_ERROR, stream.str());
-    }
-    return 0;
-}
-int GateConnector::loadgoods_client_gate_s(std::shared_ptr<protocc::CommonObject> data, std::shared_ptr<std::stack<FilterData::Envelope>> enves)
-{
-    protocc::loadgoods_client_gate_s msgs;
-    if (msgs.ParseFromString(data->msgdata()) == true) {
-        for (int i = 0; i < msgs.goods_size(); i++) {
-            LOG_DEBUG << " 物品 id:" << msgs.goods(i).id() << " cfgid:" << msgs.goods(i).cfgid() << " num:" << msgs.goods(i).num();
-        }
-        protocc::setlevel_client_gate_c msgc;
-        msgc.set_roleid(roleid_);
-        send_proto(protocc::SETLEVEL_CLIENT_GATE_C, &msgc);
-        LOG_DEBUG << "设置角色等级为1";
-    } else {
-        std::stringstream stream;
-        stream << "消息" << frmpub::Basic::msgname(data->msgid()) << "解析错误";
-        SEND_ERR(protocc::MESSAGE_PARSING_ERROR, stream.str());
-    }
-
-    return 0;
-}
 int GateConnector::gmorder_client_gate_s(std::shared_ptr<protocc::CommonObject> data, std::shared_ptr<std::stack<FilterData::Envelope>> enves)
 {
     protocc::gmorder_client_gate_s msgs;
@@ -289,4 +254,5 @@ int GateConnector::gmorder_client_gate_s(std::shared_ptr<protocc::CommonObject> 
     }
     return 0;
 }
+
 }

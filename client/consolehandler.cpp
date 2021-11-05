@@ -1,5 +1,6 @@
 #include "client/consolehandler.h"
 #include "client/gateconnector.h"
+#include "client/role.h"
 #include "shynet/net/connectreactormgr.h"
 #include "shynet/utils/iniconfig.h"
 #include "shynet/utils/singleton.h"
@@ -28,6 +29,12 @@ ConsoleHandler::ConsoleHandler(std::shared_ptr<events::EventBase> base)
 
     orderitems_.push_back({ "gm", ":o:a:", "GM指令 o:指令 a:参数组",
         std::bind(&ConsoleHandler::gm_order, this, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3) });
+
+    orderitems_.push_back({ "display_role_base", ":", "显示玩家基础数据",
+        std::bind(&ConsoleHandler::display_role_base_order, this, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3) });
+
+    orderitems_.push_back({ "display_role_goods", ":", "显示玩家物品数据",
+        std::bind(&ConsoleHandler::display_role_goods_order, this, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3) });
 }
 
 ConsoleHandler::~ConsoleHandler()
@@ -139,6 +146,26 @@ void ConsoleHandler::gm_order(const OrderItem& order, int argc, char** argv)
         LOG_DEBUG << "发送" << frmpub::Basic::msgname(protocc::GMORDER_CLIENT_GATE_C);
     } else {
         LOG_WARN << "连接已经释放";
+    }
+}
+
+void ConsoleHandler::display_role_base_order(const OrderItem& order, int argc, char** argv)
+{
+    Role& role = shynet::utils::Singleton<Role>::get_instance();
+    LOG_INFO_BASE << "角色基础信息";
+    LOG_INFO_BASE << "\t角色id:" << role.id();
+    LOG_INFO_BASE << "\t角色账号id:" << role.accountid();
+    LOG_INFO_BASE << "\t角色等级:" << role.level();
+}
+
+void ConsoleHandler::display_role_goods_order(const OrderItem& order, int argc, char** argv)
+{
+    Role& role = shynet::utils::Singleton<Role>::get_instance();
+    LOG_INFO_BASE << "物品信息";
+    for (const auto& it : role.goodsmap()) {
+        LOG_INFO_BASE << "\t物品id:" << it.second.id;
+        LOG_INFO_BASE << "\t物品配置id:" << it.second.cfgid;
+        LOG_INFO_BASE << "\t物品数量:" << it.second.num;
     }
 }
 

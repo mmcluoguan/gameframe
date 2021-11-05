@@ -27,7 +27,6 @@ function baseNet:new(socket)
     end
 	
 	o:init();
-	o:regMsg();		
 	return o
 end
 
@@ -37,16 +36,8 @@ function baseNet:init(sf)
 	if(sf ~= nil) then
 		self = sf;
 	end
-	self.msg_map_ = {} --消息映射
 end
 
---注册消息
---sf 自己引用
-function baseNet:regMsg(sf)
-	if(sf ~= nil) then
-		self = sf;
-	end
-end
 
 --析构
 --sf 自己引用
@@ -56,11 +47,6 @@ function baseNet:clean(sf)
 		log("baseNet:clean fd:" .. self.id)
 	end
 	self.cpp_socket = nil;
-	self.msg_map_ = nil;
-end
-
-function baseNet:regMsgEx(msgname)
-	self.msg_map_[msgname] = self[msgname]
 end
 
 --发送消息
@@ -117,8 +103,8 @@ function baseNet:handle_message(msgid,data,routing)
 	end
 	assert(msgname,"msgid=" .. msgid .. " 未定义");
 	msgname = string.lower(msgname)
-	if(self.msg_map_[msgname] ~= nil) then
-		return self.msg_map_[msgname](self,msgid,data,routing)
+	if(self[msgname] ~= nil) then
+		return self[msgname](self,msgid,data,routing)
 	else
 		return self:defaultHandle(msgid,msgname,data,routing);
 	end

@@ -40,12 +40,14 @@
     <ClCompile Include="gatereconnctortimer.cpp" />
     <ClCompile Include="readline_example.cpp" />
     <ClCompile Include="consolehandler.cpp" />
+    <ClCompile Include="role.cpp" />
     <ClCompile Include="test\010-TestCase.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="gateconnector.h" />
     <ClInclude Include="gatereconnctortimer.h" />
     <ClInclude Include="consolehandler.h" />
+    <ClInclude Include="role.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{ED8B3412-0F27-4788-9F88-7E00F700A174}</ProjectGuid>

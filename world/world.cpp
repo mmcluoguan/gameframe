@@ -62,6 +62,20 @@ int main(int argc, char* argv[])
         Singleton<LuaEngine>::instance(std::make_shared<world::LuaWrapper>());
         Singleton<ThreadPool>::instance().start();
 
+        LOG_DEBUG << "开启世界服务器监听";
+        std::string worldip = ini.get<const char*, std::string>(g_confname, "ip", "127.0.0.1");
+        short worldport = ini.get<short, short>(g_confname, "port", short(22000));
+        std::shared_ptr<IPAddress> worldaddr(new IPAddress(worldip.c_str(), worldport));
+        std::shared_ptr<WorldServer> worldserver(new WorldServer(worldaddr));
+        Singleton<ListenReactorMgr>::instance().add(worldserver);
+
+        LOG_DEBUG << "开启http后台服务器监听";
+        std::string httpip = ini.get<const char*, std::string>(g_confname, "http_ip", "127.0.0.1");
+        short httpport = ini.get<short, short>(g_confname, "http_port", short(26000));
+        std::shared_ptr<IPAddress> httpaddr(new IPAddress(httpip.c_str(), httpport));
+        std::shared_ptr<HttpServer> httpserver(new HttpServer(httpaddr));
+        Singleton<ListenReactorMgr>::instance().add(httpserver);
+
         //连接db服务器
         string dbstr = ini.get<const char*, string>(g_confname, "db", "");
         auto dblist = StringOp::split(dbstr, ",");
@@ -77,20 +91,6 @@ int main(int argc, char* argv[])
                     new DbConnector(shared_ptr<IPAddress>(
                         new IPAddress(dbip.c_str(), dbport)))));
         }
-
-        LOG_DEBUG << "开启世界服务器监听";
-        std::string worldip = ini.get<const char*, std::string>(g_confname, "ip", "127.0.0.1");
-        short worldport = ini.get<short, short>(g_confname, "port", short(22000));
-        std::shared_ptr<IPAddress> worldaddr(new IPAddress(worldip.c_str(), worldport));
-        std::shared_ptr<WorldServer> worldserver(new WorldServer(worldaddr));
-        Singleton<ListenReactorMgr>::instance().add(worldserver);
-
-        LOG_DEBUG << "开启http后台服务器监听";
-        std::string httpip = ini.get<const char*, std::string>(g_confname, "http_ip", "127.0.0.1");
-        short httpport = ini.get<short, short>(g_confname, "http_port", short(26000));
-        std::shared_ptr<IPAddress> httpaddr(new IPAddress(httpip.c_str(), httpport));
-        std::shared_ptr<HttpServer> httpserver(new HttpServer(httpaddr));
-        Singleton<ListenReactorMgr>::instance().add(httpserver);
 
         shared_ptr<EventBase> base(new EventBase());
         StdinHandler* stdin = &Singleton<StdinHandler>::instance(base);

@@ -1,6 +1,4 @@
 local roleMgr = require("lua/game/roleMgr")
-local timerMgr = require("lua/common/timerMgr")
-local connectorMgr = require ("lua/game/connectorMgr")
 
 --自动升级系统
 local autoUpLevel = {}
@@ -31,11 +29,15 @@ function autoUpLevel:uplevel()
 end
 
 function autoUpLevel:start()
-    self.timerid = timerMgr:bind(5 * 1000,autoUpLevel.uplevel,{self})
+    if self.is_start == false then
+        self.timerid = timerMgr:bind(5 * 1000,true,autoUpLevel,'uplevel',self)
+        self.is_start = true
+    end
 end
 
 function autoUpLevel:stop()
     timerMgr:unbind(self.timerid)
+    self.is_start = false
 end
 
 

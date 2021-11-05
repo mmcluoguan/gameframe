@@ -11,11 +11,13 @@
     <ClCompile Include="readline_example.cpp">
       <Filter>test</Filter>
     </ClCompile>
+    <ClCompile Include="role.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="gateconnector.h" />
     <ClInclude Include="gatereconnctortimer.h" />
     <ClInclude Include="consolehandler.h" />
+    <ClInclude Include="role.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="test">

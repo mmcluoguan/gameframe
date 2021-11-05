@@ -1,23 +1,9 @@
 local pb = require("pb")
 local baseNet = require ("lua/common/baseNet")
-local connectorMgr = require ("lua/game/connectorMgr")
-local roleMgr =  require ("lua/game/roleMgr")
-local timerMgr = require("lua/common/timerMgr")
-local bagSystem = require("lua/game/bagSystem")
-
 local gameClient = {}
 --继承
 setmetatable(gameClient,baseNet)
 baseNet.__index = baseNet
-
-function __RELOAD(newchunk)
-    local acceptMgr = require("lua/game/acceptMgr")
-    for k,v in pairs(acceptMgr) do
-        if type(v) == "table" then
-            v:regMsg()
-        end
-    end
-end
 
 function gameClient:init()
     baseNet:init(self);
@@ -38,7 +24,9 @@ function gameClient:defaultHandle(msgid,msgname,data,routing)
             if role ~= nil then
                 --socket与角色关联
                 role.fd = self.id
-                role:handle_message(msgname,data,routing)
+                if role:handle_message(msgname,data,routing) == false then
+                    baseNet:defaultHandle(msgid,msgname,data,routing)
+                end
             else
                 log("没有角色 roleid:",msgtable.roleid)
             end
@@ -50,18 +38,9 @@ function gameClient:defaultHandle(msgid,msgname,data,routing)
     end
 end
 
-function gameClient:regMsg()
-    baseNet:regMsg(self);
-    self:regMsgEx('createrole_client_gate_c')
-    self:regMsgEx('loadrole_client_gate_c')
-    self:regMsgEx('loadgoods_client_gate_c')
-    self:regMsgEx('clioffline_gate_all_c')
-    self:regMsgEx('reconnect_client_gate_s')
-    self:regMsgEx("gmorder_client_gate_c")
-end
-
 --延迟销毁角色数据
 function gameClient:cleanRoleObj(role)
+    print(role.online)
     if role.online == false then
         roleMgr:remove(role.id)
     end
@@ -89,24 +68,24 @@ function gameClient:createrole_client_gate_c(msgid,msgdata,routing)
         }
         connectorMgr:dbConnector():send('insertdata_to_dbvisit_c',savedata)
         --默认初始化3个物品
-        for i = 1, 3 do
-            local item = {
-                id = newid(),
-                cfgid = random(10,20),
-                num = random(10,20),
-            }
-            table.insert(roleObj.goods,#roleObj.goods + 1,item)
-            local savedata = {
-                cache_key = 'goods_' .. item.id .. "_" .. roleObj.id,
-                fields = {
-                    { key = '_id', value = tostring(item.id),},
-                    { key = 'cfgid', value = tostring(item.cfgid),},
-                    { key = 'num', value = tostring(item.num),},
-                    { key = 'roleid', value = tostring(roleObj.id),},
-                }
-            }
-            connectorMgr:dbConnector():send('insertdata_to_dbvisit_c',savedata)
-        end
+        -- for i = 1, 3 do
+        --     local item = {
+        --         id = newid(),
+        --         cfgid = random(10,20),
+        --         num = random(10,20),
+        --     }
+        --     table.insert(roleObj.goods,#roleObj.goods + 1,item)
+        --     local savedata = {
+        --         cache_key = 'goods_' .. item.id .. "_" .. roleObj.id,
+        --         fields = {
+        --             { key = '_id', value = tostring(item.id),},
+        --             { key = 'cfgid', value = tostring(item.cfgid),},
+        --             { key = 'num', value = tostring(item.num),},
+        --             { key = 'roleid', value = tostring(roleObj.id),},
+        --         }
+        --     }
+        --     connectorMgr:dbConnector():send('insertdata_to_dbvisit_c',savedata)
+        -- end
         msgdata.aid = roleObj.accountid
         msgdata.roleid = roleObj.id
     else
@@ -152,10 +131,16 @@ end
 function gameClient:loadgoods_client_gate_c(msgid,msgdata,routing)
     local msgtable = pb.decode("frmpub.protocc.loadgoods_client_gate_c", msgdata)
     local role = roleMgr:find(msgtable.roleid)
-    if role ~= nil and #role.goods ~= 0 then
+    if role ~= nil and get_tablekey_size(role.goods) ~= 0 then
         --在本地内存中获取
         log("在本地内存中获取角色物品数据 roleid:",role.id)
-        self:send("loadgoods_client_gate_s",{ goods = role.goods },routing)
+        local goodsdata = {}
+        local i = 1
+        for k,v in pairs(role.goods) do
+            table.insert(goodsdata,i,v)
+            i = i + 1
+        end
+        self:send("loadgoods_client_gate_s",{ goods = goodsdata },routing)
     else
         --转发消息到db获取角色数据
         local enve = Envelope_CPP.new()
@@ -181,9 +166,10 @@ function gameClient:clioffline_gate_all_c(msgid,msgdata,routing)
     local role = roleMgr:findby_accountid(msgtable.aid)
     if role ~= nil then
         --延迟10s销毁角色数据
+        log('角色下线,延迟10s销毁角色数据 roleid:',role.id)
         role.online = false;
         timerMgr:unbind(role.destroy_timerid)
-        role.destroy_timerid = timerMgr:bind(1000*10,gameClient.cleanRoleObj,{self,role},false)
+        role.destroy_timerid = timerMgr:bind(1000*10,false,gameClient,'cleanRoleObj',self,role)
     end
 end
 
@@ -205,26 +191,14 @@ function gameClient:gmorder_client_gate_c(msgid,msgdata,routing)
         order = msgtable.order,
         desc = '成功',
     };
-    print('1')
-    local role = roleMgr:find(msgtable.roleid)
-    if role ~= nil then
-        if msgtable.order == 'addgoods' then
-            print('3')
-            local cfgid = tonumber(msgtable.args[1])
-            local num = tonumber(msgtable.args[2])
-            if bagSystem:add_one_item(role,cfgid,num,module_name.gm) == nil then
-                gmtable.result = 2
-                gmtable.desc = '错误的配置id' .. cfgid
-            end
-        else
-            print('2')
-            gmtable.result = 2;
-            gmtable.desc = '非法的命令'
-        end
+    
+    if msgtable.order == 'addgoods' then
+        gmSystem:addgoods(msgtable,gmtable,routing)
+    elseif msgtable.order == 'delgoods' then
+        gmSystem:delgoods(msgtable,gmtable,routing)
     else
-        print('4')
-        gmtable.result = 1;
-        gmtable.desc = '没有此角色'
+        gmtable.result = 2;
+        gmtable.desc = '非法的命令'
     end
     self:send("gmorder_client_gate_s",gmtable,routing)
 end

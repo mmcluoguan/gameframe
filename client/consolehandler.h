@@ -16,6 +16,8 @@ private:
     void reconnect_order(const OrderItem& order, int argc, char** argv);
     void login_order(const OrderItem& order, int argc, char** argv);
     void gm_order(const OrderItem& order, int argc, char** argv);
+    void display_role_base_order(const OrderItem& order, int argc, char** argv);
+    void display_role_goods_order(const OrderItem& order, int argc, char** argv);
 };
 }
 

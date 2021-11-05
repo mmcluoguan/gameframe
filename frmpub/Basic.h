@@ -33,9 +33,6 @@ public:
 private:
     static std::string internal_msgname(int);
     static std::string client_msgname(int);
-    static std::unordered_map<int, std::string> internal_msgname_;
-    static std::unordered_map<int, std::string> client_msgname_;
-    static std::unordered_map<int, std::string> connect_type_;
 };
 
 class Sms {

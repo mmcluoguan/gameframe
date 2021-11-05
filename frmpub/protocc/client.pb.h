@@ -48,7 +48,7 @@ struct TableStruct_client_2eproto {
     PROTOBUF_SECTION_VARIABLE(protodesc_cold);
   static const ::PROTOBUF_NAMESPACE_ID::internal::AuxiliaryParseTableField aux[]
     PROTOBUF_SECTION_VARIABLE(protodesc_cold);
-  static const ::PROTOBUF_NAMESPACE_ID::internal::ParseTable schema[19]
+  static const ::PROTOBUF_NAMESPACE_ID::internal::ParseTable schema[20]
     PROTOBUF_SECTION_VARIABLE(protodesc_cold);
   static const ::PROTOBUF_NAMESPACE_ID::internal::FieldMetadata field_metadata[];
   static const ::PROTOBUF_NAMESPACE_ID::internal::SerializationTable serialization_table[];
@@ -70,6 +70,9 @@ extern gmorder_client_gate_cDefaultTypeInternal _gmorder_client_gate_c_default_i
 class gmorder_client_gate_s;
 struct gmorder_client_gate_sDefaultTypeInternal;
 extern gmorder_client_gate_sDefaultTypeInternal _gmorder_client_gate_s_default_instance_;
+class goodsupdata_client_gate_g;
+struct goodsupdata_client_gate_gDefaultTypeInternal;
+extern goodsupdata_client_gate_gDefaultTypeInternal _goodsupdata_client_gate_g_default_instance_;
 class loadgoods_client_gate_c;
 struct loadgoods_client_gate_cDefaultTypeInternal;
 extern loadgoods_client_gate_cDefaultTypeInternal _loadgoods_client_gate_c_default_instance_;
@@ -122,6 +125,7 @@ template<> ::frmpub::protocc::createrole_client_gate_c* Arena::CreateMaybeMessag
 template<> ::frmpub::protocc::createrole_client_gate_s* Arena::CreateMaybeMessage<::frmpub::protocc::createrole_client_gate_s>(Arena*);
 template<> ::frmpub::protocc::gmorder_client_gate_c* Arena::CreateMaybeMessage<::frmpub::protocc::gmorder_client_gate_c>(Arena*);
 template<> ::frmpub::protocc::gmorder_client_gate_s* Arena::CreateMaybeMessage<::frmpub::protocc::gmorder_client_gate_s>(Arena*);
+template<> ::frmpub::protocc::goodsupdata_client_gate_g* Arena::CreateMaybeMessage<::frmpub::protocc::goodsupdata_client_gate_g>(Arena*);
 template<> ::frmpub::protocc::loadgoods_client_gate_c* Arena::CreateMaybeMessage<::frmpub::protocc::loadgoods_client_gate_c>(Arena*);
 template<> ::frmpub::protocc::loadgoods_client_gate_s* Arena::CreateMaybeMessage<::frmpub::protocc::loadgoods_client_gate_s>(Arena*);
 template<> ::frmpub::protocc::loadgoods_client_gate_s_Goods* Arena::CreateMaybeMessage<::frmpub::protocc::loadgoods_client_gate_s_Goods>(Arena*);
@@ -167,6 +171,7 @@ enum ClientMsgId : int {
   LOADGOODS_CLIENT_GATE_S = 1208,
   GMORDER_CLIENT_GATE_C = 1209,
   GMORDER_CLIENT_GATE_S = 1210,
+  GOODSUPDATA_CLIENT_GATE_G = 1211,
   CLIENT_GAME_END = 1299,
   CLIENTMSGID_END = 5000,
   ClientMsgId_INT_MIN_SENTINEL_DO_NOT_USE_ = std::numeric_limits<::PROTOBUF_NAMESPACE_ID::int32>::min(),
@@ -3151,6 +3156,176 @@ class gmorder_client_gate_s PROTOBUF_FINAL :
   mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
   friend struct ::TableStruct_client_2eproto;
 };
+// -------------------------------------------------------------------
+
+class goodsupdata_client_gate_g PROTOBUF_FINAL :
+    public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:frmpub.protocc.goodsupdata_client_gate_g) */ {
+ public:
+  inline goodsupdata_client_gate_g() : goodsupdata_client_gate_g(nullptr) {}
+  virtual ~goodsupdata_client_gate_g();
+  explicit constexpr goodsupdata_client_gate_g(::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized);
+
+  goodsupdata_client_gate_g(const goodsupdata_client_gate_g& from);
+  goodsupdata_client_gate_g(goodsupdata_client_gate_g&& from) noexcept
+    : goodsupdata_client_gate_g() {
+    *this = ::std::move(from);
+  }
+
+  inline goodsupdata_client_gate_g& operator=(const goodsupdata_client_gate_g& from) {
+    CopyFrom(from);
+    return *this;
+  }
+  inline goodsupdata_client_gate_g& operator=(goodsupdata_client_gate_g&& from) noexcept {
+    if (GetArena() == from.GetArena()) {
+      if (this != &from) InternalSwap(&from);
+    } else {
+      CopyFrom(from);
+    }
+    return *this;
+  }
+
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* descriptor() {
+    return GetDescriptor();
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* GetDescriptor() {
+    return GetMetadataStatic().descriptor;
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Reflection* GetReflection() {
+    return GetMetadataStatic().reflection;
+  }
+  static const goodsupdata_client_gate_g& default_instance() {
+    return *internal_default_instance();
+  }
+  static inline const goodsupdata_client_gate_g* internal_default_instance() {
+    return reinterpret_cast<const goodsupdata_client_gate_g*>(
+               &_goodsupdata_client_gate_g_default_instance_);
+  }
+  static constexpr int kIndexInFileMessages =
+    19;
+
+  friend void swap(goodsupdata_client_gate_g& a, goodsupdata_client_gate_g& b) {
+    a.Swap(&b);
+  }
+  inline void Swap(goodsupdata_client_gate_g* other) {
+    if (other == this) return;
+    if (GetArena() == other->GetArena()) {
+      InternalSwap(other);
+    } else {
+      ::PROTOBUF_NAMESPACE_ID::internal::GenericSwap(this, other);
+    }
+  }
+  void UnsafeArenaSwap(goodsupdata_client_gate_g* other) {
+    if (other == this) return;
+    GOOGLE_DCHECK(GetArena() == other->GetArena());
+    InternalSwap(other);
+  }
+
+  // implements Message ----------------------------------------------
+
+  inline goodsupdata_client_gate_g* New() const final {
+    return CreateMaybeMessage<goodsupdata_client_gate_g>(nullptr);
+  }
+
+  goodsupdata_client_gate_g* New(::PROTOBUF_NAMESPACE_ID::Arena* arena) const final {
+    return CreateMaybeMessage<goodsupdata_client_gate_g>(arena);
+  }
+  void CopyFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) final;
+  void MergeFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) final;
+  void CopyFrom(const goodsupdata_client_gate_g& from);
+  void MergeFrom(const goodsupdata_client_gate_g& from);
+  PROTOBUF_ATTRIBUTE_REINITIALIZES void Clear() final;
+  bool IsInitialized() const final;
+
+  size_t ByteSizeLong() const final;
+  const char* _InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) final;
+  ::PROTOBUF_NAMESPACE_ID::uint8* _InternalSerialize(
+      ::PROTOBUF_NAMESPACE_ID::uint8* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const final;
+  int GetCachedSize() const final { return _cached_size_.Get(); }
+
+  private:
+  inline void SharedCtor();
+  inline void SharedDtor();
+  void SetCachedSize(int size) const final;
+  void InternalSwap(goodsupdata_client_gate_g* other);
+  friend class ::PROTOBUF_NAMESPACE_ID::internal::AnyMetadata;
+  static ::PROTOBUF_NAMESPACE_ID::StringPiece FullMessageName() {
+    return "frmpub.protocc.goodsupdata_client_gate_g";
+  }
+  protected:
+  explicit goodsupdata_client_gate_g(::PROTOBUF_NAMESPACE_ID::Arena* arena);
+  private:
+  static void ArenaDtor(void* object);
+  inline void RegisterArenaDtor(::PROTOBUF_NAMESPACE_ID::Arena* arena);
+  public:
+
+  ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadata() const final;
+  private:
+  static ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadataStatic() {
+    return ::descriptor_table_client_2eproto_metadata_getter(kIndexInFileMessages);
+  }
+
+  public:
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  enum : int {
+    kRoleidFieldNumber = 1,
+    kIdFieldNumber = 2,
+    kCfgidFieldNumber = 3,
+    kNumFieldNumber = 4,
+  };
+  // int64 roleid = 1;
+  void clear_roleid();
+  ::PROTOBUF_NAMESPACE_ID::int64 roleid() const;
+  void set_roleid(::PROTOBUF_NAMESPACE_ID::int64 value);
+  private:
+  ::PROTOBUF_NAMESPACE_ID::int64 _internal_roleid() const;
+  void _internal_set_roleid(::PROTOBUF_NAMESPACE_ID::int64 value);
+  public:
+
+  // int64 id = 2;
+  void clear_id();
+  ::PROTOBUF_NAMESPACE_ID::int64 id() const;
+  void set_id(::PROTOBUF_NAMESPACE_ID::int64 value);
+  private:
+  ::PROTOBUF_NAMESPACE_ID::int64 _internal_id() const;
+  void _internal_set_id(::PROTOBUF_NAMESPACE_ID::int64 value);
+  public:
+
+  // int32 cfgid = 3;
+  void clear_cfgid();
+  ::PROTOBUF_NAMESPACE_ID::int32 cfgid() const;
+  void set_cfgid(::PROTOBUF_NAMESPACE_ID::int32 value);
+  private:
+  ::PROTOBUF_NAMESPACE_ID::int32 _internal_cfgid() const;
+  void _internal_set_cfgid(::PROTOBUF_NAMESPACE_ID::int32 value);
+  public:
+
+  // int32 num = 4;
+  void clear_num();
+  ::PROTOBUF_NAMESPACE_ID::int32 num() const;
+  void set_num(::PROTOBUF_NAMESPACE_ID::int32 value);
+  private:
+  ::PROTOBUF_NAMESPACE_ID::int32 _internal_num() const;
+  void _internal_set_num(::PROTOBUF_NAMESPACE_ID::int32 value);
+  public:
+
+  // @@protoc_insertion_point(class_scope:frmpub.protocc.goodsupdata_client_gate_g)
+ private:
+  class _Internal;
+
+  template <typename T> friend class ::PROTOBUF_NAMESPACE_ID::Arena::InternalHelper;
+  typedef void InternalArenaConstructable_;
+  typedef void DestructorSkippable_;
+  ::PROTOBUF_NAMESPACE_ID::int64 roleid_;
+  ::PROTOBUF_NAMESPACE_ID::int64 id_;
+  ::PROTOBUF_NAMESPACE_ID::int32 cfgid_;
+  ::PROTOBUF_NAMESPACE_ID::int32 num_;
+  mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
+  friend struct ::TableStruct_client_2eproto;
+};
 // ===================================================================
 
 
@@ -4656,9 +4831,95 @@ inline void gmorder_client_gate_s::set_allocated_desc(std::string* desc) {
   // @@protoc_insertion_point(field_set_allocated:frmpub.protocc.gmorder_client_gate_s.desc)
 }
 
+// -------------------------------------------------------------------
+
+// goodsupdata_client_gate_g
+
+// int64 roleid = 1;
+inline void goodsupdata_client_gate_g::clear_roleid() {
+  roleid_ = PROTOBUF_LONGLONG(0);
+}
+inline ::PROTOBUF_NAMESPACE_ID::int64 goodsupdata_client_gate_g::_internal_roleid() const {
+  return roleid_;
+}
+inline ::PROTOBUF_NAMESPACE_ID::int64 goodsupdata_client_gate_g::roleid() const {
+  // @@protoc_insertion_point(field_get:frmpub.protocc.goodsupdata_client_gate_g.roleid)
+  return _internal_roleid();
+}
+inline void goodsupdata_client_gate_g::_internal_set_roleid(::PROTOBUF_NAMESPACE_ID::int64 value) {
+  
+  roleid_ = value;
+}
+inline void goodsupdata_client_gate_g::set_roleid(::PROTOBUF_NAMESPACE_ID::int64 value) {
+  _internal_set_roleid(value);
+  // @@protoc_insertion_point(field_set:frmpub.protocc.goodsupdata_client_gate_g.roleid)
+}
+
+// int64 id = 2;
+inline void goodsupdata_client_gate_g::clear_id() {
+  id_ = PROTOBUF_LONGLONG(0);
+}
+inline ::PROTOBUF_NAMESPACE_ID::int64 goodsupdata_client_gate_g::_internal_id() const {
+  return id_;
+}
+inline ::PROTOBUF_NAMESPACE_ID::int64 goodsupdata_client_gate_g::id() const {
+  // @@protoc_insertion_point(field_get:frmpub.protocc.goodsupdata_client_gate_g.id)
+  return _internal_id();
+}
+inline void goodsupdata_client_gate_g::_internal_set_id(::PROTOBUF_NAMESPACE_ID::int64 value) {
+  
+  id_ = value;
+}
+inline void goodsupdata_client_gate_g::set_id(::PROTOBUF_NAMESPACE_ID::int64 value) {
+  _internal_set_id(value);
+  // @@protoc_insertion_point(field_set:frmpub.protocc.goodsupdata_client_gate_g.id)
+}
+
+// int32 cfgid = 3;
+inline void goodsupdata_client_gate_g::clear_cfgid() {
+  cfgid_ = 0;
+}
+inline ::PROTOBUF_NAMESPACE_ID::int32 goodsupdata_client_gate_g::_internal_cfgid() const {
+  return cfgid_;
+}
+inline ::PROTOBUF_NAMESPACE_ID::int32 goodsupdata_client_gate_g::cfgid() const {
+  // @@protoc_insertion_point(field_get:frmpub.protocc.goodsupdata_client_gate_g.cfgid)
+  return _internal_cfgid();
+}
+inline void goodsupdata_client_gate_g::_internal_set_cfgid(::PROTOBUF_NAMESPACE_ID::int32 value) {
+  
+  cfgid_ = value;
+}
+inline void goodsupdata_client_gate_g::set_cfgid(::PROTOBUF_NAMESPACE_ID::int32 value) {
+  _internal_set_cfgid(value);
+  // @@protoc_insertion_point(field_set:frmpub.protocc.goodsupdata_client_gate_g.cfgid)
+}
+
+// int32 num = 4;
+inline void goodsupdata_client_gate_g::clear_num() {
+  num_ = 0;
+}
+inline ::PROTOBUF_NAMESPACE_ID::int32 goodsupdata_client_gate_g::_internal_num() const {
+  return num_;
+}
+inline ::PROTOBUF_NAMESPACE_ID::int32 goodsupdata_client_gate_g::num() const {
+  // @@protoc_insertion_point(field_get:frmpub.protocc.goodsupdata_client_gate_g.num)
+  return _internal_num();
+}
+inline void goodsupdata_client_gate_g::_internal_set_num(::PROTOBUF_NAMESPACE_ID::int32 value) {
+  
+  num_ = value;
+}
+inline void goodsupdata_client_gate_g::set_num(::PROTOBUF_NAMESPACE_ID::int32 value) {
+  _internal_set_num(value);
+  // @@protoc_insertion_point(field_set:frmpub.protocc.goodsupdata_client_gate_g.num)
+}
+
 #ifdef __GNUC__
   #pragma GCC diagnostic pop
 #endif  // __GNUC__
+// -------------------------------------------------------------------
+
 // -------------------------------------------------------------------
 
 // -------------------------------------------------------------------

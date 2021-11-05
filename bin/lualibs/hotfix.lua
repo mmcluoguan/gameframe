@@ -201,8 +201,8 @@ function hotfix:checkchunktype(oldchunk, chunk)
                 oldobj = rawset(realenv, name, {})
             end
             hotfix:reloadtable(oldobj, newobj)
-        elseif valuetype == "userdata" or valuetype == "thread" then
-            WARN("not support %s, %s", name, valuetype)
+        elseif newobj_type == "userdata" or newobj_type == "thread" then
+            WARN("not support %s, %s", name, newobj_type)
         else
             if not oldobj then
                 DEBUG("automatic updates, objType:%s, name:%s, obj:%s",
@@ -231,11 +231,11 @@ function hotfix:checkchunktype(oldchunk, chunk)
     local reloadEnv = setmetatable({}, reloadEnvMT)
     setfenv(__reload, reloadEnv)
 
-    local succ = pcall(__reload,chunk)
+    local succ,ret = pcall(__reload,oldchunk,chunk)
     -- __reload()
 
     if not succ then
-        ERROR("call __RELOAD failed")
+        ERROR("call __RELOAD failed %s",ret)
     end
 
     hotfix:reloadvalue(hotfix.reload_map)
@@ -301,7 +301,9 @@ function hotfix:reloadchunk(modname, src)
     end
 
     -- ckOrBool is a chunk or boolean
-    hotfix:reloadlocal(oldchunk,ckOrBool)
+    if type(ckOrBool) == 'table' then
+        hotfix:reloadlocal(oldchunk,ckOrBool)
+    end
     hotfix:checkchunktype(oldchunk, ckOrBool)
     hotfix:clear()
     return ckOrBool
@@ -346,29 +348,24 @@ function hotfix:reloadlocal(oldchunk,newchunk)
       setmetatable(oldchunk, metatable)
     end
     
-    local reloaddata_flag = nil
-    if chunkey_type == 'table' then
-        reloaddata_flag = rawget(newchunk, 'reloaddata') --是否更新数据,默认nil,不更新数据
-    end
+    local reloaddata_flag = rawget(newchunk, 'reloaddata') --是否更新数据,默认nil,不更新数据
     
-    if chunkey_type == 'table' then
-        for name,newobj in pairs(newchunk) do
-            local newobj_type = type(newobj)
-            if newobj_type == "table" then
-                hotfix:copytable(oldchunk[name],newobj,reloaddata_flag)
-            elseif newobj_type == "userdata" or newobj_type == "thread" then
-                WARN("not support %s, %s", name, newobj_type)
+    for name,newobj in pairs(newchunk) do
+        local newobj_type = type(newobj)
+        if newobj_type == "table" then
+            hotfix:copytable(oldchunk[name],newobj,reloaddata_flag)
+        elseif newobj_type == "userdata" or newobj_type == "thread" then
+            WARN("not support %s, %s", name, newobj_type)
+        else
+            if newobj_type == 'function' then
+                oldchunk[name] = newobj
             else
-                if newobj_type == 'function' then
+                if newobj_type ~= nil then
                     oldchunk[name] = newobj
-                else
-                    if newobj_type ~= nil then
-                        oldchunk[name] = newobj
-                    end
-                end            
-            end
+                end
+            end            
         end
-    end
+    end  
 end
 
 function hotfix:reloadfunc(name, oldfunc, newfunc)
@@ -483,6 +480,9 @@ function hotfix:reloadtable(oldtable, newtable)
     hotfix.table_mark[tag] = true
 
     for name, value in pairs(newtable) do
+        if oldtable == nil then
+            goto continue
+        end
         local oldvalue = rawget(oldtable, name)
         local oldvalue_type = type(oldvalue)
 

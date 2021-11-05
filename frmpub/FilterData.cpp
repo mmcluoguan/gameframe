@@ -97,9 +97,12 @@ int FilterData::send_proto(protocc::CommonObject* data,
     std::stack<Envelope>* enves) const
 {
     data->clear_rs();
-    while (enves != nullptr && enves->empty() == false) {
-        Envelope& enve = enves->top();
-        enves->pop();
+    std::stack<Envelope> new_enves;
+    if (enves != nullptr)
+        new_enves = *enves;
+    while (new_enves.empty() == false) {
+        Envelope& enve = new_enves.top();
+        new_enves.pop();
         auto rs = data->add_rs();
         rs->set_fd(enve.fd);
         rs->set_addr(&enve.addr, sizeof(enve.addr));
@@ -141,9 +144,12 @@ int FilterData::send_json(rapidjson::Document* doc, std::stack<Envelope>* enves)
         doc->RemoveMember("rs");
         doc->AddMember("rs", rapidjson::Value(rapidjson::kArrayType), doc->GetAllocator());
     }
-    while (enves != nullptr && enves->empty() == false) {
-        Envelope& enve = enves->top();
-        enves->pop();
+    std::stack<Envelope> new_enves;
+    if (enves != nullptr)
+        new_enves = *enves;
+    while (new_enves.empty() == false) {
+        Envelope& enve = new_enves.top();
+        new_enves.pop();
         rapidjson::Value enve_json;
         enve_json.SetObject();
         enve_json.AddMember("fd", enve.fd, doc->GetAllocator());

@@ -4,7 +4,7 @@
 #include "frmpub/connector.h"
 
 namespace client {
-class GateConnector : public frmpub::Connector {
+class GateConnector : public frmpub::Connector, public std::enable_shared_from_this<GateConnector> {
 public:
     /// <summary>
     /// 断线重连数据
@@ -70,27 +70,18 @@ private:
     int createrole_client_gate_s(std::shared_ptr<protocc::CommonObject> data,
         std::shared_ptr<std::stack<FilterData::Envelope>> enves);
     /*
-		* 加载角色数据结果
-		*/
-    int loadrole_client_gate_s(std::shared_ptr<protocc::CommonObject> data,
-        std::shared_ptr<std::stack<FilterData::Envelope>> enves);
-    /*
-		* 加载角色物品数据结果
-		*/
-    int loadgoods_client_gate_s(std::shared_ptr<protocc::CommonObject> data,
-        std::shared_ptr<std::stack<FilterData::Envelope>> enves);
-    /*
 		* gm操作结果
 		*/
     int gmorder_client_gate_s(std::shared_ptr<protocc::CommonObject> data,
         std::shared_ptr<std::stack<FilterData::Envelope>> enves);
 
 private:
+    std::string platform_key_ = "aaaa_123456";
     int login_id_ = 0;
     int game_id_ = 0;
     bool enable_reconnect_ = true;
     std::string accountid_;
-    int64_t roleid_;
+    int64_t roleid_ = 0;
     std::shared_ptr<DisConnectData> disconnect_ = nullptr;
 };
 }

@@ -54,6 +54,13 @@ int main(int argc, char* argv[])
         Singleton<LuaEngine>::instance(std::make_shared<login::LuaWrapper>());
         Singleton<ThreadPool>::instance().start();
 
+        LOG_DEBUG << "开启登录服服务器监听";
+        std::string loginip = ini.get<const char*, std::string>("login", "ip", "127.0.0.1");
+        short loginport = ini.get<short, short>("login", "port", short(23000));
+        std::shared_ptr<IPAddress> loginaddr(new IPAddress(loginip.c_str(), loginport));
+        std::shared_ptr<LoginServer> loginserver(new LoginServer(loginaddr));
+        Singleton<ListenReactorMgr>::instance().add(loginserver);
+
         //连接db服务器
         string dbstr = ini.get<const char*, string>("login", "db", "");
         auto dblist = StringOp::split(dbstr, ",");
@@ -84,13 +91,6 @@ int main(int argc, char* argv[])
                     new WorldConnector(std::shared_ptr<IPAddress>(
                         new IPAddress(worldip.c_str(), worldport)))));
         }
-
-        LOG_DEBUG << "开启登录服服务器监听";
-        std::string loginip = ini.get<const char*, std::string>("login", "ip", "127.0.0.1");
-        short loginport = ini.get<short, short>("login", "port", short(23000));
-        std::shared_ptr<IPAddress> loginaddr(new IPAddress(loginip.c_str(), loginport));
-        std::shared_ptr<LoginServer> loginserver(new LoginServer(loginaddr));
-        Singleton<ListenReactorMgr>::instance().add(loginserver);
 
         shared_ptr<EventBase> base(new EventBase());
         StdinHandler* stdin = &Singleton<StdinHandler>::instance(base);
