@@ -36,7 +36,11 @@ namespace net {
     std::shared_ptr<ConnectEvent> ConnectReactorMgr::find(int k)
     {
         std::lock_guard<std::mutex> lock(cnt_mutex_);
-        return cnts_[k];
+        auto it = cnts_.find(k);
+        if (it == cnts_.end()) {
+            return nullptr;
+        }
+        return it->second;
     }
 
     std::shared_ptr<ConnectEvent> ConnectReactorMgr::find(const std::string ip, unsigned short port)

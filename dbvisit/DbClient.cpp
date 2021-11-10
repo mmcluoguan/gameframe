@@ -249,7 +249,8 @@ int DbClient::loaddata_from_dbvisit_c(std::shared_ptr<protocc::CommonObject> dat
             for (int i = 0; i < msgc.fields_size(); i++) {
                 data[msgc.fields(i).key()] = "";
             }
-            Datahelp::ErrorCode err = shynet::utils::Singleton<Datahelp>::instance().getdata(msgc.cache_key(), data);
+            Datahelp::ErrorCode err = shynet::utils::Singleton<Datahelp>::instance().getdata(msgc.cache_key(), data,
+                static_cast<Datahelp::OperType>(msgc.opertype()));
             if (err == Datahelp::ErrorCode::OK) {
                 for (auto&& [key, value] : data) {
                     auto field = msgs.add_fields();
@@ -287,7 +288,8 @@ int DbClient::loaddata_more_from_dbvisit_c(std::shared_ptr<protocc::CommonObject
                 data[msgc.fields(i).key()] = "";
             }
 
-            moredataptr resdata = shynet::utils::Singleton<Datahelp>::instance().getdata_more(msgc.condition(), data);
+            moredataptr resdata = shynet::utils::Singleton<Datahelp>::instance().getdata_more(msgc.condition(), data,
+                msgc.sort(), msgc.limit(), static_cast<Datahelp::OperType>(msgc.opertype()));
             for (auto& i : *resdata) {
                 auto obj = msgs.add_objs();
                 for (auto&& [key, value] : i) {
@@ -325,7 +327,9 @@ int DbClient::insertdata_to_dbvisit_c(std::shared_ptr<protocc::CommonObject> dat
             for (int i = 0; i < msgc.fields_size(); i++) {
                 data[msgc.fields(i).key()] = msgc.fields(i).value();
             }
-            shynet::utils::Singleton<Datahelp>::instance().insertdata(msgc.cache_key(), data);
+            shynet::utils::Singleton<Datahelp>::instance().insertdata(msgc.cache_key(), data,
+                static_cast<Datahelp::OperType>(msgc.opertype()));
+
             msgs.set_tag(msgc.tag());
             send_proto(protocc::INSERTDATA_TO_DBVISIT_S, &msgs, enves.get());
             LOG_DEBUG << "发送消息" << frmpub::Basic::msgname(protocc::INSERTDATA_TO_DBVISIT_S) << "到"
@@ -352,7 +356,8 @@ int DbClient::updata_to_dbvisit_c(std::shared_ptr<protocc::CommonObject> data, s
             for (int i = 0; i < msgc.fields_size(); i++) {
                 data[msgc.fields(i).key()] = msgc.fields(i).value();
             }
-            shynet::utils::Singleton<Datahelp>::instance().updata(msgc.cache_key(), data);
+            shynet::utils::Singleton<Datahelp>::instance().updata(msgc.cache_key(), data,
+                static_cast<Datahelp::OperType>(msgc.opertype()));
             msgs.set_tag(msgc.tag());
             send_proto(protocc::UPDATA_TO_DBVISIT_S, &msgs, enves.get());
             LOG_DEBUG << "发送消息" << frmpub::Basic::msgname(protocc::UPDATA_TO_DBVISIT_S) << "到"
@@ -375,7 +380,8 @@ int DbClient::deletedata_to_dbvisit_c(std::shared_ptr<protocc::CommonObject> dat
     if (msgc.ParseFromString(data->msgdata()) == true) {
         try {
             protocc::deletedata_to_dbvisit_s msgs;
-            shynet::utils::Singleton<Datahelp>::instance().deletedata(msgc.cache_key());
+            shynet::utils::Singleton<Datahelp>::instance().deletedata(msgc.cache_key(),
+                static_cast<Datahelp::OperType>(msgc.opertype()));
             msgs.set_tag(msgc.tag());
             send_proto(protocc::DELETEDATA_TO_DBVISIT_S, &msgs, enves.get());
             LOG_DEBUG << "发送消息" << frmpub::Basic::msgname(protocc::DELETEDATA_TO_DBVISIT_S) << "到"
@@ -485,7 +491,7 @@ int DbClient::login_client_gate_c(std::shared_ptr<protocc::CommonObject> data,
                         { "online", "1" },
                         { "platform_key", msgc.platform_key() },
                     };
-                    help.updata(*cache_key_value, data);
+                    help.updata(*cache_key_value, data, Datahelp::OperType::ALL);
                     LOG_DEBUG << "从cache取出账号信息 accountid:" << accountid << " roleid:" << roleid;
                 } else {
                     LOG_WARN << "缓存中没有账号数据";
@@ -494,7 +500,7 @@ int DbClient::login_client_gate_c(std::shared_ptr<protocc::CommonObject> data,
                 }
             }
 
-            if (old_gate_sid != "0") {
+            if (old_gate_sid != "") {
                 if (old_gate_sid != gate_sid) {
                     //跨服顶号处理
                     protocc::repeatlogin_client_gate_s notify;
@@ -535,6 +541,7 @@ int DbClient::clioffline_gate_all_c(std::shared_ptr<protocc::CommonObject> data,
     protocc::clioffline_gate_all_c msgc;
     if (msgc.ParseFromString(data->msgdata()) == true) {
         try {
+            LOG_DEBUG << "玩家下线 账号id:" << msgc.aid();
             std::string key = "account_" + msgc.aid();
             std::unordered_map<std::string, std::string> fields {
                 { "clientaddr", "" },
@@ -542,7 +549,7 @@ int DbClient::clioffline_gate_all_c(std::shared_ptr<protocc::CommonObject> data,
             };
 
             Datahelp& help = shynet::utils::Singleton<Datahelp>::instance();
-            Datahelp::ErrorCode error = help.getdata(key, fields, false);
+            Datahelp::ErrorCode error = help.getdata(key, fields, Datahelp::OperType::ALL, false);
             if (error == Datahelp::ErrorCode::OK) {
                 if (msgc.ip() == fields["clientaddr"]
                     && std::to_string(msgc.port()) == fields["clientport"]) {
@@ -555,9 +562,8 @@ int DbClient::clioffline_gate_all_c(std::shared_ptr<protocc::CommonObject> data,
                         { "login_sid", "" },
                         { "game_sid", "" },
                         { "gate_sid", "" },
-                        { "platform_key", "" },
                     };
-                    help.updata(key, data);
+                    help.updata(key, data, Datahelp::OperType::ALL);
 
                     redis::Redis& redis = shynet::utils::Singleton<redis::Redis>::instance(std::string());
                     //设置断线重连有效时间30秒
@@ -589,11 +595,11 @@ int DbClient::reconnect_client_gate_c(std::shared_ptr<protocc::CommonObject> dat
             //验证断线重连是否有效
             if (redis.exists(key)) {
                 std::stack<FilterData::Envelope> routing = *enves;
-                FilterData::Envelope cli_enve = routing.top();
-                net::IPAddress cli_addr(&cli_enve.addr);
-                routing.pop();
                 FilterData::Envelope gate_enve = routing.top();
                 net::IPAddress gate_addr(&gate_enve.addr);
+                routing.pop();
+                FilterData::Envelope cli_enve = routing.top();
+                net::IPAddress cli_addr(&cli_enve.addr);
                 routing.pop();
 
                 //更新断线重连后关联的数据
@@ -605,7 +611,8 @@ int DbClient::reconnect_client_gate_c(std::shared_ptr<protocc::CommonObject> dat
                     { "game_sid", std::to_string(msgc.gameid()) },
                     { "gate_sid", data->extend() },
                 };
-                shynet::utils::Singleton<Datahelp>::instance().updata("account_" + msgc.aid(), clidata);
+                shynet::utils::Singleton<Datahelp>::instance().updata("account_" + msgc.aid(), clidata,
+                    Datahelp::OperType::ALL);
                 redis.del(key);
             } else {
                 msgs.set_result(1);

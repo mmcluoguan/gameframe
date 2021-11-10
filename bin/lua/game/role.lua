@@ -14,7 +14,7 @@ function role:new(id,fd)
     --socket标识
     o.fd = fd
     --路由信息
-    o.routing = nil
+    o.routing = StackEnvelope_CPP.new()
     --是否在线,当false时会延迟删除内存数据
     o.online = true
     --等级
@@ -45,9 +45,17 @@ function role:send(msg, msgdata,routing)
     end
 end
 
+--拷贝最新路由信息
+function role:copyrouting(routing)
+    while self.routing:size() ~= 0 do
+        self.routing:pop()
+    end
+    self.routing:copy(routing)
+end
+
 --分发消息
 function role:handle_message(msgname,data,routing)
-    self.routing = routing
+    self:copyrouting(routing)
     local fun = self[msgname]
     if fun == nil then
         return false

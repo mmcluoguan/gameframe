@@ -101,12 +101,15 @@ function baseNet:handle_message(msgid,data,routing)
 	if msgname == nil then
 		msgname = pb.enum("frmpub.protocc.InternalMsgId", msgid)
 	end
-	assert(msgname,"msgid=" .. msgid .. " 未定义");
-	msgname = string.lower(msgname)
-	if(self[msgname] ~= nil) then
-		return self[msgname](self,msgid,data,routing)
+	if msgname ~= nil then
+		msgname = string.lower(msgname)
+		if(self[msgname] ~= nil) then
+			return self[msgname](self,msgid,data,routing)
+		else
+			return self:defaultHandle(msgid,msgname,data,routing);
+		end
 	else
-		return self:defaultHandle(msgid,msgname,data,routing);
+		log("msgid=" .. msgid .. " 未定义")
 	end
 end
 

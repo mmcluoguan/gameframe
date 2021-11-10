@@ -15,7 +15,6 @@ void GateClientMgr::add(int k, std::shared_ptr<GateClient> v)
 {
     std::lock_guard<std::mutex> lock(clis_mutex_);
     clis_.insert({ k, v });
-
     //通知lua的onAccept函数
     shynet::utils::Singleton<lua::LuaEngine>::get_instance().append(
         std::make_shared<frmpub::OnAcceptTask<GateClient>>(v));
@@ -38,7 +37,11 @@ bool GateClientMgr::remove(int k)
 std::shared_ptr<GateClient> GateClientMgr::find(int k)
 {
     std::lock_guard<std::mutex> lock(clis_mutex_);
-    return clis_[k];
+    auto it = clis_.find(k);
+    if (it == clis_.end()) {
+        return nullptr;
+    }
+    return it->second;
 }
 
 std::shared_ptr<GateClient> GateClientMgr::find(const std::string& key)

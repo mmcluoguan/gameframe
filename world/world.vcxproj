@@ -173,7 +173,7 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|ARM'">
     <Link>
       <AdditionalLibraryDirectories>/root/gameframe/libs;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <LibraryDependencies>shynet;frmpub;protobuf;jsoncpp;lua</LibraryDependencies>
+      <LibraryDependencies>shynet;frmpub;protobuf;lua</LibraryDependencies>
     </Link>
     <ClCompile>
       <PreprocessorDefinitions>JEMALLOC_NO_DEMANGLE;USE_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
@@ -187,7 +187,7 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|ARM'">
     <Link>
       <AdditionalLibraryDirectories>/root/gameframe/libs;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <LibraryDependencies>shynet;frmpub;protobuf;jsoncpp;lua</LibraryDependencies>
+      <LibraryDependencies>shynet;frmpub;protobuf;lua</LibraryDependencies>
     </Link>
     <ClCompile>
       <AdditionalIncludeDirectories>$(SolutionDir)</AdditionalIncludeDirectories>
@@ -201,7 +201,7 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|ARM64'">
     <Link>
       <AdditionalLibraryDirectories>/root/gameframe/libs;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <LibraryDependencies>shynet;frmpub;protobuf;jsoncpp;lua</LibraryDependencies>
+      <LibraryDependencies>shynet;frmpub;protobuf;lua</LibraryDependencies>
     </Link>
     <ClCompile>
       <PreprocessorDefinitions>JEMALLOC_NO_DEMANGLE;USE_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
@@ -215,7 +215,7 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|ARM64'">
     <Link>
       <AdditionalLibraryDirectories>/root/gameframe/libs;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <LibraryDependencies>shynet;frmpub;protobuf;jsoncpp;lua</LibraryDependencies>
+      <LibraryDependencies>shynet;frmpub;protobuf;lua</LibraryDependencies>
     </Link>
     <ClCompile>
       <AdditionalIncludeDirectories>$(SolutionDir)</AdditionalIncludeDirectories>
@@ -229,7 +229,7 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <Link>
       <AdditionalLibraryDirectories>/root/gameframe/libs;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <LibraryDependencies>shynet;frmpub;protobuf;jsoncpp;lua</LibraryDependencies>
+      <LibraryDependencies>shynet;frmpub;protobuf;lua</LibraryDependencies>
     </Link>
     <ClCompile>
       <PreprocessorDefinitions>JEMALLOC_NO_DEMANGLE;USE_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
@@ -243,7 +243,7 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <Link>
       <AdditionalLibraryDirectories>/root/gameframe/libs;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <LibraryDependencies>shynet;frmpub;protobuf;jsoncpp;lua</LibraryDependencies>
+      <LibraryDependencies>shynet;frmpub;protobuf;lua</LibraryDependencies>
     </Link>
     <ClCompile>
       <AdditionalIncludeDirectories>$(SolutionDir)</AdditionalIncludeDirectories>
@@ -257,7 +257,7 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x86'">
     <Link>
       <AdditionalLibraryDirectories>/root/gameframe/libs;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <LibraryDependencies>shynet;frmpub;protobuf;jsoncpp;lua</LibraryDependencies>
+      <LibraryDependencies>shynet;frmpub;protobuf;lua</LibraryDependencies>
     </Link>
     <ClCompile>
       <PreprocessorDefinitions>JEMALLOC_NO_DEMANGLE;USE_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
@@ -271,7 +271,7 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x86'">
     <Link>
       <AdditionalLibraryDirectories>/root/gameframe/libs;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <LibraryDependencies>shynet;frmpub;protobuf;jsoncpp;lua</LibraryDependencies>
+      <LibraryDependencies>shynet;frmpub;protobuf;lua</LibraryDependencies>
     </Link>
     <ClCompile>
       <AdditionalIncludeDirectories>$(SolutionDir)</AdditionalIncludeDirectories>

@@ -22,7 +22,8 @@ constexpr loaddata_from_dbvisit_c::loaddata_from_dbvisit_c(
   ::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized)
   : fields_()
   , tag_(&::PROTOBUF_NAMESPACE_ID::internal::fixed_address_empty_string)
-  , cache_key_(&::PROTOBUF_NAMESPACE_ID::internal::fixed_address_empty_string){}
+  , cache_key_(&::PROTOBUF_NAMESPACE_ID::internal::fixed_address_empty_string)
+  , opertype_(0){}
 struct loaddata_from_dbvisit_cDefaultTypeInternal {
   constexpr loaddata_from_dbvisit_cDefaultTypeInternal()
     : _instance(::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized{}) {}
@@ -50,7 +51,10 @@ constexpr loaddata_more_from_dbvisit_c::loaddata_more_from_dbvisit_c(
   ::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized)
   : fields_()
   , tag_(&::PROTOBUF_NAMESPACE_ID::internal::fixed_address_empty_string)
-  , condition_(&::PROTOBUF_NAMESPACE_ID::internal::fixed_address_empty_string){}
+  , condition_(&::PROTOBUF_NAMESPACE_ID::internal::fixed_address_empty_string)
+  , sort_(&::PROTOBUF_NAMESPACE_ID::internal::fixed_address_empty_string)
+  , limit_(0)
+  , opertype_(0){}
 struct loaddata_more_from_dbvisit_cDefaultTypeInternal {
   constexpr loaddata_more_from_dbvisit_cDefaultTypeInternal()
     : _instance(::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized{}) {}
@@ -90,7 +94,8 @@ constexpr insertdata_to_dbvisit_c::insertdata_to_dbvisit_c(
   ::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized)
   : fields_()
   , tag_(&::PROTOBUF_NAMESPACE_ID::internal::fixed_address_empty_string)
-  , cache_key_(&::PROTOBUF_NAMESPACE_ID::internal::fixed_address_empty_string){}
+  , cache_key_(&::PROTOBUF_NAMESPACE_ID::internal::fixed_address_empty_string)
+  , opertype_(0){}
 struct insertdata_to_dbvisit_cDefaultTypeInternal {
   constexpr insertdata_to_dbvisit_cDefaultTypeInternal()
     : _instance(::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized{}) {}
@@ -117,7 +122,8 @@ constexpr updata_to_dbvisit_c::updata_to_dbvisit_c(
   ::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized)
   : fields_()
   , tag_(&::PROTOBUF_NAMESPACE_ID::internal::fixed_address_empty_string)
-  , cache_key_(&::PROTOBUF_NAMESPACE_ID::internal::fixed_address_empty_string){}
+  , cache_key_(&::PROTOBUF_NAMESPACE_ID::internal::fixed_address_empty_string)
+  , opertype_(0){}
 struct updata_to_dbvisit_cDefaultTypeInternal {
   constexpr updata_to_dbvisit_cDefaultTypeInternal()
     : _instance(::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized{}) {}
@@ -143,7 +149,8 @@ PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT updata_to_dbvisit_sDefaultTypeI
 constexpr deletedata_to_dbvisit_c::deletedata_to_dbvisit_c(
   ::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized)
   : tag_(&::PROTOBUF_NAMESPACE_ID::internal::fixed_address_empty_string)
-  , cache_key_(&::PROTOBUF_NAMESPACE_ID::internal::fixed_address_empty_string){}
+  , cache_key_(&::PROTOBUF_NAMESPACE_ID::internal::fixed_address_empty_string)
+  , opertype_(0){}
 struct deletedata_to_dbvisit_cDefaultTypeInternal {
   constexpr deletedata_to_dbvisit_cDefaultTypeInternal()
     : _instance(::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized{}) {}
@@ -180,6 +187,7 @@ const ::PROTOBUF_NAMESPACE_ID::uint32 TableStruct_dbvisit_2eproto::offsets[] PRO
   ~0u,  // no _weak_field_map_
   PROTOBUF_FIELD_OFFSET(::frmpub::protocc::loaddata_from_dbvisit_c, tag_),
   PROTOBUF_FIELD_OFFSET(::frmpub::protocc::loaddata_from_dbvisit_c, cache_key_),
+  PROTOBUF_FIELD_OFFSET(::frmpub::protocc::loaddata_from_dbvisit_c, opertype_),
   PROTOBUF_FIELD_OFFSET(::frmpub::protocc::loaddata_from_dbvisit_c, fields_),
   ~0u,  // no _has_bits_
   PROTOBUF_FIELD_OFFSET(::frmpub::protocc::loaddata_from_dbvisit_s, _internal_metadata_),
@@ -196,6 +204,9 @@ const ::PROTOBUF_NAMESPACE_ID::uint32 TableStruct_dbvisit_2eproto::offsets[] PRO
   ~0u,  // no _weak_field_map_
   PROTOBUF_FIELD_OFFSET(::frmpub::protocc::loaddata_more_from_dbvisit_c, tag_),
   PROTOBUF_FIELD_OFFSET(::frmpub::protocc::loaddata_more_from_dbvisit_c, condition_),
+  PROTOBUF_FIELD_OFFSET(::frmpub::protocc::loaddata_more_from_dbvisit_c, sort_),
+  PROTOBUF_FIELD_OFFSET(::frmpub::protocc::loaddata_more_from_dbvisit_c, limit_),
+  PROTOBUF_FIELD_OFFSET(::frmpub::protocc::loaddata_more_from_dbvisit_c, opertype_),
   PROTOBUF_FIELD_OFFSET(::frmpub::protocc::loaddata_more_from_dbvisit_c, fields_),
   ~0u,  // no _has_bits_
   PROTOBUF_FIELD_OFFSET(::frmpub::protocc::loaddata_more_from_dbvisit_s_item, _internal_metadata_),
@@ -218,6 +229,7 @@ const ::PROTOBUF_NAMESPACE_ID::uint32 TableStruct_dbvisit_2eproto::offsets[] PRO
   ~0u,  // no _weak_field_map_
   PROTOBUF_FIELD_OFFSET(::frmpub::protocc::insertdata_to_dbvisit_c, tag_),
   PROTOBUF_FIELD_OFFSET(::frmpub::protocc::insertdata_to_dbvisit_c, cache_key_),
+  PROTOBUF_FIELD_OFFSET(::frmpub::protocc::insertdata_to_dbvisit_c, opertype_),
   PROTOBUF_FIELD_OFFSET(::frmpub::protocc::insertdata_to_dbvisit_c, fields_),
   ~0u,  // no _has_bits_
   PROTOBUF_FIELD_OFFSET(::frmpub::protocc::insertdata_to_dbvisit_s, _internal_metadata_),
@@ -233,6 +245,7 @@ const ::PROTOBUF_NAMESPACE_ID::uint32 TableStruct_dbvisit_2eproto::offsets[] PRO
   ~0u,  // no _weak_field_map_
   PROTOBUF_FIELD_OFFSET(::frmpub::protocc::updata_to_dbvisit_c, tag_),
   PROTOBUF_FIELD_OFFSET(::frmpub::protocc::updata_to_dbvisit_c, cache_key_),
+  PROTOBUF_FIELD_OFFSET(::frmpub::protocc::updata_to_dbvisit_c, opertype_),
   PROTOBUF_FIELD_OFFSET(::frmpub::protocc::updata_to_dbvisit_c, fields_),
   ~0u,  // no _has_bits_
   PROTOBUF_FIELD_OFFSET(::frmpub::protocc::updata_to_dbvisit_s, _internal_metadata_),
@@ -248,6 +261,7 @@ const ::PROTOBUF_NAMESPACE_ID::uint32 TableStruct_dbvisit_2eproto::offsets[] PRO
   ~0u,  // no _weak_field_map_
   PROTOBUF_FIELD_OFFSET(::frmpub::protocc::deletedata_to_dbvisit_c, tag_),
   PROTOBUF_FIELD_OFFSET(::frmpub::protocc::deletedata_to_dbvisit_c, cache_key_),
+  PROTOBUF_FIELD_OFFSET(::frmpub::protocc::deletedata_to_dbvisit_c, opertype_),
   ~0u,  // no _has_bits_
   PROTOBUF_FIELD_OFFSET(::frmpub::protocc::deletedata_to_dbvisit_s, _internal_metadata_),
   ~0u,  // no _extensions_
@@ -258,16 +272,16 @@ const ::PROTOBUF_NAMESPACE_ID::uint32 TableStruct_dbvisit_2eproto::offsets[] PRO
 };
 static const ::PROTOBUF_NAMESPACE_ID::internal::MigrationSchema schemas[] PROTOBUF_SECTION_VARIABLE(protodesc_cold) = {
   { 0, -1, sizeof(::frmpub::protocc::loaddata_from_dbvisit_c)},
-  { 8, -1, sizeof(::frmpub::protocc::loaddata_from_dbvisit_s)},
-  { 16, -1, sizeof(::frmpub::protocc::loaddata_more_from_dbvisit_c)},
-  { 24, -1, sizeof(::frmpub::protocc::loaddata_more_from_dbvisit_s_item)},
-  { 30, -1, sizeof(::frmpub::protocc::loaddata_more_from_dbvisit_s)},
-  { 38, -1, sizeof(::frmpub::protocc::insertdata_to_dbvisit_c)},
-  { 46, -1, sizeof(::frmpub::protocc::insertdata_to_dbvisit_s)},
-  { 53, -1, sizeof(::frmpub::protocc::updata_to_dbvisit_c)},
-  { 61, -1, sizeof(::frmpub::protocc::updata_to_dbvisit_s)},
-  { 68, -1, sizeof(::frmpub::protocc::deletedata_to_dbvisit_c)},
-  { 75, -1, sizeof(::frmpub::protocc::deletedata_to_dbvisit_s)},
+  { 9, -1, sizeof(::frmpub::protocc::loaddata_from_dbvisit_s)},
+  { 17, -1, sizeof(::frmpub::protocc::loaddata_more_from_dbvisit_c)},
+  { 28, -1, sizeof(::frmpub::protocc::loaddata_more_from_dbvisit_s_item)},
+  { 34, -1, sizeof(::frmpub::protocc::loaddata_more_from_dbvisit_s)},
+  { 42, -1, sizeof(::frmpub::protocc::insertdata_to_dbvisit_c)},
+  { 51, -1, sizeof(::frmpub::protocc::insertdata_to_dbvisit_s)},
+  { 58, -1, sizeof(::frmpub::protocc::updata_to_dbvisit_c)},
+  { 67, -1, sizeof(::frmpub::protocc::updata_to_dbvisit_s)},
+  { 74, -1, sizeof(::frmpub::protocc::deletedata_to_dbvisit_c)},
+  { 82, -1, sizeof(::frmpub::protocc::deletedata_to_dbvisit_s)},
 };
 
 static ::PROTOBUF_NAMESPACE_ID::Message const * const file_default_instances[] = {
@@ -286,28 +300,31 @@ static ::PROTOBUF_NAMESPACE_ID::Message const * const file_default_instances[] =
 
 const char descriptor_table_protodef_dbvisit_2eproto[] PROTOBUF_SECTION_VARIABLE(protodesc_cold) =
   "\n\rdbvisit.proto\022\016frmpub.protocc\032\014common."
-  "proto\"f\n\027loaddata_from_dbvisit_c\022\013\n\003tag\030"
-  "\001 \001(\t\022\021\n\tcache_key\030\002 \001(\t\022+\n\006fields\030\004 \003(\013"
-  "2\033.frmpub.protocc.FieldsEntry\"c\n\027loaddat"
-  "a_from_dbvisit_s\022\016\n\006result\030\001 \001(\005\022\013\n\003tag\030"
-  "\002 \001(\t\022+\n\006fields\030\003 \003(\0132\033.frmpub.protocc.F"
-  "ieldsEntry\"k\n\034loaddata_more_from_dbvisit"
-  "_c\022\013\n\003tag\030\001 \001(\t\022\021\n\tcondition\030\002 \001(\t\022+\n\006fi"
-  "elds\030\003 \003(\0132\033.frmpub.protocc.FieldsEntry\""
-  "\261\001\n\034loaddata_more_from_dbvisit_s\022\016\n\006resu"
-  "lt\030\001 \001(\005\022\013\n\003tag\030\002 \001(\t\022\?\n\004objs\030\003 \003(\01321.fr"
-  "mpub.protocc.loaddata_more_from_dbvisit_"
-  "s.item\0323\n\004item\022+\n\006fields\030\001 \003(\0132\033.frmpub."
-  "protocc.FieldsEntry\"f\n\027insertdata_to_dbv"
-  "isit_c\022\013\n\003tag\030\001 \001(\t\022\021\n\tcache_key\030\002 \001(\t\022+"
-  "\n\006fields\030\003 \003(\0132\033.frmpub.protocc.FieldsEn"
-  "try\"6\n\027insertdata_to_dbvisit_s\022\016\n\006result"
-  "\030\001 \001(\005\022\013\n\003tag\030\002 \001(\t\"b\n\023updata_to_dbvisit"
-  "_c\022\013\n\003tag\030\001 \001(\t\022\021\n\tcache_key\030\002 \001(\t\022+\n\006fi"
-  "elds\030\003 \003(\0132\033.frmpub.protocc.FieldsEntry\""
-  "2\n\023updata_to_dbvisit_s\022\016\n\006result\030\001 \001(\005\022\013"
-  "\n\003tag\030\002 \001(\t\"9\n\027deletedata_to_dbvisit_c\022\013"
-  "\n\003tag\030\001 \001(\t\022\021\n\tcache_key\030\002 \001(\t\"6\n\027delete"
+  "proto\"x\n\027loaddata_from_dbvisit_c\022\013\n\003tag\030"
+  "\001 \001(\t\022\021\n\tcache_key\030\002 \001(\t\022\020\n\010opertype\030\003 \001"
+  "(\005\022+\n\006fields\030\004 \003(\0132\033.frmpub.protocc.Fiel"
+  "dsEntry\"c\n\027loaddata_from_dbvisit_s\022\016\n\006re"
+  "sult\030\001 \001(\005\022\013\n\003tag\030\002 \001(\t\022+\n\006fields\030\003 \003(\0132"
+  "\033.frmpub.protocc.FieldsEntry\"\232\001\n\034loaddat"
+  "a_more_from_dbvisit_c\022\013\n\003tag\030\001 \001(\t\022\021\n\tco"
+  "ndition\030\002 \001(\t\022\014\n\004sort\030\003 \001(\t\022\r\n\005limit\030\004 \001"
+  "(\005\022\020\n\010opertype\030\005 \001(\005\022+\n\006fields\030\006 \003(\0132\033.f"
+  "rmpub.protocc.FieldsEntry\"\261\001\n\034loaddata_m"
+  "ore_from_dbvisit_s\022\016\n\006result\030\001 \001(\005\022\013\n\003ta"
+  "g\030\002 \001(\t\022\?\n\004objs\030\003 \003(\01321.frmpub.protocc.l"
+  "oaddata_more_from_dbvisit_s.item\0323\n\004item"
+  "\022+\n\006fields\030\001 \003(\0132\033.frmpub.protocc.Fields"
+  "Entry\"x\n\027insertdata_to_dbvisit_c\022\013\n\003tag\030"
+  "\001 \001(\t\022\021\n\tcache_key\030\002 \001(\t\022\020\n\010opertype\030\003 \001"
+  "(\005\022+\n\006fields\030\004 \003(\0132\033.frmpub.protocc.Fiel"
+  "dsEntry\"6\n\027insertdata_to_dbvisit_s\022\016\n\006re"
+  "sult\030\001 \001(\005\022\013\n\003tag\030\002 \001(\t\"t\n\023updata_to_dbv"
+  "isit_c\022\013\n\003tag\030\001 \001(\t\022\021\n\tcache_key\030\002 \001(\t\022\020"
+  "\n\010opertype\030\003 \001(\005\022+\n\006fields\030\004 \003(\0132\033.frmpu"
+  "b.protocc.FieldsEntry\"2\n\023updata_to_dbvis"
+  "it_s\022\016\n\006result\030\001 \001(\005\022\013\n\003tag\030\002 \001(\t\"K\n\027del"
+  "etedata_to_dbvisit_c\022\013\n\003tag\030\001 \001(\t\022\021\n\tcac"
+  "he_key\030\002 \001(\t\022\020\n\010opertype\030\003 \001(\005\"6\n\027delete"
   "data_to_dbvisit_s\022\016\n\006result\030\001 \001(\005\022\013\n\003tag"
   "\030\002 \001(\tb\006proto3"
   ;
@@ -316,7 +333,7 @@ static const ::PROTOBUF_NAMESPACE_ID::internal::DescriptorTable*const descriptor
 };
 static ::PROTOBUF_NAMESPACE_ID::internal::once_flag descriptor_table_dbvisit_2eproto_once;
 const ::PROTOBUF_NAMESPACE_ID::internal::DescriptorTable descriptor_table_dbvisit_2eproto = {
-  false, false, 974, descriptor_table_protodef_dbvisit_2eproto, "dbvisit.proto", 
+  false, false, 1094, descriptor_table_protodef_dbvisit_2eproto, "dbvisit.proto", 
   &descriptor_table_dbvisit_2eproto_once, descriptor_table_dbvisit_2eproto_deps, 1, 11,
   schemas, file_default_instances, TableStruct_dbvisit_2eproto::offsets,
   file_level_metadata_dbvisit_2eproto, file_level_enum_descriptors_dbvisit_2eproto, file_level_service_descriptors_dbvisit_2eproto,
@@ -362,12 +379,14 @@ loaddata_from_dbvisit_c::loaddata_from_dbvisit_c(const loaddata_from_dbvisit_c& 
     cache_key_.Set(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, from._internal_cache_key(), 
       GetArena());
   }
+  opertype_ = from.opertype_;
   // @@protoc_insertion_point(copy_constructor:frmpub.protocc.loaddata_from_dbvisit_c)
 }
 
 void loaddata_from_dbvisit_c::SharedCtor() {
 tag_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
 cache_key_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+opertype_ = 0;
 }
 
 loaddata_from_dbvisit_c::~loaddata_from_dbvisit_c() {
@@ -401,6 +420,7 @@ void loaddata_from_dbvisit_c::Clear() {
   fields_.Clear();
   tag_.ClearToEmpty();
   cache_key_.ClearToEmpty();
+  opertype_ = 0;
   _internal_metadata_.Clear<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>();
 }
 
@@ -426,6 +446,13 @@ const char* loaddata_from_dbvisit_c::_InternalParse(const char* ptr, ::PROTOBUF_
           auto str = _internal_mutable_cache_key();
           ptr = ::PROTOBUF_NAMESPACE_ID::internal::InlineGreedyStringParser(str, ptr, ctx);
           CHK_(::PROTOBUF_NAMESPACE_ID::internal::VerifyUTF8(str, "frmpub.protocc.loaddata_from_dbvisit_c.cache_key"));
+          CHK_(ptr);
+        } else goto handle_unusual;
+        continue;
+      // int32 opertype = 3;
+      case 3:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 24)) {
+          opertype_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint64(&ptr);
           CHK_(ptr);
         } else goto handle_unusual;
         continue;
@@ -489,6 +516,12 @@ failure:
         2, this->_internal_cache_key(), target);
   }
 
+  // int32 opertype = 3;
+  if (this->opertype() != 0) {
+    target = stream->EnsureSpace(target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteInt32ToArray(3, this->_internal_opertype(), target);
+  }
+
   // repeated .frmpub.protocc.FieldsEntry fields = 4;
   for (unsigned int i = 0,
       n = static_cast<unsigned int>(this->_internal_fields_size()); i < n; i++) {
@@ -534,6 +567,13 @@ size_t loaddata_from_dbvisit_c::ByteSizeLong() const {
         this->_internal_cache_key());
   }
 
+  // int32 opertype = 3;
+  if (this->opertype() != 0) {
+    total_size += 1 +
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::Int32Size(
+        this->_internal_opertype());
+  }
+
   if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
     return ::PROTOBUF_NAMESPACE_ID::internal::ComputeUnknownFieldsSize(
         _internal_metadata_, total_size, &_cached_size_);
@@ -572,6 +612,9 @@ void loaddata_from_dbvisit_c::MergeFrom(const loaddata_from_dbvisit_c& from) {
   if (from.cache_key().size() > 0) {
     _internal_set_cache_key(from._internal_cache_key());
   }
+  if (from.opertype() != 0) {
+    _internal_set_opertype(from._internal_opertype());
+  }
 }
 
 void loaddata_from_dbvisit_c::CopyFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) {
@@ -598,6 +641,7 @@ void loaddata_from_dbvisit_c::InternalSwap(loaddata_from_dbvisit_c* other) {
   fields_.InternalSwap(&other->fields_);
   tag_.Swap(&other->tag_, &::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArena());
   cache_key_.Swap(&other->cache_key_, &::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArena());
+  swap(opertype_, other->opertype_);
 }
 
 ::PROTOBUF_NAMESPACE_ID::Metadata loaddata_from_dbvisit_c::GetMetadata() const {
@@ -897,12 +941,25 @@ loaddata_more_from_dbvisit_c::loaddata_more_from_dbvisit_c(const loaddata_more_f
     condition_.Set(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, from._internal_condition(), 
       GetArena());
   }
+  sort_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+  if (!from._internal_sort().empty()) {
+    sort_.Set(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, from._internal_sort(), 
+      GetArena());
+  }
+  ::memcpy(&limit_, &from.limit_,
+    static_cast<size_t>(reinterpret_cast<char*>(&opertype_) -
+    reinterpret_cast<char*>(&limit_)) + sizeof(opertype_));
   // @@protoc_insertion_point(copy_constructor:frmpub.protocc.loaddata_more_from_dbvisit_c)
 }
 
 void loaddata_more_from_dbvisit_c::SharedCtor() {
 tag_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
 condition_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+sort_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+::memset(reinterpret_cast<char*>(this) + static_cast<size_t>(
+    reinterpret_cast<char*>(&limit_) - reinterpret_cast<char*>(this)),
+    0, static_cast<size_t>(reinterpret_cast<char*>(&opertype_) -
+    reinterpret_cast<char*>(&limit_)) + sizeof(opertype_));
 }
 
 loaddata_more_from_dbvisit_c::~loaddata_more_from_dbvisit_c() {
@@ -915,6 +972,7 @@ void loaddata_more_from_dbvisit_c::SharedDtor() {
   GOOGLE_DCHECK(GetArena() == nullptr);
   tag_.DestroyNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
   condition_.DestroyNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+  sort_.DestroyNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
 }
 
 void loaddata_more_from_dbvisit_c::ArenaDtor(void* object) {
@@ -936,6 +994,10 @@ void loaddata_more_from_dbvisit_c::Clear() {
   fields_.Clear();
   tag_.ClearToEmpty();
   condition_.ClearToEmpty();
+  sort_.ClearToEmpty();
+  ::memset(&limit_, 0, static_cast<size_t>(
+      reinterpret_cast<char*>(&opertype_) -
+      reinterpret_cast<char*>(&limit_)) + sizeof(opertype_));
   _internal_metadata_.Clear<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>();
 }
 
@@ -964,16 +1026,39 @@ const char* loaddata_more_from_dbvisit_c::_InternalParse(const char* ptr, ::PROT
           CHK_(ptr);
         } else goto handle_unusual;
         continue;
-      // repeated .frmpub.protocc.FieldsEntry fields = 3;
+      // string sort = 3;
       case 3:
         if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 26)) {
+          auto str = _internal_mutable_sort();
+          ptr = ::PROTOBUF_NAMESPACE_ID::internal::InlineGreedyStringParser(str, ptr, ctx);
+          CHK_(::PROTOBUF_NAMESPACE_ID::internal::VerifyUTF8(str, "frmpub.protocc.loaddata_more_from_dbvisit_c.sort"));
+          CHK_(ptr);
+        } else goto handle_unusual;
+        continue;
+      // int32 limit = 4;
+      case 4:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 32)) {
+          limit_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint64(&ptr);
+          CHK_(ptr);
+        } else goto handle_unusual;
+        continue;
+      // int32 opertype = 5;
+      case 5:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 40)) {
+          opertype_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint64(&ptr);
+          CHK_(ptr);
+        } else goto handle_unusual;
+        continue;
+      // repeated .frmpub.protocc.FieldsEntry fields = 6;
+      case 6:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 50)) {
           ptr -= 1;
           do {
             ptr += 1;
             ptr = ctx->ParseMessage(_internal_add_fields(), ptr);
             CHK_(ptr);
             if (!ctx->DataAvailable(ptr)) break;
-          } while (::PROTOBUF_NAMESPACE_ID::internal::ExpectTag<26>(ptr));
+          } while (::PROTOBUF_NAMESPACE_ID::internal::ExpectTag<50>(ptr));
         } else goto handle_unusual;
         continue;
       default: {
@@ -1024,12 +1109,34 @@ failure:
         2, this->_internal_condition(), target);
   }
 
-  // repeated .frmpub.protocc.FieldsEntry fields = 3;
+  // string sort = 3;
+  if (this->sort().size() > 0) {
+    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::VerifyUtf8String(
+      this->_internal_sort().data(), static_cast<int>(this->_internal_sort().length()),
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::SERIALIZE,
+      "frmpub.protocc.loaddata_more_from_dbvisit_c.sort");
+    target = stream->WriteStringMaybeAliased(
+        3, this->_internal_sort(), target);
+  }
+
+  // int32 limit = 4;
+  if (this->limit() != 0) {
+    target = stream->EnsureSpace(target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteInt32ToArray(4, this->_internal_limit(), target);
+  }
+
+  // int32 opertype = 5;
+  if (this->opertype() != 0) {
+    target = stream->EnsureSpace(target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteInt32ToArray(5, this->_internal_opertype(), target);
+  }
+
+  // repeated .frmpub.protocc.FieldsEntry fields = 6;
   for (unsigned int i = 0,
       n = static_cast<unsigned int>(this->_internal_fields_size()); i < n; i++) {
     target = stream->EnsureSpace(target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
-      InternalWriteMessage(3, this->_internal_fields(i), target, stream);
+      InternalWriteMessage(6, this->_internal_fields(i), target, stream);
   }
 
   if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
@@ -1048,7 +1155,7 @@ size_t loaddata_more_from_dbvisit_c::ByteSizeLong() const {
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
-  // repeated .frmpub.protocc.FieldsEntry fields = 3;
+  // repeated .frmpub.protocc.FieldsEntry fields = 6;
   total_size += 1UL * this->_internal_fields_size();
   for (const auto& msg : this->fields_) {
     total_size +=
@@ -1067,6 +1174,27 @@ size_t loaddata_more_from_dbvisit_c::ByteSizeLong() const {
     total_size += 1 +
       ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::StringSize(
         this->_internal_condition());
+  }
+
+  // string sort = 3;
+  if (this->sort().size() > 0) {
+    total_size += 1 +
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::StringSize(
+        this->_internal_sort());
+  }
+
+  // int32 limit = 4;
+  if (this->limit() != 0) {
+    total_size += 1 +
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::Int32Size(
+        this->_internal_limit());
+  }
+
+  // int32 opertype = 5;
+  if (this->opertype() != 0) {
+    total_size += 1 +
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::Int32Size(
+        this->_internal_opertype());
   }
 
   if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
@@ -1107,6 +1235,15 @@ void loaddata_more_from_dbvisit_c::MergeFrom(const loaddata_more_from_dbvisit_c&
   if (from.condition().size() > 0) {
     _internal_set_condition(from._internal_condition());
   }
+  if (from.sort().size() > 0) {
+    _internal_set_sort(from._internal_sort());
+  }
+  if (from.limit() != 0) {
+    _internal_set_limit(from._internal_limit());
+  }
+  if (from.opertype() != 0) {
+    _internal_set_opertype(from._internal_opertype());
+  }
 }
 
 void loaddata_more_from_dbvisit_c::CopyFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) {
@@ -1133,6 +1270,13 @@ void loaddata_more_from_dbvisit_c::InternalSwap(loaddata_more_from_dbvisit_c* ot
   fields_.InternalSwap(&other->fields_);
   tag_.Swap(&other->tag_, &::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArena());
   condition_.Swap(&other->condition_, &::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArena());
+  sort_.Swap(&other->sort_, &::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArena());
+  ::PROTOBUF_NAMESPACE_ID::internal::memswap<
+      PROTOBUF_FIELD_OFFSET(loaddata_more_from_dbvisit_c, opertype_)
+      + sizeof(loaddata_more_from_dbvisit_c::opertype_)
+      - PROTOBUF_FIELD_OFFSET(loaddata_more_from_dbvisit_c, limit_)>(
+          reinterpret_cast<char*>(&limit_),
+          reinterpret_cast<char*>(&other->limit_));
 }
 
 ::PROTOBUF_NAMESPACE_ID::Metadata loaddata_more_from_dbvisit_c::GetMetadata() const {
@@ -1626,12 +1770,14 @@ insertdata_to_dbvisit_c::insertdata_to_dbvisit_c(const insertdata_to_dbvisit_c& 
     cache_key_.Set(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, from._internal_cache_key(), 
       GetArena());
   }
+  opertype_ = from.opertype_;
   // @@protoc_insertion_point(copy_constructor:frmpub.protocc.insertdata_to_dbvisit_c)
 }
 
 void insertdata_to_dbvisit_c::SharedCtor() {
 tag_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
 cache_key_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+opertype_ = 0;
 }
 
 insertdata_to_dbvisit_c::~insertdata_to_dbvisit_c() {
@@ -1665,6 +1811,7 @@ void insertdata_to_dbvisit_c::Clear() {
   fields_.Clear();
   tag_.ClearToEmpty();
   cache_key_.ClearToEmpty();
+  opertype_ = 0;
   _internal_metadata_.Clear<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>();
 }
 
@@ -1693,16 +1840,23 @@ const char* insertdata_to_dbvisit_c::_InternalParse(const char* ptr, ::PROTOBUF_
           CHK_(ptr);
         } else goto handle_unusual;
         continue;
-      // repeated .frmpub.protocc.FieldsEntry fields = 3;
+      // int32 opertype = 3;
       case 3:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 26)) {
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 24)) {
+          opertype_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint64(&ptr);
+          CHK_(ptr);
+        } else goto handle_unusual;
+        continue;
+      // repeated .frmpub.protocc.FieldsEntry fields = 4;
+      case 4:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 34)) {
           ptr -= 1;
           do {
             ptr += 1;
             ptr = ctx->ParseMessage(_internal_add_fields(), ptr);
             CHK_(ptr);
             if (!ctx->DataAvailable(ptr)) break;
-          } while (::PROTOBUF_NAMESPACE_ID::internal::ExpectTag<26>(ptr));
+          } while (::PROTOBUF_NAMESPACE_ID::internal::ExpectTag<34>(ptr));
         } else goto handle_unusual;
         continue;
       default: {
@@ -1753,12 +1907,18 @@ failure:
         2, this->_internal_cache_key(), target);
   }
 
-  // repeated .frmpub.protocc.FieldsEntry fields = 3;
+  // int32 opertype = 3;
+  if (this->opertype() != 0) {
+    target = stream->EnsureSpace(target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteInt32ToArray(3, this->_internal_opertype(), target);
+  }
+
+  // repeated .frmpub.protocc.FieldsEntry fields = 4;
   for (unsigned int i = 0,
       n = static_cast<unsigned int>(this->_internal_fields_size()); i < n; i++) {
     target = stream->EnsureSpace(target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
-      InternalWriteMessage(3, this->_internal_fields(i), target, stream);
+      InternalWriteMessage(4, this->_internal_fields(i), target, stream);
   }
 
   if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
@@ -1777,7 +1937,7 @@ size_t insertdata_to_dbvisit_c::ByteSizeLong() const {
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
-  // repeated .frmpub.protocc.FieldsEntry fields = 3;
+  // repeated .frmpub.protocc.FieldsEntry fields = 4;
   total_size += 1UL * this->_internal_fields_size();
   for (const auto& msg : this->fields_) {
     total_size +=
@@ -1796,6 +1956,13 @@ size_t insertdata_to_dbvisit_c::ByteSizeLong() const {
     total_size += 1 +
       ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::StringSize(
         this->_internal_cache_key());
+  }
+
+  // int32 opertype = 3;
+  if (this->opertype() != 0) {
+    total_size += 1 +
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::Int32Size(
+        this->_internal_opertype());
   }
 
   if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
@@ -1836,6 +2003,9 @@ void insertdata_to_dbvisit_c::MergeFrom(const insertdata_to_dbvisit_c& from) {
   if (from.cache_key().size() > 0) {
     _internal_set_cache_key(from._internal_cache_key());
   }
+  if (from.opertype() != 0) {
+    _internal_set_opertype(from._internal_opertype());
+  }
 }
 
 void insertdata_to_dbvisit_c::CopyFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) {
@@ -1862,6 +2032,7 @@ void insertdata_to_dbvisit_c::InternalSwap(insertdata_to_dbvisit_c* other) {
   fields_.InternalSwap(&other->fields_);
   tag_.Swap(&other->tag_, &::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArena());
   cache_key_.Swap(&other->cache_key_, &::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArena());
+  swap(opertype_, other->opertype_);
 }
 
 ::PROTOBUF_NAMESPACE_ID::Metadata insertdata_to_dbvisit_c::GetMetadata() const {
@@ -2126,12 +2297,14 @@ updata_to_dbvisit_c::updata_to_dbvisit_c(const updata_to_dbvisit_c& from)
     cache_key_.Set(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, from._internal_cache_key(), 
       GetArena());
   }
+  opertype_ = from.opertype_;
   // @@protoc_insertion_point(copy_constructor:frmpub.protocc.updata_to_dbvisit_c)
 }
 
 void updata_to_dbvisit_c::SharedCtor() {
 tag_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
 cache_key_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+opertype_ = 0;
 }
 
 updata_to_dbvisit_c::~updata_to_dbvisit_c() {
@@ -2165,6 +2338,7 @@ void updata_to_dbvisit_c::Clear() {
   fields_.Clear();
   tag_.ClearToEmpty();
   cache_key_.ClearToEmpty();
+  opertype_ = 0;
   _internal_metadata_.Clear<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>();
 }
 
@@ -2193,16 +2367,23 @@ const char* updata_to_dbvisit_c::_InternalParse(const char* ptr, ::PROTOBUF_NAME
           CHK_(ptr);
         } else goto handle_unusual;
         continue;
-      // repeated .frmpub.protocc.FieldsEntry fields = 3;
+      // int32 opertype = 3;
       case 3:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 26)) {
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 24)) {
+          opertype_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint64(&ptr);
+          CHK_(ptr);
+        } else goto handle_unusual;
+        continue;
+      // repeated .frmpub.protocc.FieldsEntry fields = 4;
+      case 4:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 34)) {
           ptr -= 1;
           do {
             ptr += 1;
             ptr = ctx->ParseMessage(_internal_add_fields(), ptr);
             CHK_(ptr);
             if (!ctx->DataAvailable(ptr)) break;
-          } while (::PROTOBUF_NAMESPACE_ID::internal::ExpectTag<26>(ptr));
+          } while (::PROTOBUF_NAMESPACE_ID::internal::ExpectTag<34>(ptr));
         } else goto handle_unusual;
         continue;
       default: {
@@ -2253,12 +2434,18 @@ failure:
         2, this->_internal_cache_key(), target);
   }
 
-  // repeated .frmpub.protocc.FieldsEntry fields = 3;
+  // int32 opertype = 3;
+  if (this->opertype() != 0) {
+    target = stream->EnsureSpace(target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteInt32ToArray(3, this->_internal_opertype(), target);
+  }
+
+  // repeated .frmpub.protocc.FieldsEntry fields = 4;
   for (unsigned int i = 0,
       n = static_cast<unsigned int>(this->_internal_fields_size()); i < n; i++) {
     target = stream->EnsureSpace(target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
-      InternalWriteMessage(3, this->_internal_fields(i), target, stream);
+      InternalWriteMessage(4, this->_internal_fields(i), target, stream);
   }
 
   if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
@@ -2277,7 +2464,7 @@ size_t updata_to_dbvisit_c::ByteSizeLong() const {
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
-  // repeated .frmpub.protocc.FieldsEntry fields = 3;
+  // repeated .frmpub.protocc.FieldsEntry fields = 4;
   total_size += 1UL * this->_internal_fields_size();
   for (const auto& msg : this->fields_) {
     total_size +=
@@ -2296,6 +2483,13 @@ size_t updata_to_dbvisit_c::ByteSizeLong() const {
     total_size += 1 +
       ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::StringSize(
         this->_internal_cache_key());
+  }
+
+  // int32 opertype = 3;
+  if (this->opertype() != 0) {
+    total_size += 1 +
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::Int32Size(
+        this->_internal_opertype());
   }
 
   if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
@@ -2336,6 +2530,9 @@ void updata_to_dbvisit_c::MergeFrom(const updata_to_dbvisit_c& from) {
   if (from.cache_key().size() > 0) {
     _internal_set_cache_key(from._internal_cache_key());
   }
+  if (from.opertype() != 0) {
+    _internal_set_opertype(from._internal_opertype());
+  }
 }
 
 void updata_to_dbvisit_c::CopyFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) {
@@ -2362,6 +2559,7 @@ void updata_to_dbvisit_c::InternalSwap(updata_to_dbvisit_c* other) {
   fields_.InternalSwap(&other->fields_);
   tag_.Swap(&other->tag_, &::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArena());
   cache_key_.Swap(&other->cache_key_, &::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArena());
+  swap(opertype_, other->opertype_);
 }
 
 ::PROTOBUF_NAMESPACE_ID::Metadata updata_to_dbvisit_c::GetMetadata() const {
@@ -2621,12 +2819,14 @@ deletedata_to_dbvisit_c::deletedata_to_dbvisit_c(const deletedata_to_dbvisit_c& 
     cache_key_.Set(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, from._internal_cache_key(), 
       GetArena());
   }
+  opertype_ = from.opertype_;
   // @@protoc_insertion_point(copy_constructor:frmpub.protocc.deletedata_to_dbvisit_c)
 }
 
 void deletedata_to_dbvisit_c::SharedCtor() {
 tag_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
 cache_key_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+opertype_ = 0;
 }
 
 deletedata_to_dbvisit_c::~deletedata_to_dbvisit_c() {
@@ -2659,6 +2859,7 @@ void deletedata_to_dbvisit_c::Clear() {
 
   tag_.ClearToEmpty();
   cache_key_.ClearToEmpty();
+  opertype_ = 0;
   _internal_metadata_.Clear<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>();
 }
 
@@ -2684,6 +2885,13 @@ const char* deletedata_to_dbvisit_c::_InternalParse(const char* ptr, ::PROTOBUF_
           auto str = _internal_mutable_cache_key();
           ptr = ::PROTOBUF_NAMESPACE_ID::internal::InlineGreedyStringParser(str, ptr, ctx);
           CHK_(::PROTOBUF_NAMESPACE_ID::internal::VerifyUTF8(str, "frmpub.protocc.deletedata_to_dbvisit_c.cache_key"));
+          CHK_(ptr);
+        } else goto handle_unusual;
+        continue;
+      // int32 opertype = 3;
+      case 3:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 24)) {
+          opertype_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint64(&ptr);
           CHK_(ptr);
         } else goto handle_unusual;
         continue;
@@ -2735,6 +2943,12 @@ failure:
         2, this->_internal_cache_key(), target);
   }
 
+  // int32 opertype = 3;
+  if (this->opertype() != 0) {
+    target = stream->EnsureSpace(target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteInt32ToArray(3, this->_internal_opertype(), target);
+  }
+
   if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::InternalSerializeUnknownFieldsToArray(
         _internal_metadata_.unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(::PROTOBUF_NAMESPACE_ID::UnknownFieldSet::default_instance), target, stream);
@@ -2763,6 +2977,13 @@ size_t deletedata_to_dbvisit_c::ByteSizeLong() const {
     total_size += 1 +
       ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::StringSize(
         this->_internal_cache_key());
+  }
+
+  // int32 opertype = 3;
+  if (this->opertype() != 0) {
+    total_size += 1 +
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::Int32Size(
+        this->_internal_opertype());
   }
 
   if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
@@ -2802,6 +3023,9 @@ void deletedata_to_dbvisit_c::MergeFrom(const deletedata_to_dbvisit_c& from) {
   if (from.cache_key().size() > 0) {
     _internal_set_cache_key(from._internal_cache_key());
   }
+  if (from.opertype() != 0) {
+    _internal_set_opertype(from._internal_opertype());
+  }
 }
 
 void deletedata_to_dbvisit_c::CopyFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) {
@@ -2827,6 +3051,7 @@ void deletedata_to_dbvisit_c::InternalSwap(deletedata_to_dbvisit_c* other) {
   _internal_metadata_.Swap<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(&other->_internal_metadata_);
   tag_.Swap(&other->tag_, &::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArena());
   cache_key_.Swap(&other->cache_key_, &::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArena());
+  swap(opertype_, other->opertype_);
 }
 
 ::PROTOBUF_NAMESPACE_ID::Metadata deletedata_to_dbvisit_c::GetMetadata() const {

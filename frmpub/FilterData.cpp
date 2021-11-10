@@ -82,7 +82,7 @@ int FilterData::json_handle(const char* original_data, size_t datalen)
             return -1;
         }
     } else {
-        LOG_WARN << "json:[" << original_data << "] 格式错误";
+        LOG_WARN << "json:[" << std::string(original_data, datalen) << "] 格式错误";
         return -1;
     }
 }
@@ -166,6 +166,7 @@ int FilterData::send_json(rapidjson::Document* doc, std::stack<Envelope>* enves)
 int FilterData::send_json(int msgid, rapidjson::Value* data, std::stack<Envelope>* enves) const
 {
     rapidjson::Document root;
+    root.SetObject();
     root.AddMember("msgid", msgid, root.GetAllocator());
     if (data != nullptr) {
         root.AddMember("msgdata", *data, root.GetAllocator());
@@ -184,6 +185,7 @@ int FilterData::send_errcode(protocc::errnum code,
         return send_proto(protocc::BroadcastMsgId::ERRCODE, &err, enves);
     } else if (pd_ == ProtoData::JSON) {
         rapidjson::Document root;
+        root.SetObject();
         root.AddMember("msgid", protocc::BroadcastMsgId::ERRCODE, root.GetAllocator());
         rapidjson::Value err(rapidjson::kObjectType);
         err.AddMember("code", code, root.GetAllocator());

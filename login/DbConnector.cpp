@@ -75,9 +75,13 @@ int DbConnector::input_handle(std::shared_ptr<protocc::CommonObject> obj,
         if (it != pmb_.end()) {
             return it->second(obj, enves);
         } else {
-            //通知lua的onMessage函数
-            shynet::utils::Singleton<lua::LuaEngine>::get_instance().append(
-                std::make_shared<frmpub::OnMessageTask<DbConnector>>(shared_from_this(), obj, enves));
+            if (enves->empty() == false) {
+                return forward_db_gate_c(obj, enves);
+            } else {
+                //通知lua的onMessage函数
+                shynet::utils::Singleton<lua::LuaEngine>::get_instance().append(
+                    std::make_shared<frmpub::OnMessageTask<DbConnector>>(shared_from_this(), obj, enves));
+            }
         }
     }
     return 0;
@@ -103,6 +107,30 @@ int DbConnector::errcode(std::shared_ptr<protocc::CommonObject> data,
         std::stringstream stream;
         stream << "消息" << frmpub::Basic::msgname(data->msgid()) << "解析错误";
         SEND_ERR(protocc::MESSAGE_PARSING_ERROR, stream.str());
+    }
+    return 0;
+}
+
+int DbConnector::forward_db_gate_c(std::shared_ptr<protocc::CommonObject> data,
+    std::shared_ptr<std::stack<FilterData::Envelope>> enves)
+{
+    if (enves->empty() == false) {
+        FilterData::Envelope& env = enves->top();
+        enves->pop();
+        std::shared_ptr<LoginClient> gate = shynet::utils::Singleton<LoginClientMgr>::instance().find(env.fd);
+        if (gate != nullptr) {
+            gate->send_proto(data.get(), enves.get());
+            LOG_DEBUG << "转发消息" << frmpub::Basic::msgname(data->msgid())
+                      << "到gate[" << gate->remote_addr()->ip() << ":"
+                      << gate->remote_addr()->port() << "]"
+                      << " gate fd:" << env.fd;
+        } else {
+            std::stringstream stream;
+            stream << "gate fd:" << env.fd << " 已断开连接";
+            SEND_ERR(protocc::GATE_NOT_EXIST, stream.str());
+        }
+    } else {
+        SEND_ERR(protocc::NO_ROUTING_INFO, "转发消息没有路由信息");
     }
     return 0;
 }

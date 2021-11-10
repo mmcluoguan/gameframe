@@ -5,7 +5,7 @@ AcceptMgr = require ("lua/game/acceptMgr")
 ConnectorMgr = require ("lua/game/connectorMgr")
 RoleMgr =  require ("lua/game/roleMgr")
 TimerMgr = require("lua/common/timerMgr")
-BagSystem = require("lua/game/bagSystem")
+BagOperator = require("lua/game/bagOperator")
 GmSystem = require("lua/game/gmSystem")
 
 --接收新客户端

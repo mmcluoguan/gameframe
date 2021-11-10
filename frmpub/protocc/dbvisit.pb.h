@@ -226,6 +226,7 @@ class loaddata_from_dbvisit_c PROTOBUF_FINAL :
     kFieldsFieldNumber = 4,
     kTagFieldNumber = 1,
     kCacheKeyFieldNumber = 2,
+    kOpertypeFieldNumber = 3,
   };
   // repeated .frmpub.protocc.FieldsEntry fields = 4;
   int fields_size() const;
@@ -277,6 +278,15 @@ class loaddata_from_dbvisit_c PROTOBUF_FINAL :
   std::string* _internal_mutable_cache_key();
   public:
 
+  // int32 opertype = 3;
+  void clear_opertype();
+  ::PROTOBUF_NAMESPACE_ID::int32 opertype() const;
+  void set_opertype(::PROTOBUF_NAMESPACE_ID::int32 value);
+  private:
+  ::PROTOBUF_NAMESPACE_ID::int32 _internal_opertype() const;
+  void _internal_set_opertype(::PROTOBUF_NAMESPACE_ID::int32 value);
+  public:
+
   // @@protoc_insertion_point(class_scope:frmpub.protocc.loaddata_from_dbvisit_c)
  private:
   class _Internal;
@@ -287,6 +297,7 @@ class loaddata_from_dbvisit_c PROTOBUF_FINAL :
   ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::frmpub::protocc::FieldsEntry > fields_;
   ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr tag_;
   ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr cache_key_;
+  ::PROTOBUF_NAMESPACE_ID::int32 opertype_;
   mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
   friend struct ::TableStruct_dbvisit_2eproto;
 };
@@ -580,11 +591,14 @@ class loaddata_more_from_dbvisit_c PROTOBUF_FINAL :
   // accessors -------------------------------------------------------
 
   enum : int {
-    kFieldsFieldNumber = 3,
+    kFieldsFieldNumber = 6,
     kTagFieldNumber = 1,
     kConditionFieldNumber = 2,
+    kSortFieldNumber = 3,
+    kLimitFieldNumber = 4,
+    kOpertypeFieldNumber = 5,
   };
-  // repeated .frmpub.protocc.FieldsEntry fields = 3;
+  // repeated .frmpub.protocc.FieldsEntry fields = 6;
   int fields_size() const;
   private:
   int _internal_fields_size() const;
@@ -634,6 +648,40 @@ class loaddata_more_from_dbvisit_c PROTOBUF_FINAL :
   std::string* _internal_mutable_condition();
   public:
 
+  // string sort = 3;
+  void clear_sort();
+  const std::string& sort() const;
+  void set_sort(const std::string& value);
+  void set_sort(std::string&& value);
+  void set_sort(const char* value);
+  void set_sort(const char* value, size_t size);
+  std::string* mutable_sort();
+  std::string* release_sort();
+  void set_allocated_sort(std::string* sort);
+  private:
+  const std::string& _internal_sort() const;
+  void _internal_set_sort(const std::string& value);
+  std::string* _internal_mutable_sort();
+  public:
+
+  // int32 limit = 4;
+  void clear_limit();
+  ::PROTOBUF_NAMESPACE_ID::int32 limit() const;
+  void set_limit(::PROTOBUF_NAMESPACE_ID::int32 value);
+  private:
+  ::PROTOBUF_NAMESPACE_ID::int32 _internal_limit() const;
+  void _internal_set_limit(::PROTOBUF_NAMESPACE_ID::int32 value);
+  public:
+
+  // int32 opertype = 5;
+  void clear_opertype();
+  ::PROTOBUF_NAMESPACE_ID::int32 opertype() const;
+  void set_opertype(::PROTOBUF_NAMESPACE_ID::int32 value);
+  private:
+  ::PROTOBUF_NAMESPACE_ID::int32 _internal_opertype() const;
+  void _internal_set_opertype(::PROTOBUF_NAMESPACE_ID::int32 value);
+  public:
+
   // @@protoc_insertion_point(class_scope:frmpub.protocc.loaddata_more_from_dbvisit_c)
  private:
   class _Internal;
@@ -644,6 +692,9 @@ class loaddata_more_from_dbvisit_c PROTOBUF_FINAL :
   ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::frmpub::protocc::FieldsEntry > fields_;
   ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr tag_;
   ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr condition_;
+  ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr sort_;
+  ::PROTOBUF_NAMESPACE_ID::int32 limit_;
+  ::PROTOBUF_NAMESPACE_ID::int32 opertype_;
   mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
   friend struct ::TableStruct_dbvisit_2eproto;
 };
@@ -1085,11 +1136,12 @@ class insertdata_to_dbvisit_c PROTOBUF_FINAL :
   // accessors -------------------------------------------------------
 
   enum : int {
-    kFieldsFieldNumber = 3,
+    kFieldsFieldNumber = 4,
     kTagFieldNumber = 1,
     kCacheKeyFieldNumber = 2,
+    kOpertypeFieldNumber = 3,
   };
-  // repeated .frmpub.protocc.FieldsEntry fields = 3;
+  // repeated .frmpub.protocc.FieldsEntry fields = 4;
   int fields_size() const;
   private:
   int _internal_fields_size() const;
@@ -1139,6 +1191,15 @@ class insertdata_to_dbvisit_c PROTOBUF_FINAL :
   std::string* _internal_mutable_cache_key();
   public:
 
+  // int32 opertype = 3;
+  void clear_opertype();
+  ::PROTOBUF_NAMESPACE_ID::int32 opertype() const;
+  void set_opertype(::PROTOBUF_NAMESPACE_ID::int32 value);
+  private:
+  ::PROTOBUF_NAMESPACE_ID::int32 _internal_opertype() const;
+  void _internal_set_opertype(::PROTOBUF_NAMESPACE_ID::int32 value);
+  public:
+
   // @@protoc_insertion_point(class_scope:frmpub.protocc.insertdata_to_dbvisit_c)
  private:
   class _Internal;
@@ -1149,6 +1210,7 @@ class insertdata_to_dbvisit_c PROTOBUF_FINAL :
   ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::frmpub::protocc::FieldsEntry > fields_;
   ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr tag_;
   ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr cache_key_;
+  ::PROTOBUF_NAMESPACE_ID::int32 opertype_;
   mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
   friend struct ::TableStruct_dbvisit_2eproto;
 };
@@ -1422,11 +1484,12 @@ class updata_to_dbvisit_c PROTOBUF_FINAL :
   // accessors -------------------------------------------------------
 
   enum : int {
-    kFieldsFieldNumber = 3,
+    kFieldsFieldNumber = 4,
     kTagFieldNumber = 1,
     kCacheKeyFieldNumber = 2,
+    kOpertypeFieldNumber = 3,
   };
-  // repeated .frmpub.protocc.FieldsEntry fields = 3;
+  // repeated .frmpub.protocc.FieldsEntry fields = 4;
   int fields_size() const;
   private:
   int _internal_fields_size() const;
@@ -1476,6 +1539,15 @@ class updata_to_dbvisit_c PROTOBUF_FINAL :
   std::string* _internal_mutable_cache_key();
   public:
 
+  // int32 opertype = 3;
+  void clear_opertype();
+  ::PROTOBUF_NAMESPACE_ID::int32 opertype() const;
+  void set_opertype(::PROTOBUF_NAMESPACE_ID::int32 value);
+  private:
+  ::PROTOBUF_NAMESPACE_ID::int32 _internal_opertype() const;
+  void _internal_set_opertype(::PROTOBUF_NAMESPACE_ID::int32 value);
+  public:
+
   // @@protoc_insertion_point(class_scope:frmpub.protocc.updata_to_dbvisit_c)
  private:
   class _Internal;
@@ -1486,6 +1558,7 @@ class updata_to_dbvisit_c PROTOBUF_FINAL :
   ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::frmpub::protocc::FieldsEntry > fields_;
   ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr tag_;
   ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr cache_key_;
+  ::PROTOBUF_NAMESPACE_ID::int32 opertype_;
   mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
   friend struct ::TableStruct_dbvisit_2eproto;
 };
@@ -1761,6 +1834,7 @@ class deletedata_to_dbvisit_c PROTOBUF_FINAL :
   enum : int {
     kTagFieldNumber = 1,
     kCacheKeyFieldNumber = 2,
+    kOpertypeFieldNumber = 3,
   };
   // string tag = 1;
   void clear_tag();
@@ -1794,6 +1868,15 @@ class deletedata_to_dbvisit_c PROTOBUF_FINAL :
   std::string* _internal_mutable_cache_key();
   public:
 
+  // int32 opertype = 3;
+  void clear_opertype();
+  ::PROTOBUF_NAMESPACE_ID::int32 opertype() const;
+  void set_opertype(::PROTOBUF_NAMESPACE_ID::int32 value);
+  private:
+  ::PROTOBUF_NAMESPACE_ID::int32 _internal_opertype() const;
+  void _internal_set_opertype(::PROTOBUF_NAMESPACE_ID::int32 value);
+  public:
+
   // @@protoc_insertion_point(class_scope:frmpub.protocc.deletedata_to_dbvisit_c)
  private:
   class _Internal;
@@ -1803,6 +1886,7 @@ class deletedata_to_dbvisit_c PROTOBUF_FINAL :
   typedef void DestructorSkippable_;
   ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr tag_;
   ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr cache_key_;
+  ::PROTOBUF_NAMESPACE_ID::int32 opertype_;
   mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
   friend struct ::TableStruct_dbvisit_2eproto;
 };
@@ -2094,6 +2178,26 @@ inline void loaddata_from_dbvisit_c::set_allocated_cache_key(std::string* cache_
   // @@protoc_insertion_point(field_set_allocated:frmpub.protocc.loaddata_from_dbvisit_c.cache_key)
 }
 
+// int32 opertype = 3;
+inline void loaddata_from_dbvisit_c::clear_opertype() {
+  opertype_ = 0;
+}
+inline ::PROTOBUF_NAMESPACE_ID::int32 loaddata_from_dbvisit_c::_internal_opertype() const {
+  return opertype_;
+}
+inline ::PROTOBUF_NAMESPACE_ID::int32 loaddata_from_dbvisit_c::opertype() const {
+  // @@protoc_insertion_point(field_get:frmpub.protocc.loaddata_from_dbvisit_c.opertype)
+  return _internal_opertype();
+}
+inline void loaddata_from_dbvisit_c::_internal_set_opertype(::PROTOBUF_NAMESPACE_ID::int32 value) {
+  
+  opertype_ = value;
+}
+inline void loaddata_from_dbvisit_c::set_opertype(::PROTOBUF_NAMESPACE_ID::int32 value) {
+  _internal_set_opertype(value);
+  // @@protoc_insertion_point(field_set:frmpub.protocc.loaddata_from_dbvisit_c.opertype)
+}
+
 // repeated .frmpub.protocc.FieldsEntry fields = 4;
 inline int loaddata_from_dbvisit_c::_internal_fields_size() const {
   return fields_.size();
@@ -2377,7 +2481,108 @@ inline void loaddata_more_from_dbvisit_c::set_allocated_condition(std::string* c
   // @@protoc_insertion_point(field_set_allocated:frmpub.protocc.loaddata_more_from_dbvisit_c.condition)
 }
 
-// repeated .frmpub.protocc.FieldsEntry fields = 3;
+// string sort = 3;
+inline void loaddata_more_from_dbvisit_c::clear_sort() {
+  sort_.ClearToEmpty();
+}
+inline const std::string& loaddata_more_from_dbvisit_c::sort() const {
+  // @@protoc_insertion_point(field_get:frmpub.protocc.loaddata_more_from_dbvisit_c.sort)
+  return _internal_sort();
+}
+inline void loaddata_more_from_dbvisit_c::set_sort(const std::string& value) {
+  _internal_set_sort(value);
+  // @@protoc_insertion_point(field_set:frmpub.protocc.loaddata_more_from_dbvisit_c.sort)
+}
+inline std::string* loaddata_more_from_dbvisit_c::mutable_sort() {
+  // @@protoc_insertion_point(field_mutable:frmpub.protocc.loaddata_more_from_dbvisit_c.sort)
+  return _internal_mutable_sort();
+}
+inline const std::string& loaddata_more_from_dbvisit_c::_internal_sort() const {
+  return sort_.Get();
+}
+inline void loaddata_more_from_dbvisit_c::_internal_set_sort(const std::string& value) {
+  
+  sort_.Set(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, value, GetArena());
+}
+inline void loaddata_more_from_dbvisit_c::set_sort(std::string&& value) {
+  
+  sort_.Set(
+    ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, ::std::move(value), GetArena());
+  // @@protoc_insertion_point(field_set_rvalue:frmpub.protocc.loaddata_more_from_dbvisit_c.sort)
+}
+inline void loaddata_more_from_dbvisit_c::set_sort(const char* value) {
+  GOOGLE_DCHECK(value != nullptr);
+  
+  sort_.Set(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, ::std::string(value), GetArena());
+  // @@protoc_insertion_point(field_set_char:frmpub.protocc.loaddata_more_from_dbvisit_c.sort)
+}
+inline void loaddata_more_from_dbvisit_c::set_sort(const char* value,
+    size_t size) {
+  
+  sort_.Set(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, ::std::string(
+      reinterpret_cast<const char*>(value), size), GetArena());
+  // @@protoc_insertion_point(field_set_pointer:frmpub.protocc.loaddata_more_from_dbvisit_c.sort)
+}
+inline std::string* loaddata_more_from_dbvisit_c::_internal_mutable_sort() {
+  
+  return sort_.Mutable(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, GetArena());
+}
+inline std::string* loaddata_more_from_dbvisit_c::release_sort() {
+  // @@protoc_insertion_point(field_release:frmpub.protocc.loaddata_more_from_dbvisit_c.sort)
+  return sort_.Release(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArena());
+}
+inline void loaddata_more_from_dbvisit_c::set_allocated_sort(std::string* sort) {
+  if (sort != nullptr) {
+    
+  } else {
+    
+  }
+  sort_.SetAllocated(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), sort,
+      GetArena());
+  // @@protoc_insertion_point(field_set_allocated:frmpub.protocc.loaddata_more_from_dbvisit_c.sort)
+}
+
+// int32 limit = 4;
+inline void loaddata_more_from_dbvisit_c::clear_limit() {
+  limit_ = 0;
+}
+inline ::PROTOBUF_NAMESPACE_ID::int32 loaddata_more_from_dbvisit_c::_internal_limit() const {
+  return limit_;
+}
+inline ::PROTOBUF_NAMESPACE_ID::int32 loaddata_more_from_dbvisit_c::limit() const {
+  // @@protoc_insertion_point(field_get:frmpub.protocc.loaddata_more_from_dbvisit_c.limit)
+  return _internal_limit();
+}
+inline void loaddata_more_from_dbvisit_c::_internal_set_limit(::PROTOBUF_NAMESPACE_ID::int32 value) {
+  
+  limit_ = value;
+}
+inline void loaddata_more_from_dbvisit_c::set_limit(::PROTOBUF_NAMESPACE_ID::int32 value) {
+  _internal_set_limit(value);
+  // @@protoc_insertion_point(field_set:frmpub.protocc.loaddata_more_from_dbvisit_c.limit)
+}
+
+// int32 opertype = 5;
+inline void loaddata_more_from_dbvisit_c::clear_opertype() {
+  opertype_ = 0;
+}
+inline ::PROTOBUF_NAMESPACE_ID::int32 loaddata_more_from_dbvisit_c::_internal_opertype() const {
+  return opertype_;
+}
+inline ::PROTOBUF_NAMESPACE_ID::int32 loaddata_more_from_dbvisit_c::opertype() const {
+  // @@protoc_insertion_point(field_get:frmpub.protocc.loaddata_more_from_dbvisit_c.opertype)
+  return _internal_opertype();
+}
+inline void loaddata_more_from_dbvisit_c::_internal_set_opertype(::PROTOBUF_NAMESPACE_ID::int32 value) {
+  
+  opertype_ = value;
+}
+inline void loaddata_more_from_dbvisit_c::set_opertype(::PROTOBUF_NAMESPACE_ID::int32 value) {
+  _internal_set_opertype(value);
+  // @@protoc_insertion_point(field_set:frmpub.protocc.loaddata_more_from_dbvisit_c.opertype)
+}
+
+// repeated .frmpub.protocc.FieldsEntry fields = 6;
 inline int loaddata_more_from_dbvisit_c::_internal_fields_size() const {
   return fields_.size();
 }
@@ -2703,7 +2908,27 @@ inline void insertdata_to_dbvisit_c::set_allocated_cache_key(std::string* cache_
   // @@protoc_insertion_point(field_set_allocated:frmpub.protocc.insertdata_to_dbvisit_c.cache_key)
 }
 
-// repeated .frmpub.protocc.FieldsEntry fields = 3;
+// int32 opertype = 3;
+inline void insertdata_to_dbvisit_c::clear_opertype() {
+  opertype_ = 0;
+}
+inline ::PROTOBUF_NAMESPACE_ID::int32 insertdata_to_dbvisit_c::_internal_opertype() const {
+  return opertype_;
+}
+inline ::PROTOBUF_NAMESPACE_ID::int32 insertdata_to_dbvisit_c::opertype() const {
+  // @@protoc_insertion_point(field_get:frmpub.protocc.insertdata_to_dbvisit_c.opertype)
+  return _internal_opertype();
+}
+inline void insertdata_to_dbvisit_c::_internal_set_opertype(::PROTOBUF_NAMESPACE_ID::int32 value) {
+  
+  opertype_ = value;
+}
+inline void insertdata_to_dbvisit_c::set_opertype(::PROTOBUF_NAMESPACE_ID::int32 value) {
+  _internal_set_opertype(value);
+  // @@protoc_insertion_point(field_set:frmpub.protocc.insertdata_to_dbvisit_c.opertype)
+}
+
+// repeated .frmpub.protocc.FieldsEntry fields = 4;
 inline int insertdata_to_dbvisit_c::_internal_fields_size() const {
   return fields_.size();
 }
@@ -2950,7 +3175,27 @@ inline void updata_to_dbvisit_c::set_allocated_cache_key(std::string* cache_key)
   // @@protoc_insertion_point(field_set_allocated:frmpub.protocc.updata_to_dbvisit_c.cache_key)
 }
 
-// repeated .frmpub.protocc.FieldsEntry fields = 3;
+// int32 opertype = 3;
+inline void updata_to_dbvisit_c::clear_opertype() {
+  opertype_ = 0;
+}
+inline ::PROTOBUF_NAMESPACE_ID::int32 updata_to_dbvisit_c::_internal_opertype() const {
+  return opertype_;
+}
+inline ::PROTOBUF_NAMESPACE_ID::int32 updata_to_dbvisit_c::opertype() const {
+  // @@protoc_insertion_point(field_get:frmpub.protocc.updata_to_dbvisit_c.opertype)
+  return _internal_opertype();
+}
+inline void updata_to_dbvisit_c::_internal_set_opertype(::PROTOBUF_NAMESPACE_ID::int32 value) {
+  
+  opertype_ = value;
+}
+inline void updata_to_dbvisit_c::set_opertype(::PROTOBUF_NAMESPACE_ID::int32 value) {
+  _internal_set_opertype(value);
+  // @@protoc_insertion_point(field_set:frmpub.protocc.updata_to_dbvisit_c.opertype)
+}
+
+// repeated .frmpub.protocc.FieldsEntry fields = 4;
 inline int updata_to_dbvisit_c::_internal_fields_size() const {
   return fields_.size();
 }
@@ -3195,6 +3440,26 @@ inline void deletedata_to_dbvisit_c::set_allocated_cache_key(std::string* cache_
   cache_key_.SetAllocated(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), cache_key,
       GetArena());
   // @@protoc_insertion_point(field_set_allocated:frmpub.protocc.deletedata_to_dbvisit_c.cache_key)
+}
+
+// int32 opertype = 3;
+inline void deletedata_to_dbvisit_c::clear_opertype() {
+  opertype_ = 0;
+}
+inline ::PROTOBUF_NAMESPACE_ID::int32 deletedata_to_dbvisit_c::_internal_opertype() const {
+  return opertype_;
+}
+inline ::PROTOBUF_NAMESPACE_ID::int32 deletedata_to_dbvisit_c::opertype() const {
+  // @@protoc_insertion_point(field_get:frmpub.protocc.deletedata_to_dbvisit_c.opertype)
+  return _internal_opertype();
+}
+inline void deletedata_to_dbvisit_c::_internal_set_opertype(::PROTOBUF_NAMESPACE_ID::int32 value) {
+  
+  opertype_ = value;
+}
+inline void deletedata_to_dbvisit_c::set_opertype(::PROTOBUF_NAMESPACE_ID::int32 value) {
+  _internal_set_opertype(value);
+  // @@protoc_insertion_point(field_set:frmpub.protocc.deletedata_to_dbvisit_c.opertype)
 }
 
 // -------------------------------------------------------------------

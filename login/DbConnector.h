@@ -39,6 +39,12 @@ private:
         std::shared_ptr<std::stack<FilterData::Envelope>> enves);
 
     /// <summary>
+    /// 转发消息到gate
+    /// </summary>
+    int forward_db_gate_c(std::shared_ptr<protocc::CommonObject> data,
+        std::shared_ptr<std::stack<FilterData::Envelope>> enves);
+
+    /// <summary>
     /// 登录服向db服注册结果
     /// </summary>
     int register_login_dbvisit_s(std::shared_ptr<protocc::CommonObject> data,

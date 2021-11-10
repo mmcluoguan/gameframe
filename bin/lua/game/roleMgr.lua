@@ -25,4 +25,13 @@ function roleMgr:findby_accountid(aid)
     return nil
 end
 
+--广播在线玩家
+function roleMgr:broadcast(msg, msgdata)
+    for k,v in pairs(self) do
+        if type(v) == "table" then
+            v:send(msg, msgdata)
+        end
+    end
+end
+
 return roleMgr

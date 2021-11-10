@@ -30,6 +30,17 @@ public:
     void close(bool active) override;
 
 private:
+    /// <summary>
+    /// 服务器通用错误信息
+    /// </summary>
+    int errcode(std::shared_ptr<rapidjson::Document> doc,
+        std::shared_ptr<std::stack<FilterData::Envelope>> enves);
+
+    int getgamelist_admin_world_c(std::shared_ptr<rapidjson::Document> doc,
+        std::shared_ptr<std::stack<FilterData::Envelope>> enves);
+
+    int noticeserver_admin_world_c(std::shared_ptr<rapidjson::Document> doc,
+        std::shared_ptr<std::stack<FilterData::Envelope>> enves);
 };
 }
 

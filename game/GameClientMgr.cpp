@@ -38,7 +38,11 @@ bool GameClientMgr::remove(int k)
 std::shared_ptr<GameClient> GameClientMgr::find(int k)
 {
     std::lock_guard<std::mutex> lock(clis_mutex_);
-    return clis_[k];
+    auto it = clis_.find(k);
+    if (it == clis_.end()) {
+        return nullptr;
+    }
+    return it->second;
 }
 
 std::unordered_map<int, std::shared_ptr<GameClient>> GameClientMgr::clis() const

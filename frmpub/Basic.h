@@ -11,6 +11,7 @@
 #include "frmpub/protocc/world.pb.h"
 #include "shynet/events/eventbuffer.h"
 #include <curl/curl.h>
+#include <rapidjson/document.h>
 #include <stack>
 #include <unordered_map>
 namespace protocc = frmpub::protocc;
@@ -25,6 +26,20 @@ namespace protocc = frmpub::protocc;
 #endif // !SEND_ERR
 
 namespace frmpub {
+
+enum class JosnMsgId {
+    ADMIN_WORLD_BEGIN = 5001,
+    GETGAMELIST_ADMIN_WORLD_C, //获取区服信息
+    GETGAMELIST_ADMIN_WORLD_S,
+    NOTICESERVER_ADMIN_WORLD_C, //广播通知消息
+    NOTICESERVER_ADMIN_WORLD_S,
+
+    ADMIN_WORLD_END = 6000,
+};
+
+rapidjson::Value& get_json_value(rapidjson::Value& jv, std::string key);
+rapidjson::Value& get_json_value(rapidjson::Document& doc, std::string key);
+
 class Basic {
 public:
     static std::string msgname(int);

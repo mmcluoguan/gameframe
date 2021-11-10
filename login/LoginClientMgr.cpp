@@ -38,7 +38,11 @@ bool LoginClientMgr::remove(int k)
 std::shared_ptr<LoginClient> LoginClientMgr::find(int k)
 {
     std::lock_guard<std::mutex> lock(clis_mutex_);
-    return clis_[k];
+    auto it = clis_.find(k);
+    if (it == clis_.end()) {
+        return nullptr;
+    }
+    return it->second;
 }
 
 std::shared_ptr<LoginClient> LoginClientMgr::find_from_sid(const std::string& sid) const

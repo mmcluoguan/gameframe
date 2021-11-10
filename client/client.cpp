@@ -337,7 +337,7 @@ int main(int argc, char* argv[])
     try {
         const char* file = "gameframe.ini";
         IniConfig& ini = Singleton<IniConfig>::instance(std::move(file));
-        bool daemon = ini.get<bool, bool>("register", "daemon", false);
+        bool daemon = ini.get<bool, bool>("client", "daemon", false);
         if (daemon) {
             Stuff::daemon();
             Singleton<IniConfig>::instance(std::move(string("gameframe.ini").c_str()));
@@ -352,8 +352,8 @@ int main(int argc, char* argv[])
 
         Singleton<ThreadPool>::instance().start();
 
-        string gateip = ini.get<const char*, string>("gate", "ip", "127.0.0.1");
-        short gateport = ini.get<short, short>("gate", "port", short(25000));
+        string gateip = ini.get<const char*, string>("client", "gateip", "127.0.0.1");
+        short gateport = ini.get<short, short>("client", "gateport", short(25000));
         shared_ptr<IPAddress> gateaddr(new IPAddress(gateip.c_str(), gateport));
         shared_ptr<GateConnector> gateconnect(new GateConnector(gateaddr));
         gateaddr.reset();

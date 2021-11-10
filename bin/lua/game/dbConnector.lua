@@ -26,7 +26,7 @@ function dbConnector:loaddata_from_dbvisit_s(msgid,msgdata,routing)
         if msgs.result == 0 then
             local msgname,msgtable
             if temp[1] == 'roledata' then
-                msgname,msgtable = self:loadrole_client_gate_c(tonumber(temp[2]),msgs.fields,gameClientFd);
+                msgname,msgtable = self:loadrole_client_gate_c(tonumber(temp[2]),msgs.fields,gameClientFd,routing);
             end
             if msgname ~= nil then
                 gameClient:send(msgname,msgtable,routing)
@@ -50,6 +50,8 @@ function dbConnector:loaddata_more_from_dbvisit_s(msgid,msgdata,routing)
         local msgname,msgtable
         if temp[1] == 'goodsdata' then
             msgname,msgtable = self:loadgoods_client_gate_c(tonumber(temp[2]),msgs.objs);
+        elseif temp[1] == 'noticedata' then
+            msgname,msgtable = self:notice_info_list_clent_gate_c(msgs.objs);
         end
         if msgname ~= nil then
             gameClient:send(msgname,msgtable,routing)
@@ -60,7 +62,7 @@ function dbConnector:loaddata_more_from_dbvisit_s(msgid,msgdata,routing)
 end
 
 --加载角色结果
-function dbConnector:loadrole_client_gate_c(roleid,fields,gameClientFd)
+function dbConnector:loadrole_client_gate_c(roleid,fields,gameClientFd,routing)
     local msgtable = {
         result = 0,
     }
@@ -69,6 +71,7 @@ function dbConnector:loadrole_client_gate_c(roleid,fields,gameClientFd)
         roleObj = role:new(roleid,gameClientFd)
         RoleMgr:add(roleObj)
     end
+    roleObj:copyrouting(routing)
     roleObj.online = true
     for i = 1, #fields do
         if fields[i].key == '_id' then
@@ -116,6 +119,26 @@ function dbConnector:loadgoods_client_gate_c(roleid,objs)
     end
     log("在db中获取角色物品数据 roleid:",roleObj.id)
     return 'loadgoods_client_gate_s',{ goods = goodsdata}
+end
+
+--广播公告信息列表
+function dbConnector:notice_info_list_clent_gate_c(objs)
+    local noticedata ={}
+    for i = 1, #objs do
+        local notice = {}
+        for j = 1, #objs[i].fields do
+            local key = objs[i].fields[j].key
+            local value = objs[i].fields[j].value
+            if key == 'info' then
+                notice.info = value
+            elseif key == 'time' then
+                notice.time = tonumber(value)
+            end
+        end
+        table.insert(noticedata,notice)
+    end
+    log("在db中获取广播公告信息列表 len:",#noticedata)
+    return 'notice_info_list_clent_gate_s',{ datas = noticedata}
 end
 
 return dbConnector;

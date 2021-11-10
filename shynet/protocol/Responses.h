@@ -17,6 +17,10 @@ namespace protocol {
         {
             return step_;
         }
+        void set_step(Step v)
+        {
+            step_ = v;
+        }
         size_t data_length() const;
         const char* websocket_key() const;
 

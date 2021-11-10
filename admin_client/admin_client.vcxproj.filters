@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="admin_client.cpp" />
+    <ClCompile Include="consolehandler.cpp" />
+    <ClCompile Include="worldconnector.cpp" />
+    <ClCompile Include="connectormgr.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="consolehandler.h" />
+    <ClInclude Include="worldconnector.h" />
+    <ClInclude Include="connectormgr.h" />
+  </ItemGroup>
+</Project>

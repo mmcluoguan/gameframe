@@ -40,7 +40,6 @@ end
 
 --延迟销毁角色数据
 function gameClient:cleanRoleObj(role)
-    print(role.online)
     if role.online == false then
         RoleMgr:remove(role.id)
     end
@@ -59,6 +58,7 @@ function gameClient:createrole_client_gate_c(msgid,msgdata,routing)
         roleObj.level = random(1,100)
         local savedata = {
             cache_key = 'role_' .. roleObj.id,
+            opertype = 0,
             fields = {
                 { key = '_id', value = tostring(roleObj.id),},
                 { key = 'accountid', value = tostring(roleObj.accountid),},
@@ -77,6 +77,7 @@ function gameClient:createrole_client_gate_c(msgid,msgdata,routing)
         --     table.insert(roleObj.goods,#roleObj.goods + 1,item)
         --     local savedata = {
         --         cache_key = 'goods_' .. item.id .. "_" .. roleObj.id,
+        --         opertype = 0,
         --         fields = {
         --             { key = '_id', value = tostring(item.id),},
         --             { key = 'cfgid', value = tostring(item.cfgid),},
@@ -102,6 +103,7 @@ function gameClient:loadrole_client_gate_c(msgid,msgdata,routing)
         --在本地内存中获取
         log("在本地内存中获取角色数据 roleid:",role.id)
         role.online = true
+        role:copyrouting(routing)
         local roledata = {
             roleid = role.id,
             aid = role.accountid,
@@ -117,6 +119,7 @@ function gameClient:loadrole_client_gate_c(msgid,msgdata,routing)
         local roledata = {
             cache_key = "role_" .. msgtable.roleid,
             tag = "roledata," .. msgtable.roleid,
+            opertype = 0,
             fields = {
                 {key = '_id', value = '',},
                 {key = 'level', value = '',},
@@ -150,6 +153,9 @@ function gameClient:loadgoods_client_gate_c(msgid,msgdata,routing)
         local goodsdata = {
             tag = "goodsdata," .. msgtable.roleid,
             condition = "goods_*_" .. msgtable.roleid,
+            sort = "",
+            limit = 0,
+            opertype = 0,
             fields = {
                 {key = '_id', value = '',},
                 {key = 'cfgid', value = '',},
@@ -179,6 +185,7 @@ function gameClient:reconnect_client_gate_s(msgid,msgdata,routing)
     local role = RoleMgr:findby_accountid(msgtable.aid)
     if role ~= nil then
         role.online = true
+        role:copyrouting(routing)
         log("玩家断线重连成功 id:",role.id)
     end
 end
@@ -201,6 +208,27 @@ function gameClient:gmorder_client_gate_c(msgid,msgdata,routing)
         gmtable.desc = '非法的命令'
     end
     self:send("gmorder_client_gate_s",gmtable,routing)
+end
+
+--广播公告信息列表
+function gameClient:notice_info_list_clent_gate_c(msgid,msgdata,routing)
+    --转发消息到db获取广播公告信息列表
+    local enve = Envelope_CPP.new()
+    enve:fd(self.id)
+    enve:addr(self.cpp_socket:remote_addr())
+    routing:push(enve)
+    local noticedata = {
+        tag = "noticedata",
+        condition = "notice_*",
+        sort = "time desc",
+        limit = 10,
+        opertype = 1,
+        fields = {
+            {key = 'info', value = '',},
+            {key = 'time', value = '',},
+        },
+    }
+    ConnectorMgr:dbConnector():send('loaddata_more_from_dbvisit_c',noticedata,routing)
 end
 
 return gameClient;

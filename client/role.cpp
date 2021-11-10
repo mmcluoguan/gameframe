@@ -85,10 +85,8 @@ int Role::loadgoods_client_gate_s(std::shared_ptr<protocc::CommonObject> data, s
             };
             LOG_DEBUG << " 物品id:" << msgs.goods(i).id() << " cfgid:" << msgs.goods(i).cfgid() << " num:" << msgs.goods(i).num();
         }
-        protocc::setlevel_client_gate_c msgc;
-        msgc.set_roleid(id_);
-        send_proto(protocc::SETLEVEL_CLIENT_GATE_C, &msgc);
-        LOG_DEBUG << "设置角色等级为1";
+        send_proto(protocc::NOTICE_INFO_LIST_CLENT_GATE_C);
+        LOG_DEBUG << "获取广播公告信息列表";
     } else {
         std::stringstream stream;
         stream << "消息" << frmpub::Basic::msgname(data->msgid()) << "解析错误";

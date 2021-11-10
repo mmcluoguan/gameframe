@@ -6,7 +6,7 @@ package frmpub.protocc;
 message loaddata_from_dbvisit_c {
     string tag = 1;
     string cache_key = 2; 
-    
+    int32 opertype = 3; //0先查找cache,然后查找db,1只查找cache,2只查找db
     repeated FieldsEntry fields = 4;
 }
 
@@ -20,7 +20,10 @@ message loaddata_from_dbvisit_s {
 message loaddata_more_from_dbvisit_c {
     string tag = 1;
     string condition = 2; //条件 如 goods_[goodsid,*]_roleid
-    repeated FieldsEntry fields = 3;
+    string sort = 3;      //排序 sort=""表示不排序,否则如 age asc 或者 age desc
+    int32 limit = 4;      //最多取多少条数据,0表示获取满足条件的所有数据
+    int32 opertype = 5; //0先查找cache,然后查找db,1只查找cache,2只查找db
+    repeated FieldsEntry fields = 6;
 }
 
 message loaddata_more_from_dbvisit_s {
@@ -36,7 +39,8 @@ message loaddata_more_from_dbvisit_s {
 message insertdata_to_dbvisit_c{
     string tag = 1;
     string cache_key = 2; 
-    repeated FieldsEntry fields = 3;
+    int32 opertype = 3; //0先添加cache,然后添加db,1只添加cache,2只添加db
+    repeated FieldsEntry fields = 4;
 }
 
 message insertdata_to_dbvisit_s{
@@ -48,7 +52,8 @@ message insertdata_to_dbvisit_s{
 message updata_to_dbvisit_c {
     string tag = 1;
     string cache_key = 2;
-    repeated FieldsEntry fields = 3;
+    int32 opertype = 3; //0先更新cache,然后更新db,1只更新cache,2只更新db
+    repeated FieldsEntry fields = 4;
 }
 
 message updata_to_dbvisit_s {
@@ -60,6 +65,7 @@ message updata_to_dbvisit_s {
 message deletedata_to_dbvisit_c {
     string tag = 1;
     string cache_key = 2;
+    int32 opertype = 3; //0先删除cache,然后删除db,1只删除cache,2只删除db
 }
 
 message deletedata_to_dbvisit_s {

@@ -1,3 +1,4 @@
+require('strings')
 AcceptMgr = require ("lua/dbvisit/acceptMgr")
 
 function onAccept(client)

@@ -32,6 +32,9 @@ enum ClientMsgId {
   GMORDER_CLIENT_GATE_C = 1209;   //gm命令
   GMORDER_CLIENT_GATE_S = 1210;
   GOODSUPDATA_CLIENT_GATE_G = 1211; //角色物品更新
+  NOTICE_INFO_CLENT_GATE_G = 1212;  //广播公告信息
+  NOTICE_INFO_LIST_CLENT_GATE_C = 1213; //获取广播公告信息列表
+  NOTICE_INFO_LIST_CLENT_GATE_S = 1214;
   CLIENT_GAME_END = 1299;
 
   CLIENTMSGID_END = 5000;
@@ -153,4 +156,18 @@ message goodsupdata_client_gate_g {
   int64 id = 2; //物品唯一id
   int32 cfgid = 3;
   int32 num = 4;//物品数量，0表示此物品删除
+}
+
+//广播公告信息
+message notice_info_clent_gate_g {
+  string info = 1;  //信息
+}
+
+//广播公告信息列表
+message notice_info_list_clent_gate_s {
+    message notice{
+        string info = 1; //信息
+        int32 time = 2; //时间戳
+    }
+    repeated notice datas = 1;
 }

@@ -40,7 +40,11 @@ namespace net {
     std::shared_ptr<TimerEvent> TimerReactorMgr::find(int k)
     {
         std::lock_guard<std::mutex> lock(times_mutex_);
-        return times_[k];
+        auto it = times_.find(k);
+        if (it == times_.end()) {
+            return nullptr;
+        }
+        return it->second;
     }
 } // namespace net
 } // namespace shynet

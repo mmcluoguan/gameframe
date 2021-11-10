@@ -47,7 +47,7 @@ struct TableStruct_world_2eproto {
     PROTOBUF_SECTION_VARIABLE(protodesc_cold);
   static const ::PROTOBUF_NAMESPACE_ID::internal::AuxiliaryParseTableField aux[]
     PROTOBUF_SECTION_VARIABLE(protodesc_cold);
-  static const ::PROTOBUF_NAMESPACE_ID::internal::ParseTable schema[3]
+  static const ::PROTOBUF_NAMESPACE_ID::internal::ParseTable schema[4]
     PROTOBUF_SECTION_VARIABLE(protodesc_cold);
   static const ::PROTOBUF_NAMESPACE_ID::internal::FieldMetadata field_metadata[];
   static const ::PROTOBUF_NAMESPACE_ID::internal::SerializationTable serialization_table[];
@@ -57,6 +57,9 @@ extern const ::PROTOBUF_NAMESPACE_ID::internal::DescriptorTable descriptor_table
 ::PROTOBUF_NAMESPACE_ID::Metadata descriptor_table_world_2eproto_metadata_getter(int index);
 namespace frmpub {
 namespace protocc {
+class noticeserver_world_game_g;
+struct noticeserver_world_game_gDefaultTypeInternal;
+extern noticeserver_world_game_gDefaultTypeInternal _noticeserver_world_game_g_default_instance_;
 class register_world_dbvisit_c;
 struct register_world_dbvisit_cDefaultTypeInternal;
 extern register_world_dbvisit_cDefaultTypeInternal _register_world_dbvisit_c_default_instance_;
@@ -69,6 +72,7 @@ extern seronline_world_gate_gDefaultTypeInternal _seronline_world_gate_g_default
 }  // namespace protocc
 }  // namespace frmpub
 PROTOBUF_NAMESPACE_OPEN
+template<> ::frmpub::protocc::noticeserver_world_game_g* Arena::CreateMaybeMessage<::frmpub::protocc::noticeserver_world_game_g>(Arena*);
 template<> ::frmpub::protocc::register_world_dbvisit_c* Arena::CreateMaybeMessage<::frmpub::protocc::register_world_dbvisit_c>(Arena*);
 template<> ::frmpub::protocc::register_world_dbvisit_s* Arena::CreateMaybeMessage<::frmpub::protocc::register_world_dbvisit_s>(Arena*);
 template<> ::frmpub::protocc::seronline_world_gate_g* Arena::CreateMaybeMessage<::frmpub::protocc::seronline_world_gate_g>(Arena*);
@@ -505,6 +509,150 @@ class seronline_world_gate_g PROTOBUF_FINAL :
   mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
   friend struct ::TableStruct_world_2eproto;
 };
+// -------------------------------------------------------------------
+
+class noticeserver_world_game_g PROTOBUF_FINAL :
+    public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:frmpub.protocc.noticeserver_world_game_g) */ {
+ public:
+  inline noticeserver_world_game_g() : noticeserver_world_game_g(nullptr) {}
+  virtual ~noticeserver_world_game_g();
+  explicit constexpr noticeserver_world_game_g(::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized);
+
+  noticeserver_world_game_g(const noticeserver_world_game_g& from);
+  noticeserver_world_game_g(noticeserver_world_game_g&& from) noexcept
+    : noticeserver_world_game_g() {
+    *this = ::std::move(from);
+  }
+
+  inline noticeserver_world_game_g& operator=(const noticeserver_world_game_g& from) {
+    CopyFrom(from);
+    return *this;
+  }
+  inline noticeserver_world_game_g& operator=(noticeserver_world_game_g&& from) noexcept {
+    if (GetArena() == from.GetArena()) {
+      if (this != &from) InternalSwap(&from);
+    } else {
+      CopyFrom(from);
+    }
+    return *this;
+  }
+
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* descriptor() {
+    return GetDescriptor();
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* GetDescriptor() {
+    return GetMetadataStatic().descriptor;
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Reflection* GetReflection() {
+    return GetMetadataStatic().reflection;
+  }
+  static const noticeserver_world_game_g& default_instance() {
+    return *internal_default_instance();
+  }
+  static inline const noticeserver_world_game_g* internal_default_instance() {
+    return reinterpret_cast<const noticeserver_world_game_g*>(
+               &_noticeserver_world_game_g_default_instance_);
+  }
+  static constexpr int kIndexInFileMessages =
+    3;
+
+  friend void swap(noticeserver_world_game_g& a, noticeserver_world_game_g& b) {
+    a.Swap(&b);
+  }
+  inline void Swap(noticeserver_world_game_g* other) {
+    if (other == this) return;
+    if (GetArena() == other->GetArena()) {
+      InternalSwap(other);
+    } else {
+      ::PROTOBUF_NAMESPACE_ID::internal::GenericSwap(this, other);
+    }
+  }
+  void UnsafeArenaSwap(noticeserver_world_game_g* other) {
+    if (other == this) return;
+    GOOGLE_DCHECK(GetArena() == other->GetArena());
+    InternalSwap(other);
+  }
+
+  // implements Message ----------------------------------------------
+
+  inline noticeserver_world_game_g* New() const final {
+    return CreateMaybeMessage<noticeserver_world_game_g>(nullptr);
+  }
+
+  noticeserver_world_game_g* New(::PROTOBUF_NAMESPACE_ID::Arena* arena) const final {
+    return CreateMaybeMessage<noticeserver_world_game_g>(arena);
+  }
+  void CopyFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) final;
+  void MergeFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) final;
+  void CopyFrom(const noticeserver_world_game_g& from);
+  void MergeFrom(const noticeserver_world_game_g& from);
+  PROTOBUF_ATTRIBUTE_REINITIALIZES void Clear() final;
+  bool IsInitialized() const final;
+
+  size_t ByteSizeLong() const final;
+  const char* _InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) final;
+  ::PROTOBUF_NAMESPACE_ID::uint8* _InternalSerialize(
+      ::PROTOBUF_NAMESPACE_ID::uint8* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const final;
+  int GetCachedSize() const final { return _cached_size_.Get(); }
+
+  private:
+  inline void SharedCtor();
+  inline void SharedDtor();
+  void SetCachedSize(int size) const final;
+  void InternalSwap(noticeserver_world_game_g* other);
+  friend class ::PROTOBUF_NAMESPACE_ID::internal::AnyMetadata;
+  static ::PROTOBUF_NAMESPACE_ID::StringPiece FullMessageName() {
+    return "frmpub.protocc.noticeserver_world_game_g";
+  }
+  protected:
+  explicit noticeserver_world_game_g(::PROTOBUF_NAMESPACE_ID::Arena* arena);
+  private:
+  static void ArenaDtor(void* object);
+  inline void RegisterArenaDtor(::PROTOBUF_NAMESPACE_ID::Arena* arena);
+  public:
+
+  ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadata() const final;
+  private:
+  static ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadataStatic() {
+    return ::descriptor_table_world_2eproto_metadata_getter(kIndexInFileMessages);
+  }
+
+  public:
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  enum : int {
+    kInfoFieldNumber = 1,
+  };
+  // string info = 1;
+  void clear_info();
+  const std::string& info() const;
+  void set_info(const std::string& value);
+  void set_info(std::string&& value);
+  void set_info(const char* value);
+  void set_info(const char* value, size_t size);
+  std::string* mutable_info();
+  std::string* release_info();
+  void set_allocated_info(std::string* info);
+  private:
+  const std::string& _internal_info() const;
+  void _internal_set_info(const std::string& value);
+  std::string* _internal_mutable_info();
+  public:
+
+  // @@protoc_insertion_point(class_scope:frmpub.protocc.noticeserver_world_game_g)
+ private:
+  class _Internal;
+
+  template <typename T> friend class ::PROTOBUF_NAMESPACE_ID::Arena::InternalHelper;
+  typedef void InternalArenaConstructable_;
+  typedef void DestructorSkippable_;
+  ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr info_;
+  mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
+  friend struct ::TableStruct_world_2eproto;
+};
 // ===================================================================
 
 
@@ -698,9 +846,76 @@ inline void seronline_world_gate_g::set_allocated_sif(::frmpub::protocc::ServerI
   // @@protoc_insertion_point(field_set_allocated:frmpub.protocc.seronline_world_gate_g.sif)
 }
 
+// -------------------------------------------------------------------
+
+// noticeserver_world_game_g
+
+// string info = 1;
+inline void noticeserver_world_game_g::clear_info() {
+  info_.ClearToEmpty();
+}
+inline const std::string& noticeserver_world_game_g::info() const {
+  // @@protoc_insertion_point(field_get:frmpub.protocc.noticeserver_world_game_g.info)
+  return _internal_info();
+}
+inline void noticeserver_world_game_g::set_info(const std::string& value) {
+  _internal_set_info(value);
+  // @@protoc_insertion_point(field_set:frmpub.protocc.noticeserver_world_game_g.info)
+}
+inline std::string* noticeserver_world_game_g::mutable_info() {
+  // @@protoc_insertion_point(field_mutable:frmpub.protocc.noticeserver_world_game_g.info)
+  return _internal_mutable_info();
+}
+inline const std::string& noticeserver_world_game_g::_internal_info() const {
+  return info_.Get();
+}
+inline void noticeserver_world_game_g::_internal_set_info(const std::string& value) {
+  
+  info_.Set(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, value, GetArena());
+}
+inline void noticeserver_world_game_g::set_info(std::string&& value) {
+  
+  info_.Set(
+    ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, ::std::move(value), GetArena());
+  // @@protoc_insertion_point(field_set_rvalue:frmpub.protocc.noticeserver_world_game_g.info)
+}
+inline void noticeserver_world_game_g::set_info(const char* value) {
+  GOOGLE_DCHECK(value != nullptr);
+  
+  info_.Set(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, ::std::string(value), GetArena());
+  // @@protoc_insertion_point(field_set_char:frmpub.protocc.noticeserver_world_game_g.info)
+}
+inline void noticeserver_world_game_g::set_info(const char* value,
+    size_t size) {
+  
+  info_.Set(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, ::std::string(
+      reinterpret_cast<const char*>(value), size), GetArena());
+  // @@protoc_insertion_point(field_set_pointer:frmpub.protocc.noticeserver_world_game_g.info)
+}
+inline std::string* noticeserver_world_game_g::_internal_mutable_info() {
+  
+  return info_.Mutable(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, GetArena());
+}
+inline std::string* noticeserver_world_game_g::release_info() {
+  // @@protoc_insertion_point(field_release:frmpub.protocc.noticeserver_world_game_g.info)
+  return info_.Release(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArena());
+}
+inline void noticeserver_world_game_g::set_allocated_info(std::string* info) {
+  if (info != nullptr) {
+    
+  } else {
+    
+  }
+  info_.SetAllocated(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), info,
+      GetArena());
+  // @@protoc_insertion_point(field_set_allocated:frmpub.protocc.noticeserver_world_game_g.info)
+}
+
 #ifdef __GNUC__
   #pragma GCC diagnostic pop
 #endif  // __GNUC__
+// -------------------------------------------------------------------
+
 // -------------------------------------------------------------------
 
 // -------------------------------------------------------------------

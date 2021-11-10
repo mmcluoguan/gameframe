@@ -1,3 +1,4 @@
+require('strings')
 AcceptMgr = require ("lua/gate/acceptMgr")
 ConnectorMgr =require ("lua/gate/connectorMgr")
 

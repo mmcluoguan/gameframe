@@ -34,11 +34,11 @@ public:
     /*
 	* 获取或设置连接id
 	*/
-    void login_conncet_id(int v)
+    void set_login_conncet_id(int v)
     {
         login_connect_id_ = v;
     }
-    int set_login_conncet_id() const
+    int login_conncet_id() const
     {
         return login_connect_id_;
     }

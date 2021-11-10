@@ -35,10 +35,13 @@ void FrmLuaWrapper::init(kaguya::State& state)
 
     using StackEnvelope = std::stack<FilterData::Envelope>;
     state["StackEnvelope_CPP"].setClass(kaguya::UserdataMetatable<StackEnvelope>()
+                                            .setConstructors<StackEnvelope()>()
                                             .addFunction("push",
                                                 static_cast<void (StackEnvelope::*)(const FilterData::Envelope&)>(&StackEnvelope::push))
                                             .addFunction("pop", &StackEnvelope::pop)
                                             .addFunction("size", &StackEnvelope::size)
+                                            .addFunction("copy",
+                                                static_cast<StackEnvelope& (StackEnvelope::*)(const StackEnvelope&)>(&StackEnvelope::operator=))
                                             .addFunction("top",
                                                 static_cast<const FilterData::Envelope& (StackEnvelope::*)() const>(&StackEnvelope::top)));
 

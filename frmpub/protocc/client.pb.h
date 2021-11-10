@@ -48,7 +48,7 @@ struct TableStruct_client_2eproto {
     PROTOBUF_SECTION_VARIABLE(protodesc_cold);
   static const ::PROTOBUF_NAMESPACE_ID::internal::AuxiliaryParseTableField aux[]
     PROTOBUF_SECTION_VARIABLE(protodesc_cold);
-  static const ::PROTOBUF_NAMESPACE_ID::internal::ParseTable schema[20]
+  static const ::PROTOBUF_NAMESPACE_ID::internal::ParseTable schema[23]
     PROTOBUF_SECTION_VARIABLE(protodesc_cold);
   static const ::PROTOBUF_NAMESPACE_ID::internal::FieldMetadata field_metadata[];
   static const ::PROTOBUF_NAMESPACE_ID::internal::SerializationTable serialization_table[];
@@ -94,6 +94,15 @@ extern login_client_gate_cDefaultTypeInternal _login_client_gate_c_default_insta
 class login_client_gate_s;
 struct login_client_gate_sDefaultTypeInternal;
 extern login_client_gate_sDefaultTypeInternal _login_client_gate_s_default_instance_;
+class notice_info_clent_gate_g;
+struct notice_info_clent_gate_gDefaultTypeInternal;
+extern notice_info_clent_gate_gDefaultTypeInternal _notice_info_clent_gate_g_default_instance_;
+class notice_info_list_clent_gate_s;
+struct notice_info_list_clent_gate_sDefaultTypeInternal;
+extern notice_info_list_clent_gate_sDefaultTypeInternal _notice_info_list_clent_gate_s_default_instance_;
+class notice_info_list_clent_gate_s_notice;
+struct notice_info_list_clent_gate_s_noticeDefaultTypeInternal;
+extern notice_info_list_clent_gate_s_noticeDefaultTypeInternal _notice_info_list_clent_gate_s_notice_default_instance_;
 class reconnect_client_gate_c;
 struct reconnect_client_gate_cDefaultTypeInternal;
 extern reconnect_client_gate_cDefaultTypeInternal _reconnect_client_gate_c_default_instance_;
@@ -133,6 +142,9 @@ template<> ::frmpub::protocc::loadrole_client_gate_c* Arena::CreateMaybeMessage<
 template<> ::frmpub::protocc::loadrole_client_gate_s* Arena::CreateMaybeMessage<::frmpub::protocc::loadrole_client_gate_s>(Arena*);
 template<> ::frmpub::protocc::login_client_gate_c* Arena::CreateMaybeMessage<::frmpub::protocc::login_client_gate_c>(Arena*);
 template<> ::frmpub::protocc::login_client_gate_s* Arena::CreateMaybeMessage<::frmpub::protocc::login_client_gate_s>(Arena*);
+template<> ::frmpub::protocc::notice_info_clent_gate_g* Arena::CreateMaybeMessage<::frmpub::protocc::notice_info_clent_gate_g>(Arena*);
+template<> ::frmpub::protocc::notice_info_list_clent_gate_s* Arena::CreateMaybeMessage<::frmpub::protocc::notice_info_list_clent_gate_s>(Arena*);
+template<> ::frmpub::protocc::notice_info_list_clent_gate_s_notice* Arena::CreateMaybeMessage<::frmpub::protocc::notice_info_list_clent_gate_s_notice>(Arena*);
 template<> ::frmpub::protocc::reconnect_client_gate_c* Arena::CreateMaybeMessage<::frmpub::protocc::reconnect_client_gate_c>(Arena*);
 template<> ::frmpub::protocc::reconnect_client_gate_s* Arena::CreateMaybeMessage<::frmpub::protocc::reconnect_client_gate_s>(Arena*);
 template<> ::frmpub::protocc::repeatlogin_client_gate_s* Arena::CreateMaybeMessage<::frmpub::protocc::repeatlogin_client_gate_s>(Arena*);
@@ -172,6 +184,9 @@ enum ClientMsgId : int {
   GMORDER_CLIENT_GATE_C = 1209,
   GMORDER_CLIENT_GATE_S = 1210,
   GOODSUPDATA_CLIENT_GATE_G = 1211,
+  NOTICE_INFO_CLENT_GATE_G = 1212,
+  NOTICE_INFO_LIST_CLENT_GATE_C = 1213,
+  NOTICE_INFO_LIST_CLENT_GATE_S = 1214,
   CLIENT_GAME_END = 1299,
   CLIENTMSGID_END = 5000,
   ClientMsgId_INT_MIN_SENTINEL_DO_NOT_USE_ = std::numeric_limits<::PROTOBUF_NAMESPACE_ID::int32>::min(),
@@ -3326,6 +3341,453 @@ class goodsupdata_client_gate_g PROTOBUF_FINAL :
   mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
   friend struct ::TableStruct_client_2eproto;
 };
+// -------------------------------------------------------------------
+
+class notice_info_clent_gate_g PROTOBUF_FINAL :
+    public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:frmpub.protocc.notice_info_clent_gate_g) */ {
+ public:
+  inline notice_info_clent_gate_g() : notice_info_clent_gate_g(nullptr) {}
+  virtual ~notice_info_clent_gate_g();
+  explicit constexpr notice_info_clent_gate_g(::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized);
+
+  notice_info_clent_gate_g(const notice_info_clent_gate_g& from);
+  notice_info_clent_gate_g(notice_info_clent_gate_g&& from) noexcept
+    : notice_info_clent_gate_g() {
+    *this = ::std::move(from);
+  }
+
+  inline notice_info_clent_gate_g& operator=(const notice_info_clent_gate_g& from) {
+    CopyFrom(from);
+    return *this;
+  }
+  inline notice_info_clent_gate_g& operator=(notice_info_clent_gate_g&& from) noexcept {
+    if (GetArena() == from.GetArena()) {
+      if (this != &from) InternalSwap(&from);
+    } else {
+      CopyFrom(from);
+    }
+    return *this;
+  }
+
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* descriptor() {
+    return GetDescriptor();
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* GetDescriptor() {
+    return GetMetadataStatic().descriptor;
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Reflection* GetReflection() {
+    return GetMetadataStatic().reflection;
+  }
+  static const notice_info_clent_gate_g& default_instance() {
+    return *internal_default_instance();
+  }
+  static inline const notice_info_clent_gate_g* internal_default_instance() {
+    return reinterpret_cast<const notice_info_clent_gate_g*>(
+               &_notice_info_clent_gate_g_default_instance_);
+  }
+  static constexpr int kIndexInFileMessages =
+    20;
+
+  friend void swap(notice_info_clent_gate_g& a, notice_info_clent_gate_g& b) {
+    a.Swap(&b);
+  }
+  inline void Swap(notice_info_clent_gate_g* other) {
+    if (other == this) return;
+    if (GetArena() == other->GetArena()) {
+      InternalSwap(other);
+    } else {
+      ::PROTOBUF_NAMESPACE_ID::internal::GenericSwap(this, other);
+    }
+  }
+  void UnsafeArenaSwap(notice_info_clent_gate_g* other) {
+    if (other == this) return;
+    GOOGLE_DCHECK(GetArena() == other->GetArena());
+    InternalSwap(other);
+  }
+
+  // implements Message ----------------------------------------------
+
+  inline notice_info_clent_gate_g* New() const final {
+    return CreateMaybeMessage<notice_info_clent_gate_g>(nullptr);
+  }
+
+  notice_info_clent_gate_g* New(::PROTOBUF_NAMESPACE_ID::Arena* arena) const final {
+    return CreateMaybeMessage<notice_info_clent_gate_g>(arena);
+  }
+  void CopyFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) final;
+  void MergeFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) final;
+  void CopyFrom(const notice_info_clent_gate_g& from);
+  void MergeFrom(const notice_info_clent_gate_g& from);
+  PROTOBUF_ATTRIBUTE_REINITIALIZES void Clear() final;
+  bool IsInitialized() const final;
+
+  size_t ByteSizeLong() const final;
+  const char* _InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) final;
+  ::PROTOBUF_NAMESPACE_ID::uint8* _InternalSerialize(
+      ::PROTOBUF_NAMESPACE_ID::uint8* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const final;
+  int GetCachedSize() const final { return _cached_size_.Get(); }
+
+  private:
+  inline void SharedCtor();
+  inline void SharedDtor();
+  void SetCachedSize(int size) const final;
+  void InternalSwap(notice_info_clent_gate_g* other);
+  friend class ::PROTOBUF_NAMESPACE_ID::internal::AnyMetadata;
+  static ::PROTOBUF_NAMESPACE_ID::StringPiece FullMessageName() {
+    return "frmpub.protocc.notice_info_clent_gate_g";
+  }
+  protected:
+  explicit notice_info_clent_gate_g(::PROTOBUF_NAMESPACE_ID::Arena* arena);
+  private:
+  static void ArenaDtor(void* object);
+  inline void RegisterArenaDtor(::PROTOBUF_NAMESPACE_ID::Arena* arena);
+  public:
+
+  ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadata() const final;
+  private:
+  static ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadataStatic() {
+    return ::descriptor_table_client_2eproto_metadata_getter(kIndexInFileMessages);
+  }
+
+  public:
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  enum : int {
+    kInfoFieldNumber = 1,
+  };
+  // string info = 1;
+  void clear_info();
+  const std::string& info() const;
+  void set_info(const std::string& value);
+  void set_info(std::string&& value);
+  void set_info(const char* value);
+  void set_info(const char* value, size_t size);
+  std::string* mutable_info();
+  std::string* release_info();
+  void set_allocated_info(std::string* info);
+  private:
+  const std::string& _internal_info() const;
+  void _internal_set_info(const std::string& value);
+  std::string* _internal_mutable_info();
+  public:
+
+  // @@protoc_insertion_point(class_scope:frmpub.protocc.notice_info_clent_gate_g)
+ private:
+  class _Internal;
+
+  template <typename T> friend class ::PROTOBUF_NAMESPACE_ID::Arena::InternalHelper;
+  typedef void InternalArenaConstructable_;
+  typedef void DestructorSkippable_;
+  ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr info_;
+  mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
+  friend struct ::TableStruct_client_2eproto;
+};
+// -------------------------------------------------------------------
+
+class notice_info_list_clent_gate_s_notice PROTOBUF_FINAL :
+    public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:frmpub.protocc.notice_info_list_clent_gate_s.notice) */ {
+ public:
+  inline notice_info_list_clent_gate_s_notice() : notice_info_list_clent_gate_s_notice(nullptr) {}
+  virtual ~notice_info_list_clent_gate_s_notice();
+  explicit constexpr notice_info_list_clent_gate_s_notice(::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized);
+
+  notice_info_list_clent_gate_s_notice(const notice_info_list_clent_gate_s_notice& from);
+  notice_info_list_clent_gate_s_notice(notice_info_list_clent_gate_s_notice&& from) noexcept
+    : notice_info_list_clent_gate_s_notice() {
+    *this = ::std::move(from);
+  }
+
+  inline notice_info_list_clent_gate_s_notice& operator=(const notice_info_list_clent_gate_s_notice& from) {
+    CopyFrom(from);
+    return *this;
+  }
+  inline notice_info_list_clent_gate_s_notice& operator=(notice_info_list_clent_gate_s_notice&& from) noexcept {
+    if (GetArena() == from.GetArena()) {
+      if (this != &from) InternalSwap(&from);
+    } else {
+      CopyFrom(from);
+    }
+    return *this;
+  }
+
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* descriptor() {
+    return GetDescriptor();
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* GetDescriptor() {
+    return GetMetadataStatic().descriptor;
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Reflection* GetReflection() {
+    return GetMetadataStatic().reflection;
+  }
+  static const notice_info_list_clent_gate_s_notice& default_instance() {
+    return *internal_default_instance();
+  }
+  static inline const notice_info_list_clent_gate_s_notice* internal_default_instance() {
+    return reinterpret_cast<const notice_info_list_clent_gate_s_notice*>(
+               &_notice_info_list_clent_gate_s_notice_default_instance_);
+  }
+  static constexpr int kIndexInFileMessages =
+    21;
+
+  friend void swap(notice_info_list_clent_gate_s_notice& a, notice_info_list_clent_gate_s_notice& b) {
+    a.Swap(&b);
+  }
+  inline void Swap(notice_info_list_clent_gate_s_notice* other) {
+    if (other == this) return;
+    if (GetArena() == other->GetArena()) {
+      InternalSwap(other);
+    } else {
+      ::PROTOBUF_NAMESPACE_ID::internal::GenericSwap(this, other);
+    }
+  }
+  void UnsafeArenaSwap(notice_info_list_clent_gate_s_notice* other) {
+    if (other == this) return;
+    GOOGLE_DCHECK(GetArena() == other->GetArena());
+    InternalSwap(other);
+  }
+
+  // implements Message ----------------------------------------------
+
+  inline notice_info_list_clent_gate_s_notice* New() const final {
+    return CreateMaybeMessage<notice_info_list_clent_gate_s_notice>(nullptr);
+  }
+
+  notice_info_list_clent_gate_s_notice* New(::PROTOBUF_NAMESPACE_ID::Arena* arena) const final {
+    return CreateMaybeMessage<notice_info_list_clent_gate_s_notice>(arena);
+  }
+  void CopyFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) final;
+  void MergeFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) final;
+  void CopyFrom(const notice_info_list_clent_gate_s_notice& from);
+  void MergeFrom(const notice_info_list_clent_gate_s_notice& from);
+  PROTOBUF_ATTRIBUTE_REINITIALIZES void Clear() final;
+  bool IsInitialized() const final;
+
+  size_t ByteSizeLong() const final;
+  const char* _InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) final;
+  ::PROTOBUF_NAMESPACE_ID::uint8* _InternalSerialize(
+      ::PROTOBUF_NAMESPACE_ID::uint8* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const final;
+  int GetCachedSize() const final { return _cached_size_.Get(); }
+
+  private:
+  inline void SharedCtor();
+  inline void SharedDtor();
+  void SetCachedSize(int size) const final;
+  void InternalSwap(notice_info_list_clent_gate_s_notice* other);
+  friend class ::PROTOBUF_NAMESPACE_ID::internal::AnyMetadata;
+  static ::PROTOBUF_NAMESPACE_ID::StringPiece FullMessageName() {
+    return "frmpub.protocc.notice_info_list_clent_gate_s.notice";
+  }
+  protected:
+  explicit notice_info_list_clent_gate_s_notice(::PROTOBUF_NAMESPACE_ID::Arena* arena);
+  private:
+  static void ArenaDtor(void* object);
+  inline void RegisterArenaDtor(::PROTOBUF_NAMESPACE_ID::Arena* arena);
+  public:
+
+  ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadata() const final;
+  private:
+  static ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadataStatic() {
+    return ::descriptor_table_client_2eproto_metadata_getter(kIndexInFileMessages);
+  }
+
+  public:
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  enum : int {
+    kInfoFieldNumber = 1,
+    kTimeFieldNumber = 2,
+  };
+  // string info = 1;
+  void clear_info();
+  const std::string& info() const;
+  void set_info(const std::string& value);
+  void set_info(std::string&& value);
+  void set_info(const char* value);
+  void set_info(const char* value, size_t size);
+  std::string* mutable_info();
+  std::string* release_info();
+  void set_allocated_info(std::string* info);
+  private:
+  const std::string& _internal_info() const;
+  void _internal_set_info(const std::string& value);
+  std::string* _internal_mutable_info();
+  public:
+
+  // int32 time = 2;
+  void clear_time();
+  ::PROTOBUF_NAMESPACE_ID::int32 time() const;
+  void set_time(::PROTOBUF_NAMESPACE_ID::int32 value);
+  private:
+  ::PROTOBUF_NAMESPACE_ID::int32 _internal_time() const;
+  void _internal_set_time(::PROTOBUF_NAMESPACE_ID::int32 value);
+  public:
+
+  // @@protoc_insertion_point(class_scope:frmpub.protocc.notice_info_list_clent_gate_s.notice)
+ private:
+  class _Internal;
+
+  template <typename T> friend class ::PROTOBUF_NAMESPACE_ID::Arena::InternalHelper;
+  typedef void InternalArenaConstructable_;
+  typedef void DestructorSkippable_;
+  ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr info_;
+  ::PROTOBUF_NAMESPACE_ID::int32 time_;
+  mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
+  friend struct ::TableStruct_client_2eproto;
+};
+// -------------------------------------------------------------------
+
+class notice_info_list_clent_gate_s PROTOBUF_FINAL :
+    public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:frmpub.protocc.notice_info_list_clent_gate_s) */ {
+ public:
+  inline notice_info_list_clent_gate_s() : notice_info_list_clent_gate_s(nullptr) {}
+  virtual ~notice_info_list_clent_gate_s();
+  explicit constexpr notice_info_list_clent_gate_s(::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized);
+
+  notice_info_list_clent_gate_s(const notice_info_list_clent_gate_s& from);
+  notice_info_list_clent_gate_s(notice_info_list_clent_gate_s&& from) noexcept
+    : notice_info_list_clent_gate_s() {
+    *this = ::std::move(from);
+  }
+
+  inline notice_info_list_clent_gate_s& operator=(const notice_info_list_clent_gate_s& from) {
+    CopyFrom(from);
+    return *this;
+  }
+  inline notice_info_list_clent_gate_s& operator=(notice_info_list_clent_gate_s&& from) noexcept {
+    if (GetArena() == from.GetArena()) {
+      if (this != &from) InternalSwap(&from);
+    } else {
+      CopyFrom(from);
+    }
+    return *this;
+  }
+
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* descriptor() {
+    return GetDescriptor();
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* GetDescriptor() {
+    return GetMetadataStatic().descriptor;
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Reflection* GetReflection() {
+    return GetMetadataStatic().reflection;
+  }
+  static const notice_info_list_clent_gate_s& default_instance() {
+    return *internal_default_instance();
+  }
+  static inline const notice_info_list_clent_gate_s* internal_default_instance() {
+    return reinterpret_cast<const notice_info_list_clent_gate_s*>(
+               &_notice_info_list_clent_gate_s_default_instance_);
+  }
+  static constexpr int kIndexInFileMessages =
+    22;
+
+  friend void swap(notice_info_list_clent_gate_s& a, notice_info_list_clent_gate_s& b) {
+    a.Swap(&b);
+  }
+  inline void Swap(notice_info_list_clent_gate_s* other) {
+    if (other == this) return;
+    if (GetArena() == other->GetArena()) {
+      InternalSwap(other);
+    } else {
+      ::PROTOBUF_NAMESPACE_ID::internal::GenericSwap(this, other);
+    }
+  }
+  void UnsafeArenaSwap(notice_info_list_clent_gate_s* other) {
+    if (other == this) return;
+    GOOGLE_DCHECK(GetArena() == other->GetArena());
+    InternalSwap(other);
+  }
+
+  // implements Message ----------------------------------------------
+
+  inline notice_info_list_clent_gate_s* New() const final {
+    return CreateMaybeMessage<notice_info_list_clent_gate_s>(nullptr);
+  }
+
+  notice_info_list_clent_gate_s* New(::PROTOBUF_NAMESPACE_ID::Arena* arena) const final {
+    return CreateMaybeMessage<notice_info_list_clent_gate_s>(arena);
+  }
+  void CopyFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) final;
+  void MergeFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) final;
+  void CopyFrom(const notice_info_list_clent_gate_s& from);
+  void MergeFrom(const notice_info_list_clent_gate_s& from);
+  PROTOBUF_ATTRIBUTE_REINITIALIZES void Clear() final;
+  bool IsInitialized() const final;
+
+  size_t ByteSizeLong() const final;
+  const char* _InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) final;
+  ::PROTOBUF_NAMESPACE_ID::uint8* _InternalSerialize(
+      ::PROTOBUF_NAMESPACE_ID::uint8* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const final;
+  int GetCachedSize() const final { return _cached_size_.Get(); }
+
+  private:
+  inline void SharedCtor();
+  inline void SharedDtor();
+  void SetCachedSize(int size) const final;
+  void InternalSwap(notice_info_list_clent_gate_s* other);
+  friend class ::PROTOBUF_NAMESPACE_ID::internal::AnyMetadata;
+  static ::PROTOBUF_NAMESPACE_ID::StringPiece FullMessageName() {
+    return "frmpub.protocc.notice_info_list_clent_gate_s";
+  }
+  protected:
+  explicit notice_info_list_clent_gate_s(::PROTOBUF_NAMESPACE_ID::Arena* arena);
+  private:
+  static void ArenaDtor(void* object);
+  inline void RegisterArenaDtor(::PROTOBUF_NAMESPACE_ID::Arena* arena);
+  public:
+
+  ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadata() const final;
+  private:
+  static ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadataStatic() {
+    return ::descriptor_table_client_2eproto_metadata_getter(kIndexInFileMessages);
+  }
+
+  public:
+
+  // nested types ----------------------------------------------------
+
+  typedef notice_info_list_clent_gate_s_notice notice;
+
+  // accessors -------------------------------------------------------
+
+  enum : int {
+    kDatasFieldNumber = 1,
+  };
+  // repeated .frmpub.protocc.notice_info_list_clent_gate_s.notice datas = 1;
+  int datas_size() const;
+  private:
+  int _internal_datas_size() const;
+  public:
+  void clear_datas();
+  ::frmpub::protocc::notice_info_list_clent_gate_s_notice* mutable_datas(int index);
+  ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::frmpub::protocc::notice_info_list_clent_gate_s_notice >*
+      mutable_datas();
+  private:
+  const ::frmpub::protocc::notice_info_list_clent_gate_s_notice& _internal_datas(int index) const;
+  ::frmpub::protocc::notice_info_list_clent_gate_s_notice* _internal_add_datas();
+  public:
+  const ::frmpub::protocc::notice_info_list_clent_gate_s_notice& datas(int index) const;
+  ::frmpub::protocc::notice_info_list_clent_gate_s_notice* add_datas();
+  const ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::frmpub::protocc::notice_info_list_clent_gate_s_notice >&
+      datas() const;
+
+  // @@protoc_insertion_point(class_scope:frmpub.protocc.notice_info_list_clent_gate_s)
+ private:
+  class _Internal;
+
+  template <typename T> friend class ::PROTOBUF_NAMESPACE_ID::Arena::InternalHelper;
+  typedef void InternalArenaConstructable_;
+  typedef void DestructorSkippable_;
+  ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::frmpub::protocc::notice_info_list_clent_gate_s_notice > datas_;
+  mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
+  friend struct ::TableStruct_client_2eproto;
+};
 // ===================================================================
 
 
@@ -4915,9 +5377,208 @@ inline void goodsupdata_client_gate_g::set_num(::PROTOBUF_NAMESPACE_ID::int32 va
   // @@protoc_insertion_point(field_set:frmpub.protocc.goodsupdata_client_gate_g.num)
 }
 
+// -------------------------------------------------------------------
+
+// notice_info_clent_gate_g
+
+// string info = 1;
+inline void notice_info_clent_gate_g::clear_info() {
+  info_.ClearToEmpty();
+}
+inline const std::string& notice_info_clent_gate_g::info() const {
+  // @@protoc_insertion_point(field_get:frmpub.protocc.notice_info_clent_gate_g.info)
+  return _internal_info();
+}
+inline void notice_info_clent_gate_g::set_info(const std::string& value) {
+  _internal_set_info(value);
+  // @@protoc_insertion_point(field_set:frmpub.protocc.notice_info_clent_gate_g.info)
+}
+inline std::string* notice_info_clent_gate_g::mutable_info() {
+  // @@protoc_insertion_point(field_mutable:frmpub.protocc.notice_info_clent_gate_g.info)
+  return _internal_mutable_info();
+}
+inline const std::string& notice_info_clent_gate_g::_internal_info() const {
+  return info_.Get();
+}
+inline void notice_info_clent_gate_g::_internal_set_info(const std::string& value) {
+  
+  info_.Set(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, value, GetArena());
+}
+inline void notice_info_clent_gate_g::set_info(std::string&& value) {
+  
+  info_.Set(
+    ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, ::std::move(value), GetArena());
+  // @@protoc_insertion_point(field_set_rvalue:frmpub.protocc.notice_info_clent_gate_g.info)
+}
+inline void notice_info_clent_gate_g::set_info(const char* value) {
+  GOOGLE_DCHECK(value != nullptr);
+  
+  info_.Set(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, ::std::string(value), GetArena());
+  // @@protoc_insertion_point(field_set_char:frmpub.protocc.notice_info_clent_gate_g.info)
+}
+inline void notice_info_clent_gate_g::set_info(const char* value,
+    size_t size) {
+  
+  info_.Set(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, ::std::string(
+      reinterpret_cast<const char*>(value), size), GetArena());
+  // @@protoc_insertion_point(field_set_pointer:frmpub.protocc.notice_info_clent_gate_g.info)
+}
+inline std::string* notice_info_clent_gate_g::_internal_mutable_info() {
+  
+  return info_.Mutable(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, GetArena());
+}
+inline std::string* notice_info_clent_gate_g::release_info() {
+  // @@protoc_insertion_point(field_release:frmpub.protocc.notice_info_clent_gate_g.info)
+  return info_.Release(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArena());
+}
+inline void notice_info_clent_gate_g::set_allocated_info(std::string* info) {
+  if (info != nullptr) {
+    
+  } else {
+    
+  }
+  info_.SetAllocated(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), info,
+      GetArena());
+  // @@protoc_insertion_point(field_set_allocated:frmpub.protocc.notice_info_clent_gate_g.info)
+}
+
+// -------------------------------------------------------------------
+
+// notice_info_list_clent_gate_s_notice
+
+// string info = 1;
+inline void notice_info_list_clent_gate_s_notice::clear_info() {
+  info_.ClearToEmpty();
+}
+inline const std::string& notice_info_list_clent_gate_s_notice::info() const {
+  // @@protoc_insertion_point(field_get:frmpub.protocc.notice_info_list_clent_gate_s.notice.info)
+  return _internal_info();
+}
+inline void notice_info_list_clent_gate_s_notice::set_info(const std::string& value) {
+  _internal_set_info(value);
+  // @@protoc_insertion_point(field_set:frmpub.protocc.notice_info_list_clent_gate_s.notice.info)
+}
+inline std::string* notice_info_list_clent_gate_s_notice::mutable_info() {
+  // @@protoc_insertion_point(field_mutable:frmpub.protocc.notice_info_list_clent_gate_s.notice.info)
+  return _internal_mutable_info();
+}
+inline const std::string& notice_info_list_clent_gate_s_notice::_internal_info() const {
+  return info_.Get();
+}
+inline void notice_info_list_clent_gate_s_notice::_internal_set_info(const std::string& value) {
+  
+  info_.Set(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, value, GetArena());
+}
+inline void notice_info_list_clent_gate_s_notice::set_info(std::string&& value) {
+  
+  info_.Set(
+    ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, ::std::move(value), GetArena());
+  // @@protoc_insertion_point(field_set_rvalue:frmpub.protocc.notice_info_list_clent_gate_s.notice.info)
+}
+inline void notice_info_list_clent_gate_s_notice::set_info(const char* value) {
+  GOOGLE_DCHECK(value != nullptr);
+  
+  info_.Set(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, ::std::string(value), GetArena());
+  // @@protoc_insertion_point(field_set_char:frmpub.protocc.notice_info_list_clent_gate_s.notice.info)
+}
+inline void notice_info_list_clent_gate_s_notice::set_info(const char* value,
+    size_t size) {
+  
+  info_.Set(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, ::std::string(
+      reinterpret_cast<const char*>(value), size), GetArena());
+  // @@protoc_insertion_point(field_set_pointer:frmpub.protocc.notice_info_list_clent_gate_s.notice.info)
+}
+inline std::string* notice_info_list_clent_gate_s_notice::_internal_mutable_info() {
+  
+  return info_.Mutable(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, GetArena());
+}
+inline std::string* notice_info_list_clent_gate_s_notice::release_info() {
+  // @@protoc_insertion_point(field_release:frmpub.protocc.notice_info_list_clent_gate_s.notice.info)
+  return info_.Release(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArena());
+}
+inline void notice_info_list_clent_gate_s_notice::set_allocated_info(std::string* info) {
+  if (info != nullptr) {
+    
+  } else {
+    
+  }
+  info_.SetAllocated(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), info,
+      GetArena());
+  // @@protoc_insertion_point(field_set_allocated:frmpub.protocc.notice_info_list_clent_gate_s.notice.info)
+}
+
+// int32 time = 2;
+inline void notice_info_list_clent_gate_s_notice::clear_time() {
+  time_ = 0;
+}
+inline ::PROTOBUF_NAMESPACE_ID::int32 notice_info_list_clent_gate_s_notice::_internal_time() const {
+  return time_;
+}
+inline ::PROTOBUF_NAMESPACE_ID::int32 notice_info_list_clent_gate_s_notice::time() const {
+  // @@protoc_insertion_point(field_get:frmpub.protocc.notice_info_list_clent_gate_s.notice.time)
+  return _internal_time();
+}
+inline void notice_info_list_clent_gate_s_notice::_internal_set_time(::PROTOBUF_NAMESPACE_ID::int32 value) {
+  
+  time_ = value;
+}
+inline void notice_info_list_clent_gate_s_notice::set_time(::PROTOBUF_NAMESPACE_ID::int32 value) {
+  _internal_set_time(value);
+  // @@protoc_insertion_point(field_set:frmpub.protocc.notice_info_list_clent_gate_s.notice.time)
+}
+
+// -------------------------------------------------------------------
+
+// notice_info_list_clent_gate_s
+
+// repeated .frmpub.protocc.notice_info_list_clent_gate_s.notice datas = 1;
+inline int notice_info_list_clent_gate_s::_internal_datas_size() const {
+  return datas_.size();
+}
+inline int notice_info_list_clent_gate_s::datas_size() const {
+  return _internal_datas_size();
+}
+inline void notice_info_list_clent_gate_s::clear_datas() {
+  datas_.Clear();
+}
+inline ::frmpub::protocc::notice_info_list_clent_gate_s_notice* notice_info_list_clent_gate_s::mutable_datas(int index) {
+  // @@protoc_insertion_point(field_mutable:frmpub.protocc.notice_info_list_clent_gate_s.datas)
+  return datas_.Mutable(index);
+}
+inline ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::frmpub::protocc::notice_info_list_clent_gate_s_notice >*
+notice_info_list_clent_gate_s::mutable_datas() {
+  // @@protoc_insertion_point(field_mutable_list:frmpub.protocc.notice_info_list_clent_gate_s.datas)
+  return &datas_;
+}
+inline const ::frmpub::protocc::notice_info_list_clent_gate_s_notice& notice_info_list_clent_gate_s::_internal_datas(int index) const {
+  return datas_.Get(index);
+}
+inline const ::frmpub::protocc::notice_info_list_clent_gate_s_notice& notice_info_list_clent_gate_s::datas(int index) const {
+  // @@protoc_insertion_point(field_get:frmpub.protocc.notice_info_list_clent_gate_s.datas)
+  return _internal_datas(index);
+}
+inline ::frmpub::protocc::notice_info_list_clent_gate_s_notice* notice_info_list_clent_gate_s::_internal_add_datas() {
+  return datas_.Add();
+}
+inline ::frmpub::protocc::notice_info_list_clent_gate_s_notice* notice_info_list_clent_gate_s::add_datas() {
+  // @@protoc_insertion_point(field_add:frmpub.protocc.notice_info_list_clent_gate_s.datas)
+  return _internal_add_datas();
+}
+inline const ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::frmpub::protocc::notice_info_list_clent_gate_s_notice >&
+notice_info_list_clent_gate_s::datas() const {
+  // @@protoc_insertion_point(field_list:frmpub.protocc.notice_info_list_clent_gate_s.datas)
+  return datas_;
+}
+
 #ifdef __GNUC__
   #pragma GCC diagnostic pop
 #endif  // __GNUC__
+// -------------------------------------------------------------------
+
+// -------------------------------------------------------------------
+
+// -------------------------------------------------------------------
+
 // -------------------------------------------------------------------
 
 // -------------------------------------------------------------------

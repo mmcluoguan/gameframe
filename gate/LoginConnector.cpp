@@ -111,8 +111,9 @@ int LoginConnector::forward_login_client_c(std::shared_ptr<protocc::CommonObject
     std::shared_ptr<std::stack<FilterData::Envelope>> enves)
 {
     if (enves->empty() == false) {
-        FilterData::Envelope& env = enves->top();
-        enves->pop();
+        std::stack<FilterData::Envelope> copy_enves = *enves;
+        FilterData::Envelope& env = copy_enves.top();
+        copy_enves.pop();
         std::shared_ptr<GateClient> client = shynet::utils::Singleton<GateClientMgr>::instance().find(env.fd);
         if (client != nullptr) {
             if (data->msgid() == protocc::LOGIN_CLIENT_GATE_S) {
@@ -142,7 +143,7 @@ int LoginConnector::forward_login_client_c(std::shared_ptr<protocc::CommonObject
                         int conncetid = shynet::utils::Singleton<ConnectorMgr>::instance().sid_conv_connect_id(msgc.gameid());
                         auto game = shynet::utils::Singleton<ConnectorMgr>::instance().game_connector(conncetid);
                         if (game != nullptr) {
-                            game->send_proto(data.get());
+                            game->send_proto(data.get(), enves.get());
                             LOG_DEBUG << "通知游戏服玩家断线重连成功" << frmpub::Basic::msgname(data->msgid());
                         }
                     }

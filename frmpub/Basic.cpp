@@ -3,6 +3,24 @@
 
 namespace frmpub {
 
+rapidjson::Value& get_json_value(rapidjson::Value& jv, std::string key)
+{
+    auto iter = jv.FindMember(key.c_str());
+    if (iter != jv.MemberEnd()) {
+        return iter->value;
+    }
+    THROW_EXCEPTION("找不到json key:" + key);
+}
+
+rapidjson::Value& get_json_value(rapidjson::Document& doc, std::string key)
+{
+    auto iter = doc.FindMember(key.c_str());
+    if (iter != doc.MemberEnd()) {
+        return iter->value;
+    }
+    THROW_EXCEPTION("找不到json key:" + key);
+}
+
 std::string Basic::internal_msgname(int id)
 {
     return "(" + frmpub::protocc::InternalMsgId_Name(id) + ":" + std::to_string(id) + ")";

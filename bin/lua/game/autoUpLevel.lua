@@ -10,6 +10,7 @@ function autoUpLevel:uplevel()
             --保存等级到db
             local savedata = {
                 cache_key = 'role_' .. v.id,
+                opertype = 0,
                 fields = {
                     { key = 'level', value = tostring(v.level),},
                 }

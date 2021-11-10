@@ -83,8 +83,7 @@ namespace protocol {
         } else if (requset_.step() == Step::Parse) {
             size_t data_length = requset_.data_length();
             if (data_length == 0) {
-                LOG_WARN << "没有数据";
-                return -1;
+                LOG_WARN << "没有POST数据";
             } else {
                 if (inputbuffer->length() >= data_length) {
                     std::unique_ptr<char[]> original_data(new char[data_length]);
@@ -96,6 +95,7 @@ namespace protocol {
                     if (ret == -1) {
                         return -1;
                     }
+                    requset_.set_step(Step::UNINIT);
                 } else {
                     LOG_WARN << "数据包数据不足,需要data_length:" << data_length << " 当前:" << inputbuffer->length();
                     inputbuffer->prependbuffer(restore);
@@ -117,12 +117,12 @@ namespace protocol {
             restore->addprintf("\r\n");
             inputbuffer->unlock();
             if (line == nullptr) {
-                delete line;
+                je_free(line);
                 LOG_WARN << "协议错误";
                 return -1;
             } else {
                 std::string strline(line, len);
-                delete line;
+                je_free(line);
                 int ret = responses_.responses_uninit(strline);
                 if (ret == -1) {
                     return -1;
@@ -136,7 +136,7 @@ namespace protocol {
             restore->addprintf("\r\n");
             inputbuffer->unlock();
             std::string strline(line, len);
-            delete line;
+            je_free(line);
             int ret = responses_.responses_init(strline);
             if (ret == -1) {
                 return -1;
@@ -144,9 +144,9 @@ namespace protocol {
         } else if (responses_.step() == Step::Parse) {
             size_t data_length = responses_.data_length();
             if (data_length == 0) {
-                LOG_WARN << "没有数据";
+                LOG_WARN << "没有POST数据";
             } else {
-                if (inputbuffer->length() > data_length) {
+                if (inputbuffer->length() >= data_length) {
                     std::unique_ptr<char[]> original_data(new char[data_length]);
                     inputbuffer->lock();
                     inputbuffer->remove(original_data.get(), data_length);
@@ -156,9 +156,9 @@ namespace protocol {
                     if (ret == -1) {
                         return -1;
                     }
+                    responses_.set_step(Step::UNINIT);
                 } else {
                     LOG_WARN << "数据包数据不足,需要data_length:" << data_length << " 当前:" << inputbuffer->length();
-                    ;
                     inputbuffer->prependbuffer(restore);
                     return 0;
                 }
@@ -236,6 +236,7 @@ namespace protocol {
             memcpy(data_buffer.get() + pos, data, len);
             std::shared_ptr<events::EventBuffer> io = filter_->iobuf();
             if (io != nullptr) {
+                std::string ccc(data_buffer.get(), total_data_len);
                 return io->write(data_buffer.get(), total_data_len);
             }
             return -1;

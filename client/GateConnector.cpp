@@ -34,6 +34,10 @@ GateConnector::GateConnector(std::shared_ptr<net::IPAddress> connect_addr,
             std::bind(&GateConnector::createrole_client_gate_s, this, std::placeholders::_1, std::placeholders::_2) },
         { protocc::GMORDER_CLIENT_GATE_S,
             std::bind(&GateConnector::gmorder_client_gate_s, this, std::placeholders::_1, std::placeholders::_2) },
+        { protocc::NOTICE_INFO_CLENT_GATE_G,
+            std::bind(&GateConnector::notice_info_clent_gate_g, this, std::placeholders::_1, std::placeholders::_2) },
+        { protocc::NOTICE_INFO_LIST_CLENT_GATE_S,
+            std::bind(&GateConnector::notice_info_list_clent_gate_s, this, std::placeholders::_1, std::placeholders::_2) },
     };
 }
 GateConnector::~GateConnector()
@@ -84,7 +88,6 @@ void GateConnector::complete()
 int GateConnector::input_handle(std::shared_ptr<protocc::CommonObject> obj, std::shared_ptr<std::stack<FilterData::Envelope>> enves)
 {
     if (obj != nullptr) {
-        LOG_DEBUG << "消息" << frmpub::Basic::msgname(100);
         auto it = pmb_.find(obj->msgid());
         if (it != pmb_.end()) {
             return it->second(obj, enves);
@@ -247,6 +250,41 @@ int GateConnector::gmorder_client_gate_s(std::shared_ptr<protocc::CommonObject> 
     protocc::gmorder_client_gate_s msgs;
     if (msgs.ParseFromString(data->msgdata()) == true) {
         LOG_DEBUG << "gm命令:" << msgs.order() << " 操作结果:" << msgs.desc();
+    } else {
+        std::stringstream stream;
+        stream << "消息" << frmpub::Basic::msgname(data->msgid()) << "解析错误";
+        SEND_ERR(protocc::MESSAGE_PARSING_ERROR, stream.str());
+    }
+    return 0;
+}
+
+int GateConnector::notice_info_clent_gate_g(std::shared_ptr<protocc::CommonObject> data, std::shared_ptr<std::stack<FilterData::Envelope>> enves)
+{
+    protocc::notice_info_clent_gate_g gmsg;
+    if (gmsg.ParseFromString(data->msgdata()) == true) {
+        LOG_DEBUG << "区服广播信息 info:" << gmsg.info();
+    } else {
+        std::stringstream stream;
+        stream << "消息" << frmpub::Basic::msgname(data->msgid()) << "解析错误";
+        SEND_ERR(protocc::MESSAGE_PARSING_ERROR, stream.str());
+    }
+    return 0;
+}
+
+int GateConnector::notice_info_list_clent_gate_s(std::shared_ptr<protocc::CommonObject> data, std::shared_ptr<std::stack<FilterData::Envelope>> enves)
+{
+    protocc::notice_info_list_clent_gate_s gmsg;
+    if (gmsg.ParseFromString(data->msgdata()) == true) {
+        for (auto& item : gmsg.datas()) {
+            auto second = std::chrono::seconds(item.time());
+            auto tp = std::chrono::time_point<std::chrono::system_clock, std::chrono::seconds>(second);
+            auto tt = std::chrono::system_clock::to_time_t(tp);
+            std::tm* tm_time = std::gmtime(&tt);
+            char timebuf[30] = { 0 };
+            strftime(timebuf, sizeof(timebuf), "%F_%T", tm_time);
+
+            LOG_INFO_BASE << "  区服广播信息 info:" << item.info() << " 时间:" << timebuf;
+        }
     } else {
         std::stringstream stream;
         stream << "消息" << frmpub::Basic::msgname(data->msgid()) << "解析错误";

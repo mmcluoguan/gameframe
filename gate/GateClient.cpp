@@ -64,26 +64,25 @@ void GateClient::close(bool active)
         ConnectorMgr& mgr = shynet::utils::Singleton<ConnectorMgr>::instance();
         mgr.reduce_count(login_id_);
 
-        if (accountid_ != "") {
-            //通知服务器玩家下线
-            protocc::clioffline_gate_all_c msg;
-            msg.set_aid(accountid_);
-            msg.set_ip(remote_addr()->ip());
-            msg.set_port(remote_addr()->port());
-            auto world = mgr.world_connector();
-            if (world != nullptr) {
-                world->send_proto(protocc::CLIOFFLINE_GATE_ALL_C, &msg);
-            }
-            int login_connect_id = mgr.sid_conv_connect_id(login_id_);
-            auto lg = mgr.login_connector(login_connect_id);
-            if (lg != nullptr) {
-                lg->send_proto(protocc::CLIOFFLINE_GATE_ALL_C, &msg);
-            }
-            int game_connect_id = mgr.sid_conv_connect_id(game_id_);
-            auto gs = mgr.game_connector(game_connect_id);
-            if (gs != nullptr) {
-                gs->send_proto(protocc::CLIOFFLINE_GATE_ALL_C, &msg);
-            }
+        //通知服务器玩家下线
+        LOG_DEBUG << "通知服务器玩家下线 账号id:" << accountid_;
+        protocc::clioffline_gate_all_c msg;
+        msg.set_aid(accountid_);
+        msg.set_ip(remote_addr()->ip());
+        msg.set_port(remote_addr()->port());
+        auto world = mgr.world_connector();
+        if (world != nullptr) {
+            world->send_proto(protocc::CLIOFFLINE_GATE_ALL_C, &msg);
+        }
+        int login_connect_id = mgr.sid_conv_connect_id(login_id_);
+        auto lg = mgr.login_connector(login_connect_id);
+        if (lg != nullptr) {
+            lg->send_proto(protocc::CLIOFFLINE_GATE_ALL_C, &msg);
+        }
+        int game_connect_id = mgr.sid_conv_connect_id(game_id_);
+        auto gs = mgr.game_connector(game_connect_id);
+        if (gs != nullptr) {
+            gs->send_proto(protocc::CLIOFFLINE_GATE_ALL_C, &msg);
         }
     }
     shynet::utils::Singleton<GateClientMgr>::instance().remove(iobuf()->fd());
@@ -100,8 +99,9 @@ int GateClient::login_message(std::shared_ptr<protocc::CommonObject> obj,
     int login_connect_id = connectMgr.sid_conv_connect_id(login_id_);
     std::shared_ptr<LoginConnector> login = connectMgr.select_login(login_connect_id);
     if (login != nullptr) {
-        if (login_connect_id != login->set_login_conncet_id()) {
-            LOG_DEBUG << "负载均衡选择的login_connect_id:" << login->set_login_conncet_id();
+        if (login_connect_id != login->login_conncet_id()) {
+            LOG_DEBUG << "负载均衡选择的login_connect_id:" << login->login_conncet_id();
+            login_connect_id = login->login_conncet_id();
         }
         FilterData::Envelope enve;
         enve.fd = iobuf()->fd();
@@ -142,6 +142,12 @@ int GateClient::login_message(std::shared_ptr<protocc::CommonObject> obj,
                 gateid, logininfo->sif.sid(), gameinfo ? gameinfo->sif.sid() : 0);
             obj->set_extend(extend);
         } else if (obj->msgid() == protocc::RECONNECT_CLIENT_GATE_C) {
+            //断线重连信息
+            protocc::reconnect_client_gate_c reconnect_msg;
+            reconnect_msg.ParseFromString(obj->msgdata());
+            accountid_ = reconnect_msg.aid();
+            game_id_ = reconnect_msg.gameid();
+            login_id_ = reconnect_msg.loginid();
             //断线重连消息中附加上选择的gateid
             shynet::utils::IniConfig& ini = shynet::utils::Singleton<shynet::utils::IniConfig>::get_instance();
             int gateid = ini.get<int, int>("gate", "sid", 1);

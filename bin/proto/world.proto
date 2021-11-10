@@ -15,3 +15,8 @@ message register_world_dbvisit_s {
 message seronline_world_gate_g {
     ServerInfo sif  = 1;
 }
+
+//世界服通知游戏服广播信息
+message noticeserver_world_game_g {
+    string info = 1; //内容
+}

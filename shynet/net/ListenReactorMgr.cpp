@@ -43,7 +43,11 @@ namespace net {
     std::shared_ptr<ListenEvent> ListenReactorMgr::find(int k)
     {
         std::lock_guard<std::mutex> lock(les_mutex_);
-        return les_[k];
+        auto it = les_.find(k);
+        if (it == les_.end()) {
+            return nullptr;
+        }
+        return it->second;
     }
 }
 }

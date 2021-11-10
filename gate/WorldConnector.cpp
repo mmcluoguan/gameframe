@@ -148,7 +148,7 @@ int WorldConnector::register_gate_world_s(std::shared_ptr<protocc::CommonObject>
                             new net::IPAddress(sif.ip().c_str(), (unsigned short)sif.port()))));
                     //连接登录服务器
                     int loginid = shynet::utils::Singleton<net::ConnectReactorMgr>::instance().add(login);
-                    login->login_conncet_id(loginid);
+                    login->set_login_conncet_id(loginid);
 
                     shynet::utils::Singleton<ConnectorMgr>::instance().add_new_connect_data(loginid, sif);
                 }
@@ -194,7 +194,7 @@ int WorldConnector::seronline_world_gate_g(std::shared_ptr<protocc::CommonObject
                         new net::IPAddress(sif.ip().c_str(), (unsigned short)sif.port()))));
                 //连接登录服务器
                 int loginid = shynet::utils::Singleton<net::ConnectReactorMgr>::instance().add(login);
-                login->login_conncet_id(loginid);
+                login->set_login_conncet_id(loginid);
 
                 shynet::utils::Singleton<ConnectorMgr>::instance().add_new_connect_data(loginid, sif);
             }

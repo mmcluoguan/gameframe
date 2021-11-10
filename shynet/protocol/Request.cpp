@@ -20,7 +20,7 @@ namespace protocol {
         } else {
             char* p;
             size_t len = strtoull(it->second.c_str(), &p, 10);
-            if (*p != '\0') {
+            if (p == it->second.c_str()) {
                 LOG_WARN << "Content-Length的值不是数字";
                 return 0L;
             }
