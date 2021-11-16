@@ -25,14 +25,8 @@ int main(int argc, char* argv[])
     using namespace frmpub;
     using namespace admin_client;
     try {
-        const char* file = "gameframe.ini";
-        IniConfig& ini = Singleton<IniConfig>::instance(std::move(file));
-        bool daemon = ini.get<bool, bool>("admin_client", "daemon", false);
-        if (daemon) {
-            Stuff::daemon();
-            Singleton<IniConfig>::instance(std::move(string("gameframe.ini").c_str()));
-        }
-
+        const char* inifile = "gameframe.ini";
+        IniConfig& ini = Singleton<IniConfig>::instance(std::move(inifile));
         Stuff::create_coredump();
         Logger::loglevel(Logger::LogLevel::DEBUG);
         if (EventBase::usethread() == -1) {
@@ -43,14 +37,14 @@ int main(int argc, char* argv[])
         Singleton<ThreadPool>::instance().start();
 
         //连接world_http服务器
-        string worldstr = ini.get<const char*, string>("admin_client", "world", "");
+        string worldstr = ini.get<string>("admin_client", "world");
         auto worldlist = StringOp::split(worldstr, ",");
         if (worldlist.size() > 2 || worldlist.size() == 0) {
             THROW_EXCEPTION("world配置错误");
         }
         for (auto& item : worldlist) {
-            std::string worldip = ini.get<const char*, string>(item, "http_ip", "");
-            short worldport = ini.get<short, short>(item, "http_port", short(26000));
+            std::string worldip = ini.get<string>(item, "http_ip");
+            short worldport = ini.get<short>(item, "http_port");
             Singleton<ConnectReactorMgr>::instance().add(
                 std::shared_ptr<WorldConnector>(
                     new WorldConnector(std::shared_ptr<IPAddress>(

@@ -55,14 +55,14 @@ void DbConnector::complete()
     protocc::register_login_dbvisit_c msgc;
     protocc::ServerInfo* sif = msgc.mutable_sif();
     shynet::utils::IniConfig& ini = shynet::utils::Singleton<shynet::utils::IniConfig>::get_instance();
-    std::string loginip = ini.get<const char*, std::string>("login", "ip", "127.0.0.1");
-    short loginport = ini.get<short, short>("login", "port", short(24000));
+    std::string loginip = ini.get<std::string>("login", "ip");
+    short loginport = ini.get<short>("login", "port");
     sif->set_ip(loginip);
     sif->set_port(loginport);
     sif->set_st(protocc::ServerType::LOGIN);
-    int sid = ini.get<int, int>("login", "sid", 1);
+    int sid = ini.get<int>("login", "sid");
     sif->set_sid(sid);
-    std::string name = ini.get<const char*, std::string>("login", "name", "");
+    std::string name = ini.get<std::string>("login", "name");
     sif->set_name(name);
     send_proto(protocc::REGISTER_LOGIN_DBVISIT_C, &msgc);
 }

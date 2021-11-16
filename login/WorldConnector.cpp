@@ -53,9 +53,9 @@ void WorldConnector::complete()
     sif->set_port(shynet::utils::Singleton<LoginClientMgr>::instance().listen_addr().port());
     sif->set_st(protocc::ServerType::LOGIN);
     shynet::utils::IniConfig& ini = shynet::utils::Singleton<shynet::utils::IniConfig>::get_instance();
-    int sid = ini.get<int, int>("login", "sid", 1);
+    int sid = ini.get<int>("login", "sid");
     sif->set_sid(sid);
-    std::string name = ini.get<const char*, std::string>("login", "name", "");
+    std::string name = ini.get<std::string>("login", "name");
     sif->set_name(name);
     send_proto(protocc::REGISTER_LOGIN_WORLD_C, &msgc);
 }

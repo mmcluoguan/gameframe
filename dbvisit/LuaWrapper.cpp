@@ -28,13 +28,13 @@ void LuaWrapper::init(kaguya::State& state)
 
     //是否开启调试模式
     shynet::utils::IniConfig& ini = shynet::utils::Singleton<shynet::utils::IniConfig>::get_instance();
-    std::string luadebugip = ini.get<const char*, std::string>(g_confname, "luadebugip", "");
+    std::string luadebugip = ini.get<std::string>(g_confname, "luadebugip");
     if (!luadebugip.empty()) {
         shynet::utils::Singleton<frmpub::LuaRemoteDebug>::instance().init(luadebugip).start(state);
     }
 
     //载入lua文件
-    std::string luafile = ini.get<const char*, std::string>(g_confname, "luafile", "lua/dbvisit/db_main.lua");
+    std::string luafile = ini.get<std::string>(g_confname, "luafile");
     state.dofile(luafile);
 
     shynet::utils::Singleton<frmpub::LuaRemoteDebug>::instance().stop(state);

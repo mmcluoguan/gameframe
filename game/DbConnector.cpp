@@ -52,14 +52,14 @@ void DbConnector::complete()
     protocc::register_game_dbvisit_c msgc;
     protocc::ServerInfo* sif = msgc.mutable_sif();
     shynet::utils::IniConfig& ini = shynet::utils::Singleton<shynet::utils::IniConfig>::get_instance();
-    std::string gameip = ini.get<const char*, std::string>("game", "ip", "127.0.0.1");
-    short gameport = ini.get<short, short>("game", "port", short(24000));
+    std::string gameip = ini.get<std::string>("game", "ip");
+    short gameport = ini.get<short>("game", "port");
     sif->set_ip(gameip);
     sif->set_port(gameport);
     sif->set_st(protocc::ServerType::GAME);
-    int sid = ini.get<int, int>("game", "sid", 1);
+    int sid = ini.get<int>("game", "sid");
     sif->set_sid(sid);
-    std::string name = ini.get<const char*, std::string>("game", "name", "");
+    std::string name = ini.get<std::string>("game", "name");
     sif->set_name(name);
     send_proto(protocc::REGISTER_GAME_DBVISIT_C, &msgc);
 }

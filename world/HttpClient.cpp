@@ -5,6 +5,7 @@
 #include "frmpub/protocc/login.pb.h"
 #include "frmpub/protocc/world.pb.h"
 #include "shynet/lua/luaengine.h"
+#include "shynet/utils/idworker.h"
 #include "world/httpclientmgr.h"
 #include "world/worldclientmgr.h"
 
@@ -24,6 +25,8 @@ HttpClient::HttpClient(std::shared_ptr<net::IPAddress> remote_addr,
             std::bind(&HttpClient::getgamelist_admin_world_c, this, std::placeholders::_1, std::placeholders::_2) },
         { int(frmpub::JosnMsgId::NOTICESERVER_ADMIN_WORLD_C),
             std::bind(&HttpClient::noticeserver_admin_world_c, this, std::placeholders::_1, std::placeholders::_2) },
+        { int(frmpub::JosnMsgId::SYSEMAIL_ADMIN_WORLD_C),
+            std::bind(&HttpClient::sysemail_admin_world_c, this, std::placeholders::_1, std::placeholders::_2) },
     };
 }
 
@@ -122,6 +125,44 @@ int HttpClient::noticeserver_admin_world_c(std::shared_ptr<rapidjson::Document> 
     } catch (const std::exception& err) {
         SEND_ERR(protocc::MESSAGE_PARSING_ERROR, err.what());
     }
+    return 0;
+}
+
+int HttpClient::sysemail_admin_world_c(std::shared_ptr<rapidjson::Document> doc, std::shared_ptr<std::stack<FilterData::Envelope>> enves)
+{
+    try {
+        rapidjson::Value msgs(rapidjson::kObjectType);
+        int result = 0;
+        rapidjson::Value& msgdata = frmpub::get_json_value(*doc, "msgdata");
+        int32_t type = frmpub::get_json_value(msgdata, "type").GetInt();
+        if (type != 1) {
+            result = 1; //邮件类型错误
+        } else {
+            int32_t sid = frmpub::get_json_value(msgdata, "sid").GetInt();
+            auto games = shynet::utils::Singleton<WorldClientMgr>::instance().clis();
+            bool flag = false;
+            for (const auto& gs : games) {
+                auto sif = gs.second->sif();
+                if (sif.st() == protocc::ServerType::GAME) {
+                    if (sid == -1 || sif.sid() == sid) {
+                        flag = true;
+                        //转发邮件到区服
+                        protocc::sysemail_world_game_g gmsg;
+                        uint64_t mailid = shynet::utils::Singleton<shynet::utils::IdWorker>::get_instance().getid();
+                        gmsg.set_id(mailid);
+                    }
+                }
+            }
+            if (flag == false) {
+                result = 2; //区服不存在
+            }
+        }
+        msgs.AddMember("result", result, doc->GetAllocator());
+        send_json(int(frmpub::JosnMsgId::SYSEMAIL_ADMIN_WORLD_S), &msgs, enves.get());
+    } catch (const std::exception& err) {
+        SEND_ERR(protocc::MESSAGE_PARSING_ERROR, err.what());
+    }
+
     return 0;
 }
 

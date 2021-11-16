@@ -38,35 +38,40 @@ int main(int argc, char* argv[])
     using namespace dbvisit;
     using namespace redis;
 
-    if (argc < 2) {
-        THROW_EXCEPTION("没有配置参数");
-    }
     try {
+        if (argc < 2) {
+            THROW_EXCEPTION("没有配置参数");
+        }
         g_confname = argv[1];
-        IniConfig& ini = Singleton<IniConfig>::instance(std::move(string("gameframe.ini").c_str()));
-        int centerid = ini.get<int, int>(g_confname, "centerid", 1);
-        int workerid = ini.get<int, int>(g_confname, "workerid", 1);
+        const char* inifile = "gameframe.ini";
+        IniConfig& ini = Singleton<IniConfig>::instance(std::move(inifile));
+        bool daemon = ini.get<bool>(g_confname, "daemon");
+        if (daemon) {
+            Stuff::daemon();
+        }
+        int centerid = ini.get<int>(g_confname, "centerid");
+        int workerid = ini.get<int>(g_confname, "workerid");
         Singleton<IdWorker>::instance(std::move(workerid), std::move(centerid));
 
-        string ip = ini.get<const char*, string>(g_confname, "ip", "127.0.0.1");
-        short port = ini.get<short, short>(g_confname, "port", short(21000));
-        int sid = ini.get<int, int>(g_confname, "sid", 1);
-        bool daemon = ini.get<bool, bool>(g_confname, "daemon", false);
+        string ip = ini.get<string>(g_confname, "ip");
+        short port = ini.get<short>(g_confname, "port");
+        int sid = ini.get<int>(g_confname, "sid");
         string type = Basic::connectname(ServerType::DBVISIT);
-        string name = ini.get<const char*, string>(g_confname, "name", "");
+        string name = ini.get<string>(g_confname, "name");
 
-        string myuri = ini.get<const char*, string>(g_confname, "mysql_uri", "mysqlx://root:123456@127.0.0.1:33060/test");
-        size_t mysqlps = ini.get<size_t, size_t>(g_confname, "mysql_pool_size", 3);
+        string myuri = ini.get<string>(g_confname, "mysql_uri");
+        size_t mysqlps = ini.get<size_t>(g_confname, "mysql_pool_size");
         mysqlx::SessionSettings myset(myuri);
         Singleton<MysqlPool>::instance(std::move(myset), std::move(mysqlps));
 
         ConnectionOptions connection_options;
-        connection_options.host = ini.get<const char*, string>(g_confname, "redis_ip", "127.0.0.1");
-        connection_options.port = ini.get<int, int>(g_confname, "redis_port", 1);
-        connection_options.db = ini.get<int, int>(g_confname, "redis_db", 0);
-        connection_options.password = ini.get<const char*, string>(g_confname, "redis_pwd", "Aninmal20200809!$");
+        connection_options.host = ini.get<string>(g_confname, "redis_ip");
+        LOG_DEBUG << connection_options.host;
+        connection_options.port = ini.get<int>(g_confname, "redis_port");
+        connection_options.db = ini.get<int>(g_confname, "redis_db");
+        connection_options.password = ini.get<string>(g_confname, "redis_pwd");
         ConnectionPoolOptions pool_options;
-        pool_options.size = ini.get<int, int>(g_confname, "redis_pool_size", 3);
+        pool_options.size = ini.get<int>(g_confname, "redis_pool_size");
         Redis& redis = Singleton<Redis>::instance(std::move(connection_options), std::move(pool_options));
 
         string key = StringOp::str_format("%s_%d", type.c_str(), sid);
@@ -90,10 +95,6 @@ int main(int argc, char* argv[])
         }
 
         if (ok) {
-            if (daemon) {
-                Stuff::daemon();
-                Singleton<IniConfig>::instance(std::move(string("gameframe.ini").c_str()));
-            }
             Stuff::create_coredump();
             Logger::loglevel(Logger::LogLevel::DEBUG);
             if (EventBase::usethread() == -1) {
@@ -110,7 +111,7 @@ int main(int argc, char* argv[])
             Singleton<LuaEngine>::instance(std::make_shared<dbvisit::LuaWrapper>());
             Singleton<ThreadPool>::instance().start();
 
-            std::string luapath = ini.get<const char*, std::string>(g_confname, "luapath", "");
+            std::string luapath = ini.get<std::string>(g_confname, "luapath");
             std::vector<std::string> vectpath = StringOp::split(luapath, ";");
             for (string pstr : vectpath) {
                 Singleton<ThreadPool>::get_instance().notifyTh().lock()->add(

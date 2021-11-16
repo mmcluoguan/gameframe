@@ -51,9 +51,9 @@ void WorldConnector::complete()
     sif->set_port(shynet::utils::Singleton<GameClientMgr>::instance().listen_addr().port());
     sif->set_st(protocc::ServerType::GAME);
     shynet::utils::IniConfig& ini = shynet::utils::Singleton<shynet::utils::IniConfig>::get_instance();
-    int sid = ini.get<int, int>("game", "sid", 1);
+    int sid = ini.get<int>("game", "sid");
     sif->set_sid(sid);
-    std::string name = ini.get<const char*, std::string>("game", "name", "");
+    std::string name = ini.get<std::string>("game", "name");
     sif->set_name(name);
     send_proto(protocc::REGISTER_GAME_WORLD_C, &msgc);
 }

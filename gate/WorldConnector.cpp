@@ -58,9 +58,9 @@ void WorldConnector::complete()
     sif->set_port(shynet::utils::Singleton<GateClientMgr>::instance().listen_addr().port());
     sif->set_st(protocc::ServerType::GATE);
     shynet::utils::IniConfig& ini = shynet::utils::Singleton<shynet::utils::IniConfig>::get_instance();
-    int sid = ini.get<int, int>("gate", "sid", 1);
+    int sid = ini.get<int>("gate", "sid");
     sif->set_sid(sid);
-    std::string name = ini.get<const char*, std::string>("gate", "name", "");
+    std::string name = ini.get<std::string>("gate", "name");
     sif->set_name(name);
     send_proto(protocc::REGISTER_GATE_WORLD_C, &msgc);
 }

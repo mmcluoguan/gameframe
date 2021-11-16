@@ -335,14 +335,8 @@ int main(int argc, char* argv[])
     using namespace frmpub;
     using namespace client;
     try {
-        const char* file = "gameframe.ini";
-        IniConfig& ini = Singleton<IniConfig>::instance(std::move(file));
-        bool daemon = ini.get<bool, bool>("client", "daemon", false);
-        if (daemon) {
-            Stuff::daemon();
-            Singleton<IniConfig>::instance(std::move(string("gameframe.ini").c_str()));
-        }
-
+        const char* inifile = "gameframe.ini";
+        IniConfig& ini = Singleton<IniConfig>::instance(std::move(inifile));
         Stuff::create_coredump();
         Logger::loglevel(Logger::LogLevel::DEBUG);
         if (EventBase::usethread() == -1) {
@@ -352,8 +346,8 @@ int main(int argc, char* argv[])
 
         Singleton<ThreadPool>::instance().start();
 
-        string gateip = ini.get<const char*, string>("client", "gateip", "127.0.0.1");
-        short gateport = ini.get<short, short>("client", "gateport", short(25000));
+        string gateip = ini.get<string>("client", "gateip");
+        short gateport = ini.get<short>("client", "gateport");
         shared_ptr<IPAddress> gateaddr(new IPAddress(gateip.c_str(), gateport));
         shared_ptr<GateConnector> gateconnect(new GateConnector(gateaddr));
         gateaddr.reset();

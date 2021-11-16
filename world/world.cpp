@@ -5,6 +5,7 @@
 #include "shynet/net/ipaddress.h"
 #include "shynet/pool/threadpool.h"
 #include "shynet/signal/signalhandler.h"
+#include "shynet/utils/idworker.h"
 #include "shynet/utils/iniconfig.h"
 #include "shynet/utils/stringop.h"
 #include "shynet/utils/stuff.h"
@@ -38,12 +39,11 @@ int main(int argc, char* argv[])
         }
         g_confname = argv[1];
 
-        const char* file = "gameframe.ini";
-        IniConfig& ini = Singleton<IniConfig>::instance(std::move(file));
-        bool daemon = ini.get<bool, bool>(g_confname, "daemon", false);
+        const char* inifile = "gameframe.ini";
+        IniConfig& ini = Singleton<IniConfig>::instance(std::move(inifile));
+        bool daemon = ini.get<bool>(g_confname, "daemon");
         if (daemon) {
             Stuff::daemon();
-            Singleton<IniConfig>::instance(std::move(string("gameframe.ini").c_str()));
         }
 
         Stuff::create_coredump();
@@ -63,28 +63,32 @@ int main(int argc, char* argv[])
         Singleton<ThreadPool>::instance().start();
 
         LOG_DEBUG << "开启世界服务器监听";
-        std::string worldip = ini.get<const char*, std::string>(g_confname, "ip", "127.0.0.1");
-        short worldport = ini.get<short, short>(g_confname, "port", short(22000));
+        std::string worldip = ini.get<std::string>(g_confname, "ip");
+        short worldport = ini.get<short>(g_confname, "port");
         std::shared_ptr<IPAddress> worldaddr(new IPAddress(worldip.c_str(), worldport));
         std::shared_ptr<WorldServer> worldserver(new WorldServer(worldaddr));
         Singleton<ListenReactorMgr>::instance().add(worldserver);
 
         LOG_DEBUG << "开启http后台服务器监听";
-        std::string httpip = ini.get<const char*, std::string>(g_confname, "http_ip", "127.0.0.1");
-        short httpport = ini.get<short, short>(g_confname, "http_port", short(26000));
+        std::string httpip = ini.get<std::string>(g_confname, "http_ip");
+        short httpport = ini.get<short>(g_confname, "http_port");
         std::shared_ptr<IPAddress> httpaddr(new IPAddress(httpip.c_str(), httpport));
         std::shared_ptr<HttpServer> httpserver(new HttpServer(httpaddr));
         Singleton<ListenReactorMgr>::instance().add(httpserver);
 
         //连接db服务器
-        string dbstr = ini.get<const char*, string>(g_confname, "db", "");
+        string dbstr = ini.get<string>(g_confname, "db");
         auto dblist = StringOp::split(dbstr, ",");
         if (dblist.size() > 2 || dblist.size() == 0) {
             THROW_EXCEPTION("db配置错误");
         }
         for (auto& item : dblist) {
-            string dbip = ini.get<const char*, string>(item, "ip", "");
-            short dbport = ini.get<short, short>(item, "port", short(21000));
+            int centerid = ini.get<int>(item, "centerid");
+            int workerid = ini.get<int>(item, "workerid");
+            Singleton<IdWorker>::instance(std::move(workerid), std::move(centerid));
+
+            string dbip = ini.get<string>(item, "ip");
+            short dbport = ini.get<short>(item, "port");
             shared_ptr<IPAddress> dbaddr(new IPAddress(dbip.c_str(), dbport));
             Singleton<ConnectReactorMgr>::instance().add(
                 shared_ptr<DbConnector>(

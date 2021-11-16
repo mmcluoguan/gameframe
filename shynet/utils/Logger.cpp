@@ -63,7 +63,7 @@ namespace utils {
         }
 
         char logfilename[NAME_MAX] = { 0 };
-        sprintf(logfilename, "./log/%s_%s", processname, timebuf);
+        sprintf(logfilename, "./log/%s_%d_%s", processname, getpid(), timebuf);
 
         if (strncmp(g_logfilename, logfilename, strlen(logfilename)) != 0) {
             if (g_logfile.is_open()) {

@@ -5,12 +5,6 @@
     <ClCompile Include="gateconnector.cpp" />
     <ClCompile Include="gatereconnctortimer.cpp" />
     <ClCompile Include="consolehandler.cpp" />
-    <ClCompile Include="test\010-TestCase.cpp">
-      <Filter>test</Filter>
-    </ClCompile>
-    <ClCompile Include="readline_example.cpp">
-      <Filter>test</Filter>
-    </ClCompile>
     <ClCompile Include="role.cpp" />
   </ItemGroup>
   <ItemGroup>

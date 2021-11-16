@@ -236,7 +236,6 @@ namespace protocol {
             memcpy(data_buffer.get() + pos, data, len);
             std::shared_ptr<events::EventBuffer> io = filter_->iobuf();
             if (io != nullptr) {
-                std::string ccc(data_buffer.get(), total_data_len);
                 return io->write(data_buffer.get(), total_data_len);
             }
             return -1;

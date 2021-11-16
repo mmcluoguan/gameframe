@@ -20,3 +20,25 @@ message seronline_world_gate_g {
 message noticeserver_world_game_g {
     string info = 1; //内容
 }
+
+//转发后台系统邮件
+message sysemail_world_game_g {
+    message Annex{
+        message Goods{
+            int32 cfgid = 1;
+            int32 num = 2;
+        }
+
+        int32 gold = 1;
+        int32 diamond = 2;
+        repeated Goods goods = 3;
+    }
+
+    int64 id = 1;       //唯一编号
+    string title = 2; //标题
+    string info = 3; //内容
+    int32 type = 4; //类型 1后台邮件 2区服邮件
+    string rid = 5; // 区服角色id -1表示全部角色
+    int32 time = 6;// 发送时间
+    repeated Annex annex = 7;// 附件
+}

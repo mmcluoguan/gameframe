@@ -2,6 +2,7 @@
 #define SHYNET_UTILS_INICONFIG_H
 
 #include "shynet/basic.h"
+#include "shynet/utils/stringop.h"
 #include <sstream>
 #include <unordered_map>
 
@@ -25,33 +26,43 @@ namespace utils {
         explicit IniConfig(const char* filename);
         ~IniConfig();
 
-        template <class IN, class OUT>
-        OUT get(section sec, key k, const IN& defv) const
+        template <class OUT>
+        OUT get(section sec, key k) const
         {
             const auto& siter = content_.find(sec);
             if (siter == content_.end()) {
-                return defv;
+                std::string except = StringOp::str_format("配置文件:%s 没有节点:%s",
+                    inifilename_.c_str(), sec.c_str());
+                THROW_EXCEPTION(except);
             } else {
                 const auto& niter = siter->second.find(k);
                 if (niter == siter->second.end()) {
-                    return defv;
+                    std::string except = StringOp::str_format("配置文件:%s 在节点:%s 中不存在:%s",
+                        inifilename_.c_str(), sec.c_str(), k.c_str());
+                    THROW_EXCEPTION(except);
                 } else {
-                    std::stringstream istream;
-                    istream << niter->second.value;
                     OUT t;
-                    istream >> t;
-                    if (istream.eof() && !istream.fail()) {
+                    if (niter->second.value.empty()) {
                         return t;
                     } else {
-                        return defv;
+                        std::stringstream istream;
+                        istream << niter->second.value;
+                        istream >> t;
+                        if (istream.eof() && !istream.fail()) {
+                            return t;
+                        } else {
+                            std::string except = StringOp::str_format("配置文件:%s 节点:%s key:%s 值:%s 转换失败",
+                                inifilename_.c_str(), sec.c_str(), k.c_str(), niter->second.value.c_str());
+                            THROW_EXCEPTION(except);
+                        }
                     }
                 }
             }
-            return defv;
         }
 
     private:
         serctions content_;
+        std::string inifilename_;
     };
 }
 }

@@ -51,8 +51,8 @@ void ConsoleHandler::reconnect_order(const OrderItem& order, int argc, char** ar
         gate.reset();
         std::this_thread::sleep_for(std::chrono::seconds(1));
         shynet::utils::IniConfig& ini = shynet::utils::Singleton<shynet::utils::IniConfig>::get_instance();
-        std::string gateip = ini.get<const char*, std::string>("gate", "ip", "127.0.0.1");
-        short gateport = ini.get<short, short>("gate", "port", short(25000));
+        std::string gateip = ini.get<std::string>("gate", "ip");
+        short gateport = ini.get<short>("gate", "port");
         std::shared_ptr<net::IPAddress> gateaddr(new net::IPAddress(gateip.c_str(), gateport));
         std::shared_ptr<GateConnector> gateconnect(new GateConnector(gateaddr, ptr));
         gateaddr.reset();

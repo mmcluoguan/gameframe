@@ -32,17 +32,11 @@ int main(int argc, char* argv[])
     using namespace game;
 
     try {
-        const char* file = "gameframe.ini";
-        IniConfig& ini = Singleton<IniConfig>::instance(std::move(file));
-
-        int centerid = ini.get<int, int>("dbvisit_game_master", "centerid", 1);
-        int workerid = ini.get<int, int>("dbvisit_game_master", "workerid", 1);
-        Singleton<IdWorker>::instance(std::move(workerid), std::move(centerid));
-
-        bool daemon = ini.get<bool, bool>("game", "daemon", false);
+        const char* inifile = "gameframe.ini";
+        IniConfig& ini = Singleton<IniConfig>::instance(std::move(inifile));
+        bool daemon = ini.get<bool>("game", "daemon");
         if (daemon) {
             Stuff::daemon();
-            Singleton<IniConfig>::instance(std::move(string("gameframe.ini").c_str()));
         }
         Stuff::create_coredump();
         Logger::loglevel(Logger::LogLevel::DEBUG);
@@ -50,7 +44,7 @@ int main(int argc, char* argv[])
             THROW_EXCEPTION("call usethread");
         }
         EventBase::initssl();
-        int sid = ini.get<int, int>("game", "sid", 0);
+        int sid = ini.get<int>("game", "sid");
         const char* pid_dir = "./pid/";
         if (access(pid_dir, F_OK) == -1) {
             mkdir(pid_dir, S_IRWXU);
@@ -61,7 +55,7 @@ int main(int argc, char* argv[])
         Singleton<LuaEngine>::instance(std::make_shared<game::LuaWrapper>());
         Singleton<ThreadPool>::instance().start();
 
-        std::string luapath = ini.get<const char*, std::string>("game", "luapath", "");
+        std::string luapath = ini.get<std::string>("game", "luapath");
         std::vector<std::string> vectpath = StringOp::split(luapath, ";");
         for (string pstr : vectpath) {
             Singleton<ThreadPool>::get_instance().notifyTh().lock()->add(
@@ -69,21 +63,26 @@ int main(int argc, char* argv[])
         }
 
         LOG_DEBUG << "开启游戏服服务器监听";
-        std::string gameip = ini.get<const char*, std::string>("game", "ip", "127.0.0.1");
-        short gameport = ini.get<short, short>("game", "port", short(24000));
+        std::string gameip = ini.get<std::string>("game", "ip");
+        short gameport = ini.get<short>("game", "port");
         std::shared_ptr<IPAddress> gameaddr(new IPAddress(gameip.c_str(), gameport));
         std::shared_ptr<GameServer> gameserver(new GameServer(gameaddr));
         Singleton<ListenReactorMgr>::instance().add(gameserver);
 
         //连接db服务器
-        string dbstr = ini.get<const char*, string>("game", "db", "");
+        string dbstr = ini.get<string>("game", "db");
         auto dblist = StringOp::split(dbstr, ",");
         if (dblist.size() > 2 || dblist.size() == 0) {
             THROW_EXCEPTION("db配置错误");
         }
         for (auto& item : dblist) {
-            string dbip = ini.get<const char*, string>(item, "ip", "");
-            short dbport = ini.get<short, short>(item, "port", short(21000));
+
+            int centerid = ini.get<int>(item, "centerid");
+            int workerid = ini.get<int>(item, "workerid");
+            Singleton<IdWorker>::instance(std::move(workerid), std::move(centerid));
+
+            string dbip = ini.get<string>(item, "ip");
+            short dbport = ini.get<short>(item, "port");
             shared_ptr<IPAddress> dbaddr(new IPAddress(dbip.c_str(), dbport));
             Singleton<ConnectReactorMgr>::instance().add(
                 shared_ptr<DbConnector>(
@@ -92,14 +91,14 @@ int main(int argc, char* argv[])
         }
 
         //连接world服务器
-        string worldstr = ini.get<const char*, string>("game", "world", "");
+        string worldstr = ini.get<string>("game", "world");
         auto worldlist = StringOp::split(worldstr, ",");
         if (worldlist.size() > 2 || worldlist.size() == 0) {
             THROW_EXCEPTION("world配置错误");
         }
         for (auto& item : worldlist) {
-            std::string worldip = ini.get<const char*, string>(item, "ip", "");
-            short worldport = ini.get<short, short>(item, "port", short(22000));
+            std::string worldip = ini.get<string>(item, "ip");
+            short worldport = ini.get<short>(item, "port");
             Singleton<ConnectReactorMgr>::instance().add(
                 std::shared_ptr<WorldConnector>(
                     new WorldConnector(std::shared_ptr<IPAddress>(

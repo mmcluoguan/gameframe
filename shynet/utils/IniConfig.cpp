@@ -7,6 +7,7 @@ namespace shynet {
 namespace utils {
     IniConfig::IniConfig(const char* filename)
     {
+        inifilename_ = filename;
         std::ifstream reader;
         reader.open(filename, std::ios::in);
         if (reader.is_open() == false) {
@@ -42,7 +43,7 @@ namespace utils {
                         StringOp::trim(key);
                         StringOp::trim(value);
                     }
-                    if (section.empty() == false) {
+                    if (section.empty() == false and key.empty() == false) {
                         ns.insert({ key, { section, key, value } });
                     }
                 }

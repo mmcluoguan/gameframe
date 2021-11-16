@@ -15,6 +15,7 @@ public:
 private:
     void getgamelist(const OrderItem& order, int argc, char** argv);
     void noticeserver(const OrderItem& order, int argc, char** argv);
+    void sysemail(const OrderItem& order, int argc, char** argv);
 };
 }
 
