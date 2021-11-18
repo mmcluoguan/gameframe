@@ -26,7 +26,8 @@ Datahelp::ErrorCode Datahelp::getdata_from_db(const std::string& tablename,
     if (key.empty()) {
         condition = where;
     }
-    mysqlx::DocResult docs = mysql.fetch()->getDefaultSchema().createCollection(tablename, true).find(condition).execute();
+    pool::MysqlPool::SessionPtr ses = mysql.fetch();
+    mysqlx::DocResult docs = ses->getDefaultSchema().createCollection(tablename, true).find(condition).execute();
     if (docs.count() == 1) {
         mysqlx::DbDoc doc = docs.fetchOne();
         //填充数据
@@ -115,24 +116,27 @@ moredataptr Datahelp::getdata_more_db(const std::string& tablename,
 {
     moredataptr datalist = std::make_shared<moredata>();
     pool::MysqlPool& mysql = shynet::utils::Singleton<pool::MysqlPool>::get_instance();
-    auto tt = mysql.fetch()->getDefaultSchema().createCollection(tablename, true).find(condition);
+    pool::MysqlPool::SessionPtr ses = mysql.fetch();
+    mysqlx::abi2::r0::Collection coll = ses->getDefaultSchema().createCollection(tablename, true);
+    auto cf = condition.empty() ? coll.find() : coll.find(condition);
     if (sort.empty() == false) {
-        tt = tt.sort(sort);
+        cf = cf.sort(sort);
     }
     mysqlx::DocResult docs;
     if (limit == 0) {
-        docs = tt.execute();
+        docs = cf.execute();
     } else {
-        docs = tt.limit(limit).execute();
+        docs = cf.limit(limit).execute();
     }
     for (mysqlx::DbDoc doc : docs.fetchAll()) {
         //填充数据
-        for (auto&& [key, value] : out) {
+        std::unordered_map<std::string, std::string> outcopy = out;
+        for (auto&& [key, value] : outcopy) {
             if (doc.hasField(key)) {
                 value = doc[key].operator std::string();
             }
         }
-        datalist->push_back(out);
+        datalist->push_back(outcopy);
     }
     return datalist;
 }
@@ -202,9 +206,11 @@ moredataptr Datahelp::getdata_more(const std::string& condition,
             if (vect.size() < 3) {
                 THROW_EXCEPTION("解析错误 condition:" + condition);
             }
-            auto where = shynet::utils::StringOp::str_format("roleid='%s'", vect[2].c_str());
+            std::string where;
+            if (vect[2] != "*")
+                where = shynet::utils::StringOp::str_format("roleid='%s'", vect[2].c_str());
             datalist = getdata_more_db(vect[0], where, out, sort, limit);
-            if (updatacache) {
+            if (updatacache && opertype == OperType::ALL) {
                 for (auto& it : *datalist) {
                     std::string cache_key = condition;
                     auto pos = cache_key.find("*");
@@ -232,7 +238,8 @@ void Datahelp::insert_db(const std::string& tablename, const std::string& key,
     const std::unordered_map<std::string, std::string>& fields)
 {
     pool::MysqlPool& mysql = shynet::utils::Singleton<pool::MysqlPool>::get_instance();
-    mysqlx::Schema sch = mysql.fetch()->getDefaultSchema();
+    pool::MysqlPool::SessionPtr ses = mysql.fetch();
+    mysqlx::Schema sch = ses->getDefaultSchema();
     rapidjson::Document doc;
     rapidjson::Value& data = doc.SetObject();
     for (auto&& [key, value] : fields) {
@@ -283,7 +290,8 @@ void Datahelp::insertdata(const std::string& cachekey,
 void Datahelp::delete_db(const std::string& tablename, const std::string& key)
 {
     pool::MysqlPool& mysql = shynet::utils::Singleton<pool::MysqlPool>::get_instance();
-    mysqlx::Schema sch = mysql.fetch()->getDefaultSchema();
+    pool::MysqlPool::SessionPtr ses = mysql.fetch();
+    mysqlx::Schema sch = ses->getDefaultSchema();
     std::string sql = shynet::utils::StringOp::str_format("_id='%s'", key.c_str());
     if (sch.createCollection(tablename, true).remove(sql).execute().getAffectedItemsCount() == 0) {
         LOG_WARN << "数据删除失败 tablename:" << tablename << " key:" << key;
@@ -322,7 +330,8 @@ void Datahelp::updata_db(const std::string& tablename, const std::string& key, c
 {
 
     pool::MysqlPool& mysql = shynet::utils::Singleton<pool::MysqlPool>::get_instance();
-    mysqlx::Schema sch = mysql.fetch()->getDefaultSchema();
+    pool::MysqlPool::SessionPtr ses = mysql.fetch();
+    mysqlx::Schema sch = ses->getDefaultSchema();
     std::string where = shynet::utils::StringOp::str_format("_id='%s'", key.c_str());
     mysqlx::CollectionModify md = sch.createCollection(tablename, true).modify(where);
     for (auto&& [key, value] : fields) {

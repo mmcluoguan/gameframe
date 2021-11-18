@@ -42,7 +42,7 @@ enum class JosnMsgId {
     * time 发送时间
     * annex 附件 gold游戏币 diamond钻石 goods物品列表
     */
-    SYSEMAIL_ADMIN_WORLD_C, //发送系统邮件 {"title":"xxx","info":"xxx","type":1,"sid":111,"rid":222,"time":123213,"annex":{"gold":111,"diamond":111,"goods":[{"cfgid":10010,"num":10}}]}
+    SYSEMAIL_ADMIN_WORLD_C, //发送系统邮件 {"title":"xxx","info":"xxx","type":1,"sid":-1,"rid":-1,"time":123213,"annex":{"gold":111,"diamond":111,"goods":[{"cfgid":10010,"num":10}]}}
     SYSEMAIL_ADMIN_WORLD_S, //{"result":1}
 
     ADMIN_WORLD_END = 6000,

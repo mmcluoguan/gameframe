@@ -166,7 +166,9 @@ constexpr loadrole_client_gate_s::loadrole_client_gate_s(
   : aid_(&::PROTOBUF_NAMESPACE_ID::internal::fixed_address_empty_string)
   , result_(0)
   , level_(0)
-  , roleid_(PROTOBUF_LONGLONG(0)){}
+  , roleid_(PROTOBUF_LONGLONG(0))
+  , gold_(0)
+  , diamond_(0){}
 struct loadrole_client_gate_sDefaultTypeInternal {
   constexpr loadrole_client_gate_sDefaultTypeInternal()
     : _instance(::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized{}) {}
@@ -178,7 +180,7 @@ struct loadrole_client_gate_sDefaultTypeInternal {
 PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT loadrole_client_gate_sDefaultTypeInternal _loadrole_client_gate_s_default_instance_;
 constexpr setlevel_client_gate_c::setlevel_client_gate_c(
   ::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized)
-  : roleid_(PROTOBUF_LONGLONG(0)){}
+  : level_(0){}
 struct setlevel_client_gate_cDefaultTypeInternal {
   constexpr setlevel_client_gate_cDefaultTypeInternal()
     : _instance(::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized{}) {}
@@ -190,7 +192,8 @@ struct setlevel_client_gate_cDefaultTypeInternal {
 PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT setlevel_client_gate_cDefaultTypeInternal _setlevel_client_gate_c_default_instance_;
 constexpr setlevel_client_gate_s::setlevel_client_gate_s(
   ::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized)
-  : result_(0){}
+  : result_(0)
+  , level_(0){}
 struct setlevel_client_gate_sDefaultTypeInternal {
   constexpr setlevel_client_gate_sDefaultTypeInternal()
     : _instance(::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized{}) {}
@@ -200,19 +203,6 @@ struct setlevel_client_gate_sDefaultTypeInternal {
   };
 };
 PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT setlevel_client_gate_sDefaultTypeInternal _setlevel_client_gate_s_default_instance_;
-constexpr loadgoods_client_gate_c::loadgoods_client_gate_c(
-  ::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized)
-  : aid_(&::PROTOBUF_NAMESPACE_ID::internal::fixed_address_empty_string)
-  , roleid_(PROTOBUF_LONGLONG(0)){}
-struct loadgoods_client_gate_cDefaultTypeInternal {
-  constexpr loadgoods_client_gate_cDefaultTypeInternal()
-    : _instance(::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized{}) {}
-  ~loadgoods_client_gate_cDefaultTypeInternal() {}
-  union {
-    loadgoods_client_gate_c _instance;
-  };
-};
-PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT loadgoods_client_gate_cDefaultTypeInternal _loadgoods_client_gate_c_default_instance_;
 constexpr loadgoods_client_gate_s_Goods::loadgoods_client_gate_s_Goods(
   ::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized)
   : id_(PROTOBUF_LONGLONG(0))
@@ -319,9 +309,143 @@ struct notice_info_list_clent_gate_sDefaultTypeInternal {
   };
 };
 PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT notice_info_list_clent_gate_sDefaultTypeInternal _notice_info_list_clent_gate_s_default_instance_;
+constexpr email_new_client_gate_g::email_new_client_gate_g(
+  ::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized)
+  : id_(PROTOBUF_LONGLONG(0)){}
+struct email_new_client_gate_gDefaultTypeInternal {
+  constexpr email_new_client_gate_gDefaultTypeInternal()
+    : _instance(::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized{}) {}
+  ~email_new_client_gate_gDefaultTypeInternal() {}
+  union {
+    email_new_client_gate_g _instance;
+  };
+};
+PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT email_new_client_gate_gDefaultTypeInternal _email_new_client_gate_g_default_instance_;
+constexpr loademails_client_gate_s_Email::loademails_client_gate_s_Email(
+  ::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized)
+  : id_(PROTOBUF_LONGLONG(0))
+  , is_read_(false)
+  , is_receive_(false){}
+struct loademails_client_gate_s_EmailDefaultTypeInternal {
+  constexpr loademails_client_gate_s_EmailDefaultTypeInternal()
+    : _instance(::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized{}) {}
+  ~loademails_client_gate_s_EmailDefaultTypeInternal() {}
+  union {
+    loademails_client_gate_s_Email _instance;
+  };
+};
+PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT loademails_client_gate_s_EmailDefaultTypeInternal _loademails_client_gate_s_Email_default_instance_;
+constexpr loademails_client_gate_s::loademails_client_gate_s(
+  ::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized)
+  : emails_(){}
+struct loademails_client_gate_sDefaultTypeInternal {
+  constexpr loademails_client_gate_sDefaultTypeInternal()
+    : _instance(::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized{}) {}
+  ~loademails_client_gate_sDefaultTypeInternal() {}
+  union {
+    loademails_client_gate_s _instance;
+  };
+};
+PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT loademails_client_gate_sDefaultTypeInternal _loademails_client_gate_s_default_instance_;
+constexpr lookemail_client_gate_c::lookemail_client_gate_c(
+  ::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized)
+  : emailid_(PROTOBUF_LONGLONG(0)){}
+struct lookemail_client_gate_cDefaultTypeInternal {
+  constexpr lookemail_client_gate_cDefaultTypeInternal()
+    : _instance(::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized{}) {}
+  ~lookemail_client_gate_cDefaultTypeInternal() {}
+  union {
+    lookemail_client_gate_c _instance;
+  };
+};
+PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT lookemail_client_gate_cDefaultTypeInternal _lookemail_client_gate_c_default_instance_;
+constexpr lookemail_client_gate_s_Annex_Goods::lookemail_client_gate_s_Annex_Goods(
+  ::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized)
+  : cfgid_(0)
+  , num_(0){}
+struct lookemail_client_gate_s_Annex_GoodsDefaultTypeInternal {
+  constexpr lookemail_client_gate_s_Annex_GoodsDefaultTypeInternal()
+    : _instance(::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized{}) {}
+  ~lookemail_client_gate_s_Annex_GoodsDefaultTypeInternal() {}
+  union {
+    lookemail_client_gate_s_Annex_Goods _instance;
+  };
+};
+PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT lookemail_client_gate_s_Annex_GoodsDefaultTypeInternal _lookemail_client_gate_s_Annex_Goods_default_instance_;
+constexpr lookemail_client_gate_s_Annex::lookemail_client_gate_s_Annex(
+  ::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized)
+  : goods_()
+  , gold_(0)
+  , diamond_(0){}
+struct lookemail_client_gate_s_AnnexDefaultTypeInternal {
+  constexpr lookemail_client_gate_s_AnnexDefaultTypeInternal()
+    : _instance(::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized{}) {}
+  ~lookemail_client_gate_s_AnnexDefaultTypeInternal() {}
+  union {
+    lookemail_client_gate_s_Annex _instance;
+  };
+};
+PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT lookemail_client_gate_s_AnnexDefaultTypeInternal _lookemail_client_gate_s_Annex_default_instance_;
+constexpr lookemail_client_gate_s::lookemail_client_gate_s(
+  ::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized)
+  : title_(&::PROTOBUF_NAMESPACE_ID::internal::fixed_address_empty_string)
+  , info_(&::PROTOBUF_NAMESPACE_ID::internal::fixed_address_empty_string)
+  , annex_(nullptr)
+  , id_(PROTOBUF_LONGLONG(0))
+  , result_(0)
+  , type_(0)
+  , time_(0){}
+struct lookemail_client_gate_sDefaultTypeInternal {
+  constexpr lookemail_client_gate_sDefaultTypeInternal()
+    : _instance(::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized{}) {}
+  ~lookemail_client_gate_sDefaultTypeInternal() {}
+  union {
+    lookemail_client_gate_s _instance;
+  };
+};
+PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT lookemail_client_gate_sDefaultTypeInternal _lookemail_client_gate_s_default_instance_;
+constexpr getannex_client_gate_c::getannex_client_gate_c(
+  ::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized)
+  : emailid_(PROTOBUF_LONGLONG(0)){}
+struct getannex_client_gate_cDefaultTypeInternal {
+  constexpr getannex_client_gate_cDefaultTypeInternal()
+    : _instance(::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized{}) {}
+  ~getannex_client_gate_cDefaultTypeInternal() {}
+  union {
+    getannex_client_gate_c _instance;
+  };
+};
+PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT getannex_client_gate_cDefaultTypeInternal _getannex_client_gate_c_default_instance_;
+constexpr getannex_client_gate_s::getannex_client_gate_s(
+  ::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized)
+  : result_(0){}
+struct getannex_client_gate_sDefaultTypeInternal {
+  constexpr getannex_client_gate_sDefaultTypeInternal()
+    : _instance(::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized{}) {}
+  ~getannex_client_gate_sDefaultTypeInternal() {}
+  union {
+    getannex_client_gate_s _instance;
+  };
+};
+PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT getannex_client_gate_sDefaultTypeInternal _getannex_client_gate_s_default_instance_;
+constexpr baseupdata_client_gate_g::baseupdata_client_gate_g(
+  ::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized)
+  : roleid_(PROTOBUF_LONGLONG(0))
+  , level_(0)
+  , gold_(0)
+  , diamond_(0){}
+struct baseupdata_client_gate_gDefaultTypeInternal {
+  constexpr baseupdata_client_gate_gDefaultTypeInternal()
+    : _instance(::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized{}) {}
+  ~baseupdata_client_gate_gDefaultTypeInternal() {}
+  union {
+    baseupdata_client_gate_g _instance;
+  };
+};
+PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT baseupdata_client_gate_gDefaultTypeInternal _baseupdata_client_gate_g_default_instance_;
 }  // namespace protocc
 }  // namespace frmpub
-static ::PROTOBUF_NAMESPACE_ID::Metadata file_level_metadata_client_2eproto[23];
+static ::PROTOBUF_NAMESPACE_ID::Metadata file_level_metadata_client_2eproto[32];
 static const ::PROTOBUF_NAMESPACE_ID::EnumDescriptor* file_level_enum_descriptors_client_2eproto[1];
 static constexpr ::PROTOBUF_NAMESPACE_ID::ServiceDescriptor const** file_level_service_descriptors_client_2eproto = nullptr;
 
@@ -412,25 +536,21 @@ const ::PROTOBUF_NAMESPACE_ID::uint32 TableStruct_client_2eproto::offsets[] PROT
   PROTOBUF_FIELD_OFFSET(::frmpub::protocc::loadrole_client_gate_s, aid_),
   PROTOBUF_FIELD_OFFSET(::frmpub::protocc::loadrole_client_gate_s, roleid_),
   PROTOBUF_FIELD_OFFSET(::frmpub::protocc::loadrole_client_gate_s, level_),
+  PROTOBUF_FIELD_OFFSET(::frmpub::protocc::loadrole_client_gate_s, gold_),
+  PROTOBUF_FIELD_OFFSET(::frmpub::protocc::loadrole_client_gate_s, diamond_),
   ~0u,  // no _has_bits_
   PROTOBUF_FIELD_OFFSET(::frmpub::protocc::setlevel_client_gate_c, _internal_metadata_),
   ~0u,  // no _extensions_
   ~0u,  // no _oneof_case_
   ~0u,  // no _weak_field_map_
-  PROTOBUF_FIELD_OFFSET(::frmpub::protocc::setlevel_client_gate_c, roleid_),
+  PROTOBUF_FIELD_OFFSET(::frmpub::protocc::setlevel_client_gate_c, level_),
   ~0u,  // no _has_bits_
   PROTOBUF_FIELD_OFFSET(::frmpub::protocc::setlevel_client_gate_s, _internal_metadata_),
   ~0u,  // no _extensions_
   ~0u,  // no _oneof_case_
   ~0u,  // no _weak_field_map_
   PROTOBUF_FIELD_OFFSET(::frmpub::protocc::setlevel_client_gate_s, result_),
-  ~0u,  // no _has_bits_
-  PROTOBUF_FIELD_OFFSET(::frmpub::protocc::loadgoods_client_gate_c, _internal_metadata_),
-  ~0u,  // no _extensions_
-  ~0u,  // no _oneof_case_
-  ~0u,  // no _weak_field_map_
-  PROTOBUF_FIELD_OFFSET(::frmpub::protocc::loadgoods_client_gate_c, aid_),
-  PROTOBUF_FIELD_OFFSET(::frmpub::protocc::loadgoods_client_gate_c, roleid_),
+  PROTOBUF_FIELD_OFFSET(::frmpub::protocc::setlevel_client_gate_s, level_),
   ~0u,  // no _has_bits_
   PROTOBUF_FIELD_OFFSET(::frmpub::protocc::loadgoods_client_gate_s_Goods, _internal_metadata_),
   ~0u,  // no _extensions_
@@ -489,6 +609,80 @@ const ::PROTOBUF_NAMESPACE_ID::uint32 TableStruct_client_2eproto::offsets[] PROT
   ~0u,  // no _oneof_case_
   ~0u,  // no _weak_field_map_
   PROTOBUF_FIELD_OFFSET(::frmpub::protocc::notice_info_list_clent_gate_s, datas_),
+  ~0u,  // no _has_bits_
+  PROTOBUF_FIELD_OFFSET(::frmpub::protocc::email_new_client_gate_g, _internal_metadata_),
+  ~0u,  // no _extensions_
+  ~0u,  // no _oneof_case_
+  ~0u,  // no _weak_field_map_
+  PROTOBUF_FIELD_OFFSET(::frmpub::protocc::email_new_client_gate_g, id_),
+  ~0u,  // no _has_bits_
+  PROTOBUF_FIELD_OFFSET(::frmpub::protocc::loademails_client_gate_s_Email, _internal_metadata_),
+  ~0u,  // no _extensions_
+  ~0u,  // no _oneof_case_
+  ~0u,  // no _weak_field_map_
+  PROTOBUF_FIELD_OFFSET(::frmpub::protocc::loademails_client_gate_s_Email, id_),
+  PROTOBUF_FIELD_OFFSET(::frmpub::protocc::loademails_client_gate_s_Email, is_read_),
+  PROTOBUF_FIELD_OFFSET(::frmpub::protocc::loademails_client_gate_s_Email, is_receive_),
+  ~0u,  // no _has_bits_
+  PROTOBUF_FIELD_OFFSET(::frmpub::protocc::loademails_client_gate_s, _internal_metadata_),
+  ~0u,  // no _extensions_
+  ~0u,  // no _oneof_case_
+  ~0u,  // no _weak_field_map_
+  PROTOBUF_FIELD_OFFSET(::frmpub::protocc::loademails_client_gate_s, emails_),
+  ~0u,  // no _has_bits_
+  PROTOBUF_FIELD_OFFSET(::frmpub::protocc::lookemail_client_gate_c, _internal_metadata_),
+  ~0u,  // no _extensions_
+  ~0u,  // no _oneof_case_
+  ~0u,  // no _weak_field_map_
+  PROTOBUF_FIELD_OFFSET(::frmpub::protocc::lookemail_client_gate_c, emailid_),
+  ~0u,  // no _has_bits_
+  PROTOBUF_FIELD_OFFSET(::frmpub::protocc::lookemail_client_gate_s_Annex_Goods, _internal_metadata_),
+  ~0u,  // no _extensions_
+  ~0u,  // no _oneof_case_
+  ~0u,  // no _weak_field_map_
+  PROTOBUF_FIELD_OFFSET(::frmpub::protocc::lookemail_client_gate_s_Annex_Goods, cfgid_),
+  PROTOBUF_FIELD_OFFSET(::frmpub::protocc::lookemail_client_gate_s_Annex_Goods, num_),
+  ~0u,  // no _has_bits_
+  PROTOBUF_FIELD_OFFSET(::frmpub::protocc::lookemail_client_gate_s_Annex, _internal_metadata_),
+  ~0u,  // no _extensions_
+  ~0u,  // no _oneof_case_
+  ~0u,  // no _weak_field_map_
+  PROTOBUF_FIELD_OFFSET(::frmpub::protocc::lookemail_client_gate_s_Annex, gold_),
+  PROTOBUF_FIELD_OFFSET(::frmpub::protocc::lookemail_client_gate_s_Annex, diamond_),
+  PROTOBUF_FIELD_OFFSET(::frmpub::protocc::lookemail_client_gate_s_Annex, goods_),
+  ~0u,  // no _has_bits_
+  PROTOBUF_FIELD_OFFSET(::frmpub::protocc::lookemail_client_gate_s, _internal_metadata_),
+  ~0u,  // no _extensions_
+  ~0u,  // no _oneof_case_
+  ~0u,  // no _weak_field_map_
+  PROTOBUF_FIELD_OFFSET(::frmpub::protocc::lookemail_client_gate_s, result_),
+  PROTOBUF_FIELD_OFFSET(::frmpub::protocc::lookemail_client_gate_s, id_),
+  PROTOBUF_FIELD_OFFSET(::frmpub::protocc::lookemail_client_gate_s, title_),
+  PROTOBUF_FIELD_OFFSET(::frmpub::protocc::lookemail_client_gate_s, info_),
+  PROTOBUF_FIELD_OFFSET(::frmpub::protocc::lookemail_client_gate_s, type_),
+  PROTOBUF_FIELD_OFFSET(::frmpub::protocc::lookemail_client_gate_s, time_),
+  PROTOBUF_FIELD_OFFSET(::frmpub::protocc::lookemail_client_gate_s, annex_),
+  ~0u,  // no _has_bits_
+  PROTOBUF_FIELD_OFFSET(::frmpub::protocc::getannex_client_gate_c, _internal_metadata_),
+  ~0u,  // no _extensions_
+  ~0u,  // no _oneof_case_
+  ~0u,  // no _weak_field_map_
+  PROTOBUF_FIELD_OFFSET(::frmpub::protocc::getannex_client_gate_c, emailid_),
+  ~0u,  // no _has_bits_
+  PROTOBUF_FIELD_OFFSET(::frmpub::protocc::getannex_client_gate_s, _internal_metadata_),
+  ~0u,  // no _extensions_
+  ~0u,  // no _oneof_case_
+  ~0u,  // no _weak_field_map_
+  PROTOBUF_FIELD_OFFSET(::frmpub::protocc::getannex_client_gate_s, result_),
+  ~0u,  // no _has_bits_
+  PROTOBUF_FIELD_OFFSET(::frmpub::protocc::baseupdata_client_gate_g, _internal_metadata_),
+  ~0u,  // no _extensions_
+  ~0u,  // no _oneof_case_
+  ~0u,  // no _weak_field_map_
+  PROTOBUF_FIELD_OFFSET(::frmpub::protocc::baseupdata_client_gate_g, roleid_),
+  PROTOBUF_FIELD_OFFSET(::frmpub::protocc::baseupdata_client_gate_g, level_),
+  PROTOBUF_FIELD_OFFSET(::frmpub::protocc::baseupdata_client_gate_g, gold_),
+  PROTOBUF_FIELD_OFFSET(::frmpub::protocc::baseupdata_client_gate_g, diamond_),
 };
 static const ::PROTOBUF_NAMESPACE_ID::internal::MigrationSchema schemas[] PROTOBUF_SECTION_VARIABLE(protodesc_cold) = {
   { 0, -1, sizeof(::frmpub::protocc::serverlist_client_gate_s)},
@@ -503,17 +697,26 @@ static const ::PROTOBUF_NAMESPACE_ID::internal::MigrationSchema schemas[] PROTOB
   { 62, -1, sizeof(::frmpub::protocc::createrole_client_gate_s)},
   { 70, -1, sizeof(::frmpub::protocc::loadrole_client_gate_c)},
   { 77, -1, sizeof(::frmpub::protocc::loadrole_client_gate_s)},
-  { 86, -1, sizeof(::frmpub::protocc::setlevel_client_gate_c)},
-  { 92, -1, sizeof(::frmpub::protocc::setlevel_client_gate_s)},
-  { 98, -1, sizeof(::frmpub::protocc::loadgoods_client_gate_c)},
-  { 105, -1, sizeof(::frmpub::protocc::loadgoods_client_gate_s_Goods)},
-  { 113, -1, sizeof(::frmpub::protocc::loadgoods_client_gate_s)},
-  { 119, -1, sizeof(::frmpub::protocc::gmorder_client_gate_c)},
-  { 127, -1, sizeof(::frmpub::protocc::gmorder_client_gate_s)},
-  { 135, -1, sizeof(::frmpub::protocc::goodsupdata_client_gate_g)},
-  { 144, -1, sizeof(::frmpub::protocc::notice_info_clent_gate_g)},
-  { 150, -1, sizeof(::frmpub::protocc::notice_info_list_clent_gate_s_notice)},
-  { 157, -1, sizeof(::frmpub::protocc::notice_info_list_clent_gate_s)},
+  { 88, -1, sizeof(::frmpub::protocc::setlevel_client_gate_c)},
+  { 94, -1, sizeof(::frmpub::protocc::setlevel_client_gate_s)},
+  { 101, -1, sizeof(::frmpub::protocc::loadgoods_client_gate_s_Goods)},
+  { 109, -1, sizeof(::frmpub::protocc::loadgoods_client_gate_s)},
+  { 115, -1, sizeof(::frmpub::protocc::gmorder_client_gate_c)},
+  { 123, -1, sizeof(::frmpub::protocc::gmorder_client_gate_s)},
+  { 131, -1, sizeof(::frmpub::protocc::goodsupdata_client_gate_g)},
+  { 140, -1, sizeof(::frmpub::protocc::notice_info_clent_gate_g)},
+  { 146, -1, sizeof(::frmpub::protocc::notice_info_list_clent_gate_s_notice)},
+  { 153, -1, sizeof(::frmpub::protocc::notice_info_list_clent_gate_s)},
+  { 159, -1, sizeof(::frmpub::protocc::email_new_client_gate_g)},
+  { 165, -1, sizeof(::frmpub::protocc::loademails_client_gate_s_Email)},
+  { 173, -1, sizeof(::frmpub::protocc::loademails_client_gate_s)},
+  { 179, -1, sizeof(::frmpub::protocc::lookemail_client_gate_c)},
+  { 185, -1, sizeof(::frmpub::protocc::lookemail_client_gate_s_Annex_Goods)},
+  { 192, -1, sizeof(::frmpub::protocc::lookemail_client_gate_s_Annex)},
+  { 200, -1, sizeof(::frmpub::protocc::lookemail_client_gate_s)},
+  { 212, -1, sizeof(::frmpub::protocc::getannex_client_gate_c)},
+  { 218, -1, sizeof(::frmpub::protocc::getannex_client_gate_s)},
+  { 224, -1, sizeof(::frmpub::protocc::baseupdata_client_gate_g)},
 };
 
 static ::PROTOBUF_NAMESPACE_ID::Message const * const file_default_instances[] = {
@@ -531,7 +734,6 @@ static ::PROTOBUF_NAMESPACE_ID::Message const * const file_default_instances[] =
   reinterpret_cast<const ::PROTOBUF_NAMESPACE_ID::Message*>(&::frmpub::protocc::_loadrole_client_gate_s_default_instance_),
   reinterpret_cast<const ::PROTOBUF_NAMESPACE_ID::Message*>(&::frmpub::protocc::_setlevel_client_gate_c_default_instance_),
   reinterpret_cast<const ::PROTOBUF_NAMESPACE_ID::Message*>(&::frmpub::protocc::_setlevel_client_gate_s_default_instance_),
-  reinterpret_cast<const ::PROTOBUF_NAMESPACE_ID::Message*>(&::frmpub::protocc::_loadgoods_client_gate_c_default_instance_),
   reinterpret_cast<const ::PROTOBUF_NAMESPACE_ID::Message*>(&::frmpub::protocc::_loadgoods_client_gate_s_Goods_default_instance_),
   reinterpret_cast<const ::PROTOBUF_NAMESPACE_ID::Message*>(&::frmpub::protocc::_loadgoods_client_gate_s_default_instance_),
   reinterpret_cast<const ::PROTOBUF_NAMESPACE_ID::Message*>(&::frmpub::protocc::_gmorder_client_gate_c_default_instance_),
@@ -540,6 +742,16 @@ static ::PROTOBUF_NAMESPACE_ID::Message const * const file_default_instances[] =
   reinterpret_cast<const ::PROTOBUF_NAMESPACE_ID::Message*>(&::frmpub::protocc::_notice_info_clent_gate_g_default_instance_),
   reinterpret_cast<const ::PROTOBUF_NAMESPACE_ID::Message*>(&::frmpub::protocc::_notice_info_list_clent_gate_s_notice_default_instance_),
   reinterpret_cast<const ::PROTOBUF_NAMESPACE_ID::Message*>(&::frmpub::protocc::_notice_info_list_clent_gate_s_default_instance_),
+  reinterpret_cast<const ::PROTOBUF_NAMESPACE_ID::Message*>(&::frmpub::protocc::_email_new_client_gate_g_default_instance_),
+  reinterpret_cast<const ::PROTOBUF_NAMESPACE_ID::Message*>(&::frmpub::protocc::_loademails_client_gate_s_Email_default_instance_),
+  reinterpret_cast<const ::PROTOBUF_NAMESPACE_ID::Message*>(&::frmpub::protocc::_loademails_client_gate_s_default_instance_),
+  reinterpret_cast<const ::PROTOBUF_NAMESPACE_ID::Message*>(&::frmpub::protocc::_lookemail_client_gate_c_default_instance_),
+  reinterpret_cast<const ::PROTOBUF_NAMESPACE_ID::Message*>(&::frmpub::protocc::_lookemail_client_gate_s_Annex_Goods_default_instance_),
+  reinterpret_cast<const ::PROTOBUF_NAMESPACE_ID::Message*>(&::frmpub::protocc::_lookemail_client_gate_s_Annex_default_instance_),
+  reinterpret_cast<const ::PROTOBUF_NAMESPACE_ID::Message*>(&::frmpub::protocc::_lookemail_client_gate_s_default_instance_),
+  reinterpret_cast<const ::PROTOBUF_NAMESPACE_ID::Message*>(&::frmpub::protocc::_getannex_client_gate_c_default_instance_),
+  reinterpret_cast<const ::PROTOBUF_NAMESPACE_ID::Message*>(&::frmpub::protocc::_getannex_client_gate_s_default_instance_),
+  reinterpret_cast<const ::PROTOBUF_NAMESPACE_ID::Message*>(&::frmpub::protocc::_baseupdata_client_gate_g_default_instance_),
 };
 
 const char descriptor_table_protodef_client_2eproto[] PROTOBUF_SECTION_VARIABLE(protodesc_cold) =
@@ -560,48 +772,72 @@ const char descriptor_table_protodef_client_2eproto[] PROTOBUF_SECTION_VARIABLE(
   "t_gate_c\022\013\n\003aid\030\001 \001(\t\"G\n\030createrole_clie"
   "nt_gate_s\022\016\n\006result\030\001 \001(\005\022\013\n\003aid\030\002 \001(\t\022\016"
   "\n\006roleid\030\003 \001(\003\"5\n\026loadrole_client_gate_c"
-  "\022\013\n\003aid\030\001 \001(\t\022\016\n\006roleid\030\002 \001(\003\"T\n\026loadrol"
+  "\022\013\n\003aid\030\001 \001(\t\022\016\n\006roleid\030\002 \001(\003\"s\n\026loadrol"
   "e_client_gate_s\022\016\n\006result\030\001 \001(\005\022\013\n\003aid\030\002"
-  " \001(\t\022\016\n\006roleid\030\003 \001(\003\022\r\n\005level\030\004 \001(\005\"(\n\026s"
-  "etlevel_client_gate_c\022\016\n\006roleid\030\001 \001(\003\"(\n"
-  "\026setlevel_client_gate_s\022\016\n\006result\030\001 \001(\005\""
-  "6\n\027loadgoods_client_gate_c\022\013\n\003aid\030\001 \001(\t\022"
-  "\016\n\006roleid\030\002 \001(\003\"\210\001\n\027loadgoods_client_gat"
-  "e_s\022<\n\005goods\030\001 \003(\0132-.frmpub.protocc.load"
-  "goods_client_gate_s.Goods\032/\n\005Goods\022\n\n\002id"
-  "\030\001 \001(\003\022\r\n\005cfgid\030\002 \001(\005\022\013\n\003num\030\003 \001(\005\"D\n\025gm"
-  "order_client_gate_c\022\016\n\006roleid\030\001 \001(\003\022\r\n\005o"
-  "rder\030\002 \001(\t\022\014\n\004args\030\003 \003(\t\"D\n\025gmorder_clie"
-  "nt_gate_s\022\016\n\006result\030\001 \001(\005\022\r\n\005order\030\002 \001(\t"
-  "\022\014\n\004desc\030\003 \001(\t\"S\n\031goodsupdata_client_gat"
-  "e_g\022\016\n\006roleid\030\001 \001(\003\022\n\n\002id\030\002 \001(\003\022\r\n\005cfgid"
-  "\030\003 \001(\005\022\013\n\003num\030\004 \001(\005\"(\n\030notice_info_clent"
-  "_gate_g\022\014\n\004info\030\001 \001(\t\"\212\001\n\035notice_info_li"
-  "st_clent_gate_s\022C\n\005datas\030\001 \003(\01324.frmpub."
-  "protocc.notice_info_list_clent_gate_s.no"
-  "tice\032$\n\006notice\022\014\n\004info\030\001 \001(\t\022\014\n\004time\030\002 \001"
-  "(\005*\203\007\n\013ClientMsgId\022\025\n\021CLIENTMSGID_BEGIN\020"
-  "\000\022\026\n\021CLIENT_GATE_BEGIN\020\350\007\022\035\n\030SERVERLIST_"
-  "CLIENT_GATE_C\020\351\007\022\035\n\030SERVERLIST_CLIENT_GA"
-  "TE_S\020\352\007\022\037\n\032SELECTSERVER_CLIENT_GATE_C\020\353\007"
-  "\022\037\n\032SELECTSERVER_CLIENT_GATE_S\020\354\007\022\036\n\031REP"
-  "EATLOGIN_CLIENT_GATE_S\020\355\007\022\024\n\017CLIENT_GATE"
-  "_END\020\313\010\022\027\n\022CLIENT_LOGIN_BEGIN\020\314\010\022\030\n\023LOGI"
-  "N_CLIENT_GATE_C\020\315\010\022\030\n\023LOGIN_CLIENT_GATE_"
-  "S\020\316\010\022\034\n\027RECONNECT_CLIENT_GATE_C\020\317\010\022\034\n\027RE"
-  "CONNECT_CLIENT_GATE_S\020\320\010\022\025\n\020CLIENT_LOGIN"
-  "_END\020\257\t\022\026\n\021CLIENT_GAME_BEGIN\020\260\t\022\035\n\030CREAT"
-  "EROLE_CLIENT_GATE_C\020\261\t\022\035\n\030CREATEROLE_CLI"
-  "ENT_GATE_S\020\262\t\022\033\n\026LOADROLE_CLIENT_GATE_C\020"
-  "\263\t\022\033\n\026LOADROLE_CLIENT_GATE_S\020\264\t\022\033\n\026SETLE"
-  "VEL_CLIENT_GATE_C\020\265\t\022\033\n\026SETLEVEL_CLIENT_"
-  "GATE_S\020\266\t\022\034\n\027LOADGOODS_CLIENT_GATE_C\020\267\t\022"
-  "\034\n\027LOADGOODS_CLIENT_GATE_S\020\270\t\022\032\n\025GMORDER"
-  "_CLIENT_GATE_C\020\271\t\022\032\n\025GMORDER_CLIENT_GATE"
-  "_S\020\272\t\022\036\n\031GOODSUPDATA_CLIENT_GATE_G\020\273\t\022\035\n"
-  "\030NOTICE_INFO_CLENT_GATE_G\020\274\t\022\"\n\035NOTICE_I"
-  "NFO_LIST_CLENT_GATE_C\020\275\t\022\"\n\035NOTICE_INFO_"
-  "LIST_CLENT_GATE_S\020\276\t\022\024\n\017CLIENT_GAME_END\020"
+  " \001(\t\022\016\n\006roleid\030\003 \001(\003\022\r\n\005level\030\004 \001(\005\022\014\n\004g"
+  "old\030\005 \001(\005\022\017\n\007diamond\030\006 \001(\005\"\'\n\026setlevel_c"
+  "lient_gate_c\022\r\n\005level\030\001 \001(\005\"7\n\026setlevel_"
+  "client_gate_s\022\016\n\006result\030\001 \001(\005\022\r\n\005level\030\002"
+  " \001(\005\"\210\001\n\027loadgoods_client_gate_s\022<\n\005good"
+  "s\030\001 \003(\0132-.frmpub.protocc.loadgoods_clien"
+  "t_gate_s.Goods\032/\n\005Goods\022\n\n\002id\030\001 \001(\003\022\r\n\005c"
+  "fgid\030\002 \001(\005\022\013\n\003num\030\003 \001(\005\"D\n\025gmorder_clien"
+  "t_gate_c\022\016\n\006roleid\030\001 \001(\003\022\r\n\005order\030\002 \001(\t\022"
+  "\014\n\004args\030\003 \003(\t\"D\n\025gmorder_client_gate_s\022\016"
+  "\n\006result\030\001 \001(\005\022\r\n\005order\030\002 \001(\t\022\014\n\004desc\030\003 "
+  "\001(\t\"S\n\031goodsupdata_client_gate_g\022\016\n\006role"
+  "id\030\001 \001(\003\022\n\n\002id\030\002 \001(\003\022\r\n\005cfgid\030\003 \001(\005\022\013\n\003n"
+  "um\030\004 \001(\005\"(\n\030notice_info_clent_gate_g\022\014\n\004"
+  "info\030\001 \001(\t\"\212\001\n\035notice_info_list_clent_ga"
+  "te_s\022C\n\005datas\030\001 \003(\01324.frmpub.protocc.not"
+  "ice_info_list_clent_gate_s.notice\032$\n\006not"
+  "ice\022\014\n\004info\030\001 \001(\t\022\014\n\004time\030\002 \001(\005\"%\n\027email"
+  "_new_client_gate_g\022\n\n\002id\030\001 \001(\003\"\224\001\n\030loade"
+  "mails_client_gate_s\022>\n\006emails\030\001 \003(\0132..fr"
+  "mpub.protocc.loademails_client_gate_s.Em"
+  "ail\0328\n\005Email\022\n\n\002id\030\001 \001(\003\022\017\n\007is_read\030\002 \001("
+  "\010\022\022\n\nis_receive\030\003 \001(\010\"*\n\027lookemail_clien"
+  "t_gate_c\022\017\n\007emailid\030\001 \001(\003\"\276\002\n\027lookemail_"
+  "client_gate_s\022\016\n\006result\030\001 \001(\005\022\n\n\002id\030\002 \001("
+  "\003\022\r\n\005title\030\003 \001(\t\022\014\n\004info\030\004 \001(\t\022\014\n\004type\030\005"
+  " \001(\005\022\014\n\004time\030\006 \001(\005\022<\n\005annex\030\007 \001(\0132-.frmp"
+  "ub.protocc.lookemail_client_gate_s.Annex"
+  "\032\217\001\n\005Annex\022\014\n\004gold\030\001 \001(\005\022\017\n\007diamond\030\002 \001("
+  "\005\022B\n\005goods\030\003 \003(\01323.frmpub.protocc.lookem"
+  "ail_client_gate_s.Annex.Goods\032#\n\005Goods\022\r"
+  "\n\005cfgid\030\001 \001(\005\022\013\n\003num\030\002 \001(\005\")\n\026getannex_c"
+  "lient_gate_c\022\017\n\007emailid\030\001 \001(\003\"(\n\026getanne"
+  "x_client_gate_s\022\016\n\006result\030\001 \001(\005\"X\n\030baseu"
+  "pdata_client_gate_g\022\016\n\006roleid\030\003 \001(\003\022\r\n\005l"
+  "evel\030\004 \001(\005\022\014\n\004gold\030\005 \001(\005\022\017\n\007diamond\030\006 \001("
+  "\005*\364\010\n\013ClientMsgId\022\025\n\021CLIENTMSGID_BEGIN\020\000"
+  "\022\026\n\021CLIENT_GATE_BEGIN\020\350\007\022\035\n\030SERVERLIST_C"
+  "LIENT_GATE_C\020\351\007\022\035\n\030SERVERLIST_CLIENT_GAT"
+  "E_S\020\352\007\022\037\n\032SELECTSERVER_CLIENT_GATE_C\020\353\007\022"
+  "\037\n\032SELECTSERVER_CLIENT_GATE_S\020\354\007\022\036\n\031REPE"
+  "ATLOGIN_CLIENT_GATE_S\020\355\007\022\024\n\017CLIENT_GATE_"
+  "END\020\313\010\022\027\n\022CLIENT_LOGIN_BEGIN\020\314\010\022\030\n\023LOGIN"
+  "_CLIENT_GATE_C\020\315\010\022\030\n\023LOGIN_CLIENT_GATE_S"
+  "\020\316\010\022\034\n\027RECONNECT_CLIENT_GATE_C\020\317\010\022\034\n\027REC"
+  "ONNECT_CLIENT_GATE_S\020\320\010\022\025\n\020CLIENT_LOGIN_"
+  "END\020\257\t\022\026\n\021CLIENT_GAME_BEGIN\020\260\t\022\035\n\030CREATE"
+  "ROLE_CLIENT_GATE_C\020\261\t\022\035\n\030CREATEROLE_CLIE"
+  "NT_GATE_S\020\262\t\022\033\n\026LOADROLE_CLIENT_GATE_C\020\263"
+  "\t\022\033\n\026LOADROLE_CLIENT_GATE_S\020\264\t\022\033\n\026SETLEV"
+  "EL_CLIENT_GATE_C\020\265\t\022\033\n\026SETLEVEL_CLIENT_G"
+  "ATE_S\020\266\t\022\034\n\027LOADGOODS_CLIENT_GATE_C\020\267\t\022\034"
+  "\n\027LOADGOODS_CLIENT_GATE_S\020\270\t\022\032\n\025GMORDER_"
+  "CLIENT_GATE_C\020\271\t\022\032\n\025GMORDER_CLIENT_GATE_"
+  "S\020\272\t\022\036\n\031GOODSUPDATA_CLIENT_GATE_G\020\273\t\022\035\n\030"
+  "NOTICE_INFO_CLENT_GATE_G\020\274\t\022\"\n\035NOTICE_IN"
+  "FO_LIST_CLENT_GATE_C\020\275\t\022\"\n\035NOTICE_INFO_L"
+  "IST_CLENT_GATE_S\020\276\t\022\034\n\027EMAIL_NEW_CLIENT_"
+  "GATE_G\020\277\t\022\035\n\030LOADEMAILS_CLIENT_GATE_C\020\300\t"
+  "\022\035\n\030LOADEMAILS_CLIENT_GATE_S\020\301\t\022\034\n\027LOOKE"
+  "MAIL_CLIENT_GATE_C\020\302\t\022\034\n\027LOOKEMAIL_CLIEN"
+  "T_GATE_S\020\303\t\022\033\n\026GETANNEX_CLIENT_GATE_C\020\304\t"
+  "\022\033\n\026GETANNEX_CLIENT_GATE_S\020\305\t\022\035\n\030BASEUPD"
+  "ATA_CLIENT_GATE_G\020\307\t\022\024\n\017CLIENT_GAME_END\020"
   "\223\n\022\024\n\017CLIENTMSGID_END\020\210\'b\006proto3"
   ;
 static const ::PROTOBUF_NAMESPACE_ID::internal::DescriptorTable*const descriptor_table_client_2eproto_deps[1] = {
@@ -609,8 +845,8 @@ static const ::PROTOBUF_NAMESPACE_ID::internal::DescriptorTable*const descriptor
 };
 static ::PROTOBUF_NAMESPACE_ID::internal::once_flag descriptor_table_client_2eproto_once;
 const ::PROTOBUF_NAMESPACE_ID::internal::DescriptorTable descriptor_table_client_2eproto = {
-  false, false, 2392, descriptor_table_protodef_client_2eproto, "client.proto", 
-  &descriptor_table_client_2eproto_once, descriptor_table_client_2eproto_deps, 1, 23,
+  false, false, 3352, descriptor_table_protodef_client_2eproto, "client.proto", 
+  &descriptor_table_client_2eproto_once, descriptor_table_client_2eproto_deps, 1, 32,
   schemas, file_default_instances, TableStruct_client_2eproto::offsets,
   file_level_metadata_client_2eproto, file_level_enum_descriptors_client_2eproto, file_level_service_descriptors_client_2eproto,
 };
@@ -659,6 +895,14 @@ bool ClientMsgId_IsValid(int value) {
     case 1212:
     case 1213:
     case 1214:
+    case 1215:
+    case 1216:
+    case 1217:
+    case 1218:
+    case 1219:
+    case 1220:
+    case 1221:
+    case 1223:
     case 1299:
     case 5000:
       return true;
@@ -3197,8 +3441,8 @@ loadrole_client_gate_s::loadrole_client_gate_s(const loadrole_client_gate_s& fro
       GetArena());
   }
   ::memcpy(&result_, &from.result_,
-    static_cast<size_t>(reinterpret_cast<char*>(&roleid_) -
-    reinterpret_cast<char*>(&result_)) + sizeof(roleid_));
+    static_cast<size_t>(reinterpret_cast<char*>(&diamond_) -
+    reinterpret_cast<char*>(&result_)) + sizeof(diamond_));
   // @@protoc_insertion_point(copy_constructor:frmpub.protocc.loadrole_client_gate_s)
 }
 
@@ -3206,8 +3450,8 @@ void loadrole_client_gate_s::SharedCtor() {
 aid_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
 ::memset(reinterpret_cast<char*>(this) + static_cast<size_t>(
     reinterpret_cast<char*>(&result_) - reinterpret_cast<char*>(this)),
-    0, static_cast<size_t>(reinterpret_cast<char*>(&roleid_) -
-    reinterpret_cast<char*>(&result_)) + sizeof(roleid_));
+    0, static_cast<size_t>(reinterpret_cast<char*>(&diamond_) -
+    reinterpret_cast<char*>(&result_)) + sizeof(diamond_));
 }
 
 loadrole_client_gate_s::~loadrole_client_gate_s() {
@@ -3239,8 +3483,8 @@ void loadrole_client_gate_s::Clear() {
 
   aid_.ClearToEmpty();
   ::memset(&result_, 0, static_cast<size_t>(
-      reinterpret_cast<char*>(&roleid_) -
-      reinterpret_cast<char*>(&result_)) + sizeof(roleid_));
+      reinterpret_cast<char*>(&diamond_) -
+      reinterpret_cast<char*>(&result_)) + sizeof(diamond_));
   _internal_metadata_.Clear<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>();
 }
 
@@ -3278,6 +3522,20 @@ const char* loadrole_client_gate_s::_InternalParse(const char* ptr, ::PROTOBUF_N
       case 4:
         if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 32)) {
           level_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint64(&ptr);
+          CHK_(ptr);
+        } else goto handle_unusual;
+        continue;
+      // int32 gold = 5;
+      case 5:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 40)) {
+          gold_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint64(&ptr);
+          CHK_(ptr);
+        } else goto handle_unusual;
+        continue;
+      // int32 diamond = 6;
+      case 6:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 48)) {
+          diamond_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint64(&ptr);
           CHK_(ptr);
         } else goto handle_unusual;
         continue;
@@ -3337,6 +3595,18 @@ failure:
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteInt32ToArray(4, this->_internal_level(), target);
   }
 
+  // int32 gold = 5;
+  if (this->gold() != 0) {
+    target = stream->EnsureSpace(target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteInt32ToArray(5, this->_internal_gold(), target);
+  }
+
+  // int32 diamond = 6;
+  if (this->diamond() != 0) {
+    target = stream->EnsureSpace(target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteInt32ToArray(6, this->_internal_diamond(), target);
+  }
+
   if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::InternalSerializeUnknownFieldsToArray(
         _internal_metadata_.unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(::PROTOBUF_NAMESPACE_ID::UnknownFieldSet::default_instance), target, stream);
@@ -3379,6 +3649,20 @@ size_t loadrole_client_gate_s::ByteSizeLong() const {
     total_size += 1 +
       ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::Int64Size(
         this->_internal_roleid());
+  }
+
+  // int32 gold = 5;
+  if (this->gold() != 0) {
+    total_size += 1 +
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::Int32Size(
+        this->_internal_gold());
+  }
+
+  // int32 diamond = 6;
+  if (this->diamond() != 0) {
+    total_size += 1 +
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::Int32Size(
+        this->_internal_diamond());
   }
 
   if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
@@ -3424,6 +3708,12 @@ void loadrole_client_gate_s::MergeFrom(const loadrole_client_gate_s& from) {
   if (from.roleid() != 0) {
     _internal_set_roleid(from._internal_roleid());
   }
+  if (from.gold() != 0) {
+    _internal_set_gold(from._internal_gold());
+  }
+  if (from.diamond() != 0) {
+    _internal_set_diamond(from._internal_diamond());
+  }
 }
 
 void loadrole_client_gate_s::CopyFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) {
@@ -3449,8 +3739,8 @@ void loadrole_client_gate_s::InternalSwap(loadrole_client_gate_s* other) {
   _internal_metadata_.Swap<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(&other->_internal_metadata_);
   aid_.Swap(&other->aid_, &::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArena());
   ::PROTOBUF_NAMESPACE_ID::internal::memswap<
-      PROTOBUF_FIELD_OFFSET(loadrole_client_gate_s, roleid_)
-      + sizeof(loadrole_client_gate_s::roleid_)
+      PROTOBUF_FIELD_OFFSET(loadrole_client_gate_s, diamond_)
+      + sizeof(loadrole_client_gate_s::diamond_)
       - PROTOBUF_FIELD_OFFSET(loadrole_client_gate_s, result_)>(
           reinterpret_cast<char*>(&result_),
           reinterpret_cast<char*>(&other->result_));
@@ -3476,12 +3766,12 @@ setlevel_client_gate_c::setlevel_client_gate_c(::PROTOBUF_NAMESPACE_ID::Arena* a
 setlevel_client_gate_c::setlevel_client_gate_c(const setlevel_client_gate_c& from)
   : ::PROTOBUF_NAMESPACE_ID::Message() {
   _internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
-  roleid_ = from.roleid_;
+  level_ = from.level_;
   // @@protoc_insertion_point(copy_constructor:frmpub.protocc.setlevel_client_gate_c)
 }
 
 void setlevel_client_gate_c::SharedCtor() {
-roleid_ = PROTOBUF_LONGLONG(0);
+level_ = 0;
 }
 
 setlevel_client_gate_c::~setlevel_client_gate_c() {
@@ -3510,7 +3800,7 @@ void setlevel_client_gate_c::Clear() {
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
-  roleid_ = PROTOBUF_LONGLONG(0);
+  level_ = 0;
   _internal_metadata_.Clear<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>();
 }
 
@@ -3521,10 +3811,10 @@ const char* setlevel_client_gate_c::_InternalParse(const char* ptr, ::PROTOBUF_N
     ptr = ::PROTOBUF_NAMESPACE_ID::internal::ReadTag(ptr, &tag);
     CHK_(ptr);
     switch (tag >> 3) {
-      // int64 roleid = 1;
+      // int32 level = 1;
       case 1:
         if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 8)) {
-          roleid_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint64(&ptr);
+          level_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint64(&ptr);
           CHK_(ptr);
         } else goto handle_unusual;
         continue;
@@ -3556,10 +3846,10 @@ failure:
   ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
   (void) cached_has_bits;
 
-  // int64 roleid = 1;
-  if (this->roleid() != 0) {
+  // int32 level = 1;
+  if (this->level() != 0) {
     target = stream->EnsureSpace(target);
-    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteInt64ToArray(1, this->_internal_roleid(), target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteInt32ToArray(1, this->_internal_level(), target);
   }
 
   if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
@@ -3578,11 +3868,11 @@ size_t setlevel_client_gate_c::ByteSizeLong() const {
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
-  // int64 roleid = 1;
-  if (this->roleid() != 0) {
+  // int32 level = 1;
+  if (this->level() != 0) {
     total_size += 1 +
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::Int64Size(
-        this->_internal_roleid());
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::Int32Size(
+        this->_internal_level());
   }
 
   if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
@@ -3616,8 +3906,8 @@ void setlevel_client_gate_c::MergeFrom(const setlevel_client_gate_c& from) {
   ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
   (void) cached_has_bits;
 
-  if (from.roleid() != 0) {
-    _internal_set_roleid(from._internal_roleid());
+  if (from.level() != 0) {
+    _internal_set_level(from._internal_level());
   }
 }
 
@@ -3642,7 +3932,7 @@ bool setlevel_client_gate_c::IsInitialized() const {
 void setlevel_client_gate_c::InternalSwap(setlevel_client_gate_c* other) {
   using std::swap;
   _internal_metadata_.Swap<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(&other->_internal_metadata_);
-  swap(roleid_, other->roleid_);
+  swap(level_, other->level_);
 }
 
 ::PROTOBUF_NAMESPACE_ID::Metadata setlevel_client_gate_c::GetMetadata() const {
@@ -3665,12 +3955,17 @@ setlevel_client_gate_s::setlevel_client_gate_s(::PROTOBUF_NAMESPACE_ID::Arena* a
 setlevel_client_gate_s::setlevel_client_gate_s(const setlevel_client_gate_s& from)
   : ::PROTOBUF_NAMESPACE_ID::Message() {
   _internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
-  result_ = from.result_;
+  ::memcpy(&result_, &from.result_,
+    static_cast<size_t>(reinterpret_cast<char*>(&level_) -
+    reinterpret_cast<char*>(&result_)) + sizeof(level_));
   // @@protoc_insertion_point(copy_constructor:frmpub.protocc.setlevel_client_gate_s)
 }
 
 void setlevel_client_gate_s::SharedCtor() {
-result_ = 0;
+::memset(reinterpret_cast<char*>(this) + static_cast<size_t>(
+    reinterpret_cast<char*>(&result_) - reinterpret_cast<char*>(this)),
+    0, static_cast<size_t>(reinterpret_cast<char*>(&level_) -
+    reinterpret_cast<char*>(&result_)) + sizeof(level_));
 }
 
 setlevel_client_gate_s::~setlevel_client_gate_s() {
@@ -3699,7 +3994,9 @@ void setlevel_client_gate_s::Clear() {
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
-  result_ = 0;
+  ::memset(&result_, 0, static_cast<size_t>(
+      reinterpret_cast<char*>(&level_) -
+      reinterpret_cast<char*>(&result_)) + sizeof(level_));
   _internal_metadata_.Clear<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>();
 }
 
@@ -3714,6 +4011,13 @@ const char* setlevel_client_gate_s::_InternalParse(const char* ptr, ::PROTOBUF_N
       case 1:
         if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 8)) {
           result_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint64(&ptr);
+          CHK_(ptr);
+        } else goto handle_unusual;
+        continue;
+      // int32 level = 2;
+      case 2:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 16)) {
+          level_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint64(&ptr);
           CHK_(ptr);
         } else goto handle_unusual;
         continue;
@@ -3751,6 +4055,12 @@ failure:
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteInt32ToArray(1, this->_internal_result(), target);
   }
 
+  // int32 level = 2;
+  if (this->level() != 0) {
+    target = stream->EnsureSpace(target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteInt32ToArray(2, this->_internal_level(), target);
+  }
+
   if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::InternalSerializeUnknownFieldsToArray(
         _internal_metadata_.unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(::PROTOBUF_NAMESPACE_ID::UnknownFieldSet::default_instance), target, stream);
@@ -3772,6 +4082,13 @@ size_t setlevel_client_gate_s::ByteSizeLong() const {
     total_size += 1 +
       ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::Int32Size(
         this->_internal_result());
+  }
+
+  // int32 level = 2;
+  if (this->level() != 0) {
+    total_size += 1 +
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::Int32Size(
+        this->_internal_level());
   }
 
   if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
@@ -3808,6 +4125,9 @@ void setlevel_client_gate_s::MergeFrom(const setlevel_client_gate_s& from) {
   if (from.result() != 0) {
     _internal_set_result(from._internal_result());
   }
+  if (from.level() != 0) {
+    _internal_set_level(from._internal_level());
+  }
 }
 
 void setlevel_client_gate_s::CopyFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) {
@@ -3831,237 +4151,15 @@ bool setlevel_client_gate_s::IsInitialized() const {
 void setlevel_client_gate_s::InternalSwap(setlevel_client_gate_s* other) {
   using std::swap;
   _internal_metadata_.Swap<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(&other->_internal_metadata_);
-  swap(result_, other->result_);
+  ::PROTOBUF_NAMESPACE_ID::internal::memswap<
+      PROTOBUF_FIELD_OFFSET(setlevel_client_gate_s, level_)
+      + sizeof(setlevel_client_gate_s::level_)
+      - PROTOBUF_FIELD_OFFSET(setlevel_client_gate_s, result_)>(
+          reinterpret_cast<char*>(&result_),
+          reinterpret_cast<char*>(&other->result_));
 }
 
 ::PROTOBUF_NAMESPACE_ID::Metadata setlevel_client_gate_s::GetMetadata() const {
-  return GetMetadataStatic();
-}
-
-
-// ===================================================================
-
-class loadgoods_client_gate_c::_Internal {
- public:
-};
-
-loadgoods_client_gate_c::loadgoods_client_gate_c(::PROTOBUF_NAMESPACE_ID::Arena* arena)
-  : ::PROTOBUF_NAMESPACE_ID::Message(arena) {
-  SharedCtor();
-  RegisterArenaDtor(arena);
-  // @@protoc_insertion_point(arena_constructor:frmpub.protocc.loadgoods_client_gate_c)
-}
-loadgoods_client_gate_c::loadgoods_client_gate_c(const loadgoods_client_gate_c& from)
-  : ::PROTOBUF_NAMESPACE_ID::Message() {
-  _internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
-  aid_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
-  if (!from._internal_aid().empty()) {
-    aid_.Set(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, from._internal_aid(), 
-      GetArena());
-  }
-  roleid_ = from.roleid_;
-  // @@protoc_insertion_point(copy_constructor:frmpub.protocc.loadgoods_client_gate_c)
-}
-
-void loadgoods_client_gate_c::SharedCtor() {
-aid_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
-roleid_ = PROTOBUF_LONGLONG(0);
-}
-
-loadgoods_client_gate_c::~loadgoods_client_gate_c() {
-  // @@protoc_insertion_point(destructor:frmpub.protocc.loadgoods_client_gate_c)
-  SharedDtor();
-  _internal_metadata_.Delete<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>();
-}
-
-void loadgoods_client_gate_c::SharedDtor() {
-  GOOGLE_DCHECK(GetArena() == nullptr);
-  aid_.DestroyNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
-}
-
-void loadgoods_client_gate_c::ArenaDtor(void* object) {
-  loadgoods_client_gate_c* _this = reinterpret_cast< loadgoods_client_gate_c* >(object);
-  (void)_this;
-}
-void loadgoods_client_gate_c::RegisterArenaDtor(::PROTOBUF_NAMESPACE_ID::Arena*) {
-}
-void loadgoods_client_gate_c::SetCachedSize(int size) const {
-  _cached_size_.Set(size);
-}
-
-void loadgoods_client_gate_c::Clear() {
-// @@protoc_insertion_point(message_clear_start:frmpub.protocc.loadgoods_client_gate_c)
-  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
-  // Prevent compiler warnings about cached_has_bits being unused
-  (void) cached_has_bits;
-
-  aid_.ClearToEmpty();
-  roleid_ = PROTOBUF_LONGLONG(0);
-  _internal_metadata_.Clear<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>();
-}
-
-const char* loadgoods_client_gate_c::_InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) {
-#define CHK_(x) if (PROTOBUF_PREDICT_FALSE(!(x))) goto failure
-  while (!ctx->Done(&ptr)) {
-    ::PROTOBUF_NAMESPACE_ID::uint32 tag;
-    ptr = ::PROTOBUF_NAMESPACE_ID::internal::ReadTag(ptr, &tag);
-    CHK_(ptr);
-    switch (tag >> 3) {
-      // string aid = 1;
-      case 1:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 10)) {
-          auto str = _internal_mutable_aid();
-          ptr = ::PROTOBUF_NAMESPACE_ID::internal::InlineGreedyStringParser(str, ptr, ctx);
-          CHK_(::PROTOBUF_NAMESPACE_ID::internal::VerifyUTF8(str, "frmpub.protocc.loadgoods_client_gate_c.aid"));
-          CHK_(ptr);
-        } else goto handle_unusual;
-        continue;
-      // int64 roleid = 2;
-      case 2:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 16)) {
-          roleid_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint64(&ptr);
-          CHK_(ptr);
-        } else goto handle_unusual;
-        continue;
-      default: {
-      handle_unusual:
-        if ((tag & 7) == 4 || tag == 0) {
-          ctx->SetLastTag(tag);
-          goto success;
-        }
-        ptr = UnknownFieldParse(tag,
-            _internal_metadata_.mutable_unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(),
-            ptr, ctx);
-        CHK_(ptr != nullptr);
-        continue;
-      }
-    }  // switch
-  }  // while
-success:
-  return ptr;
-failure:
-  ptr = nullptr;
-  goto success;
-#undef CHK_
-}
-
-::PROTOBUF_NAMESPACE_ID::uint8* loadgoods_client_gate_c::_InternalSerialize(
-    ::PROTOBUF_NAMESPACE_ID::uint8* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const {
-  // @@protoc_insertion_point(serialize_to_array_start:frmpub.protocc.loadgoods_client_gate_c)
-  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
-  (void) cached_has_bits;
-
-  // string aid = 1;
-  if (this->aid().size() > 0) {
-    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::VerifyUtf8String(
-      this->_internal_aid().data(), static_cast<int>(this->_internal_aid().length()),
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::SERIALIZE,
-      "frmpub.protocc.loadgoods_client_gate_c.aid");
-    target = stream->WriteStringMaybeAliased(
-        1, this->_internal_aid(), target);
-  }
-
-  // int64 roleid = 2;
-  if (this->roleid() != 0) {
-    target = stream->EnsureSpace(target);
-    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteInt64ToArray(2, this->_internal_roleid(), target);
-  }
-
-  if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
-    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::InternalSerializeUnknownFieldsToArray(
-        _internal_metadata_.unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(::PROTOBUF_NAMESPACE_ID::UnknownFieldSet::default_instance), target, stream);
-  }
-  // @@protoc_insertion_point(serialize_to_array_end:frmpub.protocc.loadgoods_client_gate_c)
-  return target;
-}
-
-size_t loadgoods_client_gate_c::ByteSizeLong() const {
-// @@protoc_insertion_point(message_byte_size_start:frmpub.protocc.loadgoods_client_gate_c)
-  size_t total_size = 0;
-
-  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
-  // Prevent compiler warnings about cached_has_bits being unused
-  (void) cached_has_bits;
-
-  // string aid = 1;
-  if (this->aid().size() > 0) {
-    total_size += 1 +
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::StringSize(
-        this->_internal_aid());
-  }
-
-  // int64 roleid = 2;
-  if (this->roleid() != 0) {
-    total_size += 1 +
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::Int64Size(
-        this->_internal_roleid());
-  }
-
-  if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
-    return ::PROTOBUF_NAMESPACE_ID::internal::ComputeUnknownFieldsSize(
-        _internal_metadata_, total_size, &_cached_size_);
-  }
-  int cached_size = ::PROTOBUF_NAMESPACE_ID::internal::ToCachedSize(total_size);
-  SetCachedSize(cached_size);
-  return total_size;
-}
-
-void loadgoods_client_gate_c::MergeFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) {
-// @@protoc_insertion_point(generalized_merge_from_start:frmpub.protocc.loadgoods_client_gate_c)
-  GOOGLE_DCHECK_NE(&from, this);
-  const loadgoods_client_gate_c* source =
-      ::PROTOBUF_NAMESPACE_ID::DynamicCastToGenerated<loadgoods_client_gate_c>(
-          &from);
-  if (source == nullptr) {
-  // @@protoc_insertion_point(generalized_merge_from_cast_fail:frmpub.protocc.loadgoods_client_gate_c)
-    ::PROTOBUF_NAMESPACE_ID::internal::ReflectionOps::Merge(from, this);
-  } else {
-  // @@protoc_insertion_point(generalized_merge_from_cast_success:frmpub.protocc.loadgoods_client_gate_c)
-    MergeFrom(*source);
-  }
-}
-
-void loadgoods_client_gate_c::MergeFrom(const loadgoods_client_gate_c& from) {
-// @@protoc_insertion_point(class_specific_merge_from_start:frmpub.protocc.loadgoods_client_gate_c)
-  GOOGLE_DCHECK_NE(&from, this);
-  _internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
-  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
-  (void) cached_has_bits;
-
-  if (from.aid().size() > 0) {
-    _internal_set_aid(from._internal_aid());
-  }
-  if (from.roleid() != 0) {
-    _internal_set_roleid(from._internal_roleid());
-  }
-}
-
-void loadgoods_client_gate_c::CopyFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) {
-// @@protoc_insertion_point(generalized_copy_from_start:frmpub.protocc.loadgoods_client_gate_c)
-  if (&from == this) return;
-  Clear();
-  MergeFrom(from);
-}
-
-void loadgoods_client_gate_c::CopyFrom(const loadgoods_client_gate_c& from) {
-// @@protoc_insertion_point(class_specific_copy_from_start:frmpub.protocc.loadgoods_client_gate_c)
-  if (&from == this) return;
-  Clear();
-  MergeFrom(from);
-}
-
-bool loadgoods_client_gate_c::IsInitialized() const {
-  return true;
-}
-
-void loadgoods_client_gate_c::InternalSwap(loadgoods_client_gate_c* other) {
-  using std::swap;
-  _internal_metadata_.Swap<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(&other->_internal_metadata_);
-  aid_.Swap(&other->aid_, &::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArena());
-  swap(roleid_, other->roleid_);
-}
-
-::PROTOBUF_NAMESPACE_ID::Metadata loadgoods_client_gate_c::GetMetadata() const {
   return GetMetadataStatic();
 }
 
@@ -5927,6 +6025,2335 @@ void notice_info_list_clent_gate_s::InternalSwap(notice_info_list_clent_gate_s* 
 }
 
 
+// ===================================================================
+
+class email_new_client_gate_g::_Internal {
+ public:
+};
+
+email_new_client_gate_g::email_new_client_gate_g(::PROTOBUF_NAMESPACE_ID::Arena* arena)
+  : ::PROTOBUF_NAMESPACE_ID::Message(arena) {
+  SharedCtor();
+  RegisterArenaDtor(arena);
+  // @@protoc_insertion_point(arena_constructor:frmpub.protocc.email_new_client_gate_g)
+}
+email_new_client_gate_g::email_new_client_gate_g(const email_new_client_gate_g& from)
+  : ::PROTOBUF_NAMESPACE_ID::Message() {
+  _internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
+  id_ = from.id_;
+  // @@protoc_insertion_point(copy_constructor:frmpub.protocc.email_new_client_gate_g)
+}
+
+void email_new_client_gate_g::SharedCtor() {
+id_ = PROTOBUF_LONGLONG(0);
+}
+
+email_new_client_gate_g::~email_new_client_gate_g() {
+  // @@protoc_insertion_point(destructor:frmpub.protocc.email_new_client_gate_g)
+  SharedDtor();
+  _internal_metadata_.Delete<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>();
+}
+
+void email_new_client_gate_g::SharedDtor() {
+  GOOGLE_DCHECK(GetArena() == nullptr);
+}
+
+void email_new_client_gate_g::ArenaDtor(void* object) {
+  email_new_client_gate_g* _this = reinterpret_cast< email_new_client_gate_g* >(object);
+  (void)_this;
+}
+void email_new_client_gate_g::RegisterArenaDtor(::PROTOBUF_NAMESPACE_ID::Arena*) {
+}
+void email_new_client_gate_g::SetCachedSize(int size) const {
+  _cached_size_.Set(size);
+}
+
+void email_new_client_gate_g::Clear() {
+// @@protoc_insertion_point(message_clear_start:frmpub.protocc.email_new_client_gate_g)
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
+  id_ = PROTOBUF_LONGLONG(0);
+  _internal_metadata_.Clear<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>();
+}
+
+const char* email_new_client_gate_g::_InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) {
+#define CHK_(x) if (PROTOBUF_PREDICT_FALSE(!(x))) goto failure
+  while (!ctx->Done(&ptr)) {
+    ::PROTOBUF_NAMESPACE_ID::uint32 tag;
+    ptr = ::PROTOBUF_NAMESPACE_ID::internal::ReadTag(ptr, &tag);
+    CHK_(ptr);
+    switch (tag >> 3) {
+      // int64 id = 1;
+      case 1:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 8)) {
+          id_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint64(&ptr);
+          CHK_(ptr);
+        } else goto handle_unusual;
+        continue;
+      default: {
+      handle_unusual:
+        if ((tag & 7) == 4 || tag == 0) {
+          ctx->SetLastTag(tag);
+          goto success;
+        }
+        ptr = UnknownFieldParse(tag,
+            _internal_metadata_.mutable_unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(),
+            ptr, ctx);
+        CHK_(ptr != nullptr);
+        continue;
+      }
+    }  // switch
+  }  // while
+success:
+  return ptr;
+failure:
+  ptr = nullptr;
+  goto success;
+#undef CHK_
+}
+
+::PROTOBUF_NAMESPACE_ID::uint8* email_new_client_gate_g::_InternalSerialize(
+    ::PROTOBUF_NAMESPACE_ID::uint8* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const {
+  // @@protoc_insertion_point(serialize_to_array_start:frmpub.protocc.email_new_client_gate_g)
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  // int64 id = 1;
+  if (this->id() != 0) {
+    target = stream->EnsureSpace(target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteInt64ToArray(1, this->_internal_id(), target);
+  }
+
+  if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::InternalSerializeUnknownFieldsToArray(
+        _internal_metadata_.unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(::PROTOBUF_NAMESPACE_ID::UnknownFieldSet::default_instance), target, stream);
+  }
+  // @@protoc_insertion_point(serialize_to_array_end:frmpub.protocc.email_new_client_gate_g)
+  return target;
+}
+
+size_t email_new_client_gate_g::ByteSizeLong() const {
+// @@protoc_insertion_point(message_byte_size_start:frmpub.protocc.email_new_client_gate_g)
+  size_t total_size = 0;
+
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
+  // int64 id = 1;
+  if (this->id() != 0) {
+    total_size += 1 +
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::Int64Size(
+        this->_internal_id());
+  }
+
+  if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
+    return ::PROTOBUF_NAMESPACE_ID::internal::ComputeUnknownFieldsSize(
+        _internal_metadata_, total_size, &_cached_size_);
+  }
+  int cached_size = ::PROTOBUF_NAMESPACE_ID::internal::ToCachedSize(total_size);
+  SetCachedSize(cached_size);
+  return total_size;
+}
+
+void email_new_client_gate_g::MergeFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) {
+// @@protoc_insertion_point(generalized_merge_from_start:frmpub.protocc.email_new_client_gate_g)
+  GOOGLE_DCHECK_NE(&from, this);
+  const email_new_client_gate_g* source =
+      ::PROTOBUF_NAMESPACE_ID::DynamicCastToGenerated<email_new_client_gate_g>(
+          &from);
+  if (source == nullptr) {
+  // @@protoc_insertion_point(generalized_merge_from_cast_fail:frmpub.protocc.email_new_client_gate_g)
+    ::PROTOBUF_NAMESPACE_ID::internal::ReflectionOps::Merge(from, this);
+  } else {
+  // @@protoc_insertion_point(generalized_merge_from_cast_success:frmpub.protocc.email_new_client_gate_g)
+    MergeFrom(*source);
+  }
+}
+
+void email_new_client_gate_g::MergeFrom(const email_new_client_gate_g& from) {
+// @@protoc_insertion_point(class_specific_merge_from_start:frmpub.protocc.email_new_client_gate_g)
+  GOOGLE_DCHECK_NE(&from, this);
+  _internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  if (from.id() != 0) {
+    _internal_set_id(from._internal_id());
+  }
+}
+
+void email_new_client_gate_g::CopyFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) {
+// @@protoc_insertion_point(generalized_copy_from_start:frmpub.protocc.email_new_client_gate_g)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+void email_new_client_gate_g::CopyFrom(const email_new_client_gate_g& from) {
+// @@protoc_insertion_point(class_specific_copy_from_start:frmpub.protocc.email_new_client_gate_g)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+bool email_new_client_gate_g::IsInitialized() const {
+  return true;
+}
+
+void email_new_client_gate_g::InternalSwap(email_new_client_gate_g* other) {
+  using std::swap;
+  _internal_metadata_.Swap<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(&other->_internal_metadata_);
+  swap(id_, other->id_);
+}
+
+::PROTOBUF_NAMESPACE_ID::Metadata email_new_client_gate_g::GetMetadata() const {
+  return GetMetadataStatic();
+}
+
+
+// ===================================================================
+
+class loademails_client_gate_s_Email::_Internal {
+ public:
+};
+
+loademails_client_gate_s_Email::loademails_client_gate_s_Email(::PROTOBUF_NAMESPACE_ID::Arena* arena)
+  : ::PROTOBUF_NAMESPACE_ID::Message(arena) {
+  SharedCtor();
+  RegisterArenaDtor(arena);
+  // @@protoc_insertion_point(arena_constructor:frmpub.protocc.loademails_client_gate_s.Email)
+}
+loademails_client_gate_s_Email::loademails_client_gate_s_Email(const loademails_client_gate_s_Email& from)
+  : ::PROTOBUF_NAMESPACE_ID::Message() {
+  _internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
+  ::memcpy(&id_, &from.id_,
+    static_cast<size_t>(reinterpret_cast<char*>(&is_receive_) -
+    reinterpret_cast<char*>(&id_)) + sizeof(is_receive_));
+  // @@protoc_insertion_point(copy_constructor:frmpub.protocc.loademails_client_gate_s.Email)
+}
+
+void loademails_client_gate_s_Email::SharedCtor() {
+::memset(reinterpret_cast<char*>(this) + static_cast<size_t>(
+    reinterpret_cast<char*>(&id_) - reinterpret_cast<char*>(this)),
+    0, static_cast<size_t>(reinterpret_cast<char*>(&is_receive_) -
+    reinterpret_cast<char*>(&id_)) + sizeof(is_receive_));
+}
+
+loademails_client_gate_s_Email::~loademails_client_gate_s_Email() {
+  // @@protoc_insertion_point(destructor:frmpub.protocc.loademails_client_gate_s.Email)
+  SharedDtor();
+  _internal_metadata_.Delete<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>();
+}
+
+void loademails_client_gate_s_Email::SharedDtor() {
+  GOOGLE_DCHECK(GetArena() == nullptr);
+}
+
+void loademails_client_gate_s_Email::ArenaDtor(void* object) {
+  loademails_client_gate_s_Email* _this = reinterpret_cast< loademails_client_gate_s_Email* >(object);
+  (void)_this;
+}
+void loademails_client_gate_s_Email::RegisterArenaDtor(::PROTOBUF_NAMESPACE_ID::Arena*) {
+}
+void loademails_client_gate_s_Email::SetCachedSize(int size) const {
+  _cached_size_.Set(size);
+}
+
+void loademails_client_gate_s_Email::Clear() {
+// @@protoc_insertion_point(message_clear_start:frmpub.protocc.loademails_client_gate_s.Email)
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
+  ::memset(&id_, 0, static_cast<size_t>(
+      reinterpret_cast<char*>(&is_receive_) -
+      reinterpret_cast<char*>(&id_)) + sizeof(is_receive_));
+  _internal_metadata_.Clear<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>();
+}
+
+const char* loademails_client_gate_s_Email::_InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) {
+#define CHK_(x) if (PROTOBUF_PREDICT_FALSE(!(x))) goto failure
+  while (!ctx->Done(&ptr)) {
+    ::PROTOBUF_NAMESPACE_ID::uint32 tag;
+    ptr = ::PROTOBUF_NAMESPACE_ID::internal::ReadTag(ptr, &tag);
+    CHK_(ptr);
+    switch (tag >> 3) {
+      // int64 id = 1;
+      case 1:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 8)) {
+          id_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint64(&ptr);
+          CHK_(ptr);
+        } else goto handle_unusual;
+        continue;
+      // bool is_read = 2;
+      case 2:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 16)) {
+          is_read_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint64(&ptr);
+          CHK_(ptr);
+        } else goto handle_unusual;
+        continue;
+      // bool is_receive = 3;
+      case 3:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 24)) {
+          is_receive_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint64(&ptr);
+          CHK_(ptr);
+        } else goto handle_unusual;
+        continue;
+      default: {
+      handle_unusual:
+        if ((tag & 7) == 4 || tag == 0) {
+          ctx->SetLastTag(tag);
+          goto success;
+        }
+        ptr = UnknownFieldParse(tag,
+            _internal_metadata_.mutable_unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(),
+            ptr, ctx);
+        CHK_(ptr != nullptr);
+        continue;
+      }
+    }  // switch
+  }  // while
+success:
+  return ptr;
+failure:
+  ptr = nullptr;
+  goto success;
+#undef CHK_
+}
+
+::PROTOBUF_NAMESPACE_ID::uint8* loademails_client_gate_s_Email::_InternalSerialize(
+    ::PROTOBUF_NAMESPACE_ID::uint8* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const {
+  // @@protoc_insertion_point(serialize_to_array_start:frmpub.protocc.loademails_client_gate_s.Email)
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  // int64 id = 1;
+  if (this->id() != 0) {
+    target = stream->EnsureSpace(target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteInt64ToArray(1, this->_internal_id(), target);
+  }
+
+  // bool is_read = 2;
+  if (this->is_read() != 0) {
+    target = stream->EnsureSpace(target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteBoolToArray(2, this->_internal_is_read(), target);
+  }
+
+  // bool is_receive = 3;
+  if (this->is_receive() != 0) {
+    target = stream->EnsureSpace(target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteBoolToArray(3, this->_internal_is_receive(), target);
+  }
+
+  if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::InternalSerializeUnknownFieldsToArray(
+        _internal_metadata_.unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(::PROTOBUF_NAMESPACE_ID::UnknownFieldSet::default_instance), target, stream);
+  }
+  // @@protoc_insertion_point(serialize_to_array_end:frmpub.protocc.loademails_client_gate_s.Email)
+  return target;
+}
+
+size_t loademails_client_gate_s_Email::ByteSizeLong() const {
+// @@protoc_insertion_point(message_byte_size_start:frmpub.protocc.loademails_client_gate_s.Email)
+  size_t total_size = 0;
+
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
+  // int64 id = 1;
+  if (this->id() != 0) {
+    total_size += 1 +
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::Int64Size(
+        this->_internal_id());
+  }
+
+  // bool is_read = 2;
+  if (this->is_read() != 0) {
+    total_size += 1 + 1;
+  }
+
+  // bool is_receive = 3;
+  if (this->is_receive() != 0) {
+    total_size += 1 + 1;
+  }
+
+  if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
+    return ::PROTOBUF_NAMESPACE_ID::internal::ComputeUnknownFieldsSize(
+        _internal_metadata_, total_size, &_cached_size_);
+  }
+  int cached_size = ::PROTOBUF_NAMESPACE_ID::internal::ToCachedSize(total_size);
+  SetCachedSize(cached_size);
+  return total_size;
+}
+
+void loademails_client_gate_s_Email::MergeFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) {
+// @@protoc_insertion_point(generalized_merge_from_start:frmpub.protocc.loademails_client_gate_s.Email)
+  GOOGLE_DCHECK_NE(&from, this);
+  const loademails_client_gate_s_Email* source =
+      ::PROTOBUF_NAMESPACE_ID::DynamicCastToGenerated<loademails_client_gate_s_Email>(
+          &from);
+  if (source == nullptr) {
+  // @@protoc_insertion_point(generalized_merge_from_cast_fail:frmpub.protocc.loademails_client_gate_s.Email)
+    ::PROTOBUF_NAMESPACE_ID::internal::ReflectionOps::Merge(from, this);
+  } else {
+  // @@protoc_insertion_point(generalized_merge_from_cast_success:frmpub.protocc.loademails_client_gate_s.Email)
+    MergeFrom(*source);
+  }
+}
+
+void loademails_client_gate_s_Email::MergeFrom(const loademails_client_gate_s_Email& from) {
+// @@protoc_insertion_point(class_specific_merge_from_start:frmpub.protocc.loademails_client_gate_s.Email)
+  GOOGLE_DCHECK_NE(&from, this);
+  _internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  if (from.id() != 0) {
+    _internal_set_id(from._internal_id());
+  }
+  if (from.is_read() != 0) {
+    _internal_set_is_read(from._internal_is_read());
+  }
+  if (from.is_receive() != 0) {
+    _internal_set_is_receive(from._internal_is_receive());
+  }
+}
+
+void loademails_client_gate_s_Email::CopyFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) {
+// @@protoc_insertion_point(generalized_copy_from_start:frmpub.protocc.loademails_client_gate_s.Email)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+void loademails_client_gate_s_Email::CopyFrom(const loademails_client_gate_s_Email& from) {
+// @@protoc_insertion_point(class_specific_copy_from_start:frmpub.protocc.loademails_client_gate_s.Email)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+bool loademails_client_gate_s_Email::IsInitialized() const {
+  return true;
+}
+
+void loademails_client_gate_s_Email::InternalSwap(loademails_client_gate_s_Email* other) {
+  using std::swap;
+  _internal_metadata_.Swap<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(&other->_internal_metadata_);
+  ::PROTOBUF_NAMESPACE_ID::internal::memswap<
+      PROTOBUF_FIELD_OFFSET(loademails_client_gate_s_Email, is_receive_)
+      + sizeof(loademails_client_gate_s_Email::is_receive_)
+      - PROTOBUF_FIELD_OFFSET(loademails_client_gate_s_Email, id_)>(
+          reinterpret_cast<char*>(&id_),
+          reinterpret_cast<char*>(&other->id_));
+}
+
+::PROTOBUF_NAMESPACE_ID::Metadata loademails_client_gate_s_Email::GetMetadata() const {
+  return GetMetadataStatic();
+}
+
+
+// ===================================================================
+
+class loademails_client_gate_s::_Internal {
+ public:
+};
+
+loademails_client_gate_s::loademails_client_gate_s(::PROTOBUF_NAMESPACE_ID::Arena* arena)
+  : ::PROTOBUF_NAMESPACE_ID::Message(arena),
+  emails_(arena) {
+  SharedCtor();
+  RegisterArenaDtor(arena);
+  // @@protoc_insertion_point(arena_constructor:frmpub.protocc.loademails_client_gate_s)
+}
+loademails_client_gate_s::loademails_client_gate_s(const loademails_client_gate_s& from)
+  : ::PROTOBUF_NAMESPACE_ID::Message(),
+      emails_(from.emails_) {
+  _internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
+  // @@protoc_insertion_point(copy_constructor:frmpub.protocc.loademails_client_gate_s)
+}
+
+void loademails_client_gate_s::SharedCtor() {
+}
+
+loademails_client_gate_s::~loademails_client_gate_s() {
+  // @@protoc_insertion_point(destructor:frmpub.protocc.loademails_client_gate_s)
+  SharedDtor();
+  _internal_metadata_.Delete<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>();
+}
+
+void loademails_client_gate_s::SharedDtor() {
+  GOOGLE_DCHECK(GetArena() == nullptr);
+}
+
+void loademails_client_gate_s::ArenaDtor(void* object) {
+  loademails_client_gate_s* _this = reinterpret_cast< loademails_client_gate_s* >(object);
+  (void)_this;
+}
+void loademails_client_gate_s::RegisterArenaDtor(::PROTOBUF_NAMESPACE_ID::Arena*) {
+}
+void loademails_client_gate_s::SetCachedSize(int size) const {
+  _cached_size_.Set(size);
+}
+
+void loademails_client_gate_s::Clear() {
+// @@protoc_insertion_point(message_clear_start:frmpub.protocc.loademails_client_gate_s)
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
+  emails_.Clear();
+  _internal_metadata_.Clear<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>();
+}
+
+const char* loademails_client_gate_s::_InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) {
+#define CHK_(x) if (PROTOBUF_PREDICT_FALSE(!(x))) goto failure
+  while (!ctx->Done(&ptr)) {
+    ::PROTOBUF_NAMESPACE_ID::uint32 tag;
+    ptr = ::PROTOBUF_NAMESPACE_ID::internal::ReadTag(ptr, &tag);
+    CHK_(ptr);
+    switch (tag >> 3) {
+      // repeated .frmpub.protocc.loademails_client_gate_s.Email emails = 1;
+      case 1:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 10)) {
+          ptr -= 1;
+          do {
+            ptr += 1;
+            ptr = ctx->ParseMessage(_internal_add_emails(), ptr);
+            CHK_(ptr);
+            if (!ctx->DataAvailable(ptr)) break;
+          } while (::PROTOBUF_NAMESPACE_ID::internal::ExpectTag<10>(ptr));
+        } else goto handle_unusual;
+        continue;
+      default: {
+      handle_unusual:
+        if ((tag & 7) == 4 || tag == 0) {
+          ctx->SetLastTag(tag);
+          goto success;
+        }
+        ptr = UnknownFieldParse(tag,
+            _internal_metadata_.mutable_unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(),
+            ptr, ctx);
+        CHK_(ptr != nullptr);
+        continue;
+      }
+    }  // switch
+  }  // while
+success:
+  return ptr;
+failure:
+  ptr = nullptr;
+  goto success;
+#undef CHK_
+}
+
+::PROTOBUF_NAMESPACE_ID::uint8* loademails_client_gate_s::_InternalSerialize(
+    ::PROTOBUF_NAMESPACE_ID::uint8* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const {
+  // @@protoc_insertion_point(serialize_to_array_start:frmpub.protocc.loademails_client_gate_s)
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  // repeated .frmpub.protocc.loademails_client_gate_s.Email emails = 1;
+  for (unsigned int i = 0,
+      n = static_cast<unsigned int>(this->_internal_emails_size()); i < n; i++) {
+    target = stream->EnsureSpace(target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
+      InternalWriteMessage(1, this->_internal_emails(i), target, stream);
+  }
+
+  if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::InternalSerializeUnknownFieldsToArray(
+        _internal_metadata_.unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(::PROTOBUF_NAMESPACE_ID::UnknownFieldSet::default_instance), target, stream);
+  }
+  // @@protoc_insertion_point(serialize_to_array_end:frmpub.protocc.loademails_client_gate_s)
+  return target;
+}
+
+size_t loademails_client_gate_s::ByteSizeLong() const {
+// @@protoc_insertion_point(message_byte_size_start:frmpub.protocc.loademails_client_gate_s)
+  size_t total_size = 0;
+
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
+  // repeated .frmpub.protocc.loademails_client_gate_s.Email emails = 1;
+  total_size += 1UL * this->_internal_emails_size();
+  for (const auto& msg : this->emails_) {
+    total_size +=
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(msg);
+  }
+
+  if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
+    return ::PROTOBUF_NAMESPACE_ID::internal::ComputeUnknownFieldsSize(
+        _internal_metadata_, total_size, &_cached_size_);
+  }
+  int cached_size = ::PROTOBUF_NAMESPACE_ID::internal::ToCachedSize(total_size);
+  SetCachedSize(cached_size);
+  return total_size;
+}
+
+void loademails_client_gate_s::MergeFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) {
+// @@protoc_insertion_point(generalized_merge_from_start:frmpub.protocc.loademails_client_gate_s)
+  GOOGLE_DCHECK_NE(&from, this);
+  const loademails_client_gate_s* source =
+      ::PROTOBUF_NAMESPACE_ID::DynamicCastToGenerated<loademails_client_gate_s>(
+          &from);
+  if (source == nullptr) {
+  // @@protoc_insertion_point(generalized_merge_from_cast_fail:frmpub.protocc.loademails_client_gate_s)
+    ::PROTOBUF_NAMESPACE_ID::internal::ReflectionOps::Merge(from, this);
+  } else {
+  // @@protoc_insertion_point(generalized_merge_from_cast_success:frmpub.protocc.loademails_client_gate_s)
+    MergeFrom(*source);
+  }
+}
+
+void loademails_client_gate_s::MergeFrom(const loademails_client_gate_s& from) {
+// @@protoc_insertion_point(class_specific_merge_from_start:frmpub.protocc.loademails_client_gate_s)
+  GOOGLE_DCHECK_NE(&from, this);
+  _internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  emails_.MergeFrom(from.emails_);
+}
+
+void loademails_client_gate_s::CopyFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) {
+// @@protoc_insertion_point(generalized_copy_from_start:frmpub.protocc.loademails_client_gate_s)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+void loademails_client_gate_s::CopyFrom(const loademails_client_gate_s& from) {
+// @@protoc_insertion_point(class_specific_copy_from_start:frmpub.protocc.loademails_client_gate_s)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+bool loademails_client_gate_s::IsInitialized() const {
+  return true;
+}
+
+void loademails_client_gate_s::InternalSwap(loademails_client_gate_s* other) {
+  using std::swap;
+  _internal_metadata_.Swap<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(&other->_internal_metadata_);
+  emails_.InternalSwap(&other->emails_);
+}
+
+::PROTOBUF_NAMESPACE_ID::Metadata loademails_client_gate_s::GetMetadata() const {
+  return GetMetadataStatic();
+}
+
+
+// ===================================================================
+
+class lookemail_client_gate_c::_Internal {
+ public:
+};
+
+lookemail_client_gate_c::lookemail_client_gate_c(::PROTOBUF_NAMESPACE_ID::Arena* arena)
+  : ::PROTOBUF_NAMESPACE_ID::Message(arena) {
+  SharedCtor();
+  RegisterArenaDtor(arena);
+  // @@protoc_insertion_point(arena_constructor:frmpub.protocc.lookemail_client_gate_c)
+}
+lookemail_client_gate_c::lookemail_client_gate_c(const lookemail_client_gate_c& from)
+  : ::PROTOBUF_NAMESPACE_ID::Message() {
+  _internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
+  emailid_ = from.emailid_;
+  // @@protoc_insertion_point(copy_constructor:frmpub.protocc.lookemail_client_gate_c)
+}
+
+void lookemail_client_gate_c::SharedCtor() {
+emailid_ = PROTOBUF_LONGLONG(0);
+}
+
+lookemail_client_gate_c::~lookemail_client_gate_c() {
+  // @@protoc_insertion_point(destructor:frmpub.protocc.lookemail_client_gate_c)
+  SharedDtor();
+  _internal_metadata_.Delete<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>();
+}
+
+void lookemail_client_gate_c::SharedDtor() {
+  GOOGLE_DCHECK(GetArena() == nullptr);
+}
+
+void lookemail_client_gate_c::ArenaDtor(void* object) {
+  lookemail_client_gate_c* _this = reinterpret_cast< lookemail_client_gate_c* >(object);
+  (void)_this;
+}
+void lookemail_client_gate_c::RegisterArenaDtor(::PROTOBUF_NAMESPACE_ID::Arena*) {
+}
+void lookemail_client_gate_c::SetCachedSize(int size) const {
+  _cached_size_.Set(size);
+}
+
+void lookemail_client_gate_c::Clear() {
+// @@protoc_insertion_point(message_clear_start:frmpub.protocc.lookemail_client_gate_c)
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
+  emailid_ = PROTOBUF_LONGLONG(0);
+  _internal_metadata_.Clear<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>();
+}
+
+const char* lookemail_client_gate_c::_InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) {
+#define CHK_(x) if (PROTOBUF_PREDICT_FALSE(!(x))) goto failure
+  while (!ctx->Done(&ptr)) {
+    ::PROTOBUF_NAMESPACE_ID::uint32 tag;
+    ptr = ::PROTOBUF_NAMESPACE_ID::internal::ReadTag(ptr, &tag);
+    CHK_(ptr);
+    switch (tag >> 3) {
+      // int64 emailid = 1;
+      case 1:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 8)) {
+          emailid_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint64(&ptr);
+          CHK_(ptr);
+        } else goto handle_unusual;
+        continue;
+      default: {
+      handle_unusual:
+        if ((tag & 7) == 4 || tag == 0) {
+          ctx->SetLastTag(tag);
+          goto success;
+        }
+        ptr = UnknownFieldParse(tag,
+            _internal_metadata_.mutable_unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(),
+            ptr, ctx);
+        CHK_(ptr != nullptr);
+        continue;
+      }
+    }  // switch
+  }  // while
+success:
+  return ptr;
+failure:
+  ptr = nullptr;
+  goto success;
+#undef CHK_
+}
+
+::PROTOBUF_NAMESPACE_ID::uint8* lookemail_client_gate_c::_InternalSerialize(
+    ::PROTOBUF_NAMESPACE_ID::uint8* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const {
+  // @@protoc_insertion_point(serialize_to_array_start:frmpub.protocc.lookemail_client_gate_c)
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  // int64 emailid = 1;
+  if (this->emailid() != 0) {
+    target = stream->EnsureSpace(target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteInt64ToArray(1, this->_internal_emailid(), target);
+  }
+
+  if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::InternalSerializeUnknownFieldsToArray(
+        _internal_metadata_.unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(::PROTOBUF_NAMESPACE_ID::UnknownFieldSet::default_instance), target, stream);
+  }
+  // @@protoc_insertion_point(serialize_to_array_end:frmpub.protocc.lookemail_client_gate_c)
+  return target;
+}
+
+size_t lookemail_client_gate_c::ByteSizeLong() const {
+// @@protoc_insertion_point(message_byte_size_start:frmpub.protocc.lookemail_client_gate_c)
+  size_t total_size = 0;
+
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
+  // int64 emailid = 1;
+  if (this->emailid() != 0) {
+    total_size += 1 +
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::Int64Size(
+        this->_internal_emailid());
+  }
+
+  if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
+    return ::PROTOBUF_NAMESPACE_ID::internal::ComputeUnknownFieldsSize(
+        _internal_metadata_, total_size, &_cached_size_);
+  }
+  int cached_size = ::PROTOBUF_NAMESPACE_ID::internal::ToCachedSize(total_size);
+  SetCachedSize(cached_size);
+  return total_size;
+}
+
+void lookemail_client_gate_c::MergeFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) {
+// @@protoc_insertion_point(generalized_merge_from_start:frmpub.protocc.lookemail_client_gate_c)
+  GOOGLE_DCHECK_NE(&from, this);
+  const lookemail_client_gate_c* source =
+      ::PROTOBUF_NAMESPACE_ID::DynamicCastToGenerated<lookemail_client_gate_c>(
+          &from);
+  if (source == nullptr) {
+  // @@protoc_insertion_point(generalized_merge_from_cast_fail:frmpub.protocc.lookemail_client_gate_c)
+    ::PROTOBUF_NAMESPACE_ID::internal::ReflectionOps::Merge(from, this);
+  } else {
+  // @@protoc_insertion_point(generalized_merge_from_cast_success:frmpub.protocc.lookemail_client_gate_c)
+    MergeFrom(*source);
+  }
+}
+
+void lookemail_client_gate_c::MergeFrom(const lookemail_client_gate_c& from) {
+// @@protoc_insertion_point(class_specific_merge_from_start:frmpub.protocc.lookemail_client_gate_c)
+  GOOGLE_DCHECK_NE(&from, this);
+  _internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  if (from.emailid() != 0) {
+    _internal_set_emailid(from._internal_emailid());
+  }
+}
+
+void lookemail_client_gate_c::CopyFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) {
+// @@protoc_insertion_point(generalized_copy_from_start:frmpub.protocc.lookemail_client_gate_c)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+void lookemail_client_gate_c::CopyFrom(const lookemail_client_gate_c& from) {
+// @@protoc_insertion_point(class_specific_copy_from_start:frmpub.protocc.lookemail_client_gate_c)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+bool lookemail_client_gate_c::IsInitialized() const {
+  return true;
+}
+
+void lookemail_client_gate_c::InternalSwap(lookemail_client_gate_c* other) {
+  using std::swap;
+  _internal_metadata_.Swap<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(&other->_internal_metadata_);
+  swap(emailid_, other->emailid_);
+}
+
+::PROTOBUF_NAMESPACE_ID::Metadata lookemail_client_gate_c::GetMetadata() const {
+  return GetMetadataStatic();
+}
+
+
+// ===================================================================
+
+class lookemail_client_gate_s_Annex_Goods::_Internal {
+ public:
+};
+
+lookemail_client_gate_s_Annex_Goods::lookemail_client_gate_s_Annex_Goods(::PROTOBUF_NAMESPACE_ID::Arena* arena)
+  : ::PROTOBUF_NAMESPACE_ID::Message(arena) {
+  SharedCtor();
+  RegisterArenaDtor(arena);
+  // @@protoc_insertion_point(arena_constructor:frmpub.protocc.lookemail_client_gate_s.Annex.Goods)
+}
+lookemail_client_gate_s_Annex_Goods::lookemail_client_gate_s_Annex_Goods(const lookemail_client_gate_s_Annex_Goods& from)
+  : ::PROTOBUF_NAMESPACE_ID::Message() {
+  _internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
+  ::memcpy(&cfgid_, &from.cfgid_,
+    static_cast<size_t>(reinterpret_cast<char*>(&num_) -
+    reinterpret_cast<char*>(&cfgid_)) + sizeof(num_));
+  // @@protoc_insertion_point(copy_constructor:frmpub.protocc.lookemail_client_gate_s.Annex.Goods)
+}
+
+void lookemail_client_gate_s_Annex_Goods::SharedCtor() {
+::memset(reinterpret_cast<char*>(this) + static_cast<size_t>(
+    reinterpret_cast<char*>(&cfgid_) - reinterpret_cast<char*>(this)),
+    0, static_cast<size_t>(reinterpret_cast<char*>(&num_) -
+    reinterpret_cast<char*>(&cfgid_)) + sizeof(num_));
+}
+
+lookemail_client_gate_s_Annex_Goods::~lookemail_client_gate_s_Annex_Goods() {
+  // @@protoc_insertion_point(destructor:frmpub.protocc.lookemail_client_gate_s.Annex.Goods)
+  SharedDtor();
+  _internal_metadata_.Delete<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>();
+}
+
+void lookemail_client_gate_s_Annex_Goods::SharedDtor() {
+  GOOGLE_DCHECK(GetArena() == nullptr);
+}
+
+void lookemail_client_gate_s_Annex_Goods::ArenaDtor(void* object) {
+  lookemail_client_gate_s_Annex_Goods* _this = reinterpret_cast< lookemail_client_gate_s_Annex_Goods* >(object);
+  (void)_this;
+}
+void lookemail_client_gate_s_Annex_Goods::RegisterArenaDtor(::PROTOBUF_NAMESPACE_ID::Arena*) {
+}
+void lookemail_client_gate_s_Annex_Goods::SetCachedSize(int size) const {
+  _cached_size_.Set(size);
+}
+
+void lookemail_client_gate_s_Annex_Goods::Clear() {
+// @@protoc_insertion_point(message_clear_start:frmpub.protocc.lookemail_client_gate_s.Annex.Goods)
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
+  ::memset(&cfgid_, 0, static_cast<size_t>(
+      reinterpret_cast<char*>(&num_) -
+      reinterpret_cast<char*>(&cfgid_)) + sizeof(num_));
+  _internal_metadata_.Clear<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>();
+}
+
+const char* lookemail_client_gate_s_Annex_Goods::_InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) {
+#define CHK_(x) if (PROTOBUF_PREDICT_FALSE(!(x))) goto failure
+  while (!ctx->Done(&ptr)) {
+    ::PROTOBUF_NAMESPACE_ID::uint32 tag;
+    ptr = ::PROTOBUF_NAMESPACE_ID::internal::ReadTag(ptr, &tag);
+    CHK_(ptr);
+    switch (tag >> 3) {
+      // int32 cfgid = 1;
+      case 1:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 8)) {
+          cfgid_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint64(&ptr);
+          CHK_(ptr);
+        } else goto handle_unusual;
+        continue;
+      // int32 num = 2;
+      case 2:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 16)) {
+          num_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint64(&ptr);
+          CHK_(ptr);
+        } else goto handle_unusual;
+        continue;
+      default: {
+      handle_unusual:
+        if ((tag & 7) == 4 || tag == 0) {
+          ctx->SetLastTag(tag);
+          goto success;
+        }
+        ptr = UnknownFieldParse(tag,
+            _internal_metadata_.mutable_unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(),
+            ptr, ctx);
+        CHK_(ptr != nullptr);
+        continue;
+      }
+    }  // switch
+  }  // while
+success:
+  return ptr;
+failure:
+  ptr = nullptr;
+  goto success;
+#undef CHK_
+}
+
+::PROTOBUF_NAMESPACE_ID::uint8* lookemail_client_gate_s_Annex_Goods::_InternalSerialize(
+    ::PROTOBUF_NAMESPACE_ID::uint8* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const {
+  // @@protoc_insertion_point(serialize_to_array_start:frmpub.protocc.lookemail_client_gate_s.Annex.Goods)
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  // int32 cfgid = 1;
+  if (this->cfgid() != 0) {
+    target = stream->EnsureSpace(target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteInt32ToArray(1, this->_internal_cfgid(), target);
+  }
+
+  // int32 num = 2;
+  if (this->num() != 0) {
+    target = stream->EnsureSpace(target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteInt32ToArray(2, this->_internal_num(), target);
+  }
+
+  if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::InternalSerializeUnknownFieldsToArray(
+        _internal_metadata_.unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(::PROTOBUF_NAMESPACE_ID::UnknownFieldSet::default_instance), target, stream);
+  }
+  // @@protoc_insertion_point(serialize_to_array_end:frmpub.protocc.lookemail_client_gate_s.Annex.Goods)
+  return target;
+}
+
+size_t lookemail_client_gate_s_Annex_Goods::ByteSizeLong() const {
+// @@protoc_insertion_point(message_byte_size_start:frmpub.protocc.lookemail_client_gate_s.Annex.Goods)
+  size_t total_size = 0;
+
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
+  // int32 cfgid = 1;
+  if (this->cfgid() != 0) {
+    total_size += 1 +
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::Int32Size(
+        this->_internal_cfgid());
+  }
+
+  // int32 num = 2;
+  if (this->num() != 0) {
+    total_size += 1 +
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::Int32Size(
+        this->_internal_num());
+  }
+
+  if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
+    return ::PROTOBUF_NAMESPACE_ID::internal::ComputeUnknownFieldsSize(
+        _internal_metadata_, total_size, &_cached_size_);
+  }
+  int cached_size = ::PROTOBUF_NAMESPACE_ID::internal::ToCachedSize(total_size);
+  SetCachedSize(cached_size);
+  return total_size;
+}
+
+void lookemail_client_gate_s_Annex_Goods::MergeFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) {
+// @@protoc_insertion_point(generalized_merge_from_start:frmpub.protocc.lookemail_client_gate_s.Annex.Goods)
+  GOOGLE_DCHECK_NE(&from, this);
+  const lookemail_client_gate_s_Annex_Goods* source =
+      ::PROTOBUF_NAMESPACE_ID::DynamicCastToGenerated<lookemail_client_gate_s_Annex_Goods>(
+          &from);
+  if (source == nullptr) {
+  // @@protoc_insertion_point(generalized_merge_from_cast_fail:frmpub.protocc.lookemail_client_gate_s.Annex.Goods)
+    ::PROTOBUF_NAMESPACE_ID::internal::ReflectionOps::Merge(from, this);
+  } else {
+  // @@protoc_insertion_point(generalized_merge_from_cast_success:frmpub.protocc.lookemail_client_gate_s.Annex.Goods)
+    MergeFrom(*source);
+  }
+}
+
+void lookemail_client_gate_s_Annex_Goods::MergeFrom(const lookemail_client_gate_s_Annex_Goods& from) {
+// @@protoc_insertion_point(class_specific_merge_from_start:frmpub.protocc.lookemail_client_gate_s.Annex.Goods)
+  GOOGLE_DCHECK_NE(&from, this);
+  _internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  if (from.cfgid() != 0) {
+    _internal_set_cfgid(from._internal_cfgid());
+  }
+  if (from.num() != 0) {
+    _internal_set_num(from._internal_num());
+  }
+}
+
+void lookemail_client_gate_s_Annex_Goods::CopyFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) {
+// @@protoc_insertion_point(generalized_copy_from_start:frmpub.protocc.lookemail_client_gate_s.Annex.Goods)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+void lookemail_client_gate_s_Annex_Goods::CopyFrom(const lookemail_client_gate_s_Annex_Goods& from) {
+// @@protoc_insertion_point(class_specific_copy_from_start:frmpub.protocc.lookemail_client_gate_s.Annex.Goods)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+bool lookemail_client_gate_s_Annex_Goods::IsInitialized() const {
+  return true;
+}
+
+void lookemail_client_gate_s_Annex_Goods::InternalSwap(lookemail_client_gate_s_Annex_Goods* other) {
+  using std::swap;
+  _internal_metadata_.Swap<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(&other->_internal_metadata_);
+  ::PROTOBUF_NAMESPACE_ID::internal::memswap<
+      PROTOBUF_FIELD_OFFSET(lookemail_client_gate_s_Annex_Goods, num_)
+      + sizeof(lookemail_client_gate_s_Annex_Goods::num_)
+      - PROTOBUF_FIELD_OFFSET(lookemail_client_gate_s_Annex_Goods, cfgid_)>(
+          reinterpret_cast<char*>(&cfgid_),
+          reinterpret_cast<char*>(&other->cfgid_));
+}
+
+::PROTOBUF_NAMESPACE_ID::Metadata lookemail_client_gate_s_Annex_Goods::GetMetadata() const {
+  return GetMetadataStatic();
+}
+
+
+// ===================================================================
+
+class lookemail_client_gate_s_Annex::_Internal {
+ public:
+};
+
+lookemail_client_gate_s_Annex::lookemail_client_gate_s_Annex(::PROTOBUF_NAMESPACE_ID::Arena* arena)
+  : ::PROTOBUF_NAMESPACE_ID::Message(arena),
+  goods_(arena) {
+  SharedCtor();
+  RegisterArenaDtor(arena);
+  // @@protoc_insertion_point(arena_constructor:frmpub.protocc.lookemail_client_gate_s.Annex)
+}
+lookemail_client_gate_s_Annex::lookemail_client_gate_s_Annex(const lookemail_client_gate_s_Annex& from)
+  : ::PROTOBUF_NAMESPACE_ID::Message(),
+      goods_(from.goods_) {
+  _internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
+  ::memcpy(&gold_, &from.gold_,
+    static_cast<size_t>(reinterpret_cast<char*>(&diamond_) -
+    reinterpret_cast<char*>(&gold_)) + sizeof(diamond_));
+  // @@protoc_insertion_point(copy_constructor:frmpub.protocc.lookemail_client_gate_s.Annex)
+}
+
+void lookemail_client_gate_s_Annex::SharedCtor() {
+::memset(reinterpret_cast<char*>(this) + static_cast<size_t>(
+    reinterpret_cast<char*>(&gold_) - reinterpret_cast<char*>(this)),
+    0, static_cast<size_t>(reinterpret_cast<char*>(&diamond_) -
+    reinterpret_cast<char*>(&gold_)) + sizeof(diamond_));
+}
+
+lookemail_client_gate_s_Annex::~lookemail_client_gate_s_Annex() {
+  // @@protoc_insertion_point(destructor:frmpub.protocc.lookemail_client_gate_s.Annex)
+  SharedDtor();
+  _internal_metadata_.Delete<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>();
+}
+
+void lookemail_client_gate_s_Annex::SharedDtor() {
+  GOOGLE_DCHECK(GetArena() == nullptr);
+}
+
+void lookemail_client_gate_s_Annex::ArenaDtor(void* object) {
+  lookemail_client_gate_s_Annex* _this = reinterpret_cast< lookemail_client_gate_s_Annex* >(object);
+  (void)_this;
+}
+void lookemail_client_gate_s_Annex::RegisterArenaDtor(::PROTOBUF_NAMESPACE_ID::Arena*) {
+}
+void lookemail_client_gate_s_Annex::SetCachedSize(int size) const {
+  _cached_size_.Set(size);
+}
+
+void lookemail_client_gate_s_Annex::Clear() {
+// @@protoc_insertion_point(message_clear_start:frmpub.protocc.lookemail_client_gate_s.Annex)
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
+  goods_.Clear();
+  ::memset(&gold_, 0, static_cast<size_t>(
+      reinterpret_cast<char*>(&diamond_) -
+      reinterpret_cast<char*>(&gold_)) + sizeof(diamond_));
+  _internal_metadata_.Clear<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>();
+}
+
+const char* lookemail_client_gate_s_Annex::_InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) {
+#define CHK_(x) if (PROTOBUF_PREDICT_FALSE(!(x))) goto failure
+  while (!ctx->Done(&ptr)) {
+    ::PROTOBUF_NAMESPACE_ID::uint32 tag;
+    ptr = ::PROTOBUF_NAMESPACE_ID::internal::ReadTag(ptr, &tag);
+    CHK_(ptr);
+    switch (tag >> 3) {
+      // int32 gold = 1;
+      case 1:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 8)) {
+          gold_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint64(&ptr);
+          CHK_(ptr);
+        } else goto handle_unusual;
+        continue;
+      // int32 diamond = 2;
+      case 2:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 16)) {
+          diamond_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint64(&ptr);
+          CHK_(ptr);
+        } else goto handle_unusual;
+        continue;
+      // repeated .frmpub.protocc.lookemail_client_gate_s.Annex.Goods goods = 3;
+      case 3:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 26)) {
+          ptr -= 1;
+          do {
+            ptr += 1;
+            ptr = ctx->ParseMessage(_internal_add_goods(), ptr);
+            CHK_(ptr);
+            if (!ctx->DataAvailable(ptr)) break;
+          } while (::PROTOBUF_NAMESPACE_ID::internal::ExpectTag<26>(ptr));
+        } else goto handle_unusual;
+        continue;
+      default: {
+      handle_unusual:
+        if ((tag & 7) == 4 || tag == 0) {
+          ctx->SetLastTag(tag);
+          goto success;
+        }
+        ptr = UnknownFieldParse(tag,
+            _internal_metadata_.mutable_unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(),
+            ptr, ctx);
+        CHK_(ptr != nullptr);
+        continue;
+      }
+    }  // switch
+  }  // while
+success:
+  return ptr;
+failure:
+  ptr = nullptr;
+  goto success;
+#undef CHK_
+}
+
+::PROTOBUF_NAMESPACE_ID::uint8* lookemail_client_gate_s_Annex::_InternalSerialize(
+    ::PROTOBUF_NAMESPACE_ID::uint8* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const {
+  // @@protoc_insertion_point(serialize_to_array_start:frmpub.protocc.lookemail_client_gate_s.Annex)
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  // int32 gold = 1;
+  if (this->gold() != 0) {
+    target = stream->EnsureSpace(target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteInt32ToArray(1, this->_internal_gold(), target);
+  }
+
+  // int32 diamond = 2;
+  if (this->diamond() != 0) {
+    target = stream->EnsureSpace(target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteInt32ToArray(2, this->_internal_diamond(), target);
+  }
+
+  // repeated .frmpub.protocc.lookemail_client_gate_s.Annex.Goods goods = 3;
+  for (unsigned int i = 0,
+      n = static_cast<unsigned int>(this->_internal_goods_size()); i < n; i++) {
+    target = stream->EnsureSpace(target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
+      InternalWriteMessage(3, this->_internal_goods(i), target, stream);
+  }
+
+  if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::InternalSerializeUnknownFieldsToArray(
+        _internal_metadata_.unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(::PROTOBUF_NAMESPACE_ID::UnknownFieldSet::default_instance), target, stream);
+  }
+  // @@protoc_insertion_point(serialize_to_array_end:frmpub.protocc.lookemail_client_gate_s.Annex)
+  return target;
+}
+
+size_t lookemail_client_gate_s_Annex::ByteSizeLong() const {
+// @@protoc_insertion_point(message_byte_size_start:frmpub.protocc.lookemail_client_gate_s.Annex)
+  size_t total_size = 0;
+
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
+  // repeated .frmpub.protocc.lookemail_client_gate_s.Annex.Goods goods = 3;
+  total_size += 1UL * this->_internal_goods_size();
+  for (const auto& msg : this->goods_) {
+    total_size +=
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(msg);
+  }
+
+  // int32 gold = 1;
+  if (this->gold() != 0) {
+    total_size += 1 +
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::Int32Size(
+        this->_internal_gold());
+  }
+
+  // int32 diamond = 2;
+  if (this->diamond() != 0) {
+    total_size += 1 +
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::Int32Size(
+        this->_internal_diamond());
+  }
+
+  if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
+    return ::PROTOBUF_NAMESPACE_ID::internal::ComputeUnknownFieldsSize(
+        _internal_metadata_, total_size, &_cached_size_);
+  }
+  int cached_size = ::PROTOBUF_NAMESPACE_ID::internal::ToCachedSize(total_size);
+  SetCachedSize(cached_size);
+  return total_size;
+}
+
+void lookemail_client_gate_s_Annex::MergeFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) {
+// @@protoc_insertion_point(generalized_merge_from_start:frmpub.protocc.lookemail_client_gate_s.Annex)
+  GOOGLE_DCHECK_NE(&from, this);
+  const lookemail_client_gate_s_Annex* source =
+      ::PROTOBUF_NAMESPACE_ID::DynamicCastToGenerated<lookemail_client_gate_s_Annex>(
+          &from);
+  if (source == nullptr) {
+  // @@protoc_insertion_point(generalized_merge_from_cast_fail:frmpub.protocc.lookemail_client_gate_s.Annex)
+    ::PROTOBUF_NAMESPACE_ID::internal::ReflectionOps::Merge(from, this);
+  } else {
+  // @@protoc_insertion_point(generalized_merge_from_cast_success:frmpub.protocc.lookemail_client_gate_s.Annex)
+    MergeFrom(*source);
+  }
+}
+
+void lookemail_client_gate_s_Annex::MergeFrom(const lookemail_client_gate_s_Annex& from) {
+// @@protoc_insertion_point(class_specific_merge_from_start:frmpub.protocc.lookemail_client_gate_s.Annex)
+  GOOGLE_DCHECK_NE(&from, this);
+  _internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  goods_.MergeFrom(from.goods_);
+  if (from.gold() != 0) {
+    _internal_set_gold(from._internal_gold());
+  }
+  if (from.diamond() != 0) {
+    _internal_set_diamond(from._internal_diamond());
+  }
+}
+
+void lookemail_client_gate_s_Annex::CopyFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) {
+// @@protoc_insertion_point(generalized_copy_from_start:frmpub.protocc.lookemail_client_gate_s.Annex)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+void lookemail_client_gate_s_Annex::CopyFrom(const lookemail_client_gate_s_Annex& from) {
+// @@protoc_insertion_point(class_specific_copy_from_start:frmpub.protocc.lookemail_client_gate_s.Annex)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+bool lookemail_client_gate_s_Annex::IsInitialized() const {
+  return true;
+}
+
+void lookemail_client_gate_s_Annex::InternalSwap(lookemail_client_gate_s_Annex* other) {
+  using std::swap;
+  _internal_metadata_.Swap<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(&other->_internal_metadata_);
+  goods_.InternalSwap(&other->goods_);
+  ::PROTOBUF_NAMESPACE_ID::internal::memswap<
+      PROTOBUF_FIELD_OFFSET(lookemail_client_gate_s_Annex, diamond_)
+      + sizeof(lookemail_client_gate_s_Annex::diamond_)
+      - PROTOBUF_FIELD_OFFSET(lookemail_client_gate_s_Annex, gold_)>(
+          reinterpret_cast<char*>(&gold_),
+          reinterpret_cast<char*>(&other->gold_));
+}
+
+::PROTOBUF_NAMESPACE_ID::Metadata lookemail_client_gate_s_Annex::GetMetadata() const {
+  return GetMetadataStatic();
+}
+
+
+// ===================================================================
+
+class lookemail_client_gate_s::_Internal {
+ public:
+  static const ::frmpub::protocc::lookemail_client_gate_s_Annex& annex(const lookemail_client_gate_s* msg);
+};
+
+const ::frmpub::protocc::lookemail_client_gate_s_Annex&
+lookemail_client_gate_s::_Internal::annex(const lookemail_client_gate_s* msg) {
+  return *msg->annex_;
+}
+lookemail_client_gate_s::lookemail_client_gate_s(::PROTOBUF_NAMESPACE_ID::Arena* arena)
+  : ::PROTOBUF_NAMESPACE_ID::Message(arena) {
+  SharedCtor();
+  RegisterArenaDtor(arena);
+  // @@protoc_insertion_point(arena_constructor:frmpub.protocc.lookemail_client_gate_s)
+}
+lookemail_client_gate_s::lookemail_client_gate_s(const lookemail_client_gate_s& from)
+  : ::PROTOBUF_NAMESPACE_ID::Message() {
+  _internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
+  title_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+  if (!from._internal_title().empty()) {
+    title_.Set(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, from._internal_title(), 
+      GetArena());
+  }
+  info_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+  if (!from._internal_info().empty()) {
+    info_.Set(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, from._internal_info(), 
+      GetArena());
+  }
+  if (from._internal_has_annex()) {
+    annex_ = new ::frmpub::protocc::lookemail_client_gate_s_Annex(*from.annex_);
+  } else {
+    annex_ = nullptr;
+  }
+  ::memcpy(&id_, &from.id_,
+    static_cast<size_t>(reinterpret_cast<char*>(&time_) -
+    reinterpret_cast<char*>(&id_)) + sizeof(time_));
+  // @@protoc_insertion_point(copy_constructor:frmpub.protocc.lookemail_client_gate_s)
+}
+
+void lookemail_client_gate_s::SharedCtor() {
+title_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+info_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+::memset(reinterpret_cast<char*>(this) + static_cast<size_t>(
+    reinterpret_cast<char*>(&annex_) - reinterpret_cast<char*>(this)),
+    0, static_cast<size_t>(reinterpret_cast<char*>(&time_) -
+    reinterpret_cast<char*>(&annex_)) + sizeof(time_));
+}
+
+lookemail_client_gate_s::~lookemail_client_gate_s() {
+  // @@protoc_insertion_point(destructor:frmpub.protocc.lookemail_client_gate_s)
+  SharedDtor();
+  _internal_metadata_.Delete<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>();
+}
+
+void lookemail_client_gate_s::SharedDtor() {
+  GOOGLE_DCHECK(GetArena() == nullptr);
+  title_.DestroyNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+  info_.DestroyNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+  if (this != internal_default_instance()) delete annex_;
+}
+
+void lookemail_client_gate_s::ArenaDtor(void* object) {
+  lookemail_client_gate_s* _this = reinterpret_cast< lookemail_client_gate_s* >(object);
+  (void)_this;
+}
+void lookemail_client_gate_s::RegisterArenaDtor(::PROTOBUF_NAMESPACE_ID::Arena*) {
+}
+void lookemail_client_gate_s::SetCachedSize(int size) const {
+  _cached_size_.Set(size);
+}
+
+void lookemail_client_gate_s::Clear() {
+// @@protoc_insertion_point(message_clear_start:frmpub.protocc.lookemail_client_gate_s)
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
+  title_.ClearToEmpty();
+  info_.ClearToEmpty();
+  if (GetArena() == nullptr && annex_ != nullptr) {
+    delete annex_;
+  }
+  annex_ = nullptr;
+  ::memset(&id_, 0, static_cast<size_t>(
+      reinterpret_cast<char*>(&time_) -
+      reinterpret_cast<char*>(&id_)) + sizeof(time_));
+  _internal_metadata_.Clear<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>();
+}
+
+const char* lookemail_client_gate_s::_InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) {
+#define CHK_(x) if (PROTOBUF_PREDICT_FALSE(!(x))) goto failure
+  while (!ctx->Done(&ptr)) {
+    ::PROTOBUF_NAMESPACE_ID::uint32 tag;
+    ptr = ::PROTOBUF_NAMESPACE_ID::internal::ReadTag(ptr, &tag);
+    CHK_(ptr);
+    switch (tag >> 3) {
+      // int32 result = 1;
+      case 1:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 8)) {
+          result_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint64(&ptr);
+          CHK_(ptr);
+        } else goto handle_unusual;
+        continue;
+      // int64 id = 2;
+      case 2:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 16)) {
+          id_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint64(&ptr);
+          CHK_(ptr);
+        } else goto handle_unusual;
+        continue;
+      // string title = 3;
+      case 3:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 26)) {
+          auto str = _internal_mutable_title();
+          ptr = ::PROTOBUF_NAMESPACE_ID::internal::InlineGreedyStringParser(str, ptr, ctx);
+          CHK_(::PROTOBUF_NAMESPACE_ID::internal::VerifyUTF8(str, "frmpub.protocc.lookemail_client_gate_s.title"));
+          CHK_(ptr);
+        } else goto handle_unusual;
+        continue;
+      // string info = 4;
+      case 4:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 34)) {
+          auto str = _internal_mutable_info();
+          ptr = ::PROTOBUF_NAMESPACE_ID::internal::InlineGreedyStringParser(str, ptr, ctx);
+          CHK_(::PROTOBUF_NAMESPACE_ID::internal::VerifyUTF8(str, "frmpub.protocc.lookemail_client_gate_s.info"));
+          CHK_(ptr);
+        } else goto handle_unusual;
+        continue;
+      // int32 type = 5;
+      case 5:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 40)) {
+          type_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint64(&ptr);
+          CHK_(ptr);
+        } else goto handle_unusual;
+        continue;
+      // int32 time = 6;
+      case 6:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 48)) {
+          time_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint64(&ptr);
+          CHK_(ptr);
+        } else goto handle_unusual;
+        continue;
+      // .frmpub.protocc.lookemail_client_gate_s.Annex annex = 7;
+      case 7:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 58)) {
+          ptr = ctx->ParseMessage(_internal_mutable_annex(), ptr);
+          CHK_(ptr);
+        } else goto handle_unusual;
+        continue;
+      default: {
+      handle_unusual:
+        if ((tag & 7) == 4 || tag == 0) {
+          ctx->SetLastTag(tag);
+          goto success;
+        }
+        ptr = UnknownFieldParse(tag,
+            _internal_metadata_.mutable_unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(),
+            ptr, ctx);
+        CHK_(ptr != nullptr);
+        continue;
+      }
+    }  // switch
+  }  // while
+success:
+  return ptr;
+failure:
+  ptr = nullptr;
+  goto success;
+#undef CHK_
+}
+
+::PROTOBUF_NAMESPACE_ID::uint8* lookemail_client_gate_s::_InternalSerialize(
+    ::PROTOBUF_NAMESPACE_ID::uint8* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const {
+  // @@protoc_insertion_point(serialize_to_array_start:frmpub.protocc.lookemail_client_gate_s)
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  // int32 result = 1;
+  if (this->result() != 0) {
+    target = stream->EnsureSpace(target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteInt32ToArray(1, this->_internal_result(), target);
+  }
+
+  // int64 id = 2;
+  if (this->id() != 0) {
+    target = stream->EnsureSpace(target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteInt64ToArray(2, this->_internal_id(), target);
+  }
+
+  // string title = 3;
+  if (this->title().size() > 0) {
+    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::VerifyUtf8String(
+      this->_internal_title().data(), static_cast<int>(this->_internal_title().length()),
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::SERIALIZE,
+      "frmpub.protocc.lookemail_client_gate_s.title");
+    target = stream->WriteStringMaybeAliased(
+        3, this->_internal_title(), target);
+  }
+
+  // string info = 4;
+  if (this->info().size() > 0) {
+    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::VerifyUtf8String(
+      this->_internal_info().data(), static_cast<int>(this->_internal_info().length()),
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::SERIALIZE,
+      "frmpub.protocc.lookemail_client_gate_s.info");
+    target = stream->WriteStringMaybeAliased(
+        4, this->_internal_info(), target);
+  }
+
+  // int32 type = 5;
+  if (this->type() != 0) {
+    target = stream->EnsureSpace(target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteInt32ToArray(5, this->_internal_type(), target);
+  }
+
+  // int32 time = 6;
+  if (this->time() != 0) {
+    target = stream->EnsureSpace(target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteInt32ToArray(6, this->_internal_time(), target);
+  }
+
+  // .frmpub.protocc.lookemail_client_gate_s.Annex annex = 7;
+  if (this->has_annex()) {
+    target = stream->EnsureSpace(target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
+      InternalWriteMessage(
+        7, _Internal::annex(this), target, stream);
+  }
+
+  if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::InternalSerializeUnknownFieldsToArray(
+        _internal_metadata_.unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(::PROTOBUF_NAMESPACE_ID::UnknownFieldSet::default_instance), target, stream);
+  }
+  // @@protoc_insertion_point(serialize_to_array_end:frmpub.protocc.lookemail_client_gate_s)
+  return target;
+}
+
+size_t lookemail_client_gate_s::ByteSizeLong() const {
+// @@protoc_insertion_point(message_byte_size_start:frmpub.protocc.lookemail_client_gate_s)
+  size_t total_size = 0;
+
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
+  // string title = 3;
+  if (this->title().size() > 0) {
+    total_size += 1 +
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::StringSize(
+        this->_internal_title());
+  }
+
+  // string info = 4;
+  if (this->info().size() > 0) {
+    total_size += 1 +
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::StringSize(
+        this->_internal_info());
+  }
+
+  // .frmpub.protocc.lookemail_client_gate_s.Annex annex = 7;
+  if (this->has_annex()) {
+    total_size += 1 +
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
+        *annex_);
+  }
+
+  // int64 id = 2;
+  if (this->id() != 0) {
+    total_size += 1 +
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::Int64Size(
+        this->_internal_id());
+  }
+
+  // int32 result = 1;
+  if (this->result() != 0) {
+    total_size += 1 +
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::Int32Size(
+        this->_internal_result());
+  }
+
+  // int32 type = 5;
+  if (this->type() != 0) {
+    total_size += 1 +
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::Int32Size(
+        this->_internal_type());
+  }
+
+  // int32 time = 6;
+  if (this->time() != 0) {
+    total_size += 1 +
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::Int32Size(
+        this->_internal_time());
+  }
+
+  if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
+    return ::PROTOBUF_NAMESPACE_ID::internal::ComputeUnknownFieldsSize(
+        _internal_metadata_, total_size, &_cached_size_);
+  }
+  int cached_size = ::PROTOBUF_NAMESPACE_ID::internal::ToCachedSize(total_size);
+  SetCachedSize(cached_size);
+  return total_size;
+}
+
+void lookemail_client_gate_s::MergeFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) {
+// @@protoc_insertion_point(generalized_merge_from_start:frmpub.protocc.lookemail_client_gate_s)
+  GOOGLE_DCHECK_NE(&from, this);
+  const lookemail_client_gate_s* source =
+      ::PROTOBUF_NAMESPACE_ID::DynamicCastToGenerated<lookemail_client_gate_s>(
+          &from);
+  if (source == nullptr) {
+  // @@protoc_insertion_point(generalized_merge_from_cast_fail:frmpub.protocc.lookemail_client_gate_s)
+    ::PROTOBUF_NAMESPACE_ID::internal::ReflectionOps::Merge(from, this);
+  } else {
+  // @@protoc_insertion_point(generalized_merge_from_cast_success:frmpub.protocc.lookemail_client_gate_s)
+    MergeFrom(*source);
+  }
+}
+
+void lookemail_client_gate_s::MergeFrom(const lookemail_client_gate_s& from) {
+// @@protoc_insertion_point(class_specific_merge_from_start:frmpub.protocc.lookemail_client_gate_s)
+  GOOGLE_DCHECK_NE(&from, this);
+  _internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  if (from.title().size() > 0) {
+    _internal_set_title(from._internal_title());
+  }
+  if (from.info().size() > 0) {
+    _internal_set_info(from._internal_info());
+  }
+  if (from.has_annex()) {
+    _internal_mutable_annex()->::frmpub::protocc::lookemail_client_gate_s_Annex::MergeFrom(from._internal_annex());
+  }
+  if (from.id() != 0) {
+    _internal_set_id(from._internal_id());
+  }
+  if (from.result() != 0) {
+    _internal_set_result(from._internal_result());
+  }
+  if (from.type() != 0) {
+    _internal_set_type(from._internal_type());
+  }
+  if (from.time() != 0) {
+    _internal_set_time(from._internal_time());
+  }
+}
+
+void lookemail_client_gate_s::CopyFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) {
+// @@protoc_insertion_point(generalized_copy_from_start:frmpub.protocc.lookemail_client_gate_s)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+void lookemail_client_gate_s::CopyFrom(const lookemail_client_gate_s& from) {
+// @@protoc_insertion_point(class_specific_copy_from_start:frmpub.protocc.lookemail_client_gate_s)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+bool lookemail_client_gate_s::IsInitialized() const {
+  return true;
+}
+
+void lookemail_client_gate_s::InternalSwap(lookemail_client_gate_s* other) {
+  using std::swap;
+  _internal_metadata_.Swap<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(&other->_internal_metadata_);
+  title_.Swap(&other->title_, &::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArena());
+  info_.Swap(&other->info_, &::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArena());
+  ::PROTOBUF_NAMESPACE_ID::internal::memswap<
+      PROTOBUF_FIELD_OFFSET(lookemail_client_gate_s, time_)
+      + sizeof(lookemail_client_gate_s::time_)
+      - PROTOBUF_FIELD_OFFSET(lookemail_client_gate_s, annex_)>(
+          reinterpret_cast<char*>(&annex_),
+          reinterpret_cast<char*>(&other->annex_));
+}
+
+::PROTOBUF_NAMESPACE_ID::Metadata lookemail_client_gate_s::GetMetadata() const {
+  return GetMetadataStatic();
+}
+
+
+// ===================================================================
+
+class getannex_client_gate_c::_Internal {
+ public:
+};
+
+getannex_client_gate_c::getannex_client_gate_c(::PROTOBUF_NAMESPACE_ID::Arena* arena)
+  : ::PROTOBUF_NAMESPACE_ID::Message(arena) {
+  SharedCtor();
+  RegisterArenaDtor(arena);
+  // @@protoc_insertion_point(arena_constructor:frmpub.protocc.getannex_client_gate_c)
+}
+getannex_client_gate_c::getannex_client_gate_c(const getannex_client_gate_c& from)
+  : ::PROTOBUF_NAMESPACE_ID::Message() {
+  _internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
+  emailid_ = from.emailid_;
+  // @@protoc_insertion_point(copy_constructor:frmpub.protocc.getannex_client_gate_c)
+}
+
+void getannex_client_gate_c::SharedCtor() {
+emailid_ = PROTOBUF_LONGLONG(0);
+}
+
+getannex_client_gate_c::~getannex_client_gate_c() {
+  // @@protoc_insertion_point(destructor:frmpub.protocc.getannex_client_gate_c)
+  SharedDtor();
+  _internal_metadata_.Delete<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>();
+}
+
+void getannex_client_gate_c::SharedDtor() {
+  GOOGLE_DCHECK(GetArena() == nullptr);
+}
+
+void getannex_client_gate_c::ArenaDtor(void* object) {
+  getannex_client_gate_c* _this = reinterpret_cast< getannex_client_gate_c* >(object);
+  (void)_this;
+}
+void getannex_client_gate_c::RegisterArenaDtor(::PROTOBUF_NAMESPACE_ID::Arena*) {
+}
+void getannex_client_gate_c::SetCachedSize(int size) const {
+  _cached_size_.Set(size);
+}
+
+void getannex_client_gate_c::Clear() {
+// @@protoc_insertion_point(message_clear_start:frmpub.protocc.getannex_client_gate_c)
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
+  emailid_ = PROTOBUF_LONGLONG(0);
+  _internal_metadata_.Clear<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>();
+}
+
+const char* getannex_client_gate_c::_InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) {
+#define CHK_(x) if (PROTOBUF_PREDICT_FALSE(!(x))) goto failure
+  while (!ctx->Done(&ptr)) {
+    ::PROTOBUF_NAMESPACE_ID::uint32 tag;
+    ptr = ::PROTOBUF_NAMESPACE_ID::internal::ReadTag(ptr, &tag);
+    CHK_(ptr);
+    switch (tag >> 3) {
+      // int64 emailid = 1;
+      case 1:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 8)) {
+          emailid_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint64(&ptr);
+          CHK_(ptr);
+        } else goto handle_unusual;
+        continue;
+      default: {
+      handle_unusual:
+        if ((tag & 7) == 4 || tag == 0) {
+          ctx->SetLastTag(tag);
+          goto success;
+        }
+        ptr = UnknownFieldParse(tag,
+            _internal_metadata_.mutable_unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(),
+            ptr, ctx);
+        CHK_(ptr != nullptr);
+        continue;
+      }
+    }  // switch
+  }  // while
+success:
+  return ptr;
+failure:
+  ptr = nullptr;
+  goto success;
+#undef CHK_
+}
+
+::PROTOBUF_NAMESPACE_ID::uint8* getannex_client_gate_c::_InternalSerialize(
+    ::PROTOBUF_NAMESPACE_ID::uint8* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const {
+  // @@protoc_insertion_point(serialize_to_array_start:frmpub.protocc.getannex_client_gate_c)
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  // int64 emailid = 1;
+  if (this->emailid() != 0) {
+    target = stream->EnsureSpace(target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteInt64ToArray(1, this->_internal_emailid(), target);
+  }
+
+  if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::InternalSerializeUnknownFieldsToArray(
+        _internal_metadata_.unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(::PROTOBUF_NAMESPACE_ID::UnknownFieldSet::default_instance), target, stream);
+  }
+  // @@protoc_insertion_point(serialize_to_array_end:frmpub.protocc.getannex_client_gate_c)
+  return target;
+}
+
+size_t getannex_client_gate_c::ByteSizeLong() const {
+// @@protoc_insertion_point(message_byte_size_start:frmpub.protocc.getannex_client_gate_c)
+  size_t total_size = 0;
+
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
+  // int64 emailid = 1;
+  if (this->emailid() != 0) {
+    total_size += 1 +
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::Int64Size(
+        this->_internal_emailid());
+  }
+
+  if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
+    return ::PROTOBUF_NAMESPACE_ID::internal::ComputeUnknownFieldsSize(
+        _internal_metadata_, total_size, &_cached_size_);
+  }
+  int cached_size = ::PROTOBUF_NAMESPACE_ID::internal::ToCachedSize(total_size);
+  SetCachedSize(cached_size);
+  return total_size;
+}
+
+void getannex_client_gate_c::MergeFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) {
+// @@protoc_insertion_point(generalized_merge_from_start:frmpub.protocc.getannex_client_gate_c)
+  GOOGLE_DCHECK_NE(&from, this);
+  const getannex_client_gate_c* source =
+      ::PROTOBUF_NAMESPACE_ID::DynamicCastToGenerated<getannex_client_gate_c>(
+          &from);
+  if (source == nullptr) {
+  // @@protoc_insertion_point(generalized_merge_from_cast_fail:frmpub.protocc.getannex_client_gate_c)
+    ::PROTOBUF_NAMESPACE_ID::internal::ReflectionOps::Merge(from, this);
+  } else {
+  // @@protoc_insertion_point(generalized_merge_from_cast_success:frmpub.protocc.getannex_client_gate_c)
+    MergeFrom(*source);
+  }
+}
+
+void getannex_client_gate_c::MergeFrom(const getannex_client_gate_c& from) {
+// @@protoc_insertion_point(class_specific_merge_from_start:frmpub.protocc.getannex_client_gate_c)
+  GOOGLE_DCHECK_NE(&from, this);
+  _internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  if (from.emailid() != 0) {
+    _internal_set_emailid(from._internal_emailid());
+  }
+}
+
+void getannex_client_gate_c::CopyFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) {
+// @@protoc_insertion_point(generalized_copy_from_start:frmpub.protocc.getannex_client_gate_c)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+void getannex_client_gate_c::CopyFrom(const getannex_client_gate_c& from) {
+// @@protoc_insertion_point(class_specific_copy_from_start:frmpub.protocc.getannex_client_gate_c)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+bool getannex_client_gate_c::IsInitialized() const {
+  return true;
+}
+
+void getannex_client_gate_c::InternalSwap(getannex_client_gate_c* other) {
+  using std::swap;
+  _internal_metadata_.Swap<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(&other->_internal_metadata_);
+  swap(emailid_, other->emailid_);
+}
+
+::PROTOBUF_NAMESPACE_ID::Metadata getannex_client_gate_c::GetMetadata() const {
+  return GetMetadataStatic();
+}
+
+
+// ===================================================================
+
+class getannex_client_gate_s::_Internal {
+ public:
+};
+
+getannex_client_gate_s::getannex_client_gate_s(::PROTOBUF_NAMESPACE_ID::Arena* arena)
+  : ::PROTOBUF_NAMESPACE_ID::Message(arena) {
+  SharedCtor();
+  RegisterArenaDtor(arena);
+  // @@protoc_insertion_point(arena_constructor:frmpub.protocc.getannex_client_gate_s)
+}
+getannex_client_gate_s::getannex_client_gate_s(const getannex_client_gate_s& from)
+  : ::PROTOBUF_NAMESPACE_ID::Message() {
+  _internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
+  result_ = from.result_;
+  // @@protoc_insertion_point(copy_constructor:frmpub.protocc.getannex_client_gate_s)
+}
+
+void getannex_client_gate_s::SharedCtor() {
+result_ = 0;
+}
+
+getannex_client_gate_s::~getannex_client_gate_s() {
+  // @@protoc_insertion_point(destructor:frmpub.protocc.getannex_client_gate_s)
+  SharedDtor();
+  _internal_metadata_.Delete<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>();
+}
+
+void getannex_client_gate_s::SharedDtor() {
+  GOOGLE_DCHECK(GetArena() == nullptr);
+}
+
+void getannex_client_gate_s::ArenaDtor(void* object) {
+  getannex_client_gate_s* _this = reinterpret_cast< getannex_client_gate_s* >(object);
+  (void)_this;
+}
+void getannex_client_gate_s::RegisterArenaDtor(::PROTOBUF_NAMESPACE_ID::Arena*) {
+}
+void getannex_client_gate_s::SetCachedSize(int size) const {
+  _cached_size_.Set(size);
+}
+
+void getannex_client_gate_s::Clear() {
+// @@protoc_insertion_point(message_clear_start:frmpub.protocc.getannex_client_gate_s)
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
+  result_ = 0;
+  _internal_metadata_.Clear<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>();
+}
+
+const char* getannex_client_gate_s::_InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) {
+#define CHK_(x) if (PROTOBUF_PREDICT_FALSE(!(x))) goto failure
+  while (!ctx->Done(&ptr)) {
+    ::PROTOBUF_NAMESPACE_ID::uint32 tag;
+    ptr = ::PROTOBUF_NAMESPACE_ID::internal::ReadTag(ptr, &tag);
+    CHK_(ptr);
+    switch (tag >> 3) {
+      // int32 result = 1;
+      case 1:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 8)) {
+          result_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint64(&ptr);
+          CHK_(ptr);
+        } else goto handle_unusual;
+        continue;
+      default: {
+      handle_unusual:
+        if ((tag & 7) == 4 || tag == 0) {
+          ctx->SetLastTag(tag);
+          goto success;
+        }
+        ptr = UnknownFieldParse(tag,
+            _internal_metadata_.mutable_unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(),
+            ptr, ctx);
+        CHK_(ptr != nullptr);
+        continue;
+      }
+    }  // switch
+  }  // while
+success:
+  return ptr;
+failure:
+  ptr = nullptr;
+  goto success;
+#undef CHK_
+}
+
+::PROTOBUF_NAMESPACE_ID::uint8* getannex_client_gate_s::_InternalSerialize(
+    ::PROTOBUF_NAMESPACE_ID::uint8* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const {
+  // @@protoc_insertion_point(serialize_to_array_start:frmpub.protocc.getannex_client_gate_s)
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  // int32 result = 1;
+  if (this->result() != 0) {
+    target = stream->EnsureSpace(target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteInt32ToArray(1, this->_internal_result(), target);
+  }
+
+  if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::InternalSerializeUnknownFieldsToArray(
+        _internal_metadata_.unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(::PROTOBUF_NAMESPACE_ID::UnknownFieldSet::default_instance), target, stream);
+  }
+  // @@protoc_insertion_point(serialize_to_array_end:frmpub.protocc.getannex_client_gate_s)
+  return target;
+}
+
+size_t getannex_client_gate_s::ByteSizeLong() const {
+// @@protoc_insertion_point(message_byte_size_start:frmpub.protocc.getannex_client_gate_s)
+  size_t total_size = 0;
+
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
+  // int32 result = 1;
+  if (this->result() != 0) {
+    total_size += 1 +
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::Int32Size(
+        this->_internal_result());
+  }
+
+  if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
+    return ::PROTOBUF_NAMESPACE_ID::internal::ComputeUnknownFieldsSize(
+        _internal_metadata_, total_size, &_cached_size_);
+  }
+  int cached_size = ::PROTOBUF_NAMESPACE_ID::internal::ToCachedSize(total_size);
+  SetCachedSize(cached_size);
+  return total_size;
+}
+
+void getannex_client_gate_s::MergeFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) {
+// @@protoc_insertion_point(generalized_merge_from_start:frmpub.protocc.getannex_client_gate_s)
+  GOOGLE_DCHECK_NE(&from, this);
+  const getannex_client_gate_s* source =
+      ::PROTOBUF_NAMESPACE_ID::DynamicCastToGenerated<getannex_client_gate_s>(
+          &from);
+  if (source == nullptr) {
+  // @@protoc_insertion_point(generalized_merge_from_cast_fail:frmpub.protocc.getannex_client_gate_s)
+    ::PROTOBUF_NAMESPACE_ID::internal::ReflectionOps::Merge(from, this);
+  } else {
+  // @@protoc_insertion_point(generalized_merge_from_cast_success:frmpub.protocc.getannex_client_gate_s)
+    MergeFrom(*source);
+  }
+}
+
+void getannex_client_gate_s::MergeFrom(const getannex_client_gate_s& from) {
+// @@protoc_insertion_point(class_specific_merge_from_start:frmpub.protocc.getannex_client_gate_s)
+  GOOGLE_DCHECK_NE(&from, this);
+  _internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  if (from.result() != 0) {
+    _internal_set_result(from._internal_result());
+  }
+}
+
+void getannex_client_gate_s::CopyFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) {
+// @@protoc_insertion_point(generalized_copy_from_start:frmpub.protocc.getannex_client_gate_s)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+void getannex_client_gate_s::CopyFrom(const getannex_client_gate_s& from) {
+// @@protoc_insertion_point(class_specific_copy_from_start:frmpub.protocc.getannex_client_gate_s)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+bool getannex_client_gate_s::IsInitialized() const {
+  return true;
+}
+
+void getannex_client_gate_s::InternalSwap(getannex_client_gate_s* other) {
+  using std::swap;
+  _internal_metadata_.Swap<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(&other->_internal_metadata_);
+  swap(result_, other->result_);
+}
+
+::PROTOBUF_NAMESPACE_ID::Metadata getannex_client_gate_s::GetMetadata() const {
+  return GetMetadataStatic();
+}
+
+
+// ===================================================================
+
+class baseupdata_client_gate_g::_Internal {
+ public:
+};
+
+baseupdata_client_gate_g::baseupdata_client_gate_g(::PROTOBUF_NAMESPACE_ID::Arena* arena)
+  : ::PROTOBUF_NAMESPACE_ID::Message(arena) {
+  SharedCtor();
+  RegisterArenaDtor(arena);
+  // @@protoc_insertion_point(arena_constructor:frmpub.protocc.baseupdata_client_gate_g)
+}
+baseupdata_client_gate_g::baseupdata_client_gate_g(const baseupdata_client_gate_g& from)
+  : ::PROTOBUF_NAMESPACE_ID::Message() {
+  _internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
+  ::memcpy(&roleid_, &from.roleid_,
+    static_cast<size_t>(reinterpret_cast<char*>(&diamond_) -
+    reinterpret_cast<char*>(&roleid_)) + sizeof(diamond_));
+  // @@protoc_insertion_point(copy_constructor:frmpub.protocc.baseupdata_client_gate_g)
+}
+
+void baseupdata_client_gate_g::SharedCtor() {
+::memset(reinterpret_cast<char*>(this) + static_cast<size_t>(
+    reinterpret_cast<char*>(&roleid_) - reinterpret_cast<char*>(this)),
+    0, static_cast<size_t>(reinterpret_cast<char*>(&diamond_) -
+    reinterpret_cast<char*>(&roleid_)) + sizeof(diamond_));
+}
+
+baseupdata_client_gate_g::~baseupdata_client_gate_g() {
+  // @@protoc_insertion_point(destructor:frmpub.protocc.baseupdata_client_gate_g)
+  SharedDtor();
+  _internal_metadata_.Delete<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>();
+}
+
+void baseupdata_client_gate_g::SharedDtor() {
+  GOOGLE_DCHECK(GetArena() == nullptr);
+}
+
+void baseupdata_client_gate_g::ArenaDtor(void* object) {
+  baseupdata_client_gate_g* _this = reinterpret_cast< baseupdata_client_gate_g* >(object);
+  (void)_this;
+}
+void baseupdata_client_gate_g::RegisterArenaDtor(::PROTOBUF_NAMESPACE_ID::Arena*) {
+}
+void baseupdata_client_gate_g::SetCachedSize(int size) const {
+  _cached_size_.Set(size);
+}
+
+void baseupdata_client_gate_g::Clear() {
+// @@protoc_insertion_point(message_clear_start:frmpub.protocc.baseupdata_client_gate_g)
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
+  ::memset(&roleid_, 0, static_cast<size_t>(
+      reinterpret_cast<char*>(&diamond_) -
+      reinterpret_cast<char*>(&roleid_)) + sizeof(diamond_));
+  _internal_metadata_.Clear<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>();
+}
+
+const char* baseupdata_client_gate_g::_InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) {
+#define CHK_(x) if (PROTOBUF_PREDICT_FALSE(!(x))) goto failure
+  while (!ctx->Done(&ptr)) {
+    ::PROTOBUF_NAMESPACE_ID::uint32 tag;
+    ptr = ::PROTOBUF_NAMESPACE_ID::internal::ReadTag(ptr, &tag);
+    CHK_(ptr);
+    switch (tag >> 3) {
+      // int64 roleid = 3;
+      case 3:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 24)) {
+          roleid_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint64(&ptr);
+          CHK_(ptr);
+        } else goto handle_unusual;
+        continue;
+      // int32 level = 4;
+      case 4:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 32)) {
+          level_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint64(&ptr);
+          CHK_(ptr);
+        } else goto handle_unusual;
+        continue;
+      // int32 gold = 5;
+      case 5:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 40)) {
+          gold_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint64(&ptr);
+          CHK_(ptr);
+        } else goto handle_unusual;
+        continue;
+      // int32 diamond = 6;
+      case 6:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 48)) {
+          diamond_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint64(&ptr);
+          CHK_(ptr);
+        } else goto handle_unusual;
+        continue;
+      default: {
+      handle_unusual:
+        if ((tag & 7) == 4 || tag == 0) {
+          ctx->SetLastTag(tag);
+          goto success;
+        }
+        ptr = UnknownFieldParse(tag,
+            _internal_metadata_.mutable_unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(),
+            ptr, ctx);
+        CHK_(ptr != nullptr);
+        continue;
+      }
+    }  // switch
+  }  // while
+success:
+  return ptr;
+failure:
+  ptr = nullptr;
+  goto success;
+#undef CHK_
+}
+
+::PROTOBUF_NAMESPACE_ID::uint8* baseupdata_client_gate_g::_InternalSerialize(
+    ::PROTOBUF_NAMESPACE_ID::uint8* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const {
+  // @@protoc_insertion_point(serialize_to_array_start:frmpub.protocc.baseupdata_client_gate_g)
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  // int64 roleid = 3;
+  if (this->roleid() != 0) {
+    target = stream->EnsureSpace(target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteInt64ToArray(3, this->_internal_roleid(), target);
+  }
+
+  // int32 level = 4;
+  if (this->level() != 0) {
+    target = stream->EnsureSpace(target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteInt32ToArray(4, this->_internal_level(), target);
+  }
+
+  // int32 gold = 5;
+  if (this->gold() != 0) {
+    target = stream->EnsureSpace(target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteInt32ToArray(5, this->_internal_gold(), target);
+  }
+
+  // int32 diamond = 6;
+  if (this->diamond() != 0) {
+    target = stream->EnsureSpace(target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteInt32ToArray(6, this->_internal_diamond(), target);
+  }
+
+  if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::InternalSerializeUnknownFieldsToArray(
+        _internal_metadata_.unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(::PROTOBUF_NAMESPACE_ID::UnknownFieldSet::default_instance), target, stream);
+  }
+  // @@protoc_insertion_point(serialize_to_array_end:frmpub.protocc.baseupdata_client_gate_g)
+  return target;
+}
+
+size_t baseupdata_client_gate_g::ByteSizeLong() const {
+// @@protoc_insertion_point(message_byte_size_start:frmpub.protocc.baseupdata_client_gate_g)
+  size_t total_size = 0;
+
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
+  // int64 roleid = 3;
+  if (this->roleid() != 0) {
+    total_size += 1 +
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::Int64Size(
+        this->_internal_roleid());
+  }
+
+  // int32 level = 4;
+  if (this->level() != 0) {
+    total_size += 1 +
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::Int32Size(
+        this->_internal_level());
+  }
+
+  // int32 gold = 5;
+  if (this->gold() != 0) {
+    total_size += 1 +
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::Int32Size(
+        this->_internal_gold());
+  }
+
+  // int32 diamond = 6;
+  if (this->diamond() != 0) {
+    total_size += 1 +
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::Int32Size(
+        this->_internal_diamond());
+  }
+
+  if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
+    return ::PROTOBUF_NAMESPACE_ID::internal::ComputeUnknownFieldsSize(
+        _internal_metadata_, total_size, &_cached_size_);
+  }
+  int cached_size = ::PROTOBUF_NAMESPACE_ID::internal::ToCachedSize(total_size);
+  SetCachedSize(cached_size);
+  return total_size;
+}
+
+void baseupdata_client_gate_g::MergeFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) {
+// @@protoc_insertion_point(generalized_merge_from_start:frmpub.protocc.baseupdata_client_gate_g)
+  GOOGLE_DCHECK_NE(&from, this);
+  const baseupdata_client_gate_g* source =
+      ::PROTOBUF_NAMESPACE_ID::DynamicCastToGenerated<baseupdata_client_gate_g>(
+          &from);
+  if (source == nullptr) {
+  // @@protoc_insertion_point(generalized_merge_from_cast_fail:frmpub.protocc.baseupdata_client_gate_g)
+    ::PROTOBUF_NAMESPACE_ID::internal::ReflectionOps::Merge(from, this);
+  } else {
+  // @@protoc_insertion_point(generalized_merge_from_cast_success:frmpub.protocc.baseupdata_client_gate_g)
+    MergeFrom(*source);
+  }
+}
+
+void baseupdata_client_gate_g::MergeFrom(const baseupdata_client_gate_g& from) {
+// @@protoc_insertion_point(class_specific_merge_from_start:frmpub.protocc.baseupdata_client_gate_g)
+  GOOGLE_DCHECK_NE(&from, this);
+  _internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  if (from.roleid() != 0) {
+    _internal_set_roleid(from._internal_roleid());
+  }
+  if (from.level() != 0) {
+    _internal_set_level(from._internal_level());
+  }
+  if (from.gold() != 0) {
+    _internal_set_gold(from._internal_gold());
+  }
+  if (from.diamond() != 0) {
+    _internal_set_diamond(from._internal_diamond());
+  }
+}
+
+void baseupdata_client_gate_g::CopyFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) {
+// @@protoc_insertion_point(generalized_copy_from_start:frmpub.protocc.baseupdata_client_gate_g)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+void baseupdata_client_gate_g::CopyFrom(const baseupdata_client_gate_g& from) {
+// @@protoc_insertion_point(class_specific_copy_from_start:frmpub.protocc.baseupdata_client_gate_g)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+bool baseupdata_client_gate_g::IsInitialized() const {
+  return true;
+}
+
+void baseupdata_client_gate_g::InternalSwap(baseupdata_client_gate_g* other) {
+  using std::swap;
+  _internal_metadata_.Swap<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(&other->_internal_metadata_);
+  ::PROTOBUF_NAMESPACE_ID::internal::memswap<
+      PROTOBUF_FIELD_OFFSET(baseupdata_client_gate_g, diamond_)
+      + sizeof(baseupdata_client_gate_g::diamond_)
+      - PROTOBUF_FIELD_OFFSET(baseupdata_client_gate_g, roleid_)>(
+          reinterpret_cast<char*>(&roleid_),
+          reinterpret_cast<char*>(&other->roleid_));
+}
+
+::PROTOBUF_NAMESPACE_ID::Metadata baseupdata_client_gate_g::GetMetadata() const {
+  return GetMetadataStatic();
+}
+
+
 // @@protoc_insertion_point(namespace_scope)
 }  // namespace protocc
 }  // namespace frmpub
@@ -5973,9 +8400,6 @@ template<> PROTOBUF_NOINLINE ::frmpub::protocc::setlevel_client_gate_c* Arena::C
 template<> PROTOBUF_NOINLINE ::frmpub::protocc::setlevel_client_gate_s* Arena::CreateMaybeMessage< ::frmpub::protocc::setlevel_client_gate_s >(Arena* arena) {
   return Arena::CreateMessageInternal< ::frmpub::protocc::setlevel_client_gate_s >(arena);
 }
-template<> PROTOBUF_NOINLINE ::frmpub::protocc::loadgoods_client_gate_c* Arena::CreateMaybeMessage< ::frmpub::protocc::loadgoods_client_gate_c >(Arena* arena) {
-  return Arena::CreateMessageInternal< ::frmpub::protocc::loadgoods_client_gate_c >(arena);
-}
 template<> PROTOBUF_NOINLINE ::frmpub::protocc::loadgoods_client_gate_s_Goods* Arena::CreateMaybeMessage< ::frmpub::protocc::loadgoods_client_gate_s_Goods >(Arena* arena) {
   return Arena::CreateMessageInternal< ::frmpub::protocc::loadgoods_client_gate_s_Goods >(arena);
 }
@@ -5999,6 +8423,36 @@ template<> PROTOBUF_NOINLINE ::frmpub::protocc::notice_info_list_clent_gate_s_no
 }
 template<> PROTOBUF_NOINLINE ::frmpub::protocc::notice_info_list_clent_gate_s* Arena::CreateMaybeMessage< ::frmpub::protocc::notice_info_list_clent_gate_s >(Arena* arena) {
   return Arena::CreateMessageInternal< ::frmpub::protocc::notice_info_list_clent_gate_s >(arena);
+}
+template<> PROTOBUF_NOINLINE ::frmpub::protocc::email_new_client_gate_g* Arena::CreateMaybeMessage< ::frmpub::protocc::email_new_client_gate_g >(Arena* arena) {
+  return Arena::CreateMessageInternal< ::frmpub::protocc::email_new_client_gate_g >(arena);
+}
+template<> PROTOBUF_NOINLINE ::frmpub::protocc::loademails_client_gate_s_Email* Arena::CreateMaybeMessage< ::frmpub::protocc::loademails_client_gate_s_Email >(Arena* arena) {
+  return Arena::CreateMessageInternal< ::frmpub::protocc::loademails_client_gate_s_Email >(arena);
+}
+template<> PROTOBUF_NOINLINE ::frmpub::protocc::loademails_client_gate_s* Arena::CreateMaybeMessage< ::frmpub::protocc::loademails_client_gate_s >(Arena* arena) {
+  return Arena::CreateMessageInternal< ::frmpub::protocc::loademails_client_gate_s >(arena);
+}
+template<> PROTOBUF_NOINLINE ::frmpub::protocc::lookemail_client_gate_c* Arena::CreateMaybeMessage< ::frmpub::protocc::lookemail_client_gate_c >(Arena* arena) {
+  return Arena::CreateMessageInternal< ::frmpub::protocc::lookemail_client_gate_c >(arena);
+}
+template<> PROTOBUF_NOINLINE ::frmpub::protocc::lookemail_client_gate_s_Annex_Goods* Arena::CreateMaybeMessage< ::frmpub::protocc::lookemail_client_gate_s_Annex_Goods >(Arena* arena) {
+  return Arena::CreateMessageInternal< ::frmpub::protocc::lookemail_client_gate_s_Annex_Goods >(arena);
+}
+template<> PROTOBUF_NOINLINE ::frmpub::protocc::lookemail_client_gate_s_Annex* Arena::CreateMaybeMessage< ::frmpub::protocc::lookemail_client_gate_s_Annex >(Arena* arena) {
+  return Arena::CreateMessageInternal< ::frmpub::protocc::lookemail_client_gate_s_Annex >(arena);
+}
+template<> PROTOBUF_NOINLINE ::frmpub::protocc::lookemail_client_gate_s* Arena::CreateMaybeMessage< ::frmpub::protocc::lookemail_client_gate_s >(Arena* arena) {
+  return Arena::CreateMessageInternal< ::frmpub::protocc::lookemail_client_gate_s >(arena);
+}
+template<> PROTOBUF_NOINLINE ::frmpub::protocc::getannex_client_gate_c* Arena::CreateMaybeMessage< ::frmpub::protocc::getannex_client_gate_c >(Arena* arena) {
+  return Arena::CreateMessageInternal< ::frmpub::protocc::getannex_client_gate_c >(arena);
+}
+template<> PROTOBUF_NOINLINE ::frmpub::protocc::getannex_client_gate_s* Arena::CreateMaybeMessage< ::frmpub::protocc::getannex_client_gate_s >(Arena* arena) {
+  return Arena::CreateMessageInternal< ::frmpub::protocc::getannex_client_gate_s >(arena);
+}
+template<> PROTOBUF_NOINLINE ::frmpub::protocc::baseupdata_client_gate_g* Arena::CreateMaybeMessage< ::frmpub::protocc::baseupdata_client_gate_g >(Arena* arena) {
+  return Arena::CreateMessageInternal< ::frmpub::protocc::baseupdata_client_gate_g >(arena);
 }
 PROTOBUF_NAMESPACE_CLOSE
 

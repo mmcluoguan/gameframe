@@ -30,6 +30,8 @@ private:
         std::shared_ptr<std::stack<FilterData::Envelope>> enves);
     int noticeserver_admin_world_s(std::shared_ptr<rapidjson::Document> doc,
         std::shared_ptr<std::stack<FilterData::Envelope>> enves);
+    int sysemail_admin_world_s(std::shared_ptr<rapidjson::Document> doc,
+        std::shared_ptr<std::stack<FilterData::Envelope>> enves);
 };
 }
 

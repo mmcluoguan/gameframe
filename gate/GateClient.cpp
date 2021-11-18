@@ -186,7 +186,7 @@ int GateClient::game_message(std::shared_ptr<protocc::CommonObject> obj, std::sh
     } else {
         std::stringstream stream;
         stream << "没有可用的" << frmpub::Basic::connectname(protocc::ServerType::GAME) << "连接";
-        SEND_ERR(protocc::LOGIN_NOT_EXIST, stream.str());
+        SEND_ERR(protocc::GAME_NOT_EXIST, stream.str());
     }
     return 0;
 }

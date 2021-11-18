@@ -25,7 +25,7 @@ enum ClientMsgId {
   CREATEROLE_CLIENT_GATE_S = 1202;  
   LOADROLE_CLIENT_GATE_C = 1203;  //加载角色数据
   LOADROLE_CLIENT_GATE_S = 1204;
-  SETLEVEL_CLIENT_GATE_C = 1205;  //设置角色等级为1
+  SETLEVEL_CLIENT_GATE_C = 1205;  //设置角色等级
   SETLEVEL_CLIENT_GATE_S = 1206;
   LOADGOODS_CLIENT_GATE_C = 1207; //加载角色物品数据
   LOADGOODS_CLIENT_GATE_S = 1208;
@@ -35,6 +35,14 @@ enum ClientMsgId {
   NOTICE_INFO_CLENT_GATE_G = 1212;  //广播公告信息
   NOTICE_INFO_LIST_CLENT_GATE_C = 1213; //获取广播公告信息列表
   NOTICE_INFO_LIST_CLENT_GATE_S = 1214;
+  EMAIL_NEW_CLIENT_GATE_G = 1215;       //新邮件通知
+  LOADEMAILS_CLIENT_GATE_C = 1216;      //加载邮件列表
+  LOADEMAILS_CLIENT_GATE_S = 1217;
+  LOOKEMAIL_CLIENT_GATE_C = 1218;       //查看邮件信息
+  LOOKEMAIL_CLIENT_GATE_S = 1219; 
+  GETANNEX_CLIENT_GATE_C = 1220;        //领取邮件附件
+  GETANNEX_CLIENT_GATE_S = 1221;
+  BASEUPDATA_CLIENT_GATE_G = 1223;      //角色基础数据更新
   CLIENT_GAME_END = 1299;
 
   CLIENTMSGID_END = 5000;
@@ -109,24 +117,21 @@ message loadrole_client_gate_s{
     string aid = 2;
     int64 roleid = 3;
     int32 level = 4;
+    int32 gold = 5;
+    int32 diamond = 6;
 }
 
-//重置角色等级
+//设置角色等级
 message setlevel_client_gate_c{
-    int64 roleid = 1;
+    int32 level = 1;
 }
 
 message setlevel_client_gate_s{
     int32 result  = 1; //0成功
+    int32 level = 2;
 }
 
-//加载角色物品数据
-message loadgoods_client_gate_c{
-    string aid = 1;
-    int64 roleid = 2;
-}
-
-//加载角色物品数据
+//加载角色物品数据返回
 message loadgoods_client_gate_s{
     message Goods{
         int64 id = 1;
@@ -171,3 +176,64 @@ message notice_info_list_clent_gate_s {
     }
     repeated notice datas = 1;
 }
+
+//新邮件通知
+message email_new_client_gate_g {
+    int64 id = 1; //唯一id
+}
+
+//加载邮件列表返回
+message loademails_client_gate_s{
+    message Email{
+        int64 id = 1;
+        bool is_read = 2;
+        bool is_receive = 3;
+    }
+
+    repeated Email emails = 1;
+}
+
+//查看邮件信息
+message lookemail_client_gate_c{
+    int64 emailid = 1;
+}
+
+message lookemail_client_gate_s{
+    int32 result = 1; //0成功 1邮件不存在
+
+    message Annex{
+        message Goods{
+            int32 cfgid = 1;
+            int32 num = 2;
+        }
+
+        int32 gold = 1;
+        int32 diamond = 2;
+        repeated Goods goods = 3;
+    }
+
+    int64 id = 2;       //唯一编号
+    string title = 3; //标题
+    string info = 4; //内容
+    int32 type = 5; //类型 1后台邮件 2区服邮件
+    int32 time = 6;// 发送时间
+    Annex annex = 7;// 附件
+}
+
+//领取邮件附件
+message getannex_client_gate_c{
+    int64 emailid = 1;
+}
+
+message getannex_client_gate_s{
+    int32 result = 1; //0成功 1邮件不存在 2没有附件 3已领取
+}
+
+//角色基础数据更新
+message baseupdata_client_gate_g {
+    int64 roleid = 1;
+    int32 level = 2;
+    int32 gold = 3;
+    int32 diamond = 4;
+}
+

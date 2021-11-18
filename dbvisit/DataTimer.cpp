@@ -20,10 +20,11 @@ void DataTimer::timeout()
 {
     try {
         std::vector<std::string> temp = shynet::utils::StringOp::split(cachekey_, "_");
+        LOG_DEBUG << "更新数据到 tablename:" << temp[0] << " key:" << temp[1];
+
         shynet::utils::Singleton<Datahelp>::instance().updata_db(temp[0], temp[1], fields_);
         shynet::utils::Singleton<net::TimerReactorMgr>::instance().remove(timerid());
         shynet::utils::Singleton<DataTimerMgr>::instance().remove(cachekey_);
-        LOG_DEBUG << "更新数据到 tablename:" << temp[0] << " key:" << temp[1];
     } catch (std::exception& err) {
         THROW_EXCEPTION(err.what());
     }

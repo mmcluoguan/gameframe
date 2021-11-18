@@ -43,7 +43,7 @@ void LuaWrapper::init(kaguya::State& state)
     }
 
     //载入lua文件
-    std::string luafile = ini.get<std::string>("world", "luafile");
+    std::string luafile = ini.get<std::string>(g_confname, "luafile");
     state.dofile(luafile);
 
     shynet::utils::Singleton<frmpub::LuaRemoteDebug>::instance().stop(state);

@@ -38,7 +38,7 @@ message sysemail_world_game_g {
     string title = 2; //标题
     string info = 3; //内容
     int32 type = 4; //类型 1后台邮件 2区服邮件
-    string rid = 5; // 区服角色id -1表示全部角色
+    int64 rid = 5; // 区服角色id -1表示全部角色
     int32 time = 6;// 发送时间
-    repeated Annex annex = 7;// 附件
+    Annex annex = 7;// 附件
 }

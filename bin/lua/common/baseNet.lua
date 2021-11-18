@@ -49,6 +49,11 @@ function baseNet:clean(sf)
 	self.cpp_socket = nil;
 end
 
+function baseNet:send_errcode(code,desc,routing)
+	local codenum = pb.enum("frmpub.protocc.errnum",string.upper(code))
+	return self:send('errcode',{code=codenum,desc=desc,},routing)
+end
+
 --发送消息
 --msg_name 消息名称
 --msg_data 表数据
@@ -60,12 +65,18 @@ function baseNet:send(msg, msgdata,routing)
 		msgid = pb.enum("frmpub.protocc.ClientMsgId",string.upper(msg))
 		if msgid == nil then
 			msgid = pb.enum("frmpub.protocc.InternalMsgId", string.upper(msg))
+			if msgid == nil then
+				msgid = pb.enum("frmpub.protocc.BroadcastMsgId", string.upper(msg))
+			end
 		end
 		assert(msg,"msgid=" .. msg .. " 未定义");
 	elseif type(msgid) == "number" then
 		msgname = string.lower(pb.enum("frmpub.protocc.ClientMsgId", msg))
 		if msgname == nil then
 			msgname = string.lower(pb.enum("frmpub.protocc.InternalMsgId", msg))
+			if msgname == nil then
+				msgname = string.lower(pb.enum("frmpub.protocc.BroadcastMsgId", msg))
+			end
 		end
 		assert(msg,"msgid=" .. msg .. " 未定义");
 	end

@@ -5,8 +5,11 @@ AcceptMgr = require ("lua/game/acceptMgr")
 ConnectorMgr = require ("lua/game/connectorMgr")
 RoleMgr =  require ("lua/game/roleMgr")
 TimerMgr = require("lua/common/timerMgr")
-BagOperator = require("lua/game/bagOperator")
-GmSystem = require("lua/game/gmSystem")
+BagOperator = require("lua/game/operator/bagOperator")
+EmailOperator = require("lua/game/operator/emailOperator")
+BaseOperator = require("lua/game/operator/baseOperator")
+GmSystem = require("lua/game/system/gmSystem")
+EmailSystem = require("lua/game/system/emailSystem")
 
 --接收新客户端
 function onAccept(client)
@@ -36,6 +39,6 @@ function onMessage(cli,msgid,msgdata,routing)
     end    
 end
 
---local autoUpLevel = require("lua/game/autoUpLevel")
+--local autoUpLevel = require("lua/game/system/autoUpLevel")
 --autoUpLevel:start()
 

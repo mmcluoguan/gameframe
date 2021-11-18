@@ -140,7 +140,7 @@ inline bool ServerType_Parse(
 enum errnum : int {
   MESSAGE_PARSING_ERROR = 0,
   ILLEGAL_UNKNOWN_MESSAGE = 1,
-  GAMS_NOT_EXIST = 2,
+  GAME_NOT_EXIST = 2,
   LOGIN_NOT_EXIST = 3,
   WORLD_NOT_EXIST = 4,
   DBVISIT_NOT_EXIST = 5,
@@ -151,12 +151,13 @@ enum errnum : int {
   UNKNOWN_SERVER_TYPE = 10,
   EXTEND_FORMAT_ERR = 11,
   NO_ROUTING_INFO = 12,
+  GAME_ROLE_NOT_EXIST = 13,
   errnum_INT_MIN_SENTINEL_DO_NOT_USE_ = std::numeric_limits<::PROTOBUF_NAMESPACE_ID::int32>::min(),
   errnum_INT_MAX_SENTINEL_DO_NOT_USE_ = std::numeric_limits<::PROTOBUF_NAMESPACE_ID::int32>::max()
 };
 bool errnum_IsValid(int value);
 constexpr errnum errnum_MIN = MESSAGE_PARSING_ERROR;
-constexpr errnum errnum_MAX = NO_ROUTING_INFO;
+constexpr errnum errnum_MAX = GAME_ROLE_NOT_EXIST;
 constexpr int errnum_ARRAYSIZE = errnum_MAX + 1;
 
 const ::PROTOBUF_NAMESPACE_ID::EnumDescriptor* errnum_descriptor();

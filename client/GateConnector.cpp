@@ -34,10 +34,6 @@ GateConnector::GateConnector(std::shared_ptr<net::IPAddress> connect_addr,
             std::bind(&GateConnector::createrole_client_gate_s, this, std::placeholders::_1, std::placeholders::_2) },
         { protocc::GMORDER_CLIENT_GATE_S,
             std::bind(&GateConnector::gmorder_client_gate_s, this, std::placeholders::_1, std::placeholders::_2) },
-        { protocc::NOTICE_INFO_CLENT_GATE_G,
-            std::bind(&GateConnector::notice_info_clent_gate_g, this, std::placeholders::_1, std::placeholders::_2) },
-        { protocc::NOTICE_INFO_LIST_CLENT_GATE_S,
-            std::bind(&GateConnector::notice_info_list_clent_gate_s, this, std::placeholders::_1, std::placeholders::_2) },
     };
 }
 GateConnector::~GateConnector()
@@ -76,6 +72,10 @@ void GateConnector::complete()
         } else {
             //模拟断线重连
             protocc::reconnect_client_gate_c msg;
+            accountid_ = disconnect_->accountid;
+            login_id_ = disconnect_->login_id;
+            game_id_ = disconnect_->game_id;
+            roleid_ = disconnect_->roleid;
             msg.set_aid(disconnect_->accountid);
             msg.set_loginid(disconnect_->login_id);
             msg.set_gameid(disconnect_->game_id);
@@ -107,6 +107,7 @@ std::shared_ptr<GateConnector::DisConnectData> GateConnector::disconnect_data()
     data->login_id = login_id_;
     data->game_id = game_id_;
     data->accountid = accountid_;
+    data->roleid = roleid_;
     return data;
 }
 int GateConnector::errcode(std::shared_ptr<protocc::CommonObject> data, std::shared_ptr<std::stack<FilterData::Envelope>> enves)
@@ -114,6 +115,14 @@ int GateConnector::errcode(std::shared_ptr<protocc::CommonObject> data, std::sha
     protocc::errcode err;
     if (err.ParseFromString(data->msgdata()) == true) {
         LOG_DEBUG << "错误码:" << err.code() << " 描述:" << err.desc();
+        if (err.code() == protocc::errnum::GAME_ROLE_NOT_EXIST) {
+            //加载角色数据
+            protocc::loadrole_client_gate_c msg;
+            msg.set_aid(accountid_);
+            msg.set_roleid(roleid_);
+            send_proto(protocc::LOADROLE_CLIENT_GATE_C, &msg);
+            LOG_DEBUG << "重新加载角色数据 roleid:" << roleid_;
+        }
     } else {
         std::stringstream stream;
         stream << "消息" << frmpub::Basic::msgname(data->msgid()) << "解析错误";
@@ -208,10 +217,12 @@ int GateConnector::reconnect_client_gate_s(std::shared_ptr<protocc::CommonObject
         if (msgs.result() == 0) {
 
         } else {
-            protocc::login_client_gate_c msgc;
-            msgc.set_platform_key(platform_key_);
-            send_proto(protocc::LOGIN_CLIENT_GATE_C, &msgc);
-            LOG_DEBUG << "登陆";
+            //选择服务器
+            protocc::selectserver_client_gate_c msg;
+            msg.set_loginid(login_id_);
+            msg.set_gameid(game_id_);
+            send_proto(protocc::SELECTSERVER_CLIENT_GATE_C, &msg);
+            LOG_DEBUG << "重新选择服务器";
         }
     } else {
         std::stringstream stream;
@@ -257,40 +268,4 @@ int GateConnector::gmorder_client_gate_s(std::shared_ptr<protocc::CommonObject> 
     }
     return 0;
 }
-
-int GateConnector::notice_info_clent_gate_g(std::shared_ptr<protocc::CommonObject> data, std::shared_ptr<std::stack<FilterData::Envelope>> enves)
-{
-    protocc::notice_info_clent_gate_g gmsg;
-    if (gmsg.ParseFromString(data->msgdata()) == true) {
-        LOG_DEBUG << "区服广播信息 info:" << gmsg.info();
-    } else {
-        std::stringstream stream;
-        stream << "消息" << frmpub::Basic::msgname(data->msgid()) << "解析错误";
-        SEND_ERR(protocc::MESSAGE_PARSING_ERROR, stream.str());
-    }
-    return 0;
-}
-
-int GateConnector::notice_info_list_clent_gate_s(std::shared_ptr<protocc::CommonObject> data, std::shared_ptr<std::stack<FilterData::Envelope>> enves)
-{
-    protocc::notice_info_list_clent_gate_s gmsg;
-    if (gmsg.ParseFromString(data->msgdata()) == true) {
-        for (auto& item : gmsg.datas()) {
-            auto second = std::chrono::seconds(item.time());
-            auto tp = std::chrono::time_point<std::chrono::system_clock, std::chrono::seconds>(second);
-            auto tt = std::chrono::system_clock::to_time_t(tp);
-            std::tm* tm_time = std::gmtime(&tt);
-            char timebuf[30] = { 0 };
-            strftime(timebuf, sizeof(timebuf), "%F_%T", tm_time);
-
-            LOG_INFO_BASE << "  区服广播信息 info:" << item.info() << " 时间:" << timebuf;
-        }
-    } else {
-        std::stringstream stream;
-        stream << "消息" << frmpub::Basic::msgname(data->msgid()) << "解析错误";
-        SEND_ERR(protocc::MESSAGE_PARSING_ERROR, stream.str());
-    }
-    return 0;
-}
-
 }

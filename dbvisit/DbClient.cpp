@@ -247,7 +247,7 @@ int DbClient::loaddata_from_dbvisit_c(std::shared_ptr<protocc::CommonObject> dat
             protocc::loaddata_from_dbvisit_s msgs;
             std::unordered_map<std::string, std::string> data;
             for (int i = 0; i < msgc.fields_size(); i++) {
-                data[msgc.fields(i).key()] = "";
+                data[msgc.fields(i).key()] = msgc.fields(i).value();
             }
             Datahelp::ErrorCode err = shynet::utils::Singleton<Datahelp>::instance().getdata(msgc.cache_key(), data,
                 static_cast<Datahelp::OperType>(msgc.opertype()));
@@ -285,7 +285,7 @@ int DbClient::loaddata_more_from_dbvisit_c(std::shared_ptr<protocc::CommonObject
             protocc::loaddata_more_from_dbvisit_s msgs;
             std::unordered_map<std::string, std::string> data;
             for (int i = 0; i < msgc.fields_size(); i++) {
-                data[msgc.fields(i).key()] = "";
+                data[msgc.fields(i).key()] = msgc.fields(i).value();
             }
 
             moredataptr resdata = shynet::utils::Singleton<Datahelp>::instance().getdata_more(msgc.condition(), data,

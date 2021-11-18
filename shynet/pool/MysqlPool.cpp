@@ -15,22 +15,27 @@ namespace pool {
     }
     MysqlPool::SessionPtr MysqlPool::fetch()
     {
+        //LOG_DEBUG << "fetch 1111:" << use_num_;
         std::unique_lock<std::mutex> lock(queue_mutex_);
+        //LOG_DEBUG << "fetch 2222:" << use_num_;
         if (queue_.empty()) {
             if (use_num_ == capactiy_) {
                 cond_var_.wait(lock, [this] { return !this->queue_.empty(); });
             } else {
                 SessionPtr session(new mysqlx::Session(option_), fun_);
                 ++use_num_;
+                LOG_DEBUG << "fetch new:" << use_num_;
                 return session;
             }
         }
         ++use_num_;
+        //LOG_DEBUG << "fetch get:" << use_num_;
         SessionPtr sptr = std::move(queue_.front());
         queue_.pop();
         try {
             sptr->sql("select 1").execute();
         } catch (const mysqlx::Error& err) {
+            //LOG_DEBUG << "fetch catch:" << enable_del_;
             sptr.release();
             SessionPtr session(new mysqlx::Session(option_), fun_);
             return session;
@@ -39,16 +44,19 @@ namespace pool {
     }
     void MysqlPool::reclaim(mysqlx::Session* ses)
     {
+        //LOG_DEBUG << "reclaim 11111:" << use_num_;
         if (enable_del_) {
             ses->close();
             delete ses;
             return;
         }
+        //LOG_DEBUG << "reclaim 22222:" << use_num_;
         SessionPtr ptr(ses, fun_);
         {
             std::lock_guard<std::mutex> lock(queue_mutex_);
             queue_.push(std::move(ptr));
             --use_num_;
+            //LOG_DEBUG << "reclaim:" << use_num_;
         }
         cond_var_.notify_one();
     }

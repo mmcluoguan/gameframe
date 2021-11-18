@@ -95,11 +95,11 @@ struct sysemail_world_game_g_AnnexDefaultTypeInternal {
 PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT sysemail_world_game_g_AnnexDefaultTypeInternal _sysemail_world_game_g_Annex_default_instance_;
 constexpr sysemail_world_game_g::sysemail_world_game_g(
   ::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized)
-  : annex_()
-  , title_(&::PROTOBUF_NAMESPACE_ID::internal::fixed_address_empty_string)
+  : title_(&::PROTOBUF_NAMESPACE_ID::internal::fixed_address_empty_string)
   , info_(&::PROTOBUF_NAMESPACE_ID::internal::fixed_address_empty_string)
-  , rid_(&::PROTOBUF_NAMESPACE_ID::internal::fixed_address_empty_string)
+  , annex_(nullptr)
   , id_(PROTOBUF_LONGLONG(0))
+  , rid_(PROTOBUF_LONGLONG(0))
   , type_(0)
   , time_(0){}
 struct sysemail_world_game_gDefaultTypeInternal {
@@ -199,8 +199,8 @@ const char descriptor_table_protodef_world_2eproto[] PROTOBUF_SECTION_VARIABLE(p
   "mpub.protocc.ServerInfo\")\n\031noticeserver_"
   "world_game_g\022\014\n\004info\030\001 \001(\t\"\265\002\n\025sysemail_"
   "world_game_g\022\n\n\002id\030\001 \001(\003\022\r\n\005title\030\002 \001(\t\022"
-  "\014\n\004info\030\003 \001(\t\022\014\n\004type\030\004 \001(\005\022\013\n\003rid\030\005 \001(\t"
-  "\022\014\n\004time\030\006 \001(\005\022:\n\005annex\030\007 \003(\0132+.frmpub.p"
+  "\014\n\004info\030\003 \001(\t\022\014\n\004type\030\004 \001(\005\022\013\n\003rid\030\005 \001(\003"
+  "\022\014\n\004time\030\006 \001(\005\022:\n\005annex\030\007 \001(\0132+.frmpub.p"
   "rotocc.sysemail_world_game_g.Annex\032\215\001\n\005A"
   "nnex\022\014\n\004gold\030\001 \001(\005\022\017\n\007diamond\030\002 \001(\005\022@\n\005g"
   "oods\030\003 \003(\01321.frmpub.protocc.sysemail_wor"
@@ -1521,18 +1521,21 @@ void sysemail_world_game_g_Annex::InternalSwap(sysemail_world_game_g_Annex* othe
 
 class sysemail_world_game_g::_Internal {
  public:
+  static const ::frmpub::protocc::sysemail_world_game_g_Annex& annex(const sysemail_world_game_g* msg);
 };
 
+const ::frmpub::protocc::sysemail_world_game_g_Annex&
+sysemail_world_game_g::_Internal::annex(const sysemail_world_game_g* msg) {
+  return *msg->annex_;
+}
 sysemail_world_game_g::sysemail_world_game_g(::PROTOBUF_NAMESPACE_ID::Arena* arena)
-  : ::PROTOBUF_NAMESPACE_ID::Message(arena),
-  annex_(arena) {
+  : ::PROTOBUF_NAMESPACE_ID::Message(arena) {
   SharedCtor();
   RegisterArenaDtor(arena);
   // @@protoc_insertion_point(arena_constructor:frmpub.protocc.sysemail_world_game_g)
 }
 sysemail_world_game_g::sysemail_world_game_g(const sysemail_world_game_g& from)
-  : ::PROTOBUF_NAMESPACE_ID::Message(),
-      annex_(from.annex_) {
+  : ::PROTOBUF_NAMESPACE_ID::Message() {
   _internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
   title_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
   if (!from._internal_title().empty()) {
@@ -1544,10 +1547,10 @@ sysemail_world_game_g::sysemail_world_game_g(const sysemail_world_game_g& from)
     info_.Set(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, from._internal_info(), 
       GetArena());
   }
-  rid_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
-  if (!from._internal_rid().empty()) {
-    rid_.Set(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, from._internal_rid(), 
-      GetArena());
+  if (from._internal_has_annex()) {
+    annex_ = new ::frmpub::protocc::sysemail_world_game_g_Annex(*from.annex_);
+  } else {
+    annex_ = nullptr;
   }
   ::memcpy(&id_, &from.id_,
     static_cast<size_t>(reinterpret_cast<char*>(&time_) -
@@ -1558,11 +1561,10 @@ sysemail_world_game_g::sysemail_world_game_g(const sysemail_world_game_g& from)
 void sysemail_world_game_g::SharedCtor() {
 title_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
 info_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
-rid_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
 ::memset(reinterpret_cast<char*>(this) + static_cast<size_t>(
-    reinterpret_cast<char*>(&id_) - reinterpret_cast<char*>(this)),
+    reinterpret_cast<char*>(&annex_) - reinterpret_cast<char*>(this)),
     0, static_cast<size_t>(reinterpret_cast<char*>(&time_) -
-    reinterpret_cast<char*>(&id_)) + sizeof(time_));
+    reinterpret_cast<char*>(&annex_)) + sizeof(time_));
 }
 
 sysemail_world_game_g::~sysemail_world_game_g() {
@@ -1575,7 +1577,7 @@ void sysemail_world_game_g::SharedDtor() {
   GOOGLE_DCHECK(GetArena() == nullptr);
   title_.DestroyNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
   info_.DestroyNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
-  rid_.DestroyNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+  if (this != internal_default_instance()) delete annex_;
 }
 
 void sysemail_world_game_g::ArenaDtor(void* object) {
@@ -1594,10 +1596,12 @@ void sysemail_world_game_g::Clear() {
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
-  annex_.Clear();
   title_.ClearToEmpty();
   info_.ClearToEmpty();
-  rid_.ClearToEmpty();
+  if (GetArena() == nullptr && annex_ != nullptr) {
+    delete annex_;
+  }
+  annex_ = nullptr;
   ::memset(&id_, 0, static_cast<size_t>(
       reinterpret_cast<char*>(&time_) -
       reinterpret_cast<char*>(&id_)) + sizeof(time_));
@@ -1643,12 +1647,10 @@ const char* sysemail_world_game_g::_InternalParse(const char* ptr, ::PROTOBUF_NA
           CHK_(ptr);
         } else goto handle_unusual;
         continue;
-      // string rid = 5;
+      // int64 rid = 5;
       case 5:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 42)) {
-          auto str = _internal_mutable_rid();
-          ptr = ::PROTOBUF_NAMESPACE_ID::internal::InlineGreedyStringParser(str, ptr, ctx);
-          CHK_(::PROTOBUF_NAMESPACE_ID::internal::VerifyUTF8(str, "frmpub.protocc.sysemail_world_game_g.rid"));
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 40)) {
+          rid_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint64(&ptr);
           CHK_(ptr);
         } else goto handle_unusual;
         continue;
@@ -1659,16 +1661,11 @@ const char* sysemail_world_game_g::_InternalParse(const char* ptr, ::PROTOBUF_NA
           CHK_(ptr);
         } else goto handle_unusual;
         continue;
-      // repeated .frmpub.protocc.sysemail_world_game_g.Annex annex = 7;
+      // .frmpub.protocc.sysemail_world_game_g.Annex annex = 7;
       case 7:
         if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 58)) {
-          ptr -= 1;
-          do {
-            ptr += 1;
-            ptr = ctx->ParseMessage(_internal_add_annex(), ptr);
-            CHK_(ptr);
-            if (!ctx->DataAvailable(ptr)) break;
-          } while (::PROTOBUF_NAMESPACE_ID::internal::ExpectTag<58>(ptr));
+          ptr = ctx->ParseMessage(_internal_mutable_annex(), ptr);
+          CHK_(ptr);
         } else goto handle_unusual;
         continue;
       default: {
@@ -1731,14 +1728,10 @@ failure:
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteInt32ToArray(4, this->_internal_type(), target);
   }
 
-  // string rid = 5;
-  if (this->rid().size() > 0) {
-    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::VerifyUtf8String(
-      this->_internal_rid().data(), static_cast<int>(this->_internal_rid().length()),
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::SERIALIZE,
-      "frmpub.protocc.sysemail_world_game_g.rid");
-    target = stream->WriteStringMaybeAliased(
-        5, this->_internal_rid(), target);
+  // int64 rid = 5;
+  if (this->rid() != 0) {
+    target = stream->EnsureSpace(target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteInt64ToArray(5, this->_internal_rid(), target);
   }
 
   // int32 time = 6;
@@ -1747,12 +1740,12 @@ failure:
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteInt32ToArray(6, this->_internal_time(), target);
   }
 
-  // repeated .frmpub.protocc.sysemail_world_game_g.Annex annex = 7;
-  for (unsigned int i = 0,
-      n = static_cast<unsigned int>(this->_internal_annex_size()); i < n; i++) {
+  // .frmpub.protocc.sysemail_world_game_g.Annex annex = 7;
+  if (this->has_annex()) {
     target = stream->EnsureSpace(target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
-      InternalWriteMessage(7, this->_internal_annex(i), target, stream);
+      InternalWriteMessage(
+        7, _Internal::annex(this), target, stream);
   }
 
   if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
@@ -1771,13 +1764,6 @@ size_t sysemail_world_game_g::ByteSizeLong() const {
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
-  // repeated .frmpub.protocc.sysemail_world_game_g.Annex annex = 7;
-  total_size += 1UL * this->_internal_annex_size();
-  for (const auto& msg : this->annex_) {
-    total_size +=
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(msg);
-  }
-
   // string title = 2;
   if (this->title().size() > 0) {
     total_size += 1 +
@@ -1792,11 +1778,11 @@ size_t sysemail_world_game_g::ByteSizeLong() const {
         this->_internal_info());
   }
 
-  // string rid = 5;
-  if (this->rid().size() > 0) {
+  // .frmpub.protocc.sysemail_world_game_g.Annex annex = 7;
+  if (this->has_annex()) {
     total_size += 1 +
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::StringSize(
-        this->_internal_rid());
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
+        *annex_);
   }
 
   // int64 id = 1;
@@ -1804,6 +1790,13 @@ size_t sysemail_world_game_g::ByteSizeLong() const {
     total_size += 1 +
       ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::Int64Size(
         this->_internal_id());
+  }
+
+  // int64 rid = 5;
+  if (this->rid() != 0) {
+    total_size += 1 +
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::Int64Size(
+        this->_internal_rid());
   }
 
   // int32 type = 4;
@@ -1851,18 +1844,20 @@ void sysemail_world_game_g::MergeFrom(const sysemail_world_game_g& from) {
   ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
   (void) cached_has_bits;
 
-  annex_.MergeFrom(from.annex_);
   if (from.title().size() > 0) {
     _internal_set_title(from._internal_title());
   }
   if (from.info().size() > 0) {
     _internal_set_info(from._internal_info());
   }
-  if (from.rid().size() > 0) {
-    _internal_set_rid(from._internal_rid());
+  if (from.has_annex()) {
+    _internal_mutable_annex()->::frmpub::protocc::sysemail_world_game_g_Annex::MergeFrom(from._internal_annex());
   }
   if (from.id() != 0) {
     _internal_set_id(from._internal_id());
+  }
+  if (from.rid() != 0) {
+    _internal_set_rid(from._internal_rid());
   }
   if (from.type() != 0) {
     _internal_set_type(from._internal_type());
@@ -1893,16 +1888,14 @@ bool sysemail_world_game_g::IsInitialized() const {
 void sysemail_world_game_g::InternalSwap(sysemail_world_game_g* other) {
   using std::swap;
   _internal_metadata_.Swap<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(&other->_internal_metadata_);
-  annex_.InternalSwap(&other->annex_);
   title_.Swap(&other->title_, &::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArena());
   info_.Swap(&other->info_, &::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArena());
-  rid_.Swap(&other->rid_, &::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArena());
   ::PROTOBUF_NAMESPACE_ID::internal::memswap<
       PROTOBUF_FIELD_OFFSET(sysemail_world_game_g, time_)
       + sizeof(sysemail_world_game_g::time_)
-      - PROTOBUF_FIELD_OFFSET(sysemail_world_game_g, id_)>(
-          reinterpret_cast<char*>(&id_),
-          reinterpret_cast<char*>(&other->id_));
+      - PROTOBUF_FIELD_OFFSET(sysemail_world_game_g, annex_)>(
+          reinterpret_cast<char*>(&annex_),
+          reinterpret_cast<char*>(&other->annex_));
 }
 
 ::PROTOBUF_NAMESPACE_ID::Metadata sysemail_world_game_g::GetMetadata() const {

@@ -15,26 +15,20 @@ end
 
 --没有处理的消息，转移给关联的角色处理
 function gameClient:defaultHandle(msgid,msgname,data,routing)
-
-    if #data ~= 0 then
-        --解包roleid
-        local msgtable = pb.decode("frmpub.protocc." .. msgname, data)
-        if msgtable.roleid ~= nil then
-            local role = RoleMgr:find(msgtable.roleid)
-            if role ~= nil then
-                --socket与角色关联
-                role.fd = self.id
-                if role:handle_message(msgname,data,routing) == false then
-                    baseNet:defaultHandle(msgid,msgname,data,routing)
-                end
-            else
-                log("没有角色 roleid:",msgtable.roleid)
-            end
-        else
+    assert(routing:size() ~= 0,'defaultHandle 没有路由信息');
+    local clientfd = routing:top():fd();
+    local role = RoleMgr:findby_clientfd(clientfd)
+    if role ~= nil then
+        --socket与角色关联
+        role.gatefd = self.id
+        role.clientfd = clientfd
+        if role:handle_message(msgname,data,routing) == false then
             baseNet:defaultHandle(msgid,msgname,data,routing)
         end
     else
         baseNet:defaultHandle(msgid,msgname,data,routing)
+        log("没有角色 clientfd:",clientfd)
+        self:send_errcode("GAME_ROLE_NOT_EXIST",'游戏服内没有此连接的角色,可能由于游戏服重启导致',routing)
     end
 end
 
@@ -56,7 +50,7 @@ function gameClient:createrole_client_gate_c(msgid,msgdata,routing)
         local roleObj = role:new(newid(),self.id)
         roleObj.accountid = msgtable.aid
         roleObj.level = random(1,100)
-        local savedata = {
+        local initdata = {
             cache_key = 'role_' .. roleObj.id,
             opertype = 0,
             fields = {
@@ -66,7 +60,7 @@ function gameClient:createrole_client_gate_c(msgid,msgdata,routing)
                 { key = 'star', value = tostring(roleObj.star),},
             }
         }
-        ConnectorMgr:dbConnector():send('insertdata_to_dbvisit_c',savedata)
+        ConnectorMgr:dbConnector():send('insertdata_to_dbvisit_c',initdata)
         --默认初始化3个物品
         -- for i = 1, 3 do
         --     local item = {
@@ -96,18 +90,23 @@ function gameClient:createrole_client_gate_c(msgid,msgdata,routing)
 end
 
 --加载角色数据
-function gameClient:loadrole_client_gate_c(msgid,msgdata,routing)
+function gameClient:loadrole_client_gate_c(msgid,msgdata,routing)  
     local msgtable = pb.decode("frmpub.protocc.loadrole_client_gate_c", msgdata)
     local role = RoleMgr:find(msgtable.roleid)
     if role ~= nil then
         --在本地内存中获取
         log("在本地内存中获取角色数据 roleid:",role.id)
-        role.online = true
         role:copyrouting(routing)
+        role.online = true
+        role.gatefd = self.id
+        assert(routing:size() ~= 0,'loadrole_client_gate_c 没有路由信息');
+        role.clientfd = routing:top():fd()
         local roledata = {
             roleid = role.id,
             aid = role.accountid,
             level = role.level,
+            gold = role.gold,
+            diamond = role.diamond
         };
         self:send("loadrole_client_gate_s",roledata,routing)
     else
@@ -122,8 +121,11 @@ function gameClient:loadrole_client_gate_c(msgid,msgdata,routing)
             opertype = 0,
             fields = {
                 {key = '_id', value = '',},
-                {key = 'level', value = '',},
+                {key = 'level', value = '0',},
                 {key = 'accountid', value = '',},
+                {key = 'gold', value = '0',},
+                {key = 'diamond', value = '0',},
+                {key = 'unline_time', value = '0',},
             },
         };
         ConnectorMgr:dbConnector():send('loaddata_from_dbvisit_c',roledata,routing)
@@ -132,9 +134,11 @@ end
 
 --加载角色物品数据
 function gameClient:loadgoods_client_gate_c(msgid,msgdata,routing)
-    local msgtable = pb.decode("frmpub.protocc.loadgoods_client_gate_c", msgdata)
-    local role = RoleMgr:find(msgtable.roleid)
-    if role ~= nil and get_tablekey_size(role.goods) ~= 0 then
+    assert(routing:size() ~= 0,'loadgoods_client_gate_c 没有路由信息');
+    local clientfd = routing:top():fd()
+    local role = RoleMgr:findby_clientfd(clientfd)
+    assert(role,'角色不存在,必须先获取角色基础数据')
+    if get_tablekey_size(role.goods) ~= 0 then
         --在本地内存中获取
         log("在本地内存中获取角色物品数据 roleid:",role.id)
         local goodsdata = {}
@@ -151,8 +155,8 @@ function gameClient:loadgoods_client_gate_c(msgid,msgdata,routing)
         enve:addr(self.cpp_socket:remote_addr())
         routing:push(enve)
         local goodsdata = {
-            tag = "goodsdata," .. msgtable.roleid,
-            condition = "goods_*_" .. msgtable.roleid,
+            tag = "goodsdata," .. role.id,
+            condition = "goods_*_" .. role.id,
             sort = "",
             limit = 0,
             opertype = 0,
@@ -182,7 +186,7 @@ end
 --玩家断线重连成功
 function gameClient:reconnect_client_gate_s(msgid,msgdata,routing)
     local msgtable = pb.decode("frmpub.protocc.reconnect_client_gate_s", msgdata)
-    local role = RoleMgr:findby_accountid(msgtable.aid)
+    local role = RoleMgr:findby_accountid(msgtable.aid)    
     if role ~= nil then
         role.online = true
         role:copyrouting(routing)

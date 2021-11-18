@@ -18,6 +18,9 @@ private:
     void gm_order(const OrderItem& order, int argc, char** argv);
     void display_role_base_order(const OrderItem& order, int argc, char** argv);
     void display_role_goods_order(const OrderItem& order, int argc, char** argv);
+    void setlevel_order(const OrderItem& order, int argc, char** argv);
+    void lookemail_order(const OrderItem& order, int argc, char** argv);
+    void getannex_order(const OrderItem& order, int argc, char** argv);
 };
 }
 

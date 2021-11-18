@@ -139,6 +139,10 @@ int HttpClient::sysemail_admin_world_c(std::shared_ptr<rapidjson::Document> doc,
             result = 1; //邮件类型错误
         } else {
             int32_t sid = frmpub::get_json_value(msgdata, "sid").GetInt();
+            std::string title = frmpub::get_json_value(msgdata, "title").GetString();
+            std::string info = frmpub::get_json_value(msgdata, "info").GetString();
+            int32_t rid = frmpub::get_json_value(msgdata, "rid").GetInt();
+            int32_t time = frmpub::get_json_value(msgdata, "time").GetInt();
             auto games = shynet::utils::Singleton<WorldClientMgr>::instance().clis();
             bool flag = false;
             for (const auto& gs : games) {
@@ -150,6 +154,32 @@ int HttpClient::sysemail_admin_world_c(std::shared_ptr<rapidjson::Document> doc,
                         protocc::sysemail_world_game_g gmsg;
                         uint64_t mailid = shynet::utils::Singleton<shynet::utils::IdWorker>::get_instance().getid();
                         gmsg.set_id(mailid);
+                        gmsg.set_title(title);
+                        gmsg.set_info(info);
+                        gmsg.set_type(type);
+                        gmsg.set_rid(rid);
+                        gmsg.set_time(time);
+                        try {
+                            auto annex = frmpub::get_json_value(msgdata, "annex").GetObject();
+                            auto gmsg_annex = gmsg.mutable_annex();
+                            gmsg_annex->set_gold(frmpub::get_json_value(annex, "gold").GetInt());
+                            gmsg_annex->set_diamond(frmpub::get_json_value(annex, "diamond").GetInt());
+                            try {
+                                auto goods = frmpub::get_json_value(annex, "goods").GetArray();
+                                for (auto& it : goods) {
+                                    auto cfgid = frmpub::get_json_value(it, "cfgid").GetInt();
+                                    auto num = frmpub::get_json_value(it, "num").GetInt();
+
+                                    auto gmsg_annex_goods = gmsg_annex->add_goods();
+                                    gmsg_annex_goods->set_cfgid(cfgid);
+                                    gmsg_annex_goods->set_num(num);
+                                }
+                            } catch (const std::exception& err) {
+                            }
+                        } catch (const std::exception& err) {
+                        }
+                        gs.second->send_proto(protocc::SYSEMAIL_WORLD_GAME_G, &gmsg, enves.get());
+                        LOG_DEBUG << "转发邮件到区服 name:" << sif.name() << " sid:" << sif.sid();
                     }
                 }
             }

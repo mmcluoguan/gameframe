@@ -35,6 +35,15 @@ ConsoleHandler::ConsoleHandler(std::shared_ptr<events::EventBase> base)
 
     orderitems_.push_back({ "display_role_goods", ":", "显示玩家物品数据",
         std::bind(&ConsoleHandler::display_role_goods_order, this, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3) });
+
+    orderitems_.push_back({ "setlevel", ":n:", "设置角色等级 n:新等级",
+        std::bind(&ConsoleHandler::setlevel_order, this, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3) });
+
+    orderitems_.push_back({ "lookemail", ":i:", "查看邮件信息 i:唯一编号",
+        std::bind(&ConsoleHandler::lookemail_order, this, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3) });
+
+    orderitems_.push_back({ "getannex", ":i:", "领取邮件附件 i:唯一编号",
+        std::bind(&ConsoleHandler::getannex_order, this, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3) });
 }
 
 ConsoleHandler::~ConsoleHandler()
@@ -156,6 +165,8 @@ void ConsoleHandler::display_role_base_order(const OrderItem& order, int argc, c
     LOG_INFO_BASE << "\t角色id:" << role.id();
     LOG_INFO_BASE << "\t角色账号id:" << role.accountid();
     LOG_INFO_BASE << "\t角色等级:" << role.level();
+    LOG_INFO_BASE << "\t角色游戏币:" << role.gold();
+    LOG_INFO_BASE << "\t角色钻石:" << role.diamond();
 }
 
 void ConsoleHandler::display_role_goods_order(const OrderItem& order, int argc, char** argv)
@@ -166,6 +177,132 @@ void ConsoleHandler::display_role_goods_order(const OrderItem& order, int argc, 
         LOG_INFO_BASE << "\t物品id:" << it.second.id;
         LOG_INFO_BASE << "\t物品配置id:" << it.second.cfgid;
         LOG_INFO_BASE << "\t物品数量:" << it.second.num;
+    }
+}
+
+void ConsoleHandler::setlevel_order(const OrderItem& order, int argc, char** argv)
+{
+    int opt;
+    optind = 1;
+    long newlevel = -1;
+    while ((opt = getopt(argc, argv, order.argstr)) != -1) {
+        switch (opt) {
+        case 'n':
+            char* p;
+            newlevel = strtol(optarg, &p, 10);
+            if (p == optarg) {
+                newlevel = -1;
+                LOG_WARN_BASE << "n的参数 " << optarg << " 不是数字";
+            }
+            break;
+        case ':':
+            LOG_WARN_BASE << order.name << " (-" << (char)optopt << ") 丢失参数 ";
+            break;
+        case '?':
+            LOG_WARN_BASE << order.name << " (-" << (char)optopt << ") 未知选项 ";
+            break;
+        default:
+            THROW_EXCEPTION("call getopt");
+        }
+    }
+    if (newlevel == -1) {
+        LOG_WARN_BASE << "正确格式参考:" << order.name << " " << order.argstr;
+        return;
+    }
+    protocc::setlevel_client_gate_c msg;
+    msg.set_level(int(newlevel));
+
+    std::shared_ptr<GateConnector> gate = std::dynamic_pointer_cast<GateConnector>(
+        shynet::utils::Singleton<net::ConnectReactorMgr>::instance().find(g_gateconnect_id));
+    if (gate != nullptr) {
+        gate->send_proto(protocc::SETLEVEL_CLIENT_GATE_C, &msg);
+        LOG_DEBUG << "发送" << frmpub::Basic::msgname(protocc::SETLEVEL_CLIENT_GATE_C);
+    } else {
+        LOG_WARN << "连接已经释放";
+    }
+}
+
+void ConsoleHandler::lookemail_order(const OrderItem& order, int argc, char** argv)
+{
+    int opt;
+    optind = 1;
+    int64_t emailid = -1;
+    while ((opt = getopt(argc, argv, order.argstr)) != -1) {
+        switch (opt) {
+        case 'i':
+            char* p;
+            emailid = strtoll(optarg, &p, 10);
+            if (p == optarg) {
+                emailid = -1;
+                LOG_WARN_BASE << "n的参数 " << optarg << " 不是数字";
+            }
+            break;
+        case ':':
+            LOG_WARN_BASE << order.name << " (-" << (char)optopt << ") 丢失参数 ";
+            break;
+        case '?':
+            LOG_WARN_BASE << order.name << " (-" << (char)optopt << ") 未知选项 ";
+            break;
+        default:
+            THROW_EXCEPTION("call getopt");
+        }
+    }
+    if (emailid == -1) {
+        LOG_WARN_BASE << "正确格式参考:" << order.name << " " << order.argstr;
+        return;
+    }
+    protocc::lookemail_client_gate_c msg;
+    msg.set_emailid(emailid);
+
+    std::shared_ptr<GateConnector> gate = std::dynamic_pointer_cast<GateConnector>(
+        shynet::utils::Singleton<net::ConnectReactorMgr>::instance().find(g_gateconnect_id));
+    if (gate != nullptr) {
+        gate->send_proto(protocc::LOOKEMAIL_CLIENT_GATE_C, &msg);
+        LOG_DEBUG << "发送" << frmpub::Basic::msgname(protocc::LOOKEMAIL_CLIENT_GATE_C);
+    } else {
+        LOG_WARN << "连接已经释放";
+    }
+}
+
+void ConsoleHandler::getannex_order(const OrderItem& order, int argc, char** argv)
+{
+    int opt;
+    optind = 1;
+    int64_t emailid = -1;
+    while ((opt = getopt(argc, argv, order.argstr)) != -1) {
+        switch (opt) {
+        case 'i':
+            char* p;
+            emailid = strtoll(optarg, &p, 10);
+            if (p == optarg) {
+                emailid = -1;
+                LOG_WARN_BASE << "n的参数 " << optarg << " 不是数字";
+            }
+            break;
+        case ':':
+            LOG_WARN_BASE << order.name << " (-" << (char)optopt << ") 丢失参数 ";
+            break;
+        case '?':
+            LOG_WARN_BASE << order.name << " (-" << (char)optopt << ") 未知选项 ";
+            break;
+        default:
+            THROW_EXCEPTION("call getopt");
+        }
+    }
+    if (emailid == -1) {
+        LOG_WARN_BASE << "正确格式参考:" << order.name << " " << order.argstr;
+        return;
+    }
+    protocc::getannex_client_gate_c msg;
+    msg.set_emailid(emailid);
+
+    std::shared_ptr<GateConnector> gate = std::dynamic_pointer_cast<GateConnector>(
+        shynet::utils::Singleton<net::ConnectReactorMgr>::instance().find(g_gateconnect_id));
+    if (gate != nullptr) {
+        gate->send_proto(protocc::GETANNEX_CLIENT_GATE_C, &msg);
+        LOG_DEBUG << "发送" << frmpub::Basic::msgname(protocc::GETANNEX_CLIENT_GATE_C);
+    } else {
+        LOG_WARN << "连接已经释放";
     }
 }
 

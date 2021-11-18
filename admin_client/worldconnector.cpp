@@ -16,6 +16,8 @@ WorldConnector::WorldConnector(std::shared_ptr<net::IPAddress> connect_addr)
             std::bind(&WorldConnector::getgamelist_admin_world_s, this, std::placeholders::_1, std::placeholders::_2) },
         { int(frmpub::JosnMsgId::NOTICESERVER_ADMIN_WORLD_S),
             std::bind(&WorldConnector::noticeserver_admin_world_s, this, std::placeholders::_1, std::placeholders::_2) },
+        { int(frmpub::JosnMsgId::SYSEMAIL_ADMIN_WORLD_S),
+            std::bind(&WorldConnector::sysemail_admin_world_s, this, std::placeholders::_1, std::placeholders::_2) },
     };
 }
 
@@ -52,7 +54,7 @@ int WorldConnector::input_handle(std::shared_ptr<rapidjson::Document> doc, std::
         if (it != jmb_.end()) {
             return it->second(doc, enves);
         } else {
-            LOG_DEBUG << "消息" << frmpub::Basic::msgname(msgid) << " 没有处理函数";
+            LOG_DEBUG << "消息" << msgid << " 没有处理函数";
         }
     }
     return 0;
@@ -112,6 +114,18 @@ int WorldConnector::noticeserver_admin_world_s(std::shared_ptr<rapidjson::Docume
         rapidjson::Value& msgdata = frmpub::get_json_value(*doc, "msgdata");
         int32_t result = frmpub::get_json_value(msgdata, "result").GetInt();
         LOG_DEBUG << "广播通知消息结果 result:" << result;
+    } catch (const std::exception& err) {
+        SEND_ERR(protocc::MESSAGE_PARSING_ERROR, err.what());
+    }
+    return 0;
+}
+
+int WorldConnector::sysemail_admin_world_s(std::shared_ptr<rapidjson::Document> doc, std::shared_ptr<std::stack<FilterData::Envelope>> enves)
+{
+    try {
+        rapidjson::Value& msgdata = frmpub::get_json_value(*doc, "msgdata");
+        int32_t result = frmpub::get_json_value(msgdata, "result").GetInt();
+        LOG_DEBUG << "发送系统邮件结果 result:" << result;
     } catch (const std::exception& err) {
         SEND_ERR(protocc::MESSAGE_PARSING_ERROR, err.what());
     }

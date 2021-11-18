@@ -14,9 +14,9 @@
 title (	Rtitle
 info (	Rinfo
 type (Rtype
-rid (	Rrid
+rid (Rrid
 time (RtimeA
-annex (2+.frmpub.protocc.sysemail_world_game_g.AnnexRannex¯
+annex (2+.frmpub.protocc.sysemail_world_game_g.AnnexRannex¯
 Annex
 gold (Rgold
 diamond (RdiamondG

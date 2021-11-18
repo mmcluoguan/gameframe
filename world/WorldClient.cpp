@@ -185,7 +185,7 @@ int WorldClient::login_client_gate_s(std::shared_ptr<protocc::CommonObject> data
         } else {
             std::stringstream stream;
             stream << "没有可用的" << frmpub::Basic::connectname(protocc::ServerType::GAME) << "连接";
-            SEND_ERR(protocc::GAMS_NOT_EXIST, stream.str());
+            SEND_ERR(protocc::GAME_NOT_EXIST, stream.str());
         }
     } else {
         std::stringstream stream;

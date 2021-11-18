@@ -1100,32 +1100,14 @@ class sysemail_world_game_g PROTOBUF_FINAL :
   // accessors -------------------------------------------------------
 
   enum : int {
-    kAnnexFieldNumber = 7,
     kTitleFieldNumber = 2,
     kInfoFieldNumber = 3,
-    kRidFieldNumber = 5,
+    kAnnexFieldNumber = 7,
     kIdFieldNumber = 1,
+    kRidFieldNumber = 5,
     kTypeFieldNumber = 4,
     kTimeFieldNumber = 6,
   };
-  // repeated .frmpub.protocc.sysemail_world_game_g.Annex annex = 7;
-  int annex_size() const;
-  private:
-  int _internal_annex_size() const;
-  public:
-  void clear_annex();
-  ::frmpub::protocc::sysemail_world_game_g_Annex* mutable_annex(int index);
-  ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::frmpub::protocc::sysemail_world_game_g_Annex >*
-      mutable_annex();
-  private:
-  const ::frmpub::protocc::sysemail_world_game_g_Annex& _internal_annex(int index) const;
-  ::frmpub::protocc::sysemail_world_game_g_Annex* _internal_add_annex();
-  public:
-  const ::frmpub::protocc::sysemail_world_game_g_Annex& annex(int index) const;
-  ::frmpub::protocc::sysemail_world_game_g_Annex* add_annex();
-  const ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::frmpub::protocc::sysemail_world_game_g_Annex >&
-      annex() const;
-
   // string title = 2;
   void clear_title();
   const std::string& title() const;
@@ -1158,21 +1140,23 @@ class sysemail_world_game_g PROTOBUF_FINAL :
   std::string* _internal_mutable_info();
   public:
 
-  // string rid = 5;
-  void clear_rid();
-  const std::string& rid() const;
-  void set_rid(const std::string& value);
-  void set_rid(std::string&& value);
-  void set_rid(const char* value);
-  void set_rid(const char* value, size_t size);
-  std::string* mutable_rid();
-  std::string* release_rid();
-  void set_allocated_rid(std::string* rid);
+  // .frmpub.protocc.sysemail_world_game_g.Annex annex = 7;
+  bool has_annex() const;
   private:
-  const std::string& _internal_rid() const;
-  void _internal_set_rid(const std::string& value);
-  std::string* _internal_mutable_rid();
+  bool _internal_has_annex() const;
   public:
+  void clear_annex();
+  const ::frmpub::protocc::sysemail_world_game_g_Annex& annex() const;
+  ::frmpub::protocc::sysemail_world_game_g_Annex* release_annex();
+  ::frmpub::protocc::sysemail_world_game_g_Annex* mutable_annex();
+  void set_allocated_annex(::frmpub::protocc::sysemail_world_game_g_Annex* annex);
+  private:
+  const ::frmpub::protocc::sysemail_world_game_g_Annex& _internal_annex() const;
+  ::frmpub::protocc::sysemail_world_game_g_Annex* _internal_mutable_annex();
+  public:
+  void unsafe_arena_set_allocated_annex(
+      ::frmpub::protocc::sysemail_world_game_g_Annex* annex);
+  ::frmpub::protocc::sysemail_world_game_g_Annex* unsafe_arena_release_annex();
 
   // int64 id = 1;
   void clear_id();
@@ -1181,6 +1165,15 @@ class sysemail_world_game_g PROTOBUF_FINAL :
   private:
   ::PROTOBUF_NAMESPACE_ID::int64 _internal_id() const;
   void _internal_set_id(::PROTOBUF_NAMESPACE_ID::int64 value);
+  public:
+
+  // int64 rid = 5;
+  void clear_rid();
+  ::PROTOBUF_NAMESPACE_ID::int64 rid() const;
+  void set_rid(::PROTOBUF_NAMESPACE_ID::int64 value);
+  private:
+  ::PROTOBUF_NAMESPACE_ID::int64 _internal_rid() const;
+  void _internal_set_rid(::PROTOBUF_NAMESPACE_ID::int64 value);
   public:
 
   // int32 type = 4;
@@ -1208,11 +1201,11 @@ class sysemail_world_game_g PROTOBUF_FINAL :
   template <typename T> friend class ::PROTOBUF_NAMESPACE_ID::Arena::InternalHelper;
   typedef void InternalArenaConstructable_;
   typedef void DestructorSkippable_;
-  ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::frmpub::protocc::sysemail_world_game_g_Annex > annex_;
   ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr title_;
   ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr info_;
-  ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr rid_;
+  ::frmpub::protocc::sysemail_world_game_g_Annex* annex_;
   ::PROTOBUF_NAMESPACE_ID::int64 id_;
+  ::PROTOBUF_NAMESPACE_ID::int64 rid_;
   ::PROTOBUF_NAMESPACE_ID::int32 type_;
   ::PROTOBUF_NAMESPACE_ID::int32 time_;
   mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
@@ -1769,65 +1762,24 @@ inline void sysemail_world_game_g::set_type(::PROTOBUF_NAMESPACE_ID::int32 value
   // @@protoc_insertion_point(field_set:frmpub.protocc.sysemail_world_game_g.type)
 }
 
-// string rid = 5;
+// int64 rid = 5;
 inline void sysemail_world_game_g::clear_rid() {
-  rid_.ClearToEmpty();
+  rid_ = PROTOBUF_LONGLONG(0);
 }
-inline const std::string& sysemail_world_game_g::rid() const {
+inline ::PROTOBUF_NAMESPACE_ID::int64 sysemail_world_game_g::_internal_rid() const {
+  return rid_;
+}
+inline ::PROTOBUF_NAMESPACE_ID::int64 sysemail_world_game_g::rid() const {
   // @@protoc_insertion_point(field_get:frmpub.protocc.sysemail_world_game_g.rid)
   return _internal_rid();
 }
-inline void sysemail_world_game_g::set_rid(const std::string& value) {
+inline void sysemail_world_game_g::_internal_set_rid(::PROTOBUF_NAMESPACE_ID::int64 value) {
+  
+  rid_ = value;
+}
+inline void sysemail_world_game_g::set_rid(::PROTOBUF_NAMESPACE_ID::int64 value) {
   _internal_set_rid(value);
   // @@protoc_insertion_point(field_set:frmpub.protocc.sysemail_world_game_g.rid)
-}
-inline std::string* sysemail_world_game_g::mutable_rid() {
-  // @@protoc_insertion_point(field_mutable:frmpub.protocc.sysemail_world_game_g.rid)
-  return _internal_mutable_rid();
-}
-inline const std::string& sysemail_world_game_g::_internal_rid() const {
-  return rid_.Get();
-}
-inline void sysemail_world_game_g::_internal_set_rid(const std::string& value) {
-  
-  rid_.Set(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, value, GetArena());
-}
-inline void sysemail_world_game_g::set_rid(std::string&& value) {
-  
-  rid_.Set(
-    ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, ::std::move(value), GetArena());
-  // @@protoc_insertion_point(field_set_rvalue:frmpub.protocc.sysemail_world_game_g.rid)
-}
-inline void sysemail_world_game_g::set_rid(const char* value) {
-  GOOGLE_DCHECK(value != nullptr);
-  
-  rid_.Set(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, ::std::string(value), GetArena());
-  // @@protoc_insertion_point(field_set_char:frmpub.protocc.sysemail_world_game_g.rid)
-}
-inline void sysemail_world_game_g::set_rid(const char* value,
-    size_t size) {
-  
-  rid_.Set(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, ::std::string(
-      reinterpret_cast<const char*>(value), size), GetArena());
-  // @@protoc_insertion_point(field_set_pointer:frmpub.protocc.sysemail_world_game_g.rid)
-}
-inline std::string* sysemail_world_game_g::_internal_mutable_rid() {
-  
-  return rid_.Mutable(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, GetArena());
-}
-inline std::string* sysemail_world_game_g::release_rid() {
-  // @@protoc_insertion_point(field_release:frmpub.protocc.sysemail_world_game_g.rid)
-  return rid_.Release(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArena());
-}
-inline void sysemail_world_game_g::set_allocated_rid(std::string* rid) {
-  if (rid != nullptr) {
-    
-  } else {
-    
-  }
-  rid_.SetAllocated(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), rid,
-      GetArena());
-  // @@protoc_insertion_point(field_set_allocated:frmpub.protocc.sysemail_world_game_g.rid)
 }
 
 // int32 time = 6;
@@ -1850,43 +1802,87 @@ inline void sysemail_world_game_g::set_time(::PROTOBUF_NAMESPACE_ID::int32 value
   // @@protoc_insertion_point(field_set:frmpub.protocc.sysemail_world_game_g.time)
 }
 
-// repeated .frmpub.protocc.sysemail_world_game_g.Annex annex = 7;
-inline int sysemail_world_game_g::_internal_annex_size() const {
-  return annex_.size();
+// .frmpub.protocc.sysemail_world_game_g.Annex annex = 7;
+inline bool sysemail_world_game_g::_internal_has_annex() const {
+  return this != internal_default_instance() && annex_ != nullptr;
 }
-inline int sysemail_world_game_g::annex_size() const {
-  return _internal_annex_size();
+inline bool sysemail_world_game_g::has_annex() const {
+  return _internal_has_annex();
 }
 inline void sysemail_world_game_g::clear_annex() {
-  annex_.Clear();
+  if (GetArena() == nullptr && annex_ != nullptr) {
+    delete annex_;
+  }
+  annex_ = nullptr;
 }
-inline ::frmpub::protocc::sysemail_world_game_g_Annex* sysemail_world_game_g::mutable_annex(int index) {
-  // @@protoc_insertion_point(field_mutable:frmpub.protocc.sysemail_world_game_g.annex)
-  return annex_.Mutable(index);
+inline const ::frmpub::protocc::sysemail_world_game_g_Annex& sysemail_world_game_g::_internal_annex() const {
+  const ::frmpub::protocc::sysemail_world_game_g_Annex* p = annex_;
+  return p != nullptr ? *p : reinterpret_cast<const ::frmpub::protocc::sysemail_world_game_g_Annex&>(
+      ::frmpub::protocc::_sysemail_world_game_g_Annex_default_instance_);
 }
-inline ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::frmpub::protocc::sysemail_world_game_g_Annex >*
-sysemail_world_game_g::mutable_annex() {
-  // @@protoc_insertion_point(field_mutable_list:frmpub.protocc.sysemail_world_game_g.annex)
-  return &annex_;
-}
-inline const ::frmpub::protocc::sysemail_world_game_g_Annex& sysemail_world_game_g::_internal_annex(int index) const {
-  return annex_.Get(index);
-}
-inline const ::frmpub::protocc::sysemail_world_game_g_Annex& sysemail_world_game_g::annex(int index) const {
+inline const ::frmpub::protocc::sysemail_world_game_g_Annex& sysemail_world_game_g::annex() const {
   // @@protoc_insertion_point(field_get:frmpub.protocc.sysemail_world_game_g.annex)
-  return _internal_annex(index);
+  return _internal_annex();
 }
-inline ::frmpub::protocc::sysemail_world_game_g_Annex* sysemail_world_game_g::_internal_add_annex() {
-  return annex_.Add();
+inline void sysemail_world_game_g::unsafe_arena_set_allocated_annex(
+    ::frmpub::protocc::sysemail_world_game_g_Annex* annex) {
+  if (GetArena() == nullptr) {
+    delete reinterpret_cast<::PROTOBUF_NAMESPACE_ID::MessageLite*>(annex_);
+  }
+  annex_ = annex;
+  if (annex) {
+    
+  } else {
+    
+  }
+  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:frmpub.protocc.sysemail_world_game_g.annex)
 }
-inline ::frmpub::protocc::sysemail_world_game_g_Annex* sysemail_world_game_g::add_annex() {
-  // @@protoc_insertion_point(field_add:frmpub.protocc.sysemail_world_game_g.annex)
-  return _internal_add_annex();
+inline ::frmpub::protocc::sysemail_world_game_g_Annex* sysemail_world_game_g::release_annex() {
+  
+  ::frmpub::protocc::sysemail_world_game_g_Annex* temp = annex_;
+  annex_ = nullptr;
+  if (GetArena() != nullptr) {
+    temp = ::PROTOBUF_NAMESPACE_ID::internal::DuplicateIfNonNull(temp);
+  }
+  return temp;
 }
-inline const ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::frmpub::protocc::sysemail_world_game_g_Annex >&
-sysemail_world_game_g::annex() const {
-  // @@protoc_insertion_point(field_list:frmpub.protocc.sysemail_world_game_g.annex)
+inline ::frmpub::protocc::sysemail_world_game_g_Annex* sysemail_world_game_g::unsafe_arena_release_annex() {
+  // @@protoc_insertion_point(field_release:frmpub.protocc.sysemail_world_game_g.annex)
+  
+  ::frmpub::protocc::sysemail_world_game_g_Annex* temp = annex_;
+  annex_ = nullptr;
+  return temp;
+}
+inline ::frmpub::protocc::sysemail_world_game_g_Annex* sysemail_world_game_g::_internal_mutable_annex() {
+  
+  if (annex_ == nullptr) {
+    auto* p = CreateMaybeMessage<::frmpub::protocc::sysemail_world_game_g_Annex>(GetArena());
+    annex_ = p;
+  }
   return annex_;
+}
+inline ::frmpub::protocc::sysemail_world_game_g_Annex* sysemail_world_game_g::mutable_annex() {
+  // @@protoc_insertion_point(field_mutable:frmpub.protocc.sysemail_world_game_g.annex)
+  return _internal_mutable_annex();
+}
+inline void sysemail_world_game_g::set_allocated_annex(::frmpub::protocc::sysemail_world_game_g_Annex* annex) {
+  ::PROTOBUF_NAMESPACE_ID::Arena* message_arena = GetArena();
+  if (message_arena == nullptr) {
+    delete annex_;
+  }
+  if (annex) {
+    ::PROTOBUF_NAMESPACE_ID::Arena* submessage_arena =
+      ::PROTOBUF_NAMESPACE_ID::Arena::GetArena(annex);
+    if (message_arena != submessage_arena) {
+      annex = ::PROTOBUF_NAMESPACE_ID::internal::GetOwnedMessage(
+          message_arena, annex, submessage_arena);
+    }
+    
+  } else {
+    
+  }
+  annex_ = annex;
+  // @@protoc_insertion_point(field_set_allocated:frmpub.protocc.sysemail_world_game_g.annex)
 }
 
 #ifdef __GNUC__

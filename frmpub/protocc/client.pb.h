@@ -48,7 +48,7 @@ struct TableStruct_client_2eproto {
     PROTOBUF_SECTION_VARIABLE(protodesc_cold);
   static const ::PROTOBUF_NAMESPACE_ID::internal::AuxiliaryParseTableField aux[]
     PROTOBUF_SECTION_VARIABLE(protodesc_cold);
-  static const ::PROTOBUF_NAMESPACE_ID::internal::ParseTable schema[23]
+  static const ::PROTOBUF_NAMESPACE_ID::internal::ParseTable schema[32]
     PROTOBUF_SECTION_VARIABLE(protodesc_cold);
   static const ::PROTOBUF_NAMESPACE_ID::internal::FieldMetadata field_metadata[];
   static const ::PROTOBUF_NAMESPACE_ID::internal::SerializationTable serialization_table[];
@@ -58,12 +58,24 @@ extern const ::PROTOBUF_NAMESPACE_ID::internal::DescriptorTable descriptor_table
 ::PROTOBUF_NAMESPACE_ID::Metadata descriptor_table_client_2eproto_metadata_getter(int index);
 namespace frmpub {
 namespace protocc {
+class baseupdata_client_gate_g;
+struct baseupdata_client_gate_gDefaultTypeInternal;
+extern baseupdata_client_gate_gDefaultTypeInternal _baseupdata_client_gate_g_default_instance_;
 class createrole_client_gate_c;
 struct createrole_client_gate_cDefaultTypeInternal;
 extern createrole_client_gate_cDefaultTypeInternal _createrole_client_gate_c_default_instance_;
 class createrole_client_gate_s;
 struct createrole_client_gate_sDefaultTypeInternal;
 extern createrole_client_gate_sDefaultTypeInternal _createrole_client_gate_s_default_instance_;
+class email_new_client_gate_g;
+struct email_new_client_gate_gDefaultTypeInternal;
+extern email_new_client_gate_gDefaultTypeInternal _email_new_client_gate_g_default_instance_;
+class getannex_client_gate_c;
+struct getannex_client_gate_cDefaultTypeInternal;
+extern getannex_client_gate_cDefaultTypeInternal _getannex_client_gate_c_default_instance_;
+class getannex_client_gate_s;
+struct getannex_client_gate_sDefaultTypeInternal;
+extern getannex_client_gate_sDefaultTypeInternal _getannex_client_gate_s_default_instance_;
 class gmorder_client_gate_c;
 struct gmorder_client_gate_cDefaultTypeInternal;
 extern gmorder_client_gate_cDefaultTypeInternal _gmorder_client_gate_c_default_instance_;
@@ -73,9 +85,12 @@ extern gmorder_client_gate_sDefaultTypeInternal _gmorder_client_gate_s_default_i
 class goodsupdata_client_gate_g;
 struct goodsupdata_client_gate_gDefaultTypeInternal;
 extern goodsupdata_client_gate_gDefaultTypeInternal _goodsupdata_client_gate_g_default_instance_;
-class loadgoods_client_gate_c;
-struct loadgoods_client_gate_cDefaultTypeInternal;
-extern loadgoods_client_gate_cDefaultTypeInternal _loadgoods_client_gate_c_default_instance_;
+class loademails_client_gate_s;
+struct loademails_client_gate_sDefaultTypeInternal;
+extern loademails_client_gate_sDefaultTypeInternal _loademails_client_gate_s_default_instance_;
+class loademails_client_gate_s_Email;
+struct loademails_client_gate_s_EmailDefaultTypeInternal;
+extern loademails_client_gate_s_EmailDefaultTypeInternal _loademails_client_gate_s_Email_default_instance_;
 class loadgoods_client_gate_s;
 struct loadgoods_client_gate_sDefaultTypeInternal;
 extern loadgoods_client_gate_sDefaultTypeInternal _loadgoods_client_gate_s_default_instance_;
@@ -94,6 +109,18 @@ extern login_client_gate_cDefaultTypeInternal _login_client_gate_c_default_insta
 class login_client_gate_s;
 struct login_client_gate_sDefaultTypeInternal;
 extern login_client_gate_sDefaultTypeInternal _login_client_gate_s_default_instance_;
+class lookemail_client_gate_c;
+struct lookemail_client_gate_cDefaultTypeInternal;
+extern lookemail_client_gate_cDefaultTypeInternal _lookemail_client_gate_c_default_instance_;
+class lookemail_client_gate_s;
+struct lookemail_client_gate_sDefaultTypeInternal;
+extern lookemail_client_gate_sDefaultTypeInternal _lookemail_client_gate_s_default_instance_;
+class lookemail_client_gate_s_Annex;
+struct lookemail_client_gate_s_AnnexDefaultTypeInternal;
+extern lookemail_client_gate_s_AnnexDefaultTypeInternal _lookemail_client_gate_s_Annex_default_instance_;
+class lookemail_client_gate_s_Annex_Goods;
+struct lookemail_client_gate_s_Annex_GoodsDefaultTypeInternal;
+extern lookemail_client_gate_s_Annex_GoodsDefaultTypeInternal _lookemail_client_gate_s_Annex_Goods_default_instance_;
 class notice_info_clent_gate_g;
 struct notice_info_clent_gate_gDefaultTypeInternal;
 extern notice_info_clent_gate_gDefaultTypeInternal _notice_info_clent_gate_g_default_instance_;
@@ -130,18 +157,27 @@ extern setlevel_client_gate_sDefaultTypeInternal _setlevel_client_gate_s_default
 }  // namespace protocc
 }  // namespace frmpub
 PROTOBUF_NAMESPACE_OPEN
+template<> ::frmpub::protocc::baseupdata_client_gate_g* Arena::CreateMaybeMessage<::frmpub::protocc::baseupdata_client_gate_g>(Arena*);
 template<> ::frmpub::protocc::createrole_client_gate_c* Arena::CreateMaybeMessage<::frmpub::protocc::createrole_client_gate_c>(Arena*);
 template<> ::frmpub::protocc::createrole_client_gate_s* Arena::CreateMaybeMessage<::frmpub::protocc::createrole_client_gate_s>(Arena*);
+template<> ::frmpub::protocc::email_new_client_gate_g* Arena::CreateMaybeMessage<::frmpub::protocc::email_new_client_gate_g>(Arena*);
+template<> ::frmpub::protocc::getannex_client_gate_c* Arena::CreateMaybeMessage<::frmpub::protocc::getannex_client_gate_c>(Arena*);
+template<> ::frmpub::protocc::getannex_client_gate_s* Arena::CreateMaybeMessage<::frmpub::protocc::getannex_client_gate_s>(Arena*);
 template<> ::frmpub::protocc::gmorder_client_gate_c* Arena::CreateMaybeMessage<::frmpub::protocc::gmorder_client_gate_c>(Arena*);
 template<> ::frmpub::protocc::gmorder_client_gate_s* Arena::CreateMaybeMessage<::frmpub::protocc::gmorder_client_gate_s>(Arena*);
 template<> ::frmpub::protocc::goodsupdata_client_gate_g* Arena::CreateMaybeMessage<::frmpub::protocc::goodsupdata_client_gate_g>(Arena*);
-template<> ::frmpub::protocc::loadgoods_client_gate_c* Arena::CreateMaybeMessage<::frmpub::protocc::loadgoods_client_gate_c>(Arena*);
+template<> ::frmpub::protocc::loademails_client_gate_s* Arena::CreateMaybeMessage<::frmpub::protocc::loademails_client_gate_s>(Arena*);
+template<> ::frmpub::protocc::loademails_client_gate_s_Email* Arena::CreateMaybeMessage<::frmpub::protocc::loademails_client_gate_s_Email>(Arena*);
 template<> ::frmpub::protocc::loadgoods_client_gate_s* Arena::CreateMaybeMessage<::frmpub::protocc::loadgoods_client_gate_s>(Arena*);
 template<> ::frmpub::protocc::loadgoods_client_gate_s_Goods* Arena::CreateMaybeMessage<::frmpub::protocc::loadgoods_client_gate_s_Goods>(Arena*);
 template<> ::frmpub::protocc::loadrole_client_gate_c* Arena::CreateMaybeMessage<::frmpub::protocc::loadrole_client_gate_c>(Arena*);
 template<> ::frmpub::protocc::loadrole_client_gate_s* Arena::CreateMaybeMessage<::frmpub::protocc::loadrole_client_gate_s>(Arena*);
 template<> ::frmpub::protocc::login_client_gate_c* Arena::CreateMaybeMessage<::frmpub::protocc::login_client_gate_c>(Arena*);
 template<> ::frmpub::protocc::login_client_gate_s* Arena::CreateMaybeMessage<::frmpub::protocc::login_client_gate_s>(Arena*);
+template<> ::frmpub::protocc::lookemail_client_gate_c* Arena::CreateMaybeMessage<::frmpub::protocc::lookemail_client_gate_c>(Arena*);
+template<> ::frmpub::protocc::lookemail_client_gate_s* Arena::CreateMaybeMessage<::frmpub::protocc::lookemail_client_gate_s>(Arena*);
+template<> ::frmpub::protocc::lookemail_client_gate_s_Annex* Arena::CreateMaybeMessage<::frmpub::protocc::lookemail_client_gate_s_Annex>(Arena*);
+template<> ::frmpub::protocc::lookemail_client_gate_s_Annex_Goods* Arena::CreateMaybeMessage<::frmpub::protocc::lookemail_client_gate_s_Annex_Goods>(Arena*);
 template<> ::frmpub::protocc::notice_info_clent_gate_g* Arena::CreateMaybeMessage<::frmpub::protocc::notice_info_clent_gate_g>(Arena*);
 template<> ::frmpub::protocc::notice_info_list_clent_gate_s* Arena::CreateMaybeMessage<::frmpub::protocc::notice_info_list_clent_gate_s>(Arena*);
 template<> ::frmpub::protocc::notice_info_list_clent_gate_s_notice* Arena::CreateMaybeMessage<::frmpub::protocc::notice_info_list_clent_gate_s_notice>(Arena*);
@@ -187,6 +223,14 @@ enum ClientMsgId : int {
   NOTICE_INFO_CLENT_GATE_G = 1212,
   NOTICE_INFO_LIST_CLENT_GATE_C = 1213,
   NOTICE_INFO_LIST_CLENT_GATE_S = 1214,
+  EMAIL_NEW_CLIENT_GATE_G = 1215,
+  LOADEMAILS_CLIENT_GATE_C = 1216,
+  LOADEMAILS_CLIENT_GATE_S = 1217,
+  LOOKEMAIL_CLIENT_GATE_C = 1218,
+  LOOKEMAIL_CLIENT_GATE_S = 1219,
+  GETANNEX_CLIENT_GATE_C = 1220,
+  GETANNEX_CLIENT_GATE_S = 1221,
+  BASEUPDATA_CLIENT_GATE_G = 1223,
   CLIENT_GAME_END = 1299,
   CLIENTMSGID_END = 5000,
   ClientMsgId_INT_MIN_SENTINEL_DO_NOT_USE_ = std::numeric_limits<::PROTOBUF_NAMESPACE_ID::int32>::min(),
@@ -2023,6 +2067,8 @@ class loadrole_client_gate_s PROTOBUF_FINAL :
     kResultFieldNumber = 1,
     kLevelFieldNumber = 4,
     kRoleidFieldNumber = 3,
+    kGoldFieldNumber = 5,
+    kDiamondFieldNumber = 6,
   };
   // string aid = 2;
   void clear_aid();
@@ -2067,6 +2113,24 @@ class loadrole_client_gate_s PROTOBUF_FINAL :
   void _internal_set_roleid(::PROTOBUF_NAMESPACE_ID::int64 value);
   public:
 
+  // int32 gold = 5;
+  void clear_gold();
+  ::PROTOBUF_NAMESPACE_ID::int32 gold() const;
+  void set_gold(::PROTOBUF_NAMESPACE_ID::int32 value);
+  private:
+  ::PROTOBUF_NAMESPACE_ID::int32 _internal_gold() const;
+  void _internal_set_gold(::PROTOBUF_NAMESPACE_ID::int32 value);
+  public:
+
+  // int32 diamond = 6;
+  void clear_diamond();
+  ::PROTOBUF_NAMESPACE_ID::int32 diamond() const;
+  void set_diamond(::PROTOBUF_NAMESPACE_ID::int32 value);
+  private:
+  ::PROTOBUF_NAMESPACE_ID::int32 _internal_diamond() const;
+  void _internal_set_diamond(::PROTOBUF_NAMESPACE_ID::int32 value);
+  public:
+
   // @@protoc_insertion_point(class_scope:frmpub.protocc.loadrole_client_gate_s)
  private:
   class _Internal;
@@ -2078,6 +2142,8 @@ class loadrole_client_gate_s PROTOBUF_FINAL :
   ::PROTOBUF_NAMESPACE_ID::int32 result_;
   ::PROTOBUF_NAMESPACE_ID::int32 level_;
   ::PROTOBUF_NAMESPACE_ID::int64 roleid_;
+  ::PROTOBUF_NAMESPACE_ID::int32 gold_;
+  ::PROTOBUF_NAMESPACE_ID::int32 diamond_;
   mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
   friend struct ::TableStruct_client_2eproto;
 };
@@ -2196,15 +2262,15 @@ class setlevel_client_gate_c PROTOBUF_FINAL :
   // accessors -------------------------------------------------------
 
   enum : int {
-    kRoleidFieldNumber = 1,
+    kLevelFieldNumber = 1,
   };
-  // int64 roleid = 1;
-  void clear_roleid();
-  ::PROTOBUF_NAMESPACE_ID::int64 roleid() const;
-  void set_roleid(::PROTOBUF_NAMESPACE_ID::int64 value);
+  // int32 level = 1;
+  void clear_level();
+  ::PROTOBUF_NAMESPACE_ID::int32 level() const;
+  void set_level(::PROTOBUF_NAMESPACE_ID::int32 value);
   private:
-  ::PROTOBUF_NAMESPACE_ID::int64 _internal_roleid() const;
-  void _internal_set_roleid(::PROTOBUF_NAMESPACE_ID::int64 value);
+  ::PROTOBUF_NAMESPACE_ID::int32 _internal_level() const;
+  void _internal_set_level(::PROTOBUF_NAMESPACE_ID::int32 value);
   public:
 
   // @@protoc_insertion_point(class_scope:frmpub.protocc.setlevel_client_gate_c)
@@ -2214,7 +2280,7 @@ class setlevel_client_gate_c PROTOBUF_FINAL :
   template <typename T> friend class ::PROTOBUF_NAMESPACE_ID::Arena::InternalHelper;
   typedef void InternalArenaConstructable_;
   typedef void DestructorSkippable_;
-  ::PROTOBUF_NAMESPACE_ID::int64 roleid_;
+  ::PROTOBUF_NAMESPACE_ID::int32 level_;
   mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
   friend struct ::TableStruct_client_2eproto;
 };
@@ -2334,6 +2400,7 @@ class setlevel_client_gate_s PROTOBUF_FINAL :
 
   enum : int {
     kResultFieldNumber = 1,
+    kLevelFieldNumber = 2,
   };
   // int32 result = 1;
   void clear_result();
@@ -2344,6 +2411,15 @@ class setlevel_client_gate_s PROTOBUF_FINAL :
   void _internal_set_result(::PROTOBUF_NAMESPACE_ID::int32 value);
   public:
 
+  // int32 level = 2;
+  void clear_level();
+  ::PROTOBUF_NAMESPACE_ID::int32 level() const;
+  void set_level(::PROTOBUF_NAMESPACE_ID::int32 value);
+  private:
+  ::PROTOBUF_NAMESPACE_ID::int32 _internal_level() const;
+  void _internal_set_level(::PROTOBUF_NAMESPACE_ID::int32 value);
+  public:
+
   // @@protoc_insertion_point(class_scope:frmpub.protocc.setlevel_client_gate_s)
  private:
   class _Internal;
@@ -2352,161 +2428,7 @@ class setlevel_client_gate_s PROTOBUF_FINAL :
   typedef void InternalArenaConstructable_;
   typedef void DestructorSkippable_;
   ::PROTOBUF_NAMESPACE_ID::int32 result_;
-  mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
-  friend struct ::TableStruct_client_2eproto;
-};
-// -------------------------------------------------------------------
-
-class loadgoods_client_gate_c PROTOBUF_FINAL :
-    public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:frmpub.protocc.loadgoods_client_gate_c) */ {
- public:
-  inline loadgoods_client_gate_c() : loadgoods_client_gate_c(nullptr) {}
-  virtual ~loadgoods_client_gate_c();
-  explicit constexpr loadgoods_client_gate_c(::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized);
-
-  loadgoods_client_gate_c(const loadgoods_client_gate_c& from);
-  loadgoods_client_gate_c(loadgoods_client_gate_c&& from) noexcept
-    : loadgoods_client_gate_c() {
-    *this = ::std::move(from);
-  }
-
-  inline loadgoods_client_gate_c& operator=(const loadgoods_client_gate_c& from) {
-    CopyFrom(from);
-    return *this;
-  }
-  inline loadgoods_client_gate_c& operator=(loadgoods_client_gate_c&& from) noexcept {
-    if (GetArena() == from.GetArena()) {
-      if (this != &from) InternalSwap(&from);
-    } else {
-      CopyFrom(from);
-    }
-    return *this;
-  }
-
-  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* descriptor() {
-    return GetDescriptor();
-  }
-  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* GetDescriptor() {
-    return GetMetadataStatic().descriptor;
-  }
-  static const ::PROTOBUF_NAMESPACE_ID::Reflection* GetReflection() {
-    return GetMetadataStatic().reflection;
-  }
-  static const loadgoods_client_gate_c& default_instance() {
-    return *internal_default_instance();
-  }
-  static inline const loadgoods_client_gate_c* internal_default_instance() {
-    return reinterpret_cast<const loadgoods_client_gate_c*>(
-               &_loadgoods_client_gate_c_default_instance_);
-  }
-  static constexpr int kIndexInFileMessages =
-    14;
-
-  friend void swap(loadgoods_client_gate_c& a, loadgoods_client_gate_c& b) {
-    a.Swap(&b);
-  }
-  inline void Swap(loadgoods_client_gate_c* other) {
-    if (other == this) return;
-    if (GetArena() == other->GetArena()) {
-      InternalSwap(other);
-    } else {
-      ::PROTOBUF_NAMESPACE_ID::internal::GenericSwap(this, other);
-    }
-  }
-  void UnsafeArenaSwap(loadgoods_client_gate_c* other) {
-    if (other == this) return;
-    GOOGLE_DCHECK(GetArena() == other->GetArena());
-    InternalSwap(other);
-  }
-
-  // implements Message ----------------------------------------------
-
-  inline loadgoods_client_gate_c* New() const final {
-    return CreateMaybeMessage<loadgoods_client_gate_c>(nullptr);
-  }
-
-  loadgoods_client_gate_c* New(::PROTOBUF_NAMESPACE_ID::Arena* arena) const final {
-    return CreateMaybeMessage<loadgoods_client_gate_c>(arena);
-  }
-  void CopyFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) final;
-  void MergeFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) final;
-  void CopyFrom(const loadgoods_client_gate_c& from);
-  void MergeFrom(const loadgoods_client_gate_c& from);
-  PROTOBUF_ATTRIBUTE_REINITIALIZES void Clear() final;
-  bool IsInitialized() const final;
-
-  size_t ByteSizeLong() const final;
-  const char* _InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) final;
-  ::PROTOBUF_NAMESPACE_ID::uint8* _InternalSerialize(
-      ::PROTOBUF_NAMESPACE_ID::uint8* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const final;
-  int GetCachedSize() const final { return _cached_size_.Get(); }
-
-  private:
-  inline void SharedCtor();
-  inline void SharedDtor();
-  void SetCachedSize(int size) const final;
-  void InternalSwap(loadgoods_client_gate_c* other);
-  friend class ::PROTOBUF_NAMESPACE_ID::internal::AnyMetadata;
-  static ::PROTOBUF_NAMESPACE_ID::StringPiece FullMessageName() {
-    return "frmpub.protocc.loadgoods_client_gate_c";
-  }
-  protected:
-  explicit loadgoods_client_gate_c(::PROTOBUF_NAMESPACE_ID::Arena* arena);
-  private:
-  static void ArenaDtor(void* object);
-  inline void RegisterArenaDtor(::PROTOBUF_NAMESPACE_ID::Arena* arena);
-  public:
-
-  ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadata() const final;
-  private:
-  static ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadataStatic() {
-    return ::descriptor_table_client_2eproto_metadata_getter(kIndexInFileMessages);
-  }
-
-  public:
-
-  // nested types ----------------------------------------------------
-
-  // accessors -------------------------------------------------------
-
-  enum : int {
-    kAidFieldNumber = 1,
-    kRoleidFieldNumber = 2,
-  };
-  // string aid = 1;
-  void clear_aid();
-  const std::string& aid() const;
-  void set_aid(const std::string& value);
-  void set_aid(std::string&& value);
-  void set_aid(const char* value);
-  void set_aid(const char* value, size_t size);
-  std::string* mutable_aid();
-  std::string* release_aid();
-  void set_allocated_aid(std::string* aid);
-  private:
-  const std::string& _internal_aid() const;
-  void _internal_set_aid(const std::string& value);
-  std::string* _internal_mutable_aid();
-  public:
-
-  // int64 roleid = 2;
-  void clear_roleid();
-  ::PROTOBUF_NAMESPACE_ID::int64 roleid() const;
-  void set_roleid(::PROTOBUF_NAMESPACE_ID::int64 value);
-  private:
-  ::PROTOBUF_NAMESPACE_ID::int64 _internal_roleid() const;
-  void _internal_set_roleid(::PROTOBUF_NAMESPACE_ID::int64 value);
-  public:
-
-  // @@protoc_insertion_point(class_scope:frmpub.protocc.loadgoods_client_gate_c)
- private:
-  class _Internal;
-
-  template <typename T> friend class ::PROTOBUF_NAMESPACE_ID::Arena::InternalHelper;
-  typedef void InternalArenaConstructable_;
-  typedef void DestructorSkippable_;
-  ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr aid_;
-  ::PROTOBUF_NAMESPACE_ID::int64 roleid_;
+  ::PROTOBUF_NAMESPACE_ID::int32 level_;
   mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
   friend struct ::TableStruct_client_2eproto;
 };
@@ -2555,7 +2477,7 @@ class loadgoods_client_gate_s_Goods PROTOBUF_FINAL :
                &_loadgoods_client_gate_s_Goods_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    15;
+    14;
 
   friend void swap(loadgoods_client_gate_s_Goods& a, loadgoods_client_gate_s_Goods& b) {
     a.Swap(&b);
@@ -2714,7 +2636,7 @@ class loadgoods_client_gate_s PROTOBUF_FINAL :
                &_loadgoods_client_gate_s_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    16;
+    15;
 
   friend void swap(loadgoods_client_gate_s& a, loadgoods_client_gate_s& b) {
     a.Swap(&b);
@@ -2862,7 +2784,7 @@ class gmorder_client_gate_c PROTOBUF_FINAL :
                &_gmorder_client_gate_c_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    17;
+    16;
 
   friend void swap(gmorder_client_gate_c& a, gmorder_client_gate_c& b) {
     a.Swap(&b);
@@ -3043,7 +2965,7 @@ class gmorder_client_gate_s PROTOBUF_FINAL :
                &_gmorder_client_gate_s_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    18;
+    17;
 
   friend void swap(gmorder_client_gate_s& a, gmorder_client_gate_s& b) {
     a.Swap(&b);
@@ -3216,7 +3138,7 @@ class goodsupdata_client_gate_g PROTOBUF_FINAL :
                &_goodsupdata_client_gate_g_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    19;
+    18;
 
   friend void swap(goodsupdata_client_gate_g& a, goodsupdata_client_gate_g& b) {
     a.Swap(&b);
@@ -3386,7 +3308,7 @@ class notice_info_clent_gate_g PROTOBUF_FINAL :
                &_notice_info_clent_gate_g_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    20;
+    19;
 
   friend void swap(notice_info_clent_gate_g& a, notice_info_clent_gate_g& b) {
     a.Swap(&b);
@@ -3530,7 +3452,7 @@ class notice_info_list_clent_gate_s_notice PROTOBUF_FINAL :
                &_notice_info_list_clent_gate_s_notice_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    21;
+    20;
 
   friend void swap(notice_info_list_clent_gate_s_notice& a, notice_info_list_clent_gate_s_notice& b) {
     a.Swap(&b);
@@ -3685,7 +3607,7 @@ class notice_info_list_clent_gate_s PROTOBUF_FINAL :
                &_notice_info_list_clent_gate_s_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    22;
+    21;
 
   friend void swap(notice_info_list_clent_gate_s& a, notice_info_list_clent_gate_s& b) {
     a.Swap(&b);
@@ -3785,6 +3707,1577 @@ class notice_info_list_clent_gate_s PROTOBUF_FINAL :
   typedef void InternalArenaConstructable_;
   typedef void DestructorSkippable_;
   ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::frmpub::protocc::notice_info_list_clent_gate_s_notice > datas_;
+  mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
+  friend struct ::TableStruct_client_2eproto;
+};
+// -------------------------------------------------------------------
+
+class email_new_client_gate_g PROTOBUF_FINAL :
+    public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:frmpub.protocc.email_new_client_gate_g) */ {
+ public:
+  inline email_new_client_gate_g() : email_new_client_gate_g(nullptr) {}
+  virtual ~email_new_client_gate_g();
+  explicit constexpr email_new_client_gate_g(::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized);
+
+  email_new_client_gate_g(const email_new_client_gate_g& from);
+  email_new_client_gate_g(email_new_client_gate_g&& from) noexcept
+    : email_new_client_gate_g() {
+    *this = ::std::move(from);
+  }
+
+  inline email_new_client_gate_g& operator=(const email_new_client_gate_g& from) {
+    CopyFrom(from);
+    return *this;
+  }
+  inline email_new_client_gate_g& operator=(email_new_client_gate_g&& from) noexcept {
+    if (GetArena() == from.GetArena()) {
+      if (this != &from) InternalSwap(&from);
+    } else {
+      CopyFrom(from);
+    }
+    return *this;
+  }
+
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* descriptor() {
+    return GetDescriptor();
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* GetDescriptor() {
+    return GetMetadataStatic().descriptor;
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Reflection* GetReflection() {
+    return GetMetadataStatic().reflection;
+  }
+  static const email_new_client_gate_g& default_instance() {
+    return *internal_default_instance();
+  }
+  static inline const email_new_client_gate_g* internal_default_instance() {
+    return reinterpret_cast<const email_new_client_gate_g*>(
+               &_email_new_client_gate_g_default_instance_);
+  }
+  static constexpr int kIndexInFileMessages =
+    22;
+
+  friend void swap(email_new_client_gate_g& a, email_new_client_gate_g& b) {
+    a.Swap(&b);
+  }
+  inline void Swap(email_new_client_gate_g* other) {
+    if (other == this) return;
+    if (GetArena() == other->GetArena()) {
+      InternalSwap(other);
+    } else {
+      ::PROTOBUF_NAMESPACE_ID::internal::GenericSwap(this, other);
+    }
+  }
+  void UnsafeArenaSwap(email_new_client_gate_g* other) {
+    if (other == this) return;
+    GOOGLE_DCHECK(GetArena() == other->GetArena());
+    InternalSwap(other);
+  }
+
+  // implements Message ----------------------------------------------
+
+  inline email_new_client_gate_g* New() const final {
+    return CreateMaybeMessage<email_new_client_gate_g>(nullptr);
+  }
+
+  email_new_client_gate_g* New(::PROTOBUF_NAMESPACE_ID::Arena* arena) const final {
+    return CreateMaybeMessage<email_new_client_gate_g>(arena);
+  }
+  void CopyFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) final;
+  void MergeFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) final;
+  void CopyFrom(const email_new_client_gate_g& from);
+  void MergeFrom(const email_new_client_gate_g& from);
+  PROTOBUF_ATTRIBUTE_REINITIALIZES void Clear() final;
+  bool IsInitialized() const final;
+
+  size_t ByteSizeLong() const final;
+  const char* _InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) final;
+  ::PROTOBUF_NAMESPACE_ID::uint8* _InternalSerialize(
+      ::PROTOBUF_NAMESPACE_ID::uint8* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const final;
+  int GetCachedSize() const final { return _cached_size_.Get(); }
+
+  private:
+  inline void SharedCtor();
+  inline void SharedDtor();
+  void SetCachedSize(int size) const final;
+  void InternalSwap(email_new_client_gate_g* other);
+  friend class ::PROTOBUF_NAMESPACE_ID::internal::AnyMetadata;
+  static ::PROTOBUF_NAMESPACE_ID::StringPiece FullMessageName() {
+    return "frmpub.protocc.email_new_client_gate_g";
+  }
+  protected:
+  explicit email_new_client_gate_g(::PROTOBUF_NAMESPACE_ID::Arena* arena);
+  private:
+  static void ArenaDtor(void* object);
+  inline void RegisterArenaDtor(::PROTOBUF_NAMESPACE_ID::Arena* arena);
+  public:
+
+  ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadata() const final;
+  private:
+  static ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadataStatic() {
+    return ::descriptor_table_client_2eproto_metadata_getter(kIndexInFileMessages);
+  }
+
+  public:
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  enum : int {
+    kIdFieldNumber = 1,
+  };
+  // int64 id = 1;
+  void clear_id();
+  ::PROTOBUF_NAMESPACE_ID::int64 id() const;
+  void set_id(::PROTOBUF_NAMESPACE_ID::int64 value);
+  private:
+  ::PROTOBUF_NAMESPACE_ID::int64 _internal_id() const;
+  void _internal_set_id(::PROTOBUF_NAMESPACE_ID::int64 value);
+  public:
+
+  // @@protoc_insertion_point(class_scope:frmpub.protocc.email_new_client_gate_g)
+ private:
+  class _Internal;
+
+  template <typename T> friend class ::PROTOBUF_NAMESPACE_ID::Arena::InternalHelper;
+  typedef void InternalArenaConstructable_;
+  typedef void DestructorSkippable_;
+  ::PROTOBUF_NAMESPACE_ID::int64 id_;
+  mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
+  friend struct ::TableStruct_client_2eproto;
+};
+// -------------------------------------------------------------------
+
+class loademails_client_gate_s_Email PROTOBUF_FINAL :
+    public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:frmpub.protocc.loademails_client_gate_s.Email) */ {
+ public:
+  inline loademails_client_gate_s_Email() : loademails_client_gate_s_Email(nullptr) {}
+  virtual ~loademails_client_gate_s_Email();
+  explicit constexpr loademails_client_gate_s_Email(::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized);
+
+  loademails_client_gate_s_Email(const loademails_client_gate_s_Email& from);
+  loademails_client_gate_s_Email(loademails_client_gate_s_Email&& from) noexcept
+    : loademails_client_gate_s_Email() {
+    *this = ::std::move(from);
+  }
+
+  inline loademails_client_gate_s_Email& operator=(const loademails_client_gate_s_Email& from) {
+    CopyFrom(from);
+    return *this;
+  }
+  inline loademails_client_gate_s_Email& operator=(loademails_client_gate_s_Email&& from) noexcept {
+    if (GetArena() == from.GetArena()) {
+      if (this != &from) InternalSwap(&from);
+    } else {
+      CopyFrom(from);
+    }
+    return *this;
+  }
+
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* descriptor() {
+    return GetDescriptor();
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* GetDescriptor() {
+    return GetMetadataStatic().descriptor;
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Reflection* GetReflection() {
+    return GetMetadataStatic().reflection;
+  }
+  static const loademails_client_gate_s_Email& default_instance() {
+    return *internal_default_instance();
+  }
+  static inline const loademails_client_gate_s_Email* internal_default_instance() {
+    return reinterpret_cast<const loademails_client_gate_s_Email*>(
+               &_loademails_client_gate_s_Email_default_instance_);
+  }
+  static constexpr int kIndexInFileMessages =
+    23;
+
+  friend void swap(loademails_client_gate_s_Email& a, loademails_client_gate_s_Email& b) {
+    a.Swap(&b);
+  }
+  inline void Swap(loademails_client_gate_s_Email* other) {
+    if (other == this) return;
+    if (GetArena() == other->GetArena()) {
+      InternalSwap(other);
+    } else {
+      ::PROTOBUF_NAMESPACE_ID::internal::GenericSwap(this, other);
+    }
+  }
+  void UnsafeArenaSwap(loademails_client_gate_s_Email* other) {
+    if (other == this) return;
+    GOOGLE_DCHECK(GetArena() == other->GetArena());
+    InternalSwap(other);
+  }
+
+  // implements Message ----------------------------------------------
+
+  inline loademails_client_gate_s_Email* New() const final {
+    return CreateMaybeMessage<loademails_client_gate_s_Email>(nullptr);
+  }
+
+  loademails_client_gate_s_Email* New(::PROTOBUF_NAMESPACE_ID::Arena* arena) const final {
+    return CreateMaybeMessage<loademails_client_gate_s_Email>(arena);
+  }
+  void CopyFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) final;
+  void MergeFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) final;
+  void CopyFrom(const loademails_client_gate_s_Email& from);
+  void MergeFrom(const loademails_client_gate_s_Email& from);
+  PROTOBUF_ATTRIBUTE_REINITIALIZES void Clear() final;
+  bool IsInitialized() const final;
+
+  size_t ByteSizeLong() const final;
+  const char* _InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) final;
+  ::PROTOBUF_NAMESPACE_ID::uint8* _InternalSerialize(
+      ::PROTOBUF_NAMESPACE_ID::uint8* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const final;
+  int GetCachedSize() const final { return _cached_size_.Get(); }
+
+  private:
+  inline void SharedCtor();
+  inline void SharedDtor();
+  void SetCachedSize(int size) const final;
+  void InternalSwap(loademails_client_gate_s_Email* other);
+  friend class ::PROTOBUF_NAMESPACE_ID::internal::AnyMetadata;
+  static ::PROTOBUF_NAMESPACE_ID::StringPiece FullMessageName() {
+    return "frmpub.protocc.loademails_client_gate_s.Email";
+  }
+  protected:
+  explicit loademails_client_gate_s_Email(::PROTOBUF_NAMESPACE_ID::Arena* arena);
+  private:
+  static void ArenaDtor(void* object);
+  inline void RegisterArenaDtor(::PROTOBUF_NAMESPACE_ID::Arena* arena);
+  public:
+
+  ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadata() const final;
+  private:
+  static ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadataStatic() {
+    return ::descriptor_table_client_2eproto_metadata_getter(kIndexInFileMessages);
+  }
+
+  public:
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  enum : int {
+    kIdFieldNumber = 1,
+    kIsReadFieldNumber = 2,
+    kIsReceiveFieldNumber = 3,
+  };
+  // int64 id = 1;
+  void clear_id();
+  ::PROTOBUF_NAMESPACE_ID::int64 id() const;
+  void set_id(::PROTOBUF_NAMESPACE_ID::int64 value);
+  private:
+  ::PROTOBUF_NAMESPACE_ID::int64 _internal_id() const;
+  void _internal_set_id(::PROTOBUF_NAMESPACE_ID::int64 value);
+  public:
+
+  // bool is_read = 2;
+  void clear_is_read();
+  bool is_read() const;
+  void set_is_read(bool value);
+  private:
+  bool _internal_is_read() const;
+  void _internal_set_is_read(bool value);
+  public:
+
+  // bool is_receive = 3;
+  void clear_is_receive();
+  bool is_receive() const;
+  void set_is_receive(bool value);
+  private:
+  bool _internal_is_receive() const;
+  void _internal_set_is_receive(bool value);
+  public:
+
+  // @@protoc_insertion_point(class_scope:frmpub.protocc.loademails_client_gate_s.Email)
+ private:
+  class _Internal;
+
+  template <typename T> friend class ::PROTOBUF_NAMESPACE_ID::Arena::InternalHelper;
+  typedef void InternalArenaConstructable_;
+  typedef void DestructorSkippable_;
+  ::PROTOBUF_NAMESPACE_ID::int64 id_;
+  bool is_read_;
+  bool is_receive_;
+  mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
+  friend struct ::TableStruct_client_2eproto;
+};
+// -------------------------------------------------------------------
+
+class loademails_client_gate_s PROTOBUF_FINAL :
+    public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:frmpub.protocc.loademails_client_gate_s) */ {
+ public:
+  inline loademails_client_gate_s() : loademails_client_gate_s(nullptr) {}
+  virtual ~loademails_client_gate_s();
+  explicit constexpr loademails_client_gate_s(::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized);
+
+  loademails_client_gate_s(const loademails_client_gate_s& from);
+  loademails_client_gate_s(loademails_client_gate_s&& from) noexcept
+    : loademails_client_gate_s() {
+    *this = ::std::move(from);
+  }
+
+  inline loademails_client_gate_s& operator=(const loademails_client_gate_s& from) {
+    CopyFrom(from);
+    return *this;
+  }
+  inline loademails_client_gate_s& operator=(loademails_client_gate_s&& from) noexcept {
+    if (GetArena() == from.GetArena()) {
+      if (this != &from) InternalSwap(&from);
+    } else {
+      CopyFrom(from);
+    }
+    return *this;
+  }
+
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* descriptor() {
+    return GetDescriptor();
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* GetDescriptor() {
+    return GetMetadataStatic().descriptor;
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Reflection* GetReflection() {
+    return GetMetadataStatic().reflection;
+  }
+  static const loademails_client_gate_s& default_instance() {
+    return *internal_default_instance();
+  }
+  static inline const loademails_client_gate_s* internal_default_instance() {
+    return reinterpret_cast<const loademails_client_gate_s*>(
+               &_loademails_client_gate_s_default_instance_);
+  }
+  static constexpr int kIndexInFileMessages =
+    24;
+
+  friend void swap(loademails_client_gate_s& a, loademails_client_gate_s& b) {
+    a.Swap(&b);
+  }
+  inline void Swap(loademails_client_gate_s* other) {
+    if (other == this) return;
+    if (GetArena() == other->GetArena()) {
+      InternalSwap(other);
+    } else {
+      ::PROTOBUF_NAMESPACE_ID::internal::GenericSwap(this, other);
+    }
+  }
+  void UnsafeArenaSwap(loademails_client_gate_s* other) {
+    if (other == this) return;
+    GOOGLE_DCHECK(GetArena() == other->GetArena());
+    InternalSwap(other);
+  }
+
+  // implements Message ----------------------------------------------
+
+  inline loademails_client_gate_s* New() const final {
+    return CreateMaybeMessage<loademails_client_gate_s>(nullptr);
+  }
+
+  loademails_client_gate_s* New(::PROTOBUF_NAMESPACE_ID::Arena* arena) const final {
+    return CreateMaybeMessage<loademails_client_gate_s>(arena);
+  }
+  void CopyFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) final;
+  void MergeFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) final;
+  void CopyFrom(const loademails_client_gate_s& from);
+  void MergeFrom(const loademails_client_gate_s& from);
+  PROTOBUF_ATTRIBUTE_REINITIALIZES void Clear() final;
+  bool IsInitialized() const final;
+
+  size_t ByteSizeLong() const final;
+  const char* _InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) final;
+  ::PROTOBUF_NAMESPACE_ID::uint8* _InternalSerialize(
+      ::PROTOBUF_NAMESPACE_ID::uint8* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const final;
+  int GetCachedSize() const final { return _cached_size_.Get(); }
+
+  private:
+  inline void SharedCtor();
+  inline void SharedDtor();
+  void SetCachedSize(int size) const final;
+  void InternalSwap(loademails_client_gate_s* other);
+  friend class ::PROTOBUF_NAMESPACE_ID::internal::AnyMetadata;
+  static ::PROTOBUF_NAMESPACE_ID::StringPiece FullMessageName() {
+    return "frmpub.protocc.loademails_client_gate_s";
+  }
+  protected:
+  explicit loademails_client_gate_s(::PROTOBUF_NAMESPACE_ID::Arena* arena);
+  private:
+  static void ArenaDtor(void* object);
+  inline void RegisterArenaDtor(::PROTOBUF_NAMESPACE_ID::Arena* arena);
+  public:
+
+  ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadata() const final;
+  private:
+  static ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadataStatic() {
+    return ::descriptor_table_client_2eproto_metadata_getter(kIndexInFileMessages);
+  }
+
+  public:
+
+  // nested types ----------------------------------------------------
+
+  typedef loademails_client_gate_s_Email Email;
+
+  // accessors -------------------------------------------------------
+
+  enum : int {
+    kEmailsFieldNumber = 1,
+  };
+  // repeated .frmpub.protocc.loademails_client_gate_s.Email emails = 1;
+  int emails_size() const;
+  private:
+  int _internal_emails_size() const;
+  public:
+  void clear_emails();
+  ::frmpub::protocc::loademails_client_gate_s_Email* mutable_emails(int index);
+  ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::frmpub::protocc::loademails_client_gate_s_Email >*
+      mutable_emails();
+  private:
+  const ::frmpub::protocc::loademails_client_gate_s_Email& _internal_emails(int index) const;
+  ::frmpub::protocc::loademails_client_gate_s_Email* _internal_add_emails();
+  public:
+  const ::frmpub::protocc::loademails_client_gate_s_Email& emails(int index) const;
+  ::frmpub::protocc::loademails_client_gate_s_Email* add_emails();
+  const ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::frmpub::protocc::loademails_client_gate_s_Email >&
+      emails() const;
+
+  // @@protoc_insertion_point(class_scope:frmpub.protocc.loademails_client_gate_s)
+ private:
+  class _Internal;
+
+  template <typename T> friend class ::PROTOBUF_NAMESPACE_ID::Arena::InternalHelper;
+  typedef void InternalArenaConstructable_;
+  typedef void DestructorSkippable_;
+  ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::frmpub::protocc::loademails_client_gate_s_Email > emails_;
+  mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
+  friend struct ::TableStruct_client_2eproto;
+};
+// -------------------------------------------------------------------
+
+class lookemail_client_gate_c PROTOBUF_FINAL :
+    public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:frmpub.protocc.lookemail_client_gate_c) */ {
+ public:
+  inline lookemail_client_gate_c() : lookemail_client_gate_c(nullptr) {}
+  virtual ~lookemail_client_gate_c();
+  explicit constexpr lookemail_client_gate_c(::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized);
+
+  lookemail_client_gate_c(const lookemail_client_gate_c& from);
+  lookemail_client_gate_c(lookemail_client_gate_c&& from) noexcept
+    : lookemail_client_gate_c() {
+    *this = ::std::move(from);
+  }
+
+  inline lookemail_client_gate_c& operator=(const lookemail_client_gate_c& from) {
+    CopyFrom(from);
+    return *this;
+  }
+  inline lookemail_client_gate_c& operator=(lookemail_client_gate_c&& from) noexcept {
+    if (GetArena() == from.GetArena()) {
+      if (this != &from) InternalSwap(&from);
+    } else {
+      CopyFrom(from);
+    }
+    return *this;
+  }
+
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* descriptor() {
+    return GetDescriptor();
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* GetDescriptor() {
+    return GetMetadataStatic().descriptor;
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Reflection* GetReflection() {
+    return GetMetadataStatic().reflection;
+  }
+  static const lookemail_client_gate_c& default_instance() {
+    return *internal_default_instance();
+  }
+  static inline const lookemail_client_gate_c* internal_default_instance() {
+    return reinterpret_cast<const lookemail_client_gate_c*>(
+               &_lookemail_client_gate_c_default_instance_);
+  }
+  static constexpr int kIndexInFileMessages =
+    25;
+
+  friend void swap(lookemail_client_gate_c& a, lookemail_client_gate_c& b) {
+    a.Swap(&b);
+  }
+  inline void Swap(lookemail_client_gate_c* other) {
+    if (other == this) return;
+    if (GetArena() == other->GetArena()) {
+      InternalSwap(other);
+    } else {
+      ::PROTOBUF_NAMESPACE_ID::internal::GenericSwap(this, other);
+    }
+  }
+  void UnsafeArenaSwap(lookemail_client_gate_c* other) {
+    if (other == this) return;
+    GOOGLE_DCHECK(GetArena() == other->GetArena());
+    InternalSwap(other);
+  }
+
+  // implements Message ----------------------------------------------
+
+  inline lookemail_client_gate_c* New() const final {
+    return CreateMaybeMessage<lookemail_client_gate_c>(nullptr);
+  }
+
+  lookemail_client_gate_c* New(::PROTOBUF_NAMESPACE_ID::Arena* arena) const final {
+    return CreateMaybeMessage<lookemail_client_gate_c>(arena);
+  }
+  void CopyFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) final;
+  void MergeFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) final;
+  void CopyFrom(const lookemail_client_gate_c& from);
+  void MergeFrom(const lookemail_client_gate_c& from);
+  PROTOBUF_ATTRIBUTE_REINITIALIZES void Clear() final;
+  bool IsInitialized() const final;
+
+  size_t ByteSizeLong() const final;
+  const char* _InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) final;
+  ::PROTOBUF_NAMESPACE_ID::uint8* _InternalSerialize(
+      ::PROTOBUF_NAMESPACE_ID::uint8* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const final;
+  int GetCachedSize() const final { return _cached_size_.Get(); }
+
+  private:
+  inline void SharedCtor();
+  inline void SharedDtor();
+  void SetCachedSize(int size) const final;
+  void InternalSwap(lookemail_client_gate_c* other);
+  friend class ::PROTOBUF_NAMESPACE_ID::internal::AnyMetadata;
+  static ::PROTOBUF_NAMESPACE_ID::StringPiece FullMessageName() {
+    return "frmpub.protocc.lookemail_client_gate_c";
+  }
+  protected:
+  explicit lookemail_client_gate_c(::PROTOBUF_NAMESPACE_ID::Arena* arena);
+  private:
+  static void ArenaDtor(void* object);
+  inline void RegisterArenaDtor(::PROTOBUF_NAMESPACE_ID::Arena* arena);
+  public:
+
+  ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadata() const final;
+  private:
+  static ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadataStatic() {
+    return ::descriptor_table_client_2eproto_metadata_getter(kIndexInFileMessages);
+  }
+
+  public:
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  enum : int {
+    kEmailidFieldNumber = 1,
+  };
+  // int64 emailid = 1;
+  void clear_emailid();
+  ::PROTOBUF_NAMESPACE_ID::int64 emailid() const;
+  void set_emailid(::PROTOBUF_NAMESPACE_ID::int64 value);
+  private:
+  ::PROTOBUF_NAMESPACE_ID::int64 _internal_emailid() const;
+  void _internal_set_emailid(::PROTOBUF_NAMESPACE_ID::int64 value);
+  public:
+
+  // @@protoc_insertion_point(class_scope:frmpub.protocc.lookemail_client_gate_c)
+ private:
+  class _Internal;
+
+  template <typename T> friend class ::PROTOBUF_NAMESPACE_ID::Arena::InternalHelper;
+  typedef void InternalArenaConstructable_;
+  typedef void DestructorSkippable_;
+  ::PROTOBUF_NAMESPACE_ID::int64 emailid_;
+  mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
+  friend struct ::TableStruct_client_2eproto;
+};
+// -------------------------------------------------------------------
+
+class lookemail_client_gate_s_Annex_Goods PROTOBUF_FINAL :
+    public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:frmpub.protocc.lookemail_client_gate_s.Annex.Goods) */ {
+ public:
+  inline lookemail_client_gate_s_Annex_Goods() : lookemail_client_gate_s_Annex_Goods(nullptr) {}
+  virtual ~lookemail_client_gate_s_Annex_Goods();
+  explicit constexpr lookemail_client_gate_s_Annex_Goods(::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized);
+
+  lookemail_client_gate_s_Annex_Goods(const lookemail_client_gate_s_Annex_Goods& from);
+  lookemail_client_gate_s_Annex_Goods(lookemail_client_gate_s_Annex_Goods&& from) noexcept
+    : lookemail_client_gate_s_Annex_Goods() {
+    *this = ::std::move(from);
+  }
+
+  inline lookemail_client_gate_s_Annex_Goods& operator=(const lookemail_client_gate_s_Annex_Goods& from) {
+    CopyFrom(from);
+    return *this;
+  }
+  inline lookemail_client_gate_s_Annex_Goods& operator=(lookemail_client_gate_s_Annex_Goods&& from) noexcept {
+    if (GetArena() == from.GetArena()) {
+      if (this != &from) InternalSwap(&from);
+    } else {
+      CopyFrom(from);
+    }
+    return *this;
+  }
+
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* descriptor() {
+    return GetDescriptor();
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* GetDescriptor() {
+    return GetMetadataStatic().descriptor;
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Reflection* GetReflection() {
+    return GetMetadataStatic().reflection;
+  }
+  static const lookemail_client_gate_s_Annex_Goods& default_instance() {
+    return *internal_default_instance();
+  }
+  static inline const lookemail_client_gate_s_Annex_Goods* internal_default_instance() {
+    return reinterpret_cast<const lookemail_client_gate_s_Annex_Goods*>(
+               &_lookemail_client_gate_s_Annex_Goods_default_instance_);
+  }
+  static constexpr int kIndexInFileMessages =
+    26;
+
+  friend void swap(lookemail_client_gate_s_Annex_Goods& a, lookemail_client_gate_s_Annex_Goods& b) {
+    a.Swap(&b);
+  }
+  inline void Swap(lookemail_client_gate_s_Annex_Goods* other) {
+    if (other == this) return;
+    if (GetArena() == other->GetArena()) {
+      InternalSwap(other);
+    } else {
+      ::PROTOBUF_NAMESPACE_ID::internal::GenericSwap(this, other);
+    }
+  }
+  void UnsafeArenaSwap(lookemail_client_gate_s_Annex_Goods* other) {
+    if (other == this) return;
+    GOOGLE_DCHECK(GetArena() == other->GetArena());
+    InternalSwap(other);
+  }
+
+  // implements Message ----------------------------------------------
+
+  inline lookemail_client_gate_s_Annex_Goods* New() const final {
+    return CreateMaybeMessage<lookemail_client_gate_s_Annex_Goods>(nullptr);
+  }
+
+  lookemail_client_gate_s_Annex_Goods* New(::PROTOBUF_NAMESPACE_ID::Arena* arena) const final {
+    return CreateMaybeMessage<lookemail_client_gate_s_Annex_Goods>(arena);
+  }
+  void CopyFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) final;
+  void MergeFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) final;
+  void CopyFrom(const lookemail_client_gate_s_Annex_Goods& from);
+  void MergeFrom(const lookemail_client_gate_s_Annex_Goods& from);
+  PROTOBUF_ATTRIBUTE_REINITIALIZES void Clear() final;
+  bool IsInitialized() const final;
+
+  size_t ByteSizeLong() const final;
+  const char* _InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) final;
+  ::PROTOBUF_NAMESPACE_ID::uint8* _InternalSerialize(
+      ::PROTOBUF_NAMESPACE_ID::uint8* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const final;
+  int GetCachedSize() const final { return _cached_size_.Get(); }
+
+  private:
+  inline void SharedCtor();
+  inline void SharedDtor();
+  void SetCachedSize(int size) const final;
+  void InternalSwap(lookemail_client_gate_s_Annex_Goods* other);
+  friend class ::PROTOBUF_NAMESPACE_ID::internal::AnyMetadata;
+  static ::PROTOBUF_NAMESPACE_ID::StringPiece FullMessageName() {
+    return "frmpub.protocc.lookemail_client_gate_s.Annex.Goods";
+  }
+  protected:
+  explicit lookemail_client_gate_s_Annex_Goods(::PROTOBUF_NAMESPACE_ID::Arena* arena);
+  private:
+  static void ArenaDtor(void* object);
+  inline void RegisterArenaDtor(::PROTOBUF_NAMESPACE_ID::Arena* arena);
+  public:
+
+  ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadata() const final;
+  private:
+  static ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadataStatic() {
+    return ::descriptor_table_client_2eproto_metadata_getter(kIndexInFileMessages);
+  }
+
+  public:
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  enum : int {
+    kCfgidFieldNumber = 1,
+    kNumFieldNumber = 2,
+  };
+  // int32 cfgid = 1;
+  void clear_cfgid();
+  ::PROTOBUF_NAMESPACE_ID::int32 cfgid() const;
+  void set_cfgid(::PROTOBUF_NAMESPACE_ID::int32 value);
+  private:
+  ::PROTOBUF_NAMESPACE_ID::int32 _internal_cfgid() const;
+  void _internal_set_cfgid(::PROTOBUF_NAMESPACE_ID::int32 value);
+  public:
+
+  // int32 num = 2;
+  void clear_num();
+  ::PROTOBUF_NAMESPACE_ID::int32 num() const;
+  void set_num(::PROTOBUF_NAMESPACE_ID::int32 value);
+  private:
+  ::PROTOBUF_NAMESPACE_ID::int32 _internal_num() const;
+  void _internal_set_num(::PROTOBUF_NAMESPACE_ID::int32 value);
+  public:
+
+  // @@protoc_insertion_point(class_scope:frmpub.protocc.lookemail_client_gate_s.Annex.Goods)
+ private:
+  class _Internal;
+
+  template <typename T> friend class ::PROTOBUF_NAMESPACE_ID::Arena::InternalHelper;
+  typedef void InternalArenaConstructable_;
+  typedef void DestructorSkippable_;
+  ::PROTOBUF_NAMESPACE_ID::int32 cfgid_;
+  ::PROTOBUF_NAMESPACE_ID::int32 num_;
+  mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
+  friend struct ::TableStruct_client_2eproto;
+};
+// -------------------------------------------------------------------
+
+class lookemail_client_gate_s_Annex PROTOBUF_FINAL :
+    public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:frmpub.protocc.lookemail_client_gate_s.Annex) */ {
+ public:
+  inline lookemail_client_gate_s_Annex() : lookemail_client_gate_s_Annex(nullptr) {}
+  virtual ~lookemail_client_gate_s_Annex();
+  explicit constexpr lookemail_client_gate_s_Annex(::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized);
+
+  lookemail_client_gate_s_Annex(const lookemail_client_gate_s_Annex& from);
+  lookemail_client_gate_s_Annex(lookemail_client_gate_s_Annex&& from) noexcept
+    : lookemail_client_gate_s_Annex() {
+    *this = ::std::move(from);
+  }
+
+  inline lookemail_client_gate_s_Annex& operator=(const lookemail_client_gate_s_Annex& from) {
+    CopyFrom(from);
+    return *this;
+  }
+  inline lookemail_client_gate_s_Annex& operator=(lookemail_client_gate_s_Annex&& from) noexcept {
+    if (GetArena() == from.GetArena()) {
+      if (this != &from) InternalSwap(&from);
+    } else {
+      CopyFrom(from);
+    }
+    return *this;
+  }
+
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* descriptor() {
+    return GetDescriptor();
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* GetDescriptor() {
+    return GetMetadataStatic().descriptor;
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Reflection* GetReflection() {
+    return GetMetadataStatic().reflection;
+  }
+  static const lookemail_client_gate_s_Annex& default_instance() {
+    return *internal_default_instance();
+  }
+  static inline const lookemail_client_gate_s_Annex* internal_default_instance() {
+    return reinterpret_cast<const lookemail_client_gate_s_Annex*>(
+               &_lookemail_client_gate_s_Annex_default_instance_);
+  }
+  static constexpr int kIndexInFileMessages =
+    27;
+
+  friend void swap(lookemail_client_gate_s_Annex& a, lookemail_client_gate_s_Annex& b) {
+    a.Swap(&b);
+  }
+  inline void Swap(lookemail_client_gate_s_Annex* other) {
+    if (other == this) return;
+    if (GetArena() == other->GetArena()) {
+      InternalSwap(other);
+    } else {
+      ::PROTOBUF_NAMESPACE_ID::internal::GenericSwap(this, other);
+    }
+  }
+  void UnsafeArenaSwap(lookemail_client_gate_s_Annex* other) {
+    if (other == this) return;
+    GOOGLE_DCHECK(GetArena() == other->GetArena());
+    InternalSwap(other);
+  }
+
+  // implements Message ----------------------------------------------
+
+  inline lookemail_client_gate_s_Annex* New() const final {
+    return CreateMaybeMessage<lookemail_client_gate_s_Annex>(nullptr);
+  }
+
+  lookemail_client_gate_s_Annex* New(::PROTOBUF_NAMESPACE_ID::Arena* arena) const final {
+    return CreateMaybeMessage<lookemail_client_gate_s_Annex>(arena);
+  }
+  void CopyFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) final;
+  void MergeFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) final;
+  void CopyFrom(const lookemail_client_gate_s_Annex& from);
+  void MergeFrom(const lookemail_client_gate_s_Annex& from);
+  PROTOBUF_ATTRIBUTE_REINITIALIZES void Clear() final;
+  bool IsInitialized() const final;
+
+  size_t ByteSizeLong() const final;
+  const char* _InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) final;
+  ::PROTOBUF_NAMESPACE_ID::uint8* _InternalSerialize(
+      ::PROTOBUF_NAMESPACE_ID::uint8* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const final;
+  int GetCachedSize() const final { return _cached_size_.Get(); }
+
+  private:
+  inline void SharedCtor();
+  inline void SharedDtor();
+  void SetCachedSize(int size) const final;
+  void InternalSwap(lookemail_client_gate_s_Annex* other);
+  friend class ::PROTOBUF_NAMESPACE_ID::internal::AnyMetadata;
+  static ::PROTOBUF_NAMESPACE_ID::StringPiece FullMessageName() {
+    return "frmpub.protocc.lookemail_client_gate_s.Annex";
+  }
+  protected:
+  explicit lookemail_client_gate_s_Annex(::PROTOBUF_NAMESPACE_ID::Arena* arena);
+  private:
+  static void ArenaDtor(void* object);
+  inline void RegisterArenaDtor(::PROTOBUF_NAMESPACE_ID::Arena* arena);
+  public:
+
+  ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadata() const final;
+  private:
+  static ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadataStatic() {
+    return ::descriptor_table_client_2eproto_metadata_getter(kIndexInFileMessages);
+  }
+
+  public:
+
+  // nested types ----------------------------------------------------
+
+  typedef lookemail_client_gate_s_Annex_Goods Goods;
+
+  // accessors -------------------------------------------------------
+
+  enum : int {
+    kGoodsFieldNumber = 3,
+    kGoldFieldNumber = 1,
+    kDiamondFieldNumber = 2,
+  };
+  // repeated .frmpub.protocc.lookemail_client_gate_s.Annex.Goods goods = 3;
+  int goods_size() const;
+  private:
+  int _internal_goods_size() const;
+  public:
+  void clear_goods();
+  ::frmpub::protocc::lookemail_client_gate_s_Annex_Goods* mutable_goods(int index);
+  ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::frmpub::protocc::lookemail_client_gate_s_Annex_Goods >*
+      mutable_goods();
+  private:
+  const ::frmpub::protocc::lookemail_client_gate_s_Annex_Goods& _internal_goods(int index) const;
+  ::frmpub::protocc::lookemail_client_gate_s_Annex_Goods* _internal_add_goods();
+  public:
+  const ::frmpub::protocc::lookemail_client_gate_s_Annex_Goods& goods(int index) const;
+  ::frmpub::protocc::lookemail_client_gate_s_Annex_Goods* add_goods();
+  const ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::frmpub::protocc::lookemail_client_gate_s_Annex_Goods >&
+      goods() const;
+
+  // int32 gold = 1;
+  void clear_gold();
+  ::PROTOBUF_NAMESPACE_ID::int32 gold() const;
+  void set_gold(::PROTOBUF_NAMESPACE_ID::int32 value);
+  private:
+  ::PROTOBUF_NAMESPACE_ID::int32 _internal_gold() const;
+  void _internal_set_gold(::PROTOBUF_NAMESPACE_ID::int32 value);
+  public:
+
+  // int32 diamond = 2;
+  void clear_diamond();
+  ::PROTOBUF_NAMESPACE_ID::int32 diamond() const;
+  void set_diamond(::PROTOBUF_NAMESPACE_ID::int32 value);
+  private:
+  ::PROTOBUF_NAMESPACE_ID::int32 _internal_diamond() const;
+  void _internal_set_diamond(::PROTOBUF_NAMESPACE_ID::int32 value);
+  public:
+
+  // @@protoc_insertion_point(class_scope:frmpub.protocc.lookemail_client_gate_s.Annex)
+ private:
+  class _Internal;
+
+  template <typename T> friend class ::PROTOBUF_NAMESPACE_ID::Arena::InternalHelper;
+  typedef void InternalArenaConstructable_;
+  typedef void DestructorSkippable_;
+  ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::frmpub::protocc::lookemail_client_gate_s_Annex_Goods > goods_;
+  ::PROTOBUF_NAMESPACE_ID::int32 gold_;
+  ::PROTOBUF_NAMESPACE_ID::int32 diamond_;
+  mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
+  friend struct ::TableStruct_client_2eproto;
+};
+// -------------------------------------------------------------------
+
+class lookemail_client_gate_s PROTOBUF_FINAL :
+    public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:frmpub.protocc.lookemail_client_gate_s) */ {
+ public:
+  inline lookemail_client_gate_s() : lookemail_client_gate_s(nullptr) {}
+  virtual ~lookemail_client_gate_s();
+  explicit constexpr lookemail_client_gate_s(::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized);
+
+  lookemail_client_gate_s(const lookemail_client_gate_s& from);
+  lookemail_client_gate_s(lookemail_client_gate_s&& from) noexcept
+    : lookemail_client_gate_s() {
+    *this = ::std::move(from);
+  }
+
+  inline lookemail_client_gate_s& operator=(const lookemail_client_gate_s& from) {
+    CopyFrom(from);
+    return *this;
+  }
+  inline lookemail_client_gate_s& operator=(lookemail_client_gate_s&& from) noexcept {
+    if (GetArena() == from.GetArena()) {
+      if (this != &from) InternalSwap(&from);
+    } else {
+      CopyFrom(from);
+    }
+    return *this;
+  }
+
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* descriptor() {
+    return GetDescriptor();
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* GetDescriptor() {
+    return GetMetadataStatic().descriptor;
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Reflection* GetReflection() {
+    return GetMetadataStatic().reflection;
+  }
+  static const lookemail_client_gate_s& default_instance() {
+    return *internal_default_instance();
+  }
+  static inline const lookemail_client_gate_s* internal_default_instance() {
+    return reinterpret_cast<const lookemail_client_gate_s*>(
+               &_lookemail_client_gate_s_default_instance_);
+  }
+  static constexpr int kIndexInFileMessages =
+    28;
+
+  friend void swap(lookemail_client_gate_s& a, lookemail_client_gate_s& b) {
+    a.Swap(&b);
+  }
+  inline void Swap(lookemail_client_gate_s* other) {
+    if (other == this) return;
+    if (GetArena() == other->GetArena()) {
+      InternalSwap(other);
+    } else {
+      ::PROTOBUF_NAMESPACE_ID::internal::GenericSwap(this, other);
+    }
+  }
+  void UnsafeArenaSwap(lookemail_client_gate_s* other) {
+    if (other == this) return;
+    GOOGLE_DCHECK(GetArena() == other->GetArena());
+    InternalSwap(other);
+  }
+
+  // implements Message ----------------------------------------------
+
+  inline lookemail_client_gate_s* New() const final {
+    return CreateMaybeMessage<lookemail_client_gate_s>(nullptr);
+  }
+
+  lookemail_client_gate_s* New(::PROTOBUF_NAMESPACE_ID::Arena* arena) const final {
+    return CreateMaybeMessage<lookemail_client_gate_s>(arena);
+  }
+  void CopyFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) final;
+  void MergeFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) final;
+  void CopyFrom(const lookemail_client_gate_s& from);
+  void MergeFrom(const lookemail_client_gate_s& from);
+  PROTOBUF_ATTRIBUTE_REINITIALIZES void Clear() final;
+  bool IsInitialized() const final;
+
+  size_t ByteSizeLong() const final;
+  const char* _InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) final;
+  ::PROTOBUF_NAMESPACE_ID::uint8* _InternalSerialize(
+      ::PROTOBUF_NAMESPACE_ID::uint8* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const final;
+  int GetCachedSize() const final { return _cached_size_.Get(); }
+
+  private:
+  inline void SharedCtor();
+  inline void SharedDtor();
+  void SetCachedSize(int size) const final;
+  void InternalSwap(lookemail_client_gate_s* other);
+  friend class ::PROTOBUF_NAMESPACE_ID::internal::AnyMetadata;
+  static ::PROTOBUF_NAMESPACE_ID::StringPiece FullMessageName() {
+    return "frmpub.protocc.lookemail_client_gate_s";
+  }
+  protected:
+  explicit lookemail_client_gate_s(::PROTOBUF_NAMESPACE_ID::Arena* arena);
+  private:
+  static void ArenaDtor(void* object);
+  inline void RegisterArenaDtor(::PROTOBUF_NAMESPACE_ID::Arena* arena);
+  public:
+
+  ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadata() const final;
+  private:
+  static ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadataStatic() {
+    return ::descriptor_table_client_2eproto_metadata_getter(kIndexInFileMessages);
+  }
+
+  public:
+
+  // nested types ----------------------------------------------------
+
+  typedef lookemail_client_gate_s_Annex Annex;
+
+  // accessors -------------------------------------------------------
+
+  enum : int {
+    kTitleFieldNumber = 3,
+    kInfoFieldNumber = 4,
+    kAnnexFieldNumber = 7,
+    kIdFieldNumber = 2,
+    kResultFieldNumber = 1,
+    kTypeFieldNumber = 5,
+    kTimeFieldNumber = 6,
+  };
+  // string title = 3;
+  void clear_title();
+  const std::string& title() const;
+  void set_title(const std::string& value);
+  void set_title(std::string&& value);
+  void set_title(const char* value);
+  void set_title(const char* value, size_t size);
+  std::string* mutable_title();
+  std::string* release_title();
+  void set_allocated_title(std::string* title);
+  private:
+  const std::string& _internal_title() const;
+  void _internal_set_title(const std::string& value);
+  std::string* _internal_mutable_title();
+  public:
+
+  // string info = 4;
+  void clear_info();
+  const std::string& info() const;
+  void set_info(const std::string& value);
+  void set_info(std::string&& value);
+  void set_info(const char* value);
+  void set_info(const char* value, size_t size);
+  std::string* mutable_info();
+  std::string* release_info();
+  void set_allocated_info(std::string* info);
+  private:
+  const std::string& _internal_info() const;
+  void _internal_set_info(const std::string& value);
+  std::string* _internal_mutable_info();
+  public:
+
+  // .frmpub.protocc.lookemail_client_gate_s.Annex annex = 7;
+  bool has_annex() const;
+  private:
+  bool _internal_has_annex() const;
+  public:
+  void clear_annex();
+  const ::frmpub::protocc::lookemail_client_gate_s_Annex& annex() const;
+  ::frmpub::protocc::lookemail_client_gate_s_Annex* release_annex();
+  ::frmpub::protocc::lookemail_client_gate_s_Annex* mutable_annex();
+  void set_allocated_annex(::frmpub::protocc::lookemail_client_gate_s_Annex* annex);
+  private:
+  const ::frmpub::protocc::lookemail_client_gate_s_Annex& _internal_annex() const;
+  ::frmpub::protocc::lookemail_client_gate_s_Annex* _internal_mutable_annex();
+  public:
+  void unsafe_arena_set_allocated_annex(
+      ::frmpub::protocc::lookemail_client_gate_s_Annex* annex);
+  ::frmpub::protocc::lookemail_client_gate_s_Annex* unsafe_arena_release_annex();
+
+  // int64 id = 2;
+  void clear_id();
+  ::PROTOBUF_NAMESPACE_ID::int64 id() const;
+  void set_id(::PROTOBUF_NAMESPACE_ID::int64 value);
+  private:
+  ::PROTOBUF_NAMESPACE_ID::int64 _internal_id() const;
+  void _internal_set_id(::PROTOBUF_NAMESPACE_ID::int64 value);
+  public:
+
+  // int32 result = 1;
+  void clear_result();
+  ::PROTOBUF_NAMESPACE_ID::int32 result() const;
+  void set_result(::PROTOBUF_NAMESPACE_ID::int32 value);
+  private:
+  ::PROTOBUF_NAMESPACE_ID::int32 _internal_result() const;
+  void _internal_set_result(::PROTOBUF_NAMESPACE_ID::int32 value);
+  public:
+
+  // int32 type = 5;
+  void clear_type();
+  ::PROTOBUF_NAMESPACE_ID::int32 type() const;
+  void set_type(::PROTOBUF_NAMESPACE_ID::int32 value);
+  private:
+  ::PROTOBUF_NAMESPACE_ID::int32 _internal_type() const;
+  void _internal_set_type(::PROTOBUF_NAMESPACE_ID::int32 value);
+  public:
+
+  // int32 time = 6;
+  void clear_time();
+  ::PROTOBUF_NAMESPACE_ID::int32 time() const;
+  void set_time(::PROTOBUF_NAMESPACE_ID::int32 value);
+  private:
+  ::PROTOBUF_NAMESPACE_ID::int32 _internal_time() const;
+  void _internal_set_time(::PROTOBUF_NAMESPACE_ID::int32 value);
+  public:
+
+  // @@protoc_insertion_point(class_scope:frmpub.protocc.lookemail_client_gate_s)
+ private:
+  class _Internal;
+
+  template <typename T> friend class ::PROTOBUF_NAMESPACE_ID::Arena::InternalHelper;
+  typedef void InternalArenaConstructable_;
+  typedef void DestructorSkippable_;
+  ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr title_;
+  ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr info_;
+  ::frmpub::protocc::lookemail_client_gate_s_Annex* annex_;
+  ::PROTOBUF_NAMESPACE_ID::int64 id_;
+  ::PROTOBUF_NAMESPACE_ID::int32 result_;
+  ::PROTOBUF_NAMESPACE_ID::int32 type_;
+  ::PROTOBUF_NAMESPACE_ID::int32 time_;
+  mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
+  friend struct ::TableStruct_client_2eproto;
+};
+// -------------------------------------------------------------------
+
+class getannex_client_gate_c PROTOBUF_FINAL :
+    public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:frmpub.protocc.getannex_client_gate_c) */ {
+ public:
+  inline getannex_client_gate_c() : getannex_client_gate_c(nullptr) {}
+  virtual ~getannex_client_gate_c();
+  explicit constexpr getannex_client_gate_c(::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized);
+
+  getannex_client_gate_c(const getannex_client_gate_c& from);
+  getannex_client_gate_c(getannex_client_gate_c&& from) noexcept
+    : getannex_client_gate_c() {
+    *this = ::std::move(from);
+  }
+
+  inline getannex_client_gate_c& operator=(const getannex_client_gate_c& from) {
+    CopyFrom(from);
+    return *this;
+  }
+  inline getannex_client_gate_c& operator=(getannex_client_gate_c&& from) noexcept {
+    if (GetArena() == from.GetArena()) {
+      if (this != &from) InternalSwap(&from);
+    } else {
+      CopyFrom(from);
+    }
+    return *this;
+  }
+
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* descriptor() {
+    return GetDescriptor();
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* GetDescriptor() {
+    return GetMetadataStatic().descriptor;
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Reflection* GetReflection() {
+    return GetMetadataStatic().reflection;
+  }
+  static const getannex_client_gate_c& default_instance() {
+    return *internal_default_instance();
+  }
+  static inline const getannex_client_gate_c* internal_default_instance() {
+    return reinterpret_cast<const getannex_client_gate_c*>(
+               &_getannex_client_gate_c_default_instance_);
+  }
+  static constexpr int kIndexInFileMessages =
+    29;
+
+  friend void swap(getannex_client_gate_c& a, getannex_client_gate_c& b) {
+    a.Swap(&b);
+  }
+  inline void Swap(getannex_client_gate_c* other) {
+    if (other == this) return;
+    if (GetArena() == other->GetArena()) {
+      InternalSwap(other);
+    } else {
+      ::PROTOBUF_NAMESPACE_ID::internal::GenericSwap(this, other);
+    }
+  }
+  void UnsafeArenaSwap(getannex_client_gate_c* other) {
+    if (other == this) return;
+    GOOGLE_DCHECK(GetArena() == other->GetArena());
+    InternalSwap(other);
+  }
+
+  // implements Message ----------------------------------------------
+
+  inline getannex_client_gate_c* New() const final {
+    return CreateMaybeMessage<getannex_client_gate_c>(nullptr);
+  }
+
+  getannex_client_gate_c* New(::PROTOBUF_NAMESPACE_ID::Arena* arena) const final {
+    return CreateMaybeMessage<getannex_client_gate_c>(arena);
+  }
+  void CopyFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) final;
+  void MergeFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) final;
+  void CopyFrom(const getannex_client_gate_c& from);
+  void MergeFrom(const getannex_client_gate_c& from);
+  PROTOBUF_ATTRIBUTE_REINITIALIZES void Clear() final;
+  bool IsInitialized() const final;
+
+  size_t ByteSizeLong() const final;
+  const char* _InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) final;
+  ::PROTOBUF_NAMESPACE_ID::uint8* _InternalSerialize(
+      ::PROTOBUF_NAMESPACE_ID::uint8* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const final;
+  int GetCachedSize() const final { return _cached_size_.Get(); }
+
+  private:
+  inline void SharedCtor();
+  inline void SharedDtor();
+  void SetCachedSize(int size) const final;
+  void InternalSwap(getannex_client_gate_c* other);
+  friend class ::PROTOBUF_NAMESPACE_ID::internal::AnyMetadata;
+  static ::PROTOBUF_NAMESPACE_ID::StringPiece FullMessageName() {
+    return "frmpub.protocc.getannex_client_gate_c";
+  }
+  protected:
+  explicit getannex_client_gate_c(::PROTOBUF_NAMESPACE_ID::Arena* arena);
+  private:
+  static void ArenaDtor(void* object);
+  inline void RegisterArenaDtor(::PROTOBUF_NAMESPACE_ID::Arena* arena);
+  public:
+
+  ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadata() const final;
+  private:
+  static ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadataStatic() {
+    return ::descriptor_table_client_2eproto_metadata_getter(kIndexInFileMessages);
+  }
+
+  public:
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  enum : int {
+    kEmailidFieldNumber = 1,
+  };
+  // int64 emailid = 1;
+  void clear_emailid();
+  ::PROTOBUF_NAMESPACE_ID::int64 emailid() const;
+  void set_emailid(::PROTOBUF_NAMESPACE_ID::int64 value);
+  private:
+  ::PROTOBUF_NAMESPACE_ID::int64 _internal_emailid() const;
+  void _internal_set_emailid(::PROTOBUF_NAMESPACE_ID::int64 value);
+  public:
+
+  // @@protoc_insertion_point(class_scope:frmpub.protocc.getannex_client_gate_c)
+ private:
+  class _Internal;
+
+  template <typename T> friend class ::PROTOBUF_NAMESPACE_ID::Arena::InternalHelper;
+  typedef void InternalArenaConstructable_;
+  typedef void DestructorSkippable_;
+  ::PROTOBUF_NAMESPACE_ID::int64 emailid_;
+  mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
+  friend struct ::TableStruct_client_2eproto;
+};
+// -------------------------------------------------------------------
+
+class getannex_client_gate_s PROTOBUF_FINAL :
+    public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:frmpub.protocc.getannex_client_gate_s) */ {
+ public:
+  inline getannex_client_gate_s() : getannex_client_gate_s(nullptr) {}
+  virtual ~getannex_client_gate_s();
+  explicit constexpr getannex_client_gate_s(::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized);
+
+  getannex_client_gate_s(const getannex_client_gate_s& from);
+  getannex_client_gate_s(getannex_client_gate_s&& from) noexcept
+    : getannex_client_gate_s() {
+    *this = ::std::move(from);
+  }
+
+  inline getannex_client_gate_s& operator=(const getannex_client_gate_s& from) {
+    CopyFrom(from);
+    return *this;
+  }
+  inline getannex_client_gate_s& operator=(getannex_client_gate_s&& from) noexcept {
+    if (GetArena() == from.GetArena()) {
+      if (this != &from) InternalSwap(&from);
+    } else {
+      CopyFrom(from);
+    }
+    return *this;
+  }
+
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* descriptor() {
+    return GetDescriptor();
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* GetDescriptor() {
+    return GetMetadataStatic().descriptor;
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Reflection* GetReflection() {
+    return GetMetadataStatic().reflection;
+  }
+  static const getannex_client_gate_s& default_instance() {
+    return *internal_default_instance();
+  }
+  static inline const getannex_client_gate_s* internal_default_instance() {
+    return reinterpret_cast<const getannex_client_gate_s*>(
+               &_getannex_client_gate_s_default_instance_);
+  }
+  static constexpr int kIndexInFileMessages =
+    30;
+
+  friend void swap(getannex_client_gate_s& a, getannex_client_gate_s& b) {
+    a.Swap(&b);
+  }
+  inline void Swap(getannex_client_gate_s* other) {
+    if (other == this) return;
+    if (GetArena() == other->GetArena()) {
+      InternalSwap(other);
+    } else {
+      ::PROTOBUF_NAMESPACE_ID::internal::GenericSwap(this, other);
+    }
+  }
+  void UnsafeArenaSwap(getannex_client_gate_s* other) {
+    if (other == this) return;
+    GOOGLE_DCHECK(GetArena() == other->GetArena());
+    InternalSwap(other);
+  }
+
+  // implements Message ----------------------------------------------
+
+  inline getannex_client_gate_s* New() const final {
+    return CreateMaybeMessage<getannex_client_gate_s>(nullptr);
+  }
+
+  getannex_client_gate_s* New(::PROTOBUF_NAMESPACE_ID::Arena* arena) const final {
+    return CreateMaybeMessage<getannex_client_gate_s>(arena);
+  }
+  void CopyFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) final;
+  void MergeFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) final;
+  void CopyFrom(const getannex_client_gate_s& from);
+  void MergeFrom(const getannex_client_gate_s& from);
+  PROTOBUF_ATTRIBUTE_REINITIALIZES void Clear() final;
+  bool IsInitialized() const final;
+
+  size_t ByteSizeLong() const final;
+  const char* _InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) final;
+  ::PROTOBUF_NAMESPACE_ID::uint8* _InternalSerialize(
+      ::PROTOBUF_NAMESPACE_ID::uint8* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const final;
+  int GetCachedSize() const final { return _cached_size_.Get(); }
+
+  private:
+  inline void SharedCtor();
+  inline void SharedDtor();
+  void SetCachedSize(int size) const final;
+  void InternalSwap(getannex_client_gate_s* other);
+  friend class ::PROTOBUF_NAMESPACE_ID::internal::AnyMetadata;
+  static ::PROTOBUF_NAMESPACE_ID::StringPiece FullMessageName() {
+    return "frmpub.protocc.getannex_client_gate_s";
+  }
+  protected:
+  explicit getannex_client_gate_s(::PROTOBUF_NAMESPACE_ID::Arena* arena);
+  private:
+  static void ArenaDtor(void* object);
+  inline void RegisterArenaDtor(::PROTOBUF_NAMESPACE_ID::Arena* arena);
+  public:
+
+  ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadata() const final;
+  private:
+  static ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadataStatic() {
+    return ::descriptor_table_client_2eproto_metadata_getter(kIndexInFileMessages);
+  }
+
+  public:
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  enum : int {
+    kResultFieldNumber = 1,
+  };
+  // int32 result = 1;
+  void clear_result();
+  ::PROTOBUF_NAMESPACE_ID::int32 result() const;
+  void set_result(::PROTOBUF_NAMESPACE_ID::int32 value);
+  private:
+  ::PROTOBUF_NAMESPACE_ID::int32 _internal_result() const;
+  void _internal_set_result(::PROTOBUF_NAMESPACE_ID::int32 value);
+  public:
+
+  // @@protoc_insertion_point(class_scope:frmpub.protocc.getannex_client_gate_s)
+ private:
+  class _Internal;
+
+  template <typename T> friend class ::PROTOBUF_NAMESPACE_ID::Arena::InternalHelper;
+  typedef void InternalArenaConstructable_;
+  typedef void DestructorSkippable_;
+  ::PROTOBUF_NAMESPACE_ID::int32 result_;
+  mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
+  friend struct ::TableStruct_client_2eproto;
+};
+// -------------------------------------------------------------------
+
+class baseupdata_client_gate_g PROTOBUF_FINAL :
+    public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:frmpub.protocc.baseupdata_client_gate_g) */ {
+ public:
+  inline baseupdata_client_gate_g() : baseupdata_client_gate_g(nullptr) {}
+  virtual ~baseupdata_client_gate_g();
+  explicit constexpr baseupdata_client_gate_g(::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized);
+
+  baseupdata_client_gate_g(const baseupdata_client_gate_g& from);
+  baseupdata_client_gate_g(baseupdata_client_gate_g&& from) noexcept
+    : baseupdata_client_gate_g() {
+    *this = ::std::move(from);
+  }
+
+  inline baseupdata_client_gate_g& operator=(const baseupdata_client_gate_g& from) {
+    CopyFrom(from);
+    return *this;
+  }
+  inline baseupdata_client_gate_g& operator=(baseupdata_client_gate_g&& from) noexcept {
+    if (GetArena() == from.GetArena()) {
+      if (this != &from) InternalSwap(&from);
+    } else {
+      CopyFrom(from);
+    }
+    return *this;
+  }
+
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* descriptor() {
+    return GetDescriptor();
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* GetDescriptor() {
+    return GetMetadataStatic().descriptor;
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Reflection* GetReflection() {
+    return GetMetadataStatic().reflection;
+  }
+  static const baseupdata_client_gate_g& default_instance() {
+    return *internal_default_instance();
+  }
+  static inline const baseupdata_client_gate_g* internal_default_instance() {
+    return reinterpret_cast<const baseupdata_client_gate_g*>(
+               &_baseupdata_client_gate_g_default_instance_);
+  }
+  static constexpr int kIndexInFileMessages =
+    31;
+
+  friend void swap(baseupdata_client_gate_g& a, baseupdata_client_gate_g& b) {
+    a.Swap(&b);
+  }
+  inline void Swap(baseupdata_client_gate_g* other) {
+    if (other == this) return;
+    if (GetArena() == other->GetArena()) {
+      InternalSwap(other);
+    } else {
+      ::PROTOBUF_NAMESPACE_ID::internal::GenericSwap(this, other);
+    }
+  }
+  void UnsafeArenaSwap(baseupdata_client_gate_g* other) {
+    if (other == this) return;
+    GOOGLE_DCHECK(GetArena() == other->GetArena());
+    InternalSwap(other);
+  }
+
+  // implements Message ----------------------------------------------
+
+  inline baseupdata_client_gate_g* New() const final {
+    return CreateMaybeMessage<baseupdata_client_gate_g>(nullptr);
+  }
+
+  baseupdata_client_gate_g* New(::PROTOBUF_NAMESPACE_ID::Arena* arena) const final {
+    return CreateMaybeMessage<baseupdata_client_gate_g>(arena);
+  }
+  void CopyFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) final;
+  void MergeFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) final;
+  void CopyFrom(const baseupdata_client_gate_g& from);
+  void MergeFrom(const baseupdata_client_gate_g& from);
+  PROTOBUF_ATTRIBUTE_REINITIALIZES void Clear() final;
+  bool IsInitialized() const final;
+
+  size_t ByteSizeLong() const final;
+  const char* _InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) final;
+  ::PROTOBUF_NAMESPACE_ID::uint8* _InternalSerialize(
+      ::PROTOBUF_NAMESPACE_ID::uint8* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const final;
+  int GetCachedSize() const final { return _cached_size_.Get(); }
+
+  private:
+  inline void SharedCtor();
+  inline void SharedDtor();
+  void SetCachedSize(int size) const final;
+  void InternalSwap(baseupdata_client_gate_g* other);
+  friend class ::PROTOBUF_NAMESPACE_ID::internal::AnyMetadata;
+  static ::PROTOBUF_NAMESPACE_ID::StringPiece FullMessageName() {
+    return "frmpub.protocc.baseupdata_client_gate_g";
+  }
+  protected:
+  explicit baseupdata_client_gate_g(::PROTOBUF_NAMESPACE_ID::Arena* arena);
+  private:
+  static void ArenaDtor(void* object);
+  inline void RegisterArenaDtor(::PROTOBUF_NAMESPACE_ID::Arena* arena);
+  public:
+
+  ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadata() const final;
+  private:
+  static ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadataStatic() {
+    return ::descriptor_table_client_2eproto_metadata_getter(kIndexInFileMessages);
+  }
+
+  public:
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  enum : int {
+    kRoleidFieldNumber = 3,
+    kLevelFieldNumber = 4,
+    kGoldFieldNumber = 5,
+    kDiamondFieldNumber = 6,
+  };
+  // int64 roleid = 3;
+  void clear_roleid();
+  ::PROTOBUF_NAMESPACE_ID::int64 roleid() const;
+  void set_roleid(::PROTOBUF_NAMESPACE_ID::int64 value);
+  private:
+  ::PROTOBUF_NAMESPACE_ID::int64 _internal_roleid() const;
+  void _internal_set_roleid(::PROTOBUF_NAMESPACE_ID::int64 value);
+  public:
+
+  // int32 level = 4;
+  void clear_level();
+  ::PROTOBUF_NAMESPACE_ID::int32 level() const;
+  void set_level(::PROTOBUF_NAMESPACE_ID::int32 value);
+  private:
+  ::PROTOBUF_NAMESPACE_ID::int32 _internal_level() const;
+  void _internal_set_level(::PROTOBUF_NAMESPACE_ID::int32 value);
+  public:
+
+  // int32 gold = 5;
+  void clear_gold();
+  ::PROTOBUF_NAMESPACE_ID::int32 gold() const;
+  void set_gold(::PROTOBUF_NAMESPACE_ID::int32 value);
+  private:
+  ::PROTOBUF_NAMESPACE_ID::int32 _internal_gold() const;
+  void _internal_set_gold(::PROTOBUF_NAMESPACE_ID::int32 value);
+  public:
+
+  // int32 diamond = 6;
+  void clear_diamond();
+  ::PROTOBUF_NAMESPACE_ID::int32 diamond() const;
+  void set_diamond(::PROTOBUF_NAMESPACE_ID::int32 value);
+  private:
+  ::PROTOBUF_NAMESPACE_ID::int32 _internal_diamond() const;
+  void _internal_set_diamond(::PROTOBUF_NAMESPACE_ID::int32 value);
+  public:
+
+  // @@protoc_insertion_point(class_scope:frmpub.protocc.baseupdata_client_gate_g)
+ private:
+  class _Internal;
+
+  template <typename T> friend class ::PROTOBUF_NAMESPACE_ID::Arena::InternalHelper;
+  typedef void InternalArenaConstructable_;
+  typedef void DestructorSkippable_;
+  ::PROTOBUF_NAMESPACE_ID::int64 roleid_;
+  ::PROTOBUF_NAMESPACE_ID::int32 level_;
+  ::PROTOBUF_NAMESPACE_ID::int32 gold_;
+  ::PROTOBUF_NAMESPACE_ID::int32 diamond_;
   mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
   friend struct ::TableStruct_client_2eproto;
 };
@@ -4748,28 +6241,68 @@ inline void loadrole_client_gate_s::set_level(::PROTOBUF_NAMESPACE_ID::int32 val
   // @@protoc_insertion_point(field_set:frmpub.protocc.loadrole_client_gate_s.level)
 }
 
+// int32 gold = 5;
+inline void loadrole_client_gate_s::clear_gold() {
+  gold_ = 0;
+}
+inline ::PROTOBUF_NAMESPACE_ID::int32 loadrole_client_gate_s::_internal_gold() const {
+  return gold_;
+}
+inline ::PROTOBUF_NAMESPACE_ID::int32 loadrole_client_gate_s::gold() const {
+  // @@protoc_insertion_point(field_get:frmpub.protocc.loadrole_client_gate_s.gold)
+  return _internal_gold();
+}
+inline void loadrole_client_gate_s::_internal_set_gold(::PROTOBUF_NAMESPACE_ID::int32 value) {
+  
+  gold_ = value;
+}
+inline void loadrole_client_gate_s::set_gold(::PROTOBUF_NAMESPACE_ID::int32 value) {
+  _internal_set_gold(value);
+  // @@protoc_insertion_point(field_set:frmpub.protocc.loadrole_client_gate_s.gold)
+}
+
+// int32 diamond = 6;
+inline void loadrole_client_gate_s::clear_diamond() {
+  diamond_ = 0;
+}
+inline ::PROTOBUF_NAMESPACE_ID::int32 loadrole_client_gate_s::_internal_diamond() const {
+  return diamond_;
+}
+inline ::PROTOBUF_NAMESPACE_ID::int32 loadrole_client_gate_s::diamond() const {
+  // @@protoc_insertion_point(field_get:frmpub.protocc.loadrole_client_gate_s.diamond)
+  return _internal_diamond();
+}
+inline void loadrole_client_gate_s::_internal_set_diamond(::PROTOBUF_NAMESPACE_ID::int32 value) {
+  
+  diamond_ = value;
+}
+inline void loadrole_client_gate_s::set_diamond(::PROTOBUF_NAMESPACE_ID::int32 value) {
+  _internal_set_diamond(value);
+  // @@protoc_insertion_point(field_set:frmpub.protocc.loadrole_client_gate_s.diamond)
+}
+
 // -------------------------------------------------------------------
 
 // setlevel_client_gate_c
 
-// int64 roleid = 1;
-inline void setlevel_client_gate_c::clear_roleid() {
-  roleid_ = PROTOBUF_LONGLONG(0);
+// int32 level = 1;
+inline void setlevel_client_gate_c::clear_level() {
+  level_ = 0;
 }
-inline ::PROTOBUF_NAMESPACE_ID::int64 setlevel_client_gate_c::_internal_roleid() const {
-  return roleid_;
+inline ::PROTOBUF_NAMESPACE_ID::int32 setlevel_client_gate_c::_internal_level() const {
+  return level_;
 }
-inline ::PROTOBUF_NAMESPACE_ID::int64 setlevel_client_gate_c::roleid() const {
-  // @@protoc_insertion_point(field_get:frmpub.protocc.setlevel_client_gate_c.roleid)
-  return _internal_roleid();
+inline ::PROTOBUF_NAMESPACE_ID::int32 setlevel_client_gate_c::level() const {
+  // @@protoc_insertion_point(field_get:frmpub.protocc.setlevel_client_gate_c.level)
+  return _internal_level();
 }
-inline void setlevel_client_gate_c::_internal_set_roleid(::PROTOBUF_NAMESPACE_ID::int64 value) {
+inline void setlevel_client_gate_c::_internal_set_level(::PROTOBUF_NAMESPACE_ID::int32 value) {
   
-  roleid_ = value;
+  level_ = value;
 }
-inline void setlevel_client_gate_c::set_roleid(::PROTOBUF_NAMESPACE_ID::int64 value) {
-  _internal_set_roleid(value);
-  // @@protoc_insertion_point(field_set:frmpub.protocc.setlevel_client_gate_c.roleid)
+inline void setlevel_client_gate_c::set_level(::PROTOBUF_NAMESPACE_ID::int32 value) {
+  _internal_set_level(value);
+  // @@protoc_insertion_point(field_set:frmpub.protocc.setlevel_client_gate_c.level)
 }
 
 // -------------------------------------------------------------------
@@ -4796,89 +6329,24 @@ inline void setlevel_client_gate_s::set_result(::PROTOBUF_NAMESPACE_ID::int32 va
   // @@protoc_insertion_point(field_set:frmpub.protocc.setlevel_client_gate_s.result)
 }
 
-// -------------------------------------------------------------------
-
-// loadgoods_client_gate_c
-
-// string aid = 1;
-inline void loadgoods_client_gate_c::clear_aid() {
-  aid_.ClearToEmpty();
+// int32 level = 2;
+inline void setlevel_client_gate_s::clear_level() {
+  level_ = 0;
 }
-inline const std::string& loadgoods_client_gate_c::aid() const {
-  // @@protoc_insertion_point(field_get:frmpub.protocc.loadgoods_client_gate_c.aid)
-  return _internal_aid();
+inline ::PROTOBUF_NAMESPACE_ID::int32 setlevel_client_gate_s::_internal_level() const {
+  return level_;
 }
-inline void loadgoods_client_gate_c::set_aid(const std::string& value) {
-  _internal_set_aid(value);
-  // @@protoc_insertion_point(field_set:frmpub.protocc.loadgoods_client_gate_c.aid)
+inline ::PROTOBUF_NAMESPACE_ID::int32 setlevel_client_gate_s::level() const {
+  // @@protoc_insertion_point(field_get:frmpub.protocc.setlevel_client_gate_s.level)
+  return _internal_level();
 }
-inline std::string* loadgoods_client_gate_c::mutable_aid() {
-  // @@protoc_insertion_point(field_mutable:frmpub.protocc.loadgoods_client_gate_c.aid)
-  return _internal_mutable_aid();
-}
-inline const std::string& loadgoods_client_gate_c::_internal_aid() const {
-  return aid_.Get();
-}
-inline void loadgoods_client_gate_c::_internal_set_aid(const std::string& value) {
+inline void setlevel_client_gate_s::_internal_set_level(::PROTOBUF_NAMESPACE_ID::int32 value) {
   
-  aid_.Set(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, value, GetArena());
+  level_ = value;
 }
-inline void loadgoods_client_gate_c::set_aid(std::string&& value) {
-  
-  aid_.Set(
-    ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, ::std::move(value), GetArena());
-  // @@protoc_insertion_point(field_set_rvalue:frmpub.protocc.loadgoods_client_gate_c.aid)
-}
-inline void loadgoods_client_gate_c::set_aid(const char* value) {
-  GOOGLE_DCHECK(value != nullptr);
-  
-  aid_.Set(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, ::std::string(value), GetArena());
-  // @@protoc_insertion_point(field_set_char:frmpub.protocc.loadgoods_client_gate_c.aid)
-}
-inline void loadgoods_client_gate_c::set_aid(const char* value,
-    size_t size) {
-  
-  aid_.Set(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, ::std::string(
-      reinterpret_cast<const char*>(value), size), GetArena());
-  // @@protoc_insertion_point(field_set_pointer:frmpub.protocc.loadgoods_client_gate_c.aid)
-}
-inline std::string* loadgoods_client_gate_c::_internal_mutable_aid() {
-  
-  return aid_.Mutable(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, GetArena());
-}
-inline std::string* loadgoods_client_gate_c::release_aid() {
-  // @@protoc_insertion_point(field_release:frmpub.protocc.loadgoods_client_gate_c.aid)
-  return aid_.Release(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArena());
-}
-inline void loadgoods_client_gate_c::set_allocated_aid(std::string* aid) {
-  if (aid != nullptr) {
-    
-  } else {
-    
-  }
-  aid_.SetAllocated(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), aid,
-      GetArena());
-  // @@protoc_insertion_point(field_set_allocated:frmpub.protocc.loadgoods_client_gate_c.aid)
-}
-
-// int64 roleid = 2;
-inline void loadgoods_client_gate_c::clear_roleid() {
-  roleid_ = PROTOBUF_LONGLONG(0);
-}
-inline ::PROTOBUF_NAMESPACE_ID::int64 loadgoods_client_gate_c::_internal_roleid() const {
-  return roleid_;
-}
-inline ::PROTOBUF_NAMESPACE_ID::int64 loadgoods_client_gate_c::roleid() const {
-  // @@protoc_insertion_point(field_get:frmpub.protocc.loadgoods_client_gate_c.roleid)
-  return _internal_roleid();
-}
-inline void loadgoods_client_gate_c::_internal_set_roleid(::PROTOBUF_NAMESPACE_ID::int64 value) {
-  
-  roleid_ = value;
-}
-inline void loadgoods_client_gate_c::set_roleid(::PROTOBUF_NAMESPACE_ID::int64 value) {
-  _internal_set_roleid(value);
-  // @@protoc_insertion_point(field_set:frmpub.protocc.loadgoods_client_gate_c.roleid)
+inline void setlevel_client_gate_s::set_level(::PROTOBUF_NAMESPACE_ID::int32 value) {
+  _internal_set_level(value);
+  // @@protoc_insertion_point(field_set:frmpub.protocc.setlevel_client_gate_s.level)
 }
 
 // -------------------------------------------------------------------
@@ -5570,9 +7038,730 @@ notice_info_list_clent_gate_s::datas() const {
   return datas_;
 }
 
+// -------------------------------------------------------------------
+
+// email_new_client_gate_g
+
+// int64 id = 1;
+inline void email_new_client_gate_g::clear_id() {
+  id_ = PROTOBUF_LONGLONG(0);
+}
+inline ::PROTOBUF_NAMESPACE_ID::int64 email_new_client_gate_g::_internal_id() const {
+  return id_;
+}
+inline ::PROTOBUF_NAMESPACE_ID::int64 email_new_client_gate_g::id() const {
+  // @@protoc_insertion_point(field_get:frmpub.protocc.email_new_client_gate_g.id)
+  return _internal_id();
+}
+inline void email_new_client_gate_g::_internal_set_id(::PROTOBUF_NAMESPACE_ID::int64 value) {
+  
+  id_ = value;
+}
+inline void email_new_client_gate_g::set_id(::PROTOBUF_NAMESPACE_ID::int64 value) {
+  _internal_set_id(value);
+  // @@protoc_insertion_point(field_set:frmpub.protocc.email_new_client_gate_g.id)
+}
+
+// -------------------------------------------------------------------
+
+// loademails_client_gate_s_Email
+
+// int64 id = 1;
+inline void loademails_client_gate_s_Email::clear_id() {
+  id_ = PROTOBUF_LONGLONG(0);
+}
+inline ::PROTOBUF_NAMESPACE_ID::int64 loademails_client_gate_s_Email::_internal_id() const {
+  return id_;
+}
+inline ::PROTOBUF_NAMESPACE_ID::int64 loademails_client_gate_s_Email::id() const {
+  // @@protoc_insertion_point(field_get:frmpub.protocc.loademails_client_gate_s.Email.id)
+  return _internal_id();
+}
+inline void loademails_client_gate_s_Email::_internal_set_id(::PROTOBUF_NAMESPACE_ID::int64 value) {
+  
+  id_ = value;
+}
+inline void loademails_client_gate_s_Email::set_id(::PROTOBUF_NAMESPACE_ID::int64 value) {
+  _internal_set_id(value);
+  // @@protoc_insertion_point(field_set:frmpub.protocc.loademails_client_gate_s.Email.id)
+}
+
+// bool is_read = 2;
+inline void loademails_client_gate_s_Email::clear_is_read() {
+  is_read_ = false;
+}
+inline bool loademails_client_gate_s_Email::_internal_is_read() const {
+  return is_read_;
+}
+inline bool loademails_client_gate_s_Email::is_read() const {
+  // @@protoc_insertion_point(field_get:frmpub.protocc.loademails_client_gate_s.Email.is_read)
+  return _internal_is_read();
+}
+inline void loademails_client_gate_s_Email::_internal_set_is_read(bool value) {
+  
+  is_read_ = value;
+}
+inline void loademails_client_gate_s_Email::set_is_read(bool value) {
+  _internal_set_is_read(value);
+  // @@protoc_insertion_point(field_set:frmpub.protocc.loademails_client_gate_s.Email.is_read)
+}
+
+// bool is_receive = 3;
+inline void loademails_client_gate_s_Email::clear_is_receive() {
+  is_receive_ = false;
+}
+inline bool loademails_client_gate_s_Email::_internal_is_receive() const {
+  return is_receive_;
+}
+inline bool loademails_client_gate_s_Email::is_receive() const {
+  // @@protoc_insertion_point(field_get:frmpub.protocc.loademails_client_gate_s.Email.is_receive)
+  return _internal_is_receive();
+}
+inline void loademails_client_gate_s_Email::_internal_set_is_receive(bool value) {
+  
+  is_receive_ = value;
+}
+inline void loademails_client_gate_s_Email::set_is_receive(bool value) {
+  _internal_set_is_receive(value);
+  // @@protoc_insertion_point(field_set:frmpub.protocc.loademails_client_gate_s.Email.is_receive)
+}
+
+// -------------------------------------------------------------------
+
+// loademails_client_gate_s
+
+// repeated .frmpub.protocc.loademails_client_gate_s.Email emails = 1;
+inline int loademails_client_gate_s::_internal_emails_size() const {
+  return emails_.size();
+}
+inline int loademails_client_gate_s::emails_size() const {
+  return _internal_emails_size();
+}
+inline void loademails_client_gate_s::clear_emails() {
+  emails_.Clear();
+}
+inline ::frmpub::protocc::loademails_client_gate_s_Email* loademails_client_gate_s::mutable_emails(int index) {
+  // @@protoc_insertion_point(field_mutable:frmpub.protocc.loademails_client_gate_s.emails)
+  return emails_.Mutable(index);
+}
+inline ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::frmpub::protocc::loademails_client_gate_s_Email >*
+loademails_client_gate_s::mutable_emails() {
+  // @@protoc_insertion_point(field_mutable_list:frmpub.protocc.loademails_client_gate_s.emails)
+  return &emails_;
+}
+inline const ::frmpub::protocc::loademails_client_gate_s_Email& loademails_client_gate_s::_internal_emails(int index) const {
+  return emails_.Get(index);
+}
+inline const ::frmpub::protocc::loademails_client_gate_s_Email& loademails_client_gate_s::emails(int index) const {
+  // @@protoc_insertion_point(field_get:frmpub.protocc.loademails_client_gate_s.emails)
+  return _internal_emails(index);
+}
+inline ::frmpub::protocc::loademails_client_gate_s_Email* loademails_client_gate_s::_internal_add_emails() {
+  return emails_.Add();
+}
+inline ::frmpub::protocc::loademails_client_gate_s_Email* loademails_client_gate_s::add_emails() {
+  // @@protoc_insertion_point(field_add:frmpub.protocc.loademails_client_gate_s.emails)
+  return _internal_add_emails();
+}
+inline const ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::frmpub::protocc::loademails_client_gate_s_Email >&
+loademails_client_gate_s::emails() const {
+  // @@protoc_insertion_point(field_list:frmpub.protocc.loademails_client_gate_s.emails)
+  return emails_;
+}
+
+// -------------------------------------------------------------------
+
+// lookemail_client_gate_c
+
+// int64 emailid = 1;
+inline void lookemail_client_gate_c::clear_emailid() {
+  emailid_ = PROTOBUF_LONGLONG(0);
+}
+inline ::PROTOBUF_NAMESPACE_ID::int64 lookemail_client_gate_c::_internal_emailid() const {
+  return emailid_;
+}
+inline ::PROTOBUF_NAMESPACE_ID::int64 lookemail_client_gate_c::emailid() const {
+  // @@protoc_insertion_point(field_get:frmpub.protocc.lookemail_client_gate_c.emailid)
+  return _internal_emailid();
+}
+inline void lookemail_client_gate_c::_internal_set_emailid(::PROTOBUF_NAMESPACE_ID::int64 value) {
+  
+  emailid_ = value;
+}
+inline void lookemail_client_gate_c::set_emailid(::PROTOBUF_NAMESPACE_ID::int64 value) {
+  _internal_set_emailid(value);
+  // @@protoc_insertion_point(field_set:frmpub.protocc.lookemail_client_gate_c.emailid)
+}
+
+// -------------------------------------------------------------------
+
+// lookemail_client_gate_s_Annex_Goods
+
+// int32 cfgid = 1;
+inline void lookemail_client_gate_s_Annex_Goods::clear_cfgid() {
+  cfgid_ = 0;
+}
+inline ::PROTOBUF_NAMESPACE_ID::int32 lookemail_client_gate_s_Annex_Goods::_internal_cfgid() const {
+  return cfgid_;
+}
+inline ::PROTOBUF_NAMESPACE_ID::int32 lookemail_client_gate_s_Annex_Goods::cfgid() const {
+  // @@protoc_insertion_point(field_get:frmpub.protocc.lookemail_client_gate_s.Annex.Goods.cfgid)
+  return _internal_cfgid();
+}
+inline void lookemail_client_gate_s_Annex_Goods::_internal_set_cfgid(::PROTOBUF_NAMESPACE_ID::int32 value) {
+  
+  cfgid_ = value;
+}
+inline void lookemail_client_gate_s_Annex_Goods::set_cfgid(::PROTOBUF_NAMESPACE_ID::int32 value) {
+  _internal_set_cfgid(value);
+  // @@protoc_insertion_point(field_set:frmpub.protocc.lookemail_client_gate_s.Annex.Goods.cfgid)
+}
+
+// int32 num = 2;
+inline void lookemail_client_gate_s_Annex_Goods::clear_num() {
+  num_ = 0;
+}
+inline ::PROTOBUF_NAMESPACE_ID::int32 lookemail_client_gate_s_Annex_Goods::_internal_num() const {
+  return num_;
+}
+inline ::PROTOBUF_NAMESPACE_ID::int32 lookemail_client_gate_s_Annex_Goods::num() const {
+  // @@protoc_insertion_point(field_get:frmpub.protocc.lookemail_client_gate_s.Annex.Goods.num)
+  return _internal_num();
+}
+inline void lookemail_client_gate_s_Annex_Goods::_internal_set_num(::PROTOBUF_NAMESPACE_ID::int32 value) {
+  
+  num_ = value;
+}
+inline void lookemail_client_gate_s_Annex_Goods::set_num(::PROTOBUF_NAMESPACE_ID::int32 value) {
+  _internal_set_num(value);
+  // @@protoc_insertion_point(field_set:frmpub.protocc.lookemail_client_gate_s.Annex.Goods.num)
+}
+
+// -------------------------------------------------------------------
+
+// lookemail_client_gate_s_Annex
+
+// int32 gold = 1;
+inline void lookemail_client_gate_s_Annex::clear_gold() {
+  gold_ = 0;
+}
+inline ::PROTOBUF_NAMESPACE_ID::int32 lookemail_client_gate_s_Annex::_internal_gold() const {
+  return gold_;
+}
+inline ::PROTOBUF_NAMESPACE_ID::int32 lookemail_client_gate_s_Annex::gold() const {
+  // @@protoc_insertion_point(field_get:frmpub.protocc.lookemail_client_gate_s.Annex.gold)
+  return _internal_gold();
+}
+inline void lookemail_client_gate_s_Annex::_internal_set_gold(::PROTOBUF_NAMESPACE_ID::int32 value) {
+  
+  gold_ = value;
+}
+inline void lookemail_client_gate_s_Annex::set_gold(::PROTOBUF_NAMESPACE_ID::int32 value) {
+  _internal_set_gold(value);
+  // @@protoc_insertion_point(field_set:frmpub.protocc.lookemail_client_gate_s.Annex.gold)
+}
+
+// int32 diamond = 2;
+inline void lookemail_client_gate_s_Annex::clear_diamond() {
+  diamond_ = 0;
+}
+inline ::PROTOBUF_NAMESPACE_ID::int32 lookemail_client_gate_s_Annex::_internal_diamond() const {
+  return diamond_;
+}
+inline ::PROTOBUF_NAMESPACE_ID::int32 lookemail_client_gate_s_Annex::diamond() const {
+  // @@protoc_insertion_point(field_get:frmpub.protocc.lookemail_client_gate_s.Annex.diamond)
+  return _internal_diamond();
+}
+inline void lookemail_client_gate_s_Annex::_internal_set_diamond(::PROTOBUF_NAMESPACE_ID::int32 value) {
+  
+  diamond_ = value;
+}
+inline void lookemail_client_gate_s_Annex::set_diamond(::PROTOBUF_NAMESPACE_ID::int32 value) {
+  _internal_set_diamond(value);
+  // @@protoc_insertion_point(field_set:frmpub.protocc.lookemail_client_gate_s.Annex.diamond)
+}
+
+// repeated .frmpub.protocc.lookemail_client_gate_s.Annex.Goods goods = 3;
+inline int lookemail_client_gate_s_Annex::_internal_goods_size() const {
+  return goods_.size();
+}
+inline int lookemail_client_gate_s_Annex::goods_size() const {
+  return _internal_goods_size();
+}
+inline void lookemail_client_gate_s_Annex::clear_goods() {
+  goods_.Clear();
+}
+inline ::frmpub::protocc::lookemail_client_gate_s_Annex_Goods* lookemail_client_gate_s_Annex::mutable_goods(int index) {
+  // @@protoc_insertion_point(field_mutable:frmpub.protocc.lookemail_client_gate_s.Annex.goods)
+  return goods_.Mutable(index);
+}
+inline ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::frmpub::protocc::lookemail_client_gate_s_Annex_Goods >*
+lookemail_client_gate_s_Annex::mutable_goods() {
+  // @@protoc_insertion_point(field_mutable_list:frmpub.protocc.lookemail_client_gate_s.Annex.goods)
+  return &goods_;
+}
+inline const ::frmpub::protocc::lookemail_client_gate_s_Annex_Goods& lookemail_client_gate_s_Annex::_internal_goods(int index) const {
+  return goods_.Get(index);
+}
+inline const ::frmpub::protocc::lookemail_client_gate_s_Annex_Goods& lookemail_client_gate_s_Annex::goods(int index) const {
+  // @@protoc_insertion_point(field_get:frmpub.protocc.lookemail_client_gate_s.Annex.goods)
+  return _internal_goods(index);
+}
+inline ::frmpub::protocc::lookemail_client_gate_s_Annex_Goods* lookemail_client_gate_s_Annex::_internal_add_goods() {
+  return goods_.Add();
+}
+inline ::frmpub::protocc::lookemail_client_gate_s_Annex_Goods* lookemail_client_gate_s_Annex::add_goods() {
+  // @@protoc_insertion_point(field_add:frmpub.protocc.lookemail_client_gate_s.Annex.goods)
+  return _internal_add_goods();
+}
+inline const ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::frmpub::protocc::lookemail_client_gate_s_Annex_Goods >&
+lookemail_client_gate_s_Annex::goods() const {
+  // @@protoc_insertion_point(field_list:frmpub.protocc.lookemail_client_gate_s.Annex.goods)
+  return goods_;
+}
+
+// -------------------------------------------------------------------
+
+// lookemail_client_gate_s
+
+// int32 result = 1;
+inline void lookemail_client_gate_s::clear_result() {
+  result_ = 0;
+}
+inline ::PROTOBUF_NAMESPACE_ID::int32 lookemail_client_gate_s::_internal_result() const {
+  return result_;
+}
+inline ::PROTOBUF_NAMESPACE_ID::int32 lookemail_client_gate_s::result() const {
+  // @@protoc_insertion_point(field_get:frmpub.protocc.lookemail_client_gate_s.result)
+  return _internal_result();
+}
+inline void lookemail_client_gate_s::_internal_set_result(::PROTOBUF_NAMESPACE_ID::int32 value) {
+  
+  result_ = value;
+}
+inline void lookemail_client_gate_s::set_result(::PROTOBUF_NAMESPACE_ID::int32 value) {
+  _internal_set_result(value);
+  // @@protoc_insertion_point(field_set:frmpub.protocc.lookemail_client_gate_s.result)
+}
+
+// int64 id = 2;
+inline void lookemail_client_gate_s::clear_id() {
+  id_ = PROTOBUF_LONGLONG(0);
+}
+inline ::PROTOBUF_NAMESPACE_ID::int64 lookemail_client_gate_s::_internal_id() const {
+  return id_;
+}
+inline ::PROTOBUF_NAMESPACE_ID::int64 lookemail_client_gate_s::id() const {
+  // @@protoc_insertion_point(field_get:frmpub.protocc.lookemail_client_gate_s.id)
+  return _internal_id();
+}
+inline void lookemail_client_gate_s::_internal_set_id(::PROTOBUF_NAMESPACE_ID::int64 value) {
+  
+  id_ = value;
+}
+inline void lookemail_client_gate_s::set_id(::PROTOBUF_NAMESPACE_ID::int64 value) {
+  _internal_set_id(value);
+  // @@protoc_insertion_point(field_set:frmpub.protocc.lookemail_client_gate_s.id)
+}
+
+// string title = 3;
+inline void lookemail_client_gate_s::clear_title() {
+  title_.ClearToEmpty();
+}
+inline const std::string& lookemail_client_gate_s::title() const {
+  // @@protoc_insertion_point(field_get:frmpub.protocc.lookemail_client_gate_s.title)
+  return _internal_title();
+}
+inline void lookemail_client_gate_s::set_title(const std::string& value) {
+  _internal_set_title(value);
+  // @@protoc_insertion_point(field_set:frmpub.protocc.lookemail_client_gate_s.title)
+}
+inline std::string* lookemail_client_gate_s::mutable_title() {
+  // @@protoc_insertion_point(field_mutable:frmpub.protocc.lookemail_client_gate_s.title)
+  return _internal_mutable_title();
+}
+inline const std::string& lookemail_client_gate_s::_internal_title() const {
+  return title_.Get();
+}
+inline void lookemail_client_gate_s::_internal_set_title(const std::string& value) {
+  
+  title_.Set(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, value, GetArena());
+}
+inline void lookemail_client_gate_s::set_title(std::string&& value) {
+  
+  title_.Set(
+    ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, ::std::move(value), GetArena());
+  // @@protoc_insertion_point(field_set_rvalue:frmpub.protocc.lookemail_client_gate_s.title)
+}
+inline void lookemail_client_gate_s::set_title(const char* value) {
+  GOOGLE_DCHECK(value != nullptr);
+  
+  title_.Set(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, ::std::string(value), GetArena());
+  // @@protoc_insertion_point(field_set_char:frmpub.protocc.lookemail_client_gate_s.title)
+}
+inline void lookemail_client_gate_s::set_title(const char* value,
+    size_t size) {
+  
+  title_.Set(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, ::std::string(
+      reinterpret_cast<const char*>(value), size), GetArena());
+  // @@protoc_insertion_point(field_set_pointer:frmpub.protocc.lookemail_client_gate_s.title)
+}
+inline std::string* lookemail_client_gate_s::_internal_mutable_title() {
+  
+  return title_.Mutable(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, GetArena());
+}
+inline std::string* lookemail_client_gate_s::release_title() {
+  // @@protoc_insertion_point(field_release:frmpub.protocc.lookemail_client_gate_s.title)
+  return title_.Release(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArena());
+}
+inline void lookemail_client_gate_s::set_allocated_title(std::string* title) {
+  if (title != nullptr) {
+    
+  } else {
+    
+  }
+  title_.SetAllocated(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), title,
+      GetArena());
+  // @@protoc_insertion_point(field_set_allocated:frmpub.protocc.lookemail_client_gate_s.title)
+}
+
+// string info = 4;
+inline void lookemail_client_gate_s::clear_info() {
+  info_.ClearToEmpty();
+}
+inline const std::string& lookemail_client_gate_s::info() const {
+  // @@protoc_insertion_point(field_get:frmpub.protocc.lookemail_client_gate_s.info)
+  return _internal_info();
+}
+inline void lookemail_client_gate_s::set_info(const std::string& value) {
+  _internal_set_info(value);
+  // @@protoc_insertion_point(field_set:frmpub.protocc.lookemail_client_gate_s.info)
+}
+inline std::string* lookemail_client_gate_s::mutable_info() {
+  // @@protoc_insertion_point(field_mutable:frmpub.protocc.lookemail_client_gate_s.info)
+  return _internal_mutable_info();
+}
+inline const std::string& lookemail_client_gate_s::_internal_info() const {
+  return info_.Get();
+}
+inline void lookemail_client_gate_s::_internal_set_info(const std::string& value) {
+  
+  info_.Set(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, value, GetArena());
+}
+inline void lookemail_client_gate_s::set_info(std::string&& value) {
+  
+  info_.Set(
+    ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, ::std::move(value), GetArena());
+  // @@protoc_insertion_point(field_set_rvalue:frmpub.protocc.lookemail_client_gate_s.info)
+}
+inline void lookemail_client_gate_s::set_info(const char* value) {
+  GOOGLE_DCHECK(value != nullptr);
+  
+  info_.Set(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, ::std::string(value), GetArena());
+  // @@protoc_insertion_point(field_set_char:frmpub.protocc.lookemail_client_gate_s.info)
+}
+inline void lookemail_client_gate_s::set_info(const char* value,
+    size_t size) {
+  
+  info_.Set(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, ::std::string(
+      reinterpret_cast<const char*>(value), size), GetArena());
+  // @@protoc_insertion_point(field_set_pointer:frmpub.protocc.lookemail_client_gate_s.info)
+}
+inline std::string* lookemail_client_gate_s::_internal_mutable_info() {
+  
+  return info_.Mutable(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, GetArena());
+}
+inline std::string* lookemail_client_gate_s::release_info() {
+  // @@protoc_insertion_point(field_release:frmpub.protocc.lookemail_client_gate_s.info)
+  return info_.Release(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArena());
+}
+inline void lookemail_client_gate_s::set_allocated_info(std::string* info) {
+  if (info != nullptr) {
+    
+  } else {
+    
+  }
+  info_.SetAllocated(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), info,
+      GetArena());
+  // @@protoc_insertion_point(field_set_allocated:frmpub.protocc.lookemail_client_gate_s.info)
+}
+
+// int32 type = 5;
+inline void lookemail_client_gate_s::clear_type() {
+  type_ = 0;
+}
+inline ::PROTOBUF_NAMESPACE_ID::int32 lookemail_client_gate_s::_internal_type() const {
+  return type_;
+}
+inline ::PROTOBUF_NAMESPACE_ID::int32 lookemail_client_gate_s::type() const {
+  // @@protoc_insertion_point(field_get:frmpub.protocc.lookemail_client_gate_s.type)
+  return _internal_type();
+}
+inline void lookemail_client_gate_s::_internal_set_type(::PROTOBUF_NAMESPACE_ID::int32 value) {
+  
+  type_ = value;
+}
+inline void lookemail_client_gate_s::set_type(::PROTOBUF_NAMESPACE_ID::int32 value) {
+  _internal_set_type(value);
+  // @@protoc_insertion_point(field_set:frmpub.protocc.lookemail_client_gate_s.type)
+}
+
+// int32 time = 6;
+inline void lookemail_client_gate_s::clear_time() {
+  time_ = 0;
+}
+inline ::PROTOBUF_NAMESPACE_ID::int32 lookemail_client_gate_s::_internal_time() const {
+  return time_;
+}
+inline ::PROTOBUF_NAMESPACE_ID::int32 lookemail_client_gate_s::time() const {
+  // @@protoc_insertion_point(field_get:frmpub.protocc.lookemail_client_gate_s.time)
+  return _internal_time();
+}
+inline void lookemail_client_gate_s::_internal_set_time(::PROTOBUF_NAMESPACE_ID::int32 value) {
+  
+  time_ = value;
+}
+inline void lookemail_client_gate_s::set_time(::PROTOBUF_NAMESPACE_ID::int32 value) {
+  _internal_set_time(value);
+  // @@protoc_insertion_point(field_set:frmpub.protocc.lookemail_client_gate_s.time)
+}
+
+// .frmpub.protocc.lookemail_client_gate_s.Annex annex = 7;
+inline bool lookemail_client_gate_s::_internal_has_annex() const {
+  return this != internal_default_instance() && annex_ != nullptr;
+}
+inline bool lookemail_client_gate_s::has_annex() const {
+  return _internal_has_annex();
+}
+inline void lookemail_client_gate_s::clear_annex() {
+  if (GetArena() == nullptr && annex_ != nullptr) {
+    delete annex_;
+  }
+  annex_ = nullptr;
+}
+inline const ::frmpub::protocc::lookemail_client_gate_s_Annex& lookemail_client_gate_s::_internal_annex() const {
+  const ::frmpub::protocc::lookemail_client_gate_s_Annex* p = annex_;
+  return p != nullptr ? *p : reinterpret_cast<const ::frmpub::protocc::lookemail_client_gate_s_Annex&>(
+      ::frmpub::protocc::_lookemail_client_gate_s_Annex_default_instance_);
+}
+inline const ::frmpub::protocc::lookemail_client_gate_s_Annex& lookemail_client_gate_s::annex() const {
+  // @@protoc_insertion_point(field_get:frmpub.protocc.lookemail_client_gate_s.annex)
+  return _internal_annex();
+}
+inline void lookemail_client_gate_s::unsafe_arena_set_allocated_annex(
+    ::frmpub::protocc::lookemail_client_gate_s_Annex* annex) {
+  if (GetArena() == nullptr) {
+    delete reinterpret_cast<::PROTOBUF_NAMESPACE_ID::MessageLite*>(annex_);
+  }
+  annex_ = annex;
+  if (annex) {
+    
+  } else {
+    
+  }
+  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:frmpub.protocc.lookemail_client_gate_s.annex)
+}
+inline ::frmpub::protocc::lookemail_client_gate_s_Annex* lookemail_client_gate_s::release_annex() {
+  
+  ::frmpub::protocc::lookemail_client_gate_s_Annex* temp = annex_;
+  annex_ = nullptr;
+  if (GetArena() != nullptr) {
+    temp = ::PROTOBUF_NAMESPACE_ID::internal::DuplicateIfNonNull(temp);
+  }
+  return temp;
+}
+inline ::frmpub::protocc::lookemail_client_gate_s_Annex* lookemail_client_gate_s::unsafe_arena_release_annex() {
+  // @@protoc_insertion_point(field_release:frmpub.protocc.lookemail_client_gate_s.annex)
+  
+  ::frmpub::protocc::lookemail_client_gate_s_Annex* temp = annex_;
+  annex_ = nullptr;
+  return temp;
+}
+inline ::frmpub::protocc::lookemail_client_gate_s_Annex* lookemail_client_gate_s::_internal_mutable_annex() {
+  
+  if (annex_ == nullptr) {
+    auto* p = CreateMaybeMessage<::frmpub::protocc::lookemail_client_gate_s_Annex>(GetArena());
+    annex_ = p;
+  }
+  return annex_;
+}
+inline ::frmpub::protocc::lookemail_client_gate_s_Annex* lookemail_client_gate_s::mutable_annex() {
+  // @@protoc_insertion_point(field_mutable:frmpub.protocc.lookemail_client_gate_s.annex)
+  return _internal_mutable_annex();
+}
+inline void lookemail_client_gate_s::set_allocated_annex(::frmpub::protocc::lookemail_client_gate_s_Annex* annex) {
+  ::PROTOBUF_NAMESPACE_ID::Arena* message_arena = GetArena();
+  if (message_arena == nullptr) {
+    delete annex_;
+  }
+  if (annex) {
+    ::PROTOBUF_NAMESPACE_ID::Arena* submessage_arena =
+      ::PROTOBUF_NAMESPACE_ID::Arena::GetArena(annex);
+    if (message_arena != submessage_arena) {
+      annex = ::PROTOBUF_NAMESPACE_ID::internal::GetOwnedMessage(
+          message_arena, annex, submessage_arena);
+    }
+    
+  } else {
+    
+  }
+  annex_ = annex;
+  // @@protoc_insertion_point(field_set_allocated:frmpub.protocc.lookemail_client_gate_s.annex)
+}
+
+// -------------------------------------------------------------------
+
+// getannex_client_gate_c
+
+// int64 emailid = 1;
+inline void getannex_client_gate_c::clear_emailid() {
+  emailid_ = PROTOBUF_LONGLONG(0);
+}
+inline ::PROTOBUF_NAMESPACE_ID::int64 getannex_client_gate_c::_internal_emailid() const {
+  return emailid_;
+}
+inline ::PROTOBUF_NAMESPACE_ID::int64 getannex_client_gate_c::emailid() const {
+  // @@protoc_insertion_point(field_get:frmpub.protocc.getannex_client_gate_c.emailid)
+  return _internal_emailid();
+}
+inline void getannex_client_gate_c::_internal_set_emailid(::PROTOBUF_NAMESPACE_ID::int64 value) {
+  
+  emailid_ = value;
+}
+inline void getannex_client_gate_c::set_emailid(::PROTOBUF_NAMESPACE_ID::int64 value) {
+  _internal_set_emailid(value);
+  // @@protoc_insertion_point(field_set:frmpub.protocc.getannex_client_gate_c.emailid)
+}
+
+// -------------------------------------------------------------------
+
+// getannex_client_gate_s
+
+// int32 result = 1;
+inline void getannex_client_gate_s::clear_result() {
+  result_ = 0;
+}
+inline ::PROTOBUF_NAMESPACE_ID::int32 getannex_client_gate_s::_internal_result() const {
+  return result_;
+}
+inline ::PROTOBUF_NAMESPACE_ID::int32 getannex_client_gate_s::result() const {
+  // @@protoc_insertion_point(field_get:frmpub.protocc.getannex_client_gate_s.result)
+  return _internal_result();
+}
+inline void getannex_client_gate_s::_internal_set_result(::PROTOBUF_NAMESPACE_ID::int32 value) {
+  
+  result_ = value;
+}
+inline void getannex_client_gate_s::set_result(::PROTOBUF_NAMESPACE_ID::int32 value) {
+  _internal_set_result(value);
+  // @@protoc_insertion_point(field_set:frmpub.protocc.getannex_client_gate_s.result)
+}
+
+// -------------------------------------------------------------------
+
+// baseupdata_client_gate_g
+
+// int64 roleid = 3;
+inline void baseupdata_client_gate_g::clear_roleid() {
+  roleid_ = PROTOBUF_LONGLONG(0);
+}
+inline ::PROTOBUF_NAMESPACE_ID::int64 baseupdata_client_gate_g::_internal_roleid() const {
+  return roleid_;
+}
+inline ::PROTOBUF_NAMESPACE_ID::int64 baseupdata_client_gate_g::roleid() const {
+  // @@protoc_insertion_point(field_get:frmpub.protocc.baseupdata_client_gate_g.roleid)
+  return _internal_roleid();
+}
+inline void baseupdata_client_gate_g::_internal_set_roleid(::PROTOBUF_NAMESPACE_ID::int64 value) {
+  
+  roleid_ = value;
+}
+inline void baseupdata_client_gate_g::set_roleid(::PROTOBUF_NAMESPACE_ID::int64 value) {
+  _internal_set_roleid(value);
+  // @@protoc_insertion_point(field_set:frmpub.protocc.baseupdata_client_gate_g.roleid)
+}
+
+// int32 level = 4;
+inline void baseupdata_client_gate_g::clear_level() {
+  level_ = 0;
+}
+inline ::PROTOBUF_NAMESPACE_ID::int32 baseupdata_client_gate_g::_internal_level() const {
+  return level_;
+}
+inline ::PROTOBUF_NAMESPACE_ID::int32 baseupdata_client_gate_g::level() const {
+  // @@protoc_insertion_point(field_get:frmpub.protocc.baseupdata_client_gate_g.level)
+  return _internal_level();
+}
+inline void baseupdata_client_gate_g::_internal_set_level(::PROTOBUF_NAMESPACE_ID::int32 value) {
+  
+  level_ = value;
+}
+inline void baseupdata_client_gate_g::set_level(::PROTOBUF_NAMESPACE_ID::int32 value) {
+  _internal_set_level(value);
+  // @@protoc_insertion_point(field_set:frmpub.protocc.baseupdata_client_gate_g.level)
+}
+
+// int32 gold = 5;
+inline void baseupdata_client_gate_g::clear_gold() {
+  gold_ = 0;
+}
+inline ::PROTOBUF_NAMESPACE_ID::int32 baseupdata_client_gate_g::_internal_gold() const {
+  return gold_;
+}
+inline ::PROTOBUF_NAMESPACE_ID::int32 baseupdata_client_gate_g::gold() const {
+  // @@protoc_insertion_point(field_get:frmpub.protocc.baseupdata_client_gate_g.gold)
+  return _internal_gold();
+}
+inline void baseupdata_client_gate_g::_internal_set_gold(::PROTOBUF_NAMESPACE_ID::int32 value) {
+  
+  gold_ = value;
+}
+inline void baseupdata_client_gate_g::set_gold(::PROTOBUF_NAMESPACE_ID::int32 value) {
+  _internal_set_gold(value);
+  // @@protoc_insertion_point(field_set:frmpub.protocc.baseupdata_client_gate_g.gold)
+}
+
+// int32 diamond = 6;
+inline void baseupdata_client_gate_g::clear_diamond() {
+  diamond_ = 0;
+}
+inline ::PROTOBUF_NAMESPACE_ID::int32 baseupdata_client_gate_g::_internal_diamond() const {
+  return diamond_;
+}
+inline ::PROTOBUF_NAMESPACE_ID::int32 baseupdata_client_gate_g::diamond() const {
+  // @@protoc_insertion_point(field_get:frmpub.protocc.baseupdata_client_gate_g.diamond)
+  return _internal_diamond();
+}
+inline void baseupdata_client_gate_g::_internal_set_diamond(::PROTOBUF_NAMESPACE_ID::int32 value) {
+  
+  diamond_ = value;
+}
+inline void baseupdata_client_gate_g::set_diamond(::PROTOBUF_NAMESPACE_ID::int32 value) {
+  _internal_set_diamond(value);
+  // @@protoc_insertion_point(field_set:frmpub.protocc.baseupdata_client_gate_g.diamond)
+}
+
 #ifdef __GNUC__
   #pragma GCC diagnostic pop
 #endif  // __GNUC__
+// -------------------------------------------------------------------
+
+// -------------------------------------------------------------------
+
+// -------------------------------------------------------------------
+
+// -------------------------------------------------------------------
+
+// -------------------------------------------------------------------
+
+// -------------------------------------------------------------------
+
+// -------------------------------------------------------------------
+
+// -------------------------------------------------------------------
+
+// -------------------------------------------------------------------
+
 // -------------------------------------------------------------------
 
 // -------------------------------------------------------------------

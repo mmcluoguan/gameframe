@@ -13,6 +13,7 @@ function connectorMgr:add(client)
         net = dbConnector:new(client)
         table.insert(self.dbConnectors,#self.dbConnectors+1,net)
         net.pos = #self.dbConnectors
+        EmailSystem:load()
     elseif client:name() == "WorldConnector" then
         net = worldConnector:new(client)
         table.insert(self.worldConnectors,#self.worldConnectors+1,net)

@@ -13,6 +13,7 @@ public:
         int login_id = 0;
         int game_id = 0;
         std::string accountid;
+        int64_t roleid = 0;
     };
 
     GateConnector(std::shared_ptr<net::IPAddress> connect_addr,
@@ -73,18 +74,6 @@ private:
 		* gm操作结果
 		*/
     int gmorder_client_gate_s(std::shared_ptr<protocc::CommonObject> data,
-        std::shared_ptr<std::stack<FilterData::Envelope>> enves);
-
-    /*
-		* 区服服务器广播信息
-		*/
-    int notice_info_clent_gate_g(std::shared_ptr<protocc::CommonObject> data,
-        std::shared_ptr<std::stack<FilterData::Envelope>> enves);
-
-    /*
-		* 广播信息列表
-		*/
-    int notice_info_list_clent_gate_s(std::shared_ptr<protocc::CommonObject> data,
         std::shared_ptr<std::stack<FilterData::Envelope>> enves);
 
 private:

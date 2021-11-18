@@ -47,7 +47,7 @@ message FieldsEntry {
 enum errnum{
     MESSAGE_PARSING_ERROR = 0;      //消息解析错误
     ILLEGAL_UNKNOWN_MESSAGE = 1;    //非法的未知消息
-    GAMS_NOT_EXIST = 2;             //游戏服不存在
+    GAME_NOT_EXIST = 2;             //游戏服不存在
     LOGIN_NOT_EXIST = 3;            //登录服不存在
     WORLD_NOT_EXIST = 4;            //世界服不存在
     DBVISIT_NOT_EXIST = 5;          //数据服不存在
@@ -58,6 +58,7 @@ enum errnum{
     UNKNOWN_SERVER_TYPE = 10;       //未知服务器类型
     EXTEND_FORMAT_ERR = 11;         //附加信息解析错误
     NO_ROUTING_INFO = 12;           //转发消息没有路由信息
+    GAME_ROLE_NOT_EXIST = 13;       //游戏服中角色不存在
 }
 
 //服务器通用错误信息
