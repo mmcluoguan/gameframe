@@ -14,7 +14,6 @@
 *.json
 /bin/.idea
 /.vs
-/bin
 /client/obj/x64/Debug
 /dbvisit/obj/x64/Debug
 /frmpub/obj/x86/Debug
@@ -24,3 +23,4 @@
 /shynet/obj
 /upload
 libs/libshynet.so.1.0.1
+bin/lua/luatest/
