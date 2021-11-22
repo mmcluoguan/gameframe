@@ -2069,6 +2069,7 @@ class loadrole_client_gate_s PROTOBUF_FINAL :
     kRoleidFieldNumber = 3,
     kGoldFieldNumber = 5,
     kDiamondFieldNumber = 6,
+    kLotteryFieldNumber = 7,
   };
   // string aid = 2;
   void clear_aid();
@@ -2131,6 +2132,15 @@ class loadrole_client_gate_s PROTOBUF_FINAL :
   void _internal_set_diamond(::PROTOBUF_NAMESPACE_ID::int32 value);
   public:
 
+  // int32 lottery = 7;
+  void clear_lottery();
+  ::PROTOBUF_NAMESPACE_ID::int32 lottery() const;
+  void set_lottery(::PROTOBUF_NAMESPACE_ID::int32 value);
+  private:
+  ::PROTOBUF_NAMESPACE_ID::int32 _internal_lottery() const;
+  void _internal_set_lottery(::PROTOBUF_NAMESPACE_ID::int32 value);
+  public:
+
   // @@protoc_insertion_point(class_scope:frmpub.protocc.loadrole_client_gate_s)
  private:
   class _Internal;
@@ -2144,6 +2154,7 @@ class loadrole_client_gate_s PROTOBUF_FINAL :
   ::PROTOBUF_NAMESPACE_ID::int64 roleid_;
   ::PROTOBUF_NAMESPACE_ID::int32 gold_;
   ::PROTOBUF_NAMESPACE_ID::int32 diamond_;
+  ::PROTOBUF_NAMESPACE_ID::int32 lottery_;
   mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
   friend struct ::TableStruct_client_2eproto;
 };
@@ -5226,12 +5237,12 @@ class baseupdata_client_gate_g PROTOBUF_FINAL :
   // accessors -------------------------------------------------------
 
   enum : int {
-    kRoleidFieldNumber = 3,
-    kLevelFieldNumber = 4,
-    kGoldFieldNumber = 5,
-    kDiamondFieldNumber = 6,
+    kRoleidFieldNumber = 1,
+    kLevelFieldNumber = 2,
+    kGoldFieldNumber = 3,
+    kDiamondFieldNumber = 4,
   };
-  // int64 roleid = 3;
+  // int64 roleid = 1;
   void clear_roleid();
   ::PROTOBUF_NAMESPACE_ID::int64 roleid() const;
   void set_roleid(::PROTOBUF_NAMESPACE_ID::int64 value);
@@ -5240,7 +5251,7 @@ class baseupdata_client_gate_g PROTOBUF_FINAL :
   void _internal_set_roleid(::PROTOBUF_NAMESPACE_ID::int64 value);
   public:
 
-  // int32 level = 4;
+  // int32 level = 2;
   void clear_level();
   ::PROTOBUF_NAMESPACE_ID::int32 level() const;
   void set_level(::PROTOBUF_NAMESPACE_ID::int32 value);
@@ -5249,7 +5260,7 @@ class baseupdata_client_gate_g PROTOBUF_FINAL :
   void _internal_set_level(::PROTOBUF_NAMESPACE_ID::int32 value);
   public:
 
-  // int32 gold = 5;
+  // int32 gold = 3;
   void clear_gold();
   ::PROTOBUF_NAMESPACE_ID::int32 gold() const;
   void set_gold(::PROTOBUF_NAMESPACE_ID::int32 value);
@@ -5258,7 +5269,7 @@ class baseupdata_client_gate_g PROTOBUF_FINAL :
   void _internal_set_gold(::PROTOBUF_NAMESPACE_ID::int32 value);
   public:
 
-  // int32 diamond = 6;
+  // int32 diamond = 4;
   void clear_diamond();
   ::PROTOBUF_NAMESPACE_ID::int32 diamond() const;
   void set_diamond(::PROTOBUF_NAMESPACE_ID::int32 value);
@@ -6279,6 +6290,26 @@ inline void loadrole_client_gate_s::_internal_set_diamond(::PROTOBUF_NAMESPACE_I
 inline void loadrole_client_gate_s::set_diamond(::PROTOBUF_NAMESPACE_ID::int32 value) {
   _internal_set_diamond(value);
   // @@protoc_insertion_point(field_set:frmpub.protocc.loadrole_client_gate_s.diamond)
+}
+
+// int32 lottery = 7;
+inline void loadrole_client_gate_s::clear_lottery() {
+  lottery_ = 0;
+}
+inline ::PROTOBUF_NAMESPACE_ID::int32 loadrole_client_gate_s::_internal_lottery() const {
+  return lottery_;
+}
+inline ::PROTOBUF_NAMESPACE_ID::int32 loadrole_client_gate_s::lottery() const {
+  // @@protoc_insertion_point(field_get:frmpub.protocc.loadrole_client_gate_s.lottery)
+  return _internal_lottery();
+}
+inline void loadrole_client_gate_s::_internal_set_lottery(::PROTOBUF_NAMESPACE_ID::int32 value) {
+  
+  lottery_ = value;
+}
+inline void loadrole_client_gate_s::set_lottery(::PROTOBUF_NAMESPACE_ID::int32 value) {
+  _internal_set_lottery(value);
+  // @@protoc_insertion_point(field_set:frmpub.protocc.loadrole_client_gate_s.lottery)
 }
 
 // -------------------------------------------------------------------
@@ -7661,7 +7692,7 @@ inline void getannex_client_gate_s::set_result(::PROTOBUF_NAMESPACE_ID::int32 va
 
 // baseupdata_client_gate_g
 
-// int64 roleid = 3;
+// int64 roleid = 1;
 inline void baseupdata_client_gate_g::clear_roleid() {
   roleid_ = PROTOBUF_LONGLONG(0);
 }
@@ -7681,7 +7712,7 @@ inline void baseupdata_client_gate_g::set_roleid(::PROTOBUF_NAMESPACE_ID::int64 
   // @@protoc_insertion_point(field_set:frmpub.protocc.baseupdata_client_gate_g.roleid)
 }
 
-// int32 level = 4;
+// int32 level = 2;
 inline void baseupdata_client_gate_g::clear_level() {
   level_ = 0;
 }
@@ -7701,7 +7732,7 @@ inline void baseupdata_client_gate_g::set_level(::PROTOBUF_NAMESPACE_ID::int32 v
   // @@protoc_insertion_point(field_set:frmpub.protocc.baseupdata_client_gate_g.level)
 }
 
-// int32 gold = 5;
+// int32 gold = 3;
 inline void baseupdata_client_gate_g::clear_gold() {
   gold_ = 0;
 }
@@ -7721,7 +7752,7 @@ inline void baseupdata_client_gate_g::set_gold(::PROTOBUF_NAMESPACE_ID::int32 va
   // @@protoc_insertion_point(field_set:frmpub.protocc.baseupdata_client_gate_g.gold)
 }
 
-// int32 diamond = 6;
+// int32 diamond = 4;
 inline void baseupdata_client_gate_g::clear_diamond() {
   diamond_ = 0;
 }

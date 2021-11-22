@@ -119,6 +119,7 @@ message loadrole_client_gate_s{
     int32 level = 4;
     int32 gold = 5;
     int32 diamond = 6;
+    int32 lottery = 7; //剩余抽奖次数
 }
 
 //设置角色等级

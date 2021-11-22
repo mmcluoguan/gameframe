@@ -47,18 +47,11 @@ function gameClient:createrole_client_gate_c(msgid,msgdata,routing)
     if RoleMgr:findby_accountid(msgtable.aid) == nil then
         --创建角色
         local role = require("lua/game/role")
-        local roleObj = role:new(newid(),self.id)
-        roleObj.accountid = msgtable.aid
-        roleObj.level = random(1,100)
+        local roleObj = role:new(newid(),msgtable.aid)
         local initdata = {
             cache_key = 'role_' .. roleObj.id,
             opertype = 0,
-            fields = {
-                { key = '_id', value = tostring(roleObj.id),},
-                { key = 'accountid', value = tostring(roleObj.accountid),},
-                { key = 'level', value = tostring(roleObj.level),},
-                { key = 'star', value = tostring(roleObj.star),},
-            }
+            fields = roleObj:init_fields()
         }
         ConnectorMgr:dbConnector():send('insertdata_to_dbvisit_c',initdata)
         --默认初始化3个物品
@@ -97,36 +90,22 @@ function gameClient:loadrole_client_gate_c(msgid,msgdata,routing)
         --在本地内存中获取
         log("在本地内存中获取角色数据 roleid:",role.id)
         role:copyrouting(routing)
-        role.online = true
-        role.gatefd = self.id
         assert(routing:size() ~= 0,'loadrole_client_gate_c 没有路由信息');
-        role.clientfd = routing:top():fd()
-        local roledata = {
-            roleid = role.id,
-            aid = role.accountid,
-            level = role.level,
-            gold = role.gold,
-            diamond = role.diamond
-        };
-        self:send("loadrole_client_gate_s",roledata,routing)
+        role:loaddata_complete(self.id,routing:top():fd())
+        self:send("loadrole_client_gate_s",role:client_roledata(),routing)
     else
         --转发消息到db获取角色数据
         local enve = Envelope_CPP.new()
         enve:fd(self.id)
         enve:addr(self.cpp_socket:remote_addr())
         routing:push(enve)
+        role = require("lua/game/role")
+        local roleObj = role:new(msgtable.roleid,msgtable.aid)
         local roledata = {
             cache_key = "role_" .. msgtable.roleid,
             tag = "roledata," .. msgtable.roleid,
             opertype = 0,
-            fields = {
-                {key = '_id', value = '',},
-                {key = 'level', value = '0',},
-                {key = 'accountid', value = '',},
-                {key = 'gold', value = '0',},
-                {key = 'diamond', value = '0',},
-                {key = 'unline_time', value = '0',},
-            },
+            fields = roleObj:init_fields(),
         };
         ConnectorMgr:dbConnector():send('loaddata_from_dbvisit_c',roledata,routing)
     end
@@ -138,7 +117,7 @@ function gameClient:loadgoods_client_gate_c(msgid,msgdata,routing)
     local clientfd = routing:top():fd()
     local role = RoleMgr:findby_clientfd(clientfd)
     assert(role,'角色不存在,必须先获取角色基础数据')
-    if get_tablekey_size(role.goods) ~= 0 then
+    if Get_Tablekey_Size(role.goods) ~= 0 then
         --在本地内存中获取
         log("在本地内存中获取角色物品数据 roleid:",role.id)
         local goodsdata = {}

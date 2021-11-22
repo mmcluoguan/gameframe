@@ -154,12 +154,10 @@ namespace utils {
         char* path_end;
         if (readlink("/proc/self/exe", processdir, len) <= 0) {
             THROW_EXCEPTION("call readlink");
-            return -1;
         }
         path_end = strrchr(processdir, '/');
         if (path_end == NULL) {
             THROW_EXCEPTION("找不到'/'");
-            return -1;
         }
         ++path_end;
         strcpy(processname, path_end);

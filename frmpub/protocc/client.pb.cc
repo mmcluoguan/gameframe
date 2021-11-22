@@ -168,7 +168,8 @@ constexpr loadrole_client_gate_s::loadrole_client_gate_s(
   , level_(0)
   , roleid_(PROTOBUF_LONGLONG(0))
   , gold_(0)
-  , diamond_(0){}
+  , diamond_(0)
+  , lottery_(0){}
 struct loadrole_client_gate_sDefaultTypeInternal {
   constexpr loadrole_client_gate_sDefaultTypeInternal()
     : _instance(::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized{}) {}
@@ -538,6 +539,7 @@ const ::PROTOBUF_NAMESPACE_ID::uint32 TableStruct_client_2eproto::offsets[] PROT
   PROTOBUF_FIELD_OFFSET(::frmpub::protocc::loadrole_client_gate_s, level_),
   PROTOBUF_FIELD_OFFSET(::frmpub::protocc::loadrole_client_gate_s, gold_),
   PROTOBUF_FIELD_OFFSET(::frmpub::protocc::loadrole_client_gate_s, diamond_),
+  PROTOBUF_FIELD_OFFSET(::frmpub::protocc::loadrole_client_gate_s, lottery_),
   ~0u,  // no _has_bits_
   PROTOBUF_FIELD_OFFSET(::frmpub::protocc::setlevel_client_gate_c, _internal_metadata_),
   ~0u,  // no _extensions_
@@ -697,26 +699,26 @@ static const ::PROTOBUF_NAMESPACE_ID::internal::MigrationSchema schemas[] PROTOB
   { 62, -1, sizeof(::frmpub::protocc::createrole_client_gate_s)},
   { 70, -1, sizeof(::frmpub::protocc::loadrole_client_gate_c)},
   { 77, -1, sizeof(::frmpub::protocc::loadrole_client_gate_s)},
-  { 88, -1, sizeof(::frmpub::protocc::setlevel_client_gate_c)},
-  { 94, -1, sizeof(::frmpub::protocc::setlevel_client_gate_s)},
-  { 101, -1, sizeof(::frmpub::protocc::loadgoods_client_gate_s_Goods)},
-  { 109, -1, sizeof(::frmpub::protocc::loadgoods_client_gate_s)},
-  { 115, -1, sizeof(::frmpub::protocc::gmorder_client_gate_c)},
-  { 123, -1, sizeof(::frmpub::protocc::gmorder_client_gate_s)},
-  { 131, -1, sizeof(::frmpub::protocc::goodsupdata_client_gate_g)},
-  { 140, -1, sizeof(::frmpub::protocc::notice_info_clent_gate_g)},
-  { 146, -1, sizeof(::frmpub::protocc::notice_info_list_clent_gate_s_notice)},
-  { 153, -1, sizeof(::frmpub::protocc::notice_info_list_clent_gate_s)},
-  { 159, -1, sizeof(::frmpub::protocc::email_new_client_gate_g)},
-  { 165, -1, sizeof(::frmpub::protocc::loademails_client_gate_s_Email)},
-  { 173, -1, sizeof(::frmpub::protocc::loademails_client_gate_s)},
-  { 179, -1, sizeof(::frmpub::protocc::lookemail_client_gate_c)},
-  { 185, -1, sizeof(::frmpub::protocc::lookemail_client_gate_s_Annex_Goods)},
-  { 192, -1, sizeof(::frmpub::protocc::lookemail_client_gate_s_Annex)},
-  { 200, -1, sizeof(::frmpub::protocc::lookemail_client_gate_s)},
-  { 212, -1, sizeof(::frmpub::protocc::getannex_client_gate_c)},
-  { 218, -1, sizeof(::frmpub::protocc::getannex_client_gate_s)},
-  { 224, -1, sizeof(::frmpub::protocc::baseupdata_client_gate_g)},
+  { 89, -1, sizeof(::frmpub::protocc::setlevel_client_gate_c)},
+  { 95, -1, sizeof(::frmpub::protocc::setlevel_client_gate_s)},
+  { 102, -1, sizeof(::frmpub::protocc::loadgoods_client_gate_s_Goods)},
+  { 110, -1, sizeof(::frmpub::protocc::loadgoods_client_gate_s)},
+  { 116, -1, sizeof(::frmpub::protocc::gmorder_client_gate_c)},
+  { 124, -1, sizeof(::frmpub::protocc::gmorder_client_gate_s)},
+  { 132, -1, sizeof(::frmpub::protocc::goodsupdata_client_gate_g)},
+  { 141, -1, sizeof(::frmpub::protocc::notice_info_clent_gate_g)},
+  { 147, -1, sizeof(::frmpub::protocc::notice_info_list_clent_gate_s_notice)},
+  { 154, -1, sizeof(::frmpub::protocc::notice_info_list_clent_gate_s)},
+  { 160, -1, sizeof(::frmpub::protocc::email_new_client_gate_g)},
+  { 166, -1, sizeof(::frmpub::protocc::loademails_client_gate_s_Email)},
+  { 174, -1, sizeof(::frmpub::protocc::loademails_client_gate_s)},
+  { 180, -1, sizeof(::frmpub::protocc::lookemail_client_gate_c)},
+  { 186, -1, sizeof(::frmpub::protocc::lookemail_client_gate_s_Annex_Goods)},
+  { 193, -1, sizeof(::frmpub::protocc::lookemail_client_gate_s_Annex)},
+  { 201, -1, sizeof(::frmpub::protocc::lookemail_client_gate_s)},
+  { 213, -1, sizeof(::frmpub::protocc::getannex_client_gate_c)},
+  { 219, -1, sizeof(::frmpub::protocc::getannex_client_gate_s)},
+  { 225, -1, sizeof(::frmpub::protocc::baseupdata_client_gate_g)},
 };
 
 static ::PROTOBUF_NAMESPACE_ID::Message const * const file_default_instances[] = {
@@ -772,80 +774,81 @@ const char descriptor_table_protodef_client_2eproto[] PROTOBUF_SECTION_VARIABLE(
   "t_gate_c\022\013\n\003aid\030\001 \001(\t\"G\n\030createrole_clie"
   "nt_gate_s\022\016\n\006result\030\001 \001(\005\022\013\n\003aid\030\002 \001(\t\022\016"
   "\n\006roleid\030\003 \001(\003\"5\n\026loadrole_client_gate_c"
-  "\022\013\n\003aid\030\001 \001(\t\022\016\n\006roleid\030\002 \001(\003\"s\n\026loadrol"
-  "e_client_gate_s\022\016\n\006result\030\001 \001(\005\022\013\n\003aid\030\002"
-  " \001(\t\022\016\n\006roleid\030\003 \001(\003\022\r\n\005level\030\004 \001(\005\022\014\n\004g"
-  "old\030\005 \001(\005\022\017\n\007diamond\030\006 \001(\005\"\'\n\026setlevel_c"
-  "lient_gate_c\022\r\n\005level\030\001 \001(\005\"7\n\026setlevel_"
-  "client_gate_s\022\016\n\006result\030\001 \001(\005\022\r\n\005level\030\002"
-  " \001(\005\"\210\001\n\027loadgoods_client_gate_s\022<\n\005good"
-  "s\030\001 \003(\0132-.frmpub.protocc.loadgoods_clien"
-  "t_gate_s.Goods\032/\n\005Goods\022\n\n\002id\030\001 \001(\003\022\r\n\005c"
-  "fgid\030\002 \001(\005\022\013\n\003num\030\003 \001(\005\"D\n\025gmorder_clien"
-  "t_gate_c\022\016\n\006roleid\030\001 \001(\003\022\r\n\005order\030\002 \001(\t\022"
-  "\014\n\004args\030\003 \003(\t\"D\n\025gmorder_client_gate_s\022\016"
-  "\n\006result\030\001 \001(\005\022\r\n\005order\030\002 \001(\t\022\014\n\004desc\030\003 "
-  "\001(\t\"S\n\031goodsupdata_client_gate_g\022\016\n\006role"
-  "id\030\001 \001(\003\022\n\n\002id\030\002 \001(\003\022\r\n\005cfgid\030\003 \001(\005\022\013\n\003n"
-  "um\030\004 \001(\005\"(\n\030notice_info_clent_gate_g\022\014\n\004"
-  "info\030\001 \001(\t\"\212\001\n\035notice_info_list_clent_ga"
-  "te_s\022C\n\005datas\030\001 \003(\01324.frmpub.protocc.not"
-  "ice_info_list_clent_gate_s.notice\032$\n\006not"
-  "ice\022\014\n\004info\030\001 \001(\t\022\014\n\004time\030\002 \001(\005\"%\n\027email"
-  "_new_client_gate_g\022\n\n\002id\030\001 \001(\003\"\224\001\n\030loade"
-  "mails_client_gate_s\022>\n\006emails\030\001 \003(\0132..fr"
-  "mpub.protocc.loademails_client_gate_s.Em"
-  "ail\0328\n\005Email\022\n\n\002id\030\001 \001(\003\022\017\n\007is_read\030\002 \001("
-  "\010\022\022\n\nis_receive\030\003 \001(\010\"*\n\027lookemail_clien"
-  "t_gate_c\022\017\n\007emailid\030\001 \001(\003\"\276\002\n\027lookemail_"
-  "client_gate_s\022\016\n\006result\030\001 \001(\005\022\n\n\002id\030\002 \001("
-  "\003\022\r\n\005title\030\003 \001(\t\022\014\n\004info\030\004 \001(\t\022\014\n\004type\030\005"
-  " \001(\005\022\014\n\004time\030\006 \001(\005\022<\n\005annex\030\007 \001(\0132-.frmp"
-  "ub.protocc.lookemail_client_gate_s.Annex"
-  "\032\217\001\n\005Annex\022\014\n\004gold\030\001 \001(\005\022\017\n\007diamond\030\002 \001("
-  "\005\022B\n\005goods\030\003 \003(\01323.frmpub.protocc.lookem"
-  "ail_client_gate_s.Annex.Goods\032#\n\005Goods\022\r"
-  "\n\005cfgid\030\001 \001(\005\022\013\n\003num\030\002 \001(\005\")\n\026getannex_c"
-  "lient_gate_c\022\017\n\007emailid\030\001 \001(\003\"(\n\026getanne"
-  "x_client_gate_s\022\016\n\006result\030\001 \001(\005\"X\n\030baseu"
-  "pdata_client_gate_g\022\016\n\006roleid\030\003 \001(\003\022\r\n\005l"
-  "evel\030\004 \001(\005\022\014\n\004gold\030\005 \001(\005\022\017\n\007diamond\030\006 \001("
-  "\005*\364\010\n\013ClientMsgId\022\025\n\021CLIENTMSGID_BEGIN\020\000"
-  "\022\026\n\021CLIENT_GATE_BEGIN\020\350\007\022\035\n\030SERVERLIST_C"
-  "LIENT_GATE_C\020\351\007\022\035\n\030SERVERLIST_CLIENT_GAT"
-  "E_S\020\352\007\022\037\n\032SELECTSERVER_CLIENT_GATE_C\020\353\007\022"
-  "\037\n\032SELECTSERVER_CLIENT_GATE_S\020\354\007\022\036\n\031REPE"
-  "ATLOGIN_CLIENT_GATE_S\020\355\007\022\024\n\017CLIENT_GATE_"
-  "END\020\313\010\022\027\n\022CLIENT_LOGIN_BEGIN\020\314\010\022\030\n\023LOGIN"
-  "_CLIENT_GATE_C\020\315\010\022\030\n\023LOGIN_CLIENT_GATE_S"
-  "\020\316\010\022\034\n\027RECONNECT_CLIENT_GATE_C\020\317\010\022\034\n\027REC"
-  "ONNECT_CLIENT_GATE_S\020\320\010\022\025\n\020CLIENT_LOGIN_"
-  "END\020\257\t\022\026\n\021CLIENT_GAME_BEGIN\020\260\t\022\035\n\030CREATE"
-  "ROLE_CLIENT_GATE_C\020\261\t\022\035\n\030CREATEROLE_CLIE"
-  "NT_GATE_S\020\262\t\022\033\n\026LOADROLE_CLIENT_GATE_C\020\263"
-  "\t\022\033\n\026LOADROLE_CLIENT_GATE_S\020\264\t\022\033\n\026SETLEV"
-  "EL_CLIENT_GATE_C\020\265\t\022\033\n\026SETLEVEL_CLIENT_G"
-  "ATE_S\020\266\t\022\034\n\027LOADGOODS_CLIENT_GATE_C\020\267\t\022\034"
-  "\n\027LOADGOODS_CLIENT_GATE_S\020\270\t\022\032\n\025GMORDER_"
-  "CLIENT_GATE_C\020\271\t\022\032\n\025GMORDER_CLIENT_GATE_"
-  "S\020\272\t\022\036\n\031GOODSUPDATA_CLIENT_GATE_G\020\273\t\022\035\n\030"
-  "NOTICE_INFO_CLENT_GATE_G\020\274\t\022\"\n\035NOTICE_IN"
-  "FO_LIST_CLENT_GATE_C\020\275\t\022\"\n\035NOTICE_INFO_L"
-  "IST_CLENT_GATE_S\020\276\t\022\034\n\027EMAIL_NEW_CLIENT_"
-  "GATE_G\020\277\t\022\035\n\030LOADEMAILS_CLIENT_GATE_C\020\300\t"
-  "\022\035\n\030LOADEMAILS_CLIENT_GATE_S\020\301\t\022\034\n\027LOOKE"
-  "MAIL_CLIENT_GATE_C\020\302\t\022\034\n\027LOOKEMAIL_CLIEN"
-  "T_GATE_S\020\303\t\022\033\n\026GETANNEX_CLIENT_GATE_C\020\304\t"
-  "\022\033\n\026GETANNEX_CLIENT_GATE_S\020\305\t\022\035\n\030BASEUPD"
-  "ATA_CLIENT_GATE_G\020\307\t\022\024\n\017CLIENT_GAME_END\020"
-  "\223\n\022\024\n\017CLIENTMSGID_END\020\210\'b\006proto3"
+  "\022\013\n\003aid\030\001 \001(\t\022\016\n\006roleid\030\002 \001(\003\"\204\001\n\026loadro"
+  "le_client_gate_s\022\016\n\006result\030\001 \001(\005\022\013\n\003aid\030"
+  "\002 \001(\t\022\016\n\006roleid\030\003 \001(\003\022\r\n\005level\030\004 \001(\005\022\014\n\004"
+  "gold\030\005 \001(\005\022\017\n\007diamond\030\006 \001(\005\022\017\n\007lottery\030\007"
+  " \001(\005\"\'\n\026setlevel_client_gate_c\022\r\n\005level\030"
+  "\001 \001(\005\"7\n\026setlevel_client_gate_s\022\016\n\006resul"
+  "t\030\001 \001(\005\022\r\n\005level\030\002 \001(\005\"\210\001\n\027loadgoods_cli"
+  "ent_gate_s\022<\n\005goods\030\001 \003(\0132-.frmpub.proto"
+  "cc.loadgoods_client_gate_s.Goods\032/\n\005Good"
+  "s\022\n\n\002id\030\001 \001(\003\022\r\n\005cfgid\030\002 \001(\005\022\013\n\003num\030\003 \001("
+  "\005\"D\n\025gmorder_client_gate_c\022\016\n\006roleid\030\001 \001"
+  "(\003\022\r\n\005order\030\002 \001(\t\022\014\n\004args\030\003 \003(\t\"D\n\025gmord"
+  "er_client_gate_s\022\016\n\006result\030\001 \001(\005\022\r\n\005orde"
+  "r\030\002 \001(\t\022\014\n\004desc\030\003 \001(\t\"S\n\031goodsupdata_cli"
+  "ent_gate_g\022\016\n\006roleid\030\001 \001(\003\022\n\n\002id\030\002 \001(\003\022\r"
+  "\n\005cfgid\030\003 \001(\005\022\013\n\003num\030\004 \001(\005\"(\n\030notice_inf"
+  "o_clent_gate_g\022\014\n\004info\030\001 \001(\t\"\212\001\n\035notice_"
+  "info_list_clent_gate_s\022C\n\005datas\030\001 \003(\01324."
+  "frmpub.protocc.notice_info_list_clent_ga"
+  "te_s.notice\032$\n\006notice\022\014\n\004info\030\001 \001(\t\022\014\n\004t"
+  "ime\030\002 \001(\005\"%\n\027email_new_client_gate_g\022\n\n\002"
+  "id\030\001 \001(\003\"\224\001\n\030loademails_client_gate_s\022>\n"
+  "\006emails\030\001 \003(\0132..frmpub.protocc.loademail"
+  "s_client_gate_s.Email\0328\n\005Email\022\n\n\002id\030\001 \001"
+  "(\003\022\017\n\007is_read\030\002 \001(\010\022\022\n\nis_receive\030\003 \001(\010\""
+  "*\n\027lookemail_client_gate_c\022\017\n\007emailid\030\001 "
+  "\001(\003\"\276\002\n\027lookemail_client_gate_s\022\016\n\006resul"
+  "t\030\001 \001(\005\022\n\n\002id\030\002 \001(\003\022\r\n\005title\030\003 \001(\t\022\014\n\004in"
+  "fo\030\004 \001(\t\022\014\n\004type\030\005 \001(\005\022\014\n\004time\030\006 \001(\005\022<\n\005"
+  "annex\030\007 \001(\0132-.frmpub.protocc.lookemail_c"
+  "lient_gate_s.Annex\032\217\001\n\005Annex\022\014\n\004gold\030\001 \001"
+  "(\005\022\017\n\007diamond\030\002 \001(\005\022B\n\005goods\030\003 \003(\01323.frm"
+  "pub.protocc.lookemail_client_gate_s.Anne"
+  "x.Goods\032#\n\005Goods\022\r\n\005cfgid\030\001 \001(\005\022\013\n\003num\030\002"
+  " \001(\005\")\n\026getannex_client_gate_c\022\017\n\007emaili"
+  "d\030\001 \001(\003\"(\n\026getannex_client_gate_s\022\016\n\006res"
+  "ult\030\001 \001(\005\"X\n\030baseupdata_client_gate_g\022\016\n"
+  "\006roleid\030\001 \001(\003\022\r\n\005level\030\002 \001(\005\022\014\n\004gold\030\003 \001"
+  "(\005\022\017\n\007diamond\030\004 \001(\005*\364\010\n\013ClientMsgId\022\025\n\021C"
+  "LIENTMSGID_BEGIN\020\000\022\026\n\021CLIENT_GATE_BEGIN\020"
+  "\350\007\022\035\n\030SERVERLIST_CLIENT_GATE_C\020\351\007\022\035\n\030SER"
+  "VERLIST_CLIENT_GATE_S\020\352\007\022\037\n\032SELECTSERVER"
+  "_CLIENT_GATE_C\020\353\007\022\037\n\032SELECTSERVER_CLIENT"
+  "_GATE_S\020\354\007\022\036\n\031REPEATLOGIN_CLIENT_GATE_S\020"
+  "\355\007\022\024\n\017CLIENT_GATE_END\020\313\010\022\027\n\022CLIENT_LOGIN"
+  "_BEGIN\020\314\010\022\030\n\023LOGIN_CLIENT_GATE_C\020\315\010\022\030\n\023L"
+  "OGIN_CLIENT_GATE_S\020\316\010\022\034\n\027RECONNECT_CLIEN"
+  "T_GATE_C\020\317\010\022\034\n\027RECONNECT_CLIENT_GATE_S\020\320"
+  "\010\022\025\n\020CLIENT_LOGIN_END\020\257\t\022\026\n\021CLIENT_GAME_"
+  "BEGIN\020\260\t\022\035\n\030CREATEROLE_CLIENT_GATE_C\020\261\t\022"
+  "\035\n\030CREATEROLE_CLIENT_GATE_S\020\262\t\022\033\n\026LOADRO"
+  "LE_CLIENT_GATE_C\020\263\t\022\033\n\026LOADROLE_CLIENT_G"
+  "ATE_S\020\264\t\022\033\n\026SETLEVEL_CLIENT_GATE_C\020\265\t\022\033\n"
+  "\026SETLEVEL_CLIENT_GATE_S\020\266\t\022\034\n\027LOADGOODS_"
+  "CLIENT_GATE_C\020\267\t\022\034\n\027LOADGOODS_CLIENT_GAT"
+  "E_S\020\270\t\022\032\n\025GMORDER_CLIENT_GATE_C\020\271\t\022\032\n\025GM"
+  "ORDER_CLIENT_GATE_S\020\272\t\022\036\n\031GOODSUPDATA_CL"
+  "IENT_GATE_G\020\273\t\022\035\n\030NOTICE_INFO_CLENT_GATE"
+  "_G\020\274\t\022\"\n\035NOTICE_INFO_LIST_CLENT_GATE_C\020\275"
+  "\t\022\"\n\035NOTICE_INFO_LIST_CLENT_GATE_S\020\276\t\022\034\n"
+  "\027EMAIL_NEW_CLIENT_GATE_G\020\277\t\022\035\n\030LOADEMAIL"
+  "S_CLIENT_GATE_C\020\300\t\022\035\n\030LOADEMAILS_CLIENT_"
+  "GATE_S\020\301\t\022\034\n\027LOOKEMAIL_CLIENT_GATE_C\020\302\t\022"
+  "\034\n\027LOOKEMAIL_CLIENT_GATE_S\020\303\t\022\033\n\026GETANNE"
+  "X_CLIENT_GATE_C\020\304\t\022\033\n\026GETANNEX_CLIENT_GA"
+  "TE_S\020\305\t\022\035\n\030BASEUPDATA_CLIENT_GATE_G\020\307\t\022\024"
+  "\n\017CLIENT_GAME_END\020\223\n\022\024\n\017CLIENTMSGID_END\020"
+  "\210\'b\006proto3"
   ;
 static const ::PROTOBUF_NAMESPACE_ID::internal::DescriptorTable*const descriptor_table_client_2eproto_deps[1] = {
   &::descriptor_table_common_2eproto,
 };
 static ::PROTOBUF_NAMESPACE_ID::internal::once_flag descriptor_table_client_2eproto_once;
 const ::PROTOBUF_NAMESPACE_ID::internal::DescriptorTable descriptor_table_client_2eproto = {
-  false, false, 3352, descriptor_table_protodef_client_2eproto, "client.proto", 
+  false, false, 3370, descriptor_table_protodef_client_2eproto, "client.proto", 
   &descriptor_table_client_2eproto_once, descriptor_table_client_2eproto_deps, 1, 32,
   schemas, file_default_instances, TableStruct_client_2eproto::offsets,
   file_level_metadata_client_2eproto, file_level_enum_descriptors_client_2eproto, file_level_service_descriptors_client_2eproto,
@@ -3441,8 +3444,8 @@ loadrole_client_gate_s::loadrole_client_gate_s(const loadrole_client_gate_s& fro
       GetArena());
   }
   ::memcpy(&result_, &from.result_,
-    static_cast<size_t>(reinterpret_cast<char*>(&diamond_) -
-    reinterpret_cast<char*>(&result_)) + sizeof(diamond_));
+    static_cast<size_t>(reinterpret_cast<char*>(&lottery_) -
+    reinterpret_cast<char*>(&result_)) + sizeof(lottery_));
   // @@protoc_insertion_point(copy_constructor:frmpub.protocc.loadrole_client_gate_s)
 }
 
@@ -3450,8 +3453,8 @@ void loadrole_client_gate_s::SharedCtor() {
 aid_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
 ::memset(reinterpret_cast<char*>(this) + static_cast<size_t>(
     reinterpret_cast<char*>(&result_) - reinterpret_cast<char*>(this)),
-    0, static_cast<size_t>(reinterpret_cast<char*>(&diamond_) -
-    reinterpret_cast<char*>(&result_)) + sizeof(diamond_));
+    0, static_cast<size_t>(reinterpret_cast<char*>(&lottery_) -
+    reinterpret_cast<char*>(&result_)) + sizeof(lottery_));
 }
 
 loadrole_client_gate_s::~loadrole_client_gate_s() {
@@ -3483,8 +3486,8 @@ void loadrole_client_gate_s::Clear() {
 
   aid_.ClearToEmpty();
   ::memset(&result_, 0, static_cast<size_t>(
-      reinterpret_cast<char*>(&diamond_) -
-      reinterpret_cast<char*>(&result_)) + sizeof(diamond_));
+      reinterpret_cast<char*>(&lottery_) -
+      reinterpret_cast<char*>(&result_)) + sizeof(lottery_));
   _internal_metadata_.Clear<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>();
 }
 
@@ -3536,6 +3539,13 @@ const char* loadrole_client_gate_s::_InternalParse(const char* ptr, ::PROTOBUF_N
       case 6:
         if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 48)) {
           diamond_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint64(&ptr);
+          CHK_(ptr);
+        } else goto handle_unusual;
+        continue;
+      // int32 lottery = 7;
+      case 7:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 56)) {
+          lottery_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint64(&ptr);
           CHK_(ptr);
         } else goto handle_unusual;
         continue;
@@ -3607,6 +3617,12 @@ failure:
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteInt32ToArray(6, this->_internal_diamond(), target);
   }
 
+  // int32 lottery = 7;
+  if (this->lottery() != 0) {
+    target = stream->EnsureSpace(target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteInt32ToArray(7, this->_internal_lottery(), target);
+  }
+
   if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::InternalSerializeUnknownFieldsToArray(
         _internal_metadata_.unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(::PROTOBUF_NAMESPACE_ID::UnknownFieldSet::default_instance), target, stream);
@@ -3665,6 +3681,13 @@ size_t loadrole_client_gate_s::ByteSizeLong() const {
         this->_internal_diamond());
   }
 
+  // int32 lottery = 7;
+  if (this->lottery() != 0) {
+    total_size += 1 +
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::Int32Size(
+        this->_internal_lottery());
+  }
+
   if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
     return ::PROTOBUF_NAMESPACE_ID::internal::ComputeUnknownFieldsSize(
         _internal_metadata_, total_size, &_cached_size_);
@@ -3714,6 +3737,9 @@ void loadrole_client_gate_s::MergeFrom(const loadrole_client_gate_s& from) {
   if (from.diamond() != 0) {
     _internal_set_diamond(from._internal_diamond());
   }
+  if (from.lottery() != 0) {
+    _internal_set_lottery(from._internal_lottery());
+  }
 }
 
 void loadrole_client_gate_s::CopyFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) {
@@ -3739,8 +3765,8 @@ void loadrole_client_gate_s::InternalSwap(loadrole_client_gate_s* other) {
   _internal_metadata_.Swap<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(&other->_internal_metadata_);
   aid_.Swap(&other->aid_, &::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArena());
   ::PROTOBUF_NAMESPACE_ID::internal::memswap<
-      PROTOBUF_FIELD_OFFSET(loadrole_client_gate_s, diamond_)
-      + sizeof(loadrole_client_gate_s::diamond_)
+      PROTOBUF_FIELD_OFFSET(loadrole_client_gate_s, lottery_)
+      + sizeof(loadrole_client_gate_s::lottery_)
       - PROTOBUF_FIELD_OFFSET(loadrole_client_gate_s, result_)>(
           reinterpret_cast<char*>(&result_),
           reinterpret_cast<char*>(&other->result_));
@@ -8151,30 +8177,30 @@ const char* baseupdata_client_gate_g::_InternalParse(const char* ptr, ::PROTOBUF
     ptr = ::PROTOBUF_NAMESPACE_ID::internal::ReadTag(ptr, &tag);
     CHK_(ptr);
     switch (tag >> 3) {
-      // int64 roleid = 3;
-      case 3:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 24)) {
+      // int64 roleid = 1;
+      case 1:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 8)) {
           roleid_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint64(&ptr);
           CHK_(ptr);
         } else goto handle_unusual;
         continue;
-      // int32 level = 4;
-      case 4:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 32)) {
+      // int32 level = 2;
+      case 2:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 16)) {
           level_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint64(&ptr);
           CHK_(ptr);
         } else goto handle_unusual;
         continue;
-      // int32 gold = 5;
-      case 5:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 40)) {
+      // int32 gold = 3;
+      case 3:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 24)) {
           gold_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint64(&ptr);
           CHK_(ptr);
         } else goto handle_unusual;
         continue;
-      // int32 diamond = 6;
-      case 6:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 48)) {
+      // int32 diamond = 4;
+      case 4:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 32)) {
           diamond_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint64(&ptr);
           CHK_(ptr);
         } else goto handle_unusual;
@@ -8207,28 +8233,28 @@ failure:
   ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
   (void) cached_has_bits;
 
-  // int64 roleid = 3;
+  // int64 roleid = 1;
   if (this->roleid() != 0) {
     target = stream->EnsureSpace(target);
-    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteInt64ToArray(3, this->_internal_roleid(), target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteInt64ToArray(1, this->_internal_roleid(), target);
   }
 
-  // int32 level = 4;
+  // int32 level = 2;
   if (this->level() != 0) {
     target = stream->EnsureSpace(target);
-    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteInt32ToArray(4, this->_internal_level(), target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteInt32ToArray(2, this->_internal_level(), target);
   }
 
-  // int32 gold = 5;
+  // int32 gold = 3;
   if (this->gold() != 0) {
     target = stream->EnsureSpace(target);
-    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteInt32ToArray(5, this->_internal_gold(), target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteInt32ToArray(3, this->_internal_gold(), target);
   }
 
-  // int32 diamond = 6;
+  // int32 diamond = 4;
   if (this->diamond() != 0) {
     target = stream->EnsureSpace(target);
-    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteInt32ToArray(6, this->_internal_diamond(), target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteInt32ToArray(4, this->_internal_diamond(), target);
   }
 
   if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
@@ -8247,28 +8273,28 @@ size_t baseupdata_client_gate_g::ByteSizeLong() const {
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
-  // int64 roleid = 3;
+  // int64 roleid = 1;
   if (this->roleid() != 0) {
     total_size += 1 +
       ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::Int64Size(
         this->_internal_roleid());
   }
 
-  // int32 level = 4;
+  // int32 level = 2;
   if (this->level() != 0) {
     total_size += 1 +
       ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::Int32Size(
         this->_internal_level());
   }
 
-  // int32 gold = 5;
+  // int32 gold = 3;
   if (this->gold() != 0) {
     total_size += 1 +
       ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::Int32Size(
         this->_internal_gold());
   }
 
-  // int32 diamond = 6;
+  // int32 diamond = 4;
   if (this->diamond() != 0) {
     total_size += 1 +
       ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::Int32Size(

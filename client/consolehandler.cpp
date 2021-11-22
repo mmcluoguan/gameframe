@@ -167,6 +167,7 @@ void ConsoleHandler::display_role_base_order(const OrderItem& order, int argc, c
     LOG_INFO_BASE << "\t角色等级:" << role.level();
     LOG_INFO_BASE << "\t角色游戏币:" << role.gold();
     LOG_INFO_BASE << "\t角色钻石:" << role.diamond();
+    LOG_INFO_BASE << "\t角色剩余抽奖次数:" << role.lottery();
 }
 
 void ConsoleHandler::display_role_goods_order(const OrderItem& order, int argc, char** argv)

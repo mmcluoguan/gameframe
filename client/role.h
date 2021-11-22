@@ -91,6 +91,15 @@ public:
         diamond_ = v;
     }
 
+    int32_t lottery() const
+    {
+        return lottery_;
+    }
+    void set_lottery(int32_t v)
+    {
+        lottery_ = v;
+    }
+
     void set_gate(std::weak_ptr<GateConnector> v)
     {
         gate_ = v;
@@ -180,6 +189,7 @@ private:
     int32_t level_;
     int32_t gold_;
     int32_t diamond_;
+    int32_t lottery_;
     std::unordered_map<int64_t, Goods> goodsmap_;
     std::unordered_map<int64_t, Email> emailsmap_;
 

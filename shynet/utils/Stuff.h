@@ -2,8 +2,10 @@
 #define SHYNET_UTILS_STUFF_H
 
 #include "shynet/basic.h"
+#include "shynet/utils/stringop.h"
 #include <functional>
 #include <random>
+#include <regex>
 #include <set>
 #include <vector>
 

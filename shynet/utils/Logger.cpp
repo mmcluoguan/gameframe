@@ -1,4 +1,5 @@
 #include "shynet/utils/logger.h"
+#include "shynet/utils/filepathop.h"
 #include "shynet/utils/stuff.h"
 #include <cstring>
 #include <fstream>
@@ -39,11 +40,18 @@ namespace utils {
     static void defaultOutput(const char* msg, size_t len)
     {
         std::lock_guard<std::mutex> lock(g_logMutex);
-        constexpr const char* kRoot = "./log/";
+        char path[PATH_MAX] = { 0 };
+        char processname[NAME_MAX] = { 0 };
+        utils::Stuff::executable_path(path, processname, sizeof(path));
+        char* processname_end = strrchr(processname, '.');
+        if (processname != nullptr) {
+            *processname_end = '\0';
+        }
+
+        constexpr const char* kRoot = "./log/%s";
         if (g_islogdir == false) {
-            if (access(kRoot, F_OK) == -1) {
-                mkdir(kRoot, S_IRWXU);
-            }
+            std::string path = StringOp::str_format(kRoot, processname);
+            FilePathOp::mkdir_recursive(path);
             g_islogdir = true;
         }
         time_t t = time(nullptr);
@@ -52,18 +60,8 @@ namespace utils {
         char timebuf[30] = { 0 };
         strftime(timebuf, sizeof(timebuf), "%F_%H.log", &tm_time);
 
-        char path[PATH_MAX] = { 0 };
-        char processname[NAME_MAX] = { 0 };
-        if (utils::Stuff::executable_path(path, processname, sizeof(path)) == -1) {
-            abort();
-        }
-        char* processname_end = strrchr(processname, '.');
-        if (processname != nullptr) {
-            *processname_end = '\0';
-        }
-
         char logfilename[NAME_MAX] = { 0 };
-        sprintf(logfilename, "./log/%s_%d_%s", processname, getpid(), timebuf);
+        sprintf(logfilename, "./log/%s/%s_%d_%s", processname, processname, getpid(), timebuf);
 
         if (strncmp(g_logfilename, logfilename, strlen(logfilename)) != 0) {
             if (g_logfile.is_open()) {

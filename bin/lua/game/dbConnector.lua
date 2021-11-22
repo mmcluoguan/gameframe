@@ -35,6 +35,9 @@ function dbConnector:loaddata_from_dbvisit_s(msgid,msgdata,routing)
                 end
             else
                 log("加载1条hash数据失败 tag:",msgs.tag)
+                if temp[1] == 'roledata' then
+                    gameClient:send('loadrole_client_gate_s',{ result = 1 },routing)
+                end
             end
         else
             log("网关 fd:",gameClientFd," 已断开连接")
@@ -76,41 +79,14 @@ end
 
 --加载角色结果
 function dbConnector:loadrole_client_gate_c(roleid,fields,gameClientFd,routing)
-    local msgtable = {
-        result = 0,
-    }
-    local roleObj = RoleMgr:find(roleid)
-    if roleObj == nil then
-        roleObj = role:new(roleid,gameClientFd)
-        RoleMgr:add(roleObj)
-    end
+    local roleObj = role:new(roleid,-1)
+    RoleMgr:add(roleObj)
     roleObj:copyrouting(routing)
     assert(routing:size() ~= 0,'loadrole_client_gate_c 没有路由信息');
-    roleObj.clientfd = routing:top():fd()
-    roleObj.online = true
-    roleObj.online_time = os.time()
-    for i = 1, #fields do
-        if fields[i].key == '_id' then
-            roleObj.id = tonumber(fields[i].value)
-            msgtable.roleid = roleObj.id
-        elseif fields[i].key == 'accountid' then
-            roleObj.accountid = fields[i].value
-            msgtable.aid = roleObj.accountid
-        elseif fields[i].key == 'level' then
-            roleObj.level = tonumber(fields[i].value)
-            msgtable.level = roleObj.level
-        elseif fields[i].key == 'gold' then
-            roleObj.gold = tonumber(fields[i].value)
-            msgtable.gold = roleObj.gold
-        elseif fields[i].key == 'diamond' then
-            roleObj.diamond = tonumber(fields[i].value)
-            msgtable.diamond = roleObj.diamond
-        elseif fields[i].key == 'unline_time' then
-            roleObj.unline_time = tonumber(fields[i].value)
-        end
-    end
     log("在db中获取角色数据 roleid:",roleObj.id)
-    return 'loadrole_client_gate_s',msgtable
+    roleObj:init_fields()
+    roleObj:loaddata_complete(gameClientFd,routing:top():fd(),fields)
+    return 'loadrole_client_gate_s',roleObj:client_roledata()
 end
 
 --加载角色物品结果
@@ -179,9 +155,9 @@ function dbConnector:loademails_client_gate_c(roleid,objs)
                 emailid = tonumber(value)   
                 roleObj.emails[i].id = emailid           
             elseif key == 'is_read' then
-                roleObj.emails[i].is_read = stobool(value)
+                roleObj.emails[i].is_read = StrtoBool(value)
             elseif key == 'is_receive' then
-                roleObj.emails[i].is_receive = stobool(value)
+                roleObj.emails[i].is_receive = StrtoBool(value)
             end
         end
         roleObj.emails[emailid] = roleObj.emails[i]

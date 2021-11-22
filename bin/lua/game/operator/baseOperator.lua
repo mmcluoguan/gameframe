@@ -14,17 +14,7 @@ end
 --角色游戏币改变
 function baseOperator:change_gold(role,gold,module_id)
     role.gold = role.gold + gold
-
-    --更新数据库
-    local updata = {
-        cache_key = "role_" .. role.id,
-        opertype = 0,
-        fields = {
-            { key = 'gold', value = tostring(role.gold),},
-        }
-    }
-    ConnectorMgr:dbConnector():send('updata_to_dbvisit_c',updata)
-
+    role:save('gold')
     --记录日志
     local change_log = {
         fun = 'baseOperator:change_gold',
@@ -39,16 +29,7 @@ end
 --角色钻石改变
 function baseOperator:change_diamond(role,diamond,module_id)
     role.diamond = role.diamond + diamond
-
-    --更新数据库
-    local updata = {
-        cache_key = "role_" .. role.id,
-        opertype = 0,
-        fields = {
-            { key = 'diamond', value = tostring(role.diamond),},
-        }
-    }
-    ConnectorMgr:dbConnector():send('updata_to_dbvisit_c',updata)
+    role:save('diamond')
 
     --记录日志
     local change_log = {
@@ -64,16 +45,7 @@ end
 --角色等级改变
 function baseOperator:change_level(role,level,module_id)
     role.level = role.level + level
-
-    --更新数据库
-    local updata = {
-        cache_key = "role_" .. role.id,
-        opertype = 0,
-        fields = {
-            { key = 'level', value = tostring(role.level),},
-        }
-    }
-    ConnectorMgr:dbConnector():send('updata_to_dbvisit_c',updata)
+    role:save('level')
 
     --记录日志
     local change_log = {

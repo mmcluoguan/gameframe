@@ -39,6 +39,6 @@ function onMessage(cli,msgid,msgdata,routing)
     end    
 end
 
---local autoUpLevel = require("lua/game/system/autoUpLevel")
---autoUpLevel:start()
+local zerotimeSystem = require("lua/game/system/zerotimeSystem")
+zerotimeSystem:start()
 

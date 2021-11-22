@@ -79,11 +79,13 @@ int Role::loadrole_client_gate_s(std::shared_ptr<protocc::CommonObject> data,
                   << " roleid:" << msgs.roleid()
                   << " level:" << msgs.level()
                   << " gold:" << msgs.gold()
-                  << " diamond:" << msgs.diamond();
+                  << " diamond:" << msgs.diamond()
+                  << " lottery:" << msgs.lottery();
         id_ = msgs.roleid();
         level_ = msgs.level();
         gold_ = msgs.gold();
         diamond_ = msgs.diamond();
+        lottery_ = msgs.lottery();
 
         send_proto(protocc::LOADGOODS_CLIENT_GATE_C);
         LOG_DEBUG << "加载角色物品数据";

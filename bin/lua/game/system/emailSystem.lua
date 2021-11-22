@@ -55,7 +55,7 @@ function emailSystem:loaded(objs)
         self.emails[emailid] = self.emails[i]
         self.emails[i] = nil
     end
-    log('系统邮件列表加载完成 len:',get_tablekey_size(self.emails))
+    log('系统邮件列表加载完成 len:',Get_Tablekey_Size(self.emails))
 end
 
 --添加一封新邮件

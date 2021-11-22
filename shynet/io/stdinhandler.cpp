@@ -38,7 +38,8 @@ namespace io {
 
                         LOG_INFO_BASE << "没有可执行的命令,可执行的命令列表";
                         for (const auto& it : *g_orders) {
-                            LOG_INFO_BASE << "描述:" << it.desc << "\t\t\t\t\t\t格式:" << it.name << " " << it.argstr;
+                            LOG_INFO_BASE << "格式 : " << it.name << " " << it.argstr
+                                          << "\t\t\t\t\t\t描述:" << it.desc;
                         }
                     }
                 }

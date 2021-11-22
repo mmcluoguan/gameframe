@@ -81,6 +81,8 @@ namespace utils {
             return std::string(buf.get(), buf.get() + size_buf - 1);
         }
 
+        static std::string replace(const std::string& data, const std::string& toFind, const std::string& toReplace);
+
     private:
     };
 }

@@ -210,5 +210,17 @@ namespace utils {
         }
         return ret;
     }
+
+    std::string StringOp::replace(const std::string& data, const std::string& toFind, const std::string& toReplace)
+    {
+        std::string result = data;
+        size_t pos = 0;
+        while ((pos = result.find(toFind, pos)) != std::string::npos) {
+            result.replace(pos, toFind.length(), toReplace);
+            pos += toReplace.length();
+            pos = result.find(toFind, pos);
+        }
+        return result;
+    }
 }
 }

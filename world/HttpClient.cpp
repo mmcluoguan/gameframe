@@ -78,23 +78,27 @@ int HttpClient::errcode(std::shared_ptr<rapidjson::Document> doc, std::shared_pt
 
 int HttpClient::getgamelist_admin_world_c(std::shared_ptr<rapidjson::Document> doc, std::shared_ptr<std::stack<FilterData::Envelope>> enves)
 {
-    rapidjson::Value msgs;
-    msgs.SetObject();
-    msgs.AddMember("games", rapidjson::Value(rapidjson::kArrayType), doc->GetAllocator());
-    auto clis = shynet::utils::Singleton<WorldClientMgr>::instance().clis();
-    for (auto&& [key, cli] : clis) {
-        if (cli->sif().st() == protocc::ServerType::GAME) {
-            rapidjson::Value game_json;
-            game_json.SetObject();
-            game_json.AddMember("ip", rapidjson::StringRef(cli->sif().ip().c_str()), doc->GetAllocator());
-            game_json.AddMember("port", cli->sif().port(), doc->GetAllocator());
-            game_json.AddMember("st", cli->sif().st(), doc->GetAllocator());
-            game_json.AddMember("sid", cli->sif().sid(), doc->GetAllocator());
-            game_json.AddMember("name", rapidjson::StringRef(cli->sif().name().c_str()), doc->GetAllocator());
-            msgs["games"].PushBack(game_json, doc->GetAllocator());
+    try {
+        rapidjson::Value msgs;
+        msgs.SetObject();
+        msgs.AddMember("games", rapidjson::Value(rapidjson::kArrayType), doc->GetAllocator());
+        auto clis = shynet::utils::Singleton<WorldClientMgr>::instance().clis();
+        for (auto&& [key, cli] : clis) {
+            if (cli->sif().st() == protocc::ServerType::GAME) {
+                rapidjson::Value game_json;
+                game_json.SetObject();
+                game_json.AddMember("ip", rapidjson::StringRef(cli->sif().ip().c_str()), doc->GetAllocator());
+                game_json.AddMember("port", cli->sif().port(), doc->GetAllocator());
+                game_json.AddMember("st", cli->sif().st(), doc->GetAllocator());
+                game_json.AddMember("sid", cli->sif().sid(), doc->GetAllocator());
+                game_json.AddMember("name", rapidjson::StringRef(cli->sif().name().c_str()), doc->GetAllocator());
+                msgs["games"].PushBack(game_json, doc->GetAllocator());
+            }
         }
+        send_json(int(frmpub::JosnMsgId::GETGAMELIST_ADMIN_WORLD_S), &msgs, enves.get());
+    } catch (const std::exception& err) {
+        SEND_ERR(protocc::MESSAGE_PARSING_ERROR, err.what());
     }
-    send_json(int(frmpub::JosnMsgId::GETGAMELIST_ADMIN_WORLD_S), &msgs, enves.get());
     return 0;
 }
 
