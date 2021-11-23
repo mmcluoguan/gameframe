@@ -79,7 +79,7 @@ end
 
 --加载角色结果
 function dbConnector:loadrole_client_gate_c(roleid,fields,gameClientFd,routing)
-    local roleObj = role:new(roleid,-1)
+    local roleObj = role:new(roleid,'')
     RoleMgr:add(roleObj)
     roleObj:copyrouting(routing)
     assert(routing:size() ~= 0,'loadrole_client_gate_c 没有路由信息');

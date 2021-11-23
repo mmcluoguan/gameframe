@@ -1,5 +1,5 @@
 --每天23:59:59清理任务
-local zerotimeSystem = {}
+local zerotimeSystem = { is_start = false}
 
 function zerotimeSystem:uplevel()
     for k,v in pairs(RoleMgr) do

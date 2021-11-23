@@ -122,11 +122,11 @@ function role:save(...)
         opertype = 0,
     }
     updata.fields = {}
-    for key, _ in pairs(...) do
+    for _, key in pairs({...}) do
         local t = {}
         t.key = key
-        assert(role[key],'角色没有字段 '.. key)
-        t.value = tostring(role[key])
+        assert(self[key] ~= nil,'角色没有字段 '.. key)
+        t.value = tostring(self[key])
         table.insert(updata.fields,t)
     end
     ConnectorMgr:dbConnector():send('updata_to_dbvisit_c',updata)
@@ -136,7 +136,6 @@ function role:clean()
     log("销毁角色 id:",self.id)
     self.unline_time = os.time()
     self.online = false
-
     self:save('online','unline_time')
 end
 
