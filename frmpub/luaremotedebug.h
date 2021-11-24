@@ -15,9 +15,14 @@ class LuaRemoteDebug final : public shynet::Nocopy {
 
 public:
     /*
-		* 初始化调试地址
+		* 启用调试
 		*/
-    LuaRemoteDebug& init(const std::string debugip);
+    LuaRemoteDebug& enable(const std::string& debugip);
+
+    /*
+		* 禁止调试
+		*/
+    void disenable();
 
     /*
 		* 开始调试
@@ -32,6 +37,7 @@ public:
 private:
     std::string debugip_;
     bool isinit_ = false;
+    bool isstart_ = false;
 };
 }
 

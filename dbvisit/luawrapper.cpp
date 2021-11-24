@@ -30,7 +30,7 @@ void LuaWrapper::init(kaguya::State& state)
     shynet::utils::IniConfig& ini = shynet::utils::Singleton<shynet::utils::IniConfig>::get_instance();
     std::string luadebugip = ini.get<std::string>(g_confname, "luadebugip");
     if (!luadebugip.empty()) {
-        shynet::utils::Singleton<frmpub::LuaRemoteDebug>::instance().init(luadebugip).start(state);
+        shynet::utils::Singleton<frmpub::LuaRemoteDebug>::instance().enable(luadebugip).start(state);
     }
 
     //载入lua文件

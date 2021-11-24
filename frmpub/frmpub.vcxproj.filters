@@ -45,6 +45,7 @@
     <ClCompile Include="protocc\dbvisit.pb.cc">
       <Filter>protocc</Filter>
     </ClCompile>
+    <ClCompile Include="frmstdinhandler.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pingtimer.h" />
@@ -95,6 +96,7 @@
     <ClInclude Include="protocc\dbvisit.pb.h">
       <Filter>protocc</Filter>
     </ClInclude>
+    <ClInclude Include="frmstdinhandler.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="protocc">

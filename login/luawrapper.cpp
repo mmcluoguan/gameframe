@@ -1,4 +1,5 @@
 #include "login/luawrapper.h"
+#include "frmpub/luaremotedebug.h"
 #include "login/dbconnector.h"
 #include "login/loginclient.h"
 #include "login/loginclientmgr.h"
@@ -27,9 +28,18 @@ void LuaWrapper::init(kaguya::State& state)
 
     state["WorldConnector_CPP"].setClass(kaguya::UserdataMetatable<WorldConnector, frmpub::Connector>());
 
+    //是否开启调试模式
+    shynet::utils::IniConfig& ini = shynet::utils::Singleton<shynet::utils::IniConfig>::get_instance();
+    std::string luadebugip = ini.get<std::string>("login", "luadebugip");
+    if (!luadebugip.empty()) {
+        shynet::utils::Singleton<frmpub::LuaRemoteDebug>::instance().enable(luadebugip).start(state);
+    }
+
     //载入lua文件
     shynet::utils::IniConfig& ini = shynet::utils::Singleton<shynet::utils::IniConfig>::get_instance();
     std::string luafile = ini.get<std::string>("login", "luafile");
     state.dofile(luafile);
+
+    shynet::utils::Singleton<frmpub::LuaRemoteDebug>::instance().stop(state);
 }
 }

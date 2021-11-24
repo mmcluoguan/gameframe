@@ -1,6 +1,7 @@
 #include "dbvisit/dbclientmgr.h"
 #include "dbvisit/dbserver.h"
 #include "dbvisit/luawrapper.h"
+#include "frmpub/frmstdinhandler.h"
 #include "frmpub/luafoldertask.h"
 #include "shynet/events/eventhandler.h"
 #include "shynet/io/stdinhandler.h"
@@ -124,7 +125,7 @@ int main(int argc, char* argv[])
 
             shared_ptr<EventBase> base(new EventBase());
 
-            StdinHandler* stdin = &Singleton<StdinHandler>::instance(base);
+            FrmStdinhandler* stdin = &Singleton<FrmStdinhandler>::instance(base);
             SignalHandler* sigint = &Singleton<SignalHandler>::instance(base);
             base->addevent(stdin, nullptr);
             base->addevent(sigint, nullptr);

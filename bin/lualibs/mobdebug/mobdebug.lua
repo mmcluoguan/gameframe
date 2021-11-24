@@ -1024,7 +1024,8 @@ local function debugger_loop(sev, svars, sfile, sline)
       end
     elseif command == "EXIT" then
       server:send("200 OK\n")
-      coroyield("exit")
+      coroyield("done")
+      --coroyield("exit")
     else
       server:send("400 Bad Request\n")
     end
@@ -1102,7 +1103,7 @@ local function start(controller_host, controller_port)
     step_into = true -- start with step command
     return true
   else
-    print(("Could not connect to %s:%s: %s")
+    print(("不能连接到lua调试服务 %s:%s: %s")
       :format(controller_host, controller_port, err or "unknown error"))
   end
 end

@@ -40,6 +40,7 @@
     <ClCompile Include="connector.cpp" />
     <ClCompile Include="filterdata.cpp" />
     <ClCompile Include="frmluawrapper.cpp" />
+    <ClCompile Include="frmstdinhandler.cpp" />
     <ClCompile Include="luafoldertask.cpp" />
     <ClCompile Include="luahotfixtask.cpp" />
     <ClCompile Include="luaremotedebug.cpp" />
@@ -60,6 +61,7 @@
     <ClInclude Include="connector.h" />
     <ClInclude Include="filterdata.h" />
     <ClInclude Include="frmluawrapper.h" />
+    <ClInclude Include="frmstdinhandler.h" />
     <ClInclude Include="luafoldertask.h" />
     <ClInclude Include="luahotfixtask.h" />
     <ClInclude Include="luacallbacktask.h" />
