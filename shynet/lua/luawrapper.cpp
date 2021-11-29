@@ -24,7 +24,7 @@ namespace lua {
 
         //注册函数
         state["random"] = kaguya::function([](int min, int max) {
-            return shynet::utils::Stuff::random(min, max);
+            return shynet::utils::stuff::random(min, max);
         });
 
         state["log"] = kaguya::function([](kaguya::VariadicArgType args) {

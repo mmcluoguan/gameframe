@@ -95,9 +95,9 @@ namespace protocol {
             std::string::size_type end = line.find(":");
             if (end != std::string::npos) {
                 std::string key = line.substr(0, end);
-                key = utils::StringOp::trim(key);
+                key = utils::stringop::trim(key);
                 std::string value = line.substr(end + 1);
-                value = utils::StringOp::trim(value);
+                value = utils::stringop::trim(value);
                 heads_[key] = value;
             } else {
                 LOG_WARN << "协议错误";

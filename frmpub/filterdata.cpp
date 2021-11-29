@@ -31,7 +31,7 @@ int FilterData::message_handle(char* original_data, size_t datalen)
 
 int FilterData::protobuf_handle(const char* original_data, size_t datalen)
 {
-    std::shared_ptr<protocc::CommonObject> obj(new protocc::CommonObject);
+    std::shared_ptr<protocc::CommonObject> obj = std::make_shared<protocc::CommonObject>();
     if (obj->ParseFromArray(original_data, (int)datalen) == true) {
         std::shared_ptr<std::stack<Envelope>> enves = std::make_shared<std::stack<Envelope>>();
         for (int i = obj->rs_size() - 1; i >= 0; i--) {

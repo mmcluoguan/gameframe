@@ -44,10 +44,10 @@ int main(int argc, char* argv[])
         IniConfig& ini = Singleton<IniConfig>::instance(std::move(inifile));
         bool daemon = ini.get<bool>(g_confname, "daemon");
         if (daemon) {
-            Stuff::daemon();
+            stuff::daemon();
         }
 
-        Stuff::create_coredump();
+        stuff::create_coredump();
         Logger::loglevel(Logger::LogLevel::DEBUG);
         if (EventBase::usethread() == -1) {
             THROW_EXCEPTION("call usethread");
@@ -57,8 +57,8 @@ int main(int argc, char* argv[])
         if (access(pid_dir, F_OK) == -1) {
             mkdir(pid_dir, S_IRWXU);
         }
-        std::string pidfile = StringOp::str_format("./%s/%s.pid", pid_dir, g_confname);
-        Stuff::writepid(pidfile);
+        std::string pidfile = stringop::str_format("./%s/%s.pid", pid_dir, g_confname);
+        stuff::writepid(pidfile);
 
         Singleton<LuaEngine>::instance(std::make_shared<world::LuaWrapper>());
         Singleton<ThreadPool>::instance().start();
@@ -79,7 +79,7 @@ int main(int argc, char* argv[])
 
         //连接db服务器
         string dbstr = ini.get<string>(g_confname, "db");
-        auto dblist = StringOp::split(dbstr, ",");
+        auto dblist = stringop::split(dbstr, ",");
         if (dblist.size() > 2 || dblist.size() == 0) {
             THROW_EXCEPTION("db配置错误");
         }
@@ -104,7 +104,7 @@ int main(int argc, char* argv[])
         base->addevent(sigint, nullptr);
         base->dispatch();
     } catch (const std::exception& err) {
-        utils::Stuff::print_exception(err);
+        utils::stuff::print_exception(err);
     }
     EventBase::cleanssl();
     EventBase::event_shutdown();

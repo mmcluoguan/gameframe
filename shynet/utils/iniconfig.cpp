@@ -24,7 +24,7 @@ namespace utils {
                 std::string::size_type epos = 0;
                 std::string line, key, value;
                 getline(reader, line);
-                StringOp::trim(line);
+                stringop::trim(line);
                 if (line.empty() == false) {
                     lpos = line.find('[');
                     rpos = line.find(']');
@@ -40,8 +40,8 @@ namespace utils {
                     if (line.npos != epos) {
                         key = line.substr(0, epos);
                         value = line.substr(epos + 1, line.length() - 1);
-                        StringOp::trim(key);
-                        StringOp::trim(value);
+                        stringop::trim(key);
+                        stringop::trim(value);
                     }
                     if (section.empty() == false and key.empty() == false) {
                         ns.insert({ key, { section, key, value } });

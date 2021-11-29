@@ -26,7 +26,7 @@ int LuaHotFixTask::run(thread::Thread* tif)
         shynet::utils::Singleton<LuaRemoteDebug>::instance().start(state);
 
         std::string script = "local pb = require('pb');pb.clear('%s');pb.loadfile('%s')";
-        script = shynet::utils::StringOp::str_format(script, filepath_.c_str(), filepath_.c_str());
+        script = shynet::utils::stringop::str_format(script, filepath_.c_str(), filepath_.c_str());
         state(script);
 
         shynet::utils::Singleton<LuaRemoteDebug>::instance().stop(state);
@@ -35,7 +35,7 @@ int LuaHotFixTask::run(thread::Thread* tif)
         shynet::utils::Singleton<LuaRemoteDebug>::instance().start(state);
 
         std::string script = "require('%s');local hotfix=require('hotfix');hotfix:reloadmodule('%s')";
-        script = shynet::utils::StringOp::str_format(script, name_str.c_str(), name_str.c_str());
+        script = shynet::utils::stringop::str_format(script, name_str.c_str(), name_str.c_str());
         std::this_thread::sleep_for(std::chrono::milliseconds(1)); //休眠1毫秒，为了让修改的文件加载时是最新的
         state(script);
 

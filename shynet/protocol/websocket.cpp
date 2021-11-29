@@ -21,7 +21,7 @@ namespace protocol {
     int WebSocket::process()
     {
         std::shared_ptr<events::Streambuff> inputbuffer = filter_->iobuf()->inputbuffer();
-        std::shared_ptr<events::Streambuff> restore(new events::Streambuff);
+        std::shared_ptr<events::Streambuff> restore = std::make_shared<events::Streambuff>();
         while (inputbuffer->length() > 0) {
             if (filter_->ident() == FilterProces::Identity::ACCEPTOR) {
                 if (status_ == Status::Unconnect) {
@@ -194,7 +194,7 @@ namespace protocol {
                     inputbuffer->remove(&data_length, needlen);
                     restore->add(&data_length, needlen);
                     inputbuffer->unlock();
-                    data_length = utils::Stuff::ntohl64(data_length);
+                    data_length = utils::stuff::ntohl64(data_length);
                 } else {
                     LOG_WARN << "数据包数据不足,需要needlen:" << needlen;
                     inputbuffer->lock();
@@ -303,7 +303,7 @@ namespace protocol {
     {
         std::string buf = "GET / HTTP/1.1\r\nUpgrade:websocket\r\nConnection:Upgrade\r\nSec-WebSocket-Version:13\r\nSec-WebSocket-Key:";
         unsigned char mask[16];
-        utils::Stuff::random(mask, sizeof(mask));
+        utils::stuff::random(mask, sizeof(mask));
         std::string newkey = crypto::base64_encode(mask, sizeof(mask));
         buf += newkey + "\r\n\r\n";
         unsigned char md[20];
@@ -332,7 +332,7 @@ namespace protocol {
             header_len = 4;
         } else {
             header[1] = 127 | (ismask ? 128 : 0);
-            uint64_t nlen = utils::Stuff::hl64ton(len);
+            uint64_t nlen = utils::stuff::hl64ton(len);
             memcpy(&header[2], &nlen, sizeof(nlen));
             header_len = 10;
         }
@@ -348,7 +348,7 @@ namespace protocol {
                 memcpy(data_buffer.get() + pos, header, header_len);
                 pos += header_len;
 
-                utils::Stuff::random(mask, sizeof(mask));
+                utils::stuff::random(mask, sizeof(mask));
                 memcpy(data_buffer.get() + pos, mask, sizeof(mask));
                 pos += sizeof(mask);
 

@@ -48,7 +48,7 @@ DbClient::DbClient(std::shared_ptr<net::IPAddress> remote_addr,
 DbClient::~DbClient()
 {
     std::string type = frmpub::Basic::connectname(sif().st());
-    std::string key = shynet::utils::StringOp::str_format("%s_%d", type.c_str(), sif().sid());
+    std::string key = shynet::utils::stringop::str_format("%s_%d", type.c_str(), sif().sid());
     redis::Redis& redis = shynet::utils::Singleton<redis::Redis>::instance(std::string());
     try {
         redis.del(key);
@@ -89,7 +89,7 @@ bool DbClient::verify_register(const protocc::ServerInfo& sif)
 {
     redis::Redis& redis = shynet::utils::Singleton<redis::Redis>::instance(std::string());
     std::string type = frmpub::Basic::connectname(sif.st());
-    std::string key = shynet::utils::StringOp::str_format("%s_%d", type.c_str(), sif.sid());
+    std::string key = shynet::utils::stringop::str_format("%s_%d", type.c_str(), sif.sid());
     std::unordered_map<std::string, std::string> info;
     try {
         if (redis.exists(key) == 0) {
@@ -417,7 +417,7 @@ int DbClient::login_client_gate_c(std::shared_ptr<protocc::CommonObject> data,
             //缓存过期24小时
             std::string accountid = "0"; //账号id
             std::string roleid = "0"; //角色id
-            auto temp = shynet::utils::StringOp::split(data->extend(), ",");
+            auto temp = shynet::utils::stringop::split(data->extend(), ",");
             if (temp.size() != 3) {
                 std::stringstream stream;
                 stream << "附加信息解析错误 extend:" << data->extend();
@@ -450,7 +450,7 @@ int DbClient::login_client_gate_c(std::shared_ptr<protocc::CommonObject> data,
             if (!cache_key_value) {
                 ///缓存没有玩家数据,查询数据库
                 std::string tablename = "account";
-                std::string sql = shynet::utils::StringOp::str_format("platform_key='%s'", msgc.platform_key().c_str());
+                std::string sql = shynet::utils::stringop::str_format("platform_key='%s'", msgc.platform_key().c_str());
                 Datahelp::ErrorCode code = help.getdata_from_db(tablename, "", user_data, sql);
 
                 if (code == Datahelp::ErrorCode::NOT_DATA) {

@@ -28,7 +28,7 @@ namespace thread {
             ListenThread* rtk = reinterpret_cast<ListenThread*>(ptr);
             rtk->process(bev);
         } catch (const std::exception& err) {
-            utils::Stuff::print_exception(err);
+            utils::stuff::print_exception(err);
         }
     }
 
@@ -62,7 +62,7 @@ namespace thread {
         try {
             LOG_TRACE << "ListenThread::run threadtype:" << (int)type();
 
-            base_ = std::shared_ptr<events::EventBase>(new events::EventBase());
+            base_ = std::make_shared<events::EventBase>();
             base_->make_pair_buffer(pair_);
             pair_[0]->enabled(EV_WRITE);
             pair_[0]->disable(EV_READ);
@@ -74,7 +74,7 @@ namespace thread {
             pair_[0].reset();
             pair_[1].reset();
         } catch (const std::exception& err) {
-            shynet::utils::Stuff::print_exception(err);
+            shynet::utils::stuff::print_exception(err);
         }
         return 0;
     }

@@ -17,7 +17,7 @@ void LuaRemoteDebug::disenable()
 LuaRemoteDebug& LuaRemoteDebug::start(kaguya::State& state)
 {
     if (isinit_ && isstart_ == false) {
-        state(shynet::utils::StringOp::str_format("require('mobdebug').start('%s')", debugip_.c_str()));
+        state(shynet::utils::stringop::str_format("require('mobdebug').start('%s')", debugip_.c_str()));
         isstart_ = true;
     }
     return *this;

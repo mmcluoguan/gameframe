@@ -141,7 +141,7 @@ void ConsoleHandler::gm_order(const OrderItem& order, int argc, char** argv)
     protocc::gmorder_client_gate_c msg;
     msg.set_order(gm_name);
     char* orderargv[20] = { 0 };
-    int tmp = shynet::utils::StringOp::split(gm_args, ",", orderargv, 20);
+    int tmp = shynet::utils::stringop::split(gm_args, ",", orderargv, 20);
     for (int i = 0; i < tmp; i++) {
         msg.add_args(orderargv[i]);
     }

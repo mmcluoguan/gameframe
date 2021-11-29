@@ -33,7 +33,7 @@ namespace thread {
         try {
             p->io_readcb();
         } catch (const std::exception& err) {
-            utils::Stuff::print_exception(err);
+            utils::stuff::print_exception(err);
         }
     }
 
@@ -155,15 +155,15 @@ namespace thread {
     int InotifyThread::run()
     {
         try {
-            base_ = std::shared_ptr<events::EventBase>(new events::EventBase());
-            iobuf_ = std::shared_ptr<events::EventBuffer>(new events::EventBuffer(base_, notifyfd_, 0));
+            base_ = std::make_shared<events::EventBase>();
+            iobuf_ = std::make_shared<events::EventBuffer>(base_, notifyfd_, 0);
 
             iobuf_->setcb(ioreadcb, nullptr, nullptr, this);
             iobuf_->enabled(EV_READ | EV_PERSIST);
             pthread_barrier_wait(&g_barrier);
             base_->loop(EVLOOP_NO_EXIT_ON_EMPTY);
         } catch (const std::exception& err) {
-            utils::Stuff::print_exception(err);
+            utils::stuff::print_exception(err);
         }
         return 0;
     }

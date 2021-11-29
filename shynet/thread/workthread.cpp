@@ -50,7 +50,7 @@ namespace thread {
                             return 0;
                         }
                     } catch (const std::exception& err) {
-                        utils::Stuff::print_exception(err);
+                        utils::stuff::print_exception(err);
                     }
                 }
             }
@@ -60,7 +60,7 @@ namespace thread {
                 tasks_.pop();
             }
         } catch (const std::exception& err) {
-            utils::Stuff::print_exception(err);
+            utils::stuff::print_exception(err);
         }
         return 0;
     }

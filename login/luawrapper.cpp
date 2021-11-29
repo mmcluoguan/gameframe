@@ -36,7 +36,6 @@ void LuaWrapper::init(kaguya::State& state)
     }
 
     //载入lua文件
-    shynet::utils::IniConfig& ini = shynet::utils::Singleton<shynet::utils::IniConfig>::get_instance();
     std::string luafile = ini.get<std::string>("login", "luafile");
     state.dofile(luafile);
 

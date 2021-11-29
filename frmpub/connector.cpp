@@ -29,7 +29,8 @@ void Connector::success()
 {
     net::ConnectEvent::success();
     if (enable_ping_ == true) {
-        std::shared_ptr<PingTimer> pt(new PingTimer({ heartSecond_, 0L }, this));
+        std::shared_ptr<PingTimer> pt = std::make_shared<PingTimer>(
+            timeval { heartSecond_, 0L }, this);
         shynet::utils::Singleton<net::TimerReactorMgr>::instance().add(pt);
         ping_timer_ = pt;
     }

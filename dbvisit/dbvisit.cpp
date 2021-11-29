@@ -48,7 +48,7 @@ int main(int argc, char* argv[])
         IniConfig& ini = Singleton<IniConfig>::instance(std::move(inifile));
         bool daemon = ini.get<bool>(g_confname, "daemon");
         if (daemon) {
-            Stuff::daemon();
+            stuff::daemon();
         }
         int centerid = ini.get<int>(g_confname, "centerid");
         int workerid = ini.get<int>(g_confname, "workerid");
@@ -75,7 +75,7 @@ int main(int argc, char* argv[])
         pool_options.size = ini.get<int>(g_confname, "redis_pool_size");
         Redis& redis = Singleton<Redis>::instance(std::move(connection_options), std::move(pool_options));
 
-        string key = StringOp::str_format("%s_%d", type.c_str(), sid);
+        string key = stringop::str_format("%s_%d", type.c_str(), sid);
         bool ok = true;
         unordered_map<string, string> info;
 
@@ -96,7 +96,7 @@ int main(int argc, char* argv[])
         }
 
         if (ok) {
-            Stuff::create_coredump();
+            stuff::create_coredump();
             Logger::loglevel(Logger::LogLevel::DEBUG);
             if (EventBase::usethread() == -1) {
                 THROW_EXCEPTION("call usethread");
@@ -106,14 +106,14 @@ int main(int argc, char* argv[])
             if (access(pid_dir, F_OK) == -1) {
                 mkdir(pid_dir, S_IRWXU);
             }
-            std::string pidfile = StringOp::str_format("./%s/%s.pid", pid_dir, g_confname);
-            Stuff::writepid(pidfile);
+            std::string pidfile = stringop::str_format("./%s/%s.pid", pid_dir, g_confname);
+            stuff::writepid(pidfile);
 
             Singleton<LuaEngine>::instance(std::make_shared<dbvisit::LuaWrapper>());
             Singleton<ThreadPool>::instance().start();
 
             std::string luapath = ini.get<std::string>(g_confname, "luapath");
-            std::vector<std::string> vectpath = StringOp::split(luapath, ";");
+            std::vector<std::string> vectpath = stringop::split(luapath, ";");
             for (string pstr : vectpath) {
                 Singleton<ThreadPool>::get_instance().notifyTh().lock()->add(
                     std::make_shared<LuaFolderTask>(pstr, true));
@@ -136,7 +136,7 @@ int main(int argc, char* argv[])
             THROW_EXCEPTION(err.str());
         }
     } catch (const std::exception& err) {
-        utils::Stuff::print_exception(err);
+        utils::stuff::print_exception(err);
     }
     EventBase::cleanssl();
     EventBase::event_shutdown();

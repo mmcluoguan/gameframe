@@ -138,7 +138,7 @@ int GateClient::login_message(std::shared_ptr<protocc::CommonObject> obj,
 
             shynet::utils::IniConfig& ini = shynet::utils::Singleton<shynet::utils::IniConfig>::get_instance();
             int gateid = ini.get<int>("gate", "sid");
-            std::string extend = shynet::utils::StringOp::str_format("%d,%d,%d",
+            std::string extend = shynet::utils::stringop::str_format("%d,%d,%d",
                 gateid, logininfo->sif.sid(), gameinfo ? gameinfo->sif.sid() : 0);
             obj->set_extend(extend);
         } else if (obj->msgid() == protocc::RECONNECT_CLIENT_GATE_C) {

@@ -23,9 +23,9 @@ namespace io {
         if (line != nullptr && *line) {
             add_history(line);
             if (g_orders != nullptr) {
-                char* order = shynet::utils::StringOp::trim(line);
+                char* order = shynet::utils::stringop::trim(line);
                 char* argv[20] = { 0 };
-                int argc = shynet::utils::StringOp::split(order, " ", argv, 20);
+                int argc = shynet::utils::stringop::split(order, " ", argv, 20);
                 if (argc > 0) {
                     bool flag = false;
                     for (const auto& item : *g_orders) {
@@ -119,15 +119,15 @@ namespace io {
     {
         char path[PATH_MAX] = { 0 };
         char processname[NAME_MAX] = { 0 };
-        shynet::utils::Stuff::executable_path(path, processname, sizeof(path));
+        shynet::utils::stuff::executable_path(path, processname, sizeof(path));
         LOG_INFO_BASE << "程序名:" << processname;
-        LOG_INFO_BASE << "使用线程数:" << shynet::utils::Stuff::num_of_threads();
+        LOG_INFO_BASE << "使用线程数:" << shynet::utils::stuff::num_of_threads();
         LOG_INFO_BASE << "进程id:" << getpid();
-        shynet::utils::Stuff::mem_info mem;
-        shynet::utils::Stuff::obtain_mem_info(&mem);
+        shynet::utils::stuff::mem_info mem;
+        shynet::utils::stuff::obtain_mem_info(&mem);
         LOG_INFO_BASE << "虚拟内存:" << mem.virt_kbytes << "kb";
         LOG_INFO_BASE << "常驻内存:" << mem.res_kbytes << "kb";
-        LOG_INFO_BASE << "已运行时间:" << shynet::utils::Stuff::up_duration_seconds() << "s";
+        LOG_INFO_BASE << "已运行时间:" << shynet::utils::stuff::up_duration_seconds() << "s";
     }
 }
 }

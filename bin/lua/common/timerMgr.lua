@@ -39,11 +39,14 @@ function timerMgr:execute(timer_id)
     if tb == nil then
         return
     end
+    local cbfun
     if tb.table == nil then
-        tb.fun(table.unpack(tb.paras))
+        cbfun = _G[tb.funname]       
     else
-        tb.table[tb.funname](table.unpack(tb.paras))
+        cbfun = tb.table[tb.funname]
     end
+    assert(cbfun ~= nil and type(cbfun) == 'function')
+    cbfun(table.unpack(tb.paras))
     if tb.repeated == false then
         self[timer_id] = nil
     end

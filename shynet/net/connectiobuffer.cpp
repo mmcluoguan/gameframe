@@ -57,7 +57,8 @@ namespace net {
     {
         std::shared_ptr<ConnectEvent> shconector = cnev_.lock();
         if (shconector != nullptr) {
-            std::shared_ptr<task::ConnectReadIoTask> io(new task::ConnectReadIoTask(shconector));
+            std::shared_ptr<task::ConnectReadIoTask> io
+                = std::make_shared<task::ConnectReadIoTask>(shconector);
             utils::Singleton<pool::ThreadPool>::instance().appendWork(io, fd());
         }
     }
@@ -79,8 +80,9 @@ namespace net {
         if (shconector != nullptr) {
             if (events & BEV_EVENT_CONNECTED) {
                 if (shconector->enable_heart()) {
-                    std::shared_ptr<ConnectHeartbeat> ht(
-                        new ConnectHeartbeat(shconector, { shconector->heart_second(), 0L }));
+                    std::shared_ptr<ConnectHeartbeat> ht
+                        = std::make_shared<ConnectHeartbeat>(
+                            shconector, timeval { shconector->heart_second(), 0L });
                     utils::Singleton<TimerReactorMgr>::instance().add(ht);
                     shconector->set_heart(ht);
                 }

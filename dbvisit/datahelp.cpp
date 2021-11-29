@@ -21,7 +21,7 @@ Datahelp::ErrorCode Datahelp::getdata_from_db(const std::string& tablename,
     const std::string& where)
 {
     pool::MysqlPool& mysql = shynet::utils::Singleton<pool::MysqlPool>::get_instance();
-    std::string sql = shynet::utils::StringOp::str_format("_id='%s'", key.c_str());
+    std::string sql = shynet::utils::stringop::str_format("_id='%s'", key.c_str());
     std::string condition = sql;
     if (key.empty()) {
         condition = where;
@@ -84,7 +84,7 @@ Datahelp::ErrorCode Datahelp::getdata(const std::string& cachekey,
         error = getdata_from_cache(cachekey, out);
         if (error == ErrorCode::NOT_DATA) {
         db_label:
-            const auto temp = shynet::utils::StringOp::split(cachekey, "_");
+            const auto temp = shynet::utils::stringop::split(cachekey, "_");
             if (temp.size() < 2) {
                 THROW_EXCEPTION("解析错误 cachekey:" + cachekey);
             }
@@ -164,7 +164,7 @@ moredataptr Datahelp::getdata_more_cache(const std::string& condition,
         }
     }
     if (sort.empty() == false) {
-        const auto temp = shynet::utils::StringOp::split(sort, " ");
+        const auto temp = shynet::utils::stringop::split(sort, " ");
         if (temp.size() < 2) {
             THROW_EXCEPTION("解析错误 sort:" + sort);
         }
@@ -202,13 +202,13 @@ moredataptr Datahelp::getdata_more(const std::string& condition,
         datalist = getdata_more_cache(condition, out, sort, limit);
         if (datalist->empty()) {
         db_label:
-            auto vect = shynet::utils::StringOp::split(condition, "_");
+            auto vect = shynet::utils::stringop::split(condition, "_");
             if (vect.size() < 3) {
                 THROW_EXCEPTION("解析错误 condition:" + condition);
             }
             std::string where;
             if (vect[2] != "*")
-                where = shynet::utils::StringOp::str_format("roleid='%s'", vect[2].c_str());
+                where = shynet::utils::stringop::str_format("roleid='%s'", vect[2].c_str());
             datalist = getdata_more_db(vect[0], where, out, sort, limit);
             if (updatacache && opertype == OperType::ALL) {
                 for (auto& it : *datalist) {
@@ -274,7 +274,7 @@ void Datahelp::insertdata(const std::string& cachekey,
         insert_cache(cachekey, fields, seconds);
 
     db_label:
-        std::vector<std::string> temp = shynet::utils::StringOp::split(cachekey, "_");
+        std::vector<std::string> temp = shynet::utils::stringop::split(cachekey, "_");
         if (temp.size() < 2) {
             THROW_EXCEPTION("解析错误 cachekey:" + cachekey);
             return;
@@ -292,7 +292,7 @@ void Datahelp::delete_db(const std::string& tablename, const std::string& key)
     pool::MysqlPool& mysql = shynet::utils::Singleton<pool::MysqlPool>::get_instance();
     pool::MysqlPool::SessionPtr ses = mysql.fetch();
     mysqlx::Schema sch = ses->getDefaultSchema();
-    std::string sql = shynet::utils::StringOp::str_format("_id='%s'", key.c_str());
+    std::string sql = shynet::utils::stringop::str_format("_id='%s'", key.c_str());
     if (sch.createCollection(tablename, true).remove(sql).execute().getAffectedItemsCount() == 0) {
         LOG_WARN << "数据删除失败 tablename:" << tablename << " key:" << key;
     }
@@ -313,7 +313,7 @@ void Datahelp::deletedata(const std::string& cachekey, OperType opertype)
         delete_cache(cachekey);
 
     db_label:
-        std::vector<std::string> temp = shynet::utils::StringOp::split(cachekey, "_");
+        std::vector<std::string> temp = shynet::utils::stringop::split(cachekey, "_");
         if (temp.size() < 2) {
             THROW_EXCEPTION("解析错误 cachekey:" + cachekey);
             return;
@@ -332,7 +332,7 @@ void Datahelp::updata_db(const std::string& tablename, const std::string& key, c
     pool::MysqlPool& mysql = shynet::utils::Singleton<pool::MysqlPool>::get_instance();
     pool::MysqlPool::SessionPtr ses = mysql.fetch();
     mysqlx::Schema sch = ses->getDefaultSchema();
-    std::string where = shynet::utils::StringOp::str_format("_id='%s'", key.c_str());
+    std::string where = shynet::utils::stringop::str_format("_id='%s'", key.c_str());
     mysqlx::CollectionModify md = sch.createCollection(tablename, true).modify(where);
     for (auto&& [key, value] : fields) {
         if (key != "_id") {
@@ -366,7 +366,7 @@ void Datahelp::updata(const std::string& cachekey,
         updata_cache(cachekey, fields, seconds);
 
     db_label:
-        std::vector<std::string> temp = shynet::utils::StringOp::split(cachekey, "_");
+        std::vector<std::string> temp = shynet::utils::stringop::split(cachekey, "_");
         if (temp.size() < 2) {
             THROW_EXCEPTION("解析错误 cachekey:" + cachekey);
             return;

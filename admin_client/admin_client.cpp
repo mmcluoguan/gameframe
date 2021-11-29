@@ -27,7 +27,7 @@ int main(int argc, char* argv[])
     try {
         const char* inifile = "gameframe.ini";
         IniConfig& ini = Singleton<IniConfig>::instance(std::move(inifile));
-        Stuff::create_coredump();
+        stuff::create_coredump();
         Logger::loglevel(Logger::LogLevel::DEBUG);
         if (EventBase::usethread() == -1) {
             THROW_EXCEPTION("call usethread");
@@ -38,7 +38,7 @@ int main(int argc, char* argv[])
 
         //连接world_http服务器
         string worldstr = ini.get<string>("admin_client", "world");
-        auto worldlist = StringOp::split(worldstr, ",");
+        auto worldlist = stringop::split(worldstr, ",");
         if (worldlist.size() > 2 || worldlist.size() == 0) {
             THROW_EXCEPTION("world配置错误");
         }
@@ -58,7 +58,7 @@ int main(int argc, char* argv[])
         base->addevent(sigint, nullptr);
         base->dispatch();
     } catch (const std::exception& err) {
-        utils::Stuff::print_exception(err);
+        utils::stuff::print_exception(err);
     }
     EventBase::cleanssl();
     EventBase::event_shutdown();

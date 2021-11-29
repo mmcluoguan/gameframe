@@ -34,10 +34,10 @@ int main(int argc, char* argv[])
         IniConfig& ini = Singleton<IniConfig>::instance(std::move(inifile));
         bool daemon = ini.get<bool>("login", "daemon");
         if (daemon) {
-            Stuff::daemon();
+            stuff::daemon();
         }
 
-        Stuff::create_coredump();
+        stuff::create_coredump();
         Logger::loglevel(Logger::LogLevel::DEBUG);
         if (EventBase::usethread() == -1) {
             THROW_EXCEPTION("call usethread");
@@ -48,8 +48,8 @@ int main(int argc, char* argv[])
         if (access(pid_dir, F_OK) == -1) {
             mkdir(pid_dir, S_IRWXU);
         }
-        std::string pidfile = StringOp::str_format("./%s/login_%d.pid", pid_dir, sid);
-        Stuff::writepid(pidfile);
+        std::string pidfile = stringop::str_format("./%s/login_%d.pid", pid_dir, sid);
+        stuff::writepid(pidfile);
 
         Singleton<LuaEngine>::instance(std::make_shared<login::LuaWrapper>());
         Singleton<ThreadPool>::instance().start();
@@ -63,7 +63,7 @@ int main(int argc, char* argv[])
 
         //连接db服务器
         string dbstr = ini.get<string>("login", "db");
-        auto dblist = StringOp::split(dbstr, ",");
+        auto dblist = stringop::split(dbstr, ",");
         if (dblist.size() > 2 || dblist.size() == 0) {
             THROW_EXCEPTION("db配置错误");
         }
@@ -79,7 +79,7 @@ int main(int argc, char* argv[])
 
         //连接world服务器
         string worldstr = ini.get<string>("login", "world");
-        auto worldlist = StringOp::split(worldstr, ",");
+        auto worldlist = stringop::split(worldstr, ",");
         if (worldlist.size() > 2 || worldlist.size() == 0) {
             THROW_EXCEPTION("world配置错误");
         }
@@ -99,7 +99,7 @@ int main(int argc, char* argv[])
         base->addevent(sigint, nullptr);
         base->dispatch();
     } catch (const std::exception& err) {
-        utils::Stuff::print_exception(err);
+        utils::stuff::print_exception(err);
     }
     EventBase::cleanssl();
     EventBase::event_shutdown();

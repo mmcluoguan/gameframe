@@ -19,7 +19,7 @@ namespace protocol {
     int Tcpip::process()
     {
         std::shared_ptr<events::Streambuff> inputbuffer = filter_->iobuf()->inputbuffer();
-        std::shared_ptr<events::Streambuff> restore(new events::Streambuff);
+        std::shared_ptr<events::Streambuff> restore = std::make_shared<events::Streambuff>();
         while (inputbuffer->length() > 0) {
             size_t len;
             inputbuffer->lock();

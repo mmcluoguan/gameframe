@@ -22,7 +22,7 @@ namespace thread {
             ConnectThread* cnt = reinterpret_cast<ConnectThread*>(ptr);
             cnt->process(bev);
         } catch (const std::exception& err) {
-            utils::Stuff::print_exception(err);
+            utils::stuff::print_exception(err);
         }
     }
 
@@ -48,12 +48,9 @@ namespace thread {
 
                     std::shared_ptr<net::ConnectIoBuffer> buffer;
                     if (connect->enable_ssl()) {
-                        buffer = std::shared_ptr<net::ConnectIoBuffer>(
-                            new net::ConnectIoBuffer(base_, true, connect->ctx()));
-
+                        buffer = std::make_shared<net::ConnectIoBuffer>(base_, true, connect->ctx());
                     } else {
-                        buffer = std::shared_ptr<net::ConnectIoBuffer>(
-                            new net::ConnectIoBuffer(base_, false));
+                        buffer = std::make_shared<net::ConnectIoBuffer>(base_, false);
                     }
                     buffer->set_cnev(connect);
                     connect->iobuf(buffer);
@@ -80,7 +77,7 @@ namespace thread {
         try {
             LOG_TRACE << "ConnectThread::run threadtype:" << (int)type();
 
-            base_ = std::shared_ptr<events::EventBase>(new events::EventBase());
+            base_ = std::make_shared<events::EventBase>();
             base_->make_pair_buffer(pair_);
             pair_[0]->enabled(EV_WRITE);
             pair_[0]->disable(EV_READ);
@@ -92,7 +89,7 @@ namespace thread {
             pair_[0].reset();
             pair_[1].reset();
         } catch (const std::exception& err) {
-            utils::Stuff::print_exception(err);
+            utils::stuff::print_exception(err);
         }
         return 0;
     }

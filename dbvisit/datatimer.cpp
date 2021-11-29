@@ -19,7 +19,7 @@ DataTimer::~DataTimer()
 void DataTimer::timeout()
 {
     try {
-        std::vector<std::string> temp = shynet::utils::StringOp::split(cachekey_, "_");
+        std::vector<std::string> temp = shynet::utils::stringop::split(cachekey_, "_");
         LOG_DEBUG << "更新数据到 tablename:" << temp[0] << " key:" << temp[1];
 
         shynet::utils::Singleton<Datahelp>::instance().updata_db(temp[0], temp[1], fields_);

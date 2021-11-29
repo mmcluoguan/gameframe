@@ -23,7 +23,7 @@ namespace thread {
             AcceptThread* rtk = reinterpret_cast<AcceptThread*>(ptr);
             rtk->process(bev);
         } catch (const std::exception& err) {
-            utils::Stuff::print_exception(err);
+            utils::stuff::print_exception(err);
         }
     }
 
@@ -59,20 +59,21 @@ namespace thread {
                     }
                 }
                 eventTot_++;
-                std::shared_ptr<net::IPAddress> newfdAddr(new net::IPAddress(&cliaddr));
+                std::shared_ptr<net::IPAddress> newfdAddr = std::make_shared<net::IPAddress>(&cliaddr);
                 LOG_TRACE << "accept newfd ip:" << newfdAddr->ip() << " port:" << newfdAddr->port();
                 std::shared_ptr<net::AcceptIoBuffer> iobuf;
                 if (apnf->enable_ssl()) {
-                    iobuf = std::shared_ptr<net::AcceptIoBuffer>(
-                        new net::AcceptIoBuffer(base_, newfd, true, apnf->ctx()));
+                    iobuf = std::make_shared<net::AcceptIoBuffer>(
+                        base_, newfd, true, apnf->ctx());
                 } else {
-                    iobuf = std::shared_ptr<net::AcceptIoBuffer>(new net::AcceptIoBuffer(base_, newfd, false));
+                    iobuf = std::make_shared<net::AcceptIoBuffer>(
+                        base_, newfd, false);
                 }
                 std::shared_ptr<net::AcceptNewFd> apnewfd = apnf->accept_newfd(newfdAddr, iobuf).lock();
                 iobuf->set_newfd(apnewfd);
                 if (apnewfd->enableHeart()) {
-                    std::shared_ptr<net::AcceptHeartbeat> ht(
-                        new net::AcceptHeartbeat(apnewfd, { apnewfd->heart_second(), 0L }));
+                    std::shared_ptr<net::AcceptHeartbeat> ht = std::make_shared<net::AcceptHeartbeat>(
+                        apnewfd, timeval { apnewfd->heart_second(), 0L });
                     utils::Singleton<net::TimerReactorMgr>::instance().add(ht);
                     apnewfd->set_heart(ht);
                 }
@@ -85,7 +86,7 @@ namespace thread {
         try {
             LOG_TRACE << "AcceptThread::run threadtype:" << (int)type();
 
-            base_ = std::shared_ptr<events::EventBase>(new events::EventBase());
+            base_ = std::make_shared<events::EventBase>();
             base_->make_pair_buffer(pair_);
             pair_[0]->enabled(EV_WRITE);
             pair_[0]->disable(EV_READ);
@@ -96,7 +97,7 @@ namespace thread {
             pair_[0].reset();
             pair_[1].reset();
         } catch (const std::exception& err) {
-            utils::Stuff::print_exception(err);
+            utils::stuff::print_exception(err);
         }
         return 0;
     }

@@ -31,13 +31,13 @@ namespace utils {
         {
             const auto& siter = content_.find(sec);
             if (siter == content_.end()) {
-                std::string except = StringOp::str_format("配置文件:%s 没有节点:%s",
+                std::string except = stringop::str_format("配置文件:%s 没有节点:%s",
                     inifilename_.c_str(), sec.c_str());
                 THROW_EXCEPTION(except);
             } else {
                 const auto& niter = siter->second.find(k);
                 if (niter == siter->second.end()) {
-                    std::string except = StringOp::str_format("配置文件:%s 在节点:%s 中不存在:%s",
+                    std::string except = stringop::str_format("配置文件:%s 在节点:%s 中不存在:%s",
                         inifilename_.c_str(), sec.c_str(), k.c_str());
                     THROW_EXCEPTION(except);
                 } else {
@@ -51,7 +51,7 @@ namespace utils {
                         if (istream.eof() && !istream.fail()) {
                             return t;
                         } else {
-                            std::string except = StringOp::str_format("配置文件:%s 节点:%s key:%s 值:%s 转换失败",
+                            std::string except = stringop::str_format("配置文件:%s 节点:%s key:%s 值:%s 转换失败",
                                 inifilename_.c_str(), sec.c_str(), k.c_str(), niter->second.value.c_str());
                             THROW_EXCEPTION(except);
                         }

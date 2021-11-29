@@ -6,19 +6,18 @@
 
 namespace shynet {
 namespace utils {
-    class FilePathOp final : public Nocopy {
-    public:
+    namespace filepathop {
         // @return 0 存在，文件或文件夹都可    -1 不存在
-        static int exist(const std::string& name);
+        int exist(const std::string& name);
 
         // @return 0 存在，且为文件夹    -1 不存在，或不是文件夹
-        static int is_dir(const std::string& pathname);
+        int is_dir(const std::string& pathname);
 
         // @return 0 是绝对路径格式（以`/`字符开头）    -1 不是绝对路径
-        static int is_abs_path(const std::string& name);
+        int is_abs_path(const std::string& name);
 
         // @return 0 创建成功，或创建前已经存在    -1 失败
-        static int mkdir_recursive(const std::string& pathname);
+        int mkdir_recursive(const std::string& pathname);
 
         /**
 			* @param name 文件名
@@ -28,7 +27,7 @@ namespace utils {
 			*   -1 删除失败，或`name`是文件夹
 			*
 			*/
-        static int rm_file(const std::string& name);
+        int rm_file(const std::string& name);
 
         /**
 			* @param pathname 文件夹名
@@ -38,7 +37,7 @@ namespace utils {
 			*   -1 删除失败，或`pathname`不是文件夹
 			*
 			*/
-        static int rmdir_recursive(const std::string& pathname);
+        int rmdir_recursive(const std::string& pathname);
 
         /**
 			* @param src 源文件
@@ -47,7 +46,7 @@ namespace utils {
 			* @return 0 成功 -1 失败
 			*
 			*/
-        static int rename(const std::string& src, const std::string& dst);
+        int rename(const std::string& src, const std::string& dst);
 
         /**
 			* 写文件
@@ -56,7 +55,7 @@ namespace utils {
 			* @return 0 成功 -1 失败
 			*
 			*/
-        static int write_file(const std::string& filename, const std::string& content, bool append = false);
+        int write_file(const std::string& filename, const std::string& content, bool append = false);
 
         /**
 			 * 写文件
@@ -65,7 +64,7 @@ namespace utils {
 			 * @return 0 成功 -1 失败
 			 *
 			 */
-        static int write_file(const std::string& filename, const char* content, size_t content_size, bool append = false);
+        int write_file(const std::string& filename, const char* content, size_t content_size, bool append = false);
 
         /**
 			* @注意
@@ -75,7 +74,7 @@ namespace utils {
 			* @return 文件大小，失败则返回-1
 			*
 			*/
-        static int64_t get_file_size(const std::string& filename);
+        int64_t get_file_size(const std::string& filename);
 
         /**
 			* 读文件，对get_file_size()+read_file()的封装，更易于使用
@@ -83,13 +82,13 @@ namespace utils {
 			* @return 成功返回文件内容，失败返回std::string()
 			*
 			*/
-        static std::unique_ptr<char[]> read_file(const std::string& filename);
+        std::unique_ptr<char[]> read_file(const std::string& filename);
 
         /**
 			 * 由于/proc下面的文件无法通过::stat()获取文件长度，所以提供参数让调用者填入一个fixed长度
 			 *
 			 */
-        static std::unique_ptr<char[]> read_file(const std::string& filename, size_t content_size);
+        std::unique_ptr<char[]> read_file(const std::string& filename, size_t content_size);
 
         /**
 			 * @param filename     文件名
@@ -99,10 +98,10 @@ namespace utils {
 			 * @return 成功返回实际读入大小，失败返回-1
 			 *
 			 */
-        static int64_t read_file(const std::string& filename, char* content /*out*/, size_t content_size);
+        int64_t read_file(const std::string& filename, char* content /*out*/, size_t content_size);
 
         /// @TODO 能否统一成一个接口，内部判断是否是否为link
-        static std::unique_ptr<char[]> read_link(const std::string& filename, size_t content_size);
+        std::unique_ptr<char[]> read_link(const std::string& filename, size_t content_size);
 
         /**
 			 * @param path     目录
@@ -111,7 +110,7 @@ namespace utils {
 			 * 连接目录和文件名，解决`path`后面'/'和`filename`前面'/'是否存在，重复的问题
 			 *
 			*/
-        static std::string join(const std::string& path, const std::string& filename);
+        std::string join(const std::string& path, const std::string& filename);
     };
 }
 }

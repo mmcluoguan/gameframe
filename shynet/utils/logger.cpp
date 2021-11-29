@@ -42,7 +42,7 @@ namespace utils {
         std::lock_guard<std::mutex> lock(g_logMutex);
         char path[PATH_MAX] = { 0 };
         char processname[NAME_MAX] = { 0 };
-        utils::Stuff::executable_path(path, processname, sizeof(path));
+        utils::stuff::executable_path(path, processname, sizeof(path));
         char* processname_end = strrchr(processname, '.');
         if (processname != nullptr) {
             *processname_end = '\0';
@@ -50,8 +50,8 @@ namespace utils {
 
         constexpr const char* kRoot = "./log/%s";
         if (g_islogdir == false) {
-            std::string path = StringOp::str_format(kRoot, processname);
-            FilePathOp::mkdir_recursive(path);
+            std::string path = stringop::str_format(kRoot, processname);
+            filepathop::mkdir_recursive(path);
             g_islogdir = true;
         }
         time_t t = time(nullptr);

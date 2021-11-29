@@ -1,7 +1,7 @@
 --每天23:59:59清理任务
 local zerotimeSystem = { is_start = false}
 
-function zerotimeSystem:uplevel()
+function zerotimeSystem:zerotime()
     for k,v in pairs(RoleMgr) do
         if type(v) == "table" then
             --遍历角色
