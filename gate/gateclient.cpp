@@ -195,11 +195,11 @@ int GateClient::serverlist_client_gate_c(std::shared_ptr<protocc::CommonObject> 
     std::shared_ptr<std::stack<FilterData::Envelope>> enves)
 {
     protocc::serverlist_client_gate_s msgs;
-    auto list = shynet::utils::Singleton<ConnectorMgr>::instance().connect_datas();
-    for (auto&& [key, value] : list) {
-        protocc::ServerInfo* sif = msgs.add_sifs();
-        *sif = value.sif;
-    }
+    shynet::utils::Singleton<ConnectorMgr>::instance()
+        .foreach_connect_datas([&](int key, ConnectorMgr::ConnectData value) {
+            protocc::ServerInfo* sif = msgs.add_sifs();
+            *sif = value.sif;
+        });
     send_proto(protocc::SERVERLIST_CLIENT_GATE_S, &msgs);
     return 0;
 }

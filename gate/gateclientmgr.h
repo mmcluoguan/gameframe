@@ -29,10 +29,10 @@ public:
     std::shared_ptr<GateClient> find(const std::string& key);
 
     /// <summary>
-    /// 所有连接列表,int为连接fd
+    /// 迭代所有连接列表
     /// </summary>
-    /// <returns></returns>
-    std::unordered_map<int, std::shared_ptr<GateClient>> clis() const;
+    /// <param name="cb"></param>
+    void foreach_clis(std::function<void(int, std::shared_ptr<GateClient>)> cb) const;
 
     /*
 	* 获取设置登录服务器监听地址

@@ -26,10 +26,10 @@ public:
     std::shared_ptr<DbClient> find(int k);
 
     /// <summary>
-    /// 所有连接列表,int为连接fd
+    /// 迭代所有连接列表
     /// </summary>
-    /// <returns></returns>
-    std::unordered_map<int, std::shared_ptr<DbClient>> clis() const;
+    /// <param name="cb"></param>
+    void foreach_clis(std::function<void(int, std::shared_ptr<DbClient>)> cb) const;
 
     /*
 		* 获取设置db服务器监听地址

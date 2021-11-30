@@ -45,10 +45,12 @@ std::shared_ptr<DbClient> DbClientMgr::find(int k)
     return it->second;
 }
 
-std::unordered_map<int, std::shared_ptr<DbClient>> DbClientMgr::clis() const
+void DbClientMgr::foreach_clis(std::function<void(int, std::shared_ptr<DbClient>)> cb) const
 {
     std::lock_guard<std::mutex> lock(clis_mutex_);
-    return clis_;
+    for (auto&& [key, cli] : clis_) {
+        cb(key, cli);
+    }
 }
 
 std::shared_ptr<DbClient> DbClientMgr::find(std::string sid)

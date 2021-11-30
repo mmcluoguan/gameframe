@@ -86,11 +86,11 @@ public:
     std::shared_ptr<GameConnector> game_connector(int game_connect_id) const;
 
     /// <summary>
-    /// 服务器连接信息列表
+    /// 迭代服务器连接信息列表
     /// key为conncet_id
     /// </summary>
     /// <returns></returns>
-    std::unordered_map<int, ConnectData> connect_datas() const;
+    void foreach_connect_datas(std::function<void(int, ConnectData)> cb) const;
 
 private:
     std::list<int> worldctor_ids_;

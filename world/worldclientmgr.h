@@ -23,10 +23,10 @@ public:
     std::shared_ptr<WorldClient> find(int k);
 
     /// <summary>
-    /// 所有连接列表,int为连接fd
+    /// 迭代所有连接列表
     /// </summary>
-    /// <returns></returns>
-    std::unordered_map<int, std::shared_ptr<WorldClient>> clis() const;
+    /// <param name="cb"></param>
+    void foreach_clis(std::function<void(int, std::shared_ptr<WorldClient>)> cb) const;
 
     /*
 	* 获取设置世界服务器监听地址

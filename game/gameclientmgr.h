@@ -24,10 +24,10 @@ public:
     std::shared_ptr<GameClient> find(int k);
 
     /// <summary>
-    /// 所有连接列表,int为连接fd
+    /// 迭代所有连接列表
     /// </summary>
-    /// <returns></returns>
-    std::unordered_map<int, std::shared_ptr<GameClient>> clis() const;
+    /// <param name="cb"></param>
+    void foreach_clis(std::function<void(int, std::shared_ptr<GameClient>)> cb) const;
 
     /*
 	* 获取设置游戏服务器监听地址

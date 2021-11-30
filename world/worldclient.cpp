@@ -90,12 +90,12 @@ int WorldClient::register_login_world_c(std::shared_ptr<protocc::CommonObject> d
         protocc::ServerInfo* sif = msgg.mutable_sif();
         *sif = this->sif();
 
-        auto clis = shynet::utils::Singleton<WorldClientMgr>::instance().clis();
-        for (auto&& [key, cli] : clis) {
-            if (cli->sif().st() == protocc::ServerType::GATE) {
-                cli->send_proto(protocc::SERONLINE_WORLD_GATE_G, &msgg);
-            }
-        }
+        shynet::utils::Singleton<WorldClientMgr>::instance()
+            .foreach_clis([&](int key, std::shared_ptr<WorldClient> cli) {
+                if (cli->sif().st() == protocc::ServerType::GATE) {
+                    cli->send_proto(protocc::SERONLINE_WORLD_GATE_G, &msgg);
+                }
+            });
     } else {
         std::stringstream stream;
         stream << "消息" << frmpub::Basic::msgname(data->msgid()) << "解析错误";
@@ -121,12 +121,12 @@ int WorldClient::register_game_world_c(std::shared_ptr<protocc::CommonObject> da
         protocc::ServerInfo* sif = msgg.mutable_sif();
         *sif = this->sif();
 
-        auto clis = shynet::utils::Singleton<WorldClientMgr>::instance().clis();
-        for (auto&& [key, cli] : clis) {
-            if (cli->sif().st() == protocc::ServerType::GATE) {
-                cli->send_proto(protocc::SERONLINE_WORLD_GATE_G, &msgg);
-            }
-        }
+        shynet::utils::Singleton<WorldClientMgr>::instance()
+            .foreach_clis([&](int key, std::shared_ptr<WorldClient> cli) {
+                if (cli->sif().st() == protocc::ServerType::GATE) {
+                    cli->send_proto(protocc::SERONLINE_WORLD_GATE_G, &msgg);
+                }
+            });
     } else {
         std::stringstream stream;
         stream << "消息" << frmpub::Basic::msgname(data->msgid()) << "解析错误";
@@ -147,13 +147,14 @@ int WorldClient::register_gate_world_c(std::shared_ptr<protocc::CommonObject> da
         //返回已经在世界服注册的游戏和登录服务器信息
         protocc::register_gate_world_s msgs;
         msgs.set_result(0);
-        auto clis = shynet::utils::Singleton<WorldClientMgr>::instance().clis();
-        for (auto&& [key, cli] : clis) {
-            if (cli->sif().st() == protocc::ServerType::GAME || cli->sif().st() == protocc::ServerType::LOGIN) {
-                protocc::ServerInfo* sif = msgs.add_sifs();
-                *sif = cli->sif();
-            }
-        }
+        shynet::utils::Singleton<WorldClientMgr>::instance()
+            .foreach_clis([&](int key, std::shared_ptr<WorldClient> cli) {
+                if (cli->sif().st() == protocc::ServerType::GAME
+                    || cli->sif().st() == protocc::ServerType::LOGIN) {
+                    protocc::ServerInfo* sif = msgs.add_sifs();
+                    *sif = cli->sif();
+                }
+            });
         send_proto(protocc::REGISTER_GATE_WORLD_S, &msgs);
     } else {
         std::stringstream stream;

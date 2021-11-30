@@ -56,10 +56,12 @@ std::shared_ptr<LoginClient> LoginClientMgr::find_from_sid(const std::string& si
     return nullptr;
 }
 
-std::unordered_map<int, std::shared_ptr<LoginClient>> LoginClientMgr::clis() const
+void LoginClientMgr::foreach_clis(std::function<void(int, std::shared_ptr<LoginClient>)> cb) const
 {
     std::lock_guard<std::mutex> lock(clis_mutex_);
-    return clis_;
+    for (auto&& [key, cli] : clis_) {
+        cb(key, cli);
+    }
 }
 
 const net::IPAddress& LoginClientMgr::listen_addr() const

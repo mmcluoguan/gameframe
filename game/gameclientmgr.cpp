@@ -45,9 +45,11 @@ std::shared_ptr<GameClient> GameClientMgr::find(int k)
     return it->second;
 }
 
-std::unordered_map<int, std::shared_ptr<GameClient>> GameClientMgr::clis() const
+void GameClientMgr::foreach_clis(std::function<void(int, std::shared_ptr<GameClient>)> cb) const
 {
     std::lock_guard<std::mutex> lock(clis_mutex_);
-    return clis_;
+    for (auto&& [key, cli] : clis_) {
+        cb(key, cli);
+    }
 }
 }

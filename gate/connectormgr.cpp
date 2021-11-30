@@ -131,9 +131,11 @@ std::shared_ptr<GameConnector> ConnectorMgr::game_connector(int game_connect_id)
         shynet::utils::Singleton<net::ConnectReactorMgr>::instance().find(game_connect_id));
 }
 
-std::unordered_map<int, ConnectorMgr::ConnectData> ConnectorMgr::connect_datas() const
+void ConnectorMgr::foreach_connect_datas(std::function<void(int, ConnectData)> cb) const
 {
     std::lock_guard<std::mutex> lock(connect_data_mutex_);
-    return connect_datas_;
+    for (auto&& [key, data] : connect_datas_) {
+        cb(key, data);
+    }
 }
 }

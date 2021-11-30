@@ -114,13 +114,13 @@ namespace pool {
         tasks_condvar_.notify_one();
     }
 
-    void ThreadPool::appendWork(std::shared_ptr<task::Task> tk, size_t tag)
+    void ThreadPool::appendwork(std::shared_ptr<task::Task> tk, size_t tag)
     {
         std::shared_ptr<thread::WorkThread> target = workThs_[tag % workThs_.size()].lock();
         if (target) {
             size_t len = target->addTask(tk);
             LOG_TRACE << "push local queue localsize:" << len;
-            LOG_TRACE << "appendWork notify_all";
+            LOG_TRACE << "appendwork notify_all";
             tasks_condvar_.notify_all();
         }
     }

@@ -55,10 +55,12 @@ std::shared_ptr<GateClient> GateClientMgr::find(const std::string& key)
     return nullptr;
 }
 
-std::unordered_map<int, std::shared_ptr<GateClient>> GateClientMgr::clis() const
+void GateClientMgr::foreach_clis(std::function<void(int, std::shared_ptr<GateClient>)> cb) const
 {
     std::lock_guard<std::mutex> lock(clis_mutex_);
-    return clis_;
+    for (auto&& [key, cli] : clis_) {
+        cb(key, cli);
+    }
 }
 
 }

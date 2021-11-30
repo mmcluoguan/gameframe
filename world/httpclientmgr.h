@@ -26,7 +26,7 @@ public:
     /// 所有连接列表,int为连接fd
     /// </summary>
     /// <returns></returns>
-    std::unordered_map<int, std::shared_ptr<HttpClient>> clis() const;
+    void foreach_clis(std::function<void(int, std::shared_ptr<HttpClient>)> cb) const;
 
     /*
 	* 获取设置http后台服务器监听地址

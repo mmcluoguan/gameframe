@@ -47,7 +47,7 @@ namespace pool {
         /// <param name="tag">
         /// 方法内按照(tag%普通工作线程数量)求得线程指定位置
         /// </param>
-        void appendWork(std::shared_ptr<task::Task> tk, size_t tag);
+        void appendwork(std::shared_ptr<task::Task> tk, size_t tag);
 
         std::mutex& tasks_mutex()
         {
@@ -69,9 +69,11 @@ namespace pool {
             return listernTh_;
         }
 
-        std::vector<std::weak_ptr<thread::AcceptThread>> acceptThs() const
+        void foreach_acceptThs(std::function<void(std::weak_ptr<thread::AcceptThread>)> cb) const
         {
-            return acceptThs_;
+            for (auto& it : acceptThs_) {
+                cb(it);
+            }
         }
 
         std::weak_ptr<thread::TimerThread> timerTh() const

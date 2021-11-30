@@ -45,9 +45,12 @@ std::shared_ptr<HttpClient> HttpClientMgr::find(int k)
     return it->second;
 }
 
-std::unordered_map<int, std::shared_ptr<HttpClient>> HttpClientMgr::clis() const
+void HttpClientMgr::foreach_clis(std::function<void(int, std::shared_ptr<HttpClient>)> cb) const
 {
     std::lock_guard<std::mutex> lock(clis_mutex_);
-    return clis_;
+    for (auto&& [key, cli] : clis_) {
+        cb(key, cli);
+    }
 }
+
 }

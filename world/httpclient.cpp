@@ -82,19 +82,19 @@ int HttpClient::getgamelist_admin_world_c(std::shared_ptr<rapidjson::Document> d
         rapidjson::Value msgs;
         msgs.SetObject();
         msgs.AddMember("games", rapidjson::Value(rapidjson::kArrayType), doc->GetAllocator());
-        auto clis = shynet::utils::Singleton<WorldClientMgr>::instance().clis();
-        for (auto&& [key, cli] : clis) {
-            if (cli->sif().st() == protocc::ServerType::GAME) {
-                rapidjson::Value game_json;
-                game_json.SetObject();
-                game_json.AddMember("ip", rapidjson::StringRef(cli->sif().ip().c_str()), doc->GetAllocator());
-                game_json.AddMember("port", cli->sif().port(), doc->GetAllocator());
-                game_json.AddMember("st", cli->sif().st(), doc->GetAllocator());
-                game_json.AddMember("sid", cli->sif().sid(), doc->GetAllocator());
-                game_json.AddMember("name", rapidjson::StringRef(cli->sif().name().c_str()), doc->GetAllocator());
-                msgs["games"].PushBack(game_json, doc->GetAllocator());
-            }
-        }
+        shynet::utils::Singleton<WorldClientMgr>::instance()
+            .foreach_clis([&](int key, std::shared_ptr<WorldClient> cli) {
+                if (cli->sif().st() == protocc::ServerType::GAME) {
+                    rapidjson::Value game_json;
+                    game_json.SetObject();
+                    game_json.AddMember("ip", rapidjson::StringRef(cli->sif().ip().c_str()), doc->GetAllocator());
+                    game_json.AddMember("port", cli->sif().port(), doc->GetAllocator());
+                    game_json.AddMember("st", cli->sif().st(), doc->GetAllocator());
+                    game_json.AddMember("sid", cli->sif().sid(), doc->GetAllocator());
+                    game_json.AddMember("name", rapidjson::StringRef(cli->sif().name().c_str()), doc->GetAllocator());
+                    msgs["games"].PushBack(game_json, doc->GetAllocator());
+                }
+            });
         send_json(int(frmpub::JosnMsgId::GETGAMELIST_ADMIN_WORLD_S), &msgs, enves.get());
     } catch (const std::exception& err) {
         SEND_ERR(protocc::MESSAGE_PARSING_ERROR, err.what());
@@ -108,21 +108,21 @@ int HttpClient::noticeserver_admin_world_c(std::shared_ptr<rapidjson::Document> 
         rapidjson::Value& msgdata = frmpub::get_json_value(*doc, "msgdata");
         int32_t sid = frmpub::get_json_value(msgdata, "sid").GetInt();
         std::string info = frmpub::get_json_value(msgdata, "info").GetString();
-        auto games = shynet::utils::Singleton<WorldClientMgr>::instance().clis();
         bool flag = false;
-        for (const auto& gs : games) {
-            auto sif = gs.second->sif();
-            if (sid != 0 && sid != sif.sid()) {
-                continue;
-            }
-            if (sif.st() == protocc::ServerType::GAME) {
-                flag = true;
-                LOG_DEBUG << "通知区服服务器 name:" << sif.name() << " sid:" << sif.sid();
-                protocc::noticeserver_world_game_g gmsg;
-                gmsg.set_info(info);
-                gs.second->send_proto(protocc::NOTICESERVER_WORLD_GAME_G, &gmsg, enves.get());
-            }
-        }
+        shynet::utils::Singleton<WorldClientMgr>::instance()
+            .foreach_clis([&](int key, std::shared_ptr<WorldClient> cli) {
+                auto sif = cli->sif();
+                if (sid != 0 && sid != sif.sid()) {
+                    return;
+                }
+                if (sif.st() == protocc::ServerType::GAME) {
+                    flag = true;
+                    LOG_DEBUG << "通知区服服务器 name:" << sif.name() << " sid:" << sif.sid();
+                    protocc::noticeserver_world_game_g gmsg;
+                    gmsg.set_info(info);
+                    cli->send_proto(protocc::NOTICESERVER_WORLD_GAME_G, &gmsg, enves.get());
+                }
+            });
         rapidjson::Value result(rapidjson::kObjectType);
         result.AddMember("result", flag ? 0 : 1, doc->GetAllocator());
         send_json(int(frmpub::JosnMsgId::NOTICESERVER_ADMIN_WORLD_S), &result, enves.get());
@@ -147,46 +147,46 @@ int HttpClient::sysemail_admin_world_c(std::shared_ptr<rapidjson::Document> doc,
             std::string info = frmpub::get_json_value(msgdata, "info").GetString();
             int32_t rid = frmpub::get_json_value(msgdata, "rid").GetInt();
             int32_t time = frmpub::get_json_value(msgdata, "time").GetInt();
-            auto games = shynet::utils::Singleton<WorldClientMgr>::instance().clis();
             bool flag = false;
-            for (const auto& gs : games) {
-                auto sif = gs.second->sif();
-                if (sif.st() == protocc::ServerType::GAME) {
-                    if (sid == -1 || sif.sid() == sid) {
-                        flag = true;
-                        //转发邮件到区服
-                        protocc::sysemail_world_game_g gmsg;
-                        uint64_t mailid = shynet::utils::Singleton<shynet::utils::IdWorker>::get_instance().getid();
-                        gmsg.set_id(mailid);
-                        gmsg.set_title(title);
-                        gmsg.set_info(info);
-                        gmsg.set_type(type);
-                        gmsg.set_rid(rid);
-                        gmsg.set_time(time);
-                        try {
-                            auto annex = frmpub::get_json_value(msgdata, "annex").GetObject();
-                            auto gmsg_annex = gmsg.mutable_annex();
-                            gmsg_annex->set_gold(frmpub::get_json_value(annex, "gold").GetInt());
-                            gmsg_annex->set_diamond(frmpub::get_json_value(annex, "diamond").GetInt());
+            shynet::utils::Singleton<WorldClientMgr>::instance()
+                .foreach_clis([&](int key, std::shared_ptr<WorldClient> cli) {
+                    auto sif = cli->sif();
+                    if (sif.st() == protocc::ServerType::GAME) {
+                        if (sid == -1 || sif.sid() == sid) {
+                            flag = true;
+                            //转发邮件到区服
+                            protocc::sysemail_world_game_g gmsg;
+                            uint64_t mailid = shynet::utils::Singleton<shynet::utils::IdWorker>::get_instance().getid();
+                            gmsg.set_id(mailid);
+                            gmsg.set_title(title);
+                            gmsg.set_info(info);
+                            gmsg.set_type(type);
+                            gmsg.set_rid(rid);
+                            gmsg.set_time(time);
                             try {
-                                auto goods = frmpub::get_json_value(annex, "goods").GetArray();
-                                for (auto& it : goods) {
-                                    auto cfgid = frmpub::get_json_value(it, "cfgid").GetInt();
-                                    auto num = frmpub::get_json_value(it, "num").GetInt();
+                                auto annex = frmpub::get_json_value(msgdata, "annex").GetObject();
+                                auto gmsg_annex = gmsg.mutable_annex();
+                                gmsg_annex->set_gold(frmpub::get_json_value(annex, "gold").GetInt());
+                                gmsg_annex->set_diamond(frmpub::get_json_value(annex, "diamond").GetInt());
+                                try {
+                                    auto goods = frmpub::get_json_value(annex, "goods").GetArray();
+                                    for (auto& it : goods) {
+                                        auto cfgid = frmpub::get_json_value(it, "cfgid").GetInt();
+                                        auto num = frmpub::get_json_value(it, "num").GetInt();
 
-                                    auto gmsg_annex_goods = gmsg_annex->add_goods();
-                                    gmsg_annex_goods->set_cfgid(cfgid);
-                                    gmsg_annex_goods->set_num(num);
+                                        auto gmsg_annex_goods = gmsg_annex->add_goods();
+                                        gmsg_annex_goods->set_cfgid(cfgid);
+                                        gmsg_annex_goods->set_num(num);
+                                    }
+                                } catch (const std::exception& err) {
                                 }
                             } catch (const std::exception& err) {
                             }
-                        } catch (const std::exception& err) {
+                            cli->send_proto(protocc::SYSEMAIL_WORLD_GAME_G, &gmsg, enves.get());
+                            LOG_DEBUG << "转发邮件到区服 name:" << sif.name() << " sid:" << sif.sid();
                         }
-                        gs.second->send_proto(protocc::SYSEMAIL_WORLD_GAME_G, &gmsg, enves.get());
-                        LOG_DEBUG << "转发邮件到区服 name:" << sif.name() << " sid:" << sif.sid();
                     }
-                }
-            }
+                });
             if (flag == false) {
                 result = 2; //区服不存在
             }

@@ -61,7 +61,7 @@ namespace net {
         std::shared_ptr<AcceptNewFd> aptnewfd = newfd_.lock();
         if (aptnewfd != nullptr) {
             std::shared_ptr<task::AcceptReadIoTask> io = std::make_shared<task::AcceptReadIoTask>(aptnewfd);
-            utils::Singleton<pool::ThreadPool>::instance().appendWork(io, fd());
+            utils::Singleton<pool::ThreadPool>::instance().appendwork(io, fd());
         }
     }
 
