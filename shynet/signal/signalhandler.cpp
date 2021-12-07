@@ -5,29 +5,27 @@
 
 namespace shynet {
 namespace signal {
-    SignalHandler::SignalHandler(std::shared_ptr<events::EventBase> base)
-        : events::EventHandler(base, SIGINT, EV_SIGNAL | EV_PERSIST)
+    void SignalHandler::add(std::shared_ptr<events::EventBase> base,
+        int sig, callback cb)
     {
+        std::shared_ptr<SignalEvent> se = std::make_shared<SignalEvent>(base, sig, cb);
+        base->addevent(se, nullptr);
+        sigevents_[sig] = se;
     }
 
-    SignalHandler::~SignalHandler()
+    SignalHandler::SignalEvent::SignalEvent(std::shared_ptr<events::EventBase> base,
+        int sig, callback cb)
+        : events::EventHandler(base, sig, EV_SIGNAL | EV_PERSIST)
     {
+        cb_ = cb;
     }
 
-    void SignalHandler::signal(int signal)
+    void SignalHandler::SignalEvent::signal(int signal)
     {
-        if (signalmap_.size() == 0) {
+        if (signal == SIGINT || signal == SIGQUIT) {
             rl_callback_handler_remove();
-            struct timeval delay = { 2, 0 };
-            LOG_INFO << "捕获到中断信号,程序将在2秒后安全退出";
-            base()->loopexit(&delay);
-        } else {
-            for (auto&& [signalnum, cb] : signalmap_) {
-                if (signalnum == signal) {
-                    cb(signal);
-                }
-            }
         }
+        cb_(base(), signal);
     }
 }
 }

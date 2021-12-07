@@ -7,6 +7,9 @@
 #include "shynet/utils/iniconfig.h"
 #include "shynet/utils/stringop.h"
 
+//配置参数
+extern const char* g_conf_node;
+
 namespace gate {
 GateClient::GateClient(std::shared_ptr<net::IPAddress> remote_addr,
     std::shared_ptr<net::IPAddress> listen_addr,
@@ -137,7 +140,7 @@ int GateClient::login_message(std::shared_ptr<protocc::CommonObject> obj,
             auto gameinfo = connectMgr.find_connect_data(game_connect_id);
 
             shynet::utils::IniConfig& ini = shynet::utils::Singleton<shynet::utils::IniConfig>::get_instance();
-            int gateid = ini.get<int>("gate", "sid");
+            int gateid = ini.get<int>(g_conf_node, "sid");
             std::string extend = shynet::utils::stringop::str_format("%d,%d,%d",
                 gateid, logininfo->sif.sid(), gameinfo ? gameinfo->sif.sid() : 0);
             obj->set_extend(extend);
@@ -150,7 +153,7 @@ int GateClient::login_message(std::shared_ptr<protocc::CommonObject> obj,
             login_id_ = reconnect_msg.loginid();
             //断线重连消息中附加上选择的gateid
             shynet::utils::IniConfig& ini = shynet::utils::Singleton<shynet::utils::IniConfig>::get_instance();
-            int gateid = ini.get<int>("gate", "sid");
+            int gateid = ini.get<int>(g_conf_node, "sid");
             obj->set_extend(std::to_string(gateid));
         }
         login->send_proto(obj.get(), enves.get());

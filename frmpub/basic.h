@@ -10,6 +10,8 @@
 #include "frmpub/protocc/login.pb.h"
 #include "frmpub/protocc/world.pb.h"
 #include "shynet/events/eventbuffer.h"
+#include "shynet/utils/logger.h"
+#include <csignal>
 #include <curl/curl.h>
 #include <rapidjson/document.h>
 #include <stack>
@@ -68,6 +70,18 @@ public:
 private:
     static size_t req_reply(void* ptr, size_t size, size_t nmemb, void* stream);
 };
+
+inline void default_sigcb(std::shared_ptr<events::EventBase> base, int signum)
+{
+    if (signum == SIGINT) {
+        struct timeval delay = { 2, 0 };
+        LOG_INFO << "捕获到中断信号,程序将在2秒后安全退出";
+        base->loopexit(&delay);
+    } else if (signum == SIGQUIT) {
+        LOG_INFO << "捕获到退出信号,程序将在立刻安全退出";
+        base->loopexit();
+    }
+}
 }
 
 #endif

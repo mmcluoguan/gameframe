@@ -538,7 +538,7 @@ namespace utils {
         /*
 			* 调试
 			*/
-        const std::string debug_string()
+        const std::string debug_string() const
         {
             std::ostringstream info;
             info << "<<<<<" << std::endl;
@@ -771,6 +771,13 @@ namespace utils {
 			*/
         std::unordered_map<Key, Score> kvmap_;
     };
+
+    template <typename Key, typename Score, typename Compare>
+    std::ostream& operator<<(std::ostream& strm, const SkipList<Key, Score, Compare>& sk)
+    {
+        strm << sk.debug_string();
+        return strm;
+    }
 }
 }
 #endif

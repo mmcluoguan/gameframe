@@ -8,6 +8,9 @@
 #include "shynet/net/connectreactormgr.h"
 #include "shynet/utils/iniconfig.h"
 
+//配置参数
+extern const char* g_conf_node;
+
 namespace game {
 DbConnector::DbConnector(std::shared_ptr<net::IPAddress> connect_addr)
     : frmpub::Connector(connect_addr, "DbConnector")
@@ -52,14 +55,14 @@ void DbConnector::complete()
     protocc::register_game_dbvisit_c msgc;
     protocc::ServerInfo* sif = msgc.mutable_sif();
     shynet::utils::IniConfig& ini = shynet::utils::Singleton<shynet::utils::IniConfig>::get_instance();
-    std::string gameip = ini.get<std::string>("game", "ip");
-    short gameport = ini.get<short>("game", "port");
+    std::string gameip = ini.get<std::string>(g_conf_node, "ip");
+    short gameport = ini.get<short>(g_conf_node, "port");
     sif->set_ip(gameip);
     sif->set_port(gameport);
     sif->set_st(protocc::ServerType::GAME);
-    int sid = ini.get<int>("game", "sid");
+    int sid = ini.get<int>(g_conf_node, "sid");
     sif->set_sid(sid);
-    std::string name = ini.get<std::string>("game", "name");
+    std::string name = ini.get<std::string>(g_conf_node, "name");
     sif->set_name(name);
     send_proto(protocc::REGISTER_GAME_DBVISIT_C, &msgc);
 }

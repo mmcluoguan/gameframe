@@ -6,6 +6,9 @@
 #include "gate/worldconnector.h"
 #include "shynet/utils/iniconfig.h"
 
+//配置参数
+extern const char* g_conf_node;
+
 namespace gate {
 LuaWrapper::LuaWrapper()
 {
@@ -31,7 +34,7 @@ void LuaWrapper::init(kaguya::State& state)
 
     //载入lua文件
     shynet::utils::IniConfig& ini = shynet::utils::Singleton<shynet::utils::IniConfig>::get_instance();
-    std::string luafile = ini.get<std::string>("gate", "luafile");
+    std::string luafile = ini.get<std::string>(g_conf_node, "luafile");
     state.dofile(luafile);
 }
 }

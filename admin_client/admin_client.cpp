@@ -28,7 +28,7 @@ int main(int argc, char* argv[])
         const char* inifile = "gameframe.ini";
         IniConfig& ini = Singleton<IniConfig>::instance(std::move(inifile));
         stuff::create_coredump();
-        Logger::loglevel(Logger::LogLevel::DEBUG);
+        Logger::set_loglevel(Logger::LogLevel::DEBUG);
         if (EventBase::usethread() == -1) {
             THROW_EXCEPTION("call usethread");
         }
@@ -53,9 +53,10 @@ int main(int argc, char* argv[])
 
         shared_ptr<EventBase> base(new EventBase());
         ConsoleHandler* stdin = &Singleton<ConsoleHandler>::instance(base);
-        SignalHandler* sigint = &Singleton<SignalHandler>::instance(base);
         base->addevent(stdin, nullptr);
-        base->addevent(sigint, nullptr);
+        SignalHandler* sigmgr = &Singleton<SignalHandler>::instance();
+        sigmgr->add(base, SIGINT, default_sigcb);
+        sigmgr->add(base, SIGQUIT, default_sigcb);
         base->dispatch();
     } catch (const std::exception& err) {
         utils::stuff::print_exception(err);

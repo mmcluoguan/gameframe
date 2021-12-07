@@ -223,6 +223,7 @@
     <ClInclude Include="utils\iniconfig.h" />
     <ClInclude Include="utils\logger.h" />
     <ClInclude Include="utils\lru.h" />
+    <ClInclude Include="utils\objectcount.h" />
     <ClInclude Include="utils\singleton.h" />
     <ClInclude Include="utils\skiplist.h" />
     <ClInclude Include="utils\stringify_stl.h" />

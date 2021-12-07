@@ -1,1 +1,0 @@
-./world.out world_slave

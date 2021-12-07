@@ -8,6 +8,9 @@
 #include "shynet/net/connectreactormgr.h"
 #include "shynet/utils/iniconfig.h"
 
+//配置参数
+extern const char* g_conf_node;
+
 namespace login {
 DbConnector::DbConnector(std::shared_ptr<net::IPAddress> connect_addr)
     : frmpub::Connector(connect_addr, "DbConnector")
@@ -55,14 +58,14 @@ void DbConnector::complete()
     protocc::register_login_dbvisit_c msgc;
     protocc::ServerInfo* sif = msgc.mutable_sif();
     shynet::utils::IniConfig& ini = shynet::utils::Singleton<shynet::utils::IniConfig>::get_instance();
-    std::string loginip = ini.get<std::string>("login", "ip");
-    short loginport = ini.get<short>("login", "port");
+    std::string loginip = ini.get<std::string>(g_conf_node, "ip");
+    short loginport = ini.get<short>(g_conf_node, "port");
     sif->set_ip(loginip);
     sif->set_port(loginport);
     sif->set_st(protocc::ServerType::LOGIN);
-    int sid = ini.get<int>("login", "sid");
+    int sid = ini.get<int>(g_conf_node, "sid");
     sif->set_sid(sid);
-    std::string name = ini.get<std::string>("login", "name");
+    std::string name = ini.get<std::string>(g_conf_node, "name");
     sif->set_name(name);
     send_proto(protocc::REGISTER_LOGIN_DBVISIT_C, &msgc);
 }

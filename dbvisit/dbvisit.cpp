@@ -10,6 +10,7 @@
 #include "shynet/pool/mysqlpool.h"
 #include "shynet/pool/threadpool.h"
 #include "shynet/signal/signalhandler.h"
+#include "shynet/utils/filepathop.h"
 #include "shynet/utils/idworker.h"
 #include "shynet/utils/iniconfig.h"
 #include "shynet/utils/stringop.h"
@@ -17,11 +18,12 @@
 #include <google/protobuf/message.h>
 #include <sw/redis++/redis++.h>
 namespace redis = sw::redis;
+#include <csignal>
 #include <sys/stat.h>
 #include <unistd.h>
 
 //配置参数
-const char* g_confname;
+const char* g_conf_node;
 
 int main(int argc, char* argv[])
 {
@@ -43,98 +45,87 @@ int main(int argc, char* argv[])
         if (argc < 2) {
             THROW_EXCEPTION("没有配置参数");
         }
-        g_confname = argv[1];
+        g_conf_node = argv[1]; //节点名
         const char* inifile = "gameframe.ini";
+        if (argc == 3) {
+            inifile = argv[2]; //配置文件名
+        }
         IniConfig& ini = Singleton<IniConfig>::instance(std::move(inifile));
-        bool daemon = ini.get<bool>(g_confname, "daemon");
+        bool daemon = ini.get<bool>(g_conf_node, "daemon");
         if (daemon) {
             stuff::daemon();
         }
-        int centerid = ini.get<int>(g_confname, "centerid");
-        int workerid = ini.get<int>(g_confname, "workerid");
+        stuff::create_coredump();
+        Logger::set_loglevel(Logger::LogLevel::DEBUG);
+        Logger::set_logname(g_conf_node);
+        int centerid = ini.get<int>(g_conf_node, "centerid");
+        int workerid = ini.get<int>(g_conf_node, "workerid");
         Singleton<IdWorker>::instance(std::move(workerid), std::move(centerid));
 
-        string ip = ini.get<string>(g_confname, "ip");
-        short port = ini.get<short>(g_confname, "port");
-        int sid = ini.get<int>(g_confname, "sid");
+        string ip = ini.get<string>(g_conf_node, "ip");
+        short port = ini.get<short>(g_conf_node, "port");
+        int sid = ini.get<int>(g_conf_node, "sid");
         string type = Basic::connectname(ServerType::DBVISIT);
-        string name = ini.get<string>(g_confname, "name");
+        string name = ini.get<string>(g_conf_node, "name");
 
-        string myuri = ini.get<string>(g_confname, "mysql_uri");
-        size_t mysqlps = ini.get<size_t>(g_confname, "mysql_pool_size");
+        string myuri = ini.get<string>(g_conf_node, "mysql_uri");
+        size_t mysqlps = ini.get<size_t>(g_conf_node, "mysql_pool_size");
         mysqlx::SessionSettings myset(myuri);
         Singleton<MysqlPool>::instance(std::move(myset), std::move(mysqlps));
 
         ConnectionOptions connection_options;
-        connection_options.host = ini.get<string>(g_confname, "redis_ip");
-        LOG_DEBUG << connection_options.host;
-        connection_options.port = ini.get<int>(g_confname, "redis_port");
-        connection_options.db = ini.get<int>(g_confname, "redis_db");
-        connection_options.password = ini.get<string>(g_confname, "redis_pwd");
+        connection_options.host = ini.get<string>(g_conf_node, "redis_ip");
+        connection_options.port = ini.get<int>(g_conf_node, "redis_port");
+        connection_options.db = ini.get<int>(g_conf_node, "redis_db");
+        connection_options.password = ini.get<string>(g_conf_node, "redis_pwd");
         ConnectionPoolOptions pool_options;
-        pool_options.size = ini.get<int>(g_confname, "redis_pool_size");
+        pool_options.size = ini.get<int>(g_conf_node, "redis_pool_size");
         Redis& redis = Singleton<Redis>::instance(std::move(connection_options), std::move(pool_options));
 
         string key = stringop::str_format("%s_%d", type.c_str(), sid);
-        bool ok = true;
         unordered_map<string, string> info;
 
-        if (redis.exists(key) == 0) {
-            redis.hmset(key,
-                {
-                    make_pair("ip", ip),
-                    make_pair("port", to_string(port)),
-                    make_pair("sid", to_string(sid)),
-                    make_pair("type", type),
-                    make_pair("name", name),
-                });
-        } else {
-            redis.hgetall(key, std::inserter(info, info.begin()));
-            if (ip != info["ip"] || to_string(port) != info["port"]) {
-                ok = false;
-            }
+        redis.hmset(key,
+            {
+                make_pair("ip", ip),
+                make_pair("port", to_string(port)),
+                make_pair("sid", to_string(sid)),
+                make_pair("type", type),
+                make_pair("name", name),
+            });
+
+        if (EventBase::usethread() == -1) {
+            THROW_EXCEPTION("call usethread");
+        }
+        EventBase::initssl();
+
+        Singleton<LuaEngine>::instance(std::make_shared<dbvisit::LuaWrapper>());
+        Singleton<ThreadPool>::instance().start();
+
+        std::string luapath = ini.get<std::string>(g_conf_node, "luapath");
+        std::vector<std::string> vectpath = stringop::split(luapath, ";");
+        for (string pstr : vectpath) {
+            Singleton<ThreadPool>::get_instance().notifyTh().lock()->add(
+                std::make_shared<LuaFolderTask>(pstr, true));
         }
 
-        if (ok) {
-            stuff::create_coredump();
-            Logger::loglevel(Logger::LogLevel::DEBUG);
-            if (EventBase::usethread() == -1) {
-                THROW_EXCEPTION("call usethread");
-            }
-            EventBase::initssl();
-            const char* pid_dir = "./pid/";
-            if (access(pid_dir, F_OK) == -1) {
-                mkdir(pid_dir, S_IRWXU);
-            }
-            std::string pidfile = stringop::str_format("./%s/%s.pid", pid_dir, g_confname);
-            stuff::writepid(pidfile);
+        shared_ptr<IPAddress> ipaddr(new IPAddress(ip.c_str(), port));
+        shared_ptr<DbServer> dbserver(new DbServer(ipaddr));
+        Singleton<ListenReactorMgr>::instance().add(dbserver);
 
-            Singleton<LuaEngine>::instance(std::make_shared<dbvisit::LuaWrapper>());
-            Singleton<ThreadPool>::instance().start();
+        const char* pid_dir = "./pid/";
+        filepathop::mkdir_recursive(pid_dir);
+        std::string pidfile = stringop::str_format("./%s/%s.pid", pid_dir, g_conf_node);
+        stuff::writepid(pidfile);
+        shared_ptr<EventBase> base(new EventBase());
 
-            std::string luapath = ini.get<std::string>(g_confname, "luapath");
-            std::vector<std::string> vectpath = stringop::split(luapath, ";");
-            for (string pstr : vectpath) {
-                Singleton<ThreadPool>::get_instance().notifyTh().lock()->add(
-                    std::make_shared<LuaFolderTask>(pstr, true));
-            }
+        FrmStdinhandler* stdin = &Singleton<FrmStdinhandler>::instance(base);
+        base->addevent(stdin, nullptr);
+        SignalHandler* sigmgr = &Singleton<SignalHandler>::instance();
+        sigmgr->add(base, SIGINT, default_sigcb);
+        sigmgr->add(base, SIGQUIT, default_sigcb);
+        base->dispatch();
 
-            shared_ptr<IPAddress> ipaddr(new IPAddress(ip.c_str(), port));
-            shared_ptr<DbServer> dbserver(new DbServer(ipaddr));
-            Singleton<ListenReactorMgr>::instance().add(dbserver);
-
-            shared_ptr<EventBase> base(new EventBase());
-
-            FrmStdinhandler* stdin = &Singleton<FrmStdinhandler>::instance(base);
-            SignalHandler* sigint = &Singleton<SignalHandler>::instance(base);
-            base->addevent(stdin, nullptr);
-            base->addevent(sigint, nullptr);
-            base->dispatch();
-        } else {
-            std::stringstream err;
-            err << "已存在" << info["type"] << "_" << info["sid"] << " " << info["ip"] << ":" << info["port"];
-            THROW_EXCEPTION(err.str());
-        }
     } catch (const std::exception& err) {
         utils::stuff::print_exception(err);
     }

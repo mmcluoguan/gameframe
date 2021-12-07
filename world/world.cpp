@@ -6,6 +6,7 @@
 #include "shynet/net/ipaddress.h"
 #include "shynet/pool/threadpool.h"
 #include "shynet/signal/signalhandler.h"
+#include "shynet/utils/filepathop.h"
 #include "shynet/utils/idworker.h"
 #include "shynet/utils/iniconfig.h"
 #include "shynet/utils/stringop.h"
@@ -18,7 +19,7 @@
 #include <unistd.h>
 
 //配置参数
-const char* g_confname;
+const char* g_conf_node;
 
 int main(int argc, char* argv[])
 {
@@ -38,47 +39,44 @@ int main(int argc, char* argv[])
         if (argc < 2) {
             THROW_EXCEPTION("没有配置参数");
         }
-        g_confname = argv[1];
-
+        g_conf_node = argv[1]; //节点名
         const char* inifile = "gameframe.ini";
+        if (argc == 3) {
+            inifile = argv[2]; //配置文件名
+        }
         IniConfig& ini = Singleton<IniConfig>::instance(std::move(inifile));
-        bool daemon = ini.get<bool>(g_confname, "daemon");
+        bool daemon = ini.get<bool>(g_conf_node, "daemon");
         if (daemon) {
             stuff::daemon();
         }
 
         stuff::create_coredump();
-        Logger::loglevel(Logger::LogLevel::DEBUG);
+        Logger::set_loglevel(Logger::LogLevel::DEBUG);
+        Logger::set_logname(g_conf_node);
         if (EventBase::usethread() == -1) {
             THROW_EXCEPTION("call usethread");
         }
         EventBase::initssl();
-        const char* pid_dir = "./pid/";
-        if (access(pid_dir, F_OK) == -1) {
-            mkdir(pid_dir, S_IRWXU);
-        }
-        std::string pidfile = stringop::str_format("./%s/%s.pid", pid_dir, g_confname);
-        stuff::writepid(pidfile);
 
         Singleton<LuaEngine>::instance(std::make_shared<world::LuaWrapper>());
         Singleton<ThreadPool>::instance().start();
 
         LOG_DEBUG << "开启世界服务器监听";
-        std::string worldip = ini.get<std::string>(g_confname, "ip");
-        short worldport = ini.get<short>(g_confname, "port");
+        std::string worldip = ini.get<std::string>(g_conf_node, "ip");
+        short worldport = ini.get<short>(g_conf_node, "port");
         std::shared_ptr<IPAddress> worldaddr(new IPAddress(worldip.c_str(), worldport));
         std::shared_ptr<WorldServer> worldserver(new WorldServer(worldaddr));
         Singleton<ListenReactorMgr>::instance().add(worldserver);
 
         LOG_DEBUG << "开启http后台服务器监听";
-        std::string httpip = ini.get<std::string>(g_confname, "http_ip");
-        short httpport = ini.get<short>(g_confname, "http_port");
+        std::string httpip = ini.get<std::string>(g_conf_node, "http_ip");
+        short httpport = ini.get<short>(g_conf_node, "http_port");
         std::shared_ptr<IPAddress> httpaddr(new IPAddress(httpip.c_str(), httpport));
         std::shared_ptr<HttpServer> httpserver(new HttpServer(httpaddr));
         Singleton<ListenReactorMgr>::instance().add(httpserver);
 
         //连接db服务器
-        string dbstr = ini.get<string>(g_confname, "db");
+        string dbstr = ini.get<string>(g_conf_node, "db");
         auto dblist = stringop::split(dbstr, ",");
         if (dblist.size() > 2 || dblist.size() == 0) {
             THROW_EXCEPTION("db配置错误");
@@ -97,11 +95,17 @@ int main(int argc, char* argv[])
                         new IPAddress(dbip.c_str(), dbport)))));
         }
 
+        const char* pid_dir = "./pid/";
+        filepathop::mkdir_recursive(pid_dir);
+        std::string pidfile = stringop::str_format("./%s/%s.pid", pid_dir, g_conf_node);
+        stuff::writepid(pidfile);
         shared_ptr<EventBase> base(new EventBase());
+
         FrmStdinhandler* stdin = &Singleton<FrmStdinhandler>::instance(base);
-        SignalHandler* sigint = &Singleton<SignalHandler>::instance(base);
         base->addevent(stdin, nullptr);
-        base->addevent(sigint, nullptr);
+        SignalHandler* sigmgr = &Singleton<SignalHandler>::instance();
+        sigmgr->add(base, SIGINT, default_sigcb);
+        sigmgr->add(base, SIGQUIT, default_sigcb);
         base->dispatch();
     } catch (const std::exception& err) {
         utils::stuff::print_exception(err);

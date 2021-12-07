@@ -2,6 +2,7 @@
 #define SHYNET_UTILS_LOGGER_H
 
 #include "shynet/basic.h"
+#include <memory>
 #include <sstream>
 
 namespace shynet {
@@ -32,7 +33,9 @@ namespace utils {
     public:
         static void setoutput(OutputFunc);
         static Logger::LogLevel loglevel();
-        static void loglevel(Logger::LogLevel level);
+        static void set_loglevel(Logger::LogLevel level);
+        static std::string logname();
+        static void set_logname(std::string name);
 
     private:
         std::ostringstream ostream_;
@@ -44,6 +47,7 @@ namespace utils {
     private:
         static Logger::LogLevel g_level_;
         static OutputFunc g_output_;
+        inline static std::unique_ptr<std::string> g_logname_;
     };
 }
 }

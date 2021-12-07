@@ -352,6 +352,9 @@
     <ClInclude Include="io\stdinhandler.h">
       <Filter>io</Filter>
     </ClInclude>
+    <ClInclude Include="utils\objectcount.h">
+      <Filter>utils</Filter>
+    </ClInclude>
     <ClInclude Include="signal\signalhandler.h">
       <Filter>signal</Filter>
     </ClInclude>

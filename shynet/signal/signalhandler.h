@@ -12,19 +12,35 @@ namespace signal {
     /// <summary>
     /// 系统信号处理
     /// </summary>
-    class SignalHandler : public events::EventHandler {
+    class SignalHandler {
 
         friend class utils::Singleton<SignalHandler>;
 
     public:
-        ~SignalHandler();
+        using callback = std::function<void(std::shared_ptr<events::EventBase>, int)>;
+
+        ~SignalHandler() = default;
+        void add(std::shared_ptr<events::EventBase> base,
+            int sig,
+            callback cb);
 
     private:
-        explicit SignalHandler(std::shared_ptr<events::EventBase> base);
-        void signal(int signal) override;
+        class SignalEvent : public events::EventHandler {
 
-    protected:
-        std::unordered_map<int, std::function<void(int)>> signalmap_;
+        public:
+            SignalEvent(std::shared_ptr<events::EventBase> base,
+                int sig, callback cb);
+            ~SignalEvent() = default;
+
+        private:
+            void signal(int signal) override;
+            callback cb_;
+        };
+
+        explicit SignalHandler() = default;
+
+    private:
+        std::unordered_map<int, std::shared_ptr<SignalEvent>> sigevents_;
     };
 }
 }

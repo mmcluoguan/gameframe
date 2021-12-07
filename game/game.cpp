@@ -11,12 +11,16 @@
 #include "shynet/net/ipaddress.h"
 #include "shynet/pool/threadpool.h"
 #include "shynet/signal/signalhandler.h"
+#include "shynet/utils/filepathop.h"
 #include "shynet/utils/idworker.h"
 #include "shynet/utils/iniconfig.h"
 #include "shynet/utils/stringop.h"
 #include "shynet/utils/stuff.h"
 #include "sys/stat.h"
 #include <unistd.h>
+
+//配置参数
+const char* g_conf_node;
 
 int main(int argc, char* argv[])
 {
@@ -33,30 +37,32 @@ int main(int argc, char* argv[])
     using namespace game;
 
     try {
+        if (argc < 2) {
+            THROW_EXCEPTION("没有配置参数");
+        }
+        g_conf_node = argv[1]; //节点名
         const char* inifile = "gameframe.ini";
+        if (argc == 3) {
+            inifile = argv[2]; //配置文件名
+        }
         IniConfig& ini = Singleton<IniConfig>::instance(std::move(inifile));
-        bool daemon = ini.get<bool>("game", "daemon");
+        bool daemon = ini.get<bool>(g_conf_node, "daemon");
         if (daemon) {
             stuff::daemon();
         }
         stuff::create_coredump();
-        Logger::loglevel(Logger::LogLevel::DEBUG);
+        Logger::set_loglevel(Logger::LogLevel::DEBUG);
+        Logger::set_logname(g_conf_node);
         if (EventBase::usethread() == -1) {
             THROW_EXCEPTION("call usethread");
         }
         EventBase::initssl();
-        int sid = ini.get<int>("game", "sid");
-        const char* pid_dir = "./pid/";
-        if (access(pid_dir, F_OK) == -1) {
-            mkdir(pid_dir, S_IRWXU);
-        }
-        std::string pidfile = stringop::str_format("./%s/game_%d.pid", pid_dir, sid);
-        stuff::writepid(pidfile);
+        //int sid = ini.get<int>(g_conf_node, "sid");
 
         Singleton<LuaEngine>::instance(std::make_shared<game::LuaWrapper>());
         Singleton<ThreadPool>::instance().start();
 
-        std::string luapath = ini.get<std::string>("game", "luapath");
+        std::string luapath = ini.get<std::string>(g_conf_node, "luapath");
         std::vector<std::string> vectpath = stringop::split(luapath, ";");
         for (string pstr : vectpath) {
             Singleton<ThreadPool>::get_instance().notifyTh().lock()->add(
@@ -64,14 +70,14 @@ int main(int argc, char* argv[])
         }
 
         LOG_DEBUG << "开启游戏服服务器监听";
-        std::string gameip = ini.get<std::string>("game", "ip");
-        short gameport = ini.get<short>("game", "port");
+        std::string gameip = ini.get<std::string>(g_conf_node, "ip");
+        short gameport = ini.get<short>(g_conf_node, "port");
         std::shared_ptr<IPAddress> gameaddr(new IPAddress(gameip.c_str(), gameport));
         std::shared_ptr<GameServer> gameserver(new GameServer(gameaddr));
         Singleton<ListenReactorMgr>::instance().add(gameserver);
 
         //连接db服务器
-        string dbstr = ini.get<string>("game", "db");
+        string dbstr = ini.get<string>(g_conf_node, "db");
         auto dblist = stringop::split(dbstr, ",");
         if (dblist.size() > 2 || dblist.size() == 0) {
             THROW_EXCEPTION("db配置错误");
@@ -92,7 +98,7 @@ int main(int argc, char* argv[])
         }
 
         //连接world服务器
-        string worldstr = ini.get<string>("game", "world");
+        string worldstr = ini.get<string>(g_conf_node, "world");
         auto worldlist = stringop::split(worldstr, ",");
         if (worldlist.size() > 2 || worldlist.size() == 0) {
             THROW_EXCEPTION("world配置错误");
@@ -106,11 +112,17 @@ int main(int argc, char* argv[])
                         new IPAddress(worldip.c_str(), worldport)))));
         }
 
+        const char* pid_dir = "./pid/";
+        filepathop::mkdir_recursive(pid_dir);
+        std::string pidfile = stringop::str_format("./%s/%s.pid", pid_dir, g_conf_node);
+        stuff::writepid(pidfile);
         shared_ptr<EventBase> base(new EventBase());
+
         FrmStdinhandler* stdin = &Singleton<FrmStdinhandler>::instance(base);
-        SignalHandler* sigint = &Singleton<SignalHandler>::instance(base);
         base->addevent(stdin, nullptr);
-        base->addevent(sigint, nullptr);
+        SignalHandler* sigmgr = &Singleton<SignalHandler>::instance();
+        sigmgr->add(base, SIGINT, default_sigcb);
+        sigmgr->add(base, SIGQUIT, default_sigcb);
         base->dispatch();
     } catch (const std::exception& err) {
         utils::stuff::print_exception(err);

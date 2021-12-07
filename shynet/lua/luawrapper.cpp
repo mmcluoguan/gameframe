@@ -6,6 +6,7 @@
 #include "shynet/net/listenreactormgr.h"
 #include "shynet/utils/logger.h"
 #include "shynet/utils/stuff.h"
+#include <random/random.hpp>
 
 namespace shynet {
 namespace lua {
@@ -24,7 +25,11 @@ namespace lua {
 
         //注册函数
         state["random"] = kaguya::function([](int min, int max) {
-            return shynet::utils::stuff::random(min, max);
+            return effolkronium::random_static::get(min, max);
+        });
+
+        state["random_pro"] = kaguya::function([](double probability) {
+            return effolkronium::random_static::get<bool>(probability);
         });
 
         state["log"] = kaguya::function([](kaguya::VariadicArgType args) {

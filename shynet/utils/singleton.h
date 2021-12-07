@@ -44,14 +44,9 @@ namespace utils {
         }
 
     private:
-        static std::once_flag onceflag_;
-        static std::unique_ptr<T> instance_;
+        inline static std::once_flag onceflag_;
+        inline static std::unique_ptr<T> instance_;
     };
-
-    template <class T>
-    std::unique_ptr<T> Singleton<T>::instance_;
-    template <class T>
-    std::once_flag Singleton<T>::onceflag_;
 }
 }
 

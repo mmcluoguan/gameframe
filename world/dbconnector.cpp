@@ -10,7 +10,7 @@
 #include "world/worldclientmgr.h"
 #include "world/worldserver.h"
 //配置参数
-extern const char* g_confname;
+extern const char* g_conf_node;
 
 namespace world {
 DbConnector::DbConnector(std::shared_ptr<net::IPAddress> connect_addr)
@@ -55,14 +55,14 @@ void DbConnector::complete()
     protocc::register_world_dbvisit_c msgc;
     protocc::ServerInfo* sif = msgc.mutable_sif();
     shynet::utils::IniConfig& ini = shynet::utils::Singleton<shynet::utils::IniConfig>::get_instance();
-    std::string registerip = ini.get<std::string>(g_confname, "ip");
-    short registerport = ini.get<short>(g_confname, "port");
+    std::string registerip = ini.get<std::string>(g_conf_node, "ip");
+    short registerport = ini.get<short>(g_conf_node, "port");
     sif->set_ip(registerip);
     sif->set_port(registerport);
     sif->set_st(protocc::ServerType::WORLD);
-    int sid = ini.get<int>(g_confname, "sid");
+    int sid = ini.get<int>(g_conf_node, "sid");
     sif->set_sid(sid);
-    std::string name = ini.get<std::string>(g_confname, "name");
+    std::string name = ini.get<std::string>(g_conf_node, "name");
     sif->set_name(name);
     send_proto(protocc::REGISTER_WORLD_DBVISIT_C, &msgc);
 }

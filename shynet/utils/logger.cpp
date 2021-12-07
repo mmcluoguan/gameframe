@@ -61,7 +61,12 @@ namespace utils {
         strftime(timebuf, sizeof(timebuf), "%F_%H.log", &tm_time);
 
         char logfilename[NAME_MAX] = { 0 };
-        sprintf(logfilename, "./log/%s/%s_%d_%s", processname, processname, getpid(), timebuf);
+        std::string userlogname = Logger::logname();
+        if (userlogname.empty()) {
+            sprintf(logfilename, "./log/%s/%s_%s", processname, processname, timebuf);
+        } else {
+            sprintf(logfilename, "./log/%s/%s_%s", processname, userlogname.c_str(), timebuf);
+        }
 
         if (strncmp(g_logfilename, logfilename, strlen(logfilename)) != 0) {
             if (g_logfile.is_open()) {
@@ -204,9 +209,17 @@ namespace utils {
         return g_level_;
     }
 
-    void Logger::loglevel(Logger::LogLevel level)
+    void Logger::set_loglevel(Logger::LogLevel level)
     {
         g_level_ = level;
+    }
+    std::string Logger::logname()
+    {
+        return g_logname_ ? g_logname_->c_str() : "";
+    }
+    void Logger::set_logname(std::string name)
+    {
+        g_logname_.reset(new std::string(name));
     }
 }
 }
