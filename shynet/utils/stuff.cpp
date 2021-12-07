@@ -99,6 +99,7 @@ namespace utils {
             if (setrlimit(RLIMIT_CORE, &core) == -1) {
                 THROW_EXCEPTION("call setrlimit");
             }
+            system("echo core-%e-%p-%t > /proc/sys/kernel/core_pattern");
         }
 
         int daemon()
