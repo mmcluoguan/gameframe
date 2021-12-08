@@ -31,11 +31,21 @@ std::string Basic::client_msgname(int id)
     return "(" + frmpub::protocc::ClientMsgId_Name(id) + ":" + std::to_string(id) + ")";
 }
 
+std::string Basic::json_msgname(int id)
+{
+    JosnMsgId eid = static_cast<JosnMsgId>(id);
+    std::string ename(magic_enum::enum_name<JosnMsgId>(eid));
+    return "(" + ename + ":" + std::to_string(id) + ")";
+}
+
 std::string Basic::msgname(int id)
 {
     std::string str = client_msgname(id);
     if (str == "(:" + std::to_string(id) + ")") {
         str = internal_msgname(id);
+        if (str == "(:" + std::to_string(id) + ")") {
+            str = json_msgname(id);
+        }
     }
     if (str == "(:" + std::to_string(id) + ")") {
         return "(unkonw:unkonw)";

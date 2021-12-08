@@ -13,6 +13,7 @@
 #include "shynet/utils/logger.h"
 #include <csignal>
 #include <curl/curl.h>
+#include <enum/magic_enum.hpp>
 #include <rapidjson/document.h>
 #include <stack>
 #include <unordered_map>
@@ -29,7 +30,7 @@ namespace protocc = frmpub::protocc;
 
 namespace frmpub {
 
-enum class JosnMsgId {
+enum class JosnMsgId : int {
     ADMIN_WORLD_BEGIN = 5001,
     GETGAMELIST_ADMIN_WORLD_C, //获取区服信息
     GETGAMELIST_ADMIN_WORLD_S, //{"games":[{"ip":"127.0.0.1","port":1234,"st":1,"name":"xxxx"}]}
@@ -47,7 +48,7 @@ enum class JosnMsgId {
     SYSEMAIL_ADMIN_WORLD_C, //发送系统邮件 {"title":"xxx","info":"xxx","type":1,"sid":-1,"rid":-1,"time":123213,"annex":{"gold":111,"diamond":111,"goods":[{"cfgid":10010,"num":10}]}}
     SYSEMAIL_ADMIN_WORLD_S, //{"result":1}
 
-    ADMIN_WORLD_END = 6000,
+    ADMIN_WORLD_END = 5256,
 };
 
 rapidjson::Value& get_json_value(rapidjson::Value& jv, std::string key);
@@ -61,6 +62,7 @@ public:
 private:
     static std::string internal_msgname(int);
     static std::string client_msgname(int);
+    static std::string json_msgname(int);
 };
 
 class Sms {
@@ -84,4 +86,11 @@ inline void default_sigcb(std::shared_ptr<events::EventBase> base, int signum)
 }
 }
 
+namespace magic_enum::customize {
+template <>
+struct enum_range<frmpub::JosnMsgId> {
+    static constexpr int min = static_cast<int>(frmpub::JosnMsgId::ADMIN_WORLD_BEGIN);
+    static constexpr int max = static_cast<int>(frmpub::JosnMsgId::ADMIN_WORLD_END);
+};
+}
 #endif

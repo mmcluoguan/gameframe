@@ -35,7 +35,7 @@ public:
     void foreach_clis(std::function<void(int, std::shared_ptr<GateClient>)> cb) const;
 
     /*
-	* 获取设置登录服务器监听地址
+	* 获取设置网关服务器监听地址
 	*/
     const net::IPAddress& listen_addr() const
     {

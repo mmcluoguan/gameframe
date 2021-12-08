@@ -54,7 +54,7 @@ int WorldConnector::input_handle(std::shared_ptr<rapidjson::Document> doc, std::
         if (it != jmb_.end()) {
             return it->second(doc, enves);
         } else {
-            LOG_DEBUG << "消息" << msgid << " 没有处理函数";
+            LOG_DEBUG << "消息" << frmpub::Basic::msgname(msgid) << " 没有处理函数";
         }
     }
     return 0;

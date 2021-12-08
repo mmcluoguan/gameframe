@@ -119,8 +119,8 @@ int main(int argc, char* argv[])
         filepathop::mkdir_recursive(pid_dir);
         std::string pidfile = stringop::str_format("./%s/%s.pid", pid_dir, g_conf_node);
         stuff::writepid(pidfile);
-        shared_ptr<EventBase> base(new EventBase());
 
+        shared_ptr<EventBase> base(new EventBase());
         FrmStdinhandler* stdin = &Singleton<FrmStdinhandler>::instance(base);
         base->addevent(stdin, nullptr);
         SignalHandler* sigmgr = &Singleton<SignalHandler>::instance();
