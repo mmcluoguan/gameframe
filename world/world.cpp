@@ -46,6 +46,9 @@ int main(int argc, char* argv[])
         }
         IniConfig& ini = Singleton<IniConfig>::instance(std::move(inifile));
         bool daemon = ini.get<bool>(g_conf_node, "daemon");
+        if (argc == 4) {
+            daemon = static_cast<bool>(std::stoi(argv[3])); //是否后台启动
+        }
         if (daemon) {
             stuff::daemon();
         }

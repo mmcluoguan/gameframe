@@ -58,7 +58,11 @@ namespace utils {
         struct tm tm_time;
         localtime_r(&t, &tm_time);
         char timebuf[30] = { 0 };
-        strftime(timebuf, sizeof(timebuf), "%F_%H.log", &tm_time);
+        if (Logger::logprecise() == Logger::LogPrecise::HOUR) {
+            strftime(timebuf, sizeof(timebuf), "%F_%H.log", &tm_time);
+        } else {
+            strftime(timebuf, sizeof(timebuf), "%F.log", &tm_time);
+        }
 
         char logfilename[NAME_MAX] = { 0 };
         std::string userlogname = Logger::logname();
@@ -85,7 +89,6 @@ namespace utils {
     }
 
     Logger::OutputFunc Logger::g_output_ = defaultOutput;
-    Logger::LogLevel Logger::g_level_ = LogLevel::DEBUG;
 
     Logger::Logger(const char* sourcefile, int line, Logger::LogLevel level, const char* fun, int savedErrno)
     {
@@ -220,6 +223,14 @@ namespace utils {
     void Logger::set_logname(std::string name)
     {
         g_logname_.reset(new std::string(name));
+    }
+    Logger::LogPrecise Logger::logprecise()
+    {
+        return g_precise_;
+    }
+    void Logger::set_logprecise(Logger::LogPrecise percise)
+    {
+        g_precise_ = percise;
     }
 }
 }

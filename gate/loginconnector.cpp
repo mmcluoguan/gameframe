@@ -158,10 +158,10 @@ int LoginConnector::forward_login_client_c(std::shared_ptr<protocc::CommonObject
             }
 
             client->send_proto(data.get(), enves.get());
-            LOG_DEBUG << "转发消息" << frmpub::Basic::msgname(data->msgid())
+            LOG_DEBUG << "发送账号id:" << client->accountid()
+                      << " 转发消息" << frmpub::Basic::msgname(data->msgid())
                       << "到client[" << client->remote_addr()->ip() << ":"
-                      << client->remote_addr()->port() << "]"
-                      << " client fd:" << env.fd;
+                      << client->remote_addr()->port() << "]";
         } else {
             std::stringstream stream;
             stream << "client fd:" << env.fd << " 已断开连接";

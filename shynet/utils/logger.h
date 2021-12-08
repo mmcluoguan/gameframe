@@ -21,6 +21,11 @@ namespace utils {
             NUM_LOG_LEVELS,
         };
 
+        enum class LogPrecise {
+            HOUR,
+            DAY,
+        };
+
         Logger(const char* sourcefile, int line, Logger::LogLevel level = Logger::LogLevel::INFO, const char* fun = nullptr, int savedErrno = 0);
         ~Logger();
         std::ostream& stream()
@@ -36,6 +41,8 @@ namespace utils {
         static void set_loglevel(Logger::LogLevel level);
         static std::string logname();
         static void set_logname(std::string name);
+        static Logger::LogPrecise logprecise();
+        static void set_logprecise(Logger::LogPrecise percise);
 
     private:
         std::ostringstream ostream_;
@@ -45,9 +52,10 @@ namespace utils {
         const char* fun_;
 
     private:
-        static Logger::LogLevel g_level_;
+        inline static LogLevel g_level_ = LogLevel::DEBUG;
         static OutputFunc g_output_;
         inline static std::unique_ptr<std::string> g_logname_;
+        inline static LogPrecise g_precise_ = LogPrecise::DAY;
     };
 }
 }

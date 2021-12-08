@@ -34,6 +34,8 @@ GateClient::~GateClient()
 int GateClient::input_handle(std::shared_ptr<protocc::CommonObject> obj, std::shared_ptr<std::stack<FilterData::Envelope>> enves)
 {
     if (obj != nullptr) {
+        LOG_DEBUG << "接收账号id:" << accountid_
+                  << " 消息" << frmpub::Basic::msgname(obj->msgid());
         if (obj->msgid() > protocc::CLIENT_LOGIN_BEGIN && obj->msgid() < protocc::CLIENT_LOGIN_END) {
             return login_message(obj, enves);
         }

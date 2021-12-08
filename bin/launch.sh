@@ -78,10 +78,9 @@ dostart()
 			
 		;;
 		*)
-			$(pwd)/${arr[0]}$SUFFIX $serv
+			$(pwd)/${arr[0]}$SUFFIX $serv $CFGNAME 1
 		;;
 		esac
-        #sleep 0.5
 	done
 }
 
@@ -98,7 +97,7 @@ dostatus()
         count=$(getcount $pid)
 		if [ $count -eq 1 ];then
 		 	state=$(ps x | egrep -w "^\s*$pid" | awk -F " " '{print $1,$4,$5,$6}' | grep -v grep)
-			echo -e "\033[34m[running]\033[0m $state \t\t\c"
+			echo -e "\033[35m[running]\033[0m $state \t\t\c"
 		 	echo ""
 		else
             oldIFS=$IFS
@@ -121,6 +120,8 @@ SERVER=""
 SERVERLIST=""
 #程序后缀
 SUFFIX=".out"
+#配置文件
+CFGNAME="gameframe.ini"
 
 # 切换到命令所在路径
 cd `dirname $0`
@@ -141,7 +142,7 @@ if [ "$SERVERLIST" == "" ] ; then
 	SERVERLIST="dbvisit_account_master dbvisit_game_master dbvisit_world_master world_master game_20 login_10 gate_30"
 fi
 
-echo -e "======================================== \033[34m`echo $MODE|tr 'a-z' 'A-Z'`\033[0m ========================================"
+echo -e "======================================== \033[35m`echo $MODE|tr 'a-z' 'A-Z'`\033[0m ========================================"
 case $OPERATOR in
 stop)
 	dostop
@@ -164,5 +165,5 @@ status)
 	dostatus
 ;;
 esac
-echo -e "======================================== \033[34m`echo $MODE|tr 'a-z' 'A-Z'`\033[0m ========================================"
+echo -e "======================================== \033[35m`echo $MODE|tr 'a-z' 'A-Z'`\033[0m ========================================"
 
