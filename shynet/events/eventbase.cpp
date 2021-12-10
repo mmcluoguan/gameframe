@@ -1,5 +1,5 @@
 #include "shynet/events/eventbase.h"
-#include "shynet/3rd/jemalloc/jemalloc.h"
+#include "3rd/jemalloc/jemalloc.h"
 #include "shynet/events/eventbuffer.h"
 #include "shynet/events/eventhandler.h"
 #include "shynet/utils/logger.h"

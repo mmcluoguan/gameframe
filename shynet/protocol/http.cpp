@@ -1,5 +1,5 @@
 #include "shynet/protocol/http.h"
-#include "shynet/3rd/jemalloc/jemalloc.h"
+#include "3rd/jemalloc/jemalloc.h"
 #include "shynet/protocol/filterproces.h"
 #include "shynet/utils/logger.h"
 #include <cstring>

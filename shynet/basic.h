@@ -1,7 +1,7 @@
 #ifndef SHYNET_BASIC_H
 #define SHYNET_BASIC_H
 
-#include "shynet/3rd/backward/backward.hpp"
+#include "3rd/backward/backward.hpp"
 #include <cstring>
 #include <string>
 

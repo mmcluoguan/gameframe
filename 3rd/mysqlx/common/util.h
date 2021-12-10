@@ -44,7 +44,7 @@
 
 #if defined __clang__ || __GNUC__ > 4 || (__GNUC__ == 4 && __GNUC_MINOR__ >= 6)
 #define DIAGNOSTIC_PUSH PRAGMA(GCC diagnostic push)
-#define DIAGNOSTIC_POP  PRAGMA(GCC diagnostic pop)
+#define DIAGNOSTIC_POP PRAGMA(GCC diagnostic pop)
 #else
 #define DIAGNOSTIC_PUSH
 #define DIAGNOSTIC_POP
@@ -52,12 +52,12 @@
 
 #elif defined _MSC_VER
 
-
 #define PRAGMA(X) __pragma(X)
-#define DISABLE_WARNING(W) PRAGMA(warning (disable:W))
+#define DISABLE_WARNING(W) PRAGMA(warning(disable \
+                                          : W))
 
-#define DIAGNOSTIC_PUSH  PRAGMA(warning (push))
-#define DIAGNOSTIC_POP   PRAGMA(warning (pop))
+#define DIAGNOSTIC_PUSH PRAGMA(warning(push))
+#define DIAGNOSTIC_POP PRAGMA(warning(pop))
 
 #else
 
@@ -68,7 +68,6 @@
 #define DIAGNOSTIC_POP
 
 #endif
-
 
 /*
   Macros to disable compile warnings in system headers. Put
@@ -88,14 +87,14 @@
   string literal
 */
 
-#define PUSH_SYS_WARNINGS \
-  PRAGMA(warning (push,2)) \
-  DISABLE_WARNING(4350) \
-  DISABLE_WARNING(4738) \
-  DISABLE_WARNING(4548) \
-  DISABLE_WARNING(4365) \
-  DISABLE_WARNING(4774) \
-  DISABLE_WARNING(4244)
+#define PUSH_SYS_WARNINGS    \
+    PRAGMA(warning(push, 2)) \
+    DISABLE_WARNING(4350)    \
+    DISABLE_WARNING(4738)    \
+    DISABLE_WARNING(4548)    \
+    DISABLE_WARNING(4365)    \
+    DISABLE_WARNING(4774)    \
+    DISABLE_WARNING(4244)
 
 #else
 
@@ -103,20 +102,20 @@
 
 #endif
 
-#define POP_SYS_WARNINGS  DIAGNOSTIC_POP
+#define POP_SYS_WARNINGS DIAGNOSTIC_POP
 
 PUSH_SYS_WARNINGS
 
-#include <string>
-#include <stdexcept>
-#include <ostream>
-#include <memory>
-#include <forward_list>
-#include <string.h>  // for memcpy
-#include <utility>   // std::move etc
 #include <algorithm>
+#include <forward_list>
 #include <functional>
+#include <memory>
+#include <ostream>
+#include <stdexcept>
+#include <string.h> // for memcpy
+#include <string>
 #include <type_traits>
+#include <utility> // std::move etc
 
 POP_SYS_WARNINGS
 
@@ -126,21 +125,21 @@ POP_SYS_WARNINGS
 */
 
 #ifndef FALLTHROUGH
-# ifdef __GNUC__
-#  if __GNUC__ < 7
-#    define FALLTHROUGH // fallthrough
-#  else
-#    if __cplusplus >= 201703L
-#      define FALLTHROUGH [[fallthrough]] // C++17
-#    elif __cplusplus >= 201103L
-#      define FALLTHROUGH [[gnu::fallthrough]] // C++11 and C++14
-#    else
-#      define FALLTHROUGH __attribute__((fallthrough))
-#    endif
-#  endif
-# else
-#   define FALLTHROUGH  // fallthrough
-# endif
+#ifdef __GNUC__
+#if __GNUC__ < 7
+#define FALLTHROUGH // fallthrough
+#else
+#if __cplusplus >= 201703L
+#define FALLTHROUGH [[fallthrough]] // C++17
+#elif __cplusplus >= 201103L
+#define FALLTHROUGH [[gnu::fallthrough]] // C++11 and C++14
+#else
+#define FALLTHROUGH __attribute__((fallthrough))
+#endif
+#endif
+#else
+#define FALLTHROUGH // fallthrough
+#endif
 #endif //FALLTHROUGH
 
 /*
@@ -153,14 +152,21 @@ POP_SYS_WARNINGS
 
 #ifdef THROW_AS_ASSERT
 
-#define THROW(MSG)  do { assert(false && (MSG)); throw (MSG); } while(false)
+#define THROW(MSG)              \
+    do {                        \
+        assert(false && (MSG)); \
+        throw(MSG);             \
+    } while (false)
 
 #else
 
-#define THROW(MSG) do { throw_error(MSG); throw (MSG); } while(false)
+#define THROW(MSG)        \
+    do {                  \
+        throw_error(MSG); \
+        throw(MSG);       \
+    } while (false)
 
 #endif
-
 
 /*
   Macros used to disable warnings for fragments of code.
@@ -171,7 +177,6 @@ POP_SYS_WARNINGS
 #undef DIAGNOSTIC_PUSH
 #undef DIAGNOSTIC_POP
 
-
 #if defined __GNUC__ || defined __clang__
 
 #define PRAGMA(X) _Pragma(#X)
@@ -179,7 +184,7 @@ POP_SYS_WARNINGS
 
 #if defined __clang__ || __GNUC__ > 4 || (__GNUC__ == 4 && __GNUC_MINOR__ >= 6)
 #define DIAGNOSTIC_PUSH PRAGMA(GCC diagnostic push)
-#define DIAGNOSTIC_POP  PRAGMA(GCC diagnostic pop)
+#define DIAGNOSTIC_POP PRAGMA(GCC diagnostic pop)
 #else
 #define DIAGNOSTIC_PUSH
 #define DIAGNOSTIC_POP
@@ -188,10 +193,11 @@ POP_SYS_WARNINGS
 #elif defined _MSC_VER
 
 #define PRAGMA(X) __pragma(X)
-#define DISABLE_WARNING(W) PRAGMA(warning (disable:W))
+#define DISABLE_WARNING(W) PRAGMA(warning(disable \
+                                          : W))
 
-#define DIAGNOSTIC_PUSH  PRAGMA(warning (push))
-#define DIAGNOSTIC_POP   PRAGMA(warning (pop))
+#define DIAGNOSTIC_PUSH PRAGMA(warning(push))
+#define DIAGNOSTIC_POP PRAGMA(warning(pop))
 
 #else
 
@@ -202,7 +208,6 @@ POP_SYS_WARNINGS
 #define DIAGNOSTIC_POP
 
 #endif
-
 
 /*
   On Windows, MSVC issues warnings if public API class definition uses
@@ -224,10 +229,11 @@ POP_SYS_WARNINGS
 
 #if defined _MSC_VER
 
-#define DLL_WARNINGS_PUSH  DIAGNOSTIC_PUSH \
-  DISABLE_WARNING(4251) \
-  DISABLE_WARNING(4275)
-#define DLL_WARNINGS_POP   DIAGNOSTIC_POP
+#define DLL_WARNINGS_PUSH \
+    DIAGNOSTIC_PUSH       \
+    DISABLE_WARNING(4251) \
+    DISABLE_WARNING(4275)
+#define DLL_WARNINGS_POP DIAGNOSTIC_POP
 
 #else
 
@@ -235,7 +241,6 @@ POP_SYS_WARNINGS
 #define DLL_WARNINGS_POP
 
 #endif
-
 
 /*
   A dirty trick to help Doxygen to process 'enum class' declarations, which
@@ -248,7 +253,6 @@ POP_SYS_WARNINGS
 #else
 #define enum_class enum class
 #endif
-
 
 /*
   Macro to put at the end of other macros that define lists of items. This is
@@ -273,15 +277,14 @@ POP_SYS_WARNINGS
 
 #define END_LIST
 
-
 #ifdef __cplusplus
 
 namespace mysqlx {
-MYSQLX_ABI_BEGIN(2,0)
+MYSQLX_ABI_BEGIN(2, 0)
 
 namespace common {
 
-/*
+    /*
   Convenience for checking numeric limits (to be used when doing numeric
   casts).
 
@@ -289,126 +292,108 @@ namespace common {
   type and U is an integer type or vice versa.
 */
 
-template <
-  typename T, typename U,
-  typename std::enable_if<std::is_unsigned<U>::value>::type* = nullptr
->
-inline
-bool check_num_limits(U val)
-{
-  using UT = typename std::make_unsigned<T>::type;
-  return !(val > (UT)std::numeric_limits<T>::max());
-}
+    template <
+        typename T, typename U,
+        typename std::enable_if<std::is_unsigned<U>::value>::type* = nullptr>
+    inline bool check_num_limits(U val)
+    {
+        using UT = typename std::make_unsigned<T>::type;
+        return !(val > (UT)std::numeric_limits<T>::max());
+    }
 
-template <
-  typename T, typename U,
-  typename std::enable_if<std::is_unsigned<T>::value>::type* = nullptr,
-  typename std::enable_if<!std::is_unsigned<U>::value>::type* = nullptr
->
-inline
-bool check_num_limits(U val)
-{
-  return !(val < 0) && !(val > std::numeric_limits<T>::max());
-}
+    template <
+        typename T, typename U,
+        typename std::enable_if<std::is_unsigned<T>::value>::type* = nullptr,
+        typename std::enable_if<!std::is_unsigned<U>::value>::type* = nullptr>
+    inline bool check_num_limits(U val)
+    {
+        return !(val < 0) && !(val > std::numeric_limits<T>::max());
+    }
 
-template <
-  typename T, typename U,
-  typename std::enable_if<!std::is_unsigned<T>::value>::type* = nullptr,
-  typename std::enable_if<!std::is_unsigned<U>::value>::type* = nullptr
->
-inline
-bool check_num_limits(U val)
-{
-  return
-    !((val > std::numeric_limits<T>::max())
-     || (val < std::numeric_limits<T>::lowest()));
-}
+    template <
+        typename T, typename U,
+        typename std::enable_if<!std::is_unsigned<T>::value>::type* = nullptr,
+        typename std::enable_if<!std::is_unsigned<U>::value>::type* = nullptr>
+    inline bool check_num_limits(U val)
+    {
+        return !((val > std::numeric_limits<T>::max())
+            || (val < std::numeric_limits<T>::lowest()));
+    }
 
-#define ASSERT_NUM_LIMITS(T,V) assert(::mysqlx::common::check_num_limits<T>(V))
+#define ASSERT_NUM_LIMITS(T, V) assert(::mysqlx::common::check_num_limits<T>(V))
 
+    inline std::string to_upper(const std::string& val)
+    {
+        using std::transform;
 
+        std::string uc_val;
+        uc_val.resize(val.size());
+        transform(val.begin(), val.end(), uc_val.begin(), ::toupper);
+        return uc_val;
+    }
 
-inline
-std::string to_upper(const std::string &val)
-{
-  using std::transform;
+    inline std::string to_lower(const std::string& val)
+    {
+        using std::transform;
 
-  std::string uc_val;
-  uc_val.resize(val.size());
-  transform(val.begin(), val.end(), uc_val.begin(), ::toupper);
-  return std::move(uc_val);
-}
+        std::string uc_val;
+        uc_val.resize(val.size());
+        transform(val.begin(), val.end(), uc_val.begin(), ::tolower);
+        return uc_val;
+    }
 
-inline
-std::string to_lower(const std::string &val)
-{
-  using std::transform;
-
-  std::string uc_val;
-  uc_val.resize(val.size());
-  transform(val.begin(), val.end(), uc_val.begin(), ::tolower);
-  return std::move(uc_val);
-}
-
-}  // common
-
+} // common
 
 namespace common {
 
 #ifdef USE_NATIVE_BYTE
-  using ::byte;
+    using ::byte;
 #else
-  typedef unsigned char byte;
+    typedef unsigned char byte;
 #endif
 
-  class nocopy
-  {
-  public:
-    nocopy(const nocopy&) = delete;
-    nocopy& operator=(const nocopy&) = delete;
-  protected:
-    nocopy() {}
-  };
+    class nocopy {
+    public:
+        nocopy(const nocopy&) = delete;
+        nocopy& operator=(const nocopy&) = delete;
 
+    protected:
+        nocopy() { }
+    };
 
-  class Printable
-  {
-    virtual void print(std::ostream&) const = 0;
-    friend std::ostream& operator<<(std::ostream&, const Printable&);
-  };
+    class Printable {
+        virtual void print(std::ostream&) const = 0;
+        friend std::ostream& operator<<(std::ostream&, const Printable&);
+    };
 
-  inline
-  std::ostream& operator<<(std::ostream &out, const Printable &obj)
-  {
-    obj.print(out);
-    return out;
-  }
+    inline std::ostream& operator<<(std::ostream& out, const Printable& obj)
+    {
+        obj.print(out);
+        return out;
+    }
 
-
-}  // common
-
+} // common
 
 namespace common {
 
-using std::find_if;
+    using std::find_if;
 
-/*
+    /*
   Remove from a container all elements that satisfy the given predicate.
 */
 
-template <class CONT, class PRED>
-void remove_from(CONT &cont, PRED pred)
-{
-  using It = typename CONT::iterator;
-  It end = std::remove_if(cont.begin(), cont.end(), pred);
-  cont.erase(end, cont.end());
-}
+    template <class CONT, class PRED>
+    void remove_from(CONT& cont, PRED pred)
+    {
+        using It = typename CONT::iterator;
+        It end = std::remove_if(cont.begin(), cont.end(), pred);
+        cont.erase(end, cont.end());
+    }
 
+} // common
+MYSQLX_ABI_END(2, 0)
+} // mysqlx
 
-}  // common
-MYSQLX_ABI_END(2,0)
-}  // mysqlx
-
-#endif  //  __cplusplus
+#endif //  __cplusplus
 
 #endif

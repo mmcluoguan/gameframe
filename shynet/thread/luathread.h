@@ -1,7 +1,7 @@
 #ifndef SHYNET_THREAD_LUATHREAD_H
 #define SHYNET_THREAD_LUATHREAD_H
 
-#include "shynet/3rd/kaguya/kaguya.hpp"
+#include "3rd/kaguya/kaguya.hpp"
 #include "shynet/task/task.h"
 #include "shynet/thread/thread.h"
 #include <condition_variable>

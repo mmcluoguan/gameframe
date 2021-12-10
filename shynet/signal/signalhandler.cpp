@@ -1,5 +1,5 @@
 #include "shynet/signal/signalhandler.h"
-#include "shynet/3rd/readline/readline.h"
+#include "3rd/readline/readline.h"
 #include "shynet/utils/logger.h"
 #include <csignal>
 

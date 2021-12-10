@@ -1,5 +1,5 @@
 #include "shynet/lua/luawrapper.h"
-#include "shynet/3rd/random/random.hpp"
+#include "3rd/random/random.hpp"
 #include "shynet/net/acceptnewfd.h"
 #include "shynet/net/connectevent.h"
 #include "shynet/net/ipaddress.h"

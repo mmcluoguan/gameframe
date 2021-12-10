@@ -1,6 +1,9 @@
 #ifndef FRMPUB_BASIC_H
 #define FRMPUB_BASIC_H
 
+#include "3rd/curl/curl.h"
+#include "3rd/enum/magic_enum.hpp"
+#include "3rd/rapidjson/document.h"
 #include "frmpub/protocc/client.pb.h"
 #include "frmpub/protocc/common.pb.h"
 #include "frmpub/protocc/dbvisit.pb.h"
@@ -9,9 +12,6 @@
 #include "frmpub/protocc/internal.pb.h"
 #include "frmpub/protocc/login.pb.h"
 #include "frmpub/protocc/world.pb.h"
-#include "shynet/3rd/curl/curl.h"
-#include "shynet/3rd/enum/magic_enum.hpp"
-#include "shynet/3rd/rapidjson/document.h"
 #include "shynet/events/eventbuffer.h"
 #include "shynet/utils/logger.h"
 #include <csignal>

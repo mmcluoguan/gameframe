@@ -1,5 +1,5 @@
 #include "shynet/protocol/websocket.h"
-#include "shynet/3rd/jemalloc/jemalloc.h"
+#include "3rd/jemalloc/jemalloc.h"
 #include "shynet/crypto/base64.h"
 #include "shynet/crypto/sha1.h"
 #include "shynet/protocol/filterproces.h"
