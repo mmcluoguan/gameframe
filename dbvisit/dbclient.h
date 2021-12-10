@@ -2,8 +2,8 @@
 #define DBVISIT_DBCLIENT_H
 
 #include "frmpub/client.h"
+#include "shynet/3rd/sw/redis++/redis++.h"
 #include "shynet/events/eventbuffer.h"
-#include <sw/redis++/redis++.h>
 namespace redis = sw::redis;
 
 namespace dbvisit {

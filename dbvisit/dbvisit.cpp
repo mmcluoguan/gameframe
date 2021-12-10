@@ -3,6 +3,7 @@
 #include "dbvisit/luawrapper.h"
 #include "frmpub/frmstdinhandler.h"
 #include "frmpub/luafoldertask.h"
+#include "shynet/3rd/sw/redis++/redis++.h"
 #include "shynet/events/eventhandler.h"
 #include "shynet/io/stdinhandler.h"
 #include "shynet/lua/luaengine.h"
@@ -16,7 +17,6 @@
 #include "shynet/utils/stringop.h"
 #include "shynet/utils/stuff.h"
 #include <google/protobuf/message.h>
-#include <sw/redis++/redis++.h>
 namespace redis = sw::redis;
 #include <csignal>
 #include <sys/stat.h>

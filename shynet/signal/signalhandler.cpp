@@ -1,7 +1,7 @@
 #include "shynet/signal/signalhandler.h"
+#include "shynet/3rd/readline/readline.h"
 #include "shynet/utils/logger.h"
 #include <csignal>
-#include <readline/readline.h>
 
 namespace shynet {
 namespace signal {

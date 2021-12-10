@@ -1,7 +1,7 @@
 #ifndef SHYNET_LUA_LUAWRAPPER_H
 #define SHYNET_LUA_LUAWRAPPER_H
 
-#include <kaguya/kaguya.hpp>
+#include "shynet/3rd/kaguya/kaguya.hpp"
 
 namespace shynet {
 namespace lua {

@@ -9,12 +9,12 @@
 #include "frmpub/protocc/internal.pb.h"
 #include "frmpub/protocc/login.pb.h"
 #include "frmpub/protocc/world.pb.h"
+#include "shynet/3rd/curl/curl.h"
+#include "shynet/3rd/enum/magic_enum.hpp"
+#include "shynet/3rd/rapidjson/document.h"
 #include "shynet/events/eventbuffer.h"
 #include "shynet/utils/logger.h"
 #include <csignal>
-#include <curl/curl.h>
-#include <enum/magic_enum.hpp>
-#include <rapidjson/document.h>
 #include <stack>
 #include <unordered_map>
 namespace protocc = frmpub::protocc;

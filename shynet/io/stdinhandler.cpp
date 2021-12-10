@@ -1,4 +1,5 @@
 #include "shynet/io/stdinhandler.h"
+#include "shynet/3rd/readline/readline.h"
 #include "shynet/utils/singleton.h"
 #include "shynet/utils/stringop.h"
 #include "shynet/utils/stuff.h"
@@ -6,7 +7,6 @@
 #include <cstring>
 #include <limits.h>
 #include <readline/history.h>
-#include <readline/readline.h>
 #include <string_view>
 #include <unistd.h>
 

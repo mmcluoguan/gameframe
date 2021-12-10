@@ -1,10 +1,10 @@
 #ifndef SHYNET_POOL_MYSQLPOOL_H
 #define SHYNET_POOL_MYSQLPOOL_H
 
+#include "shynet/3rd/mysqlx/xdevapi.h"
 #include "shynet/utils/singleton.h"
 #include <condition_variable>
 #include <functional>
-#include <mysqlx/xdevapi.h>
 #include <queue>
 
 namespace shynet {

@@ -358,8 +358,395 @@
     <ClInclude Include="signal\signalhandler.h">
       <Filter>signal</Filter>
     </ClInclude>
-    <ClInclude Include="utils\backward.hpp">
-      <Filter>utils</Filter>
+    <ClInclude Include="3rd\backward\backward.hpp">
+      <Filter>3rd\backward</Filter>
+    </ClInclude>
+    <ClInclude Include="3rd\curl\curl.h">
+      <Filter>3rd\curl</Filter>
+    </ClInclude>
+    <ClInclude Include="3rd\curl\curlver.h">
+      <Filter>3rd\curl</Filter>
+    </ClInclude>
+    <ClInclude Include="3rd\curl\easy.h">
+      <Filter>3rd\curl</Filter>
+    </ClInclude>
+    <ClInclude Include="3rd\curl\mprintf.h">
+      <Filter>3rd\curl</Filter>
+    </ClInclude>
+    <ClInclude Include="3rd\curl\multi.h">
+      <Filter>3rd\curl</Filter>
+    </ClInclude>
+    <ClInclude Include="3rd\curl\options.h">
+      <Filter>3rd\curl</Filter>
+    </ClInclude>
+    <ClInclude Include="3rd\curl\stdcheaders.h">
+      <Filter>3rd\curl</Filter>
+    </ClInclude>
+    <ClInclude Include="3rd\curl\system.h">
+      <Filter>3rd\curl</Filter>
+    </ClInclude>
+    <ClInclude Include="3rd\curl\typecheck-gcc.h">
+      <Filter>3rd\curl</Filter>
+    </ClInclude>
+    <ClInclude Include="3rd\curl\urlapi.h">
+      <Filter>3rd\curl</Filter>
+    </ClInclude>
+    <ClInclude Include="3rd\enum\magic_enum.hpp">
+      <Filter>3rd\enum</Filter>
+    </ClInclude>
+    <ClInclude Include="3rd\fmt\args.h">
+      <Filter>3rd\fmt</Filter>
+    </ClInclude>
+    <ClInclude Include="3rd\fmt\chrono.h">
+      <Filter>3rd\fmt</Filter>
+    </ClInclude>
+    <ClInclude Include="3rd\fmt\color.h">
+      <Filter>3rd\fmt</Filter>
+    </ClInclude>
+    <ClInclude Include="3rd\fmt\compile.h">
+      <Filter>3rd\fmt</Filter>
+    </ClInclude>
+    <ClInclude Include="3rd\fmt\core.h">
+      <Filter>3rd\fmt</Filter>
+    </ClInclude>
+    <ClInclude Include="3rd\fmt\format.h">
+      <Filter>3rd\fmt</Filter>
+    </ClInclude>
+    <ClInclude Include="3rd\fmt\format-inl.h">
+      <Filter>3rd\fmt</Filter>
+    </ClInclude>
+    <ClInclude Include="3rd\fmt\locale.h">
+      <Filter>3rd\fmt</Filter>
+    </ClInclude>
+    <ClInclude Include="3rd\fmt\os.h">
+      <Filter>3rd\fmt</Filter>
+    </ClInclude>
+    <ClInclude Include="3rd\fmt\ostream.h">
+      <Filter>3rd\fmt</Filter>
+    </ClInclude>
+    <ClInclude Include="3rd\fmt\printf.h">
+      <Filter>3rd\fmt</Filter>
+    </ClInclude>
+    <ClInclude Include="3rd\fmt\ranges.h">
+      <Filter>3rd\fmt</Filter>
+    </ClInclude>
+    <ClInclude Include="3rd\fmt\xchar.h">
+      <Filter>3rd\fmt</Filter>
+    </ClInclude>
+    <ClInclude Include="3rd\jemalloc\jemalloc.h">
+      <Filter>3rd\jemalloc</Filter>
+    </ClInclude>
+    <ClInclude Include="3rd\kaguya\kaguya.hpp">
+      <Filter>3rd\kaguya</Filter>
+    </ClInclude>
+    <ClInclude Include="3rd\kaguya\preprocess.hpp">
+      <Filter>3rd\kaguya</Filter>
+    </ClInclude>
+    <ClInclude Include="3rd\random\random.hpp">
+      <Filter>3rd\random</Filter>
+    </ClInclude>
+    <ClInclude Include="3rd\rapidjson\error\en.h">
+      <Filter>3rd\rapidjson\error</Filter>
+    </ClInclude>
+    <ClInclude Include="3rd\rapidjson\error\error.h">
+      <Filter>3rd\rapidjson\error</Filter>
+    </ClInclude>
+    <ClInclude Include="3rd\rapidjson\internal\biginteger.h">
+      <Filter>3rd\rapidjson\internal</Filter>
+    </ClInclude>
+    <ClInclude Include="3rd\rapidjson\internal\clzll.h">
+      <Filter>3rd\rapidjson\internal</Filter>
+    </ClInclude>
+    <ClInclude Include="3rd\rapidjson\internal\diyfp.h">
+      <Filter>3rd\rapidjson\internal</Filter>
+    </ClInclude>
+    <ClInclude Include="3rd\rapidjson\internal\dtoa.h">
+      <Filter>3rd\rapidjson\internal</Filter>
+    </ClInclude>
+    <ClInclude Include="3rd\rapidjson\internal\ieee754.h">
+      <Filter>3rd\rapidjson\internal</Filter>
+    </ClInclude>
+    <ClInclude Include="3rd\rapidjson\internal\itoa.h">
+      <Filter>3rd\rapidjson\internal</Filter>
+    </ClInclude>
+    <ClInclude Include="3rd\rapidjson\internal\meta.h">
+      <Filter>3rd\rapidjson\internal</Filter>
+    </ClInclude>
+    <ClInclude Include="3rd\rapidjson\internal\pow10.h">
+      <Filter>3rd\rapidjson\internal</Filter>
+    </ClInclude>
+    <ClInclude Include="3rd\rapidjson\internal\regex.h">
+      <Filter>3rd\rapidjson\internal</Filter>
+    </ClInclude>
+    <ClInclude Include="3rd\rapidjson\internal\stack.h">
+      <Filter>3rd\rapidjson\internal</Filter>
+    </ClInclude>
+    <ClInclude Include="3rd\rapidjson\internal\strfunc.h">
+      <Filter>3rd\rapidjson\internal</Filter>
+    </ClInclude>
+    <ClInclude Include="3rd\rapidjson\internal\strtod.h">
+      <Filter>3rd\rapidjson\internal</Filter>
+    </ClInclude>
+    <ClInclude Include="3rd\rapidjson\internal\swap.h">
+      <Filter>3rd\rapidjson\internal</Filter>
+    </ClInclude>
+    <ClInclude Include="3rd\rapidjson\msinttypes\inttypes.h">
+      <Filter>3rd\rapidjson\msinttypes</Filter>
+    </ClInclude>
+    <ClInclude Include="3rd\rapidjson\msinttypes\stdint.h">
+      <Filter>3rd\rapidjson\msinttypes</Filter>
+    </ClInclude>
+    <ClInclude Include="3rd\rapidjson\allocators.h">
+      <Filter>3rd\rapidjson</Filter>
+    </ClInclude>
+    <ClInclude Include="3rd\rapidjson\cursorstreamwrapper.h">
+      <Filter>3rd\rapidjson</Filter>
+    </ClInclude>
+    <ClInclude Include="3rd\rapidjson\document.h">
+      <Filter>3rd\rapidjson</Filter>
+    </ClInclude>
+    <ClInclude Include="3rd\rapidjson\encodedstream.h">
+      <Filter>3rd\rapidjson</Filter>
+    </ClInclude>
+    <ClInclude Include="3rd\rapidjson\encodings.h">
+      <Filter>3rd\rapidjson</Filter>
+    </ClInclude>
+    <ClInclude Include="3rd\rapidjson\filereadstream.h">
+      <Filter>3rd\rapidjson</Filter>
+    </ClInclude>
+    <ClInclude Include="3rd\rapidjson\filewritestream.h">
+      <Filter>3rd\rapidjson</Filter>
+    </ClInclude>
+    <ClInclude Include="3rd\rapidjson\fwd.h">
+      <Filter>3rd\rapidjson</Filter>
+    </ClInclude>
+    <ClInclude Include="3rd\rapidjson\istreamwrapper.h">
+      <Filter>3rd\rapidjson</Filter>
+    </ClInclude>
+    <ClInclude Include="3rd\rapidjson\memorybuffer.h">
+      <Filter>3rd\rapidjson</Filter>
+    </ClInclude>
+    <ClInclude Include="3rd\rapidjson\memorystream.h">
+      <Filter>3rd\rapidjson</Filter>
+    </ClInclude>
+    <ClInclude Include="3rd\rapidjson\ostreamwrapper.h">
+      <Filter>3rd\rapidjson</Filter>
+    </ClInclude>
+    <ClInclude Include="3rd\rapidjson\pointer.h">
+      <Filter>3rd\rapidjson</Filter>
+    </ClInclude>
+    <ClInclude Include="3rd\rapidjson\prettywriter.h">
+      <Filter>3rd\rapidjson</Filter>
+    </ClInclude>
+    <ClInclude Include="3rd\rapidjson\rapidjson.h">
+      <Filter>3rd\rapidjson</Filter>
+    </ClInclude>
+    <ClInclude Include="3rd\rapidjson\reader.h">
+      <Filter>3rd\rapidjson</Filter>
+    </ClInclude>
+    <ClInclude Include="3rd\rapidjson\schema.h">
+      <Filter>3rd\rapidjson</Filter>
+    </ClInclude>
+    <ClInclude Include="3rd\rapidjson\stream.h">
+      <Filter>3rd\rapidjson</Filter>
+    </ClInclude>
+    <ClInclude Include="3rd\rapidjson\stringbuffer.h">
+      <Filter>3rd\rapidjson</Filter>
+    </ClInclude>
+    <ClInclude Include="3rd\rapidjson\uri.h">
+      <Filter>3rd\rapidjson</Filter>
+    </ClInclude>
+    <ClInclude Include="3rd\rapidjson\writer.h">
+      <Filter>3rd\rapidjson</Filter>
+    </ClInclude>
+    <ClInclude Include="3rd\rapidxml\rapidxml.hpp">
+      <Filter>3rd\rapidxml</Filter>
+    </ClInclude>
+    <ClInclude Include="3rd\rapidxml\rapidxml_iterators.hpp">
+      <Filter>3rd\rapidxml</Filter>
+    </ClInclude>
+    <ClInclude Include="3rd\rapidxml\rapidxml_print.hpp">
+      <Filter>3rd\rapidxml</Filter>
+    </ClInclude>
+    <ClInclude Include="3rd\rapidxml\rapidxml_utils.hpp">
+      <Filter>3rd\rapidxml</Filter>
+    </ClInclude>
+    <ClInclude Include="3rd\readline\chardefs.h">
+      <Filter>3rd\readline</Filter>
+    </ClInclude>
+    <ClInclude Include="3rd\readline\history.h">
+      <Filter>3rd\readline</Filter>
+    </ClInclude>
+    <ClInclude Include="3rd\readline\keymaps.h">
+      <Filter>3rd\readline</Filter>
+    </ClInclude>
+    <ClInclude Include="3rd\readline\readline.h">
+      <Filter>3rd\readline</Filter>
+    </ClInclude>
+    <ClInclude Include="3rd\readline\rlconf.h">
+      <Filter>3rd\readline</Filter>
+    </ClInclude>
+    <ClInclude Include="3rd\readline\rlstdc.h">
+      <Filter>3rd\readline</Filter>
+    </ClInclude>
+    <ClInclude Include="3rd\readline\rltypedefs.h">
+      <Filter>3rd\readline</Filter>
+    </ClInclude>
+    <ClInclude Include="3rd\readline\tilde.h">
+      <Filter>3rd\readline</Filter>
+    </ClInclude>
+    <ClInclude Include="3rd\sw\redis++\command.h">
+      <Filter>3rd\sw\redis++</Filter>
+    </ClInclude>
+    <ClInclude Include="3rd\sw\redis++\command_args.h">
+      <Filter>3rd\sw\redis++</Filter>
+    </ClInclude>
+    <ClInclude Include="3rd\sw\redis++\command_options.h">
+      <Filter>3rd\sw\redis++</Filter>
+    </ClInclude>
+    <ClInclude Include="3rd\sw\redis++\connection.h">
+      <Filter>3rd\sw\redis++</Filter>
+    </ClInclude>
+    <ClInclude Include="3rd\sw\redis++\connection_pool.h">
+      <Filter>3rd\sw\redis++</Filter>
+    </ClInclude>
+    <ClInclude Include="3rd\sw\redis++\errors.h">
+      <Filter>3rd\sw\redis++</Filter>
+    </ClInclude>
+    <ClInclude Include="3rd\sw\redis++\pipeline.h">
+      <Filter>3rd\sw\redis++</Filter>
+    </ClInclude>
+    <ClInclude Include="3rd\sw\redis++\queued_redis.h">
+      <Filter>3rd\sw\redis++</Filter>
+    </ClInclude>
+    <ClInclude Include="3rd\sw\redis++\queued_redis.hpp">
+      <Filter>3rd\sw\redis++</Filter>
+    </ClInclude>
+    <ClInclude Include="3rd\sw\redis++\redis.h">
+      <Filter>3rd\sw\redis++</Filter>
+    </ClInclude>
+    <ClInclude Include="3rd\sw\redis++\redis.hpp">
+      <Filter>3rd\sw\redis++</Filter>
+    </ClInclude>
+    <ClInclude Include="3rd\sw\redis++\redis_cluster.h">
+      <Filter>3rd\sw\redis++</Filter>
+    </ClInclude>
+    <ClInclude Include="3rd\sw\redis++\redis_cluster.hpp">
+      <Filter>3rd\sw\redis++</Filter>
+    </ClInclude>
+    <ClInclude Include="3rd\sw\redis++\redis++.h">
+      <Filter>3rd\sw\redis++</Filter>
+    </ClInclude>
+    <ClInclude Include="3rd\sw\redis++\reply.h">
+      <Filter>3rd\sw\redis++</Filter>
+    </ClInclude>
+    <ClInclude Include="3rd\sw\redis++\sentinel.h">
+      <Filter>3rd\sw\redis++</Filter>
+    </ClInclude>
+    <ClInclude Include="3rd\sw\redis++\shards.h">
+      <Filter>3rd\sw\redis++</Filter>
+    </ClInclude>
+    <ClInclude Include="3rd\sw\redis++\shards_pool.h">
+      <Filter>3rd\sw\redis++</Filter>
+    </ClInclude>
+    <ClInclude Include="3rd\sw\redis++\subscriber.h">
+      <Filter>3rd\sw\redis++</Filter>
+    </ClInclude>
+    <ClInclude Include="3rd\sw\redis++\tls.h">
+      <Filter>3rd\sw\redis++</Filter>
+    </ClInclude>
+    <ClInclude Include="3rd\sw\redis++\transaction.h">
+      <Filter>3rd\sw\redis++</Filter>
+    </ClInclude>
+    <ClInclude Include="3rd\sw\redis++\utils.h">
+      <Filter>3rd\sw\redis++</Filter>
+    </ClInclude>
+    <ClInclude Include="3rd\mysqlx\common.h">
+      <Filter>3rd\mysqlx</Filter>
+    </ClInclude>
+    <ClInclude Include="3rd\mysqlx\common_constants.h">
+      <Filter>3rd\mysqlx</Filter>
+    </ClInclude>
+    <ClInclude Include="3rd\mysqlx\xapi.h">
+      <Filter>3rd\mysqlx</Filter>
+    </ClInclude>
+    <ClInclude Include="3rd\mysqlx\xdevapi.h">
+      <Filter>3rd\mysqlx</Filter>
+    </ClInclude>
+    <ClInclude Include="3rd\mysqlx\common\api.h">
+      <Filter>3rd\mysqlx\common</Filter>
+    </ClInclude>
+    <ClInclude Include="3rd\mysqlx\common\error.h">
+      <Filter>3rd\mysqlx\common</Filter>
+    </ClInclude>
+    <ClInclude Include="3rd\mysqlx\common\op_if.h">
+      <Filter>3rd\mysqlx\common</Filter>
+    </ClInclude>
+    <ClInclude Include="3rd\mysqlx\common\settings.h">
+      <Filter>3rd\mysqlx\common</Filter>
+    </ClInclude>
+    <ClInclude Include="3rd\mysqlx\common\util.h">
+      <Filter>3rd\mysqlx\common</Filter>
+    </ClInclude>
+    <ClInclude Include="3rd\mysqlx\common\value.h">
+      <Filter>3rd\mysqlx\common</Filter>
+    </ClInclude>
+    <ClInclude Include="3rd\mysqlx\devapi\collations.h">
+      <Filter>3rd\mysqlx\devapi</Filter>
+    </ClInclude>
+    <ClInclude Include="3rd\mysqlx\devapi\collection_crud.h">
+      <Filter>3rd\mysqlx\devapi</Filter>
+    </ClInclude>
+    <ClInclude Include="3rd\mysqlx\devapi\common.h">
+      <Filter>3rd\mysqlx\devapi</Filter>
+    </ClInclude>
+    <ClInclude Include="3rd\mysqlx\devapi\crud.h">
+      <Filter>3rd\mysqlx\devapi</Filter>
+    </ClInclude>
+    <ClInclude Include="3rd\mysqlx\devapi\document.h">
+      <Filter>3rd\mysqlx\devapi</Filter>
+    </ClInclude>
+    <ClInclude Include="3rd\mysqlx\devapi\error.h">
+      <Filter>3rd\mysqlx\devapi</Filter>
+    </ClInclude>
+    <ClInclude Include="3rd\mysqlx\devapi\executable.h">
+      <Filter>3rd\mysqlx\devapi</Filter>
+    </ClInclude>
+    <ClInclude Include="3rd\mysqlx\devapi\mysql_charsets.h">
+      <Filter>3rd\mysqlx\devapi</Filter>
+    </ClInclude>
+    <ClInclude Include="3rd\mysqlx\devapi\mysql_collations.h">
+      <Filter>3rd\mysqlx\devapi</Filter>
+    </ClInclude>
+    <ClInclude Include="3rd\mysqlx\devapi\result.h">
+      <Filter>3rd\mysqlx\devapi</Filter>
+    </ClInclude>
+    <ClInclude Include="3rd\mysqlx\devapi\row.h">
+      <Filter>3rd\mysqlx\devapi</Filter>
+    </ClInclude>
+    <ClInclude Include="3rd\mysqlx\devapi\settings.h">
+      <Filter>3rd\mysqlx\devapi</Filter>
+    </ClInclude>
+    <ClInclude Include="3rd\mysqlx\devapi\table_crud.h">
+      <Filter>3rd\mysqlx\devapi</Filter>
+    </ClInclude>
+    <ClInclude Include="3rd\mysqlx\devapi\detail\crud.h">
+      <Filter>3rd\mysqlx\devapi\detail</Filter>
+    </ClInclude>
+    <ClInclude Include="3rd\mysqlx\devapi\detail\error.h">
+      <Filter>3rd\mysqlx\devapi\detail</Filter>
+    </ClInclude>
+    <ClInclude Include="3rd\mysqlx\devapi\detail\result.h">
+      <Filter>3rd\mysqlx\devapi\detail</Filter>
+    </ClInclude>
+    <ClInclude Include="3rd\mysqlx\devapi\detail\row.h">
+      <Filter>3rd\mysqlx\devapi\detail</Filter>
+    </ClInclude>
+    <ClInclude Include="3rd\mysqlx\devapi\detail\session.h">
+      <Filter>3rd\mysqlx\devapi\detail</Filter>
+    </ClInclude>
+    <ClInclude Include="3rd\mysqlx\devapi\detail\settings.h">
+      <Filter>3rd\mysqlx\devapi\detail</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -407,6 +794,66 @@
     </Filter>
     <Filter Include="signal">
       <UniqueIdentifier>{5f863c25-1550-495a-94c1-2aaa317b032c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="3rd">
+      <UniqueIdentifier>{bb6a76e7-c94a-422d-a60b-1e2bdbae9696}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="3rd\backward">
+      <UniqueIdentifier>{d5a650cd-be7f-416f-b53a-f86fd00a8463}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="3rd\curl">
+      <UniqueIdentifier>{70c5757e-9950-49d9-bad6-beea541e6534}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="3rd\enum">
+      <UniqueIdentifier>{25836b83-ee21-4d65-96e6-b18b45008506}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="3rd\fmt">
+      <UniqueIdentifier>{1c50557e-4539-477a-b523-15fdeb4305f5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="3rd\jemalloc">
+      <UniqueIdentifier>{1d84b8b0-7c57-41f9-bbcf-5556d057a185}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="3rd\kaguya">
+      <UniqueIdentifier>{fddb727f-0ecf-4c95-8f9f-fec2eb898e04}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="3rd\random">
+      <UniqueIdentifier>{fba2ff1f-67d5-4f02-8902-c02c69fe1a73}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="3rd\rapidjson">
+      <UniqueIdentifier>{cae75cc3-2d59-4ea1-96a7-65aff8375388}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="3rd\rapidjson\error">
+      <UniqueIdentifier>{448176d3-d58b-47f5-9d32-0cceb59eaba1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="3rd\rapidjson\internal">
+      <UniqueIdentifier>{452f8328-cd47-4b33-bb40-18c8888129a8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="3rd\rapidjson\msinttypes">
+      <UniqueIdentifier>{d0fd1a39-56e3-4dff-884b-384db8e7d025}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="3rd\rapidxml">
+      <UniqueIdentifier>{c1f12df7-246b-4d48-8ccc-78851b2711ff}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="3rd\readline">
+      <UniqueIdentifier>{da1b17a1-1f6e-4282-b763-38669c403e10}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="3rd\sw">
+      <UniqueIdentifier>{679fdee5-1b7e-4403-abb0-26f0ed27749f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="3rd\sw\redis++">
+      <UniqueIdentifier>{5a1d4c9b-bda4-49e0-ab1d-5cd263c3a446}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="3rd\mysqlx">
+      <UniqueIdentifier>{f47f9280-58f8-4e78-8be9-717f9d6521e8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="3rd\mysqlx\common">
+      <UniqueIdentifier>{1aa2fc74-4fa7-425d-ae80-5853bf8eec66}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="3rd\mysqlx\devapi">
+      <UniqueIdentifier>{6aee27e5-162e-4da5-9aec-5bf53933a82e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="3rd\mysqlx\devapi\detail">
+      <UniqueIdentifier>{eb269f48-3327-4bef-9c8d-3996b2b82ef4}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

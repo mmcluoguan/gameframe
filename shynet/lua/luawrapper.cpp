@@ -1,4 +1,5 @@
 #include "shynet/lua/luawrapper.h"
+#include "shynet/3rd/random/random.hpp"
 #include "shynet/net/acceptnewfd.h"
 #include "shynet/net/connectevent.h"
 #include "shynet/net/ipaddress.h"
@@ -6,7 +7,6 @@
 #include "shynet/net/listenreactormgr.h"
 #include "shynet/utils/logger.h"
 #include "shynet/utils/stuff.h"
-#include <random/random.hpp>
 
 namespace shynet {
 namespace lua {

@@ -1,9 +1,9 @@
 #include "frmpub/filterdata.h"
+#include "shynet/3rd/rapidjson/stringbuffer.h"
+#include "shynet/3rd/rapidjson/writer.h"
 #include "shynet/net/ipaddress.h"
 #include "shynet/utils/logger.h"
 #include <memory>
-#include <rapidjson/stringbuffer.h>
-#include <rapidjson/writer.h>
 
 namespace frmpub {
 FilterData::FilterData(ProtoData pd)
