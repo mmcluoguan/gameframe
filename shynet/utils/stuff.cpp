@@ -1,4 +1,5 @@
 #include "shynet/utils/stuff.h"
+#include "shynet/basic.h"
 #include "shynet/utils/filepathop.h"
 #include "shynet/utils/logger.h"
 #include <arpa/inet.h>
@@ -17,6 +18,8 @@
 
 namespace shynet {
 namespace utils {
+    extern std::ofstream g_logfile;
+
     namespace stuff {
         namespace {
             static const int64_t BOOT_TIMESTAMP = std::time(NULL);
@@ -93,6 +96,11 @@ namespace utils {
 
         void create_coredump()
         {
+            static backward::SignalHandling sh;
+            sh.pcb = [](backward::Printer& p, backward::StackTrace& st) {
+                if (g_logfile.is_open())
+                    p.print(st, g_logfile);
+            };
             struct rlimit core {
                 RLIM_INFINITY, RLIM_INFINITY
             };
@@ -396,7 +404,14 @@ namespace utils {
 
         void print_exception(const std::exception& e, int level)
         {
-            LOG_ERROR << "异常层级: " << level << " 异常信息:" << e.what();
+            std::ostringstream info;
+            info << "异常层级: " << level << " 异常信息: \n";
+            info << e.what();
+            if (auto beptr = dynamic_cast<const shynet::BaseException*>(&e)) {
+                info << "\n"
+                     << beptr->trace();
+            }
+            LOG_WARN << info.str();
             try {
                 if (auto ptr = dynamic_cast<const std::nested_exception*>(&e)) {
                     if (ptr->nested_ptr())

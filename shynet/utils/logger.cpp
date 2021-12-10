@@ -21,19 +21,19 @@ namespace utils {
 
     static bool g_islogdir = false;
     static std::mutex g_logMutex;
-    static std::ofstream g_logfile;
+    std::ofstream g_logfile;
     static char g_logfilename[NAME_MAX] = { 0 };
 
     static std::map<Logger::LogLevel, LogInfo> levelNames()
     {
         return {
-            { Logger::LogLevel::TRACE, { "TRACE", "\033[01;36m" } },
-            { Logger::LogLevel::DEBUG, { "DEBUG", "\033[01;32m" } },
-            { Logger::LogLevel::LUA, { "LUA", "\033[01;37m" } },
-            { Logger::LogLevel::INFO, { "INFO", "\033[01;35m" } },
-            { Logger::LogLevel::WARN, { "WARN", "\033[01;33m" } },
-            { Logger::LogLevel::ERROR, { "ERROR", "\033[01;31m" } },
-            { Logger::LogLevel::FATAL, { "FATAL", "\033[01;34m" } },
+            { Logger::LogLevel::TRACE, { "TRACE", "\033[01;36m" } }, //粗体青色
+            { Logger::LogLevel::DEBUG, { "DEBUG", "\033[01;32m" } }, //粗体绿色
+            { Logger::LogLevel::LUA, { "LUA", "\033[01;37m" } }, //粗体浅灰
+            { Logger::LogLevel::INFO, { "INFO", "\033[01;35m" } }, //粗体蓝色
+            { Logger::LogLevel::WARN, { "WARN", "\033[01;33m" } }, //粗体橙色
+            { Logger::LogLevel::ERROR, { "ERROR", "\033[01;31m" } }, //粗体红色
+            { Logger::LogLevel::FATAL, { "FATAL", "\033[01;34m" } }, //粗体品红
         };
     }
 
@@ -77,7 +77,8 @@ namespace utils {
                 g_logfile.close();
             }
             g_logfile.open(logfilename, std::ios::out | std::ios::app);
-            strncpy(g_logfilename, logfilename, strlen(g_logfilename));
+            std::cerr.rdbuf(g_logfile.rdbuf());
+            strncpy(g_logfilename, logfilename, strlen(logfilename));
         }
         g_logfile << msg << std::endl;
         for (auto&& [key, value] : levelNames()) {

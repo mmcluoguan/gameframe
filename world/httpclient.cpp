@@ -95,7 +95,7 @@ int HttpClient::getgamelist_admin_world_c(std::shared_ptr<rapidjson::Document> d
                     msgs["games"].PushBack(game_json, doc->GetAllocator());
                 }
             });
-        send_json(int(frmpub::JosnMsgId::GETGAMELIST_ADMIN_WORLD_S), &msgs, enves.get());
+        send_json(frmpub::JosnMsgId::GETGAMELIST_ADMIN_WORLD_S, &msgs, enves.get());
     } catch (const std::exception& err) {
         int msgid = (*doc)["msgid"].GetInt();
         std::stringstream stream;
@@ -128,7 +128,7 @@ int HttpClient::noticeserver_admin_world_c(std::shared_ptr<rapidjson::Document> 
             });
         rapidjson::Value result(rapidjson::kObjectType);
         result.AddMember("result", flag ? 0 : 1, doc->GetAllocator());
-        send_json(int(frmpub::JosnMsgId::NOTICESERVER_ADMIN_WORLD_S), &result, enves.get());
+        send_json(frmpub::JosnMsgId::NOTICESERVER_ADMIN_WORLD_S, &result, enves.get());
     } catch (const std::exception& err) {
         int msgid = (*doc)["msgid"].GetInt();
         std::stringstream stream;
@@ -198,7 +198,7 @@ int HttpClient::sysemail_admin_world_c(std::shared_ptr<rapidjson::Document> doc,
             }
         }
         msgs.AddMember("result", result, doc->GetAllocator());
-        send_json(int(frmpub::JosnMsgId::SYSEMAIL_ADMIN_WORLD_S), &msgs, enves.get());
+        send_json(frmpub::JosnMsgId::SYSEMAIL_ADMIN_WORLD_S, &msgs, enves.get());
     } catch (const std::exception& err) {
         int msgid = (*doc)["msgid"].GetInt();
         std::stringstream stream;

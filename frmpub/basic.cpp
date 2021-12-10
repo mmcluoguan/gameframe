@@ -33,8 +33,7 @@ std::string Basic::client_msgname(int id)
 
 std::string Basic::json_msgname(int id)
 {
-    JosnMsgId eid = static_cast<JosnMsgId>(id);
-    std::string ename(magic_enum::enum_name<JosnMsgId>(eid));
+    std::string ename(magic_enum::enum_name<JosnMsgId>(static_cast<JosnMsgId>(id)));
     return "(" + ename + ":" + std::to_string(id) + ")";
 }
 

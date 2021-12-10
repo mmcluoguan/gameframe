@@ -1,6 +1,7 @@
 #ifndef SHYNET_BASIC_H
 #define SHYNET_BASIC_H
 
+#include "utils/backward.hpp"
 #include <cstring>
 #include <string>
 
@@ -44,7 +45,12 @@ private:                                                                        
 #define PROPERTY_STD_LOCK(name) PROPERTY_LOCK(std::mutex, name)
 #define PROPERTY_WITH_STD_LOCK(lockName, PropertyType, propertyName) PROPERTY_WITH_LOCK(std::lock_guard, std::mutex, lockName, PropertyType, propertyName)
 
-#define THROW_EXCEPTION(err) std::throw_with_nested(shynet::BaseException(std::string(err) + " -" + std::string(strrchr(__FILE__, '/') + 1) + " line:" + std::to_string(__LINE__)));
+#define THROW_EXCEPTION(err)                                                      \
+    {                                                                             \
+        std::ostringstream oss;                                                   \
+        oss << err << " -" << strrchr(__FILE__, '/') + 1 << " line:" << __LINE__; \
+        std::throw_with_nested(shynet::BaseException(oss.str()));                 \
+    }
 
 namespace shynet {
 namespace utils {
@@ -80,9 +86,17 @@ namespace protocol {
 	*/
 class BaseException : public std::exception {
 public:
-    explicit BaseException(const std::string& msg)
+    explicit BaseException(const std::string msg)
         : msg_(msg)
     {
+        backward::StackTrace st;
+        st.load_here(32);
+        backward::Printer p;
+        std::ostringstream trace;
+        p.object = true;
+        p.address = true;
+        p.print(st, trace);
+        trace_ = trace.str();
     }
 
     BaseException(const BaseException&) = default;
@@ -93,13 +107,21 @@ public:
 
     virtual ~BaseException() override = default;
 
+    //异常信息
     virtual const char* what() const noexcept override
     {
         return msg_.data();
     }
 
+    //堆栈追踪
+    const char* trace() const noexcept
+    {
+        return trace_.c_str();
+    }
+
 private:
     std::string msg_;
+    std::string trace_;
 };
 
 /// <summary>

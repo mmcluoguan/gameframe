@@ -358,6 +358,9 @@
     <ClInclude Include="signal\signalhandler.h">
       <Filter>signal</Filter>
     </ClInclude>
+    <ClInclude Include="utils\backward.hpp">
+      <Filter>utils</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="pool">

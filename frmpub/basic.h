@@ -30,7 +30,7 @@ namespace protocc = frmpub::protocc;
 
 namespace frmpub {
 
-enum class JosnMsgId : int {
+enum JosnMsgId : int {
     ADMIN_WORLD_BEGIN = 5001,
     GETGAMELIST_ADMIN_WORLD_C, //获取区服信息
     GETGAMELIST_ADMIN_WORLD_S, //{"games":[{"ip":"127.0.0.1","port":1234,"st":1,"name":"xxxx"}]}
@@ -89,8 +89,8 @@ inline void default_sigcb(std::shared_ptr<events::EventBase> base, int signum)
 namespace magic_enum::customize {
 template <>
 struct enum_range<frmpub::JosnMsgId> {
-    static constexpr int min = static_cast<int>(frmpub::JosnMsgId::ADMIN_WORLD_BEGIN);
-    static constexpr int max = static_cast<int>(frmpub::JosnMsgId::ADMIN_WORLD_END);
+    static constexpr int min = frmpub::ADMIN_WORLD_BEGIN;
+    static constexpr int max = frmpub::ADMIN_WORLD_END;
 };
 }
 #endif

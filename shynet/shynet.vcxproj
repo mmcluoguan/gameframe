@@ -216,6 +216,7 @@
     <ClInclude Include="thread\thread.h" />
     <ClInclude Include="thread\timerthread.h" />
     <ClInclude Include="thread\workthread.h" />
+    <ClInclude Include="utils\backward.hpp" />
     <ClInclude Include="utils\databuffer.h" />
     <ClInclude Include="utils\filepathop.h" />
     <ClInclude Include="utils\hash.h" />
