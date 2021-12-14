@@ -24,7 +24,7 @@ namespace pool {
             } else {
                 SessionPtr session(new mysqlx::Session(option_), fun_);
                 ++use_num_;
-                LOG_DEBUG << "fetch new:" << use_num_;
+                //LOG_DEBUG << "fetch new:" << use_num_;
                 return session;
             }
         }

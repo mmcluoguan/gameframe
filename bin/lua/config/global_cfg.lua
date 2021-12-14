@@ -1,6 +1,6 @@
 local items = 
 {
-    { Id = 1, KeyName = "每日抽奖次数", Value = "10", },
+    { Id = 1, KeyName = "每日抽奖次数", Value = 10, },
 }
 
 local idItems = 

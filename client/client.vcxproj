@@ -173,8 +173,7 @@
       <StrictAliasing>false</StrictAliasing>
       <UnrollLoops>true</UnrollLoops>
       <TreatWarningAsError>false</TreatWarningAsError>
-      <AdditionalOptions>
-      </AdditionalOptions>
+      <AdditionalOptions>-W"no-conversion" </AdditionalOptions>
     </ClCompile>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|ARM'">
@@ -189,6 +188,7 @@
       <StrictAliasing>false</StrictAliasing>
       <UnrollLoops>true</UnrollLoops>
       <TreatWarningAsError>false</TreatWarningAsError>
+      <AdditionalOptions>-W"no-conversion" </AdditionalOptions>
     </ClCompile>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|ARM64'">
@@ -204,8 +204,7 @@
       <StrictAliasing>false</StrictAliasing>
       <UnrollLoops>true</UnrollLoops>
       <TreatWarningAsError>false</TreatWarningAsError>
-      <AdditionalOptions>
-      </AdditionalOptions>
+      <AdditionalOptions>-W"no-conversion" </AdditionalOptions>
     </ClCompile>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|ARM64'">
@@ -220,6 +219,7 @@
       <StrictAliasing>false</StrictAliasing>
       <UnrollLoops>true</UnrollLoops>
       <TreatWarningAsError>false</TreatWarningAsError>
+      <AdditionalOptions>-W"no-conversion" </AdditionalOptions>
     </ClCompile>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -235,8 +235,7 @@
       <StrictAliasing>false</StrictAliasing>
       <UnrollLoops>true</UnrollLoops>
       <TreatWarningAsError>false</TreatWarningAsError>
-      <AdditionalOptions>
-      </AdditionalOptions>
+      <AdditionalOptions>-W"no-conversion" </AdditionalOptions>
     </ClCompile>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -251,6 +250,7 @@
       <StrictAliasing>false</StrictAliasing>
       <UnrollLoops>true</UnrollLoops>
       <TreatWarningAsError>false</TreatWarningAsError>
+      <AdditionalOptions>-W"no-conversion" </AdditionalOptions>
     </ClCompile>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x86'">
@@ -266,8 +266,7 @@
       <StrictAliasing>false</StrictAliasing>
       <UnrollLoops>true</UnrollLoops>
       <TreatWarningAsError>false</TreatWarningAsError>
-      <AdditionalOptions>
-      </AdditionalOptions>
+      <AdditionalOptions>-W"no-conversion" </AdditionalOptions>
     </ClCompile>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x86'">
@@ -282,6 +281,7 @@
       <StrictAliasing>false</StrictAliasing>
       <UnrollLoops>true</UnrollLoops>
       <TreatWarningAsError>false</TreatWarningAsError>
+      <AdditionalOptions>-W"no-conversion" </AdditionalOptions>
     </ClCompile>
   </ItemDefinitionGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

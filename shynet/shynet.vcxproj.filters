@@ -55,7 +55,7 @@
     <ClCompile Include="net\timerevent.cpp">
       <Filter>net\timer</Filter>
     </ClCompile>
-    <ClCompile Include="net\Connectiobuffer.cpp">
+    <ClCompile Include="net\connectiobuffer.cpp">
       <Filter>net\connect</Filter>
     </ClCompile>
     <ClCompile Include="net\connectevent.cpp">

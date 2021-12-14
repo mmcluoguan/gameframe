@@ -256,7 +256,7 @@
     <ClCompile Include="net\acceptreactormgr.cpp" />
     <ClCompile Include="net\connectevent.cpp" />
     <ClCompile Include="net\connectheartbeat.cpp" />
-    <ClCompile Include="net\Connectiobuffer.cpp" />
+    <ClCompile Include="net\connectiobuffer.cpp" />
     <ClCompile Include="net\connectreactormgr.cpp" />
     <ClCompile Include="net\acceptiobuffer.cpp" />
     <ClCompile Include="net\ipaddress.cpp" />
