@@ -39,6 +39,7 @@
     <ClCompile Include="gateconnector.cpp" />
     <ClCompile Include="gatereconnctortimer.cpp" />
     <ClCompile Include="consolehandler.cpp" />
+    <ClCompile Include="mmpv.cpp" />
     <ClCompile Include="role.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -46,6 +47,7 @@
     <ClInclude Include="gatereconnctortimer.h" />
     <ClInclude Include="consolehandler.h" />
     <ClInclude Include="role.h" />
+    <ClInclude Include="test\mio.hpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{ED8B3412-0F27-4788-9F88-7E00F700A174}</ProjectGuid>
@@ -163,7 +165,7 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|ARM'">
     <Link>
       <AdditionalLibraryDirectories>/root/gameframe/libs;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <LibraryDependencies>shynet;frmpub;protobuf;lua;dl;jemalloc;readline</LibraryDependencies>
+      <LibraryDependencies>shynet;frmpub;protobuf;lua;dl;jemalloc;readline;mmkv;pthread;z</LibraryDependencies>
       <AdditionalOptions>-rdynamic %(AdditionalOptions)</AdditionalOptions>
     </Link>
     <ClCompile>
@@ -179,7 +181,7 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|ARM'">
     <Link>
       <AdditionalLibraryDirectories>/root/gameframe/libs;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <LibraryDependencies>shynet;frmpub;protobuf;lua;dl;jemalloc;readline</LibraryDependencies>
+      <LibraryDependencies>shynet;frmpub;protobuf;lua;dl;jemalloc;readline;mmkv;pthread;z</LibraryDependencies>
     </Link>
     <ClCompile>
       <AdditionalIncludeDirectories>$(SolutionDir)</AdditionalIncludeDirectories>
@@ -194,7 +196,7 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|ARM64'">
     <Link>
       <AdditionalLibraryDirectories>/root/gameframe/libs;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <LibraryDependencies>shynet;frmpub;protobuf;lua;dl;jemalloc;readline</LibraryDependencies>
+      <LibraryDependencies>shynet;frmpub;protobuf;lua;dl;jemalloc;readline;mmkv;pthread;z</LibraryDependencies>
       <AdditionalOptions>-rdynamic %(AdditionalOptions)</AdditionalOptions>
     </Link>
     <ClCompile>
@@ -210,7 +212,7 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|ARM64'">
     <Link>
       <AdditionalLibraryDirectories>/root/gameframe/libs;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <LibraryDependencies>shynet;frmpub;protobuf;lua;dl;jemalloc;readline</LibraryDependencies>
+      <LibraryDependencies>shynet;frmpub;protobuf;lua;dl;jemalloc;readline;mmkv;pthread;z</LibraryDependencies>
     </Link>
     <ClCompile>
       <AdditionalIncludeDirectories>$(SolutionDir)</AdditionalIncludeDirectories>
@@ -225,7 +227,7 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <Link>
       <AdditionalLibraryDirectories>/root/gameframe/libs;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <LibraryDependencies>shynet;frmpub;protobuf;lua;dl;jemalloc;readline</LibraryDependencies>
+      <LibraryDependencies>shynet;frmpub;protobuf;lua;dl;jemalloc;readline;mmkv;pthread;z</LibraryDependencies>
       <AdditionalOptions>-rdynamic %(AdditionalOptions)</AdditionalOptions>
     </Link>
     <ClCompile>
@@ -241,7 +243,7 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <Link>
       <AdditionalLibraryDirectories>/root/gameframe/libs;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <LibraryDependencies>shynet;frmpub;protobuf;lua;dl;jemalloc;readline</LibraryDependencies>
+      <LibraryDependencies>shynet;frmpub;protobuf;lua;dl;jemalloc;readline;mmkv;pthread;z</LibraryDependencies>
     </Link>
     <ClCompile>
       <AdditionalIncludeDirectories>$(SolutionDir)</AdditionalIncludeDirectories>
@@ -256,7 +258,7 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x86'">
     <Link>
       <AdditionalLibraryDirectories>/root/gameframe/libs;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <LibraryDependencies>shynet;frmpub;protobuf;lua;dl;jemalloc;readline</LibraryDependencies>
+      <LibraryDependencies>shynet;frmpub;protobuf;lua;dl;jemalloc;readline;mmkv;pthread;z</LibraryDependencies>
       <AdditionalOptions>-rdynamic %(AdditionalOptions)</AdditionalOptions>
     </Link>
     <ClCompile>
@@ -272,7 +274,7 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x86'">
     <Link>
       <AdditionalLibraryDirectories>/root/gameframe/libs;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <LibraryDependencies>shynet;frmpub;protobuf;lua;dl;jemalloc;readline</LibraryDependencies>
+      <LibraryDependencies>shynet;frmpub;protobuf;lua;dl;jemalloc;readline;mmkv;pthread;z</LibraryDependencies>
     </Link>
     <ClCompile>
       <AdditionalIncludeDirectories>$(SolutionDir)</AdditionalIncludeDirectories>

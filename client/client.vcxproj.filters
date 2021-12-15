@@ -6,12 +6,18 @@
     <ClCompile Include="gatereconnctortimer.cpp" />
     <ClCompile Include="consolehandler.cpp" />
     <ClCompile Include="role.cpp" />
+    <ClCompile Include="mmpv.cpp">
+      <Filter>test</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="gateconnector.h" />
     <ClInclude Include="gatereconnctortimer.h" />
     <ClInclude Include="consolehandler.h" />
     <ClInclude Include="role.h" />
+    <ClInclude Include="test\mio.hpp">
+      <Filter>test</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="test">
