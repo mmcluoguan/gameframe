@@ -50,7 +50,7 @@ int main(int argc, char* argv[])
         if (argc == 3) {
             inifile = argv[2]; //配置文件名
         }
-        IniConfig& ini = Singleton<IniConfig>::instance(std::move(inifile));
+        IniConfig& ini = Singleton<IniConfig>::instance(inifile);
         bool daemon = ini.get<bool>(g_conf_node, "daemon");
         if (argc == 4) {
             daemon = static_cast<bool>(std::stoi(argv[3])); //是否后台启动
@@ -63,7 +63,7 @@ int main(int argc, char* argv[])
         Logger::set_logname(g_conf_node);
         int centerid = ini.get<int>(g_conf_node, "centerid");
         int workerid = ini.get<int>(g_conf_node, "workerid");
-        Singleton<IdWorker>::instance(std::move(workerid), std::move(centerid));
+        Singleton<IdWorker>::instance(workerid, centerid);
 
         string ip = ini.get<string>(g_conf_node, "ip");
         short port = ini.get<short>(g_conf_node, "port");
@@ -74,7 +74,7 @@ int main(int argc, char* argv[])
         string myuri = ini.get<string>(g_conf_node, "mysql_uri");
         size_t mysqlps = ini.get<size_t>(g_conf_node, "mysql_pool_size");
         mysqlx::SessionSettings myset(myuri);
-        Singleton<MysqlPool>::instance(std::move(myset), std::move(mysqlps));
+        Singleton<MysqlPool>::instance(myset, mysqlps);
 
         ConnectionOptions connection_options;
         connection_options.host = ini.get<string>(g_conf_node, "redis_ip");
@@ -83,7 +83,7 @@ int main(int argc, char* argv[])
         connection_options.password = ini.get<string>(g_conf_node, "redis_pwd");
         ConnectionPoolOptions pool_options;
         pool_options.size = ini.get<int>(g_conf_node, "redis_pool_size");
-        Redis& redis = Singleton<Redis>::instance(std::move(connection_options), std::move(pool_options));
+        Redis& redis = Singleton<Redis>::instance(connection_options, pool_options);
 
         string key = stringop::str_format("%s_%d", type.c_str(), sid);
         unordered_map<string, string> info;

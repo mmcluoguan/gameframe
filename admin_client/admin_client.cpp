@@ -26,7 +26,7 @@ int main(int argc, char* argv[])
     using namespace admin_client;
     try {
         const char* inifile = "gameframe.ini";
-        IniConfig& ini = Singleton<IniConfig>::instance(std::move(inifile));
+        IniConfig& ini = Singleton<IniConfig>::instance(inifile);
         stuff::create_coredump();
         Logger::set_loglevel(Logger::LogLevel::DEBUG);
         if (EventBase::usethread() == -1) {

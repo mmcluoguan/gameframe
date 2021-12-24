@@ -13,7 +13,9 @@
 
 int g_gateconnect_id;
 
+#include "3rd/debug/dbg.h"
 #include "3rd/memory/MemoryPool.hpp"
+#include "3rd/visit_struct/visit_struct.hpp"
 #include "shynet/crypto/md5.h"
 #include "shynet/utils/databuffer.h"
 #include "shynet/utils/hash.h"
@@ -22,11 +24,9 @@ int g_gateconnect_id;
 #include "shynet/utils/stringify_stl.h"
 #include <atomic>
 #include <cstddef>
-#include <dbg.h>
 #include <functional>
 #include <tuple>
 #include <unordered_map>
-#include <visit_struct/visit_struct.hpp>
 
 void test()
 {
@@ -77,8 +77,8 @@ void test()
 #define USER_ALLOC hzw::AllocWkG
     //shynet::utils::SkipList<std::string, int, USER_ALLOC, decltype(cbfun)> sk(cbfun);
     //shynet::utils::SkipList<std::string, int, USER_ALLOC, decltype(cb)> sk(cb);
-    shynet::utils::SkipList<std::string, int, USER_ALLOC, cbstruct> sk(cbstruct {});
-    //shynet::utils::SkipList<std::string, int, USER_ALLOC> sk;
+    //shynet::utils::SkipList<std::string, int, USER_ALLOC, cbstruct> sk(cbstruct {});
+    shynet::utils::SkipList<std::string, int, USER_ALLOC> sk;
     sk.insert({ "a", 100 });
     sk.insert({ "b", 200 });
     sk.insert({ "c", 150 });
@@ -108,13 +108,13 @@ void test()
     if (rank_pos != sk.end())
         std::cout << "(" << rank_pos->first << "," << rank_pos->second << ") " << std::endl;
     /*shynet::utils::SkipList<std::string, int, USER_ALLOC> sk1(sk);
-    std::cout << sk1.debug_string();
-    shynet::utils::SkipList<std::string, int, USER_ALLOC> sk2(std::move(sk1));
-    std::cout << sk1.debug_string();
-    std::cout << sk2.debug_string();
-    shynet::utils::SkipList<std::string, int, USER_ALLOC> sk3 = std::move(sk2);
-    std::cout << sk2.debug_string();
-    std::cout << sk3.debug_string();*/
+	std::cout << sk1.debug_string();
+	shynet::utils::SkipList<std::string, int, USER_ALLOC> sk2(std::move(sk1));
+	std::cout << sk1.debug_string();
+	std::cout << sk2.debug_string();
+	shynet::utils::SkipList<std::string, int, USER_ALLOC> sk3 = std::move(sk2);
+	std::cout << sk2.debug_string();
+	std::cout << sk3.debug_string();*/
 
     auto itff = sk.find(80, 200);
     for (; itff.first != itff.second; ++itff.first) {
@@ -304,6 +304,7 @@ void test1()
 }
 
 struct test_struct_one {
+    //test_struct_one(const test_struct_one&) = delete;
     int a;
     float b;
     std::string c;
@@ -372,11 +373,82 @@ void test2()
     assert(vis1.result[2].second == "asdf");
 }
 
+std::queue<std::function<int(int)>> que;
+
+//template <typename F>
+//void push_task(const F& task)
+//{
+//    que.push(std::function<int(int)>(task));
+//}
+
+template <typename F, typename... A>
+void push_task(F&& task, A&&... args)
+{
+    //std::cout << task.use_count() << std::endl;
+    auto lab = [&](int) -> int {
+        //std::cout << task.use_count() << std::endl;
+        /*if constexpr (sizeof...(args) != 0) {
+            (*task)(args...);
+        } else {
+            task();
+        }*/
+        std::invoke(std::forward<F>(task),
+            std::forward<A>(args)...);
+        return 1;
+    };
+    que.push(lab);
+}
+
+template <typename F, typename... A>
+void push_task(std::shared_ptr<F>& task, A&&... args)
+{
+    auto lab = [&, task](int) -> int {
+        std::invoke(std::forward<F>(*task),
+            std::forward<A>(args)...);
+        return 1;
+    };
+    que.push(lab);
+}
+
+int qqqq(std::string)
+{
+    return 0;
+}
+
+void test3()
+{
+    auto cb = [](float b) {
+        std::cout << b << std::endl;
+    };
+    typedef struct {
+        void operator()(test_struct_one a) const
+        {
+            std::cout << a.a << std::endl;
+        }
+        void operator()() const
+        {
+        }
+    } cbstruct;
+    std::function<void(float)> cbfun = std::bind(cb, std::placeholders::_1);
+    //push_task(cb, 1.f);
+    test_struct_one xxx {};
+    {
+
+        auto ptr = std::make_shared<cbstruct>();
+        push_task(ptr, xxx);
+    }
+    //std::invoke(cs);
+    push_task(qqqq, "a111");
+    auto& t = que.front();
+    t(40);
+}
+
 int main(int argc, char* argv[])
 {
-    test();
+    //test();
     //test1();
     //test2();
+    test3();
     return 0;
     using namespace std;
     using namespace shynet;
@@ -390,7 +462,7 @@ int main(int argc, char* argv[])
     using namespace client;
     try {
         const char* inifile = "gameframe.ini";
-        IniConfig& ini = Singleton<IniConfig>::instance(std::move(inifile));
+        IniConfig& ini = Singleton<IniConfig>::instance(inifile);
         stuff::create_coredump();
         Logger::set_loglevel(Logger::LogLevel::DEBUG);
         if (EventBase::usethread() == -1) {

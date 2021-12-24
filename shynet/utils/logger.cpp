@@ -1,4 +1,5 @@
 #include "shynet/utils/logger.h"
+#include "3rd/memory/MemoryPoolUtility.hpp"
 #include "shynet/utils/filepathop.h"
 #include "shynet/utils/stuff.h"
 #include <cstring>
@@ -77,6 +78,9 @@ namespace utils {
                 g_logfile.close();
             }
             g_logfile.open(logfilename, std::ios::out | std::ios::app);
+            hzw::set_memorypool_log_handle([]() -> std::ostream& {
+                return g_logfile;
+            });
             std::cerr.rdbuf(g_logfile.rdbuf());
             strncpy(g_logfilename, logfilename, strlen(logfilename));
         }

@@ -101,8 +101,6 @@ int WorldConnector::getgamelist_admin_world_s(std::shared_ptr<rapidjson::Documen
                           << " 类型:" << frmpub::Basic::connectname(sif.st())
                           << " sid:" << sif.sid()
                           << " 名称:" << sif.name();
-            protocc::ServerInfo* ffff;
-            ffff->set_name("1111");
         }
     } catch (const std::exception& err) {
         shynet::utils::stuff::print_exception(err);
