@@ -37,7 +37,7 @@ namespace utils {
     template <typename Key,
         typename Score,
         template <typename T> typename Alloc = std::allocator,
-        typename Compare = decltype(std::bind(default_compare<Key, Score>, std::placeholders::_1, std::placeholders::_2))>
+        typename Compare = decltype(default_compare<Key, Score>)>
     class SkipList {
 
     public:
@@ -206,7 +206,7 @@ namespace utils {
         /// 空构造
         /// </summary>
         /// <param name="compare">排序函数</param>
-        SkipList(Compare compare = std::bind(default_compare<Key, Score>, std::placeholders::_1, std::placeholders::_2))
+        SkipList(Compare compare = default_compare<Key, Score>)
             : random_generator_(std::chrono::system_clock::now().time_since_epoch().count())
             , compare_(compare)
         {
@@ -219,7 +219,7 @@ namespace utils {
         /// <param name="first"></param>
         /// <param name="last"></param>
         /// <param name="compare"></param>
-        SkipList(iterator first, iterator last, Compare compare = std::bind(default_compare<Key, Score>, std::placeholders::_1, std::placeholders::_2))
+        SkipList(iterator first, iterator last, Compare compare = default_compare<Key, Score>)
             : random_generator_(std::chrono::system_clock::now().time_since_epoch().count())
             , compare_(compare)
         {
@@ -782,7 +782,10 @@ namespace utils {
         /*
         *排序方式
         */
-        Compare compare_;
+        std::conditional_t<
+            std::is_function_v<Compare>,
+            std::add_pointer_t<Compare>, Compare>
+            compare_;
         /*
 			* 当前排序,1.升序,0.初始化,-1降序
 			*/

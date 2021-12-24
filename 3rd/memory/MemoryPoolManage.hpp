@@ -619,6 +619,7 @@ namespace detail {
                 cookie->_prev->_next = cookie->_next;
                 cookie->_next->_prev = cookie->_prev;
             }
+            cookie->~DebugCookie();
         }
 
         //功能：校验释放大小（非多态下校验）
@@ -702,7 +703,7 @@ namespace detail {
         }
     };
 
-#ifdef _DEBUG
+#ifdef USE_DEBUG
     template <typename MemoryPool>
     using GMM = DebugMemoryPoolManageWrap<GlobalMemoryPoolManage<MemoryPool>>; //全局内存池管理别名（带debug功能）
 

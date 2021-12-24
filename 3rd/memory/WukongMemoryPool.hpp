@@ -24,6 +24,7 @@ namespace detail {
         _ListChain()
             : _size { 0 }
             , _head { nullptr }
+            , _mallochead { nullptr }
         {
         }
 
@@ -37,8 +38,8 @@ namespace detail {
 
         ~_ListChain()
         {
-            if (_head != nullptr) {
-                FREE(_head);
+            if (_mallochead != nullptr) {
+                FREE(_mallochead);
             }
         }
 
@@ -145,6 +146,7 @@ namespace detail {
             set_cookie(p - COOKIE_SIZE, size - COOKIE_SIZE, support_polym {});
             //挂到内存链上
             _head = reinterpret_cast<Node*>(chunk + COOKIE_SIZE);
+            _mallochead = _head;
         }
 
         //功能：对齐内存请求大小
@@ -160,6 +162,7 @@ namespace detail {
 
         size_t _size; //当前内存链上内存块数
         Node* _head; //内存链头节点
+        Node* _mallochead; //分配头
     };
 
     //悟空内存池
