@@ -39,7 +39,6 @@
     <ClCompile Include="gateconnector.cpp" />
     <ClCompile Include="gatereconnctortimer.cpp" />
     <ClCompile Include="consolehandler.cpp" />
-    <ClCompile Include="mmpv.cpp" />
     <ClCompile Include="role.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -47,7 +46,6 @@
     <ClInclude Include="gatereconnctortimer.h" />
     <ClInclude Include="consolehandler.h" />
     <ClInclude Include="role.h" />
-    <ClInclude Include="test\mio.hpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{ED8B3412-0F27-4788-9F88-7E00F700A174}</ProjectGuid>
@@ -105,6 +103,8 @@
     <RemoteLdToolExe>g++</RemoteLdToolExe>
     <EnableASAN>true</EnableASAN>
     <EnableIncrementalBuild>WithNinja</EnableIncrementalBuild>
+    <AdditionalSourcesToCopyMapping>
+    </AdditionalSourcesToCopyMapping>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|ARM'">
     <OutDir>../bin/</OutDir>
@@ -113,6 +113,8 @@
     <RemoteLdToolExe>g++</RemoteLdToolExe>
     <EnableASAN>false</EnableASAN>
     <EnableIncrementalBuild>WithNinja</EnableIncrementalBuild>
+    <AdditionalSourcesToCopyMapping>
+    </AdditionalSourcesToCopyMapping>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|ARM64'">
     <OutDir>../bin/</OutDir>
@@ -121,6 +123,8 @@
     <RemoteLdToolExe>g++</RemoteLdToolExe>
     <EnableASAN>true</EnableASAN>
     <EnableIncrementalBuild>WithNinja</EnableIncrementalBuild>
+    <AdditionalSourcesToCopyMapping>
+    </AdditionalSourcesToCopyMapping>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|ARM64'">
     <OutDir>../bin/</OutDir>
@@ -129,6 +133,8 @@
     <RemoteLdToolExe>g++</RemoteLdToolExe>
     <EnableASAN>false</EnableASAN>
     <EnableIncrementalBuild>WithNinja</EnableIncrementalBuild>
+    <AdditionalSourcesToCopyMapping>
+    </AdditionalSourcesToCopyMapping>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <OutDir>../bin/</OutDir>
@@ -137,6 +143,8 @@
     <RemoteLdToolExe>g++</RemoteLdToolExe>
     <EnableASAN>true</EnableASAN>
     <EnableIncrementalBuild>WithNinja</EnableIncrementalBuild>
+    <AdditionalSourcesToCopyMapping>
+    </AdditionalSourcesToCopyMapping>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <OutDir>../bin/</OutDir>
@@ -145,6 +153,8 @@
     <RemoteLdToolExe>g++</RemoteLdToolExe>
     <EnableASAN>false</EnableASAN>
     <EnableIncrementalBuild>WithNinja</EnableIncrementalBuild>
+    <AdditionalSourcesToCopyMapping>
+    </AdditionalSourcesToCopyMapping>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x86'">
     <OutDir>../bin/</OutDir>
@@ -153,6 +163,8 @@
     <RemoteLdToolExe>g++</RemoteLdToolExe>
     <EnableASAN>true</EnableASAN>
     <EnableIncrementalBuild>WithNinja</EnableIncrementalBuild>
+    <AdditionalSourcesToCopyMapping>
+    </AdditionalSourcesToCopyMapping>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x86'">
     <OutDir>../bin/</OutDir>
@@ -161,6 +173,8 @@
     <RemoteLdToolExe>g++</RemoteLdToolExe>
     <EnableASAN>false</EnableASAN>
     <EnableIncrementalBuild>WithNinja</EnableIncrementalBuild>
+    <AdditionalSourcesToCopyMapping>
+    </AdditionalSourcesToCopyMapping>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|ARM'">
     <Link>

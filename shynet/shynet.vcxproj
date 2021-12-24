@@ -98,7 +98,8 @@
     <RemoteLdToolExe>g++</RemoteLdToolExe>
     <EnableIncrementalBuild>WithNinja</EnableIncrementalBuild>
     <EnableASAN>true</EnableASAN>
-    <AdditionalSourcesToCopyMapping>$(SolutionDir)3rd\:=$(RemoteRootDir)/3rd;$(AdditionalSourcesToCopyMapping)</AdditionalSourcesToCopyMapping>
+    <AdditionalSourcesToCopyMapping>
+    </AdditionalSourcesToCopyMapping>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|ARM'">
     <OutDir>../libs/</OutDir>
@@ -108,7 +109,8 @@
     <RemoteLdToolExe>g++</RemoteLdToolExe>
     <EnableIncrementalBuild>WithNinja</EnableIncrementalBuild>
     <EnableASAN>false</EnableASAN>
-    <AdditionalSourcesToCopyMapping>$(SolutionDir)3rd\:=$(RemoteRootDir)/3rd;$(AdditionalSourcesToCopyMapping)</AdditionalSourcesToCopyMapping>
+    <AdditionalSourcesToCopyMapping>
+    </AdditionalSourcesToCopyMapping>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|ARM64'">
     <OutDir>../libs/</OutDir>
@@ -118,7 +120,8 @@
     <RemoteLdToolExe>g++</RemoteLdToolExe>
     <EnableIncrementalBuild>WithNinja</EnableIncrementalBuild>
     <EnableASAN>true</EnableASAN>
-    <AdditionalSourcesToCopyMapping>$(SolutionDir)3rd\:=$(RemoteRootDir)/3rd;$(AdditionalSourcesToCopyMapping)</AdditionalSourcesToCopyMapping>
+    <AdditionalSourcesToCopyMapping>
+    </AdditionalSourcesToCopyMapping>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|ARM64'">
     <OutDir>../libs/</OutDir>
@@ -128,7 +131,8 @@
     <RemoteLdToolExe>g++</RemoteLdToolExe>
     <EnableIncrementalBuild>WithNinja</EnableIncrementalBuild>
     <EnableASAN>false</EnableASAN>
-    <AdditionalSourcesToCopyMapping>$(SolutionDir)3rd\:=$(RemoteRootDir)/3rd;$(AdditionalSourcesToCopyMapping)</AdditionalSourcesToCopyMapping>
+    <AdditionalSourcesToCopyMapping>
+    </AdditionalSourcesToCopyMapping>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <OutDir>../libs/</OutDir>
@@ -138,7 +142,8 @@
     <RemoteLdToolExe>g++</RemoteLdToolExe>
     <EnableIncrementalBuild>WithNinja</EnableIncrementalBuild>
     <EnableASAN>true</EnableASAN>
-    <AdditionalSourcesToCopyMapping>$(SolutionDir)3rd\:=$(RemoteRootDir)/3rd;$(AdditionalSourcesToCopyMapping)</AdditionalSourcesToCopyMapping>
+    <AdditionalSourcesToCopyMapping>
+    </AdditionalSourcesToCopyMapping>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <OutDir>../libs/</OutDir>
@@ -148,7 +153,8 @@
     <RemoteLdToolExe>g++</RemoteLdToolExe>
     <EnableIncrementalBuild>WithNinja</EnableIncrementalBuild>
     <EnableASAN>false</EnableASAN>
-    <AdditionalSourcesToCopyMapping>$(SolutionDir)3rd\:=$(RemoteRootDir)/3rd;$(AdditionalSourcesToCopyMapping)</AdditionalSourcesToCopyMapping>
+    <AdditionalSourcesToCopyMapping>
+    </AdditionalSourcesToCopyMapping>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x86'">
     <OutDir>../libs/</OutDir>
@@ -158,7 +164,8 @@
     <RemoteLdToolExe>g++</RemoteLdToolExe>
     <EnableIncrementalBuild>WithNinja</EnableIncrementalBuild>
     <EnableASAN>true</EnableASAN>
-    <AdditionalSourcesToCopyMapping>$(SolutionDir)3rd\:=$(RemoteRootDir)/3rd;$(AdditionalSourcesToCopyMapping)</AdditionalSourcesToCopyMapping>
+    <AdditionalSourcesToCopyMapping>
+    </AdditionalSourcesToCopyMapping>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x86'">
     <OutDir>../libs/</OutDir>
@@ -168,7 +175,8 @@
     <RemoteLdToolExe>g++</RemoteLdToolExe>
     <EnableIncrementalBuild>WithNinja</EnableIncrementalBuild>
     <EnableASAN>false</EnableASAN>
-    <AdditionalSourcesToCopyMapping>$(SolutionDir)3rd\:=$(RemoteRootDir)/3rd;$(AdditionalSourcesToCopyMapping)</AdditionalSourcesToCopyMapping>
+    <AdditionalSourcesToCopyMapping>
+    </AdditionalSourcesToCopyMapping>
   </PropertyGroup>
   <ItemGroup>
     <ClInclude Include="basic.h" />

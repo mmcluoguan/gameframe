@@ -34,7 +34,10 @@ namespace utils {
     // 跳表
     // key不能相同，不同的key可以有相同的分数
     //
-    template <typename Key, typename Score, typename Compare = decltype(std::bind(default_compare<Key, Score>, std::placeholders::_1, std::placeholders::_2))>
+    template <typename Key,
+        typename Score,
+        template <typename T> typename Alloc = std::allocator,
+        typename Compare = decltype(std::bind(default_compare<Key, Score>, std::placeholders::_1, std::placeholders::_2))>
     class SkipList {
 
     public:
@@ -43,12 +46,10 @@ namespace utils {
 
     private:
         /*
-			* 内部节点
-			*/
+		* 内部节点
+		*/
         struct node {
         public:
-            friend class SkipList;
-
             struct level_item {
                 node* prev_ = nullptr;
                 node* next_ = nullptr;
@@ -61,6 +62,7 @@ namespace utils {
                 , levels_(height)
             {
             }
+            ~node() = default;
 
             explicit node(int height, const value_type& kv)
                 : kv_(kv)
@@ -69,10 +71,9 @@ namespace utils {
             {
             }
 
-        private:
             value_type kv_;
             int height_;
-            std::vector<level_item> levels_;
+            std::vector<level_item, Alloc<level_item>> levels_;
         };
 
     public:
@@ -81,6 +82,12 @@ namespace utils {
 			*/
         class iterator {
             friend class SkipList;
+
+        public:
+            using pointer = value_type*;
+            using reference = value_type;
+            using iterator_category = std::bidirectional_iterator_tag;
+            using difference_type = std::ptrdiff_t;
 
         public:
             iterator() = default;
@@ -133,6 +140,12 @@ namespace utils {
 			*/
         class reverse_iterator {
             friend class SkipList;
+
+        public:
+            using pointer = value_type*;
+            using reference = value_type;
+            using iterator_category = std::bidirectional_iterator_tag;
+            using difference_type = std::ptrdiff_t;
 
         public:
             reverse_iterator() = default;
@@ -197,7 +210,7 @@ namespace utils {
             : random_generator_(std::chrono::system_clock::now().time_since_epoch().count())
             , compare_(compare)
         {
-            head_ = new node(kMaxHeight_);
+            head_ = new (alloc_.allocate(1)) node(kMaxHeight_);
         }
 
         /// <summary>
@@ -210,7 +223,7 @@ namespace utils {
             : random_generator_(std::chrono::system_clock::now().time_since_epoch().count())
             , compare_(compare)
         {
-            head_ = new node(kMaxHeight_);
+            head_ = new (alloc_.allocate(1)) node(kMaxHeight_);
             insert_range_effective_(first, last);
         }
 
@@ -221,7 +234,7 @@ namespace utils {
             : random_generator_(std::chrono::system_clock::now().time_since_epoch().count())
             , compare_(x.compare_)
         {
-            head_ = new node(kMaxHeight_);
+            head_ = new (alloc_.allocate(1)) node(kMaxHeight_);
             insert_range_effective_(x.begin(), x.end());
         }
 
@@ -232,14 +245,16 @@ namespace utils {
             : random_generator_(std::chrono::system_clock::now().time_since_epoch().count())
             , compare_(x.compare_)
         {
-            head_ = new node(kMaxHeight_);
+            head_ = new (alloc_.allocate(1)) node(kMaxHeight_);
             swap(x);
         }
 
         virtual ~SkipList()
         {
             clear();
-            delete head_;
+            //delete head_;
+            head_->~node();
+            alloc_.deallocate(head_, 1);
         }
 
         SkipList& operator=(const SkipList& x)
@@ -307,7 +322,9 @@ namespace utils {
             node* p = head_->levels_[0].next_;
             while (p) {
                 node* next = p->levels_[0].next_;
-                delete p;
+                //delete p;
+                p->~node();
+                alloc_.deallocate(p, 1);
                 p = next;
             }
             head_->levels_[0].next_ = nullptr;
@@ -350,7 +367,7 @@ namespace utils {
 			*/
         std::pair<iterator, bool> insert(const value_type& val)
         {
-            std::vector<node*> cache;
+            std::vector<node*, Alloc<node*>> cache;
             iterator iter = find_(val, nullptr, nullptr, &cache);
             if (iter != end()) {
                 return std::make_pair(iter, false);
@@ -364,7 +381,7 @@ namespace utils {
 			*/
         iterator insert(iterator position, const value_type& val)
         {
-            std::vector<node*> cache;
+            std::vector<node*, Alloc<node*>> cache;
             iterator iter = find_(val, position.node_, nullptr, &cache);
             if (iter != end()) {
                 return iter;
@@ -594,11 +611,13 @@ namespace utils {
 
             element_num_--;
             kvmap_.erase(n->kv_.first);
-            delete n;
+            //delete n;
+            n->~node();
+            alloc_.deallocate(n, 1);
             return erase_next;
         }
 
-        iterator find_(const value_type& k, node* bpos = nullptr, node* epos = nullptr, std::vector<node*>* cache = nullptr) const
+        iterator find_(const value_type& k, node* bpos = nullptr, node* epos = nullptr, std::vector<node*, Alloc<node*>>* cache = nullptr) const
         {
             if (cache) {
                 cache->reserve(kMaxHeight_);
@@ -637,7 +656,7 @@ namespace utils {
             return end();
         }
 
-        iterator insert_(const value_type& kv, std::vector<node*>& cache)
+        iterator insert_(const value_type& kv, std::vector<node*, Alloc<node*>>& cache)
         {
             kvmap_[kv.first] = kv.second;
             int height = random_height_();
@@ -658,7 +677,7 @@ namespace utils {
                 }
             }
 
-            node* nn = new node(height, kv);
+            node* nn = new (alloc_.allocate(1)) node(height, kv);
             node* newptr = nn;
             for (int i = 0; i <= current_height_ - 1; i++) {
                 node* cn = cache[i];
@@ -713,7 +732,7 @@ namespace utils {
         void insert_range_effective_(iterator b, iterator e)
         {
             iterator pos;
-            std::vector<node*> cache;
+            std::vector<node*, Alloc<node*>> cache;
             for (iterator iter = b; iter != e; ++iter) {
                 pos = find_(*iter, pos.node_, nullptr, &cache);
                 if (pos == end()) {
@@ -760,7 +779,9 @@ namespace utils {
 			* 随机生成器
 			*/
         std::mt19937 random_generator_;
-        //排序方式
+        /*
+        *排序方式
+        */
         Compare compare_;
         /*
 			* 当前排序,1.升序,0.初始化,-1降序
@@ -769,11 +790,17 @@ namespace utils {
         /*
 			* key,score映射
 			*/
-        std::unordered_map<Key, Score> kvmap_;
+        std::unordered_map<Key, Score,
+            std::hash<Key>, std::equal_to<Key>, Alloc<value_type>>
+            kvmap_;
+        /*
+        * 分配器
+        */
+        Alloc<node> alloc_;
     };
 
-    template <typename Key, typename Score, typename Compare>
-    std::ostream& operator<<(std::ostream& strm, const SkipList<Key, Score, Compare>& sk)
+    template <typename Key, typename Score, template <typename T> typename Alloc, typename Compare>
+    std::ostream& operator<<(std::ostream& strm, const SkipList<Key, Score, Alloc, Compare>& sk)
     {
         strm << sk.debug_string();
         return strm;
