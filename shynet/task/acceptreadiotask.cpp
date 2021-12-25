@@ -10,7 +10,7 @@ namespace task {
     {
     }
 
-    int AcceptReadIoTask::run(thread::Thread* tif)
+    void AcceptReadIoTask::operator()()
     {
         std::shared_ptr<net::AcceptNewFd> aptnewfd = newfd_.lock();
         if (aptnewfd != nullptr) {
@@ -25,7 +25,6 @@ namespace task {
                 aptnewfd->close(false);
             }
         }
-        return 0;
     }
 }
 }

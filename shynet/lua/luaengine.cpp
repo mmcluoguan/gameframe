@@ -19,7 +19,7 @@ namespace lua {
         }
     }
 
-    void LuaEngine::append(std::shared_ptr<task::Task> task)
+    void LuaEngine::append(std::shared_ptr<luatask::LuaTask> task)
     {
         auto ptr = utils::Singleton<pool::ThreadPool>::get_instance().luaTh().lock();
         if (ptr) {

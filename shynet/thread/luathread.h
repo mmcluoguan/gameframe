@@ -2,7 +2,7 @@
 #define SHYNET_THREAD_LUATHREAD_H
 
 #include "3rd/kaguya/kaguya.hpp"
-#include "shynet/task/task.h"
+#include "shynet/lua/luatask.h"
 #include "shynet/thread/thread.h"
 #include <condition_variable>
 #include <mutex>
@@ -18,7 +18,7 @@ namespace thread {
         int run() override;
         int stop() override;
 
-        size_t addTask(std::shared_ptr<task::Task> tk);
+        size_t addTask(std::shared_ptr<luatask::LuaTask> tk);
 
         kaguya::State* luaState() const
         {
@@ -28,7 +28,7 @@ namespace thread {
     private:
         std::mutex tasks_mutex_;
         std::condition_variable tasks_condvar_;
-        std::queue<std::shared_ptr<task::Task>> tasks_;
+        std::queue<std::shared_ptr<luatask::LuaTask>> tasks_;
         bool stop_ = false;
         kaguya::State* luaState_ = nullptr;
     };

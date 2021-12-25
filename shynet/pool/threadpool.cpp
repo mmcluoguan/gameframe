@@ -104,25 +104,5 @@ namespace pool {
                 pthread_barrier_wait(&g_barrier);
             });
     }
-
-    void ThreadPool::append(std::shared_ptr<task::Task> tk)
-    {
-        std::lock_guard<std::mutex> lock(tasks_mutex_);
-        tasks_.push(tk);
-        LOG_TRACE << "push global queue globalsize:" << tasks_.size();
-        LOG_TRACE << "append notify_one";
-        tasks_condvar_.notify_one();
-    }
-
-    void ThreadPool::appendwork(std::shared_ptr<task::Task> tk, size_t tag)
-    {
-        std::shared_ptr<thread::WorkThread> target = workThs_[tag % workThs_.size()].lock();
-        if (target) {
-            size_t len = target->addTask(tk);
-            LOG_TRACE << "push local queue localsize:" << len;
-            LOG_TRACE << "appendwork notify_all";
-            tasks_condvar_.notify_all();
-        }
-    }
 }
 }

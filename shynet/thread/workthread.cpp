@@ -17,7 +17,7 @@ namespace thread {
     {
         try {
             while (stop_ == false) {
-                std::shared_ptr<task::Task> tk;
+                std::function<void()> tk;
                 if (tasks_.empty() == false) {
                     std::lock_guard<std::mutex> lock(tasks_mutex_);
                     tk = tasks_.front();
@@ -44,11 +44,7 @@ namespace thread {
                 }
                 if (tk != nullptr) {
                     try {
-                        int ret = tk->run(this);
-                        if (ret < 0) {
-                            LOG_TRACE << "thread[" << index() << "] exited abnormally";
-                            return 0;
-                        }
+                        tk();
                     } catch (const std::exception& err) {
                         utils::stuff::print_exception(err);
                     }
@@ -56,7 +52,7 @@ namespace thread {
             }
             //清空未完成任务
             while (tasks_.empty() == false) {
-                tasks_.front()->run(this);
+                tasks_.front()();
                 tasks_.pop();
             }
         } catch (const std::exception& err) {
@@ -71,7 +67,7 @@ namespace thread {
         return 0;
     }
 
-    size_t WorkThread::addTask(std::shared_ptr<task::Task> tk)
+    size_t WorkThread::addTask(std::function<void()>&& tk)
     {
         std::lock_guard<std::mutex> lock(tasks_mutex_);
         tasks_.push(tk);

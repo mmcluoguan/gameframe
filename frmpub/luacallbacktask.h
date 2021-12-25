@@ -2,7 +2,7 @@
 #define FRMPUB_ONACCEPTTASK_H
 
 #include "frmpub/luaremotedebug.h"
-#include "shynet/task/task.h"
+#include "shynet/lua/luatask.h"
 #include "shynet/thread/luathread.h"
 #include "shynet/thread/thread.h"
 
@@ -11,7 +11,7 @@ namespace frmpub {
 	* 处理新连接
 	*/
 template <class T>
-class OnAcceptTask : public shynet::task::Task {
+class OnAcceptTask : public shynet::luatask::LuaTask {
 public:
     OnAcceptTask(std::shared_ptr<T> client)
     {
@@ -41,7 +41,7 @@ private:
 	* 处理连接成功
 	*/
 template <class T>
-class OnConnectorTask : public shynet::task::Task {
+class OnConnectorTask : public shynet::luatask::LuaTask {
 public:
     OnConnectorTask(std::shared_ptr<T> conncetor)
     {
@@ -70,7 +70,7 @@ private:
 /*
 	* 处理连接关闭
 	*/
-class OnCloseTask : public shynet::task::Task {
+class OnCloseTask : public shynet::luatask::LuaTask {
 public:
     OnCloseTask(int fd)
     {
@@ -98,7 +98,7 @@ private:
 	* 处理连接数据
 	*/
 template <class T>
-class OnMessageTask : public shynet::task::Task {
+class OnMessageTask : public shynet::luatask::LuaTask {
 public:
     OnMessageTask(std::shared_ptr<T> client, std::shared_ptr<protocc::CommonObject> data,
         std::shared_ptr<std::stack<FilterData::Envelope>> enves)

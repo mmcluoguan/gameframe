@@ -375,51 +375,43 @@ void test2()
 
 std::queue<std::function<int(int)>> que;
 
-//template <typename F>
-//void push_task(const F& task)
-//{
-//    que.push(std::function<int(int)>(task));
-//}
-
-template <typename F, typename... A>
-void push_task(F&& task, A&&... args)
+template <typename F, typename... A, typename R = std::invoke_result_t<std::decay_t<F>, std::decay_t<A>...>, typename = std::enable_if_t<!std::is_void_v<R>>>
+std::future<R> push_task(F&& task, A&&... args)
 {
-    //std::cout << task.use_count() << std::endl;
-    auto lab = [&](int) -> int {
-        //std::cout << task.use_count() << std::endl;
-        /*if constexpr (sizeof...(args) != 0) {
+    std::shared_ptr<std::promise<R>> task_promise = std::make_shared<std::promise<R>>();
+    std::future<R> future = task_promise->get_future();
+    auto lab = [=](int) -> int {
+        task_promise->set_value(task(args...));
+        return 1;
+    };
+    que.push(lab);
+    return future;
+}
+
+template <typename F, typename... A, typename R = std::invoke_result_t<std::decay_t<F>, std::decay_t<A>...>>
+std::future<R> push_task(std::shared_ptr<F>& task, A&&... args)
+{
+    std::shared_ptr<std::promise<R>> task_promise = std::make_shared<std::promise<R>>();
+    std::future<R> future = task_promise->get_future();
+    auto lab = [=](int) -> int {
+        if constexpr (std::is_void_v<R>) {
             (*task)(args...);
         } else {
-            task();
-        }*/
-        std::invoke(std::forward<F>(task),
-            std::forward<A>(args)...);
+            task_promise->set_value((*task)(args...));
+        }
         return 1;
     };
     que.push(lab);
-}
-
-template <typename F, typename... A>
-void push_task(std::shared_ptr<F>& task, A&&... args)
-{
-    auto lab = [&, task](int) -> int {
-        std::invoke(std::forward<F>(*task),
-            std::forward<A>(args)...);
-        return 1;
-    };
-    que.push(lab);
-}
-
-int qqqq(std::string)
-{
-    return 0;
+    return future;
 }
 
 void test3()
 {
     auto cb = [](float b) {
         std::cout << b << std::endl;
+        return b;
     };
+
     typedef struct {
         void operator()(test_struct_one a) const
         {
@@ -430,17 +422,18 @@ void test3()
         }
     } cbstruct;
     std::function<void(float)> cbfun = std::bind(cb, std::placeholders::_1);
-    //push_task(cb, 1.f);
-    test_struct_one xxx {};
-    {
 
-        auto ptr = std::make_shared<cbstruct>();
-        push_task(ptr, xxx);
-    }
+    std::future<float> ff;
+    //ff = push_task(cb, 1.1f);
+    test_struct_one xxx {};
+    auto ptr = std::make_shared<cbstruct>();
+    std::future<void> ff2 = push_task(ptr, xxx);
     //std::invoke(cs);
-    push_task(qqqq, "a111");
+    //push_task(qqqq, "a111");
     auto& t = que.front();
     t(40);
+    if (ff.valid())
+        std::cout << ff.get() << std::endl;
 }
 
 int main(int argc, char* argv[])
@@ -448,8 +441,8 @@ int main(int argc, char* argv[])
     //test();
     //test1();
     //test2();
-    test3();
-    return 0;
+    //test3();
+    //return 0;
     using namespace std;
     using namespace shynet;
     using namespace shynet::utils;

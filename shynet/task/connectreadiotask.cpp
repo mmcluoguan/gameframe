@@ -11,7 +11,7 @@ namespace task {
     {
     }
 
-    int ConnectReadIoTask::run(thread::Thread* tif)
+    void ConnectReadIoTask::operator()()
     {
         std::shared_ptr<net::ConnectHeartbeat> ht = cntevent_->heart().lock();
         if (ht != nullptr) {
@@ -23,8 +23,6 @@ namespace task {
         } else if (ret == -2) {
             cntevent_->close(net::ConnectEvent::CloseType::SERVER_CLOSE);
         }
-        return 0;
     }
-
 }
 }

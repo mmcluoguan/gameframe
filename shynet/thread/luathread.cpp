@@ -24,7 +24,7 @@ namespace thread {
             utils::Singleton<lua::LuaEngine>::instance().init(state);
             pthread_barrier_wait(&g_barrier);
             while (stop_ == false) {
-                std::shared_ptr<task::Task> tk;
+                std::shared_ptr<luatask::LuaTask> tk;
                 {
                     std::unique_lock<std::mutex> lock(tasks_mutex_);
                     tasks_condvar_.wait(lock, [this] {
@@ -74,7 +74,7 @@ namespace thread {
         return 0;
     }
 
-    size_t LuaThread::addTask(std::shared_ptr<task::Task> tk)
+    size_t LuaThread::addTask(std::shared_ptr<luatask::LuaTask> tk)
     {
         std::lock_guard<std::mutex> lock(tasks_mutex_);
         tasks_.push(tk);

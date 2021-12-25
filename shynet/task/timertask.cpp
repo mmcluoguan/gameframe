@@ -12,13 +12,12 @@ namespace task {
     {
     }
 
-    int TimerTask::run(thread::Thread* tif)
+    void TimerTask::operator()()
     {
         std::shared_ptr<net::TimerEvent> tv = utils::Singleton<net::TimerReactorMgr>::instance().find(timerid_);
         if (tv != nullptr) {
             tv->timeout();
         }
-        return 0;
     }
 }
 }

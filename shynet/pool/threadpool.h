@@ -1,7 +1,6 @@
 #ifndef SHYNET_POOL_THREADPOOL_H
 #define SHYNET_POOL_THREADPOOL_H
 
-#include "shynet/task/task.h"
 #include "shynet/thread/acceptthread.h"
 #include "shynet/thread/connectthread.h"
 #include "shynet/thread/inotifythread.h"
@@ -10,6 +9,8 @@
 #include "shynet/thread/timerthread.h"
 #include "shynet/thread/workthread.h"
 #include "shynet/utils/singleton.h"
+#include <functional>
+#include <future>
 
 namespace shynet {
 namespace pool {
@@ -34,20 +35,141 @@ namespace pool {
 
         void start();
 
-        /// <summary>
-        /// 添加任务到线程池公共的任务队列中
-        /// </summary>
-        /// <param name="tk"></param>
-        void append(std::shared_ptr<task::Task> tk);
-        /// <summary>
-        /// 添加任务到线程池中指定工作线程
-        /// 注意,此方法目的是让任务在特定的线程按添加的顺序执行
-        /// </summary>
-        /// <param name="tk"></param>
-        /// <param name="tag">
-        /// 方法内按照(tag%普通工作线程数量)求得线程指定位置
-        /// </param>
-        void appendwork(std::shared_ptr<task::Task> tk, size_t tag);
+        /**
+         * @brief 添加任务到线程池公共的任务队列中
+         *
+         * @tparam F 可调用对象类型
+         * @tparam A 参数列表类型
+         * @param task 可调用对象
+         * @param args 参数
+         * @return 返回future
+         */
+        template <typename F, typename... A, typename R = std::invoke_result_t<std::decay_t<F>, std::decay_t<A>...>>
+        std::future<R> append(F&& task, A&&... args)
+        {
+            std::shared_ptr<std::promise<R>> task_promise = std::make_shared<std::promise<R>>();
+            std::future<R> future = task_promise->get_future();
+            auto tk = [task, args..., task_promise]() {
+                if constexpr (std::is_void_v<R>) {
+                    task(args...);
+                } else {
+                    task_promise->set_value(task(args...));
+                }
+            };
+            std::lock_guard<std::mutex> lock(tasks_mutex_);
+            tasks_.push(tk);
+            LOG_TRACE << "push global queue globalsize:" << tasks_.size();
+            LOG_TRACE << "append notify_one";
+            tasks_condvar_.notify_one();
+            return future;
+        }
+
+        /**
+         * @brief 添加任务到线程池公共的任务队列中
+         * shared_ptr 版本
+         *
+         * @tparam F 可调用对象类型
+         * @tparam A 参数列表类型
+         * @param task 可调用对象
+         * @param args 参数
+         * @return 返回future
+         */
+        template <typename F, typename... A, typename R = std::invoke_result_t<std::decay_t<F>, std::decay_t<A>...>>
+        std::future<R> append(std::shared_ptr<F>& task, A&&... args)
+        {
+            std::shared_ptr<std::promise<R>> task_promise = std::make_shared<std::promise<R>>();
+            std::future<R> future = task_promise->get_future();
+            auto tk = [task, args..., task_promise]() {
+                if constexpr (std::is_void_v<R>) {
+                    (*task)(args...);
+                } else {
+                    task_promise->set_value((*task)(args...));
+                }
+            };
+            std::lock_guard<std::mutex> lock(tasks_mutex_);
+            tasks_.push(tk);
+            LOG_TRACE << "push global queue globalsize:" << tasks_.size();
+            LOG_TRACE << "append notify_one";
+            tasks_condvar_.notify_one();
+            return future;
+        }
+
+        /**
+         * @brief 添加任务到线程池中指定工作线程
+         *
+         * @tparam F 可调用对象类型
+         * @tparam A 参数列表类型
+         * @param tag 方法内按照(tag%普通工作线程数量)求得线程指定位置
+         * @param task 可调用对象
+         * @param args 参数
+         * @return 返回future
+         */
+        template <typename F, typename... A, typename R = std::invoke_result_t<std::decay_t<F>, std::decay_t<A>...>>
+        std::future<R> appendwork(size_t tag, F&& task, A&&... args)
+        {
+            std::shared_ptr<std::promise<R>> task_promise = std::make_shared<std::promise<R>>();
+            std::future<R> future = task_promise->get_future();
+            std::shared_ptr<thread::WorkThread> target = workThs_[tag % workThs_.size()].lock();
+            if (target) {
+                auto tk = [task, args..., task_promise]() {
+                    if constexpr (std::is_void_v<R>) {
+                        task(args...);
+                    } else {
+                        task_promise->set_value(task(args...));
+                    }
+                };
+                size_t len = target->addTask(tk);
+                LOG_TRACE << "push local queue localsize:" << len;
+                LOG_TRACE << "appendwork notify_all";
+                tasks_condvar_.notify_all();
+            } else {
+                if constexpr (std::is_void_v<R>) {
+                    task(args...);
+                } else {
+                    task_promise->set_value(task(args...));
+                }
+            }
+            return future;
+        }
+
+        /**
+         * @brief 添加任务到线程池中指定工作线程
+         * shared_ptr 版本
+         *
+         * @tparam F 可调用对象类型
+         * @tparam A 参数列表类型
+         * @param tag 方法内按照(tag%普通工作线程数量)求得线程指定位置
+         * @param task 可调用对象
+         * @param args 参数
+         * @return 返回future
+         */
+        template <typename F, typename... A, typename R = std::invoke_result_t<std::decay_t<F>, std::decay_t<A>...>>
+        std::future<R> appendwork(size_t tag, std::shared_ptr<F>& task, A&&... args)
+        {
+            std::shared_ptr<std::promise<R>> task_promise = std::make_shared<std::promise<R>>();
+            std::future<R> future = task_promise->get_future();
+            std::shared_ptr<thread::WorkThread> target = workThs_[tag % workThs_.size()].lock();
+            if (target) {
+                auto tk = [task, args..., task_promise]() {
+                    if constexpr (std::is_void_v<R>) {
+                        (*task)(args...);
+                    } else {
+                        task_promise->set_value((*task)(args...));
+                    }
+                };
+                size_t len = target->addTask(tk);
+                LOG_TRACE << "push local queue localsize:" << len;
+                LOG_TRACE << "appendwork notify_all";
+                tasks_condvar_.notify_all();
+            } else {
+                if constexpr (std::is_void_v<R>) {
+                    (*task)(args...);
+                } else {
+                    task_promise->set_value((*task)(args...));
+                }
+            }
+            return future;
+        }
 
         std::mutex& tasks_mutex()
         {
@@ -59,7 +181,7 @@ namespace pool {
             return tasks_condvar_;
         }
 
-        std::queue<std::shared_ptr<task::Task>>& tasks()
+        std::queue<std::function<void()>>& tasks()
         {
             return tasks_;
         }
@@ -109,7 +231,7 @@ namespace pool {
         /// <summary>
         /// 公共的任务队列中等待执行的任务
         /// </summary>
-        std::queue<std::shared_ptr<task::Task>> tasks_;
+        std::queue<std::function<void()>> tasks_;
 
         /*
 			* 监听线程

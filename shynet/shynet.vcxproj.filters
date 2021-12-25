@@ -115,9 +115,6 @@
     <ClCompile Include="thread\inotifythread.cpp">
       <Filter>thread</Filter>
     </ClCompile>
-    <ClCompile Include="task\task.cpp">
-      <Filter>task</Filter>
-    </ClCompile>
     <ClCompile Include="task\timertask.cpp">
       <Filter>task</Filter>
     </ClCompile>
@@ -159,6 +156,9 @@
     </ClCompile>
     <ClCompile Include="signal\signalhandler.cpp">
       <Filter>signal</Filter>
+    </ClCompile>
+    <ClCompile Include="lua\luatask.cpp">
+      <Filter>lua</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -286,9 +286,6 @@
     <ClInclude Include="thread\inotifythread.h">
       <Filter>thread</Filter>
     </ClInclude>
-    <ClInclude Include="task\task.h">
-      <Filter>task</Filter>
-    </ClInclude>
     <ClInclude Include="task\timertask.h">
       <Filter>task</Filter>
     </ClInclude>
@@ -357,6 +354,9 @@
     </ClInclude>
     <ClInclude Include="signal\signalhandler.h">
       <Filter>signal</Filter>
+    </ClInclude>
+    <ClInclude Include="lua\luatask.h">
+      <Filter>lua</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

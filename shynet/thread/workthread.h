@@ -16,11 +16,11 @@ namespace thread {
         int run() override;
         int stop() override;
 
-        size_t addTask(std::shared_ptr<task::Task> tk);
+        size_t addTask(std::function<void()>&& tk);
 
     private:
         std::mutex tasks_mutex_;
-        std::queue<std::shared_ptr<task::Task>> tasks_;
+        std::queue<std::function<void()>> tasks_;
         bool stop_ = false;
     };
 }

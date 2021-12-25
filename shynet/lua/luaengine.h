@@ -1,8 +1,8 @@
 #ifndef SHYNET_LUA_LUAENGINE_H
 #define SHYNET_LUA_LUAENGINE_H
 
+#include "shynet/lua/luatask.h"
 #include "shynet/lua/luawrapper.h"
-#include "shynet/task/task.h"
 #include "shynet/thread/thread.h"
 #include "shynet/utils/singleton.h"
 
@@ -28,7 +28,7 @@ namespace lua {
         /*
 			* 添加任务到lua线程
 			*/
-        void append(std::shared_ptr<task::Task> task);
+        void append(std::shared_ptr<luatask::LuaTask> task);
 
     private:
         std::shared_ptr<LuaWrapper> wrapper_;

@@ -4,6 +4,7 @@
 #include "frmpub/reconnecttimer.h"
 #include "shynet/events/streambuff.h"
 #include "shynet/net/connectreactormgr.h"
+#include "shynet/pool/threadpool.h"
 
 namespace client {
 GateConnector::GateConnector(std::shared_ptr<net::IPAddress> connect_addr,

@@ -1,8 +1,8 @@
 #ifndef FRMPUB_LUATIMERMGR_H
 #define FRMPUB_LUATIMERMGR_H
 
+#include "shynet/lua/luatask.h"
 #include "shynet/net/timerevent.h"
-#include "shynet/task/task.h"
 #include "shynet/utils/singleton.h"
 #include <unordered_set>
 
@@ -11,7 +11,7 @@ namespace frmpub {
 	* lua计时器管理
 	*/
 class LuaTimerMgr {
-    class LuaTimerTask : public task::Task {
+    class LuaTimerTask : public shynet::luatask::LuaTask {
     public:
         LuaTimerTask(int timerid);
 

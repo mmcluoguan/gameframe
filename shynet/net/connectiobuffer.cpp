@@ -59,7 +59,7 @@ namespace net {
         if (shconector != nullptr) {
             std::shared_ptr<task::ConnectReadIoTask> io
                 = std::make_shared<task::ConnectReadIoTask>(shconector);
-            utils::Singleton<pool::ThreadPool>::instance().appendwork(io, fd());
+            utils::Singleton<pool::ThreadPool>::instance().appendwork(fd(), io);
         }
     }
 

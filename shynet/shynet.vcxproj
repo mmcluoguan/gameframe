@@ -196,6 +196,7 @@
     <ClInclude Include="events\streambuff.h" />
     <ClInclude Include="io\stdinhandler.h" />
     <ClInclude Include="lua\luaengine.h" />
+    <ClInclude Include="lua\luatask.h" />
     <ClInclude Include="lua\luawrapper.h" />
     <ClInclude Include="net\acceptheartbeat.h" />
     <ClInclude Include="net\acceptnewfd.h" />
@@ -222,7 +223,6 @@
     <ClInclude Include="task\acceptreadiotask.h" />
     <ClInclude Include="task\connectreadiotask.h" />
     <ClInclude Include="task\notifytask.h" />
-    <ClInclude Include="task\task.h" />
     <ClInclude Include="task\timertask.h" />
     <ClInclude Include="thread\acceptthread.h" />
     <ClInclude Include="thread\connectthread.h" />
@@ -258,6 +258,7 @@
     <ClCompile Include="events\streambuff.cpp" />
     <ClCompile Include="io\stdinhandler.cpp" />
     <ClCompile Include="lua\luaengine.cpp" />
+    <ClCompile Include="lua\luatask.cpp" />
     <ClCompile Include="lua\luawrapper.cpp" />
     <ClCompile Include="net\acceptheartbeat.cpp" />
     <ClCompile Include="net\acceptnewfd.cpp" />
@@ -284,7 +285,6 @@
     <ClCompile Include="task\acceptreadiotask.cpp" />
     <ClCompile Include="task\connectreadiotask.cpp" />
     <ClCompile Include="task\notifytask.cpp" />
-    <ClCompile Include="task\task.cpp" />
     <ClCompile Include="task\timertask.cpp" />
     <ClCompile Include="thread\acceptthread.cpp" />
     <ClCompile Include="thread\connectthread.cpp" />

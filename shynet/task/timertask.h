@@ -1,16 +1,14 @@
 #ifndef SHYNET_TASK_TIMERTASK_H
 #define SHYNET_TASK_TIMERTASK_H
 
-#include "shynet/task/task.h"
-
 namespace shynet {
 namespace task {
-    class TimerTask : public task::Task {
+    class TimerTask {
     public:
         explicit TimerTask(int timerid);
         ~TimerTask();
 
-        int run(thread::Thread* tif) override;
+        void operator()();
 
     private:
         int timerid_ = 0;

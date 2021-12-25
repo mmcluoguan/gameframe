@@ -1,14 +1,14 @@
 #ifndef FRMPUB_LUAHOTFIXTASK_H
 #define FRMPUB_LUAHOTFIXTASK_H
 
-#include "shynet/task/task.h"
+#include "shynet/lua/luatask.h"
 #include "shynet/thread/thread.h"
 
 namespace frmpub {
 /*
 	* lua热更新任务
 	*/
-class LuaHotFixTask : public shynet::task::Task {
+class LuaHotFixTask : public shynet::luatask::LuaTask {
 public:
     LuaHotFixTask(std::string filepath);
     ~LuaHotFixTask();
