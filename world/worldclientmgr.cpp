@@ -3,13 +3,6 @@
 #include "shynet/lua/luaengine.h"
 
 namespace world {
-WorldClientMgr::WorldClientMgr()
-{
-}
-
-WorldClientMgr::~WorldClientMgr()
-{
-}
 
 void WorldClientMgr::add(int k, std::shared_ptr<WorldClient> v)
 {

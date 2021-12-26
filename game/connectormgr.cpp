@@ -2,12 +2,6 @@
 #include "shynet/net/connectreactormgr.h"
 
 namespace game {
-ConnectorMgr::ConnectorMgr()
-{
-}
-ConnectorMgr::~ConnectorMgr()
-{
-}
 std::shared_ptr<DbConnector> ConnectorMgr::db_connector()
 {
     if (dbctor_ids_.begin() != dbctor_ids_.end()) {

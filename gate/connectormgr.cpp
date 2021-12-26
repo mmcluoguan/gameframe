@@ -2,12 +2,6 @@
 #include "shynet/net/connectreactormgr.h"
 
 namespace gate {
-ConnectorMgr::ConnectorMgr()
-{
-}
-ConnectorMgr::~ConnectorMgr()
-{
-}
 int ConnectorMgr::sid_conv_connect_id(int sid)
 {
     std::lock_guard<std::mutex> lock(connect_data_mutex_);

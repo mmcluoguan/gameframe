@@ -3,13 +3,6 @@
 
 namespace admin_client {
 
-ConnectorMgr::ConnectorMgr()
-{
-}
-ConnectorMgr::~ConnectorMgr()
-{
-}
-
 std::shared_ptr<WorldConnector> ConnectorMgr::world_connector()
 {
     if (worldctor_ids_.begin() != worldctor_ids_.end()) {

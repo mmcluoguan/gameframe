@@ -3,13 +3,6 @@
 #include "shynet/lua/luaengine.h"
 
 namespace dbvisit {
-DbClientMgr::DbClientMgr()
-{
-}
-
-DbClientMgr::~DbClientMgr()
-{
-}
 
 void DbClientMgr::add(int k, std::shared_ptr<DbClient> v)
 {
@@ -21,7 +14,7 @@ void DbClientMgr::add(int k, std::shared_ptr<DbClient> v)
         std::make_shared<frmpub::OnAcceptTask<DbClient>>(v));
 }
 
-bool DbClientMgr::remove(int k)
+void DbClientMgr::remove(int k)
 {
     std::lock_guard<std::mutex> lock(clis_mutex_);
     if (clis_.erase(k) > 0) {
@@ -29,10 +22,7 @@ bool DbClientMgr::remove(int k)
         //通知lua的onClose函数
         shynet::utils::Singleton<lua::LuaEngine>::get_instance().append(
             std::make_shared<frmpub::OnCloseTask>(k));
-
-        return true;
     }
-    return false;
 }
 
 std::shared_ptr<DbClient> DbClientMgr::find(int k)

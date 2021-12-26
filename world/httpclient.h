@@ -5,43 +5,70 @@
 #include "shynet/events/eventbuffer.h"
 
 namespace world {
-/// <summary>
-/// 后台客户端
-/// </summary>
+/**
+ * @brief http客户端连接
+*/
 class HttpClient : public frmpub::Client, public std::enable_shared_from_this<HttpClient> {
 public:
+    /**
+     * @brief 构造
+     * @param remote_addr game客户端地址
+     * @param listen_addr 服务器监听地址
+     * @param iobuf 管理io读写缓冲区
+    */
     HttpClient(std::shared_ptr<net::IPAddress> remote_addr,
         std::shared_ptr<net::IPAddress> listen_addr,
         std::shared_ptr<events::EventBuffer> iobuf);
     ~HttpClient();
 
-    /// <summary>
-    /// 处理网络消息
-    /// </summary>
-    /// <param name="obj">数据包</param>
-    /// <param name="enves">数据包转发路由</param>
-    /// <returns></returns>
+    /**
+     * @brief 处理protobuf数据封包
+     * @param obj protobuf对象
+     * @param enves 路由信息
+     * @return 0成功 -1失败 失败将关闭对端连接
+    */
     int input_handle(std::shared_ptr<rapidjson::Document> doc, std::shared_ptr<std::stack<FilterData::Envelope>> enves) override;
 
-    /// <summary>
-    /// 连接断开
-    /// </summary>
-    /// <param name="active">true服务器主动断开,false客户端主动断开</param>
+    /**
+     * @brief 客户端连接与http服务器断开连接回调
+     * @param active 连接断开原因
+    */
     void close(net::CloseType active) override;
 
 private:
-    /// <summary>
-    /// 服务器通用错误信息
-    /// </summary>
+    /**
+     * @brief 接收http客户端发来的错误信息
+     * @param data protobuf对象
+     * @param enves 路由信息
+     * @return 0成功 -1失败 失败将关闭对端连接
+    */
     int errcode(std::shared_ptr<rapidjson::Document> doc,
         std::shared_ptr<std::stack<FilterData::Envelope>> enves);
 
+    /**
+     * @brief 接收http客户端发来的获取区服列表信息
+     * @param data protobuf对象
+     * @param enves 路由信息
+     * @return 0成功 -1失败 失败将关闭对端连接
+    */
     int getgamelist_admin_world_c(std::shared_ptr<rapidjson::Document> doc,
         std::shared_ptr<std::stack<FilterData::Envelope>> enves);
 
+    /**
+     * @brief 接收http客户端发来的通知消息信息
+     * @param data protobuf对象
+     * @param enves 路由信息
+     * @return 0成功 -1失败 失败将关闭对端连接
+    */
     int noticeserver_admin_world_c(std::shared_ptr<rapidjson::Document> doc,
         std::shared_ptr<std::stack<FilterData::Envelope>> enves);
 
+    /**
+     * @brief 接收http客户端发来的发送邮件信息
+     * @param data protobuf对象
+     * @param enves 路由信息
+     * @return 0成功 -1失败 失败将关闭对端连接
+    */
     int sysemail_admin_world_c(std::shared_ptr<rapidjson::Document> doc,
         std::shared_ptr<std::stack<FilterData::Envelope>> enves);
 };

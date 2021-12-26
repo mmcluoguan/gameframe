@@ -3,13 +3,6 @@
 #include "shynet/lua/luaengine.h"
 
 namespace login {
-LoginClientMgr::LoginClientMgr()
-{
-}
-
-LoginClientMgr::~LoginClientMgr()
-{
-}
 
 void LoginClientMgr::add(int k, std::shared_ptr<LoginClient> v)
 {
@@ -62,14 +55,5 @@ void LoginClientMgr::foreach_clis(std::function<void(int, std::shared_ptr<LoginC
     for (auto&& [key, cli] : clis_) {
         cb(key, cli);
     }
-}
-
-const net::IPAddress& LoginClientMgr::listen_addr() const
-{
-    return listen_addr_;
-}
-void LoginClientMgr::set_listen_addr(const net::IPAddress& addr)
-{
-    listen_addr_ = addr;
 }
 }

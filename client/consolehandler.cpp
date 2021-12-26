@@ -46,10 +46,6 @@ ConsoleHandler::ConsoleHandler(std::shared_ptr<events::EventBase> base)
         std::bind(&ConsoleHandler::getannex_order, this, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3) });
 }
 
-ConsoleHandler::~ConsoleHandler()
-{
-}
-
 void ConsoleHandler::reconnect_order(const OrderItem& order, int argc, char** argv)
 {
     std::shared_ptr<GateConnector> gate = std::dynamic_pointer_cast<GateConnector>(

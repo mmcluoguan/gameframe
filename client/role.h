@@ -116,6 +116,12 @@ public:
     int send_errcode(protocc::errnum code, const std::string& desc,
         std::stack<FilterData::Envelope>* enves = nullptr);
 
+    /**
+     * @brief 处理protobuf数据封包
+     * @param obj protobuf对象
+     * @param enves 路由信息
+     * @return 0成功 -1失败 失败将关闭对端连接
+    */
     int input_handle(std::shared_ptr<protocc::CommonObject> obj, std::shared_ptr<std::stack<frmpub::FilterData::Envelope>> enves);
 
     /*

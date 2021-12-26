@@ -10,13 +10,6 @@
 extern const char* g_conf_node;
 
 namespace gate {
-LuaWrapper::LuaWrapper()
-{
-}
-
-LuaWrapper::~LuaWrapper()
-{
-}
 
 void LuaWrapper::init(kaguya::State& state)
 {

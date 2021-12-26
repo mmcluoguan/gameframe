@@ -8,49 +8,75 @@
 #include <unordered_map>
 
 namespace dbvisit {
-/// <summary>
-/// db连接管理器
-/// </summary>
+/**
+ * @brief 连接db的客户端管理器
+*/
 class DbClientMgr final : public shynet::Nocopy {
     friend class shynet::utils::Singleton<DbClientMgr>;
-    DbClientMgr();
+
+    DbClientMgr() = default;
 
 public:
-    ~DbClientMgr();
+    /**
+    * @brief 类型名称
+    */
+    static constexpr const char* kClassname = "DbClientMgr";
+    ~DbClientMgr() = default;
 
-    /*
-		* 添加,删除,查找连接,k为连接fd
-		*/
+    /**
+     * @brief 添加连接db的客户端连接
+     * @param k db的客户端fd
+     * @param v db的客户端连接
+    */
     void add(int k, std::shared_ptr<DbClient> v);
-    bool remove(int k);
+    /**
+     * @brief 移除连接db的客户端连接
+     * @param k db的客户端fd
+    */
+    void remove(int k);
+    /**
+     * @brief 查找连接db的客户端连接
+     * @param k db的客户端fd
+     * @return 连接db的客户端连接,找不到返回nullptr
+    */
     std::shared_ptr<DbClient> find(int k);
-
-    /// <summary>
-    /// 迭代所有连接列表
-    /// </summary>
-    /// <param name="cb"></param>
-    void foreach_clis(std::function<void(int, std::shared_ptr<DbClient>)> cb) const;
-
-    /*
-		* 获取设置db服务器监听地址
-		*/
-    const net::IPAddress& listen_addr() const
-    {
-        return listen_addr_;
-    }
-    void set_listen_addr(const net::IPAddress& addr)
-    {
-        listen_addr_ = addr;
-    }
-
-    /*
-		* 通过服务器id查找
-		*/
+    /**
+     * @brief 查找连接db的客户端连接
+     * @param sid  连接db的客户端的服务器id 
+    (连接db的客户端都是应用服务器)
+     * @return 连接db的客户端连接,找不到返回nullptr
+    */
     std::shared_ptr<DbClient> find(std::string sid);
 
+    /**
+     * @brief 迭代所有管理的连接db的客户端连接
+     * @param cb 迭代函数
+    */
+    void foreach_clis(std::function<void(int, std::shared_ptr<DbClient>)> cb) const;
+
+    /**
+     * @brief 获取db服务器监听地址
+     * @return db服务器监听地址
+    */
+    const net::IPAddress& listen_addr() const { return listen_addr_; }
+    /**
+     * @brief 设置db服务器监听地址
+     * @param addr db服务器监听地址 
+    */
+    void set_listen_addr(const net::IPAddress& addr) { listen_addr_ = addr; }
+
 private:
+    /**
+     * @brief  db服务器监听地址 
+    */
     net::IPAddress listen_addr_;
+    /**
+     * @brief 互斥体
+    */
     mutable std::mutex clis_mutex_;
+    /**
+     * @brief 连接db的客户端fd与连接db的客户端映射的hash表
+    */
     std::unordered_map<int, std::shared_ptr<DbClient>> clis_;
 };
 }

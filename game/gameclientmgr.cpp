@@ -3,13 +3,6 @@
 #include "shynet/lua/luaengine.h"
 
 namespace game {
-GameClientMgr::GameClientMgr()
-{
-}
-
-GameClientMgr::~GameClientMgr()
-{
-}
 
 void GameClientMgr::add(int k, std::shared_ptr<GameClient> v)
 {

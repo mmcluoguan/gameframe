@@ -12,10 +12,6 @@ DataTimer::DataTimer(const std::string& cachekey, const struct timeval val)
     cachekey_ = cachekey;
 }
 
-DataTimer::~DataTimer()
-{
-}
-
 void DataTimer::timeout()
 {
     try {

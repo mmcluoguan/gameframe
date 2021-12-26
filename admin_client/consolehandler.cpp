@@ -28,10 +28,6 @@ ConsoleHandler::ConsoleHandler(std::shared_ptr<events::EventBase> base)
         std::bind(&ConsoleHandler::sysemail, this, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3) });
 }
 
-ConsoleHandler::~ConsoleHandler()
-{
-}
-
 void ConsoleHandler::getgamelist(const OrderItem& order, int argc, char** argv)
 {
     std::shared_ptr<WorldConnector> world = shynet::utils::Singleton<ConnectorMgr>::instance().world_connector();

@@ -1,13 +1,6 @@
 #include "dbvisit/datatimermgr.h"
 
 namespace dbvisit {
-DataTimerMgr::DataTimerMgr()
-{
-}
-
-DataTimerMgr::~DataTimerMgr()
-{
-}
 
 void DataTimerMgr::add(std::string cachekey, int timerid)
 {
@@ -24,6 +17,10 @@ bool DataTimerMgr::remove(std::string cachekey)
 int DataTimerMgr::find(std::string cachekey)
 {
     std::lock_guard<std::mutex> lock(cachekey_timerid_mutex_);
-    return cachekey_timerids_[cachekey];
+    auto iter = cachekey_timerids_.find(cachekey);
+    if (iter != cachekey_timerids_.end()) {
+        return iter->second;
+    }
+    return -1;
 }
 }

@@ -3,13 +3,6 @@
 #include "shynet/lua/luaengine.h"
 
 namespace world {
-HttpClientMgr::HttpClientMgr()
-{
-}
-
-HttpClientMgr::~HttpClientMgr()
-{
-}
 
 void HttpClientMgr::add(int k, std::shared_ptr<HttpClient> v)
 {

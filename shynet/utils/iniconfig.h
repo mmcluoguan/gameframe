@@ -81,7 +81,13 @@ namespace utils {
         }
 
     private:
+        /**
+         * @brief []部分
+        */
         serctions content_;
+        /**
+         * @brief ini文件名
+        */
         std::string inifilename_;
     };
 }

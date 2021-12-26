@@ -12,9 +12,6 @@ namespace redis = sw::redis;
 #include <unordered_set>
 
 namespace dbvisit {
-Datahelp::Datahelp()
-{
-}
 
 Datahelp::ErrorCode Datahelp::getdata_from_db(const std::string& tablename,
     const std::string& key, std::unordered_map<std::string, std::string>& out,
@@ -340,7 +337,7 @@ void Datahelp::updata_db(const std::string& tablename, const std::string& key, c
         }
     }
     if (md.execute().getAffectedItemsCount() == 0) {
-        LOG_WARN << "数据更新失败 tablename:" << tablename << " key:" << key;
+        //LOG_WARN << "数据更新失败 tablename:" << tablename << " key:" << key;
     }
 }
 
