@@ -6,9 +6,6 @@ namespace task {
     {
         newfd_ = newfd;
     }
-    AcceptReadIoTask::~AcceptReadIoTask()
-    {
-    }
 
     void AcceptReadIoTask::operator()()
     {
@@ -18,11 +15,11 @@ namespace task {
             if (ht != nullptr) {
                 ht->set_val({ aptnewfd->heart_second(), 0 });
             }
-            int ret = aptnewfd->input();
-            if (ret == -1) {
-                aptnewfd->close(true);
-            } else if (ret == -2) {
-                aptnewfd->close(false);
+            net::InputResult ret = aptnewfd->input();
+            if (ret == net::InputResult::INITIATIVE_CLOSE) {
+                aptnewfd->close(net::CloseType::SERVER_CLOSE);
+            } else if (ret == net::InputResult::PASSIVE_CLOSE) {
+                aptnewfd->close(net::CloseType::CLIENT_CLOSE);
             }
         }
     }

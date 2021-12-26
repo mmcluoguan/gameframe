@@ -10,10 +10,6 @@ LuaFolderTask::LuaFolderTask(std::string path, bool ischild, uint32_t mask)
 {
 }
 
-LuaFolderTask::~LuaFolderTask()
-{
-}
-
 /*
 	* 临时记录文件最新修改时间，精确到毫秒
 	* 用于判断文件修改间隔

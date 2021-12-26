@@ -6,66 +6,73 @@
 #include "shynet/net/acceptnewfd.h"
 
 namespace frmpub {
-/// <summary>
-/// 客户端连接
-/// </summary>
+/**
+ * @brief 客户端连接
+*/
 class Client : public net::AcceptNewFd, public FilterData {
 public:
-    /// <summary>
-    /// 客户端连接
-    /// </summary>
-    /// <param name="remote_addr">客户端连接地址</param>
-    /// <param name="listen_addr">服务器监听地址</param>
-    /// <param name="iobuf">io读写缓冲区</param>
-    /// <param name="enableHeart">是否检测心跳</param>
-    /// <param name="heartSecond">心跳检测秒数</param>
-    /// <param name="pt">协议类型</param>
-    /// <param name="pd">数据封包类型</param>
+    /**
+         * @brief 构造
+         * @param remote_addr 客户端连接地址
+         * @param listen_addr 服务器监听地址
+         * @param iobuf 管理io读写缓冲区
+         * @param enableHeart 是否启用心跳包检测客户端
+         * @param heartSecond 心跳包检测秒数
+         * @param pt 协议类型 SHY,HTTP,WEBSOCKET
+         * @param pd 数据封包 PROTOBUF,JSON,NATIVE
+        */
     Client(std::shared_ptr<net::IPAddress> remote_addr,
         std::shared_ptr<net::IPAddress> listen_addr,
         std::shared_ptr<events::EventBuffer> iobuf,
         bool enableHeart = false, ssize_t heartSecond = 5,
         protocol::FilterProces::ProtoType pt = protocol::FilterProces::ProtoType::SHY,
         FilterData::ProtoData pd = FilterData::ProtoData::PROTOBUF);
-    ~Client();
+    ~Client() = default;
 
-    /*
-		* 连接断开
-		active=true服务器主动断开,false客户端主动断开
-		*/
-    void close(bool active) override;
-    /// <summary>
-    /// 心跳超时
-    /// </summary>
-    void timerout() override;
-    /*
-		* 消息数据封包处理
-		*/
+    /**
+    * @brief 客户端连接断开回调
+    * @param active 断开原因 CLIENT_CLOSE,SERVER_CLOSE,TIMEOUT_CLOSE
+    */
+    void close(net::CloseType active) override;
+    /**
+         * @brief 心跳包检测到客户端超时回调
+         * @param active 断开原因
+        */
+    void timerout(net::CloseType) override;
+    /**
+     * @brief 消息数据封包处理
+     * @param original_data 指定数据的指针
+     * @param datalen 指定数据的指针的大小
+     * @return 0成功 -1失败 失败将关闭对端连接
+    */
     int message_handle(char* original_data, size_t datalen) override;
 
-    /*
-		* true服务器主动断开,false客户端主动断开
-		*/
-    bool active() const
-    {
-        return active_;
-    }
+    /**
+     * @brief 获取连接断开原因
+     * @return 连接断开原因
+    */
+    net::CloseType active() const { return active_; }
 
-    /*
-		* 获取或设置连接的客户端的监听的服务信息
-		*/
-    protocc::ServerInfo sif() const
-    {
-        return sif_;
-    }
-    void set_sif(const protocc::ServerInfo& v)
-    {
-        sif_ = v;
-    }
+    /**
+     * @brief 获取连接的客户端的监听的服务信息
+     * @return 连接的客户端的监听的服务信息
+    */
+    protocc::ServerInfo sif() const { return sif_; }
+    /**
+     * @brief 设置连接的客户端的监听的服务信息
+     * @param v 连接的客户端的监听的服务信息
+    */
+    void set_sif(const protocc::ServerInfo& v) { sif_ = v; }
 
 private:
+    /**
+     * @brief 连接的客户端的监听的服务信息
+    */
     protocc::ServerInfo sif_;
-    bool active_ = false;
+    /**
+     * @brief 连接断开原因
+    */
+    net::CloseType active_ = net::CloseType::SERVER_CLOSE;
 };
 }
 

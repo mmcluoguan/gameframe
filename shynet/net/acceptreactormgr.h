@@ -6,17 +6,36 @@
 
 namespace shynet {
 namespace net {
-
+    /**
+     * @brief 接收客户端连接线程管理器
+    */
     class AcceptReactorMgr final : public Nocopy {
         friend class utils::Singleton<AcceptReactorMgr>;
-        AcceptReactorMgr();
+
+        /**
+         * @brief 构造
+        */
+        AcceptReactorMgr() = default;
 
     public:
-        ~AcceptReactorMgr();
+        /**
+         * @brief 类型名称
+        */
+        static constexpr const char* kClassname = "AcceptReactorMgr";
+        ~AcceptReactorMgr() = default;
 
+        /**
+         * @brief 通知服务器接收客户端数据线程接收新的连接
+         * @param data 数据为 ListenEvent*
+         * @param len 数据长度
+        */
         void notify(const void* data, size_t len);
 
     private:
+        /**
+         * @brief 查找最优连接线程
+         * @return 最优连接线程
+        */
         std::shared_ptr<thread::AcceptThread> find_rtk() const;
     };
 }

@@ -12,10 +12,6 @@ LuaHotFixTask::LuaHotFixTask(std::string filepath)
     filepath_ = filepath;
 }
 
-LuaHotFixTask::~LuaHotFixTask()
-{
-}
-
 int LuaHotFixTask::run(thread::Thread* tif)
 {
     thread::LuaThread* lua = dynamic_cast<thread::LuaThread*>(tif);

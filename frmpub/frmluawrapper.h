@@ -4,15 +4,19 @@
 #include "shynet/lua/luawrapper.h"
 
 namespace frmpub {
-/*
-	* 导出c++到lua
-	*/
+/**
+ * @brief lua包装器
+*/
 class FrmLuaWrapper : public shynet::lua::LuaWrapper {
 public:
-    FrmLuaWrapper();
-    ~FrmLuaWrapper();
+    FrmLuaWrapper() = default;
+    ~FrmLuaWrapper() = default;
 
-    virtual void init(kaguya::State& state) override;
+    /**
+    * @brief 初始化lua栈,导出c++到lua
+    * @param state lua栈
+    */
+    void init(kaguya::State& state) override;
 };
 }
 

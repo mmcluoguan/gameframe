@@ -7,20 +7,28 @@
 #include "shynet/thread/thread.h"
 
 namespace frmpub {
-/*
-	* 处理新连接
-	*/
+/**
+ * @brief 处理新连接lua任务
+ * @tparam T 新连接类型
+*/
 template <class T>
 class OnAcceptTask : public shynet::luatask::LuaTask {
 public:
+    /**
+     * @brief 构造
+     * @param client 新连接
+    */
     OnAcceptTask(std::shared_ptr<T> client)
     {
         client_ = client;
     }
-    ~OnAcceptTask()
-    {
-    }
+    ~OnAcceptTask() = default;
 
+    /**
+    * @brief 运行lua任务
+    * @param tif 线程信息
+    * @return 0成功,-1失败,返回失败lua线程会结束
+    */
     int run(thread::Thread* tif) override
     {
         thread::LuaThread* lua = dynamic_cast<thread::LuaThread*>(tif);
@@ -34,23 +42,34 @@ public:
     }
 
 private:
+    /**
+     * @brief 新连接
+    */
     std::shared_ptr<T> client_;
 };
 
-/*
-	* 处理连接成功
-	*/
+/**
+ * @brief 处理连接服务器成功lua任务
+ * @tparam T 连接服务器类型
+*/
 template <class T>
 class OnConnectorTask : public shynet::luatask::LuaTask {
 public:
+    /**
+     * @brief 构造
+     * @param conncetor 连接服务器的连接器 
+    */
     OnConnectorTask(std::shared_ptr<T> conncetor)
     {
         conncetor_ = conncetor;
     }
-    ~OnConnectorTask()
-    {
-    }
+    ~OnConnectorTask() = default;
 
+    /**
+    * @brief 运行lua任务
+    * @param tif 线程信息
+    * @return 0成功,-1失败,返回失败lua线程会结束
+    */
     int run(thread::Thread* tif) override
     {
         thread::LuaThread* lua = dynamic_cast<thread::LuaThread*>(tif);
@@ -64,22 +83,32 @@ public:
     }
 
 private:
+    /**
+     * @brief 连接服务器的连接器
+    */
     std::shared_ptr<T> conncetor_;
 };
 
-/*
-	* 处理连接关闭
-	*/
+/**
+ * @brief 连接断开lua任务
+*/
 class OnCloseTask : public shynet::luatask::LuaTask {
 public:
+    /**
+     * @brief 构造
+     * @param fd socket文件描述符
+    */
     OnCloseTask(int fd)
     {
         fd_ = fd;
     }
-    ~OnCloseTask()
-    {
-    }
+    ~OnCloseTask() = default;
 
+    /**
+    * @brief 运行lua任务
+    * @param tif 线程信息
+    * @return 0成功,-1失败,返回失败lua线程会结束
+    */
     int run(thread::Thread* tif) override
     {
         thread::LuaThread* lua = dynamic_cast<thread::LuaThread*>(tif);
@@ -91,15 +120,25 @@ public:
     }
 
 private:
+    /**
+     * @brief socket文件描述符
+    */
     int fd_;
 };
 
-/*
-	* 处理连接数据
-	*/
+/**
+ * @brief 处理连接数据
+ * @tparam T 
+*/
 template <class T>
 class OnMessageTask : public shynet::luatask::LuaTask {
 public:
+    /**
+     * @brief 构造
+     * @param client 对端连接
+     * @param data protocbuf数据
+     * @param enves 路由信息
+    */
     OnMessageTask(std::shared_ptr<T> client, std::shared_ptr<protocc::CommonObject> data,
         std::shared_ptr<std::stack<FilterData::Envelope>> enves)
     {
@@ -107,6 +146,12 @@ public:
         data_ = data;
         enves_ = enves;
     }
+    /**
+     * @brief 构造
+     * @param client 对端连接
+     * @param doc json数据
+     * @param enves 路由信息
+    */
     OnMessageTask(std::shared_ptr<T> client, std::shared_ptr<rapidjson::Document> doc,
         std::shared_ptr<std::stack<FilterData::Envelope>> enves)
     {
@@ -114,10 +159,13 @@ public:
         doc_ = doc;
         enves_ = enves;
     }
-    ~OnMessageTask()
-    {
-    }
+    ~OnMessageTask() = default;
 
+    /**
+    * @brief 运行lua任务
+    * @param tif 线程信息
+    * @return 0成功,-1失败,返回失败lua线程会结束
+    */
     int run(thread::Thread* tif) override
     {
         thread::LuaThread* lua = dynamic_cast<thread::LuaThread*>(tif);
@@ -135,9 +183,21 @@ public:
     }
 
 private:
+    /**
+     * @brief protocbuf数据
+    */
     std::shared_ptr<protocc::CommonObject> data_;
+    /**
+     * @brief json数据
+    */
     std::shared_ptr<rapidjson::Document> doc_;
+    /**
+     * @brief 对端连接
+    */
     std::shared_ptr<T> client_;
+    /**
+     * @brief 路由信息
+    */
     std::shared_ptr<std::stack<FilterData::Envelope>> enves_;
 };
 }

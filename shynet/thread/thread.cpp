@@ -7,9 +7,6 @@ namespace thread {
         type_ = t;
         index_ = index;
     }
-    Thread::~Thread()
-    {
-    }
 
     std::shared_ptr<std::thread> Thread::start()
     {

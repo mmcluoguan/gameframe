@@ -5,14 +5,8 @@
 
 namespace shynet {
 namespace protocol {
-    Responses::Responses()
-    {
-    }
-    Responses::~Responses()
-    {
-    }
 
-    int Responses::responses_uninit(std::string& line)
+    int Responses::responses_uninit(const std::string& line)
     {
         std::string::const_iterator start = line.begin();
         std::string::const_iterator end = line.end();
@@ -38,7 +32,7 @@ namespace protocol {
         return 0;
     }
 
-    int Responses::responses_init(std::string& line)
+    int Responses::responses_init(const std::string& line)
     {
         if (line.empty() == false) {
             std::string::size_type end = line.find(":");

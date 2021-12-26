@@ -22,13 +22,13 @@ GameConnector::GameConnector(std::shared_ptr<net::IPAddress> connect_addr)
 }
 GameConnector::~GameConnector()
 {
-    if (active() == net::ConnectEvent::CloseType::CLIENT_CLOSE) {
+    if (active() == net::CloseType::CLIENT_CLOSE) {
         LOG_INFO << "连接game客户端主动关闭连接 "
                  << "[ip:" << connect_addr()->ip() << ":" << connect_addr()->port() << "]";
-    } else if (active() == net::ConnectEvent::CloseType::SERVER_CLOSE) {
+    } else if (active() == net::CloseType::SERVER_CLOSE) {
         LOG_INFO << "服务器game主动关闭连接 "
                  << "[ip:" << connect_addr()->ip() << ":" << connect_addr()->port() << "]";
-    } else if (active() == net::ConnectEvent::CloseType::CONNECT_FAIL) {
+    } else if (active() == net::CloseType::CONNECT_FAIL) {
         LOG_INFO << "连接服务器game失败 "
                  << "[ip:" << connect_addr()->ip() << ":" << connect_addr()->port() << "]";
     }
@@ -75,7 +75,7 @@ int GameConnector::input_handle(std::shared_ptr<protocc::CommonObject> obj, std:
     return 0;
 }
 
-void GameConnector::close(net::ConnectEvent::CloseType active)
+void GameConnector::close(net::CloseType active)
 {
     //通知lua的onClose函数
     shynet::utils::Singleton<lua::LuaEngine>::get_instance().append(

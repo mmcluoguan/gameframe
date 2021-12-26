@@ -8,9 +8,6 @@ PingTimer::PingTimer(const timeval val, Connector* connector)
 {
     connector_ = connector;
 }
-PingTimer::~PingTimer()
-{
-}
 void PingTimer::timeout()
 {
     if (connector_ != nullptr) {

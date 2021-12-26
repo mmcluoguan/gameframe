@@ -13,10 +13,6 @@ namespace thread {
     {
     }
 
-    AcceptThread::~AcceptThread()
-    {
-    }
-
     static void pipeReadcb(struct bufferevent* bev, void* ptr)
     {
         try {

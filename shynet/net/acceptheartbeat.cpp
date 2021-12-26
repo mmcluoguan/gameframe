@@ -8,15 +8,13 @@ namespace net {
     {
         newfd_ = newfd;
     }
-    AcceptHeartbeat::~AcceptHeartbeat()
-    {
-    }
+
     void AcceptHeartbeat::timeout()
     {
         utils::Singleton<TimerReactorMgr>::instance().remove(timerid());
         std::shared_ptr<AcceptNewFd> newfd = newfd_.lock();
         if (newfd != nullptr) {
-            newfd->timerout();
+            newfd->timerout(net::CloseType::TIMEOUT_CLOSE);
         }
     }
 }

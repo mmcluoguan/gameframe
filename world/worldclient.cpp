@@ -30,7 +30,7 @@ WorldClient::WorldClient(std::shared_ptr<net::IPAddress> remote_addr,
 WorldClient::~WorldClient()
 {
     std::string str;
-    if (active()) {
+    if (active() == net::CloseType::SERVER_CLOSE) {
         str = "服务器world主动关闭连接";
     } else {
         str = frmpub::Basic::connectname(sif().st()) + "客户端主动关闭连接";
@@ -53,7 +53,7 @@ int WorldClient::input_handle(std::shared_ptr<protocc::CommonObject> obj, std::s
     return 0;
 }
 
-void WorldClient::close(bool active)
+void WorldClient::close(net::CloseType active)
 {
     frmpub::Client::close(active);
     shynet::utils::Singleton<WorldClientMgr>::instance().remove(iobuf()->fd());

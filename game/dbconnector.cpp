@@ -25,17 +25,17 @@ DbConnector::DbConnector(std::shared_ptr<net::IPAddress> connect_addr)
 }
 DbConnector::~DbConnector()
 {
-    if (active() == net::ConnectEvent::CloseType::CLIENT_CLOSE) {
+    if (active() == net::CloseType::CLIENT_CLOSE) {
         LOG_INFO << "连接dbvisit客户端主动关闭连接 "
                  << "[ip:" << connect_addr()->ip() << ":" << connect_addr()->port() << "]";
-    } else if (active() == net::ConnectEvent::CloseType::SERVER_CLOSE) {
+    } else if (active() == net::CloseType::SERVER_CLOSE) {
         LOG_INFO << "服务器dbvisit主动关闭连接 "
                  << "[ip:" << connect_addr()->ip() << ":" << connect_addr()->port() << "]";
-    } else if (active() == net::ConnectEvent::CloseType::CONNECT_FAIL) {
+    } else if (active() == net::CloseType::CONNECT_FAIL) {
         LOG_INFO << "连接服务器dbvisit失败 "
                  << "[ip:" << connect_addr()->ip() << ":" << connect_addr()->port() << "]";
     }
-    if (active() != net::ConnectEvent::CloseType::CLIENT_CLOSE) {
+    if (active() != net::CloseType::CLIENT_CLOSE) {
         LOG_INFO << "3秒后开始重连";
         std::shared_ptr<frmpub::ReConnectTimer<DbConnector>> reconnect(
             new frmpub::ReConnectTimer<DbConnector>(connect_addr(), { 3L, 0L }));
@@ -81,7 +81,7 @@ int DbConnector::input_handle(std::shared_ptr<protocc::CommonObject> obj, std::s
     return 0;
 }
 
-void DbConnector::close(net::ConnectEvent::CloseType active)
+void DbConnector::close(net::CloseType active)
 {
     //通知lua的onClose函数
     shynet::utils::Singleton<lua::LuaEngine>::get_instance().append(

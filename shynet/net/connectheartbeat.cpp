@@ -9,15 +9,13 @@ namespace net {
     {
         cnv_ = cnv;
     }
-    ConnectHeartbeat::~ConnectHeartbeat()
-    {
-    }
+
     void ConnectHeartbeat::timeout()
     {
         utils::Singleton<TimerReactorMgr>::instance().remove(timerid());
         std::shared_ptr<ConnectEvent> cnv = cnv_.lock();
         if (cnv != nullptr) {
-            cnv->timerout();
+            cnv->timerout(net::CloseType::TIMEOUT_CLOSE);
         }
     }
 

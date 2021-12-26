@@ -42,9 +42,6 @@ namespace net {
         iobuf_->setcb(ioreadcb, iowritecb, ioeventcb, this);
         iobuf_->enabled(EV_READ | EV_WRITE | EV_PERSIST);
     }
-    AcceptIoBuffer::~AcceptIoBuffer()
-    {
-    }
 
     std::weak_ptr<AcceptNewFd> AcceptIoBuffer::newfd() const
     {
@@ -71,7 +68,7 @@ namespace net {
         if (aptnewfd != nullptr) {
             int ret = aptnewfd->output();
             if (ret == -1) {
-                aptnewfd->close(true);
+                aptnewfd->close(net::CloseType::SERVER_CLOSE);
             }
         }
     }
@@ -81,10 +78,10 @@ namespace net {
         std::shared_ptr<AcceptNewFd> aptnewfd = newfd_.lock();
         if (aptnewfd != nullptr) {
             if (events & BEV_EVENT_EOF) {
-                aptnewfd->close(false);
-            } else if (events & (BEV_EVENT_ERROR | BEV_EVENT_READING | BEV_EVENT_WRITING)) {
+                aptnewfd->close(net::CloseType::CLIENT_CLOSE);
+            } else if (events & (BEV_EVENT_ERROR | BEV_EVENT_READING | BEV_EVENT_WRITING | BEV_EVENT_TIMEOUT)) {
                 LOG_WARN << evutil_socket_error_to_string(EVUTIL_SOCKET_ERROR());
-                aptnewfd->close(true);
+                aptnewfd->close(net::CloseType::SERVER_CLOSE);
             }
         }
     }

@@ -8,9 +8,6 @@ namespace task {
     {
         timerid_ = timerid;
     }
-    TimerTask::~TimerTask()
-    {
-    }
 
     void TimerTask::operator()()
     {

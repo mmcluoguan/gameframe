@@ -5,38 +5,49 @@
 #include "shynet/utils/singleton.h"
 
 namespace frmpub {
-/*
-	* lua远程调试
-	*/
+/**
+ * @brief lua远程调试器
+*/
 class LuaRemoteDebug final : public shynet::Nocopy {
     friend class shynet::utils::Singleton<LuaRemoteDebug>;
 
     LuaRemoteDebug() = default;
 
 public:
-    /*
-		* 启用调试
-		*/
+    /**
+     * @brief 启用调试
+     * @param debugip 远程服务器地址
+     * @return 
+    */
     LuaRemoteDebug& enable(const std::string& debugip);
 
     /*
-		* 禁止调试
-		*/
+	* @brief 禁用调试
+	*/
     void disenable();
 
     /*
-		* 开始调试
-		*/
+	* @brief 开始调试
+	*/
     LuaRemoteDebug& start(kaguya::State& state);
 
     /*
-		* 调试结束
-		*/
+	* @brief 调试结束
+	*/
     LuaRemoteDebug& stop(kaguya::State& state);
 
 private:
+    /**
+     * @brief 远程服务器地址
+    */
     std::string debugip_;
+    /**
+     * @brief 是否初始化
+    */
     bool isinit_ = false;
+    /**
+     * @brief 是否开始调试
+    */
     bool isstart_ = false;
 };
 }

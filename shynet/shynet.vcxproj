@@ -258,7 +258,6 @@
     <ClCompile Include="events\streambuff.cpp" />
     <ClCompile Include="io\stdinhandler.cpp" />
     <ClCompile Include="lua\luaengine.cpp" />
-    <ClCompile Include="lua\luatask.cpp" />
     <ClCompile Include="lua\luawrapper.cpp" />
     <ClCompile Include="net\acceptheartbeat.cpp" />
     <ClCompile Include="net\acceptnewfd.cpp" />

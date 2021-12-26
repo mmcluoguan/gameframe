@@ -13,10 +13,6 @@ namespace thread {
     {
     }
 
-    TimerThread::~TimerThread()
-    {
-    }
-
     int TimerThread::notify(const void* data, size_t len) const
     {
         return pair_[0]->write(data, len);
@@ -50,7 +46,7 @@ namespace thread {
 
                 std::shared_ptr<net::TimerEvent> timerEv = utils::Singleton<net::TimerReactorMgr>::instance().find(timerid);
                 if (timerEv != nullptr) {
-                    timerEv->event(base_, -1, timerEv->what());
+                    timerEv->set_event(base_, -1, timerEv->what());
                     base_->addevent(timerEv, &timerEv->val());
                 } else {
                     LOG_TRACE << "set_timerid:" << timerid << " not exist";

@@ -7,16 +7,22 @@
 
 namespace shynet {
 namespace utils {
+    /**
+     * @brief 单例模式
+     * @tparam T 类型
+    */
     template <class T>
     class Singleton : public Nocopy {
     public:
-        Singleton()
-        {
-        }
-        ~Singleton()
-        {
-        }
+        Singleton() = default;
+        ~Singleton() = default;
 
+        /**
+         * @brief 获取实例
+         * @tparam ...Args 实例化类型构造函数参数类型 
+         * @param ...args 实例化类型构造函数参数
+         * @return 实例
+        */
         template <typename... Args>
         static T& instance(Args&&... args)
         {
@@ -26,6 +32,11 @@ namespace utils {
             return *instance_;
         };
 
+        /**
+         * @brief 获取实例,这个接口保证单例一定创建完成,否则抛出异常
+         目的用于发现单例的创建是否在预期内
+         * @return 实例
+        */
         static T& get_instance()
         {
             if (instance_ == nullptr) {
@@ -37,6 +48,11 @@ namespace utils {
         }
 
     private:
+        /**
+         * @brief 调用单例构造函数
+         * @tparam ...Args 实例化类型构造函数参数类型 
+         * @param ...args 实例化类型构造函数参数
+        */
         template <typename... Args>
         static void init(Args&&... args)
         {
@@ -44,7 +60,13 @@ namespace utils {
         }
 
     private:
+        /**
+         * @brief 保证多线程情况下单例也只实例化一次
+        */
         inline static std::once_flag onceflag_;
+        /**
+         * @brief 单例对象指针
+        */
         inline static std::unique_ptr<T> instance_;
     };
 }

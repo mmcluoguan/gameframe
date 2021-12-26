@@ -56,7 +56,7 @@ DbClient::~DbClient()
         THROW_EXCEPTION(err.what());
     }
     std::string str;
-    if (active()) {
+    if (active() == net::CloseType::SERVER_CLOSE) {
         str = "服务器dbvisit主动关闭连接";
     } else {
         str = frmpub::Basic::connectname(sif().st()) + "客户端主动关闭连接";
@@ -79,7 +79,7 @@ int DbClient::input_handle(std::shared_ptr<protocc::CommonObject> obj, std::shar
     return 0;
 }
 
-void DbClient::close(bool active)
+void DbClient::close(net::CloseType active)
 {
     frmpub::Client::close(active);
     shynet::utils::Singleton<DbClientMgr>::instance().remove(iobuf()->fd());

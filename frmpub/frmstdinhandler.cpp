@@ -16,10 +16,6 @@ FrmStdinhandler::FrmStdinhandler(std::shared_ptr<events::EventBase> base)
         std::bind(&FrmStdinhandler::luadebugoff, this, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3) });
 }
 
-FrmStdinhandler::~FrmStdinhandler()
-{
-}
-
 void FrmStdinhandler::luadebugon(const OrderItem& order, int argc, char** argv)
 {
     int opt;

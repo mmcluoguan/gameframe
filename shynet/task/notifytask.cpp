@@ -10,8 +10,5 @@ namespace task {
         ischild_ = ischild;
         mask_ = mask;
     }
-    NotifyTask::~NotifyTask()
-    {
-    }
 }
 }

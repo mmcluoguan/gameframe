@@ -8,7 +8,13 @@
 
 namespace shynet {
 namespace utils {
+    /**
+     * @brief ini配置文件解析器
+    */
     class IniConfig final : public Nocopy {
+        /**
+         * @brief 节点
+        */
         struct node {
             std::string section;
             std::string key;
@@ -22,10 +28,24 @@ namespace utils {
         using serctions = std::unordered_map<section, nodes>;
 
     public:
+        /**
+         * @brief 类型名称
+        */
         static constexpr const char* kClassname = "IniConfig";
+        /**
+         * @brief 构造
+         * @param filename ini文件名
+        */
         explicit IniConfig(const char* filename);
-        ~IniConfig();
+        ~IniConfig() = default;
 
+        /**
+         * @brief 获取指定部分中，指定k对应的值
+         * @tparam OUT 返回值类型
+         * @param sec []部分
+         * @param k 键
+         * @return 值
+        */
         template <class OUT>
         OUT get(section sec, key k) const
         {

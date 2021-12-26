@@ -5,54 +5,73 @@
 
 namespace shynet {
 namespace net {
-
+    /**
+     * @brief 计时器处理器
+    */
     class TimerEvent : public events::EventHandler {
     public:
-        /// <summary>
-        /// 计时器事件
-        /// </summary>
-        /// <param name="val">相对时间值</param>
-        /// <param name="what">事件处理器标识 EV_TIMEOUT，EV_PERSIST</param>
+        /**
+         * @brief 构造
+         * @param val 超时相对时间值
+         * @param what 事件处理器标识 EV_TIMEOUT，EV_PERSIST
+        */
         TimerEvent(const struct timeval val, short what);
-        ~TimerEvent();
+        ~TimerEvent() = default;
 
+        /**
+         * @brief 获取超时相对时间值
+        */
         const struct timeval& val() const { return val_; }
-        /// <summary>
-        /// 重新设置超时时间，如果超时未触发，则延迟指定时间
-        /// </summary>
-        /// <param name="t"></param>
+        /**
+         * @brief 重新设置超时时间，如果超时未触发，则延迟指定时间
+         * @param t 超时相对时间值
+        */
         void set_val(const struct timeval& t);
 
-        /// <summary>
-        /// 事件处理器标识 EV_TIMEOUT，EV_PERSIST
-        /// </summary>
-        /// <returns></returns>
+        /**
+         * @brief 获取事件处理器标识
+         * @return 事件处理器标识 EV_TIMEOUT，EV_PERSIST
+        */
         short what() const { return what_; }
 
-        /*
-        * 获取设置计时器id
+        /**
+         * @brief 获取计时器id
+         * @return 计时器id
         */
         int timerid() const { return timerid_; }
+        /**
+         * @brief 设置计时器id
+         * @param timerid 计时器id
+        */
         void set_timerid(int timerid) { timerid_ = timerid; }
 
-        /// <summary>
-        /// EV_TIMEOUT回调
-        /// </summary>
-        /// <param name="fd">-1</param>
+        /**
+         * @brief 超时回调,创建计时器任务投递到工作线程中
+         * @param fd -1
+        */
         void timeout(int fd) override;
 
-        /// <summary>
-        /// 计时器线程超时回调
-        /// </summary>
+        /**
+         * @brief 计时器超时后,在工作线程中处理超时回调
+        */
         virtual void timeout() = 0;
 
     private:
+        /**
+         * @brief 超时相对时间值
+        */
         struct timeval val_;
+        /**
+         * @brief 事件处理器标识 EV_TIMEOUT，EV_PERSIST
+        */
         short what_ = 0;
+        /**
+         * @brief 计时器id
+        */
         int timerid_ = 0;
     };
 
-} // namespace net
-} // namespace shynet
+}
+}
 
 #endif

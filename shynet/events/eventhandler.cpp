@@ -39,7 +39,7 @@ namespace events {
         event_ = nullptr;
     }
 
-    void EventHandler::event(std::shared_ptr<EventBase> base, evutil_socket_t fd, short what)
+    void EventHandler::set_event(std::shared_ptr<EventBase> base, evutil_socket_t fd, short what)
     {
         if (event_ != nullptr) {
             THROW_EXCEPTION("event 已经存在");

@@ -10,7 +10,6 @@ namespace net {
     {
         what_ = what;
     }
-    TimerEvent::~TimerEvent() { }
 
     void TimerEvent::set_val(const timeval& t)
     {
@@ -27,5 +26,5 @@ namespace net {
         utils::Singleton<pool::ThreadPool>::instance().append(ttk);
     }
 
-} // namespace net
-} // namespace shynet
+}
+}

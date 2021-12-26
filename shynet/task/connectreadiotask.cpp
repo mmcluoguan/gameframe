@@ -7,9 +7,6 @@ namespace task {
     {
         cntevent_ = cntevent;
     }
-    ConnectReadIoTask::~ConnectReadIoTask()
-    {
-    }
 
     void ConnectReadIoTask::operator()()
     {
@@ -17,11 +14,11 @@ namespace task {
         if (ht != nullptr) {
             ht->set_val({ cntevent_->heart_second(), 0 });
         }
-        int ret = cntevent_->input();
-        if (ret == -1) {
-            cntevent_->close(net::ConnectEvent::CloseType::CLIENT_CLOSE);
-        } else if (ret == -2) {
-            cntevent_->close(net::ConnectEvent::CloseType::SERVER_CLOSE);
+        net::InputResult ret = cntevent_->input();
+        if (ret == net::InputResult::INITIATIVE_CLOSE) {
+            cntevent_->close(net::CloseType::CLIENT_CLOSE);
+        } else if (ret == net::InputResult::PASSIVE_CLOSE) {
+            cntevent_->close(net::CloseType::SERVER_CLOSE);
         }
     }
 }

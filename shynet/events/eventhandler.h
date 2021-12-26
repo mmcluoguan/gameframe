@@ -6,63 +6,79 @@
 namespace shynet {
 namespace events {
 
-    /// <summary>
-    /// 事件处理器
-    /// </summary>
+    /**
+     * @brief 事件处理器
+    */
     class EventHandler : public Nocopy {
     public:
-        /// <summary>
-        /// 创建事件处理器,必须调用event设置反应堆
-        /// </summary>
+        /**
+         * @brief 构造
+        */
         EventHandler();
-        /// <summary>
-        /// 创建事件处理器
-        /// </summary>
-        /// <param name="base">反应堆</param>
-        /// <param name="fd">文件描述符</param>
-        /// <param name="what">事件处理器标识 EV_TIMEOUT，EV_READ，EV_WRITE，EV_SIGNAL，EV_PERSIST</param>
+        /**
+         * @brief 构造
+         * @param base 反应堆
+         * @param fd socket文件描述符
+         * @param what 事件处理器标识 EV_TIMEOUT，EV_READ，EV_WRITE，EV_SIGNAL，EV_PERSIST
+        */
         EventHandler(std::shared_ptr<EventBase> base, evutil_socket_t fd, short what);
         ~EventHandler();
-        /// <summary>
-        /// 延迟创建底层的event，
-        /// 必须保证底层的event没有通过EventHandler构造产生
-        /// </summary>
-        /// <param name="base"></param>
-        /// <param name="fd"></param>
-        /// <param name="what"></param>
-        void event(std::shared_ptr<EventBase> base, evutil_socket_t fd, short what);
+        /**
+         * @brief 设置原生的event,
+         * 必须保证原生的event没有通过EventHandler构造产生
+         * @param base 反应堆
+         * @param fd 文件描述符
+         * @param what 事件处理器标识 EV_TIMEOUT，EV_READ，EV_WRITE，EV_SIGNAL，EV_PERSIST
+        */
+        void set_event(std::shared_ptr<EventBase> base, evutil_socket_t fd, short what);
+        /**
+         * @brief 获取原生的event
+        */
         struct event* event() const;
+        /**
+         * @brief 获取socket文件描述符
+         * @return socket文件描述符
+        */
         evutil_socket_t fd() const;
+        /**
+         * @brief 获取反应堆
+         * @return 反应堆
+        */
         std::shared_ptr<EventBase> base() const;
-        /// <summary>
-        /// 事件处理器标识
-        /// </summary>
-        /// <returns>EV_TIMEOUT，EV_READ，EV_WRITE，EV_SIGNAL，EV_PERSIST</returns>
+        /**
+         * @brief 获取设置事件处理器标识
+         * @return EV_TIMEOUT，EV_READ，EV_WRITE，EV_SIGNAL，EV_PERSIST
+        */
         short what() const;
-
-        /// <summary>
-        /// EV_READ回调，可以读数据回调
-        /// </summary>
-        /// <param name="fd">文件描述符</param>
+        /**
+         * @brief EV_READ回调，可以读数据回调
+         * @param fd 文件描述符
+        */
         virtual void input(int fd) {};
-        /// <summary>
-        /// EV_WRITE回调，指定数据已经发送回调
-        /// </summary>
-        /// <param name="fd">文件描述符</param>
+        /**
+         * @brief EV_WRITE回调，指定数据已经发送回调
+         * @param fd 文件描述符
+        */
         virtual void output(int fd) {};
-        /// <summary>
-        /// EV_SIGNAL回调
-        /// </summary>
-        /// <param name="fd">信号编号</param>
+        /**
+         * @brief EV_SIGNAL回调
+         * @param fd 信号编号
+        */
         virtual void signal(int fd) {};
-        /// <summary>
-        /// EV_TIMEOUT回调
-        /// </summary>
-        /// <param name="fd">-1</param>
+        /**
+         * @brief EV_TIMEOUT回调
+         * @param fd -1
+        */
         virtual void timeout(int fd) {};
 
     private:
+        /**
+         * @brief 原生事件
+        */
         struct event* event_ = nullptr;
+        /**
+         * @brief 反应器
+        */
         std::shared_ptr<EventBase> base_ = nullptr;
     };
 }

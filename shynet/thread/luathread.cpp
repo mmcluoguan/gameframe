@@ -12,10 +12,6 @@ namespace thread {
     {
     }
 
-    LuaThread::~LuaThread()
-    {
-    }
-
     int LuaThread::run()
     {
         try {
@@ -74,12 +70,11 @@ namespace thread {
         return 0;
     }
 
-    size_t LuaThread::addTask(std::shared_ptr<luatask::LuaTask> tk)
+    void LuaThread::addTask(std::shared_ptr<luatask::LuaTask> tk)
     {
         std::lock_guard<std::mutex> lock(tasks_mutex_);
         tasks_.push(tk);
         tasks_condvar_.notify_one();
-        return tasks_.size();
     }
 
 }

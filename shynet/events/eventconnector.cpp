@@ -31,7 +31,9 @@ namespace events {
         }
         if (events & BEV_EVENT_CONNECTED) {
             conector->success(conector->buffer());
-        } else if (events & (BEV_EVENT_ERROR | BEV_EVENT_EOF)) {
+        } else if (events & BEV_EVENT_EOF) {
+            conector->close(EventConnector::CloseType::SERVER_CLOSE);
+        } else if (events & (BEV_EVENT_ERROR | BEV_EVENT_READING | BEV_EVENT_WRITING | BEV_EVENT_TIMEOUT)) {
             if (conector->dnsbase() != nullptr)
                 LOG_WARN << evutil_gai_strerror(bufferevent_socket_get_dns_error(bev));
             LOG_WARN << evutil_socket_error_to_string(EVUTIL_SOCKET_ERROR());

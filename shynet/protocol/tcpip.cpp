@@ -12,11 +12,7 @@ namespace protocol {
     {
     }
 
-    Tcpip::~Tcpip()
-    {
-    }
-
-    int Tcpip::process()
+    net::InputResult Tcpip::process()
     {
         std::shared_ptr<events::Streambuff> inputbuffer = filter_->iobuf()->inputbuffer();
         std::shared_ptr<events::Streambuff> restore = std::make_shared<events::Streambuff>();
@@ -30,7 +26,7 @@ namespace protocol {
             if (line == nullptr) {
                 je_free(line);
                 LOG_WARN << "协议错误";
-                return -1;
+                return net::InputResult::INITIATIVE_CLOSE;
             } else {
                 je_free(line);
                 FrameType ft;
@@ -64,21 +60,20 @@ namespace protocol {
                             if (total_postion_ >= filter_->max_reve_buf_size) {
                                 LOG_WARN << "接收缓冲超过最大可接收容量:" << filter_->max_reve_buf_size;
                                 total_postion_ = 0;
-                                return -1;
+                                return net::InputResult::INITIATIVE_CLOSE;
                             }
                             //判断是否是完整包
                             if (ft != FrameType::Continuation) {
                                 if (ft == FrameType::Ping) {
-                                    return send(nullptr, 0, FrameType::Pong);
+                                    send(nullptr, 0, FrameType::Pong);
                                 } else if (ft == FrameType::Pong) {
-                                    return 0;
                                 } else if (ft == FrameType::Close) {
-                                    return -2;
+                                    return net::InputResult::PASSIVE_CLOSE;
                                 } else {
-                                    int ret = filter_->message_handle(original_data.get(), data_length);
+                                    int ret = filter_->message_handle(total_original_data_.get(), total_postion_);
                                     total_postion_ = 0;
                                     if (ret == -1) {
-                                        return -1;
+                                        return net::InputResult::INITIATIVE_CLOSE;
                                     }
                                 }
                             }
@@ -86,23 +81,23 @@ namespace protocol {
                             LOG_WARN << "数据包数据不足,需要needlen:" << needlen << " 当前:" << inputbuffer->length();
                             ;
                             inputbuffer->prependbuffer(restore);
-                            return 0;
+                            return net::InputResult::DATA_INCOMPLETE;
                         }
                     } else {
                         LOG_WARN << "数据包数据不足,需要needlen:" << needlen << " 当前:" << inputbuffer->length();
                         ;
                         inputbuffer->prependbuffer(restore);
-                        return 0;
+                        return net::InputResult::DATA_INCOMPLETE;
                     }
                 } else {
                     LOG_WARN << "数据包数据不足,需要needlen:" << needlen << " 当前:" << inputbuffer->length();
                     ;
                     inputbuffer->prependbuffer(restore);
-                    return 0;
+                    return net::InputResult::DATA_INCOMPLETE;
                 }
             }
         }
-        return 0;
+        return net::InputResult::SUCCESS;
     }
 
     int Tcpip::send1(const void* data, size_t len, FrameType op) const
@@ -143,7 +138,7 @@ namespace protocol {
         }
         return send1((const char*)data + pos, remaining, op);
     }
-    int Tcpip::send(std::string data, FrameType op) const
+    int Tcpip::send(const std::string& data, FrameType op) const
     {
         return send(data.c_str(), data.length(), op);
     }

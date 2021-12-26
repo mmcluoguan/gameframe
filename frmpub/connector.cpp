@@ -35,7 +35,7 @@ void Connector::success()
         ping_timer_ = pt;
     }
 }
-int Connector::input()
+net::InputResult Connector::input()
 {
     //有数据接收到，因此延迟心跳计时器时间
     std::shared_ptr<PingTimer> pt = ping_timer_.lock();
@@ -50,18 +50,18 @@ int Connector::message_handle(char* original_data, size_t datalen)
     return FilterData::message_handle(original_data, datalen);
 }
 
-void Connector::close(net::ConnectEvent::CloseType active)
+void Connector::close(net::CloseType active)
 {
     active_ = active;
     shynet::utils::Singleton<net::ConnectReactorMgr>::instance().remove(connectid());
 }
-void Connector::timerout()
+void Connector::timerout(net::CloseType active)
 {
     LOG_INFO << "服务器心跳超时 [ip:" << connect_addr()->ip() << ":" << connect_addr()->port() << "]";
-    close(net::ConnectEvent::CloseType::TIMEOUT_CLOSE);
+    close(active);
 }
 
-net::ConnectEvent::CloseType Connector::active() const
+net::CloseType Connector::active() const
 {
     return active_;
 }

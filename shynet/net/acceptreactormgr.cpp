@@ -4,13 +4,6 @@
 
 namespace shynet {
 namespace net {
-    AcceptReactorMgr::AcceptReactorMgr()
-    {
-    }
-
-    AcceptReactorMgr::~AcceptReactorMgr()
-    {
-    }
 
     void AcceptReactorMgr::notify(const void* data, size_t len)
     {

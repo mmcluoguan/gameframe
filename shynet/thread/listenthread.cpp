@@ -13,10 +13,6 @@ namespace thread {
     {
     }
 
-    ListenThread::~ListenThread()
-    {
-    }
-
     int ListenThread::notify(const void* data, size_t len) const
     {
         return pair_[0]->write(data, len);
@@ -50,7 +46,7 @@ namespace thread {
 
                 std::shared_ptr<net::ListenEvent> listenEv = utils::Singleton<net::ListenReactorMgr>::instance().find(serverid);
                 if (listenEv != nullptr) {
-                    listenEv->event(base_, listenEv->listenfd(), EV_READ | EV_PERSIST);
+                    listenEv->set_event(base_, listenEv->listenfd(), EV_READ | EV_PERSIST);
                     base_->addevent(listenEv, nullptr);
                 }
             }

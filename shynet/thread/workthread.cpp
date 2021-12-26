@@ -9,10 +9,6 @@ namespace thread {
     {
     }
 
-    WorkThread::~WorkThread()
-    {
-    }
-
     int WorkThread::run()
     {
         try {
@@ -67,11 +63,10 @@ namespace thread {
         return 0;
     }
 
-    size_t WorkThread::addTask(std::function<void()>&& tk)
+    void WorkThread::addTask(std::function<void()>&& tk)
     {
         std::lock_guard<std::mutex> lock(tasks_mutex_);
         tasks_.push(tk);
-        return tasks_.size();
     }
 
 }

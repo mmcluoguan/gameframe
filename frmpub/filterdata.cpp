@@ -10,9 +10,6 @@ FilterData::FilterData(ProtoData pd)
 {
     pd_ = pd;
 }
-FilterData::~FilterData()
-{
-}
 int FilterData::message_handle(char* original_data, size_t datalen)
 {
     int ret = 0;

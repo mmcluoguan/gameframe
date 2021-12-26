@@ -8,9 +8,6 @@ namespace lua {
     {
         wrapper_ = wrapper;
     }
-    LuaEngine::~LuaEngine()
-    {
-    }
 
     void LuaEngine::init(kaguya::State& state)
     {

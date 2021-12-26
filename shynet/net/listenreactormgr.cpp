@@ -4,14 +4,6 @@
 namespace shynet {
 namespace net {
 
-    ListenReactorMgr::ListenReactorMgr()
-    {
-    }
-
-    ListenReactorMgr::~ListenReactorMgr()
-    {
-    }
-
     void ListenReactorMgr::notify(const void* data, size_t len)
     {
         std::shared_ptr<thread::ListenThread> lth = utils::Singleton<pool::ThreadPool>::get_instance().listernTh().lock();

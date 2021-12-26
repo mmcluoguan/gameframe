@@ -4,12 +4,6 @@
 #include "frmpub/luatimertask.h"
 
 namespace frmpub {
-FrmLuaWrapper::FrmLuaWrapper()
-{
-}
-FrmLuaWrapper::~FrmLuaWrapper()
-{
-}
 void FrmLuaWrapper::init(kaguya::State& state)
 {
     lua::LuaWrapper::init(state);

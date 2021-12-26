@@ -55,9 +55,5 @@ namespace utils {
             }
         }
     }
-
-    IniConfig::~IniConfig()
-    {
-    }
 }
 }

@@ -56,7 +56,17 @@ rapidjson::Value& get_json_value(rapidjson::Document& doc, std::string key);
 
 class Basic {
 public:
-    static std::string msgname(int);
+    /**
+     * @brief 通过消息id获取消息名称
+     * @param  msgid 消息id
+     * @return 消息名称
+    */
+    static std::string msgname(int id);
+    /**
+     * @brief 通过服务类行获取服务名称
+     * @param st 服务类行
+     * @return 服务名称
+    */
     static std::string connectname(protocc::ServerType st);
 
 private:
@@ -67,12 +77,22 @@ private:
 
 class Sms {
 public:
+    /**
+     * @brief 发送短信
+     * @param url 地址
+     * @return 服务器响应字符串
+    */
     static std::string send(std::string url);
 
 private:
     static size_t req_reply(void* ptr, size_t size, size_t nmemb, void* stream);
 };
 
+/**
+ * @brief 默认系统信号处理
+ * @param base 反应器
+ * @param signum 系统信号
+*/
 inline void default_sigcb(std::shared_ptr<events::EventBase> base, int signum)
 {
     if (signum == SIGINT) {
