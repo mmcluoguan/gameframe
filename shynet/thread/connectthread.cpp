@@ -12,10 +12,6 @@ namespace thread {
     {
     }
 
-    ConnectThread::~ConnectThread()
-    {
-    }
-
     static void pipeReadcb(struct bufferevent* bev, void* ptr)
     {
         try {
@@ -53,13 +49,13 @@ namespace thread {
                         buffer = std::make_shared<net::ConnectIoBuffer>(base_, false);
                     }
                     buffer->set_cnev(connect);
-                    connect->iobuf(buffer);
-                    if (connect->enable_dns()) {
+                    connect->set_iobuf(buffer);
+                    if (connect->dnsport() != 0) {
                         evdns_base* dnsbase = evdns_base_new(base_->base(), 1);
                         if (dnsbase == nullptr) {
                             THROW_EXCEPTION("call connect_hostname")
                         }
-                        connect->dnsbase(dnsbase);
+                        connect->set_dnsbase(dnsbase);
                         bufferevent_socket_connect_hostname(buffer->buffer(), dnsbase, AF_UNSPEC,
                             connect->hostname().c_str(), connect->dnsport());
                     } else {

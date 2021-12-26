@@ -33,7 +33,7 @@ HttpClient::HttpClient(std::shared_ptr<net::IPAddress> remote_addr,
 HttpClient::~HttpClient()
 {
     std::string str;
-    if (active()) {
+    if (active() == net::CloseType::SERVER_CLOSE) {
         str = "服务器http主动关闭连接";
     } else {
         str = "客户端主动关闭连接";
@@ -57,7 +57,7 @@ int HttpClient::input_handle(std::shared_ptr<rapidjson::Document> doc, std::shar
     return 0;
 }
 
-void HttpClient::close(bool active)
+void HttpClient::close(net::CloseType active)
 {
     frmpub::Client::close(active);
     shynet::utils::Singleton<HttpClientMgr>::instance().remove(iobuf()->fd());

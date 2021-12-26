@@ -157,9 +157,6 @@
     <ClCompile Include="signal\signalhandler.cpp">
       <Filter>signal</Filter>
     </ClCompile>
-    <ClCompile Include="lua\luatask.cpp">
-      <Filter>lua</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="basic.h" />

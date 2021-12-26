@@ -31,7 +31,7 @@ LoginClient::LoginClient(std::shared_ptr<net::IPAddress> remote_addr,
 LoginClient::~LoginClient()
 {
     std::string str;
-    if (active()) {
+    if (active() == net::CloseType::SERVER_CLOSE) {
         str = "服务器login主动关闭连接";
     } else {
         str = frmpub::Basic::connectname(sif().st()) + "客户端主动关闭连接";
@@ -54,7 +54,7 @@ int LoginClient::input_handle(std::shared_ptr<protocc::CommonObject> obj, std::s
     return 0;
 }
 
-void LoginClient::close(bool active)
+void LoginClient::close(net::CloseType active)
 {
     frmpub::Client::close(active);
     shynet::utils::Singleton<LoginClientMgr>::instance().remove(iobuf()->fd());

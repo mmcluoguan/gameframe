@@ -79,6 +79,5 @@ namespace net {
             THROW_EXCEPTION(err.str());
         }
     }
-    IPAddress::~IPAddress() { }
-} // namespace net
-} // namespace shynet
+}
+}

@@ -58,6 +58,46 @@ namespace utils {
 namespace events {
 };
 namespace net {
+    /**
+         * @brief 连接断开原因
+        */
+    enum class CloseType {
+        /**
+         * @brief 客户端主动断开
+            */
+        CLIENT_CLOSE,
+        /**
+         * @brief 服务区主动断开
+        */
+        SERVER_CLOSE,
+        /**
+             * @brief 连接服务器失败
+            */
+        CONNECT_FAIL,
+        /**
+             * @brief 心跳包超时
+            */
+        TIMEOUT_CLOSE,
+    };
+
+    /**
+     * @brief 管理io缓冲数据处理结果
+    */
+    enum class InputResult {
+        SUCCESS = 0,
+        /**
+         * @brief 主动断开
+        */
+        INITIATIVE_CLOSE,
+        /**
+         * @brief 被动断开
+        */
+        PASSIVE_CLOSE,
+        /**
+         * @brief 数据包不完整
+        */
+        DATA_INCOMPLETE,
+    };
 };
 namespace io {
 };
@@ -74,16 +114,28 @@ namespace lua {
 namespace task {
 };
 namespace protocol {
+    /**
+     * @brief 协议处理步骤阶段
+    */
     enum class Step {
+        /**
+         * @brief 未初始阶段
+        */
         UNINIT = 0,
+        /**
+         * @brief 已初始阶段
+        */
         INIT,
+        /**
+         * @brief 解析阶段
+        */
         Parse,
     };
 };
 
-/*
-	* 异常
-	*/
+/**
+ * @brief 异常
+*/
 class BaseException : public std::exception {
 public:
     explicit BaseException(const std::string msg)
@@ -124,9 +176,9 @@ private:
     std::string trace_;
 };
 
-/// <summary>
-/// 禁止拷贝
-/// </summary>
+/**
+ * @brief 禁止拷贝
+*/
 class Nocopy {
 public:
     Nocopy(const Nocopy&) = delete;

@@ -28,7 +28,7 @@ public:
     /// </summary>
     /// <param
     /// name="active">true服务器主动断开,false客户端主动断开</param>
-    void close(bool active) override;
+    void close(net::CloseType active) override;
 
     /*
 	* 获取设置玩家账号id

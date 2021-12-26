@@ -10,35 +10,30 @@ namespace protocol {
         : filter_(filter)
     {
     }
-    Http::~Http()
-    {
-    }
 
-    int Http::process()
+    net::InputResult Http::process()
     {
         std::shared_ptr<events::Streambuff> inputbuffer = filter_->iobuf()->inputbuffer();
         if (inputbuffer->length() >= filter_->max_reve_buf_size) {
             LOG_WARN << "接收的数据超过最大可接收容量:" << filter_->max_reve_buf_size;
-            return -1;
+            return net::InputResult::INITIATIVE_CLOSE;
         }
         std::shared_ptr<events::Streambuff> restore = std::make_shared<events::Streambuff>();
         while (inputbuffer->length() > 0) {
             if (filter_->ident() == FilterProces::Identity::ACCEPTOR) {
-                int ret = process_requset(inputbuffer, restore);
-                if (ret == -1) {
-                    return -1;
-                }
+                net::InputResult ret = process_requset(inputbuffer, restore);
+                if (ret != net::InputResult::SUCCESS)
+                    return ret;
             } else if (filter_->ident() == FilterProces::Identity::CONNECTOR) {
-                int ret = process_responses(inputbuffer, restore);
-                if (ret == -1) {
-                    return -1;
-                }
+                net::InputResult ret = process_responses(inputbuffer, restore);
+                if (ret != net::InputResult::SUCCESS)
+                    return ret;
             }
         }
-        return 0;
+        return net::InputResult::SUCCESS;
     }
 
-    int Http::process_requset(std::shared_ptr<events::Streambuff> inputbuffer,
+    net::InputResult Http::process_requset(std::shared_ptr<events::Streambuff> inputbuffer,
         std::shared_ptr<events::Streambuff> restore)
     {
         if (requset_.step() == Step::UNINIT) {
@@ -51,14 +46,14 @@ namespace protocol {
             if (line == nullptr) {
                 je_free(line);
                 LOG_WARN << "协议错误";
-                return -1;
+                return net::InputResult::INITIATIVE_CLOSE;
             } else {
                 std::string strline(line, len);
                 je_free(line);
                 int ret = requset_.requset_uninit(strline);
                 if (ret == -1) {
                     LOG_WARN << "协议错误";
-                    return -1;
+                    return net::InputResult::INITIATIVE_CLOSE;
                 }
             }
         } else if (requset_.step() == Step::INIT) {
@@ -71,13 +66,13 @@ namespace protocol {
             if (line == nullptr) {
                 je_free(line);
                 LOG_WARN << "协议错误";
-                return -1;
+                return net::InputResult::INITIATIVE_CLOSE;
             } else {
                 std::string strline(line, len);
                 je_free(line);
                 int ret = requset_.requset_init(strline);
                 if (ret == -1) {
-                    return -1;
+                    return net::InputResult::INITIATIVE_CLOSE;
                 }
             }
         } else if (requset_.step() == Step::Parse) {
@@ -93,20 +88,20 @@ namespace protocol {
                     inputbuffer->unlock();
                     int ret = filter_->message_handle(original_data.get(), data_length);
                     if (ret == -1) {
-                        return -1;
+                        return net::InputResult::INITIATIVE_CLOSE;
                     }
                     requset_.set_step(Step::UNINIT);
                 } else {
                     LOG_WARN << "数据包数据不足,需要data_length:" << data_length << " 当前:" << inputbuffer->length();
                     inputbuffer->prependbuffer(restore);
-                    return 0;
+                    return net::InputResult::DATA_INCOMPLETE;
                 }
             }
         }
-        return 0;
+        return net::InputResult::SUCCESS;
     }
 
-    int Http::process_responses(std::shared_ptr<events::Streambuff> inputbuffer,
+    net::InputResult Http::process_responses(std::shared_ptr<events::Streambuff> inputbuffer,
         std::shared_ptr<events::Streambuff> restore)
     {
         if (responses_.step() == Step::UNINIT) {
@@ -119,13 +114,13 @@ namespace protocol {
             if (line == nullptr) {
                 je_free(line);
                 LOG_WARN << "协议错误";
-                return -1;
+                return net::InputResult::INITIATIVE_CLOSE;
             } else {
                 std::string strline(line, len);
                 je_free(line);
                 int ret = responses_.responses_uninit(strline);
                 if (ret == -1) {
-                    return -1;
+                    return net::InputResult::INITIATIVE_CLOSE;
                 }
             }
         } else if (responses_.step() == Step::INIT) {
@@ -139,7 +134,7 @@ namespace protocol {
             je_free(line);
             int ret = responses_.responses_init(strline);
             if (ret == -1) {
-                return -1;
+                return net::InputResult::INITIATIVE_CLOSE;
             }
         } else if (responses_.step() == Step::Parse) {
             size_t data_length = responses_.data_length();
@@ -154,17 +149,17 @@ namespace protocol {
                     inputbuffer->unlock();
                     int ret = filter_->message_handle(original_data.get(), data_length);
                     if (ret == -1) {
-                        return -1;
+                        return net::InputResult::INITIATIVE_CLOSE;
                     }
                     responses_.set_step(Step::UNINIT);
                 } else {
                     LOG_WARN << "数据包数据不足,需要data_length:" << data_length << " 当前:" << inputbuffer->length();
                     inputbuffer->prependbuffer(restore);
-                    return 0;
+                    return net::InputResult::DATA_INCOMPLETE;
                 }
             }
         }
-        return 0;
+        return net::InputResult::DATA_INCOMPLETE;
     }
 
     int Http::send_responses(const void* data, size_t len,
@@ -201,7 +196,7 @@ namespace protocol {
         return -1;
     }
 
-    int Http::send_responses(std::string data,
+    int Http::send_responses(const std::string& data,
         std::string server_name,
         std::string content_type,
         std::map<std::string, std::string>* server_heads,
@@ -246,7 +241,7 @@ namespace protocol {
         }
         return -1;
     }
-    int Http::send_requset(std::string data, std::string host, std::string path, std::string version) const
+    int Http::send_requset(const std::string& data, std::string host, std::string path, std::string version) const
     {
         return send_requset(data.c_str(), data.length(), host, path, version);
     }

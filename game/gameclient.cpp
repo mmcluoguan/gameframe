@@ -22,7 +22,7 @@ GameClient::GameClient(std::shared_ptr<net::IPAddress> remote_addr,
 GameClient::~GameClient()
 {
     std::string str;
-    if (active()) {
+    if (active() == net::CloseType::SERVER_CLOSE) {
         str = "服务器game主动关闭连接";
     } else {
         str = frmpub::Basic::connectname(sif().st()) + "客户端主动关闭连接";
@@ -45,7 +45,7 @@ int GameClient::input_handle(std::shared_ptr<protocc::CommonObject> obj, std::sh
     return 0;
 }
 
-void GameClient::close(bool active)
+void GameClient::close(net::CloseType active)
 {
     frmpub::Client::close(active);
     shynet::utils::Singleton<GameClientMgr>::instance().remove(iobuf()->fd());

@@ -29,11 +29,11 @@ namespace net {
         bool enable_ssl, bool enableHeart, ssize_t heartSecond)
         : protocol::FilterProces(nullptr, pt, protocol::FilterProces::Identity::CONNECTOR)
     {
-        enable_ssl_ = enable_ssl;
-        heart_second_ = heartSecond;
         hostname_ = hostname;
         dnsport_ = port;
+        enable_ssl_ = enable_ssl;
         enable_heart_ = enableHeart;
+        heart_second_ = heartSecond;
         if (enable_ssl_) {
             ctx_ = SSL_CTX_new(SSLv23_client_method());
             if (ctx_ == nullptr) {
@@ -84,7 +84,7 @@ namespace net {
             complete();
     }
 
-    int ConnectEvent::input()
+    InputResult ConnectEvent::input()
     {
         return process();
     }
@@ -106,31 +106,6 @@ namespace net {
     ssize_t ConnectEvent::heart_second() const
     {
         return heart_second_;
-    }
-
-    bool ConnectEvent::enable_dns() const
-    {
-        return enable_dns_;
-    }
-
-    short ConnectEvent::dnsport() const
-    {
-        return dnsport_;
-    }
-
-    void ConnectEvent::dnsbase(evdns_base* base)
-    {
-        dnsbase_ = base;
-    }
-
-    evdns_base* ConnectEvent::set_dnsbase() const
-    {
-        return dnsbase_;
-    }
-
-    std::string ConnectEvent::hostname() const
-    {
-        return hostname_;
     }
 }
 }

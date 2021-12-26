@@ -56,7 +56,7 @@ void ConsoleHandler::reconnect_order(const OrderItem& order, int argc, char** ar
         shynet::utils::Singleton<net::ConnectReactorMgr>::instance().find(g_gateconnect_id));
     if (gate != nullptr) {
         std::shared_ptr<GateConnector::DisConnectData> ptr = gate->disconnect_data();
-        gate->close(net::ConnectEvent::CloseType::CLIENT_CLOSE);
+        gate->close(net::CloseType::CLIENT_CLOSE);
         gate.reset();
         std::this_thread::sleep_for(std::chrono::seconds(1));
         shynet::utils::IniConfig& ini = shynet::utils::Singleton<shynet::utils::IniConfig>::get_instance();

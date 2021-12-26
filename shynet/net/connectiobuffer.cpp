@@ -39,9 +39,6 @@ namespace net {
         iobuf_->setcb(ioreadcb, iowritecb, ioeventcb, this);
         iobuf_->enabled(EV_READ | EV_WRITE | EV_PERSIST);
     }
-    ConnectIoBuffer::~ConnectIoBuffer()
-    {
-    }
 
     std::weak_ptr<ConnectEvent> ConnectIoBuffer::cnev() const
     {
@@ -69,7 +66,7 @@ namespace net {
         if (shconector != nullptr) {
             int ret = shconector->output();
             if (ret == -1) {
-                shconector->close(ConnectEvent::CloseType::CLIENT_CLOSE);
+                shconector->close(net::CloseType::CLIENT_CLOSE);
             }
         }
     }
@@ -88,12 +85,12 @@ namespace net {
                 }
                 shconector->success();
             } else if (events & BEV_EVENT_EOF) {
-                shconector->close(ConnectEvent::CloseType::SERVER_CLOSE);
-            } else if (events & (BEV_EVENT_ERROR | BEV_EVENT_READING | BEV_EVENT_WRITING)) {
-                if (shconector->set_dnsbase() != nullptr)
+                shconector->close(net::CloseType::SERVER_CLOSE);
+            } else if (events & (BEV_EVENT_ERROR | BEV_EVENT_READING | BEV_EVENT_WRITING | BEV_EVENT_TIMEOUT)) {
+                if (shconector->dnsbase() != nullptr)
                     LOG_WARN << evutil_gai_strerror(bufferevent_socket_get_dns_error(iobuf_->buffer()));
                 LOG_WARN << evutil_socket_error_to_string(EVUTIL_SOCKET_ERROR());
-                shconector->close(ConnectEvent::CloseType::CONNECT_FAIL);
+                shconector->close(net::CloseType::CONNECT_FAIL);
             }
         }
     }

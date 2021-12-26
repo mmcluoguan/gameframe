@@ -77,5 +77,21 @@ namespace net {
     {
         return utils::Singleton<ListenReactorMgr>::instance().remove(serverid_);
     }
+
+    void ListenEvent::pause()
+    {
+        if (ispause_ == false) {
+            base()->delevent(this);
+            ispause_ = true;
+        }
+    }
+
+    void ListenEvent::resume()
+    {
+        if (ispause_) {
+            base()->addevent(this, nullptr);
+            ispause_ = false;
+        }
+    }
 }
 }

@@ -10,12 +10,6 @@
 
 namespace shynet {
 namespace lua {
-    LuaWrapper::LuaWrapper()
-    {
-    }
-    LuaWrapper::~LuaWrapper()
-    {
-    }
 
     void LuaWrapper::init(kaguya::State& state)
     {

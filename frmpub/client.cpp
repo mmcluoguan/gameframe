@@ -18,15 +18,15 @@ Client::~Client()
 {
 }
 
-void Client::close(bool active)
+void Client::close(net::CloseType active)
 {
     active_ = active;
 }
 
-void Client::timerout()
+void Client::timerout(net::CloseType active)
 {
     LOG_INFO << "客户端心跳超时 [ip:" << remote_addr()->ip() << ":" << remote_addr()->port() << "]";
-    close(true);
+    close(active);
 }
 
 int Client::message_handle(char* original_data, size_t datalen)

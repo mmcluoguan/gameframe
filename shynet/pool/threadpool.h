@@ -14,25 +14,30 @@
 
 namespace shynet {
 namespace pool {
-    /// <summary>
-    /// 线程池
-    /// </summary>
+    /**
+     * @brief 线程池
+    */
     class ThreadPool final : public Nocopy {
         friend class utils::Singleton<ThreadPool>;
 
-        /// <summary>
-        /// 初始化线程池
-        /// </summary>
-        /// <param name="workNum">work线程数量</param>
-        /// <param name="acceptNum">接收线程数量</param>
+        /**
+         * @brief 构造
+         * @param workNum work线程数量
+         * @param acceptNum 服务器接收新连接线程数量
+        */
         explicit ThreadPool(size_t workNum = 4, size_t acceptNum = 2);
 
     public:
+        /**
+         * @brief 类型名称
+        */
         static constexpr const char* kClassname = "ThreadPool";
-        ThreadPool(const ThreadPool&) = delete;
-        ThreadPool& operator=(const ThreadPool&) = delete;
+
         ~ThreadPool();
 
+        /**
+         * @brief 启动
+        */
         void start();
 
         /**
@@ -58,7 +63,6 @@ namespace pool {
             };
             std::lock_guard<std::mutex> lock(tasks_mutex_);
             tasks_.push(tk);
-            LOG_TRACE << "push global queue globalsize:" << tasks_.size();
             LOG_TRACE << "append notify_one";
             tasks_condvar_.notify_one();
             return future;
@@ -88,7 +92,6 @@ namespace pool {
             };
             std::lock_guard<std::mutex> lock(tasks_mutex_);
             tasks_.push(tk);
-            LOG_TRACE << "push global queue globalsize:" << tasks_.size();
             LOG_TRACE << "append notify_one";
             tasks_condvar_.notify_one();
             return future;
@@ -118,8 +121,7 @@ namespace pool {
                         task_promise->set_value(task(args...));
                     }
                 };
-                size_t len = target->addTask(tk);
-                LOG_TRACE << "push local queue localsize:" << len;
+                target->addTask(tk);
                 LOG_TRACE << "appendwork notify_all";
                 tasks_condvar_.notify_all();
             } else {
@@ -157,8 +159,7 @@ namespace pool {
                         task_promise->set_value((*task)(args...));
                     }
                 };
-                size_t len = target->addTask(tk);
-                LOG_TRACE << "push local queue localsize:" << len;
+                target->addTask(tk);
                 LOG_TRACE << "appendwork notify_all";
                 tasks_condvar_.notify_all();
             } else {
@@ -171,26 +172,46 @@ namespace pool {
             return future;
         }
 
+        /**
+         * @brief 获取任务互斥体
+         * @return 任务互斥体
+        */
         std::mutex& tasks_mutex()
         {
             return tasks_mutex_;
         }
 
+        /**
+         * @brief 获取任务条件变量
+         * @return 任务条件变量
+        */
         std::condition_variable& tasks_condvar()
         {
             return tasks_condvar_;
         }
 
+        /**
+         * @brief 获取全局任务队列
+         * @return 全局任务队列
+        */
         std::queue<std::function<void()>>& tasks()
         {
             return tasks_;
         }
 
+        /**
+         * @brief 获取监听服务器地址线程
+         * @return 监听服务器地址线程
+        */
         std::weak_ptr<thread::ListenThread> listernTh() const
         {
             return listernTh_;
         }
 
+        /**
+         * @brief 迭代服务器接收客户端数据线程
+         * @param cb 迭代回调
+        */
         void foreach_acceptThs(std::function<void(std::weak_ptr<thread::AcceptThread>)> cb) const
         {
             for (auto& it : acceptThs_) {
@@ -198,68 +219,95 @@ namespace pool {
             }
         }
 
+        /**
+         * @brief 获取计时器线程
+         * @return 计时器线程
+        */
         std::weak_ptr<thread::TimerThread> timerTh() const
         {
             return timerTh_;
         }
 
+        /**
+         * @brief 获取连接服务器线程
+         * @return 连接服务器线程
+        */
         std::weak_ptr<thread::ConnectThread> connectTh() const
         {
             return connectTh_;
         }
 
+        /**
+         * @brief 获取lua线程
+         * @return lua线程
+        */
         std::weak_ptr<thread::LuaThread> luaTh() const
         {
             return luaTh_;
         }
 
+        /**
+         * @brief 获取文件监控线程
+         * @return 文件监控线程
+        */
         std::weak_ptr<thread::InotifyThread> notifyTh() const
         {
             return notifyTh_;
         }
 
     private:
+        /**
+         * @brief 服务器接收新连接线程数量
+        */
         size_t acceptNum_ = 2;
+        /**
+         * @brief work线程数量
+        */
         size_t workNum_ = 4;
-        /// <summary>
-        /// 线程列表
-        /// </summary>
+        /**
+         * @brief 管理的所有线程向量
+        */
         std::vector<std::shared_ptr<thread::Thread>> tifs_;
-
+        /**
+         * @brief 任务互斥体
+        */
         std::mutex tasks_mutex_;
+        /**
+         * @brief 任务条件变量
+        */
         std::condition_variable tasks_condvar_;
-        /// <summary>
-        /// 公共的任务队列中等待执行的任务
-        /// </summary>
+        /**
+         * @brief 全局任务队列
+        */
         std::queue<std::function<void()>> tasks_;
 
         /*
-			* 监听线程
-			*/
+		* 监听服务器地址线程
+		*/
         std::weak_ptr<thread::ListenThread> listernTh_;
         /*
-			* 接收线程列表
-			*/
+		* 服务器接收客户端数据线程
+		*/
         std::vector<std::weak_ptr<thread::AcceptThread>> acceptThs_;
         /*
-			* 工作线程列表
-			*/
+		* 工作线程列表
+		*/
         std::vector<std::weak_ptr<thread::WorkThread>> workThs_;
         /*
-			* 计时器线程
-			*/
+		* 计时器线程
+		*/
         std::weak_ptr<thread::TimerThread> timerTh_;
         /*
-			* 连接线程
-			*/
+		* 连接服务器线程
+		*/
         std::weak_ptr<thread::ConnectThread> connectTh_;
         /*
-			* lua线程
-			*/
+		* lua线程
+		*/
         std::weak_ptr<thread::LuaThread> luaTh_;
         /*
-			* 目录监控线程
-			*/
+		* 目录监控线程
+		*/
         std::weak_ptr<thread::InotifyThread> notifyTh_;
     };
 }

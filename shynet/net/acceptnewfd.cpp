@@ -15,11 +15,8 @@ namespace net {
         enable_heart_ = enableHeart;
         heart_second_ = heartSecond;
     }
-    AcceptNewFd::~AcceptNewFd()
-    {
-    }
 
-    int AcceptNewFd::input()
+    InputResult AcceptNewFd::input()
     {
         return process();
     }

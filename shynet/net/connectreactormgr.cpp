@@ -6,14 +6,6 @@
 namespace shynet {
 namespace net {
 
-    ConnectReactorMgr::ConnectReactorMgr()
-    {
-    }
-
-    ConnectReactorMgr::~ConnectReactorMgr()
-    {
-    }
-
     int ConnectReactorMgr::add(std::shared_ptr<ConnectEvent> v)
     {
         static int connectid = 0;

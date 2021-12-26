@@ -39,17 +39,17 @@ GateConnector::GateConnector(std::shared_ptr<net::IPAddress> connect_addr,
 }
 GateConnector::~GateConnector()
 {
-    if (active() == net::ConnectEvent::CloseType::CLIENT_CLOSE) {
+    if (active() == net::CloseType::CLIENT_CLOSE) {
         LOG_INFO << "连接gate客户端主动关闭连接 "
                  << "[ip:" << connect_addr()->ip() << ":" << connect_addr()->port() << "]";
-    } else if (active() == net::ConnectEvent::CloseType::SERVER_CLOSE) {
+    } else if (active() == net::CloseType::SERVER_CLOSE) {
         LOG_INFO << "服务器gate主动关闭连接 "
                  << "[ip:" << connect_addr()->ip() << ":" << connect_addr()->port() << "]";
-    } else if (active() == net::ConnectEvent::CloseType::CONNECT_FAIL) {
+    } else if (active() == net::CloseType::CONNECT_FAIL) {
         LOG_INFO << "连接服务器gate失败 "
                  << "[ip:" << connect_addr()->ip() << ":" << connect_addr()->port() << "]";
     }
-    if (active() != net::ConnectEvent::CloseType::CLIENT_CLOSE && enable_reconnect_ == true) {
+    if (active() != net::CloseType::CLIENT_CLOSE && enable_reconnect_ == true) {
         LOG_INFO << "3秒后开始重连";
 
         std::shared_ptr<GateReConnctorTimer> reconnect(

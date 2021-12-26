@@ -13,16 +13,30 @@ namespace utils {
 		* 字符串简单操作
 		*/
     namespace stringop {
+        /**
+         * @brief 移除字符串两端的空白字符串
+         此函数会修改原始字符串,不会复制
+         * @param str 待移除字符串
+         * @param cb 空白字符串
+         * @return 移除字后的符串
+        */
         char* trim(char* str, std::function<int(int)> cb = isspace);
+        /**
+         * @brief 移除字符串两端的空白字符串
+         此函数会修改原始字符串,不会复制
+         * @param xstr 待移除字符串
+         * @param cb 空白字符串
+         * @return 移除字后的符串
+        */
         std::string& trim(std::string& xstr, std::function<int(int)> cb = isspace);
-
-        /// <summary>
-        /// 拆分字符串
-        /// </summary>
-        /// <param name="target">目标</param>
-        /// <param name="c">分割符</param>
-        /// <param name="argv">拆分到的目标字符串数组</param>
-        /// <param name="size">目标字符串数组大小</param>
+        /**
+         * @brief 拆分字符串
+         * @param target 目标字符串
+         * @param c 分割符
+         * @param argv 拆分到的目标字符串数组
+         * @param size 目标字符串数组大小
+         * @return 实际拆分的数组大小
+        */
         int split(char* target, const char* c, char** argv, int size);
         /**
 			* 用`sep`分割`s`
@@ -65,6 +79,13 @@ namespace utils {
 			*/
         std::vector<std::string> splitlines(const std::string& s, bool keep_ends = false);
 
+        /**
+         * @brief 格式化字符串
+         * @tparam ...Args 格式参数类型 
+         * @param format 格式符串
+         * @param ...args 格式参数
+         * @return 新的字符串
+        */
         template <typename... Args>
         std::string str_format(const std::string& format, Args... args)
         {
@@ -78,6 +99,13 @@ namespace utils {
             return std::string(buf.get(), buf.get() + size_buf - 1);
         }
 
+        /**
+         * @brief 替换字符串
+         * @param data 原始字符串
+         * @param toFind 在原始字符串需要替换的字符串
+         * @param toReplace 替换成的字符串
+         * @return 新的字符串
+        */
         std::string replace(const std::string& data, const std::string& toFind, const std::string& toReplace);
 
     };

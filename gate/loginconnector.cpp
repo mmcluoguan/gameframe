@@ -23,13 +23,13 @@ LoginConnector::LoginConnector(std::shared_ptr<net::IPAddress> connect_addr)
 }
 LoginConnector::~LoginConnector()
 {
-    if (active() == net::ConnectEvent::CloseType::CLIENT_CLOSE) {
+    if (active() == net::CloseType::CLIENT_CLOSE) {
         LOG_INFO << "连接login客户端主动关闭连接 "
                  << "[ip:" << connect_addr()->ip() << ":" << connect_addr()->port() << "]";
-    } else if (active() == net::ConnectEvent::CloseType::SERVER_CLOSE) {
+    } else if (active() == net::CloseType::SERVER_CLOSE) {
         LOG_INFO << "服务器login主动关闭连接 "
                  << "[ip:" << connect_addr()->ip() << ":" << connect_addr()->port() << "]";
-    } else if (active() == net::ConnectEvent::CloseType::CONNECT_FAIL) {
+    } else if (active() == net::CloseType::CONNECT_FAIL) {
         LOG_INFO << "连接服务器login失败 "
                  << "[ip:" << connect_addr()->ip() << ":" << connect_addr()->port() << "]";
     }
@@ -74,7 +74,7 @@ int LoginConnector::input_handle(std::shared_ptr<protocc::CommonObject> obj, std
     }
     return 0;
 }
-void LoginConnector::close(net::ConnectEvent::CloseType active)
+void LoginConnector::close(net::CloseType active)
 {
     //通知lua的onClose函数
     shynet::utils::Singleton<lua::LuaEngine>::get_instance().append(
@@ -181,7 +181,7 @@ int LoginConnector::repeatlogin_client_gate_s(std::shared_ptr<protocc::CommonObj
         if (client != nullptr) {
             //顶掉之前登录的账号
             client->send_proto(data.get(), enves.get());
-            client->close(true);
+            client->close(net::CloseType::SERVER_CLOSE);
         } else {
             std::stringstream stream;
             stream << "client acccount:" << msg.aid() << " 已断开连接";

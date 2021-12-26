@@ -28,7 +28,8 @@ GateClient::GateClient(std::shared_ptr<net::IPAddress> remote_addr,
 
 GateClient::~GateClient()
 {
-    LOG_INFO << (active() ? "服务器gate主动关闭连接 " : "客户端主动关闭连接 ") << "[ip:" << remote_addr()->ip() << ":" << remote_addr()->port() << "]";
+    LOG_INFO << (active() == net::CloseType::SERVER_CLOSE ? "服务器gate主动关闭连接 " : "客户端主动关闭连接 ")
+             << "[ip:" << remote_addr()->ip() << ":" << remote_addr()->port() << "]";
 }
 
 int GateClient::input_handle(std::shared_ptr<protocc::CommonObject> obj, std::shared_ptr<std::stack<FilterData::Envelope>> enves)
@@ -62,7 +63,7 @@ int GateClient::input_handle(std::shared_ptr<protocc::CommonObject> obj, std::sh
     return 0;
 }
 
-void GateClient::close(bool active)
+void GateClient::close(net::CloseType active)
 {
     frmpub::Client::close(active);
     if (accountid_.empty() == false) {
@@ -121,7 +122,7 @@ int GateClient::login_message(std::shared_ptr<protocc::CommonObject> obj,
                     protocc::repeatlogin_client_gate_s msgs;
                     msgs.set_aid(cli->accountid());
                     cli->send_proto(protocc::REPEATLOGIN_CLIENT_GATE_S, &msgs);
-                    cli->close(true);
+                    cli->close(net::CloseType::SERVER_CLOSE);
                 }
                 platform_key_ = msgc.platform_key();
             } else {

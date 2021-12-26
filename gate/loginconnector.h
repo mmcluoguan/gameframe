@@ -29,7 +29,7 @@ public:
     /// 与服务器连接断开回调
     /// </summary>
     /// <param name="active">断开原因</param>
-    void close(net::ConnectEvent::CloseType active) override;
+    void close(net::CloseType active) override;
 
     /*
 	* 获取或设置连接id

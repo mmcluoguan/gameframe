@@ -33,11 +33,11 @@ public:
     /// 与服务器连接断开回调
     /// </summary>
     /// <param name="active">断开原因</param>
-    void close(net::ConnectEvent::CloseType active) override;
+    void close(net::CloseType active) override;
     /// <summary>
     /// 心跳超时回调
     /// </summary>
-    void timerout() override;
+    void timerout(net::CloseType active) override;
     /// <summary>
     /// 连接成功
     /// </summary>
@@ -50,7 +50,7 @@ public:
     /// 返回-1服务器将关闭底层socket，并触发close(true)
     /// 返回-2服务器将关闭底层socket，并触发close(false)
     /// </returns>
-    int input() override;
+    net::InputResult input() override;
     /*
 		* 消息数据封包处理
 		*/
@@ -60,7 +60,7 @@ public:
     /// 与服务器连接断开回调
     /// </summary>
     /// <param name="active">断开原因</param>
-    net::ConnectEvent::CloseType active() const;
+    net::CloseType active() const;
 
     /*
 		* 获取连接器名称
@@ -71,7 +71,7 @@ public:
     }
 
 private:
-    net::ConnectEvent::CloseType active_ = net::ConnectEvent::CloseType::CLIENT_CLOSE;
+    net::CloseType active_ = net::CloseType::CLIENT_CLOSE;
     std::weak_ptr<PingTimer> ping_timer_;
     bool enable_ping_ = false;
     ssize_t heartSecond_ = 5;

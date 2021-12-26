@@ -5,17 +5,21 @@
 
 namespace shynet {
 namespace lua {
-    /*
-		* 导出c++到lua
-		*/
+    /**
+     * @brief lua包装器
+    */
     class LuaWrapper {
     public:
-        LuaWrapper();
-        virtual ~LuaWrapper();
+        /**
+         * @brief 构造
+        */
+        LuaWrapper() = default;
+        virtual ~LuaWrapper() = default;
 
-        /*
-			* 初始化lua状态
-			*/
+        /**
+         * @brief 初始化lua栈,导出c++到lua
+         * @param state lua栈
+        */
         virtual void init(kaguya::State& state);
     };
 }

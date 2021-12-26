@@ -5,12 +5,6 @@
 
 namespace shynet {
 namespace protocol {
-    Request::Request()
-    {
-    }
-    Request::~Request()
-    {
-    }
 
     size_t Request::data_length() const
     {
@@ -47,7 +41,7 @@ namespace protocol {
         }
     }
 
-    int Request::requset_uninit(std::string& line)
+    int Request::requset_uninit(const std::string& line)
     {
         std::string::const_iterator start = line.begin();
         std::string::const_iterator end = line.end();
@@ -89,7 +83,7 @@ namespace protocol {
         return 0;
     }
 
-    int Request::requset_init(std::string& line)
+    int Request::requset_init(const std::string& line)
     {
         if (line.empty() == false) {
             std::string::size_type end = line.find(":");

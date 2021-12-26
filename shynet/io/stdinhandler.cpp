@@ -97,10 +97,6 @@ namespace io {
             std::bind(&StdinHandler::info_order, this, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3) });
     }
 
-    StdinHandler::~StdinHandler()
-    {
-    }
-
     void StdinHandler::input(int fd)
     {
         g_orders = &orderitems_;

@@ -17,11 +17,8 @@ namespace protocol {
         else if (pt_ == ProtoType::WEBSOCKET)
             websocket_.reset(new protocol::WebSocket(this));
     }
-    FilterProces::~FilterProces()
-    {
-    }
 
-    int FilterProces::process()
+    net::InputResult FilterProces::process()
     {
         switch (pt_) {
         case ProtoType::SHY:
@@ -32,7 +29,7 @@ namespace protocol {
             return websocket_->process();
         default:
             LOG_WARN << "未知的协议类型";
-            return -1;
+            return net::InputResult::INITIATIVE_CLOSE;
         }
     }
 
@@ -61,7 +58,7 @@ namespace protocol {
         return -1;
     }
 
-    int FilterProces::send(std::string data) const
+    int FilterProces::send(const std::string& data) const
     {
         return send(data.c_str(), data.length());
     }

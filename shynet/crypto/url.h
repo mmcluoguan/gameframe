@@ -30,6 +30,11 @@ namespace crypto {
             }
         }
 
+        /**
+         * @brief ±àÂëurl×Ö·û´®
+         * @param URL ×Ö·û´®
+         * @return ±àÂëºó×Ö·û´®
+        */
         std::string escapeURL(const std::string& URL)
         {
             std::string result = "";
@@ -54,6 +59,11 @@ namespace crypto {
             return result;
         }
 
+        /**
+         * @brief ½âÂëurl×Ö·û´®
+         * @param URL ×Ö·û´®
+         * @return ±àÂëÇ°×Ö·û´®
+        */
         std::string deescapeURL(const std::string& URL)
         {
             std::string result = "";

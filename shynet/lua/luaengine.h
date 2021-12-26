@@ -8,29 +8,41 @@
 
 namespace shynet {
 namespace lua {
-    /// <summary>
-    /// lua通信引擎
-    /// </summary>
+    /**
+     * @brief lua通信引擎
+    */
     class LuaEngine final : public Nocopy {
         friend class utils::Singleton<LuaEngine>;
 
+        /**
+         * @brief 构造
+         * @param wrapper lua包装器
+        */
         LuaEngine(std::shared_ptr<LuaWrapper> wrapper = nullptr);
 
     public:
+        /**
+         * @brief 类型名
+        */
         static constexpr const char* kClassname = "LuaEngine";
-        ~LuaEngine();
+        ~LuaEngine() = default;
 
-        /*
-			* 初始化lua栈
-			*/
+        /**
+         * @brief 初始化lua栈
+         * @param state lua栈
+        */
         void init(kaguya::State& state);
 
-        /*
-			* 添加任务到lua线程
-			*/
+        /**
+         * @brief 添加任务到lua线程
+         * @param task 任务
+        */
         void append(std::shared_ptr<luatask::LuaTask> task);
 
     private:
+        /**
+         * @brief lua包装器
+        */
         std::shared_ptr<LuaWrapper> wrapper_;
     };
 }

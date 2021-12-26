@@ -33,11 +33,11 @@ public:
 		* 连接断开
 		active=true服务器主动断开,false客户端主动断开
 		*/
-    void close(bool active) override;
+    void close(net::CloseType active) override;
     /// <summary>
     /// 心跳超时
     /// </summary>
-    void timerout() override;
+    void timerout(net::CloseType) override;
     /*
 		* 消息数据封包处理
 		*/
@@ -46,7 +46,7 @@ public:
     /*
 		* true服务器主动断开,false客户端主动断开
 		*/
-    bool active() const
+    net::CloseType active() const
     {
         return active_;
     }
@@ -65,7 +65,7 @@ public:
 
 private:
     protocc::ServerInfo sif_;
-    bool active_ = false;
+    net::CloseType active_ = net::CloseType::SERVER_CLOSE;
 };
 }
 

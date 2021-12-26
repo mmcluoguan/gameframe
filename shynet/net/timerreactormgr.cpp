@@ -4,11 +4,6 @@
 
 namespace shynet {
 namespace net {
-
-    TimerReactorMgr::TimerReactorMgr() { }
-
-    TimerReactorMgr::~TimerReactorMgr() { }
-
     void TimerReactorMgr::notify(const void* data, size_t len)
     {
         std::shared_ptr<thread::TimerThread> tth = utils::Singleton<pool::ThreadPool>::get_instance().timerTh().lock();

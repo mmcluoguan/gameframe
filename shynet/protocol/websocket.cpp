@@ -14,46 +14,39 @@ namespace protocol {
         , total_original_data_(new char[filter_->max_reve_buf_size])
     {
     }
-    WebSocket::~WebSocket()
-    {
-    }
 
-    int WebSocket::process()
+    net::InputResult WebSocket::process()
     {
         std::shared_ptr<events::Streambuff> inputbuffer = filter_->iobuf()->inputbuffer();
         std::shared_ptr<events::Streambuff> restore = std::make_shared<events::Streambuff>();
         while (inputbuffer->length() > 0) {
             if (filter_->ident() == FilterProces::Identity::ACCEPTOR) {
                 if (status_ == Status::Unconnect) {
-                    int ret = process_requset(inputbuffer, restore);
-                    if (ret < 0) {
+                    net::InputResult ret = process_requset(inputbuffer, restore);
+                    if (ret != net::InputResult::SUCCESS)
                         return ret;
-                    }
                 } else if (status_ == Status::Handsharked) {
-                    int ret = process_data(inputbuffer, restore);
-                    if (ret < 0) {
+                    net::InputResult ret = process_data(inputbuffer, restore);
+                    if (ret != net::InputResult::SUCCESS)
                         return ret;
-                    }
                 }
 
             } else if (filter_->ident() == FilterProces::Identity::CONNECTOR) {
                 if (status_ == Status::Unconnect) {
-                    int ret = process_responses(inputbuffer, restore);
-                    if (ret < 0) {
+                    net::InputResult ret = process_responses(inputbuffer, restore);
+                    if (ret != net::InputResult::SUCCESS)
                         return ret;
-                    }
                 } else if (status_ == Status::Handsharked) {
-                    int ret = process_data(inputbuffer, restore);
-                    if (ret < 0) {
+                    net::InputResult ret = process_data(inputbuffer, restore);
+                    if (ret != net::InputResult::SUCCESS)
                         return ret;
-                    }
                 }
             }
         }
-        return 0;
+        return net::InputResult::SUCCESS;
     }
 
-    int WebSocket::process_requset(std::shared_ptr<events::Streambuff> inputbuffer,
+    net::InputResult WebSocket::process_requset(std::shared_ptr<events::Streambuff> inputbuffer,
         std::shared_ptr<events::Streambuff> restore)
     {
         if (requset_.step() == Step::UNINIT) {
@@ -65,13 +58,13 @@ namespace protocol {
             inputbuffer->unlock();
             if (line == nullptr) {
                 LOG_WARN << "协议错误";
-                return -1;
+                return net::InputResult::INITIATIVE_CLOSE;
             } else {
                 std::string strline(line, len);
                 je_free(line);
                 int ret = requset_.requset_uninit(strline);
                 if (ret == -1) {
-                    return -1;
+                    return net::InputResult::INITIATIVE_CLOSE;
                 }
             }
         } else if (requset_.step() == Step::INIT) {
@@ -85,21 +78,21 @@ namespace protocol {
             je_free(line);
             int ret = requset_.requset_init(strline);
             if (ret == -1) {
-                return -1;
+                return net::InputResult::INITIATIVE_CLOSE;
             } else {
                 const char* key;
                 if (requset_.step() == Step::Parse && (key = requset_.websocket_key()) != nullptr) {
                     ret = upgrade(key);
                     if (ret == -1) {
-                        return -1;
+                        return net::InputResult::INITIATIVE_CLOSE;
                     }
                 }
             }
         }
-        return 0;
+        return net::InputResult::SUCCESS;
     }
 
-    int WebSocket::process_responses(std::shared_ptr<events::Streambuff> inputbuffer,
+    net::InputResult WebSocket::process_responses(std::shared_ptr<events::Streambuff> inputbuffer,
         std::shared_ptr<events::Streambuff> restore)
     {
         if (responses_.step() == Step::UNINIT) {
@@ -112,13 +105,13 @@ namespace protocol {
             if (line == nullptr) {
                 je_free(line);
                 LOG_WARN << "协议错误";
-                return -1;
+                return net::InputResult::INITIATIVE_CLOSE;
             } else {
                 std::string strline(line, len);
                 je_free(line);
                 int ret = responses_.responses_uninit(strline);
                 if (ret == -1) {
-                    return -1;
+                    return net::InputResult::INITIATIVE_CLOSE;
                 }
             }
         } else if (responses_.step() == Step::INIT) {
@@ -131,28 +124,28 @@ namespace protocol {
             if (line == nullptr) {
                 je_free(line);
                 LOG_WARN << "协议错误";
-                return -1;
+                return net::InputResult::INITIATIVE_CLOSE;
             } else {
                 std::string strline(line, len);
                 je_free(line);
                 int ret = responses_.responses_init(strline);
                 if (ret == -1) {
-                    return -1;
+                    return net::InputResult::INITIATIVE_CLOSE;
                 } else {
                     const char* key;
                     if (responses_.step() == Step::Parse && (key = responses_.websocket_key()) != nullptr) {
                         ret = verify(key);
                         if (ret == -1) {
-                            return -1;
+                            return net::InputResult::INITIATIVE_CLOSE;
                         }
                     }
                 }
             }
         }
-        return 0;
+        return net::InputResult::SUCCESS;
     }
 
-    int WebSocket::process_data(std::shared_ptr<events::Streambuff> inputbuffer,
+    net::InputResult WebSocket::process_data(std::shared_ptr<events::Streambuff> inputbuffer,
         std::shared_ptr<events::Streambuff> restore)
     {
         size_t n = 0, mask_len = 0;
@@ -185,7 +178,7 @@ namespace protocol {
                     inputbuffer->lock();
                     inputbuffer->prependbuffer(restore);
                     inputbuffer->unlock();
-                    return 0;
+                    return net::InputResult::DATA_INCOMPLETE;
                 }
             } else if (n > 126) {
                 needlen = sizeof(uint64_t);
@@ -200,7 +193,7 @@ namespace protocol {
                     inputbuffer->lock();
                     inputbuffer->prependbuffer(restore);
                     inputbuffer->unlock();
-                    return 0;
+                    return net::InputResult::DATA_INCOMPLETE;
                 }
             }
         } else {
@@ -208,7 +201,7 @@ namespace protocol {
             inputbuffer->lock();
             inputbuffer->prependbuffer(restore);
             inputbuffer->unlock();
-            return 0;
+            return net::InputResult::DATA_INCOMPLETE;
         }
         char mask[4];
         if (mask_len > 0) {
@@ -223,7 +216,7 @@ namespace protocol {
                 inputbuffer->lock();
                 inputbuffer->prependbuffer(restore);
                 inputbuffer->unlock();
-                return 0;
+                return net::InputResult::DATA_INCOMPLETE;
             }
         }
         size_t buffer_length = inputbuffer->length();
@@ -239,11 +232,12 @@ namespace protocol {
                 }
             }
             if (ft == FrameType::Ping) {
-                return send(nullptr, 0, FrameType::Pong);
+                send(nullptr, 0, FrameType::Pong);
+                return net::InputResult::SUCCESS;
             } else if (ft == FrameType::Pong) {
-                return 0;
+                return net::InputResult::SUCCESS;
             } else if (ft == FrameType::Close) {
-                return -2;
+                return net::InputResult::PASSIVE_CLOSE;
             } else {
                 //拷贝数据到缓冲区
                 memcpy(total_original_data_.get() + total_postion_, original_data.get(), data_length);
@@ -251,14 +245,14 @@ namespace protocol {
                 if (total_postion_ >= filter_->max_reve_buf_size) {
                     LOG_WARN << "接收缓冲超过最大可接收容量:" << filter_->max_reve_buf_size;
                     total_postion_ = 0;
-                    return -1;
+                    return net::InputResult::INITIATIVE_CLOSE;
                 }
                 //判断是否是完整包
                 if (fin == 1) {
                     int ret = filter_->message_handle(total_original_data_.get(), total_postion_);
                     total_postion_ = 0;
-                    if (ret == -1 || ft == FrameType::Close) {
-                        return -1;
+                    if (ret == -1) {
+                        return net::InputResult::INITIATIVE_CLOSE;
                     }
                 }
             }
@@ -268,9 +262,9 @@ namespace protocol {
             inputbuffer->prependbuffer(restore);
             inputbuffer->unlock();
             //usleep(1 * 1000 * 1000);//单位是微秒，1秒 = 1000毫秒 ，1毫秒 = 1000微秒
-            return -3;
+            return net::InputResult::DATA_INCOMPLETE;
         }
-        return 0;
+        return net::InputResult::SUCCESS;
     }
 
     int WebSocket::upgrade(const char* key)
@@ -310,6 +304,7 @@ namespace protocol {
         newkey += magic_key_;
         crypto::sha1::calc(newkey.c_str(), newkey.length(), md);
         request_key_ = crypto::base64_encode(md, 20);
+        LOG_DEBUG << "request_handshake";
         return filter_->iobuf()->write(buf.c_str(), buf.length());
     }
 
@@ -387,7 +382,7 @@ namespace protocol {
         return send1((const char*)data + pos, remaining, op);
     }
 
-    int WebSocket::send(std::string data, FrameType op) const
+    int WebSocket::send(const std::string& data, FrameType op) const
     {
         return send(data.c_str(), data.length(), op);
     }

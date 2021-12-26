@@ -21,17 +21,17 @@ WorldConnector::WorldConnector(std::shared_ptr<net::IPAddress> connect_addr)
 }
 WorldConnector::~WorldConnector()
 {
-    if (active() == net::ConnectEvent::CloseType::CLIENT_CLOSE) {
+    if (active() == net::CloseType::CLIENT_CLOSE) {
         LOG_INFO << "连接world客户端主动关闭连接 "
                  << "[ip:" << connect_addr()->ip() << ":" << connect_addr()->port() << "]";
-    } else if (active() == net::ConnectEvent::CloseType::SERVER_CLOSE) {
+    } else if (active() == net::CloseType::SERVER_CLOSE) {
         LOG_INFO << "服务器world主动关闭连接 "
                  << "[ip:" << connect_addr()->ip() << ":" << connect_addr()->port() << "]";
-    } else if (active() == net::ConnectEvent::CloseType::CONNECT_FAIL) {
+    } else if (active() == net::CloseType::CONNECT_FAIL) {
         LOG_INFO << "连接服务器world失败 "
                  << "[ip:" << connect_addr()->ip() << ":" << connect_addr()->port() << "]";
     }
-    if (active() != net::ConnectEvent::CloseType::CLIENT_CLOSE) {
+    if (active() != net::CloseType::CLIENT_CLOSE) {
         LOG_INFO << "3秒后开始重连";
         std::shared_ptr<frmpub::ReConnectTimer<WorldConnector>> reconnect(
             new frmpub::ReConnectTimer<WorldConnector>(connect_addr(), { 3L, 0L }));
@@ -76,7 +76,7 @@ int WorldConnector::input_handle(std::shared_ptr<protocc::CommonObject> obj, std
     return 0;
 }
 
-void WorldConnector::close(net::ConnectEvent::CloseType active)
+void WorldConnector::close(net::CloseType active)
 {
     //通知lua的onClose函数
     shynet::utils::Singleton<lua::LuaEngine>::get_instance().append(

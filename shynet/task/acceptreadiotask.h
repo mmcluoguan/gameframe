@@ -6,14 +6,27 @@
 
 namespace shynet {
 namespace task {
+    /**
+     * @brief 接收客户端数据任务处理器
+    */
     class AcceptReadIoTask {
     public:
+        /**
+         * @brief 构造
+         * @param newfd 接收客户端数据处理器
+        */
         explicit AcceptReadIoTask(std::weak_ptr<net::AcceptNewFd> newfd);
-        ~AcceptReadIoTask();
+        ~AcceptReadIoTask() = default;
 
+        /**
+         * @brief 任务处理
+        */
         void operator()();
 
     private:
+        /**
+         * @brief 接收客户端数据处理器
+        */
         std::weak_ptr<net::AcceptNewFd> newfd_;
     };
 }

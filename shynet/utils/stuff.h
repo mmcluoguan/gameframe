@@ -15,35 +15,44 @@ namespace utils {
 		* 杂七杂八
 		*/
     namespace stuff {
-        /*
-			* 创建dump
-			*/
+        /**
+         * @brief 创建dump
+        */
         void create_coredump();
-        /*
-			* 守护进程运行
-			* 返回进程id
-			*/
+        /**
+         * @brief 守护进程运行
+         * @return 进程id
+        */
         int daemon();
 
-        /*
-			* 获取当前进程运行目录和程序名称
-			*/
+        /**
+         * @brief 获取当前进程运行目录和程序名称
+         * @param processdir 当前进程运行目录
+         * @param processname 程序名称
+         * @param len 指向存储当前进程运行目录地址的大小
+         * @return 当前进程运行目录长度
+        */
         int executable_path(char* processdir, char* processname, size_t len);
 
-        /*
-			* 写进程id
-			* pidfile 默认工作目录下,程序名.pid
-			*/
+        /**
+         * @brief 写进程id到文件
+         * @param pidfile 记录进程id的文件名,
+         默认工作目录下,程序名.pid 
+        */
         void writepid(const char* pidfile = nullptr);
+        /**
+         * @brief 写进程id到文件
+         * @param pidfile 记录进程id的文件名
+        */
         void writepid(const std::string& pidfile);
 
         /*
-			* 随机字符串
-			*/
+		* @brief 随机字符串
+		*/
         void random(void* buf, size_t len);
         /*
-			* 随机[min,max]范围
-			*/
+		*@brief 随机[min,max]范围
+		*/
         template <class T>
         T random(T min, T max)
         {
@@ -54,8 +63,8 @@ namespace utils {
         }
 
         /*
-			* uint64_t字节序转换
-			*/
+		* uint64_t字节序转换
+		*/
         uint64_t hl64ton(uint64_t host);
         uint64_t ntohl64(uint64_t host);
 
