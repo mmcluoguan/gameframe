@@ -255,7 +255,7 @@
       <StrictAliasing>false</StrictAliasing>
       <UnrollLoops>true</UnrollLoops>
       <TreatWarningAsError>false</TreatWarningAsError>
-      <AdditionalOptions>-W"no-unused-function" -W"no-conversion"</AdditionalOptions>
+      <AdditionalOptions>-W"no-unused-function" -W"no-conversion" -W"no-unused-local-typedefs" -W"no-reorder"</AdditionalOptions>
       <CppAdditionalWarning>%(CppAdditionalWarning)</CppAdditionalWarning>
     </ClCompile>
   </ItemDefinitionGroup>
@@ -271,7 +271,7 @@
       <StrictAliasing>false</StrictAliasing>
       <UnrollLoops>true</UnrollLoops>
       <TreatWarningAsError>false</TreatWarningAsError>
-      <AdditionalOptions>-W"no-unused-function" -W"no-conversion"</AdditionalOptions>
+      <AdditionalOptions>-W"no-unused-function" -W"no-conversion" -W"no-unused-local-typedefs" -W"no-reorder"</AdditionalOptions>
       <CppAdditionalWarning>%(CppAdditionalWarning)</CppAdditionalWarning>
     </ClCompile>
   </ItemDefinitionGroup>

@@ -3,12 +3,12 @@
 
 	   ```
 	   std::vector<int> vec({1,2,3});
-	   std::string str = shynet::utils::stl(vec);
+	   std::string str = shynet::utils::stringify::stl(vec);
 	   // "[1,2,3]"
 
 	   std::map<int, int> m;
 	   m[1] = 100; m[2] = 200; m[3] = 300;
-	   str = shynet::utils::stl(m);
+	   str = shynet::utils::stringify::stl(m);
 	   // "{1:100,2:200,3:300}"
 	   ```
 
@@ -16,7 +16,7 @@
 
 	  ```
 	  std::vector<std::vector<int> > vec = {{1,2,3}, {4,5,6}};
-	  str = shynet::utils::stl(vec);
+	  str = shynet::utils::stringify::stl(vec);
 	  // "[[1,2,3],[4,5,6]]"
 	  ```
 
@@ -40,7 +40,7 @@
 	  std::vector<SelfType> vec;
 	  vec.push_back(SelfType(1,2));
 	  vec.push_back(SelfType(3,4));
-	  std::string str = shynet::utils::stl(vec);
+	  std::string str = shynet::utils::stringify::stl(vec);
 	  // "[(1,2),(3,4)]"
 	  ```
 
@@ -50,7 +50,7 @@
 	   // 自定义样式举例
 	   // shynet::utils::STL_STYLE_ONE_BEAUTY 是我提供的一个默认带缩进换行的样式，业务方可以自己构造一个
 	   // stl_one_style 类型的变量实现更高定制化的样式
-	   std::string str = shynet::utils::stl(vec, shynet::utils::STL_STYLE_ONE_BEAUTY);
+	   std::string str = shynet::utils::stringify::stl(vec, shynet::utils::STL_STYLE_ONE_BEAUTY);
 	   // [
 	   //   "1",
 	   //   "2",

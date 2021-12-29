@@ -97,6 +97,15 @@
       <Filter>protocc</Filter>
     </ClInclude>
     <ClInclude Include="frmstdinhandler.h" />
+    <ClInclude Include="josncfg.h">
+      <Filter>config</Filter>
+    </ClInclude>
+    <ClInclude Include="matecfg.h">
+      <Filter>config</Filter>
+    </ClInclude>
+    <ClInclude Include="configcenter.h">
+      <Filter>config</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="protocc">
@@ -104,6 +113,9 @@
     </Filter>
     <Filter Include="lua">
       <UniqueIdentifier>{f23ef2a0-c99e-4fb0-9946-081ea4eacb34}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="config">
+      <UniqueIdentifier>{5c35d0dd-330d-486e-b63f-98759fba4040}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

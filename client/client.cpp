@@ -16,8 +16,10 @@ int g_gateconnect_id;
 #include "3rd/debug/dbg.h"
 #include "3rd/memory/MemoryPool.hpp"
 #include "3rd/visit_struct/visit_struct.hpp"
+#include "frmpub/configcenter.h"
 #include "shynet/crypto/md5.h"
 #include "shynet/utils/databuffer.h"
+#include "shynet/utils/filepathop.h"
 #include "shynet/utils/hash.h"
 #include "shynet/utils/lru.h"
 #include "shynet/utils/skiplist.h"
@@ -373,67 +375,27 @@ void test2()
     assert(vis1.result[2].second == "asdf");
 }
 
-std::queue<std::function<int(int)>> que;
-
-template <typename F, typename... A, typename R = std::invoke_result_t<std::decay_t<F>, std::decay_t<A>...>, typename = std::enable_if_t<!std::is_void_v<R>>>
-std::future<R> push_task(F&& task, A&&... args)
-{
-    std::shared_ptr<std::promise<R>> task_promise = std::make_shared<std::promise<R>>();
-    std::future<R> future = task_promise->get_future();
-    auto lab = [=](int) -> int {
-        task_promise->set_value(task(args...));
-        return 1;
-    };
-    que.push(lab);
-    return future;
-}
-
-template <typename F, typename... A, typename R = std::invoke_result_t<std::decay_t<F>, std::decay_t<A>...>>
-std::future<R> push_task(std::shared_ptr<F>& task, A&&... args)
-{
-    std::shared_ptr<std::promise<R>> task_promise = std::make_shared<std::promise<R>>();
-    std::future<R> future = task_promise->get_future();
-    auto lab = [=](int) -> int {
-        if constexpr (std::is_void_v<R>) {
-            (*task)(args...);
-        } else {
-            task_promise->set_value((*task)(args...));
-        }
-        return 1;
-    };
-    que.push(lab);
-    return future;
-}
-
 void test3()
 {
-    auto cb = [](float b) {
-        std::cout << b << std::endl;
-        return b;
-    };
+    auto& cfgmgr = shynet::utils::Singleton<frmpub::ConfigCenter>::instance();
+    cfgmgr.set_search_path("lua/config");
+    cfgmgr.load<frmpub::task_cfg>();
+    const frmpub::task_cfg_record* record = cfgmgr.get<frmpub::task_cfg, frmpub::task_cfg_record>(1010000);
+    if (record != nullptr) {
+        std::cout << record->Id << " " << record->KeyName << std::endl;
+        std::cout << shynet::utils::stringify::stl(record->Ints) << std::endl;
+    }
+    std::cout << "1:" << record << std::endl;
+    cfgmgr.reload<frmpub::task_cfg>();
+    cfgmgr.get<frmpub::task_cfg, frmpub::task_cfg_record>(1010000);
+    std::cout << "2:" << record << std::endl;
+    cfgmgr.reload<frmpub::task_cfg>();
+    record = cfgmgr.get<frmpub::task_cfg, frmpub::task_cfg_record>(1010000);
+    std::cout << "3:" << record << std::endl;
 
-    typedef struct {
-        void operator()(test_struct_one a) const
-        {
-            std::cout << a.a << std::endl;
-        }
-        void operator()() const
-        {
-        }
-    } cbstruct;
-    std::function<void(float)> cbfun = std::bind(cb, std::placeholders::_1);
-
-    std::future<float> ff;
-    //ff = push_task(cb, 1.1f);
-    test_struct_one xxx {};
-    auto ptr = std::make_shared<cbstruct>();
-    std::future<void> ff2 = push_task(ptr, xxx);
-    //std::invoke(cs);
-    //push_task(qqqq, "a111");
-    auto& t = que.front();
-    t(40);
-    if (ff.valid())
-        std::cout << ff.get() << std::endl;
+    cfgmgr.for_each<frmpub::task_cfg>([](const int& k, const frmpub::task_cfg_record& v) {
+        std::cout << k << std::endl;
+    });
 }
 
 int main(int argc, char* argv[])
@@ -441,8 +403,8 @@ int main(int argc, char* argv[])
     //test();
     //test1();
     //test2();
-    //test3();
-    //return 0;
+    test3();
+    return 0;
     using namespace std;
     using namespace shynet;
     using namespace shynet::utils;
