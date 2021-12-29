@@ -6,6 +6,7 @@
 #include <memory>
 #include <mutex>
 #include <sstream>
+#include <thread>
 #include <type_traits>
 #include <vector>
 #if _HAS_CXX17
@@ -13,6 +14,7 @@
 #endif
 #ifdef __linux__
 #include <malloc.h>
+#include <memory.h>
 #endif
 
 namespace hzw {

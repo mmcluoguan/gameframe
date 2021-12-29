@@ -41,7 +41,7 @@
     <DebuggerFlavor>LinuxDebugger</DebuggerFlavor>
     <RemoteDebuggerCommand>
     </RemoteDebuggerCommand>
-    <RemoteTarget>-2095721169;172.28.10.65 (username=, port=22, authentication=Password)</RemoteTarget>
+    <RemoteTarget>270785230;192.168.0.18 (username=, port=22, authentication=Password)</RemoteTarget>
     <RemoteDebuggingTarget>-2095721169;172.28.10.65 (username=, port=22, authentication=Password)</RemoteDebuggingTarget>
     <RemoteDebuggerCommandArguments>login_10</RemoteDebuggerCommandArguments>
   </PropertyGroup>
@@ -50,7 +50,7 @@
     <DebuggerFlavor>LinuxDebugger</DebuggerFlavor>
     <RemoteDebuggerCommand>
     </RemoteDebuggerCommand>
-    <RemoteTarget>-2095721169;172.28.10.65 (username=, port=22, authentication=Password)</RemoteTarget>
+    <RemoteTarget>270785230;192.168.0.18 (username=, port=22, authentication=Password)</RemoteTarget>
     <RemoteDebuggingTarget>-2095721169;172.28.10.65 (username=, port=22, authentication=Password)</RemoteDebuggingTarget>
     <RemoteDebuggerCommandArguments>login_10</RemoteDebuggerCommandArguments>
   </PropertyGroup>

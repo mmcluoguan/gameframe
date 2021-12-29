@@ -1,0 +1,43 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="test.cpp" />
+    <ClCompile Include="mmpv\test_mmpv.cpp">
+      <Filter>mmpv</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="skip">
+      <UniqueIdentifier>{1d71c35a-0f01-47b2-8e42-58a3a1eff158}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="dbg">
+      <UniqueIdentifier>{6cc05817-8c98-4a5c-9e24-5ff9eaeb20ce}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="reflection">
+      <UniqueIdentifier>{f88bc361-9727-4f35-9fa5-e90391f16bd9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="configcenter">
+      <UniqueIdentifier>{ab840773-01e5-4a02-ac0c-bff33466c170}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="mmpv">
+      <UniqueIdentifier>{f94f1163-9159-475f-9110-77a57f80f2c3}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="skip\test_skip.h">
+      <Filter>skip</Filter>
+    </ClInclude>
+    <ClInclude Include="dbg\test_dbg.h">
+      <Filter>dbg</Filter>
+    </ClInclude>
+    <ClInclude Include="reflection\test_reflection.h">
+      <Filter>reflection</Filter>
+    </ClInclude>
+    <ClInclude Include="configcenter\test_configcenter.h">
+      <Filter>configcenter</Filter>
+    </ClInclude>
+    <ClInclude Include="mmpv\test_mmpv.h">
+      <Filter>mmpv</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>

@@ -16,6 +16,7 @@
 
 namespace frmpub {
 
+/*===================================task_cfg.josn”≥…‰===========================*/
 struct task_cfg_record {
     int Id;
     std::string KeyName;
