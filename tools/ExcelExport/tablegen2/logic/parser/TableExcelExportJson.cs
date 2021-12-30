@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Newtonsoft.Json;
@@ -10,6 +10,8 @@ namespace tablegen2.logic
     {
         public static void exportExcelFile(TableExcelData data, string filePath)
         {
+            Dictionary<object, Dictionary<string, object>> record =
+                new Dictionary<object, Dictionary<string, object>>();
             List<Dictionary<string, object>> lst = data.Rows.Select(a =>
             {
                 var r = new Dictionary<string, object>();
@@ -21,6 +23,7 @@ namespace tablegen2.logic
                     switch (hdr.FieldType)
                     {
                         case "string":
+                        case "formula":
                             obj = val;
                             break;
                         case "int":
@@ -39,11 +42,19 @@ namespace tablegen2.logic
                             break;
                     }
                     r[hdr.FieldName] = obj;
+                    if (hdr.FieldName == "Id")
+                    {
+                        record[obj] = r;
+                    }
                 }
                 return r;
             }).ToList();
 
-            string output = JsonConvert.SerializeObject(lst, Formatting.Indented);
+            Dictionary<string, Dictionary<object, Dictionary<string, object>>> jsondata =
+                new Dictionary<string, Dictionary<object, Dictionary<string, object>>>();
+            jsondata["data"] = record;
+
+            string output = JsonConvert.SerializeObject(jsondata, Formatting.Indented);
             File.WriteAllBytes(filePath, Encoding.UTF8.GetBytes(output));
         }
     }

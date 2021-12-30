@@ -3,6 +3,7 @@
 
 #include "frmpub/josncfg.h"
 #include "shynet/utils/singleton.h"
+#include <atomic>
 #include <memory>
 #include <string>
 
@@ -135,7 +136,7 @@ private:
     /**
      * @brief 当前使用加载数据保存的hash表数组的索引(用于reload时交换)
     */
-    Index use_index_ = Loaded;
+    std::atomic<Index> use_index_ = Loaded;
 };
 }
 

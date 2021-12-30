@@ -27,3 +27,4 @@ bin/lua/luatest/
 gate/obj/
 world/obj/
 admin_client/obj/
+test/obj/

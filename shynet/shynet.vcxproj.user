@@ -21,12 +21,12 @@
     <DebuggerFlavor>LinuxDebugger</DebuggerFlavor>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <RemoteTarget>270785230;192.168.0.18 (username=, port=22, authentication=Password)</RemoteTarget>
+    <RemoteTarget>-2095721169;172.28.10.65 (username=, port=22, authentication=Password)</RemoteTarget>
     <RemoteDebuggingTarget>-2095721169;172.28.10.65 (username=, port=22, authentication=Password)</RemoteDebuggingTarget>
     <DebuggerFlavor>LinuxDebugger</DebuggerFlavor>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <RemoteTarget>270785230;192.168.0.18 (username=, port=22, authentication=Password)</RemoteTarget>
+    <RemoteTarget>-2095721169;172.28.10.65 (username=, port=22, authentication=Password)</RemoteTarget>
     <RemoteDebuggingTarget>-2095721169;172.28.10.65 (username=, port=22, authentication=Password)</RemoteDebuggingTarget>
     <DebuggerFlavor>LinuxDebugger</DebuggerFlavor>
   </PropertyGroup>

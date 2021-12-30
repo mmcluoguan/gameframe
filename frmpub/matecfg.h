@@ -16,13 +16,16 @@
 
 namespace frmpub {
 
-/*===================================task_cfg.josnÓ³Éä===========================*/
+/*===================================task_cfg.josnæ˜ å°„===========================*/
 struct task_cfg_record {
     int Id;
     std::string KeyName;
-    std::vector<int> Ints;
+    int Type;
+    std::string AcceptCond;
+    std::string CompCond;
+    std::string Reward;
 };
-REFLECTION(task_cfg_record, Id, KeyName, Ints)
+REFLECTION(task_cfg_record, Id, KeyName, Type, AcceptCond, CompCond, Reward)
 
 struct task_cfg {
     std::unordered_map<int, task_cfg_record> data;

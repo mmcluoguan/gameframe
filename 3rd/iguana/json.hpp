@@ -274,6 +274,10 @@ namespace json {
     };
 
     static bool g_has_error = false;
+    static std::string g_error_desc;
+
+    inline const char* error_desc() { return g_error_desc.c_str(); }
+
     class reader_t {
     public:
         reader_t(const char* ptr = nullptr, size_t len = -1)
@@ -307,15 +311,15 @@ namespace json {
 
         inline void error(const char* message)
         {
+            g_error_desc.clear();
             g_has_error = true;
-            //                char buffer[20];
-            //                std::string msg = "error at line :";
-            //                msg += itoa_native(cur_line_, buffer, 19);
-            //                msg += " col :";
-            //                msg += itoa_native(cur_col_, buffer, 19);
-            //                msg += " msg:";
-            //                msg += message;
-            //                throw std::invalid_argument(msg);
+            char buffer[20];
+            g_error_desc = "error at line :";
+            g_error_desc += itoa_native(cur_line_ + 1, buffer, 19);
+            g_error_desc += " col :";
+            g_error_desc += itoa_native(cur_col_, buffer, 19);
+            g_error_desc += " msg:";
+            g_error_desc += message;
         }
 
         inline token const& peek() const
@@ -1117,6 +1121,9 @@ namespace json {
                 rd.next();
                 if (rd.peek().str != get_name<T, Idx>().data()) {
                     g_has_error = true;
+                    //std::cerr << "jsontok:" << std::string(rd.peek().str.str, rd.peek().str.len)
+                    //          << " fieldname:" << get_name<T, Idx>().data()
+                    //          << std::endl;
                     return;
                 }
 

@@ -9,41 +9,41 @@
 namespace frmpub {
 
 /**
- * @brief jsonÅäÖÃ½Ó¿Ú
+ * @brief jsoné…ç½®æ¥å£
 */
 class JsoncfgBase {
 public:
     /**
-     * @brief ¼ÓÔØ²¢·´ÉäjsonÊµÌå
-     * @param root jsonÎÄ¼şËùÔÚÄ¿Â¼
+     * @brief åŠ è½½å¹¶åå°„jsonå®ä½“
+     * @param root jsonæ–‡ä»¶æ‰€åœ¨ç›®å½•
     */
     virtual void load(const char* root) = 0;
     /**
-     * @brief Ğ¶ÔØjsonÊµÌå
+     * @brief å¸è½½jsonå®ä½“
     */
     virtual void unload() = 0;
     /**
-     * @brief ÖØĞÂ¼ÓÔØjsonÊµÌå
-     * @param root jsonÎÄ¼şËùÔÚÄ¿Â¼
+     * @brief é‡æ–°åŠ è½½jsonå®ä½“
+     * @param root jsonæ–‡ä»¶æ‰€åœ¨ç›®å½•
     */
     virtual void reload(const char* root) = 0;
     /**
-     * @brief »ñÈ¡jsonÎÄ¼şÓ³Éäc++ÊµÌåÃû³Æ
-     * @return jsonÎÄ¼şÓ³Éäc++ÊµÌåÃû³Æ
+     * @brief è·å–jsonæ–‡ä»¶æ˜ å°„c++å®ä½“åç§°
+     * @return jsonæ–‡ä»¶æ˜ å°„c++å®ä½“åç§°
     */
     virtual const char* name() = 0;
 };
 
 /**
- * @brief jsonÅäÖÃ
- * @tparam F json·´ÉäµÄc++ÊµÌåÀàĞÍ
+ * @brief jsoné…ç½®
+ * @tparam F jsonåå°„çš„c++å®ä½“ç±»å‹
 */
 template <typename F>
 class JsonCfg final : public JsoncfgBase {
 public:
     /**
-     * @brief ¼ÓÔØ²¢·´ÉäjsonÊµÌå
-     * @param root jsonÎÄ¼şËùÔÚÄ¿Â¼
+     * @brief åŠ è½½å¹¶åå°„jsonå®ä½“
+     * @param root jsonæ–‡ä»¶æ‰€åœ¨ç›®å½•
     */
     void load(const char* root) override
     {
@@ -52,7 +52,7 @@ public:
         std::ifstream jf(cfgstr);
         if (jf.is_open() == false) {
             std::ostringstream err;
-            err << "open failure:" << cfgstr;
+            err << "æ‰“å¼€jsonæ–‡ä»¶å¤±è´¥:" << cfgstr;
             THROW_EXCEPTION(err.str());
         }
         std::stringstream buffer;
@@ -60,13 +60,14 @@ public:
         bool ret = iguana::json::from_json(meta, buffer.str().c_str());
         if (ret == false) {
             std::ostringstream err;
-            err << "from_json failure:" << cfg;
+            err << "josnååºåˆ—åŒ–å¤±è´¥:" << cfgstr << std::endl
+                << iguana::json::error_desc();
             THROW_EXCEPTION(err.str());
         }
     }
 
     /**
-     * @brief Ğ¶ÔØjsonÊµÌå
+     * @brief å¸è½½jsonå®ä½“
     */
     void unload() override
     {
@@ -74,8 +75,8 @@ public:
     }
 
     /**
-     * @brief ÖØĞÂ¼ÓÔØjsonÊµÌå
-     * @param root jsonÎÄ¼şËùÔÚÄ¿Â¼
+     * @brief é‡æ–°åŠ è½½jsonå®ä½“
+     * @param root jsonæ–‡ä»¶æ‰€åœ¨ç›®å½•
     */
     void reload(const char* root) override
     {
@@ -84,11 +85,11 @@ public:
     }
 
     /**
-     * @brief Í¨¹ıkey»ñÈ¡json¼ÇÂ¼·´ÉäµÄc++ÊµÌå
-     * @tparam R json¼ÇÂ¼·´ÉäµÄc++ÊµÌåÀàĞÍ
-     * @tparam K json¼ÇÂ¼·´ÉäµÄc++ÊµÌåkeyµÄÀàĞÍ
-     * @param id json¼ÇÂ¼·´ÉäµÄc++ÊµÌåkeyÖµ
-     * @return json¼ÇÂ¼·´ÉäµÄc++ÊµÌå
+     * @brief é€šè¿‡keyè·å–jsonè®°å½•åå°„çš„c++å®ä½“
+     * @tparam R jsonè®°å½•åå°„çš„c++å®ä½“ç±»å‹
+     * @tparam K jsonè®°å½•åå°„çš„c++å®ä½“keyçš„ç±»å‹
+     * @param id jsonè®°å½•åå°„çš„c++å®ä½“keyå€¼
+     * @return jsonè®°å½•åå°„çš„c++å®ä½“
     */
     template <typename R, typename K>
     const std::optional<R> getById(K id)
@@ -103,8 +104,8 @@ public:
     }
 
     /**
-     * @brief »ñÈ¡jsonÎÄ¼şÓ³Éäc++ÊµÌåÃû³Æ
-     * @return jsonÎÄ¼şÓ³Éäc++ÊµÌåÃû³Æ
+     * @brief è·å–jsonæ–‡ä»¶æ˜ å°„c++å®ä½“åç§°
+     * @return jsonæ–‡ä»¶æ˜ å°„c++å®ä½“åç§°
     */
     const char* name() override
     {
@@ -112,9 +113,9 @@ public:
     }
 
     /**
-     * @brief µü´újsonÅäÖÃËùÓĞ¼ÇÂ¼ 
-     * @tparam Fn µü´úº¯ÊıÀàĞÍ
-     * @param cb µü´úº¯Êı
+     * @brief è¿­ä»£jsoné…ç½®æ‰€æœ‰è®°å½• 
+     * @tparam Fn è¿­ä»£å‡½æ•°ç±»å‹
+     * @param cb è¿­ä»£å‡½æ•°
     */
     template <typename Fn>
     void for_each(Fn cb)
@@ -126,7 +127,7 @@ public:
 
 private:
     /**
-     * @brief json·´Éäc++ÊµÌåÔªÀàĞÍ
+     * @brief jsonåå°„c++å®ä½“å…ƒç±»å‹
     */
     F meta {};
 };
