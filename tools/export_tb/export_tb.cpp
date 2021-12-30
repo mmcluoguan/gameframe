@@ -1,4 +1,6 @@
+#include "3rd/kaguya/kaguya.hpp"
 #include "3rd/xl/libxl.h"
+#include "shynet/utils/stringop.h"
 #include <assert.h>
 #include <filesystem>
 #include <fstream>
@@ -25,8 +27,27 @@ bool init_datahead(Sheet* sheet)
     return false;
 }
 
+bool luatojoson(kaguya::State& state, const char* luascript, string& datajosn)
+{
+    string str = shynet::utils::stringop::str_format("data=%s", luascript);
+    bool ret = state(str);
+    if (ret == false) {
+        cout << "错误的lua格式:" << luascript << endl;
+        return ret;
+    }
+    ret = state("datajosn = rapidjson.encode(data)");
+    if (ret == false) {
+        cout << "josn encode 失败" << endl;
+        return ret;
+    }
+    string data = state["datajosn"];
+    datajosn = data;
+    return true;
+}
+
 void export_lua(Sheet* sheet, const string& out_lua)
 {
+    kaguya::State state;
     vector<string> ids;
 
     ostringstream out;
@@ -47,12 +68,21 @@ void export_lua(Sheet* sheet, const string& out_lua)
                     temp << sheet->readNum(row, col);
             } else if (cellType == CELLTYPE_STRING) {
                 if (type == "luatable") {
-                    temp << sheet->readStr(row, col);
+                    const char* v = sheet->readStr(row, col);
+                    string luascript = shynet::utils::stringop::str_format("local data=%s", v);
+                    bool ret = state(luascript);
+                    if (ret == false) {
+                        cout << "错误的lua格式:" << v << endl;
+                        return;
+                    }
+                    temp << v;
                 } else {
                     temp << "\"" << sheet->readStr(row, col) << "\"";
                 }
+            } else if (cellType == CELLTYPE_BLANK) {
+                temp << "\"\"";
             }
-            out << data_head[0][col] << " = " << temp.str() << ",";
+            out << " " << data_head[0][col] << "=" << temp.str() << ",";
             if (data_head[0][col] == "Id")
                 ids.push_back(temp.str());
         }
@@ -66,7 +96,7 @@ void export_lua(Sheet* sheet, const string& out_lua)
     out << "{";
     out << endl;
     for (size_t i = 0; i < ids.size(); i++) {
-        out << "[" << ids[i] << "] = items[" << i + 1 << "],";
+        out << "[" << ids[i] << "]=items[" << i + 1 << "],";
         out << endl;
     }
     out << "}" << endl;
@@ -88,19 +118,25 @@ return data
 
 void export_json(Sheet* sheet, const string& out_json)
 {
-    vector<string> ids;
-
+    kaguya::State state;
+    state("package.cpath=package.cpath ..\"../luabin/?.so\"");
+    bool ret = state("rapidjson = require('rapidjson')");
+    if (ret == false) {
+        cout << "没有安装rapidjson库" << endl;
+        return;
+    }
     ostringstream out;
     out << "{" << endl;
-    out << sheet->name() << ":{" << endl;
+    out << " " << sheet->name() << ":{" << endl;
     for (int row = 3; row < sheet->lastRow(); ++row) {
-        out << sheet->readStr(row, 0) << ":{" << endl;
+        out << "\t"
+            << "\"" << sheet->readStr(row, 0) << "\":{";
         for (int col = sheet->firstCol(); col < sheet->lastCol(); ++col) {
             string type = data_head[2][col];
             CellType cellType = sheet->cellType(row, col);
             ostringstream temp;
             if (cellType == CELLTYPE_EMPTY) {
-                temp << "";
+                temp << "\"\"";
             } else if (cellType == CELLTYPE_NUMBER) {
                 if (type == "int")
                     temp << (int)sheet->readNum(row, col);
@@ -108,18 +144,32 @@ void export_json(Sheet* sheet, const string& out_json)
                     temp << sheet->readNum(row, col);
             } else if (cellType == CELLTYPE_STRING) {
                 if (type == "luatable") {
-                    temp << "";
-                    //temp << sheet->readStr(row, col);
+                    string v = sheet->readStr(row, col);
+                    if (v == "nil") {
+                        temp << "\"\"";
+                    } else {
+                        string datajosn;
+                        bool ret = luatojoson(state, sheet->readStr(row, col), datajosn);
+                        if (!ret)
+                            return;
+                        else
+                            temp << datajosn;
+                    }
                 } else {
                     temp << "\"" << sheet->readStr(row, col) << "\"";
                 }
+            } else if (cellType == CELLTYPE_BLANK) {
+                temp << "\"\"";
             }
-            out << "{" << endl
-                << data_head[0][col] << " : " << temp.str() << ",";
-            if (data_head[0][col] == "Id")
-                ids.push_back(temp.str());
+            out << " " << data_head[0][col] << ":" << temp.str();
+            if (col != sheet->lastCol() - 1) {
+                out << ",";
+            }
         }
-        out << "},";
+        out << "}";
+        if (row != sheet->lastRow() - 1) {
+            out << ",";
+        }
         out << endl;
     }
     out << " }" << endl;
@@ -141,16 +191,22 @@ int main(int argc, char* argv[])
     if (book->load(xlsname.c_str())) {
         Sheet* sheet = book->getSheet(0);
         if (init_datahead(sheet)) {
-            if (!out_lua.empty())
+            if (!out_lua.empty()) {
+                cout << "开始导出:" << xlsname << " ==> " << out_lua << endl;
                 export_lua(sheet, out_lua);
-            if (!out_json.empty())
+                cout << "完成导出:" << xlsname << " ==> " << out_lua << endl;
+            }
+            if (!out_json.empty()) {
+                cout << "开始导出:" << xlsname << " ==> " << out_json << endl;
                 export_json(sheet, out_json);
+                cout << "完成导出:" << xlsname << " ==> " << out_json << endl;
+            }
         } else {
-            cout << "表头数据不足:" << xlsname;
+            cout << "表头数据不足:" << xlsname << endl;
         }
-
     } else {
-        cout << "不能解析:" << xlsname;
+        cout << "不能解析:" << xlsname << endl;
     }
     book->release();
+    return 0;
 }
