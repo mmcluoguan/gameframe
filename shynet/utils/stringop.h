@@ -3,6 +3,7 @@
 
 #include "shynet/basic.h"
 #include <functional>
+#include <iterator>
 #include <memory>
 #include <string>
 #include <vector>
@@ -107,6 +108,20 @@ namespace utils {
          * @return 新的字符串
         */
         std::string replace(const std::string& data, const std::string& toFind, const std::string& toReplace);
+
+        /**
+         * @brief 将字符串转换为大写
+         * @param data 字符串
+         * @return 转换后的字符串
+        */
+        std::string toupper(std::string& data);
+
+        /**
+         * @brief 将字符串转换为小写
+         * @param data 字符串
+         * @return 转换后的字符串
+        */
+        std::string tolower(std::string& data);
 
     };
 }

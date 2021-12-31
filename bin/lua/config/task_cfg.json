@@ -1,7 +1,7 @@
 {
- data:{
-	"1010000":{ id:1010000, name:"任务1", type:1, accept_cond:"", comp_cond:"", reward:""},
-	"1010001":{ id:1010001, name:"任务2", type:1, accept_cond:"", comp_cond:"", reward:""}
+ "data":{
+	"1010000":{ "id":1010000, "name":"任务1", "type":1, "accept_cond":"", "comp_cond":"", "reward":""},
+	"1010001":{ "id":1010001, "name":"任务2", "type":1, "accept_cond":"", "comp_cond":"", "reward":""}
  }
 }
 

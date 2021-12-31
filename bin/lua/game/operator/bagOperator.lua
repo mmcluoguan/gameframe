@@ -67,13 +67,13 @@ function bagOperator:add_one_item(role,cfgid,num,module_id)
     if cfg == nil then
         return nil
     end
-    if cfg.Overlap == 0 then
+    if cfg.overlap == 0 then
         --不能叠加
         return self:create_one_item(role,cfgid,num,module_id)
     else
         --判断是否超过叠加上限
         local curr_num,item_id = self:get_one_item_num(role,cfgid)
-        if curr_num == nil or curr_num + num >= cfg.Overlap then
+        if curr_num == nil or curr_num + num >= cfg.overlap then
             --超过叠加上限或者背包中无此物品
             return self:create_one_item(role,cfgid,num,module_id)
         else

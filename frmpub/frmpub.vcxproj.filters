@@ -100,9 +100,6 @@
     <ClInclude Include="josncfg.h">
       <Filter>config</Filter>
     </ClInclude>
-    <ClInclude Include="matecfg.h">
-      <Filter>config</Filter>
-    </ClInclude>
     <ClInclude Include="configcenter.h">
       <Filter>config</Filter>
     </ClInclude>

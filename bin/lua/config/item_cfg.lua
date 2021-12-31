@@ -1,10 +1,10 @@
-local items = 
+local items =
 {
 	{ id=1000100, name="1级碎片", type=1, overlap=99,},
 	{ id=1010001, name="2级碎片", type=1, overlap=99,},
 }
 
-local idItems = 
+local idItems =
 {
 	[1000100]=items[1],
 	[1010001]=items[2],

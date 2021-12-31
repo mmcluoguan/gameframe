@@ -1,9 +1,9 @@
-local items = 
+local items =
 {
 	{ id=1, value=10, desc="每日抽奖次数",},
 }
 
-local idItems = 
+local idItems =
 {
 	[1]=items[1],
 }

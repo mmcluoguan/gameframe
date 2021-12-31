@@ -55,7 +55,7 @@ function role:init_fields()
     self.diamond = 0
     table.insert(fields,{ key ='diamond',value = tostring(self.diamond)})
     --剩余抽奖次数
-    self.lottery = global_cfg:getByKey("每日抽奖次数").Value
+    self.lottery = global_cfg:getById(1).value
     table.insert(fields,{ key ='lottery',value = tostring(self.lottery)})
 
     return fields
@@ -153,7 +153,7 @@ end
 
 --重置数据
 function role:resetdata()
-    self.lottery = global_cfg:getByKey("每日抽奖次数").Value
+    self.lottery = global_cfg:getById(1).value
     self:save('lottery')
 end
 

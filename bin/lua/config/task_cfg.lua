@@ -1,10 +1,10 @@
-local items = 
+local items =
 {
 	{ id=1010000, name="任务1", type=1, accept_cond=nil, comp_cond=nil, reward=nil,},
 	{ id=1010001, name="任务2", type=1, accept_cond=nil, comp_cond=nil, reward=nil,},
 }
 
-local idItems = 
+local idItems =
 {
 	[1010000]=items[1],
 	[1010001]=items[2],

@@ -1,10 +1,10 @@
-local items = 
+local items =
 {
 	{ id=1000100, effect={1001,1002},},
 	{ id=1010001, effect=nil,},
 }
 
-local idItems = 
+local idItems =
 {
 	[1000100]=items[1],
 	[1010001]=items[2],

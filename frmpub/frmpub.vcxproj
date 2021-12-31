@@ -69,7 +69,6 @@
     <ClInclude Include="luacallbacktask.h" />
     <ClInclude Include="luaremotedebug.h" />
     <ClInclude Include="luatimertask.h" />
-    <ClInclude Include="matecfg.h" />
     <ClInclude Include="pingtimer.h" />
     <ClInclude Include="protocc\client.pb.h" />
     <ClInclude Include="protocc\common.pb.h" />

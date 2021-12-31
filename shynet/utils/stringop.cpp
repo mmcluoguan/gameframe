@@ -1,5 +1,7 @@
 #include "shynet/utils/stringop.h"
+#include <algorithm>
 #include <arpa/inet.h>
+#include <cctype>
 #include <cstring>
 #include <fcntl.h>
 #include <sstream>
@@ -222,6 +224,30 @@ namespace utils {
                 pos = result.find(toFind, pos);
             }
             return result;
+        }
+
+        /**
+         * @brief 将字符串转换为大写
+         * @param data 字符串
+         * @return 转换后的字符串
+        */
+        std::string toupper(std::string& data)
+        {
+            std::string dst;
+            std::transform(data.begin(), data.end(), back_inserter(dst), ::toupper);
+            return dst;
+        }
+
+        /**
+         * @brief 将字符串转换为小写
+         * @param data 字符串
+         * @return 转换后的字符串
+        */
+        std::string tolower(std::string& data)
+        {
+            std::string dst;
+            std::transform(data.begin(), data.end(), std::back_inserter(dst), ::tolower);
+            return dst;
         }
     }
 }
