@@ -1,23 +1,16 @@
 local items = 
 {
-    { Id = 1, KeyName = "每日抽奖次数", Value = 10, },
+	{ id=1, value=10, desc="每日抽奖次数",},
 }
 
 local idItems = 
 {
-    [1] = items[1],
+	[1]=items[1],
 }
 
-local keyItems = 
-{
-    ["每日抽奖次数"] = items[1],
-}
 
-local data = { Items = items, IdItems = idItems, KeyItems = keyItems, reloaddata = 1 }
+local data = { Items = items, IdItems = idItems, reloaddata = 1 }
 function data:getById(id)
     return self.IdItems[id]
-end
-function data:getByKey(key)
-    return self.KeyItems[key]
 end
 return data

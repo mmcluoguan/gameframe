@@ -1,6 +1,10 @@
-for %%i in (*.proto) do (  
-    protoc --cpp_out=../../frmpub/protocc %%i  
-    protoc -o ../lua/pb/%%~ni.pb %%i 
-)
-pause
+for file in `ls` 
+do
+    if [ "${file##*.}" == "proto" ]
+    then
+        echo $file
+        protoc --cpp_out=../../frmpub/protocc $file
+        protoc -o ../lua/pb/${file%%.*}.pb $file
+    fi
+done
 

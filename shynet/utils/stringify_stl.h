@@ -149,6 +149,13 @@ namespace utils {
         std::string stl_one_(double val) { return std::to_string(val); }
         std::string stl_one_(long double val) { return std::to_string(val); }
         std::string stl_one_(const std::string& s) { return s; }
+        template <typename T1, typename T2>
+        std::string stl_one_(const std::pair<T1, T2>& p)
+        {
+            std::ostringstream ss;
+            ss << "(" << p.first << "," << p.second << ")";
+            return ss.str();
+        }
 
         template <typename T>
         std::string stl_one_(const T& val, const stl_one_style& style = STL_STYLE_ONE_DEFAULT)

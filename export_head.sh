@@ -31,4 +31,4 @@ read_dir $shynet
 echo "导出完成:"$target/$shynet
 mkdir -p $target/$frmpub
 read_dir $frmpub
-echo "导出完成:"$target/$shynet
+echo "导出完成:"$target/$frmpub

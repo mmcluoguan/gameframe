@@ -1,0 +1,8 @@
+{
+ data:{
+	"1010000":{ id:1010000, name:"demo1", type:1, accept_cond:[1,2,3], comp_cond:"", reward:{"diamom":50,"gold":100}, power:50.5, tag:[{"a":1,"b":"2"},{"a":2,"b":"e"}]},
+	"1010001":{ id:1010001, name:"demo2", type:1, accept_cond:[1,2], comp_cond:"", reward:{"diamom":55,"gold":100}, power:10.451, tag:[{"a":1,"b":"2"}]},
+	"1010002":{ id:1010002, name:"demo2", type:1, accept_cond:[], comp_cond:"", reward:{"diamom":55,"gold":100}, power:10.451, tag:[{"a":1,"b":"2"}]},
+ }
+}
+

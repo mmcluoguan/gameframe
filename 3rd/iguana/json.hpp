@@ -1119,11 +1119,20 @@ namespace json {
             using type_v = decltype(std::declval<T>().*std::declval<decltype(v)>());
             if constexpr (!is_reflection<type_v>::value) {
                 rd.next();
+                /* g_has_error = true;
+                std::size_t index { 0 };
+                while (index < Count) {
+                    if (!(rd.peek().str != get_name<T, Idx>().data())) {
+                        g_has_error = false;
+                        break;
+                    }
+                    ++index;
+                }
+                if (g_has_error) {
+                    return;
+                }*/
                 if (rd.peek().str != get_name<T, Idx>().data()) {
                     g_has_error = true;
-                    //std::cerr << "jsontok:" << std::string(rd.peek().str.str, rd.peek().str.len)
-                    //          << " fieldname:" << get_name<T, Idx>().data()
-                    //          << std::endl;
                     return;
                 }
 

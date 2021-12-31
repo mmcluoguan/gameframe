@@ -1,26 +1,18 @@
 local items = 
 {
-    { Id = 1010000, KeyName = "任务1", Type = 1, AcceptCond = nil, CompCond = nil, Reward = nil, },
-    { Id = 1010001, KeyName = "任务2", Type = 1, AcceptCond = nil, CompCond = nil, Reward = nil, },
+	{ id=1010000, name="任务1", type=1, accept_cond=nil, comp_cond=nil, reward=nil,},
+	{ id=1010001, name="任务2", type=1, accept_cond=nil, comp_cond=nil, reward=nil,},
 }
 
 local idItems = 
 {
-    [1010000] = items[1],
-    [1010001] = items[2],
+	[1010000]=items[1],
+	[1010001]=items[2],
 }
 
-local keyItems = 
-{
-    ["任务1"] = items[1],
-    ["任务2"] = items[2],
-}
 
-local data = { Items = items, IdItems = idItems, KeyItems = keyItems, reloaddata = 1 }
+local data = { Items = items, IdItems = idItems, reloaddata = 1 }
 function data:getById(id)
     return self.IdItems[id]
-end
-function data:getByKey(key)
-    return self.KeyItems[key]
 end
 return data

@@ -28,3 +28,4 @@ gate/obj/
 world/obj/
 admin_client/obj/
 test/obj/
+tools/export_tb/obj/

@@ -1,20 +1,7 @@
 {
-  "data": {
-    "1010000": {
-      "Id": 1010000,
-      "KeyName": "任务1",
-      "Type": 1,
-      "AcceptCond": "nil",
-      "CompCond": "nil",
-      "Reward": "nil"
-    },
-    "1010001": {
-      "Id": 1010001,
-      "KeyName": "任务2",
-      "Type": 1,
-      "AcceptCond": "nil",
-      "CompCond": "nil",
-      "Reward": "nil"
-    }
-  }
+ data:{
+	"1010000":{ id:1010000, name:"任务1", type:1, accept_cond:"", comp_cond:"", reward:""},
+	"1010001":{ id:1010001, name:"任务2", type:1, accept_cond:"", comp_cond:"", reward:""}
+ }
 }
+

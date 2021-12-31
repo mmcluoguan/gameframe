@@ -16,21 +16,37 @@
 
 namespace frmpub {
 
-/*===================================task_cfg.josn映射===========================*/
-struct task_cfg_record {
-    int Id;
-    std::string KeyName;
-    int Type;
-    std::string AcceptCond;
-    std::string CompCond;
-    std::string Reward;
+/*===================================demo_cfg.josn映射===========================*/
+struct demo_cfg_record_tag_record {
+    int a;
+    std::string b;
 };
-REFLECTION(task_cfg_record, Id, KeyName, Type, AcceptCond, CompCond, Reward)
 
-struct task_cfg {
-    std::unordered_map<int, task_cfg_record> data;
+REFLECTION(demo_cfg_record_tag_record, a, b)
+
+struct demo_cfg_record_reward {
+    int diamom;
+    int gold;
 };
-REFLECTION(task_cfg, data)
+
+REFLECTION(demo_cfg_record_reward, diamom, gold)
+
+struct demo_cfg_record {
+    int id;
+    std::string name;
+    int type;
+    std::vector<int32_t> accept_cond;
+    std::string comp_cond;
+    demo_cfg_record_reward reward;
+    double power;
+    std::list<demo_cfg_record_tag_record> tag;
+};
+REFLECTION(demo_cfg_record, id, name, type, accept_cond, comp_cond, reward, power, tag)
+
+struct demo_cfg {
+    std::unordered_map<int, demo_cfg_record> data;
+};
+REFLECTION(demo_cfg, data)
 
 }
 
