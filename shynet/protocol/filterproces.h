@@ -103,11 +103,11 @@ namespace protocol {
         /**
          * @brief 单包接收缓冲区最大值
         */
-        const size_t max_reve_buf_size = 4 * 1024 * 1024;
+        const size_t max_reve_buf_size = 100 * 64 * 1024;
         /**
          * @brief 单包最大值(超过时发送分包)
         */
-        const size_t max_single_buf_size = 1024 * 64;
+        const size_t max_single_buf_size = 64 * 1024;
 
         /**
          * @brief 获取管理io缓冲

@@ -92,7 +92,7 @@ namespace protocol {
                     }
                     requset_.set_step(Step::UNINIT);
                 } else {
-                    LOG_WARN << "数据包数据不足,需要data_length:" << data_length << " 当前:" << inputbuffer->length();
+                    LOG_TRACE << "数据包数据不足,需要data_length:" << data_length << " 当前:" << inputbuffer->length();
                     inputbuffer->prependbuffer(restore);
                     return net::InputResult::DATA_INCOMPLETE;
                 }
@@ -153,7 +153,7 @@ namespace protocol {
                     }
                     responses_.set_step(Step::UNINIT);
                 } else {
-                    LOG_WARN << "数据包数据不足,需要data_length:" << data_length << " 当前:" << inputbuffer->length();
+                    LOG_TRACE << "数据包数据不足,需要data_length:" << data_length << " 当前:" << inputbuffer->length();
                     inputbuffer->prependbuffer(restore);
                     return net::InputResult::DATA_INCOMPLETE;
                 }

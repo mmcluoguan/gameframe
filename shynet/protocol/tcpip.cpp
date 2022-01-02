@@ -8,7 +8,7 @@ namespace shynet {
 namespace protocol {
     Tcpip::Tcpip(FilterProces* filter)
         : filter_(filter)
-        , total_original_data_(new char[filter_->max_reve_buf_size])
+        , total_original_data_(std::make_shared<events::Streambuff>())
     {
     }
 
@@ -48,49 +48,62 @@ namespace protocol {
                         inputbuffer->unlock();
                         size_t data_length = ntohl(data_len);
                         if (inputbuffer->length() >= data_length) {
-                            std::unique_ptr<char[]> original_data(new char[data_length]);
-                            inputbuffer->lock();
-                            inputbuffer->remove(original_data.get(), data_length);
-                            restore.reset(new events::Streambuff);
-                            inputbuffer->unlock();
-
-                            //拷贝数据到缓冲区
-                            memcpy(total_original_data_.get() + total_postion_, original_data.get(), data_length);
-                            total_postion_ += data_length;
-                            if (total_postion_ >= filter_->max_reve_buf_size) {
-                                LOG_WARN << "接收缓冲超过最大可接收容量:" << filter_->max_reve_buf_size;
-                                total_postion_ = 0;
-                                return net::InputResult::INITIATIVE_CLOSE;
-                            }
                             //判断是否是完整包
                             if (ft != FrameType::Continuation) {
+                                //数据包完整
                                 if (ft == FrameType::Ping) {
                                     send(nullptr, 0, FrameType::Pong);
                                 } else if (ft == FrameType::Pong) {
                                 } else if (ft == FrameType::Close) {
                                     return net::InputResult::PASSIVE_CLOSE;
                                 } else {
-                                    int ret = filter_->message_handle(total_original_data_.get(), total_postion_);
-                                    total_postion_ = 0;
-                                    if (ret == -1) {
-                                        return net::InputResult::INITIATIVE_CLOSE;
+                                    size_t total_length = total_original_data_->length();
+                                    if (total_length > 0) {
+                                        std::unique_ptr<char[]> complete_data(new char[total_length]);
+                                        total_original_data_->remove(complete_data.get(), total_length);
+                                        int ret = filter_->message_handle(complete_data.get(), total_length);
+                                        if (ret == -1) {
+                                            return net::InputResult::INITIATIVE_CLOSE;
+                                        }
+                                    } else {
+                                        std::unique_ptr<char[]> original_data(new char[data_length]);
+                                        inputbuffer->lock();
+                                        inputbuffer->remove(original_data.get(), data_length);
+                                        restore.reset(new events::Streambuff);
+                                        inputbuffer->unlock();
+                                        int ret = filter_->message_handle(original_data.get(), data_length);
+                                        if (ret == -1) {
+                                            return net::InputResult::INITIATIVE_CLOSE;
+                                        }
                                     }
+                                }
+                            } else {
+                                //数据包不完整,拷贝数据到缓冲区
+                                inputbuffer->lock();
+                                inputbuffer->removebuffer(total_original_data_, data_length);
+                                restore.reset(new events::Streambuff);
+                                inputbuffer->unlock();
+                                size_t total_length = total_original_data_->length();
+                                if (total_length >= filter_->max_reve_buf_size) {
+                                    LOG_WARN << "接收缓冲超过最大可接收容量:" << filter_->max_reve_buf_size;
+                                    total_original_data_->drain(total_length);
+                                    return net::InputResult::INITIATIVE_CLOSE;
                                 }
                             }
                         } else {
-                            LOG_WARN << "数据包数据不足,需要needlen:" << needlen << " 当前:" << inputbuffer->length();
+                            LOG_TRACE << "数据包数据不足,需要needlen:" << needlen << " 当前:" << inputbuffer->length();
                             ;
                             inputbuffer->prependbuffer(restore);
                             return net::InputResult::DATA_INCOMPLETE;
                         }
                     } else {
-                        LOG_WARN << "数据包数据不足,需要needlen:" << needlen << " 当前:" << inputbuffer->length();
+                        LOG_TRACE << "数据包数据不足,需要needlen:" << needlen << " 当前:" << inputbuffer->length();
                         ;
                         inputbuffer->prependbuffer(restore);
                         return net::InputResult::DATA_INCOMPLETE;
                     }
                 } else {
-                    LOG_WARN << "数据包数据不足,需要needlen:" << needlen << " 当前:" << inputbuffer->length();
+                    LOG_TRACE << "数据包数据不足,需要needlen:" << needlen << " 当前:" << inputbuffer->length();
                     ;
                     inputbuffer->prependbuffer(restore);
                     return net::InputResult::DATA_INCOMPLETE;

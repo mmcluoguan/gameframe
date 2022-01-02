@@ -87,11 +87,7 @@ namespace protocol {
         /**
          * @brief 缓存不完整的数据包
         */
-        std::unique_ptr<char[]> total_original_data_;
-        /**
-         * @brief 缓存不完整的数据包当前偏移位置
-        */
-        size_t total_postion_ = 0;
+        std::shared_ptr<events::Streambuff> total_original_data_;
     };
 }
 }

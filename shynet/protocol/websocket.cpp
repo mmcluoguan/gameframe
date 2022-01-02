@@ -11,7 +11,7 @@ namespace shynet {
 namespace protocol {
     WebSocket::WebSocket(FilterProces* filter)
         : filter_(filter)
-        , total_original_data_(new char[filter_->max_reve_buf_size])
+        , total_original_data_(std::make_shared<events::Streambuff>())
     {
     }
 
@@ -174,7 +174,7 @@ namespace protocol {
                     inputbuffer->unlock();
                     data_length = ntohs((uint16_t)data_length);
                 } else {
-                    LOG_WARN << "数据包数据不足,需要needlen:" << needlen;
+                    LOG_TRACE << "数据包数据不足,需要needlen:" << needlen;
                     inputbuffer->lock();
                     inputbuffer->prependbuffer(restore);
                     inputbuffer->unlock();
@@ -189,7 +189,7 @@ namespace protocol {
                     inputbuffer->unlock();
                     data_length = utils::stuff::ntohl64(data_length);
                 } else {
-                    LOG_WARN << "数据包数据不足,需要needlen:" << needlen;
+                    LOG_TRACE << "数据包数据不足,需要needlen:" << needlen;
                     inputbuffer->lock();
                     inputbuffer->prependbuffer(restore);
                     inputbuffer->unlock();
@@ -197,7 +197,7 @@ namespace protocol {
                 }
             }
         } else {
-            LOG_WARN << "数据包数据不足,需要needlen:" << needlen;
+            LOG_TRACE << "数据包数据不足,需要needlen:" << needlen;
             inputbuffer->lock();
             inputbuffer->prependbuffer(restore);
             inputbuffer->unlock();
@@ -212,7 +212,7 @@ namespace protocol {
                 restore->add(mask, needlen);
                 inputbuffer->unlock();
             } else {
-                LOG_WARN << "数据包数据不足,需要needlen:" << needlen;
+                LOG_TRACE << "数据包数据不足,需要needlen:" << needlen;
                 inputbuffer->lock();
                 inputbuffer->prependbuffer(restore);
                 inputbuffer->unlock();
@@ -239,25 +239,36 @@ namespace protocol {
             } else if (ft == FrameType::Close) {
                 return net::InputResult::PASSIVE_CLOSE;
             } else {
-                //拷贝数据到缓冲区
-                memcpy(total_original_data_.get() + total_postion_, original_data.get(), data_length);
-                total_postion_ += data_length;
-                if (total_postion_ >= filter_->max_reve_buf_size) {
-                    LOG_WARN << "接收缓冲超过最大可接收容量:" << filter_->max_reve_buf_size;
-                    total_postion_ = 0;
-                    return net::InputResult::INITIATIVE_CLOSE;
-                }
                 //判断是否是完整包
                 if (fin == 1) {
-                    int ret = filter_->message_handle(total_original_data_.get(), total_postion_);
-                    total_postion_ = 0;
-                    if (ret == -1) {
+                    //数据包完整
+                    size_t total_length = total_original_data_->length();
+                    if (total_length > 0) {
+                        std::unique_ptr<char[]> complete_data(new char[total_length]);
+                        total_original_data_->remove(complete_data.get(), total_length);
+                        int ret = filter_->message_handle(complete_data.get(), total_length);
+                        if (ret == -1) {
+                            return net::InputResult::INITIATIVE_CLOSE;
+                        }
+                    } else {
+                        int ret = filter_->message_handle(original_data.get(), data_length);
+                        if (ret == -1) {
+                            return net::InputResult::INITIATIVE_CLOSE;
+                        }
+                    }
+                } else {
+                    //数据包不完整,拷贝数据到缓冲区
+                    total_original_data_->add(original_data.get(), data_length);
+                    size_t total_length = total_original_data_->length();
+                    if (total_length >= filter_->max_reve_buf_size) {
+                        LOG_WARN << "接收缓冲超过最大可接收容量:" << filter_->max_reve_buf_size;
+                        total_original_data_->drain(total_length);
                         return net::InputResult::INITIATIVE_CLOSE;
                     }
                 }
             }
         } else {
-            LOG_WARN << "数据包数据不足,需要data_length:" << data_length << " 当前:" << buffer_length << " fin:" << fin;
+            LOG_TRACE << "数据包数据不足,需要data_length:" << data_length << " 当前:" << buffer_length << " fin:" << fin;
             inputbuffer->lock();
             inputbuffer->prependbuffer(restore);
             inputbuffer->unlock();
