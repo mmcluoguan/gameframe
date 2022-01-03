@@ -23,11 +23,6 @@ namespace thread {
          * @return 累计接收客户端连接数量
         */
         int event_tot() const { return eventTot_; }
-        /**
-         * @brief 设置累计接收客户端连接数量
-         * @param v 累计接收客户端连接数量
-        */
-        void set_event_tot(int v) { eventTot_ = v; }
 
         /**
          * @brief 线程运行回调
