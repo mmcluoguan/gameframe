@@ -41,7 +41,17 @@ namespace thread {
                 }
                 if (tk != nullptr) {
                     try {
+#ifdef USE_DEBUG
+                        auto msec = utils::stuff::tick_msec();
                         int ret = tk->run(this);
+                        msec = utils::stuff::tick_msec() - msec;
+                        LOG_DEBUG << "lua线程单任务执行时间:" << msec << "ms";
+                        if (msec > 10) {
+                            LOG_WARN << "lua线程单任务执行时间超过10ms,请检查";
+                        }
+#elif
+                        int ret = tk->run(this);
+#endif
                         if (ret < 0) {
                             LOG_WARN << "thread[" << index() << "] 线程异常退出";
                             return 0;

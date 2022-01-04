@@ -122,6 +122,7 @@ int LoginConnector::forward_login_client_c(std::shared_ptr<protocc::CommonObject
             if (data->msgid() == protocc::LOGIN_CLIENT_GATE_S) {
                 protocc::login_client_gate_s msgc;
                 if (msgc.ParseFromString(data->msgdata()) == true) {
+                    assert(msgc.result() == 0);
                     if (msgc.result() == 0) {
                         client->set_accountid(msgc.aid());
                         if (data->extend().empty() == false) {

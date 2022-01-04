@@ -33,7 +33,7 @@ namespace thread {
             if (len == 0) {
                 break;
             } else if (len != sizeof(buf)) {
-                LOG_DEBUG << "没有足够的数据";
+                LOG_WARN << "AcceptThread没有足够的数据";
             } else {
                 uintptr_t* p = reinterpret_cast<uintptr_t*>(buf);
                 net::ListenEvent* apnf = reinterpret_cast<net::ListenEvent*>(*p);

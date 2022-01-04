@@ -1,8 +1,10 @@
 #include "shynet/events/eventbufferssl.h"
 #include "shynet/utils/logger.h"
+#include <csignal>
 
 namespace shynet {
 namespace events {
+
     EventBufferSsl::EventBufferSsl(std::shared_ptr<EventBase> base,
         evutil_socket_t fd, bufferevent_ssl_state state, int options, SSL_CTX* ctx)
         : EventBuffer(base)
@@ -20,7 +22,9 @@ namespace events {
     EventBufferSsl::~EventBufferSsl()
     {
         if (ssl_ != nullptr) {
+            std::signal(SIGPIPE, SIG_IGN);
             SSL_shutdown(ssl_);
+            SSL_set_shutdown(ssl_, SSL_SENT_SHUTDOWN);
             SSL_set_shutdown(ssl_, SSL_RECEIVED_SHUTDOWN);
             //SSL_free(ssl_);
         }

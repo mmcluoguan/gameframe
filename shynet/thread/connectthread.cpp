@@ -31,7 +31,7 @@ namespace thread {
             if (len == 0) {
                 break;
             } else if (len != sizeof(buf)) {
-                LOG_WARN << "没有足够的数据";
+                LOG_WARN << "ConnectThread没有足够的数据";
             } else {
                 int connectid = 0;
                 size_t index = 0;

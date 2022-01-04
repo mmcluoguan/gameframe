@@ -64,6 +64,12 @@ public:
     */
     int64_t roleid() { return roleid_; }
 
+    /**
+     * @brief 设置平台key
+     * @param key 平台key
+    */
+    void set_platform_key(std::string key) { platform_key_ = key; }
+
 private:
     /**
      * @brief 接收gate服务器发来的错误信息

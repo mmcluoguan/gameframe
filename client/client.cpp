@@ -36,13 +36,17 @@ int main(int argc, char* argv[])
 
         Singleton<ThreadPool>::instance().start();
 
-        string gateip = ini.get<string>("client", "gateip");
-        short gateport = ini.get<short>("client", "gateport");
-        shared_ptr<IPAddress> gateaddr(new IPAddress(gateip.c_str(), gateport));
-        shared_ptr<GateConnector> gateconnect(new GateConnector(gateaddr));
-        gateaddr.reset();
-        g_gateconnect_id = Singleton<ConnectReactorMgr>::instance().add(gateconnect);
-        gateconnect.reset();
+        for (int i = 0; i < 500; i++) {
+            string gateip = ini.get<string>("client", "gateip");
+            short gateport = ini.get<short>("client", "gateport");
+            shared_ptr<IPAddress> gateaddr(new IPAddress(gateip.c_str(), gateport));
+            shared_ptr<GateConnector> gateconnect(new GateConnector(gateaddr));
+            gateconnect->set_platform_key("test_" + std::to_string(i));
+            gateaddr.reset();
+            g_gateconnect_id = Singleton<ConnectReactorMgr>::instance().add(gateconnect);
+            gateconnect.reset();
+            LOG_DEBUG << "计数:" << i;
+        }
 
         shared_ptr<EventBase> base(new EventBase());
         ConsoleHandler* stdin = &Singleton<ConsoleHandler>::instance(base);

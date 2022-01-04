@@ -52,9 +52,9 @@ GateConnector::~GateConnector()
     if (active() != net::CloseType::CLIENT_CLOSE && enable_reconnect_ == true) {
         LOG_INFO << "3秒后开始重连";
 
-        std::shared_ptr<GateReConnctorTimer> reconnect(
-            new GateReConnctorTimer(connect_addr(), disconnect_data(), { 3L, 0L }));
-        shynet::utils::Singleton<net::TimerReactorMgr>::instance().add(reconnect);
+        //std::shared_ptr<GateReConnctorTimer> reconnect(
+        //    new GateReConnctorTimer(connect_addr(), disconnect_data(), { 3L, 0L }));
+        //shynet::utils::Singleton<net::TimerReactorMgr>::instance().add(reconnect);
     }
 }
 void GateConnector::complete()
@@ -163,7 +163,7 @@ int GateConnector::selectserver_client_gate_s(std::shared_ptr<protocc::CommonObj
         protocc::login_client_gate_c msgc;
         msgc.set_platform_key(platform_key_);
         send_proto(protocc::LOGIN_CLIENT_GATE_C, &msgc);
-        LOG_DEBUG << "登陆";
+        LOG_DEBUG << "登陆 platform_key:" << platform_key_;
     } else {
         std::stringstream stream;
         stream << "消息" << frmpub::Basic::msgname(data->msgid()) << "解析错误";
@@ -174,9 +174,11 @@ int GateConnector::selectserver_client_gate_s(std::shared_ptr<protocc::CommonObj
 int GateConnector::login_client_gate_s(std::shared_ptr<protocc::CommonObject> data,
     std::shared_ptr<std::stack<FilterData::Envelope>> enves)
 {
+    static int count = 0;
     protocc::login_client_gate_s msgc;
     if (msgc.ParseFromString(data->msgdata()) == true) {
-        LOG_DEBUG << "登录结果:" << msgc.result() << " aid:" << msgc.aid();
+        LOG_DEBUG << count << "登录结果:" << msgc.result() << " aid:" << msgc.aid();
+        count++;
         if (msgc.result() == 0) {
             accountid_ = msgc.aid();
             roleid_ = msgc.roleid();

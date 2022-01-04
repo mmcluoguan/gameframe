@@ -117,6 +117,7 @@ int GateClient::login_message(std::shared_ptr<protocc::CommonObject> obj,
             //同服顶号处理
             protocc::login_client_gate_c msgc;
             if (msgc.ParseFromString(obj->msgdata()) == true) {
+                assert(msgc.platform_key().empty() == false);
                 auto cli = shynet::utils::Singleton<GateClientMgr>::instance().find(msgc.platform_key());
                 if (cli) {
                     protocc::repeatlogin_client_gate_s msgs;

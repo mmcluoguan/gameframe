@@ -46,7 +46,7 @@ Datahelp::ErrorCode Datahelp::getdata_from_cache(const std::string& cachekey,
     std::chrono::seconds seconds)
 {
 
-    redis::Redis& redis = shynet::utils::Singleton<redis::Redis>::instance(std::string());
+    redis::Redis& redis = shynet::utils::Singleton<redis::Redis>::get_instance();
     if (redis.exists(cachekey) == 1) {
         std::vector<std::string> out_key;
         for (auto&& [key, value] : out) {
@@ -88,7 +88,7 @@ Datahelp::ErrorCode Datahelp::getdata(const std::string& cachekey,
             error = getdata_from_db(temp[0], temp[1], out);
             if (error == ErrorCode::OK) {
                 if (updatacache) {
-                    redis::Redis& redis = shynet::utils::Singleton<redis::Redis>::instance(std::string());
+                    redis::Redis& redis = shynet::utils::Singleton<redis::Redis>::get_instance();
                     redis.hset(cachekey, out.begin(), out.end());
                     if (seconds.count() != 0) {
                         redis.expire(cachekey, seconds);
@@ -145,7 +145,7 @@ moredataptr Datahelp::getdata_more_cache(const std::string& condition,
 {
 
     moredataptr datalist = std::make_shared<moredata>();
-    redis::Redis& redis = shynet::utils::Singleton<redis::Redis>::instance(std::string());
+    redis::Redis& redis = shynet::utils::Singleton<redis::Redis>::get_instance();
     auto cursor = 0LL;
     std::unordered_set<std::string> keys;
     while (true) {
@@ -214,7 +214,7 @@ moredataptr Datahelp::getdata_more(const std::string& condition,
                     if (pos == std::string::npos)
                         THROW_EXCEPTION("找不到* condition:" + condition);
                     cache_key.replace(pos, 1, it["_id"]);
-                    redis::Redis& redis = shynet::utils::Singleton<redis::Redis>::instance(std::string());
+                    redis::Redis& redis = shynet::utils::Singleton<redis::Redis>::get_instance();
                     redis.hmset(cache_key, it.begin(), it.end());
                     if (seconds.count() != 0) {
                         redis.expire(cache_key, seconds);
@@ -254,7 +254,7 @@ void Datahelp::insert_db(const std::string& tablename, const std::string& key,
 
 void Datahelp::insert_cache(const std::string& cachekey, const std::unordered_map<std::string, std::string>& fields, std::chrono::seconds seconds)
 {
-    redis::Redis& redis = shynet::utils::Singleton<redis::Redis>::instance(std::string());
+    redis::Redis& redis = shynet::utils::Singleton<redis::Redis>::get_instance();
     redis.hmset(cachekey, fields.begin(), fields.end());
     if (seconds.count() != 0) {
         redis.expire(cachekey, seconds);
@@ -297,7 +297,7 @@ void Datahelp::delete_db(const std::string& tablename, const std::string& key)
 
 void Datahelp::delete_cache(const std::string& cachekey)
 {
-    redis::Redis& redis = shynet::utils::Singleton<redis::Redis>::instance(std::string());
+    redis::Redis& redis = shynet::utils::Singleton<redis::Redis>::get_instance();
     long long ret = redis.del(cachekey);
     if (ret == 0) {
         LOG_WARN << "cachekey数据删除失败 cachekey:" << cachekey;
@@ -345,7 +345,7 @@ void Datahelp::updata_cache(const std::string& cachekey,
     const std::unordered_map<std::string, std::string>& fields,
     std::chrono::seconds seconds)
 {
-    redis::Redis& redis = shynet::utils::Singleton<redis::Redis>::instance(std::string());
+    redis::Redis& redis = shynet::utils::Singleton<redis::Redis>::get_instance();
     redis.hmset(cachekey, fields.begin(), fields.end());
     if (seconds.count() != 0) {
         redis.expire(cachekey, seconds);

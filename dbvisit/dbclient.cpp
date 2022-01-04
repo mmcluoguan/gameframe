@@ -49,7 +49,7 @@ DbClient::~DbClient()
 {
     std::string type = frmpub::Basic::connectname(sif().st());
     std::string key = shynet::utils::stringop::str_format("%s_%d", type.c_str(), sif().sid());
-    redis::Redis& redis = shynet::utils::Singleton<redis::Redis>::instance(std::string());
+    redis::Redis& redis = shynet::utils::Singleton<redis::Redis>::get_instance();
     try {
         redis.del(key);
     } catch (const std::exception& err) {
@@ -59,7 +59,7 @@ DbClient::~DbClient()
     if (active() == net::CloseType::SERVER_CLOSE) {
         str = "服务器dbvisit主动关闭连接";
     } else {
-        str = frmpub::Basic::connectname(sif().st()) + "客户端主动关闭连接";
+        str = frmpub::Basic::connectname(sif().st()) + std::string("客户端主动关闭连接");
     }
     LOG_INFO << str << "[ip:" << remote_addr()->ip() << ":" << remote_addr()->port() << "]";
 }
@@ -87,7 +87,7 @@ void DbClient::close(net::CloseType active)
 
 bool DbClient::verify_register(const protocc::ServerInfo& sif)
 {
-    redis::Redis& redis = shynet::utils::Singleton<redis::Redis>::instance(std::string());
+    redis::Redis& redis = shynet::utils::Singleton<redis::Redis>::get_instance();
     std::string type = frmpub::Basic::connectname(sif.st());
     std::string key = shynet::utils::stringop::str_format("%s_%d", type.c_str(), sif.sid());
     std::unordered_map<std::string, std::string> info;
@@ -442,7 +442,7 @@ int DbClient::login_client_gate_c(std::shared_ptr<protocc::CommonObject> data,
                 { "online", "1" },
                 { "platform_key", msgc.platform_key() },
             };
-            redis::Redis& redis = shynet::utils::Singleton<redis::Redis>::instance(std::string());
+            redis::Redis& redis = shynet::utils::Singleton<redis::Redis>::get_instance();
             //通过平台key取出账号cache_key_value
             redis::OptionalString cache_key_value = redis.get(msgc.platform_key());
             Datahelp& help = shynet::utils::Singleton<Datahelp>::instance();
@@ -465,11 +465,11 @@ int DbClient::login_client_gate_c(std::shared_ptr<protocc::CommonObject> data,
                     roleid = user_data["roleid"];
                     old_gate_sid = user_data["gate_sid"];
                 }
-                *cache_key_value = "account_" + accountid;
+                std::string key = std::string("account_") + accountid;
                 //玩家平台key缓存X小时
-                redis.set(msgc.platform_key(), *cache_key_value, oneday_);
+                redis.set(msgc.platform_key(), key, oneday_);
                 //缓存玩家数据
-                help.updata_cache(*cache_key_value, user_data);
+                help.updata_cache(key, user_data);
                 LOG_DEBUG << "从db取出账号信息 accountid:" << accountid << " roleid:" << roleid;
             } else {
                 //玩家平台key缓存X小时
@@ -511,10 +511,13 @@ int DbClient::login_client_gate_c(std::shared_ptr<protocc::CommonObject> data,
                 }
             }
             if (result == 0) {
-                //如果有则清除断线重连有效时间
-                redis::Redis& redis = shynet::utils::Singleton<redis::Redis>::instance(std::string());
-                redis.del(*cache_key_value + "_disconnect");
+                if (cache_key_value) {
+                    //如果有则清除断线重连有效时间
+                    std::string key = *cache_key_value + std::string("_disconnect");
+                    redis.del(key);
+                }
             }
+            assert(accountid.empty() == false);
             //发送登录结果
             protocc::login_client_gate_s msgs;
             msgs.set_result(result);
@@ -523,7 +526,8 @@ int DbClient::login_client_gate_c(std::shared_ptr<protocc::CommonObject> data,
             send_proto(protocc::LOGIN_CLIENT_GATE_S, &msgs, enves.get(), &game_sid);
             LOG_DEBUG << "发送消息" << frmpub::Basic::msgname(protocc::LOGIN_CLIENT_GATE_S) << "到"
                       << frmpub::Basic::connectname(sif().st())
-                      << " result:" << msgs.result();
+                      << " result:" << msgs.result()
+                      << " aid:" << msgs.aid();
         } catch (const std::exception& err) {
             SEND_ERR(protocc::DB_CACHE_ERROR, err.what());
         }
@@ -542,7 +546,7 @@ int DbClient::clioffline_gate_all_c(std::shared_ptr<protocc::CommonObject> data,
     if (msgc.ParseFromString(data->msgdata()) == true) {
         try {
             LOG_DEBUG << "玩家下线 账号id:" << msgc.aid();
-            std::string key = "account_" + msgc.aid();
+            std::string key = std::string("account_") + msgc.aid();
             std::unordered_map<std::string, std::string> fields {
                 { "clientaddr", "" },
                 { "clientport", "" },
@@ -565,9 +569,9 @@ int DbClient::clioffline_gate_all_c(std::shared_ptr<protocc::CommonObject> data,
                     };
                     help.updata(key, data, Datahelp::OperType::ALL);
 
-                    redis::Redis& redis = shynet::utils::Singleton<redis::Redis>::instance(std::string());
+                    redis::Redis& redis = shynet::utils::Singleton<redis::Redis>::get_instance();
                     //设置断线重连有效时间30秒
-                    redis.set(key + "_disconnect", "0", std::chrono::seconds(30));
+                    redis.set(key + std::string("_disconnect"), "0", std::chrono::seconds(30));
                 }
             } else {
                 LOG_WARN << "账号不存在 key=" << key << " 失败";
@@ -590,8 +594,8 @@ int DbClient::reconnect_client_gate_c(std::shared_ptr<protocc::CommonObject> dat
     if (msgc.ParseFromString(data->msgdata()) == true) {
         protocc::reconnect_client_gate_s msgs;
         try {
-            redis::Redis& redis = shynet::utils::Singleton<redis::Redis>::instance(std::string());
-            std::string key = "account_" + msgc.aid() + "_disconnect";
+            redis::Redis& redis = shynet::utils::Singleton<redis::Redis>::get_instance();
+            std::string key = std::string("account_") + msgc.aid() + std::string("_disconnect");
             //验证断线重连是否有效
             if (redis.exists(key)) {
                 std::stack<FilterData::Envelope> routing = *enves;
@@ -611,7 +615,7 @@ int DbClient::reconnect_client_gate_c(std::shared_ptr<protocc::CommonObject> dat
                     { "game_sid", std::to_string(msgc.gameid()) },
                     { "gate_sid", data->extend() },
                 };
-                shynet::utils::Singleton<Datahelp>::instance().updata("account_" + msgc.aid(), clidata,
+                shynet::utils::Singleton<Datahelp>::instance().updata(std::string("account_") + msgc.aid(), clidata,
                     Datahelp::OperType::ALL);
                 redis.del(key);
             } else {

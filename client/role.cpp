@@ -73,14 +73,18 @@ int Role::input_handle(std::shared_ptr<protocc::CommonObject> obj, std::shared_p
 int Role::loadrole_client_gate_s(std::shared_ptr<protocc::CommonObject> data,
     std::shared_ptr<std::stack<FilterData::Envelope>> enves)
 {
+    static int count = 0;
     protocc::loadrole_client_gate_s msgs;
     if (msgs.ParseFromString(data->msgdata()) == true) {
-        LOG_DEBUG << "加载角色结果:" << msgs.result()
+        LOG_DEBUG << count << "加载角色结果:" << msgs.result()
+                  << " aid:" << msgs.aid()
                   << " roleid:" << msgs.roleid()
                   << " level:" << msgs.level()
                   << " gold:" << msgs.gold()
                   << " diamond:" << msgs.diamond()
                   << " lottery:" << msgs.lottery();
+        count++;
+        accountid_ = msgs.aid();
         id_ = msgs.roleid();
         level_ = msgs.level();
         gold_ = msgs.gold();
@@ -88,7 +92,7 @@ int Role::loadrole_client_gate_s(std::shared_ptr<protocc::CommonObject> data,
         lottery_ = msgs.lottery();
 
         send_proto(protocc::LOADGOODS_CLIENT_GATE_C);
-        LOG_DEBUG << "加载角色物品数据";
+        LOG_DEBUG << "加载角色物品数据 roleid:" << id_;
     } else {
         std::stringstream stream;
         stream << "消息" << frmpub::Basic::msgname(data->msgid()) << "解析错误";
@@ -98,9 +102,14 @@ int Role::loadrole_client_gate_s(std::shared_ptr<protocc::CommonObject> data,
 }
 int Role::loadgoods_client_gate_s(std::shared_ptr<protocc::CommonObject> data, std::shared_ptr<std::stack<FilterData::Envelope>> enves)
 {
+    static int count = 0;
     protocc::loadgoods_client_gate_s msgs;
     if (msgs.ParseFromString(data->msgdata()) == true) {
         goodsmap_.clear();
+        LOG_DEBUG << count << "获取角色物品数量:" << msgs.goods_size()
+                  << " roleid:" << id_;
+        count++;
+        return 0;
         for (int i = 0; i < msgs.goods_size(); i++) {
             goodsmap_[msgs.goods(i).id()] = {
                 msgs.goods(i).id(),

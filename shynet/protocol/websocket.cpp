@@ -315,7 +315,6 @@ namespace protocol {
         newkey += magic_key_;
         crypto::sha1::calc(newkey.c_str(), newkey.length(), md);
         request_key_ = crypto::base64_encode(md, 20);
-        LOG_DEBUG << "request_handshake";
         return filter_->iobuf()->write(buf.c_str(), buf.length());
     }
 
