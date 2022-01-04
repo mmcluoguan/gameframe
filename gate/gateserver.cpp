@@ -5,7 +5,7 @@
 
 namespace gate {
 GateServer::GateServer(std::shared_ptr<net::IPAddress> listen_addr)
-    : net::ListenEvent(listen_addr, true)
+    : net::ListenEvent(listen_addr, false)
 {
     LOG_INFO << "服务器gate启动 [ip:" << listen_addr->ip() << ":" << listen_addr->port() << "]";
     shynet::utils::Singleton<GateClientMgr>::instance().set_listen_addr(*listenaddr());

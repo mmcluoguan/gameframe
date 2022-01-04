@@ -172,6 +172,7 @@ int DbConnector::login_client_gate_s(std::shared_ptr<protocc::CommonObject> data
 {
     protocc::login_client_gate_s msgc;
     if (msgc.ParseFromString(data->msgdata()) == true) {
+        //assert(msgc.aid().empty() == false);
         if (msgc.result() == 0) {
             //判断登录前是否选择gamesid
             if (data->extend().empty() == false) {

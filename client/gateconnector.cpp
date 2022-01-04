@@ -1,6 +1,5 @@
 #include "client/gateconnector.h"
 #include "client/gatereconnctortimer.h"
-#include "client/role.h"
 #include "frmpub/reconnecttimer.h"
 #include "shynet/events/streambuff.h"
 #include "shynet/net/connectreactormgr.h"
@@ -9,7 +8,7 @@
 namespace client {
 GateConnector::GateConnector(std::shared_ptr<net::IPAddress> connect_addr,
     std::shared_ptr<DisConnectData> disconnect)
-    : frmpub::Connector(connect_addr, "GateConnector", true, false, 5L, shynet::protocol::FilterProces::ProtoType::WEBSOCKET)
+    : frmpub::Connector(connect_addr, "GateConnector", false, false, 5L, shynet::protocol::FilterProces::ProtoType::WEBSOCKET)
 {
     disconnect_ = disconnect;
     if (disconnect_ != nullptr) {
@@ -60,7 +59,6 @@ GateConnector::~GateConnector()
 void GateConnector::complete()
 {
     LOG_INFO << "连接服务器gate成功 [ip:" << connect_addr()->ip() << ":" << connect_addr()->port() << "]";
-    shynet::utils::Singleton<Role>::instance().set_gate(shared_from_this());
     if (disconnect_ == nullptr) {
         //获取服务器列表
         send_proto(protocc::SERVERLIST_CLIENT_GATE_C);
@@ -76,7 +74,6 @@ void GateConnector::complete()
             accountid_ = disconnect_->accountid;
             login_id_ = disconnect_->login_id;
             game_id_ = disconnect_->game_id;
-            roleid_ = disconnect_->roleid;
             msg.set_aid(disconnect_->accountid);
             msg.set_loginid(disconnect_->login_id);
             msg.set_gameid(disconnect_->game_id);
@@ -93,8 +90,8 @@ int GateConnector::input_handle(std::shared_ptr<protocc::CommonObject> obj, std:
         if (it != pmb_.end()) {
             return it->second(obj, enves);
         } else {
-            if (roleid_ != 0) {
-                return shynet::utils::Singleton<Role>::get_instance().input_handle(obj, enves);
+            if (role_ != 0) {
+                return role_->input_handle(obj, enves);
             } else {
                 LOG_DEBUG << "消息" << frmpub::Basic::msgname(obj->msgid()) << " 没有处理函数";
             }
@@ -108,7 +105,6 @@ std::shared_ptr<GateConnector::DisConnectData> GateConnector::disconnect_data()
     data->login_id = login_id_;
     data->game_id = game_id_;
     data->accountid = accountid_;
-    data->roleid = roleid_;
     return data;
 }
 int GateConnector::errcode(std::shared_ptr<protocc::CommonObject> data, std::shared_ptr<std::stack<FilterData::Envelope>> enves)
@@ -118,11 +114,13 @@ int GateConnector::errcode(std::shared_ptr<protocc::CommonObject> data, std::sha
         LOG_DEBUG << "错误码:" << err.code() << " 描述:" << err.desc();
         if (err.code() == protocc::errnum::GAME_ROLE_NOT_EXIST) {
             //加载角色数据
-            protocc::loadrole_client_gate_c msg;
-            msg.set_aid(accountid_);
-            msg.set_roleid(roleid_);
-            send_proto(protocc::LOADROLE_CLIENT_GATE_C, &msg);
-            LOG_DEBUG << "重新加载角色数据 roleid:" << roleid_;
+            if (role_ != nullptr) {
+                protocc::loadrole_client_gate_c msg;
+                msg.set_aid(accountid_);
+                msg.set_roleid(role_->id());
+                send_proto(protocc::LOADROLE_CLIENT_GATE_C, &msg);
+                LOG_DEBUG << "重新加载角色数据 roleid:" << role_->id();
+            }
         }
     } else {
         std::stringstream stream;
@@ -179,11 +177,10 @@ int GateConnector::login_client_gate_s(std::shared_ptr<protocc::CommonObject> da
     if (msgc.ParseFromString(data->msgdata()) == true) {
         LOG_DEBUG << count << "登录结果:" << msgc.result() << " aid:" << msgc.aid();
         count++;
+        //return 0;
         if (msgc.result() == 0) {
             accountid_ = msgc.aid();
-            roleid_ = msgc.roleid();
-            shynet::utils::Singleton<Role>::get_instance().set_accountid(accountid_);
-            if (roleid_ == 0) {
+            if (msgc.roleid() == 0) {
                 //创建角色
                 protocc::createrole_client_gate_c msg;
                 msg.set_aid(accountid_);
@@ -191,11 +188,19 @@ int GateConnector::login_client_gate_s(std::shared_ptr<protocc::CommonObject> da
                 LOG_DEBUG << "创建角色";
             } else {
                 //加载角色数据
+                if (role_ == nullptr) {
+                    role_ = std::make_shared<Role>();
+                }
+                role_->set_gate(shared_from_this());
+                role_->set_id(msgc.roleid());
+                role_->set_accountid(accountid_);
                 protocc::loadrole_client_gate_c msg;
                 msg.set_aid(accountid_);
-                msg.set_roleid(roleid_);
+                msg.set_roleid(msgc.roleid());
                 send_proto(protocc::LOADROLE_CLIENT_GATE_C, &msg);
-                LOG_DEBUG << "加载角色数据 roleid:" << roleid_;
+                LOG_DEBUG << "加载角色数据 roleid:" << role_->id()
+                          << " accountid:" << accountid_
+                          << " platform_key:" << platform_key_;
             }
         }
     } else {
@@ -218,7 +223,6 @@ int GateConnector::reconnect_client_gate_s(std::shared_ptr<protocc::CommonObject
     if (msgs.ParseFromString(data->msgdata()) == true) {
         LOG_DEBUG << "断线重连结果:" << msgs.result();
         if (msgs.result() == 0) {
-
         } else {
             //选择服务器
             protocc::selectserver_client_gate_c msg;
@@ -242,11 +246,15 @@ int client::GateConnector::createrole_client_gate_s(std::shared_ptr<protocc::Com
     if (msgc.ParseFromString(data->msgdata()) == true) {
         LOG_DEBUG << "创建角色结果:" << msgc.result();
         if (msgc.result() == 0) {
-            roleid_ = msgc.roleid();
-            shynet::utils::Singleton<Role>::get_instance().set_id(roleid_);
+            if (role_ == nullptr) {
+                role_ = std::make_shared<Role>();
+            }
+            role_->set_gate(shared_from_this());
+            role_->set_id(msgc.roleid());
+            role_->set_accountid(accountid_);
             //加载角色数据
             protocc::loadrole_client_gate_c msg;
-            msg.set_roleid(roleid_);
+            msg.set_roleid(role_->id());
             send_proto(protocc::LOADROLE_CLIENT_GATE_C, &msg);
             LOG_DEBUG << "加载角色数据";
         }

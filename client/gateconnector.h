@@ -1,6 +1,7 @@
 #ifndef CLIENT_GATECONNECTOR_H
 #define CLIENT_GATECONNECTOR_H
 
+#include "client/role.h"
 #include "frmpub/connector.h"
 
 namespace client {
@@ -59,16 +60,16 @@ public:
     std::shared_ptr<GateConnector::DisConnectData> disconnect_data();
 
     /**
-     * @brief 获取角色id
-     * @return 角色id
-    */
-    int64_t roleid() { return roleid_; }
-
-    /**
      * @brief 设置平台key
      * @param key 平台key
     */
     void set_platform_key(std::string key) { platform_key_ = key; }
+
+    /**
+     * @brief 获取角色
+     * @return 角色
+    */
+    std::shared_ptr<Role> role() { return role_; };
 
 private:
     /**
@@ -158,13 +159,13 @@ private:
     */
     std::string accountid_;
     /**
-     * @brief 角色id
-    */
-    int64_t roleid_ = 0;
-    /**
      * @brief 重连前的连接数据
     */
     std::shared_ptr<DisConnectData> disconnect_ = nullptr;
+    /**
+     * @brief 角色
+    */
+    std::shared_ptr<Role> role_ = nullptr;
 };
 }
 

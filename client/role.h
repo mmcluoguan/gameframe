@@ -1,7 +1,6 @@
 #ifndef CLIENT_ROLE_H
 #define CLIENT_ROLE_H
 
-#include "client/gateconnector.h"
 #include "frmpub/filterdata.h"
 #include "shynet/basic.h"
 #include "shynet/utils/singleton.h"
@@ -11,14 +10,11 @@ using namespace shynet;
 using namespace frmpub;
 
 namespace client {
+
+class GateConnector;
 class Role {
 
-    friend class shynet::utils::Singleton<Role>;
-    Role();
-
 public:
-    static constexpr const char* kClassname = "Role";
-
     struct Goods {
         int64_t id;
         int32_t cfgid;
@@ -44,71 +40,88 @@ public:
         std::shared_ptr<Annex> annex;
     };
 
-    ~Role();
+    /**
+     * @brief 构造
+    */
+    Role();
+    ~Role() = default;
 
-    int64_t id() const
-    {
-        return id_;
-    }
-    void set_id(int64_t v)
-    {
-        id_ = v;
-    }
+    /**
+     * @brief 获取角色id
+     * @return 角色id
+    */
+    int64_t id() const { return id_; }
+    /**
+     * @brief 设置角色id
+     * @param v 角色id
+    */
+    void set_id(int64_t v) { id_ = v; }
+    /**
+     * @brief 获取账号
+     * @return 账号
+    */
+    std::string accountid() const { return accountid_; }
+    /**
+     * @brief 设置账号
+     * @param v 账号
+    */
+    void set_accountid(std::string v) { accountid_ = v; }
 
-    std::string accountid() const
-    {
-        return accountid_;
-    }
-    void set_accountid(std::string v)
-    {
-        accountid_ = v;
-    }
+    /**
+     * @brief 获取等级
+     * @return 等级
+    */
+    int32_t level() const { return level_; }
+    /**
+     * @brief 设置等级
+     * @param v 等级
+    */
+    void set_level(int32_t v) { level_ = v; }
 
-    int32_t level() const
-    {
-        return level_;
-    }
-    void set_level(int32_t v)
-    {
-        level_ = v;
-    }
+    /**
+     * @brief 获取金币
+     * @return 金币
+    */
+    int32_t gold() const { return gold_; }
+    /**
+     * @brief 设置金币
+     * @param v 金币
+    */
+    void set_gold(int32_t v) { gold_ = v; }
 
-    int32_t gold() const
-    {
-        return gold_;
-    }
-    void set_gold(int32_t v)
-    {
-        gold_ = v;
-    }
+    /**
+     * @brief 获取钻石
+     * @return 钻石
+    */
+    int32_t diamond() const { return diamond_; }
 
-    int32_t diamond() const
-    {
-        return diamond_;
-    }
-    void set_diamond(int32_t v)
-    {
-        diamond_ = v;
-    }
+    /**
+     * @brief 设置钻石
+     * @param v 钻石
+    */
+    void set_diamond(int32_t v) { diamond_ = v; }
+    /**
+     * @brief 获取剩余抽奖次数
+     * @return 剩余抽奖次数
+    */
+    int32_t lottery() const { return lottery_; }
 
-    int32_t lottery() const
-    {
-        return lottery_;
-    }
-    void set_lottery(int32_t v)
-    {
-        lottery_ = v;
-    }
+    /**
+     * @brief 设置剩余抽奖次数
+     * @param v 剩余抽奖次数
+    */
+    void set_lottery(int32_t v) { lottery_ = v; }
 
-    void set_gate(std::weak_ptr<GateConnector> v)
-    {
-        gate_ = v;
-    }
-
-    std::unordered_map<int64_t, Goods>& goodsmap()
-    {
-        return goodsmap_;
-    }
+    /**
+     * @brief 设置对应连接
+     * @param v 对应连接
+    */
+    void set_gate(std::weak_ptr<GateConnector> v) { gate_ = v; }
+    /**
+     * @brief 获取背包hash表
+     * @return 背包hash表
+    */
+    std::unordered_map<int64_t, Goods>& goodsmap() { return goodsmap_; }
 
     int send_proto(int msgid, const google::protobuf::Message* data = nullptr,
         std::stack<FilterData::Envelope>* enves = nullptr, const std::string* extend = nullptr) const;
@@ -189,18 +202,48 @@ public:
         std::shared_ptr<std::stack<FilterData::Envelope>> enves);
 
 private:
+    /**
+     * @brief 角色id
+    */
     int64_t id_;
+    /**
+     * @brief 账号id
+    */
     std::string accountid_;
+    /**
+     * @brief 对应连接
+    */
     std::weak_ptr<GateConnector> gate_;
+    /**
+     * @brief 等级
+    */
     int32_t level_;
+    /**
+     * @brief 金币
+    */
     int32_t gold_;
+    /**
+     * @brief 钻石
+    */
     int32_t diamond_;
+    /**
+     * @brief 剩余抽奖次数
+    */
     int32_t lottery_;
+    /**
+     * @brief 背包hash表
+    */
     std::unordered_map<int64_t, Goods> goodsmap_;
+    /**
+     * @brief 邮件hash表
+    */
     std::unordered_map<int64_t, Email> emailsmap_;
 
     using ProtoMsgBind = std::function<int(std::shared_ptr<protocc::CommonObject> obj,
         std::shared_ptr<std::stack<FilterData::Envelope>> enves)>;
+    /**
+     * @brief 消息处理函数hash表
+    */
     std::unordered_map<int, ProtoMsgBind> pmb_;
 };
 }

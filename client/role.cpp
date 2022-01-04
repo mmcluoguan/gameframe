@@ -1,4 +1,5 @@
 #include "client/role.h"
+#include "client/gateconnector.h"
 
 namespace client {
 
@@ -30,10 +31,6 @@ Role::Role()
         { protocc::BASEUPDATA_CLIENT_GATE_G,
             std::bind(&Role::baseupdata_client_gate_g, this, std::placeholders::_1, std::placeholders::_2) },
     };
-}
-
-Role::~Role()
-{
 }
 
 int Role::send_proto(int msgid, const google::protobuf::Message* data, std::stack<FilterData::Envelope>* enves, const std::string* extend) const
@@ -109,7 +106,6 @@ int Role::loadgoods_client_gate_s(std::shared_ptr<protocc::CommonObject> data, s
         LOG_DEBUG << count << "获取角色物品数量:" << msgs.goods_size()
                   << " roleid:" << id_;
         count++;
-        return 0;
         for (int i = 0; i < msgs.goods_size(); i++) {
             goodsmap_[msgs.goods(i).id()] = {
                 msgs.goods(i).id(),
@@ -164,9 +160,11 @@ int Role::notice_info_clent_gate_g(std::shared_ptr<protocc::CommonObject> data, 
 
 int Role::notice_info_list_clent_gate_s(std::shared_ptr<protocc::CommonObject> data, std::shared_ptr<std::stack<FilterData::Envelope>> enves)
 {
+    static int count = 0;
     protocc::notice_info_list_clent_gate_s gmsg;
     if (gmsg.ParseFromString(data->msgdata()) == true) {
-        LOG_DEBUG << "区服广播信息 len:" << gmsg.datas_size();
+        LOG_DEBUG << count << "区服广播信息 len:" << gmsg.datas_size();
+        count++;
         for (auto& item : gmsg.datas()) {
             auto second = std::chrono::seconds(item.time());
             auto tp = std::chrono::time_point<std::chrono::system_clock, std::chrono::seconds>(second);
@@ -218,9 +216,11 @@ int Role::setlevel_client_gate_s(std::shared_ptr<protocc::CommonObject> data, st
 }
 int Role::loademails_client_gate_s(std::shared_ptr<protocc::CommonObject> data, std::shared_ptr<std::stack<FilterData::Envelope>> enves)
 {
+    static int count = 0;
     protocc::loademails_client_gate_s gmsg;
     if (gmsg.ParseFromString(data->msgdata()) == true) {
-        LOG_DEBUG << "邮件列表 len:" << gmsg.emails_size();
+        LOG_DEBUG << count << "邮件列表 len:" << gmsg.emails_size();
+        count++;
         for (auto& data : gmsg.emails()) {
             Email email;
             email.id = data.id();

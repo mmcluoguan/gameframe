@@ -145,8 +145,8 @@ void ConsoleHandler::gm_order(const OrderItem& order, int argc, char** argv)
     std::shared_ptr<GateConnector>
         gate = std::dynamic_pointer_cast<GateConnector>(
             shynet::utils::Singleton<net::ConnectReactorMgr>::instance().find(g_gateconnect_id));
-    if (gate != nullptr) {
-        msg.set_roleid(gate->roleid());
+    if (gate != nullptr && gate->role() != nullptr) {
+        msg.set_roleid(gate->role()->id());
         gate->send_proto(protocc::GMORDER_CLIENT_GATE_C, &msg);
         LOG_DEBUG << "发送" << frmpub::Basic::msgname(protocc::GMORDER_CLIENT_GATE_C);
     } else {
@@ -156,25 +156,25 @@ void ConsoleHandler::gm_order(const OrderItem& order, int argc, char** argv)
 
 void ConsoleHandler::display_role_base_order(const OrderItem& order, int argc, char** argv)
 {
-    Role& role = shynet::utils::Singleton<Role>::get_instance();
+    /*Role& role = shynet::utils::Singleton<Role>::get_instance();
     LOG_INFO_BASE << "角色基础信息";
     LOG_INFO_BASE << "\t角色id:" << role.id();
     LOG_INFO_BASE << "\t角色账号id:" << role.accountid();
     LOG_INFO_BASE << "\t角色等级:" << role.level();
     LOG_INFO_BASE << "\t角色游戏币:" << role.gold();
     LOG_INFO_BASE << "\t角色钻石:" << role.diamond();
-    LOG_INFO_BASE << "\t角色剩余抽奖次数:" << role.lottery();
+    LOG_INFO_BASE << "\t角色剩余抽奖次数:" << role.lottery();*/
 }
 
 void ConsoleHandler::display_role_goods_order(const OrderItem& order, int argc, char** argv)
 {
-    Role& role = shynet::utils::Singleton<Role>::get_instance();
+    /*Role& role = shynet::utils::Singleton<Role>::get_instance();
     LOG_INFO_BASE << "物品信息";
     for (const auto& it : role.goodsmap()) {
         LOG_INFO_BASE << "\t物品id:" << it.second.id;
         LOG_INFO_BASE << "\t物品配置id:" << it.second.cfgid;
         LOG_INFO_BASE << "\t物品数量:" << it.second.num;
-    }
+    }*/
 }
 
 void ConsoleHandler::setlevel_order(const OrderItem& order, int argc, char** argv)

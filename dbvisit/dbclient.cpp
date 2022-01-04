@@ -517,7 +517,7 @@ int DbClient::login_client_gate_c(std::shared_ptr<protocc::CommonObject> data,
                     redis.del(key);
                 }
             }
-            assert(accountid.empty() == false);
+            //assert(accountid.empty() == false);
             //发送登录结果
             protocc::login_client_gate_s msgs;
             msgs.set_result(result);

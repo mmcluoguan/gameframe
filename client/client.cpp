@@ -25,6 +25,17 @@ int main(int argc, char* argv[])
     using namespace frmpub;
     using namespace client;
     try {
+        int begin = 0;
+        int end = 0;
+        if (argc != 3) {
+            THROW_EXCEPTION("缺少配置参数");
+        }
+        begin = std::stoi(argv[1]);
+        end = std::stoi(argv[2]);
+        if (end < begin) {
+            THROW_EXCEPTION("配置参数错误");
+        }
+
         const char* inifile = "gameframe.ini";
         IniConfig& ini = Singleton<IniConfig>::instance(inifile);
         stuff::create_coredump();
@@ -36,7 +47,7 @@ int main(int argc, char* argv[])
 
         Singleton<ThreadPool>::instance().start();
 
-        for (int i = 0; i < 500; i++) {
+        for (int i = begin; i < end; i++) {
             string gateip = ini.get<string>("client", "gateip");
             short gateport = ini.get<short>("client", "gateport");
             shared_ptr<IPAddress> gateaddr(new IPAddress(gateip.c_str(), gateport));
