@@ -6,6 +6,8 @@
 namespace frmpub {
 void FrmLuaWrapper::init(kaguya::State& state)
 {
+    export LUA_PATH = "./?.lua;./lualibs/?.lua;./lualibs/?/?.lua;" export LUA_CPATH = "./luabin/?.so;./luabin/clibs53/?.so;./luabin/clibs53/?/?.so;" state("package.cpath=package.cpath ..\";luabin/?.so\"");
+    state("package.path=package.path ..\";lualib/?.lua\"");
     lua::LuaWrapper::init(state);
 
     state["schedule_timer"] = kaguya::function([](int millisecond, bool repeat, std::string funname = "") {
