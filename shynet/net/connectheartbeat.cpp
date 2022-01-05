@@ -1,6 +1,7 @@
 #include "shynet/net/connectheartbeat.h"
 #include "shynet/net/connectevent.h"
 #include "shynet/net/timerreactormgr.h"
+#include "shynet/utils/elapsed.h"
 
 namespace shynet {
 namespace net {
@@ -12,11 +13,19 @@ namespace net {
 
     void ConnectHeartbeat::timeout()
     {
-        utils::Singleton<TimerReactorMgr>::instance().remove(timerid());
-        std::shared_ptr<ConnectEvent> cnv = cnv_.lock();
-        if (cnv != nullptr) {
-            cnv->timerout(net::CloseType::TIMEOUT_CLOSE);
-        }
+        auto cb = [&]() {
+            utils::Singleton<TimerReactorMgr>::instance().remove(timerid());
+            std::shared_ptr<ConnectEvent> cnv = cnv_.lock();
+            if (cnv != nullptr) {
+                cnv->timerout(net::CloseType::TIMEOUT_CLOSE);
+            }
+        };
+#ifdef USE_DEBUG
+        shynet::utils::elapsed("工作线程计时单任务执行 ConnectHeartbeat");
+        return cb();
+#elif
+        return cb();
+#endif
     }
 
 }

@@ -1,10 +1,12 @@
 #include "world/httpclient.h"
+#include "3rd/fmt/format.h"
 #include "frmpub/luacallbacktask.h"
 #include "frmpub/protocc/game.pb.h"
 #include "frmpub/protocc/gate.pb.h"
 #include "frmpub/protocc/login.pb.h"
 #include "frmpub/protocc/world.pb.h"
 #include "shynet/lua/luaengine.h"
+#include "shynet/utils/elapsed.h"
 #include "shynet/utils/idworker.h"
 #include "world/httpclientmgr.h"
 #include "world/worldclientmgr.h"
@@ -43,8 +45,8 @@ HttpClient::~HttpClient()
 
 int HttpClient::input_handle(std::shared_ptr<rapidjson::Document> doc, std::shared_ptr<std::stack<FilterData::Envelope>> enves)
 {
-    if (doc != nullptr) {
-        int msgid = (*doc)["msgid"].GetInt();
+    int msgid = (*doc)["msgid"].GetInt();
+    auto cb = [&]() {
         auto it = jmb_.find(msgid);
         if (it != jmb_.end()) {
             return it->second(doc, enves);
@@ -53,8 +55,15 @@ int HttpClient::input_handle(std::shared_ptr<rapidjson::Document> doc, std::shar
             shynet::utils::Singleton<lua::LuaEngine>::get_instance().append(
                 std::make_shared<frmpub::OnMessageTask<HttpClient>>(shared_from_this(), doc, enves));
         }
-    }
-    return 0;
+        return 0;
+    };
+#ifdef USE_DEBUG
+    std::string str = fmt::format("工作线程单任务执行 {}", frmpub::Basic::msgname(msgid));
+    shynet::utils::elapsed(str.c_str());
+    return cb();
+#elif
+    return cb();
+#endif
 }
 
 void HttpClient::close(net::CloseType active)

@@ -1,29 +1,43 @@
 #include "frmpub/luatimertask.h"
+#include "3rd/fmt/format.h"
 #include "frmpub/luaremotedebug.h"
 #include "shynet/lua/luaengine.h"
 #include "shynet/net/timerreactormgr.h"
 #include "shynet/thread/luathread.h"
+#include "shynet/utils/elapsed.h"
 
 namespace frmpub {
-LuaTimerMgr::LuaTimerTask::LuaTimerTask(int timerid)
+LuaTimerMgr::LuaTimerTask::LuaTimerTask(int timerid, std::string funname)
 {
     timerid_ = timerid;
+    funname_ = funname;
 }
 
 int LuaTimerMgr::LuaTimerTask::run(thread::Thread* tif)
 {
     thread::LuaThread* lua = dynamic_cast<thread::LuaThread*>(tif);
     kaguya::State& state = *(lua->luaState());
-    shynet::utils::Singleton<LuaRemoteDebug>::instance().start(state);
-    state["onTimerOut"].call<void>(timerid_);
-    shynet::utils::Singleton<LuaRemoteDebug>::instance().stop(state);
+    auto cb = [&]() {
+        shynet::utils::Singleton<LuaRemoteDebug>::instance().start(state);
+        state["onTimerOut"].call<void>(timerid_);
+        shynet::utils::Singleton<LuaRemoteDebug>::instance().stop(state);
+    };
+#ifdef USE_DEBUG
+    std::string str("lua线程计时单任务执行 ");
+    str.append(funname_);
+    shynet::utils::elapsed(str.c_str());
+    cb();
+#elif
+    cb();
+#endif
     return 0;
 }
 
-LuaTimerMgr::LuaTimer::LuaTimer(const timeval val, bool repeat)
+LuaTimerMgr::LuaTimer::LuaTimer(const timeval val, bool repeat, std::string funname)
     : net::TimerEvent(val, EV_TIMEOUT | EV_PERSIST)
 {
     repeat_ = repeat;
+    funname_ = funname;
 }
 
 void LuaTimerMgr::LuaTimer::timeout()
@@ -34,9 +48,9 @@ void LuaTimerMgr::LuaTimer::timeout()
         shynet::utils::Singleton<net::TimerReactorMgr>::instance().remove(timerid());
     }
 }
-int LuaTimerMgr::add(const timeval val, bool repeat)
+int LuaTimerMgr::add(const timeval val, bool repeat, std::string funname)
 {
-    std::shared_ptr<LuaTimer> timer = std::make_shared<LuaTimer>(val, repeat);
+    std::shared_ptr<LuaTimer> timer = std::make_shared<LuaTimer>(val, repeat, funname);
     int id = shynet::utils::Singleton<net::TimerReactorMgr>::instance().add(timer);
     timerids_.insert(id);
     return id;

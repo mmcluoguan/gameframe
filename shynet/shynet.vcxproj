@@ -233,6 +233,7 @@
     <ClInclude Include="thread\timerthread.h" />
     <ClInclude Include="thread\workthread.h" />
     <ClInclude Include="utils\databuffer.h" />
+    <ClInclude Include="utils\elapsed.h" />
     <ClInclude Include="utils\filepathop.h" />
     <ClInclude Include="utils\hash.h" />
     <ClInclude Include="utils\idworker.h" />

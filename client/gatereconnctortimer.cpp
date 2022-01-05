@@ -2,6 +2,7 @@
 #include "shynet/net/connectreactormgr.h"
 #include "shynet/net/ipaddress.h"
 #include "shynet/net/timerreactormgr.h"
+#include "shynet/utils/elapsed.h"
 
 extern int g_gateconnect_id;
 
@@ -22,8 +23,16 @@ GateReConnctorTimer::~GateReConnctorTimer()
 
 void GateReConnctorTimer::timeout()
 {
-    shynet::utils::Singleton<net::TimerReactorMgr>::instance().remove(timerid());
-    std::shared_ptr<GateConnector> reconnect(new GateConnector(connect_addr_, data_));
-    g_gateconnect_id = shynet::utils::Singleton<net::ConnectReactorMgr>::instance().add(reconnect);
+    auto cb = [&]() {
+        shynet::utils::Singleton<net::TimerReactorMgr>::instance().remove(timerid());
+        std::shared_ptr<GateConnector> reconnect(new GateConnector(connect_addr_, data_));
+        g_gateconnect_id = shynet::utils::Singleton<net::ConnectReactorMgr>::instance().add(reconnect);
+    };
+#ifdef USE_DEBUG
+    shynet::utils::elapsed("工作线程计时单任务执行 GateReConnectorTimer");
+    return cb();
+#elif
+    return cb();
+#endif
 }
 }

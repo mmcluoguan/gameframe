@@ -179,7 +179,7 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|ARM'">
     <Link>
       <AdditionalLibraryDirectories>/root/gameframe/libs;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <LibraryDependencies>shynet;frmpub;protobuf</LibraryDependencies>
+      <LibraryDependencies>shynet;frmpub;protobuf;fmt</LibraryDependencies>
       <AdditionalOptions>-rdynamic %(AdditionalOptions)</AdditionalOptions>
     </Link>
     <ClCompile>
@@ -196,7 +196,7 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|ARM'">
     <Link>
       <AdditionalLibraryDirectories>/root/gameframe/libs;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <LibraryDependencies>shynet;frmpub;protobuf</LibraryDependencies>
+      <LibraryDependencies>shynet;frmpub;protobuf;fmt</LibraryDependencies>
     </Link>
     <ClCompile>
       <AdditionalIncludeDirectories>$(SolutionDir)</AdditionalIncludeDirectories>
@@ -212,7 +212,7 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|ARM64'">
     <Link>
       <AdditionalLibraryDirectories>/root/gameframe/libs;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <LibraryDependencies>shynet;frmpub;protobuf</LibraryDependencies>
+      <LibraryDependencies>shynet;frmpub;protobuf;fmt</LibraryDependencies>
       <AdditionalOptions>-rdynamic %(AdditionalOptions)</AdditionalOptions>
     </Link>
     <ClCompile>
@@ -229,7 +229,7 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|ARM64'">
     <Link>
       <AdditionalLibraryDirectories>/root/gameframe/libs;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <LibraryDependencies>shynet;frmpub;protobuf</LibraryDependencies>
+      <LibraryDependencies>shynet;frmpub;protobuf;fmt</LibraryDependencies>
     </Link>
     <ClCompile>
       <AdditionalIncludeDirectories>$(SolutionDir)</AdditionalIncludeDirectories>
@@ -245,7 +245,7 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <Link>
       <AdditionalLibraryDirectories>/root/gameframe/libs;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <LibraryDependencies>shynet;frmpub;protobuf</LibraryDependencies>
+      <LibraryDependencies>shynet;frmpub;protobuf;fmt</LibraryDependencies>
       <AdditionalOptions>-rdynamic %(AdditionalOptions)</AdditionalOptions>
     </Link>
     <ClCompile>
@@ -262,7 +262,7 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <Link>
       <AdditionalLibraryDirectories>/root/gameframe/libs;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <LibraryDependencies>shynet;frmpub;protobuf</LibraryDependencies>
+      <LibraryDependencies>shynet;frmpub;protobuf;fmt</LibraryDependencies>
     </Link>
     <ClCompile>
       <AdditionalIncludeDirectories>$(SolutionDir)</AdditionalIncludeDirectories>
@@ -278,7 +278,7 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x86'">
     <Link>
       <AdditionalLibraryDirectories>/root/gameframe/libs;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <LibraryDependencies>shynet;frmpub;protobuf</LibraryDependencies>
+      <LibraryDependencies>shynet;frmpub;protobuf;fmt</LibraryDependencies>
       <AdditionalOptions>-rdynamic %(AdditionalOptions)</AdditionalOptions>
     </Link>
     <ClCompile>
@@ -295,7 +295,7 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x86'">
     <Link>
       <AdditionalLibraryDirectories>/root/gameframe/libs;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <LibraryDependencies>shynet;frmpub;protobuf</LibraryDependencies>
+      <LibraryDependencies>shynet;frmpub;protobuf;fmt</LibraryDependencies>
     </Link>
     <ClCompile>
       <AdditionalIncludeDirectories>$(SolutionDir)</AdditionalIncludeDirectories>

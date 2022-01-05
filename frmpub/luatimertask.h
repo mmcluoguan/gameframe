@@ -20,7 +20,7 @@ class LuaTimerMgr {
          * @brief 构造
          * @param timerid 计时器id 
         */
-        LuaTimerTask(int timerid);
+        LuaTimerTask(int timerid, std::string funname = "");
         ~LuaTimerTask() = default;
         /**
         * @brief 运行lua任务
@@ -34,6 +34,10 @@ class LuaTimerMgr {
          * @brief 计时器id
         */
         int timerid_;
+        /**
+         * @brief lua计时器调用lua函数名
+        */
+        std::string funname_;
     };
 
     /**
@@ -46,7 +50,7 @@ class LuaTimerMgr {
          * @param val 超时相对时间值
          * @param repeat true为重复执行,false为只执行1次
         */
-        LuaTimer(const struct timeval val, bool repeat);
+        LuaTimer(const struct timeval val, bool repeat, std::string funname = "");
         ~LuaTimer() = default;
 
         /**
@@ -59,6 +63,10 @@ class LuaTimerMgr {
          * @brief true为重复执行,false为只执行1次
         */
         bool repeat_ = true;
+        /**
+         * @brief lua计时器调用lua函数名
+        */
+        std::string funname_;
     };
 
     friend class shynet::utils::Singleton<LuaTimerMgr>;
@@ -77,9 +85,10 @@ public:
      * @brief 添加新的计时处理器
      * @param val 间隔
      * @param repeat 是否重复
+     * @param funname lua计时器调用lua函数名
      * @return 计时器id
     */
-    int add(const struct timeval val, bool repeat = true);
+    int add(const struct timeval val, bool repeat = true, std::string funname = "");
     /**
      * @brief 移除计时处理器
      * @param timerid 计时器id

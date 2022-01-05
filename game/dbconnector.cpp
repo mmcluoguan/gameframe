@@ -1,4 +1,5 @@
 #include "game/dbconnector.h"
+#include "3rd/fmt/format.h"
 #include "frmpub/luacallbacktask.h"
 #include "frmpub/reconnecttimer.h"
 #include "game/connectormgr.h"
@@ -6,6 +7,7 @@
 #include "game/gameserver.h"
 #include "shynet/lua/luaengine.h"
 #include "shynet/net/connectreactormgr.h"
+#include "shynet/utils/elapsed.h"
 #include "shynet/utils/iniconfig.h"
 
 //配置参数
@@ -68,7 +70,7 @@ void DbConnector::complete()
 }
 int DbConnector::input_handle(std::shared_ptr<protocc::CommonObject> obj, std::shared_ptr<std::stack<FilterData::Envelope>> enves)
 {
-    if (obj != nullptr) {
+    auto cb = [&]() {
         auto it = pmb_.find(obj->msgid());
         if (it != pmb_.end()) {
             return it->second(obj, enves);
@@ -77,8 +79,15 @@ int DbConnector::input_handle(std::shared_ptr<protocc::CommonObject> obj, std::s
             shynet::utils::Singleton<lua::LuaEngine>::get_instance().append(
                 std::make_shared<frmpub::OnMessageTask<DbConnector>>(shared_from_this(), obj, enves));
         }
-    }
-    return 0;
+        return 0;
+    };
+#ifdef USE_DEBUG
+    std::string str = fmt::format("工作线程单任务执行 {}", frmpub::Basic::msgname(obj->msgid()));
+    shynet::utils::elapsed(str.c_str());
+    return cb();
+#elif
+    return cb();
+#endif
 }
 
 void DbConnector::close(net::CloseType active)

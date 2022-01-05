@@ -40,18 +40,7 @@ namespace thread {
                 }
                 if (tk != nullptr) {
                     try {
-#ifdef USE_DEBUG
-                        auto msec = utils::stuff::tick_msec();
                         tk();
-                        msec = utils::stuff::tick_msec() - msec;
-                        LOG_TRACE << "work线程单任务执行时间:" << msec << "ms";
-                        if (msec > 10) {
-                            LOG_WARN << "work线程单任务执行时间超过10ms,请检查";
-                        }
-#elif
-                        tk();
-#endif
-
                     } catch (const std::exception& err) {
                         utils::stuff::print_exception(err);
                     }

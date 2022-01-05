@@ -1,8 +1,10 @@
 #include "login/loginclient.h"
+#include "3rd/fmt/format.h"
 #include "frmpub/luacallbacktask.h"
 #include "login/connectormgr.h"
 #include "login/loginclientmgr.h"
 #include "shynet/lua/luaengine.h"
+#include "shynet/utils/elapsed.h"
 
 namespace login {
 LoginClient::LoginClient(std::shared_ptr<net::IPAddress> remote_addr,
@@ -41,7 +43,7 @@ LoginClient::~LoginClient()
 
 int LoginClient::input_handle(std::shared_ptr<protocc::CommonObject> obj, std::shared_ptr<std::stack<FilterData::Envelope>> enves)
 {
-    if (obj != nullptr) {
+    auto cb = [&]() {
         auto it = pmb_.find(obj->msgid());
         if (it != pmb_.end()) {
             return it->second(obj, enves);
@@ -50,8 +52,15 @@ int LoginClient::input_handle(std::shared_ptr<protocc::CommonObject> obj, std::s
             shynet::utils::Singleton<lua::LuaEngine>::get_instance().append(
                 std::make_shared<frmpub::OnMessageTask<LoginClient>>(shared_from_this(), obj, enves));
         }
-    }
-    return 0;
+        return 0;
+    };
+#ifdef USE_DEBUG
+    std::string str = fmt::format("工作线程单任务执行 {}", frmpub::Basic::msgname(obj->msgid()));
+    shynet::utils::elapsed(str.c_str());
+    return cb();
+#elif
+    return cb();
+#endif
 }
 
 void LoginClient::close(net::CloseType active)

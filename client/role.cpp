@@ -227,9 +227,9 @@ int Role::loademails_client_gate_s(std::shared_ptr<protocc::CommonObject> data, 
             email.is_read = data.is_read();
             email.is_receive = data.is_receive();
             emailsmap_[email.id] = email;
-            LOG_INFO_BASE << " id:" << email.id
-                          << " is_read:" << email.is_read
-                          << " is_receive:" << email.is_receive;
+            // LOG_INFO_BASE << " id:" << email.id
+            //              << " is_read:" << email.is_read
+            //              << " is_receive:" << email.is_receive;
         }
     } else {
         std::stringstream stream;

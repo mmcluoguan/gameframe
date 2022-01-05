@@ -1,8 +1,10 @@
 #include "admin_client/worldconnector.h"
+#include "3rd/fmt/format.h"
 #include "admin_client/connectormgr.h"
 #include "frmpub/reconnecttimer.h"
 #include "shynet/events/streambuff.h"
 #include "shynet/net/connectreactormgr.h"
+#include "shynet/utils/elapsed.h"
 #include "shynet/utils/stuff.h"
 
 namespace admin_client {
@@ -48,16 +50,24 @@ void WorldConnector::complete()
 
 int WorldConnector::input_handle(std::shared_ptr<rapidjson::Document> doc, std::shared_ptr<std::stack<FilterData::Envelope>> enves)
 {
-    if (doc != nullptr) {
-        int msgid = (*doc)["msgid"].GetInt();
+    int msgid = (*doc)["msgid"].GetInt();
+    auto cb = [&]() {
         auto it = jmb_.find(msgid);
         if (it != jmb_.end()) {
             return it->second(doc, enves);
         } else {
             LOG_DEBUG << "消息" << frmpub::Basic::msgname(msgid) << " 没有处理函数";
         }
-    }
-    return 0;
+        return 0;
+    };
+
+#ifdef USE_DEBUG
+    std::string str = fmt::format("工作线程单任务执行 {}", frmpub::Basic::msgname(msgid));
+    shynet::utils::elapsed(str.c_str());
+    return cb();
+#elif
+    return cb();
+#endif
 }
 
 void WorldConnector::close(net::CloseType active)

@@ -15,28 +15,79 @@ class GateConnector;
 class Role {
 
 public:
+    /**
+     * @brief 物品数据
+    */
     struct Goods {
+        /**
+         * @brief 唯一id
+        */
         int64_t id;
+        /**
+         * @brief 配置id
+        */
         int32_t cfgid;
+        /**
+         * @brief 拥有数量
+        */
         int32_t num;
     };
 
+    /**
+     * @brief 邮件数据
+    */
     struct Email {
+        /**
+         * @brief 附件
+        */
         struct Annex {
+            /**
+             * @brief 金币
+            */
             int gold;
+            /**
+             * @brief 钻石
+            */
             int diamond;
+            /**
+             * @brief 物品列表
+            */
             std::list<Goods> goodslist;
         };
 
+        /**
+         * @brief 唯一id
+        */
         int64_t id;
+        /**
+         * @brief 是否已读
+        */
         bool is_read;
+        /**
+         * @brief 是否已领取附件
+        */
         bool is_receive;
+        /**
+         * @brief 标题
+        */
         std::string title;
+        /**
+         * @brief 内容
+        */
         std::string info;
+        /**
+         * @brief 类型
+        */
         int type;
+        /**
+         * @brief 时间
+        */
         int time;
 
-        //附件
+        /**
+         * @brief 附件
+         * @param v 
+        */
         std::shared_ptr<Annex> annex;
     };
 
@@ -123,9 +174,24 @@ public:
     */
     std::unordered_map<int64_t, Goods>& goodsmap() { return goodsmap_; }
 
+    /**
+     * @brief  发送proto数据封包
+     * @param msgid msgid
+     * @param data protobuf
+     * @param enves 路由信息
+     * @param extend 扩展字符串数据
+     * @return 0成功 -1失败
+    */
     int send_proto(int msgid, const google::protobuf::Message* data = nullptr,
         std::stack<FilterData::Envelope>* enves = nullptr, const std::string* extend = nullptr) const;
 
+    /**
+     * @brief 发送错误信息
+     * @param code code
+     * @param desc desc
+     * @param enves 路由信息
+     * @return 0成功 -1失败
+    */
     int send_errcode(protocc::errnum code, const std::string& desc,
         std::stack<FilterData::Envelope>* enves = nullptr);
 

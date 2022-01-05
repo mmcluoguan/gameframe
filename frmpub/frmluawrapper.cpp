@@ -8,10 +8,10 @@ void FrmLuaWrapper::init(kaguya::State& state)
 {
     lua::LuaWrapper::init(state);
 
-    state["schedule_timer"] = kaguya::function([](int millisecond, bool repeat) {
+    state["schedule_timer"] = kaguya::function([](int millisecond, bool repeat, std::string funname = "") {
         int second = millisecond / 1000;
         int milli = millisecond - second * 1000;
-        return shynet::utils::Singleton<LuaTimerMgr>::instance().add({ second, milli * 1000 }, repeat);
+        return shynet::utils::Singleton<LuaTimerMgr>::instance().add({ second, milli * 1000 }, repeat, funname);
     });
 
     state["cancel_timer"] = kaguya::function([](int timerid) {

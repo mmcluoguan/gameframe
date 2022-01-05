@@ -1,10 +1,12 @@
 #ifndef FRMPUB_ONACCEPTTASK_H
 #define FRMPUB_ONACCEPTTASK_H
 
+#include "3rd/fmt/format.h"
 #include "frmpub/luaremotedebug.h"
 #include "shynet/lua/luatask.h"
 #include "shynet/thread/luathread.h"
 #include "shynet/thread/thread.h"
+#include "shynet/utils/elapsed.h"
 
 namespace frmpub {
 /**
@@ -34,9 +36,17 @@ public:
         thread::LuaThread* lua = dynamic_cast<thread::LuaThread*>(tif);
         kaguya::State& state = *(lua->luaState());
         if (client_) {
-            shynet::utils::Singleton<LuaRemoteDebug>::instance().start(state);
-            state["onAccept"].call<void>(client_.get());
-            shynet::utils::Singleton<LuaRemoteDebug>::instance().stop(state);
+            auto cb = [&]() {
+                shynet::utils::Singleton<LuaRemoteDebug>::instance().start(state);
+                state["onAccept"].call<void>(client_.get());
+                shynet::utils::Singleton<LuaRemoteDebug>::instance().stop(state);
+            };
+#ifdef USE_DEBUG
+            shynet::utils::elapsed("lua线程单任务执行 onAccept");
+            cb();
+#elif
+            cb();
+#endif
         }
         return 0;
     }
@@ -75,9 +85,17 @@ public:
         thread::LuaThread* lua = dynamic_cast<thread::LuaThread*>(tif);
         kaguya::State& state = *(lua->luaState());
         if (conncetor_) {
-            shynet::utils::Singleton<LuaRemoteDebug>::instance().start(state);
-            state["onConnect"].call<void>(conncetor_.get());
-            shynet::utils::Singleton<LuaRemoteDebug>::instance().stop(state);
+            auto cb = [&]() {
+                shynet::utils::Singleton<LuaRemoteDebug>::instance().start(state);
+                state["onConnect"].call<void>(conncetor_.get());
+                shynet::utils::Singleton<LuaRemoteDebug>::instance().stop(state);
+            };
+#ifdef USE_DEBUG
+            shynet::utils::elapsed("lua线程单任务执行 onConnect");
+            cb();
+#elif
+            cb();
+#endif
         }
         return 0;
     }
@@ -113,9 +131,17 @@ public:
     {
         thread::LuaThread* lua = dynamic_cast<thread::LuaThread*>(tif);
         kaguya::State& state = *(lua->luaState());
-        shynet::utils::Singleton<LuaRemoteDebug>::instance().start(state);
-        state["onClose"].call<void>(fd_);
-        shynet::utils::Singleton<LuaRemoteDebug>::instance().stop(state);
+        auto cb = [&]() {
+            shynet::utils::Singleton<LuaRemoteDebug>::instance().start(state);
+            state["onClose"].call<void>(fd_);
+            shynet::utils::Singleton<LuaRemoteDebug>::instance().stop(state);
+        };
+#ifdef USE_DEBUG
+        shynet::utils::elapsed("lua线程单任务执行 onClose");
+        cb();
+#elif
+        cb();
+#endif
         return 0;
     }
 
@@ -171,13 +197,29 @@ public:
         thread::LuaThread* lua = dynamic_cast<thread::LuaThread*>(tif);
         kaguya::State& state = *(lua->luaState());
         if (client_) {
-            shynet::utils::Singleton<LuaRemoteDebug>::instance().start(state);
+            int msgid = 0;
             if (data_) {
-                state["onMessage"].call<void>(client_.get(), data_->msgid(), data_->msgdata(), enves_.get());
+                msgid = data_->msgid();
             } else if (doc_) {
-                state["onMessage"].call<void>(client_.get(), doc_, enves_.get());
+                msgid = (*doc_)["msgid"].GetInt();
             }
-            shynet::utils::Singleton<LuaRemoteDebug>::instance().stop(state);
+            auto cb = [&]() {
+                shynet::utils::Singleton<LuaRemoteDebug>::instance().start(state);
+                if (data_) {
+                    state["onMessage"].call<void>(client_.get(), data_->msgid(), data_->msgdata(), enves_.get());
+                } else if (doc_) {
+                    state["onMessage"].call<void>(client_.get(), doc_, enves_.get());
+                }
+                shynet::utils::Singleton<LuaRemoteDebug>::instance().stop(state);
+            };
+
+#ifdef USE_DEBUG
+            std::string str = fmt::format("工作线程单任务执行 {}", frmpub::Basic::msgname(msgid));
+            shynet::utils::elapsed("str");
+            cb();
+#elif
+            cb();
+#endif
         }
         return 0;
     }

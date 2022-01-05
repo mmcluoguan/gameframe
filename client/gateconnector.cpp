@@ -1,9 +1,11 @@
 #include "client/gateconnector.h"
+#include "3rd/fmt/format.h"
 #include "client/gatereconnctortimer.h"
 #include "frmpub/reconnecttimer.h"
 #include "shynet/events/streambuff.h"
 #include "shynet/net/connectreactormgr.h"
 #include "shynet/pool/threadpool.h"
+#include "shynet/utils/elapsed.h"
 
 namespace client {
 GateConnector::GateConnector(std::shared_ptr<net::IPAddress> connect_addr,
@@ -51,9 +53,9 @@ GateConnector::~GateConnector()
     if (active() != net::CloseType::CLIENT_CLOSE && enable_reconnect_ == true) {
         LOG_INFO << "3秒后开始重连";
 
-        //std::shared_ptr<GateReConnctorTimer> reconnect(
-        //    new GateReConnctorTimer(connect_addr(), disconnect_data(), { 3L, 0L }));
-        //shynet::utils::Singleton<net::TimerReactorMgr>::instance().add(reconnect);
+        std::shared_ptr<GateReConnctorTimer> reconnect(
+            new GateReConnctorTimer(connect_addr(), disconnect_data(), { 3L, 0L }));
+        shynet::utils::Singleton<net::TimerReactorMgr>::instance().add(reconnect);
     }
 }
 void GateConnector::complete()
@@ -85,7 +87,7 @@ void GateConnector::complete()
 
 int GateConnector::input_handle(std::shared_ptr<protocc::CommonObject> obj, std::shared_ptr<std::stack<FilterData::Envelope>> enves)
 {
-    if (obj != nullptr) {
+    auto cb = [&]() {
         auto it = pmb_.find(obj->msgid());
         if (it != pmb_.end()) {
             return it->second(obj, enves);
@@ -96,8 +98,16 @@ int GateConnector::input_handle(std::shared_ptr<protocc::CommonObject> obj, std:
                 LOG_DEBUG << "消息" << frmpub::Basic::msgname(obj->msgid()) << " 没有处理函数";
             }
         }
-    }
-    return 0;
+        return 0;
+    };
+
+#ifdef USE_DEBUG
+    std::string str = fmt::format("工作线程单任务执行 {}", frmpub::Basic::msgname(obj->msgid()));
+    shynet::utils::elapsed(str.c_str());
+    return cb();
+#elif
+    return cb();
+#endif
 }
 std::shared_ptr<GateConnector::DisConnectData> GateConnector::disconnect_data()
 {

@@ -355,6 +355,9 @@
     <ClInclude Include="lua\luatask.h">
       <Filter>lua</Filter>
     </ClInclude>
+    <ClInclude Include="utils\elapsed.h">
+      <Filter>utils</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="pool">

@@ -1,46 +1,44 @@
-local roleMgr = {}
+local roleMgr = {
+    rid={},
+    aid={},
+    cfd={}
+}
 
 function roleMgr:add(role)
-    self[role.id] = role
+    self.rid[role.id] = role
+    self.aid[role.accountid] = role
+    self.cfd[role.clientfd] = role
 end
 
 function roleMgr:remove(roleid)
-    local role = self[roleid]
+    local role = self.rid[roleid]
+    local aid = role.accountid
+    local clientfd = role.clientfd
     role:clean()
-    self[roleid] = nil
+    self.rid[roleid] = nil
+    self.aid[aid] = nil
+    self.cfd[clientfd] = nil
 end
 
 --通过roleid查找
 function roleMgr:find(roleid)
-    return self[roleid]
+    return self.rid[roleid]
 end
 
 --通过accountid查找
 function roleMgr:findby_accountid(aid)
-    for k,v in pairs(self) do
-        if type(v) == "table" and v.accountid == aid then
-            return v
-        end
-    end
-    return nil
+    return self.aid[aid]
 end
 
 --通过client_fd查找
 function roleMgr:findby_clientfd(clientfd)
-    for k,v in pairs(self) do
-        if type(v) == "table" and v.clientfd == clientfd then
-            return v
-        end
-    end
-    return nil
+    return self.cfd[clientfd]
 end
 
 --广播在线玩家
 function roleMgr:broadcast(msg, msgdata)
-    for k,v in pairs(self) do
-        if type(v) == "table" then
-            v:send(msg, msgdata)
-        end
+    for k,v in pairs(self.rid) do
+        v:send(msg, msgdata)
     end
 end
 

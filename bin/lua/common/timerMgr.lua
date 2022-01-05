@@ -21,7 +21,7 @@ function timerMgr:bind(millisecond,repeated,table,funname,...)
         paras = {...},
         repeated = repeated,
     }
-    local timer_id = schedule_timer(millisecond,repeated)
+    local timer_id = schedule_timer(millisecond,repeated,tostring(funname))
     --print("绑定计时器",timer_id,self)
     self[timer_id] = tb
     return timer_id

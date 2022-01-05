@@ -1,6 +1,7 @@
 #include "frmpub/pingtimer.h"
 #include "frmpub/connector.h"
 #include "shynet/net/timerreactormgr.h"
+#include "shynet/utils/elapsed.h"
 
 namespace frmpub {
 PingTimer::PingTimer(const timeval val, Connector* connector)
@@ -10,10 +11,18 @@ PingTimer::PingTimer(const timeval val, Connector* connector)
 }
 void PingTimer::timeout()
 {
-    if (connector_ != nullptr) {
-        connector_->ping();
-    } else {
-        shynet::utils::Singleton<net::TimerReactorMgr>::instance().remove(timerid());
-    }
+    auto cb = [&]() {
+        if (connector_ != nullptr) {
+            connector_->ping();
+        } else {
+            shynet::utils::Singleton<net::TimerReactorMgr>::instance().remove(timerid());
+        }
+    };
+#ifdef USE_DEBUG
+    shynet::utils::elapsed("工作线程计时单任务执行 PingTimer");
+    return cb();
+#elif
+    return cb();
+#endif
 }
 }

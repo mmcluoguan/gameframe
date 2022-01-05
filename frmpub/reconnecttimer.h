@@ -4,19 +4,20 @@
 #include "shynet/net/connectreactormgr.h"
 #include "shynet/net/ipaddress.h"
 #include "shynet/net/timerreactormgr.h"
+#include "shynet/utils/elapsed.h"
 
 namespace frmpub {
 /**
- * @brief ×Ô¶¯ÖØÁ¬·şÎñÆ÷¼ÆÊ±´¦ÀíÆ÷
- * @tparam T ·şÎñÆ÷Á¬½ÓÆ÷ÀàĞÍ
+ * @brief è‡ªåŠ¨é‡è¿æœåŠ¡å™¨è®¡æ—¶å¤„ç†å™¨
+ * @tparam T æœåŠ¡å™¨è¿æ¥å™¨ç±»å‹
 */
 template <class T>
 class ReConnectTimer : public net::TimerEvent {
 public:
     /**
-     * @brief ¹¹Ôì
-     * @param connect_addr Á¬½ÓµÄ·şÎñÆ÷µØÖ·
-     * @param val ³¬Ê±Ïà¶ÔÊ±¼äÖµ
+     * @brief æ„é€ 
+     * @param connect_addr è¿æ¥çš„æœåŠ¡å™¨åœ°å€
+     * @param val è¶…æ—¶ç›¸å¯¹æ—¶é—´å€¼
     */
     ReConnectTimer(std::shared_ptr<net::IPAddress> connect_addr, const struct timeval val)
         : net::TimerEvent(val, EV_TIMEOUT)
@@ -25,19 +26,27 @@ public:
     }
     ~ReConnectTimer() = default;
     /**
-     * @brief ¼ÆÊ±Æ÷³¬Ê±ºó,ÔÚ¹¤×÷Ïß³ÌÖĞ´¦Àí³¬Ê±»Øµ÷
+     * @brief è®¡æ—¶å™¨è¶…æ—¶å,åœ¨å·¥ä½œçº¿ç¨‹ä¸­å¤„ç†è¶…æ—¶å›è°ƒ
     */
     void timeout() override
     {
-        shynet::utils::Singleton<net::TimerReactorMgr>::instance().remove(timerid());
-        std::shared_ptr<T> reconnect = std::make_shared<T>(connect_addr_);
-        shynet::utils::Singleton<net::ConnectReactorMgr>::instance().add(reconnect);
-        reconnect.reset();
+        auto cb = [&]() {
+            shynet::utils::Singleton<net::TimerReactorMgr>::instance().remove(timerid());
+            std::shared_ptr<T> reconnect = std::make_shared<T>(connect_addr_);
+            shynet::utils::Singleton<net::ConnectReactorMgr>::instance().add(reconnect);
+            reconnect.reset();
+        };
+#ifdef USE_DEBUG
+        shynet::utils::elapsed("å·¥ä½œçº¿ç¨‹è®¡æ—¶å•ä»»åŠ¡æ‰§è¡Œ ReConnectTimer");
+        return cb();
+#elif
+        return cb();
+#endif
     }
 
 private:
     /**
-     * @brief Á¬½ÓµÄ·şÎñÆ÷µØÖ·
+     * @brief è¿æ¥çš„æœåŠ¡å™¨åœ°å€
      * @tparam T 
     */
     std::shared_ptr<net::IPAddress> connect_addr_;

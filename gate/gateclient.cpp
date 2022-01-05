@@ -1,9 +1,11 @@
 #include "gate/gateclient.h"
+#include "3rd/fmt/format.h"
 #include "frmpub/luacallbacktask.h"
 #include "gate/connectormgr.h"
 #include "gate/gateclientmgr.h"
 #include "shynet/lua/luaengine.h"
 #include "shynet/net/connectreactormgr.h"
+#include "shynet/utils/elapsed.h"
 #include "shynet/utils/iniconfig.h"
 #include "shynet/utils/stringop.h"
 
@@ -34,7 +36,7 @@ GateClient::~GateClient()
 
 int GateClient::input_handle(std::shared_ptr<protocc::CommonObject> obj, std::shared_ptr<std::stack<FilterData::Envelope>> enves)
 {
-    if (obj != nullptr) {
+    auto cb = [&]() {
         LOG_DEBUG << "接收账号id:" << accountid_
                   << " 消息" << frmpub::Basic::msgname(obj->msgid());
         if (obj->msgid() > protocc::CLIENT_LOGIN_BEGIN && obj->msgid() < protocc::CLIENT_LOGIN_END) {
@@ -59,8 +61,16 @@ int GateClient::input_handle(std::shared_ptr<protocc::CommonObject> obj, std::sh
             stream << "非法消息" << obj->msgid();
             SEND_ERR(protocc::ILLEGAL_UNKNOWN_MESSAGE, stream.str());
         }
-    }
-    return 0;
+        return 0;
+    };
+
+#ifdef USE_DEBUG
+    std::string str = fmt::format("工作线程单任务执行 {}", frmpub::Basic::msgname(obj->msgid()));
+    shynet::utils::elapsed(str.c_str());
+    return cb();
+#elif
+    return cb();
+#endif
 }
 
 void GateClient::close(net::CloseType active)

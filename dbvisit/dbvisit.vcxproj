@@ -167,7 +167,7 @@
   </ItemGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|ARM'">
     <Link>
-      <LibraryDependencies>shynet;frmpub;protobuf;redis++;hiredis;mysqlcppconn8;lua</LibraryDependencies>
+      <LibraryDependencies>shynet;frmpub;protobuf;redis++;hiredis;mysqlcppconn8;lua;fmt</LibraryDependencies>
       <AdditionalLibraryDirectories>/root/gameframe/libs;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalOptions>
       </AdditionalOptions>
@@ -184,7 +184,7 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|ARM'">
     <Link>
-      <LibraryDependencies>shynet;frmpub;protobuf;redis++;hiredis;mysqlcppconn8;lua</LibraryDependencies>
+      <LibraryDependencies>shynet;frmpub;protobuf;redis++;hiredis;mysqlcppconn8;lua;fmt</LibraryDependencies>
       <AdditionalLibraryDirectories>/root/gameframe/libs;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalOptions>
       </AdditionalOptions>
@@ -201,7 +201,7 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|ARM64'">
     <Link>
-      <LibraryDependencies>shynet;frmpub;protobuf;redis++;hiredis;mysqlcppconn8;lua</LibraryDependencies>
+      <LibraryDependencies>shynet;frmpub;protobuf;redis++;hiredis;mysqlcppconn8;lua;fmt</LibraryDependencies>
       <AdditionalLibraryDirectories>/root/gameframe/libs;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalOptions>
       </AdditionalOptions>
@@ -218,7 +218,7 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|ARM64'">
     <Link>
-      <LibraryDependencies>shynet;frmpub;protobuf;redis++;hiredis;mysqlcppconn8;lua</LibraryDependencies>
+      <LibraryDependencies>shynet;frmpub;protobuf;redis++;hiredis;mysqlcppconn8;lua;fmt</LibraryDependencies>
       <AdditionalLibraryDirectories>/root/gameframe/libs;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalOptions>
       </AdditionalOptions>
@@ -235,7 +235,7 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <Link>
-      <LibraryDependencies>shynet;frmpub;protobuf;redis++;hiredis;mysqlcppconn8;lua</LibraryDependencies>
+      <LibraryDependencies>shynet;frmpub;protobuf;redis++;hiredis;mysqlcppconn8;lua;fmt</LibraryDependencies>
       <AdditionalLibraryDirectories>/root/gameframe/libs;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalOptions>
       </AdditionalOptions>
@@ -252,7 +252,7 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <Link>
-      <LibraryDependencies>shynet;frmpub;protobuf;redis++;hiredis;mysqlcppconn8;lua</LibraryDependencies>
+      <LibraryDependencies>shynet;frmpub;protobuf;redis++;hiredis;mysqlcppconn8;lua;fmt</LibraryDependencies>
       <AdditionalLibraryDirectories>/root/gameframe/libs;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalOptions>
       </AdditionalOptions>
@@ -269,7 +269,7 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x86'">
     <Link>
-      <LibraryDependencies>shynet;frmpub;protobuf;redis++;hiredis;mysqlcppconn8;lua</LibraryDependencies>
+      <LibraryDependencies>shynet;frmpub;protobuf;redis++;hiredis;mysqlcppconn8;lua;fmt</LibraryDependencies>
       <AdditionalLibraryDirectories>/root/gameframe/libs;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalOptions>
       </AdditionalOptions>
@@ -286,7 +286,7 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x86'">
     <Link>
-      <LibraryDependencies>shynet;frmpub;protobuf;redis++;hiredis;mysqlcppconn8;lua</LibraryDependencies>
+      <LibraryDependencies>shynet;frmpub;protobuf;redis++;hiredis;mysqlcppconn8;lua;fmt</LibraryDependencies>
       <AdditionalLibraryDirectories>/root/gameframe/libs;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalOptions>
       </AdditionalOptions>

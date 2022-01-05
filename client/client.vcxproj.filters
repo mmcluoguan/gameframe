@@ -13,12 +13,4 @@
     <ClInclude Include="consolehandler.h" />
     <ClInclude Include="role.h" />
   </ItemGroup>
-  <ItemGroup>
-    <Filter Include="test">
-      <UniqueIdentifier>{d0f8ebc2-4653-4ffb-a8bb-223cf6a85f08}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="itertools">
-      <UniqueIdentifier>{cb1af5cb-41d7-47d9-968f-f0b674163fb4}</UniqueIdentifier>
-    </Filter>
-  </ItemGroup>
 </Project>
