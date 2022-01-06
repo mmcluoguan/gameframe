@@ -80,12 +80,12 @@ end
 --加载角色结果
 function dbConnector:loadrole_client_gate_c(roleid,fields,gameClientFd,routing)
     local roleObj = role:new(roleid,'')
-    RoleMgr:add(roleObj)
     roleObj:copyrouting(routing)
     assert(routing:size() ~= 0,'loadrole_client_gate_c 没有路由信息');
     log("在db中获取角色数据 roleid:",roleObj.id)
     roleObj:init_fields()
     roleObj:loaddata_complete(gameClientFd,routing:top():fd(),fields)
+    RoleMgr:add(roleObj)
     return 'loadrole_client_gate_s',roleObj:client_roledata()
 end
 

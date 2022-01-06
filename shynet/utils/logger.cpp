@@ -45,7 +45,7 @@ namespace utils {
         char processname[NAME_MAX] = { 0 };
         utils::stuff::executable_path(path, processname, sizeof(path));
         char* processname_end = strrchr(processname, '.');
-        if (processname != nullptr) {
+        if (processname != nullptr && processname_end != nullptr) {
             *processname_end = '\0';
         }
 

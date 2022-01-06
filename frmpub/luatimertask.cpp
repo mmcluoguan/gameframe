@@ -27,7 +27,7 @@ int LuaTimerMgr::LuaTimerTask::run(thread::Thread* tif)
     str.append(funname_);
     shynet::utils::elapsed(str.c_str());
     cb();
-#elif
+#else
     cb();
 #endif
     return 0;

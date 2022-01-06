@@ -374,7 +374,7 @@ void Datahelp::updata(const std::string& cachekey,
         } else {
             //延时排队写库
             auto timerid = shynet::utils::Singleton<DataTimerMgr>::instance().find(cachekey);
-            if (timerid == 0) {
+            if (timerid == -1) {
                 //创建写库计时器
                 std::shared_ptr<DataTimer> dt = std::make_shared<DataTimer>(cachekey, val);
                 dt->modify_cache_fields(fields);

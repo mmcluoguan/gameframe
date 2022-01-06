@@ -115,6 +115,7 @@
     <EnableIncrementalBuild>WithNinja</EnableIncrementalBuild>
     <AdditionalSourcesToCopyMapping>
     </AdditionalSourcesToCopyMapping>
+    <TargetExt />
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|ARM64'">
     <OutDir>../bin/</OutDir>
@@ -135,6 +136,7 @@
     <EnableIncrementalBuild>WithNinja</EnableIncrementalBuild>
     <AdditionalSourcesToCopyMapping>
     </AdditionalSourcesToCopyMapping>
+    <TargetExt />
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <OutDir>../bin/</OutDir>
@@ -155,6 +157,7 @@
     <EnableIncrementalBuild>WithNinja</EnableIncrementalBuild>
     <AdditionalSourcesToCopyMapping>
     </AdditionalSourcesToCopyMapping>
+    <TargetExt />
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x86'">
     <OutDir>../bin/</OutDir>
@@ -175,6 +178,7 @@
     <EnableIncrementalBuild>WithNinja</EnableIncrementalBuild>
     <AdditionalSourcesToCopyMapping>
     </AdditionalSourcesToCopyMapping>
+    <TargetExt />
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|ARM'">
     <Link>

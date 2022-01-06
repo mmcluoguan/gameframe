@@ -61,4 +61,26 @@ function gmSystem:delgoods(msgtable,gmtable,routing)
     end
 end
 
+function gmSystem:changegold(msgtable,gmtable,routing)
+    if #msgtable.args < 1 then
+        gmtable.desc = '参数数量小于1'
+    else
+        local goldnum = tonumber(msgtable.args[1])
+        if goldnum == nil then
+            gmtable.result = 2
+            gmtable.desc = '错误的参数' .. msgtable.args[1]
+        else
+            local role = RoleMgr:find(msgtable.roleid)
+            if role ~= nil then
+                role.gold = role.gold + goldnum
+                role.routing = routing
+                role:save('gold')
+            else                    
+                gmtable.result = 1;
+                gmtable.desc = '没有角色' .. msgtable.roleid
+            end
+        end
+    end
+end
+
 return gmSystem;

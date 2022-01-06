@@ -81,7 +81,7 @@ int WorldConnector::input_handle(std::shared_ptr<protocc::CommonObject> obj, std
     std::string str = fmt::format("工作线程单任务执行 {}", frmpub::Basic::msgname(obj->msgid()));
     shynet::utils::elapsed(str.c_str());
     return cb();
-#elif
+#else
     return cb();
 #endif
 }

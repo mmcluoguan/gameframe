@@ -146,8 +146,8 @@ message loadgoods_client_gate_s{
 //gm命令
 message gmorder_client_gate_c {
   int64 roleid = 1;
-  string order = 2; //命令
-  repeated string args = 3;//参数
+  string order = 2; //命令 changegold
+  repeated string args = 3;//参数 100
 }
 
 message gmorder_client_gate_s {
@@ -237,4 +237,3 @@ message baseupdata_client_gate_g {
     int32 gold = 3;
     int32 diamond = 4;
 }
-

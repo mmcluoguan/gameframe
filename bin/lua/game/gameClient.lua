@@ -84,6 +84,7 @@ end
 
 --加载角色数据
 function gameClient:loadrole_client_gate_c(msgid,msgdata,routing)  
+    local clientfd = routing:top():fd()
     local msgtable = pb.decode("frmpub.protocc.loadrole_client_gate_c", msgdata)
     local role = RoleMgr:find(msgtable.roleid)
     if role ~= nil then
@@ -91,7 +92,7 @@ function gameClient:loadrole_client_gate_c(msgid,msgdata,routing)
         log("在本地内存中获取角色数据 roleid:",role.id)
         role:copyrouting(routing)
         assert(routing:size() ~= 0,'loadrole_client_gate_c 没有路由信息');
-        role:loaddata_complete(self.id,routing:top():fd())
+        role:loaddata_complete(self.id,clientfd)
         self:send("loadrole_client_gate_s",role:client_roledata(),routing)
     else
         --转发消息到db获取角色数据
@@ -186,6 +187,8 @@ function gameClient:gmorder_client_gate_c(msgid,msgdata,routing)
         GmSystem:addgoods(msgtable,gmtable,routing)
     elseif msgtable.order == 'delgoods' then
         GmSystem:delgoods(msgtable,gmtable,routing)
+    elseif msgtable.order == 'changegold' then
+        GmSystem:changegold(msgtable,gmtable,routing)
     else
         gmtable.result = 2;
         gmtable.desc = '非法的命令'

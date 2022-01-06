@@ -44,7 +44,7 @@ public:
 #ifdef USE_DEBUG
             shynet::utils::elapsed("lua线程单任务执行 onAccept");
             cb();
-#elif
+#else
             cb();
 #endif
         }
@@ -93,7 +93,7 @@ public:
 #ifdef USE_DEBUG
             shynet::utils::elapsed("lua线程单任务执行 onConnect");
             cb();
-#elif
+#else
             cb();
 #endif
         }
@@ -139,7 +139,7 @@ public:
 #ifdef USE_DEBUG
         shynet::utils::elapsed("lua线程单任务执行 onClose");
         cb();
-#elif
+#else
         cb();
 #endif
         return 0;
@@ -197,12 +197,6 @@ public:
         thread::LuaThread* lua = dynamic_cast<thread::LuaThread*>(tif);
         kaguya::State& state = *(lua->luaState());
         if (client_) {
-            int msgid = 0;
-            if (data_) {
-                msgid = data_->msgid();
-            } else if (doc_) {
-                msgid = (*doc_)["msgid"].GetInt();
-            }
             auto cb = [&]() {
                 shynet::utils::Singleton<LuaRemoteDebug>::instance().start(state);
                 if (data_) {
@@ -214,10 +208,16 @@ public:
             };
 
 #ifdef USE_DEBUG
+            int msgid = 0;
+            if (data_) {
+                msgid = data_->msgid();
+            } else if (doc_) {
+                msgid = (*doc_)["msgid"].GetInt();
+            }
             std::string str = fmt::format("工作线程单任务执行 {}", frmpub::Basic::msgname(msgid));
             shynet::utils::elapsed("str");
             cb();
-#elif
+#else
             cb();
 #endif
         }
