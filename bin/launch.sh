@@ -75,7 +75,8 @@ dostart()
 		echo -e "starting \033[31m$serv\033[0m ..."
 		case $MODE in
 		release)
-			
+			$(pwd)/${arr[0]} $serv $CFGNAME 1
+			SUFFIX=""
 		;;
 		*)
 			$(pwd)/${arr[0]}$SUFFIX $serv $CFGNAME 1
