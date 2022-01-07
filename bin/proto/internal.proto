@@ -41,5 +41,8 @@ enum InternalMsgId {
   DELETEDATA_TO_DBVISIT_C = 509;		//从dbvisit删除1条hash数据
   DELETEDATA_TO_DBVISIT_S = 510;
 
+  WRITELOG_TO_LOG_C = 601;          //写工作日志
+  WRITELOG_TO_LOG_S = 602;
+
   INTERNALMSGID_END = 999;
 }

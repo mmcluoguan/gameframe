@@ -56,8 +56,11 @@ namespace thread {
                             THROW_EXCEPTION("call connect_hostname")
                         }
                         connect->set_dnsbase(dnsbase);
-                        bufferevent_socket_connect_hostname(buffer->buffer(), dnsbase, AF_UNSPEC,
-                            connect->hostname().c_str(), connect->dnsport());
+                        if (bufferevent_socket_connect_hostname(buffer->buffer(), dnsbase, AF_UNSPEC,
+                                connect->hostname().c_str(), connect->dnsport())
+                            == -1) {
+                            THROW_EXCEPTION("call bufferevent_socket_connect_hostname")
+                        }
                     } else {
                         if (bufferevent_socket_connect(buffer->buffer(), address, sizeof(sockaddr_storage)) == -1) {
                             THROW_EXCEPTION("call bufferevent_socket_connect")

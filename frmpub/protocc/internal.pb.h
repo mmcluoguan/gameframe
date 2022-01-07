@@ -92,6 +92,8 @@ enum InternalMsgId : int {
   UPDATA_TO_DBVISIT_S = 508,
   DELETEDATA_TO_DBVISIT_C = 509,
   DELETEDATA_TO_DBVISIT_S = 510,
+  WRITELOG_TO_LOG_C = 601,
+  WRITELOG_TO_LOG_S = 602,
   INTERNALMSGID_END = 999,
   InternalMsgId_INT_MIN_SENTINEL_DO_NOT_USE_ = std::numeric_limits<::PROTOBUF_NAMESPACE_ID::int32>::min(),
   InternalMsgId_INT_MAX_SENTINEL_DO_NOT_USE_ = std::numeric_limits<::PROTOBUF_NAMESPACE_ID::int32>::max()

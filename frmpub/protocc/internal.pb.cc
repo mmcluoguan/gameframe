@@ -28,7 +28,7 @@ static constexpr ::PROTOBUF_NAMESPACE_ID::internal::MigrationSchema* schemas = n
 static constexpr ::PROTOBUF_NAMESPACE_ID::Message* const* file_default_instances = nullptr;
 
 const char descriptor_table_protodef_internal_2eproto[] PROTOBUF_SECTION_VARIABLE(protodesc_cold) =
-  "\n\016internal.proto\022\016frmpub.protocc*\352\007\n\rInt"
+  "\n\016internal.proto\022\016frmpub.protocc*\232\010\n\rInt"
   "ernalMsgId\022\027\n\023INTERNALMSGID_BEGIN\020\000\022\034\n\030R"
   "EGISTER_WORLD_DBVISIT_C\020d\022\034\n\030REGISTER_WO"
   "RLD_DBVISIT_S\020e\022\032\n\026SERONLINE_WORLD_GATE_"
@@ -53,12 +53,13 @@ const char descriptor_table_protodef_internal_2eproto[] PROTOBUF_SECTION_VARIABL
   "TDATA_TO_DBVISIT_S\020\372\003\022\030\n\023UPDATA_TO_DBVIS"
   "IT_C\020\373\003\022\030\n\023UPDATA_TO_DBVISIT_S\020\374\003\022\034\n\027DEL"
   "ETEDATA_TO_DBVISIT_C\020\375\003\022\034\n\027DELETEDATA_TO"
-  "_DBVISIT_S\020\376\003\022\026\n\021INTERNALMSGID_END\020\347\007b\006p"
-  "roto3"
+  "_DBVISIT_S\020\376\003\022\026\n\021WRITELOG_TO_LOG_C\020\331\004\022\026\n"
+  "\021WRITELOG_TO_LOG_S\020\332\004\022\026\n\021INTERNALMSGID_E"
+  "ND\020\347\007b\006proto3"
   ;
 static ::PROTOBUF_NAMESPACE_ID::internal::once_flag descriptor_table_internal_2eproto_once;
 const ::PROTOBUF_NAMESPACE_ID::internal::DescriptorTable descriptor_table_internal_2eproto = {
-  false, false, 1045, descriptor_table_protodef_internal_2eproto, "internal.proto", 
+  false, false, 1093, descriptor_table_protodef_internal_2eproto, "internal.proto", 
   &descriptor_table_internal_2eproto_once, nullptr, 0, 0,
   schemas, file_default_instances, TableStruct_internal_2eproto::offsets,
   file_level_metadata_internal_2eproto, file_level_enum_descriptors_internal_2eproto, file_level_service_descriptors_internal_2eproto,
@@ -112,6 +113,8 @@ bool InternalMsgId_IsValid(int value) {
     case 508:
     case 509:
     case 510:
+    case 601:
+    case 602:
     case 999:
       return true;
     default:

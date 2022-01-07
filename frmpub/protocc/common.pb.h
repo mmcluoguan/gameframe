@@ -115,12 +115,13 @@ enum ServerType : int {
   LOGIN = 3,
   GAME = 4,
   GATE = 5,
+  LOG = 6,
   ServerType_INT_MIN_SENTINEL_DO_NOT_USE_ = std::numeric_limits<::PROTOBUF_NAMESPACE_ID::int32>::min(),
   ServerType_INT_MAX_SENTINEL_DO_NOT_USE_ = std::numeric_limits<::PROTOBUF_NAMESPACE_ID::int32>::max()
 };
 bool ServerType_IsValid(int value);
 constexpr ServerType ServerType_MIN = UNKNOW;
-constexpr ServerType ServerType_MAX = GATE;
+constexpr ServerType ServerType_MAX = LOG;
 constexpr int ServerType_ARRAYSIZE = ServerType_MAX + 1;
 
 const ::PROTOBUF_NAMESPACE_ID::EnumDescriptor* ServerType_descriptor();

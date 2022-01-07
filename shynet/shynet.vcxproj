@@ -310,7 +310,7 @@
     </Link>
     <ClCompile>
       <AdditionalIncludeDirectories>$(SolutionDir)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>JEMALLOC_NO_DEMANGLE;USE_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>USE_DEBUG;JEMALLOC_NO_DEMANGLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <CppLanguageStandard>c++17</CppLanguageStandard>
       <AdditionalOptions>-W"no-conversion" -W"no-stringop-truncation" -W"no-stringop-overflow"</AdditionalOptions>
       <TreatWarningAsError>false</TreatWarningAsError>
@@ -327,7 +327,7 @@
     </Link>
     <ClCompile>
       <AdditionalIncludeDirectories>$(SolutionDir)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>JEMALLOC_NO_DEMANGLE;USE_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>USE_DEBUG;JEMALLOC_NO_DEMANGLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <CppLanguageStandard>c++17</CppLanguageStandard>
       <AdditionalOptions>-W"no-conversion" -W"no-stringop-truncation" -W"no-stringop-overflow"</AdditionalOptions>
       <TreatWarningAsError>false</TreatWarningAsError>
@@ -344,7 +344,7 @@
     </Link>
     <ClCompile>
       <AdditionalIncludeDirectories>$(SolutionDir)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>JEMALLOC_NO_DEMANGLE;USE_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>USE_DEBUG;JEMALLOC_NO_DEMANGLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <CppLanguageStandard>c++17</CppLanguageStandard>
       <AdditionalOptions>-W"no-conversion" -W"no-stringop-truncation" -W"no-stringop-overflow"</AdditionalOptions>
       <TreatWarningAsError>false</TreatWarningAsError>
@@ -361,7 +361,7 @@
     </Link>
     <ClCompile>
       <AdditionalIncludeDirectories>$(SolutionDir)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>JEMALLOC_NO_DEMANGLE;USE_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>USE_DEBUG;JEMALLOC_NO_DEMANGLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <CppLanguageStandard>c++17</CppLanguageStandard>
       <AdditionalOptions>-W"no-conversion" -W"no-stringop-truncation" -W"no-stringop-overflow"</AdditionalOptions>
       <TreatWarningAsError>false</TreatWarningAsError>

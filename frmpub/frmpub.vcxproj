@@ -41,6 +41,8 @@
     <ClCompile Include="filterdata.cpp" />
     <ClCompile Include="frmluawrapper.cpp" />
     <ClCompile Include="frmstdinhandler.cpp" />
+    <ClCompile Include="logconnector.cpp" />
+    <ClCompile Include="logconnectormgr.cpp" />
     <ClCompile Include="luafoldertask.cpp" />
     <ClCompile Include="luahotfixtask.cpp" />
     <ClCompile Include="luaremotedebug.cpp" />
@@ -52,6 +54,7 @@
     <ClCompile Include="protocc\game.pb.cc" />
     <ClCompile Include="protocc\gate.pb.cc" />
     <ClCompile Include="protocc\internal.pb.cc" />
+    <ClCompile Include="protocc\log.pb.cc" />
     <ClCompile Include="protocc\login.pb.cc" />
     <ClCompile Include="protocc\world.pb.cc" />
   </ItemGroup>
@@ -64,6 +67,8 @@
     <ClInclude Include="frmluawrapper.h" />
     <ClInclude Include="frmstdinhandler.h" />
     <ClInclude Include="josncfg.h" />
+    <ClInclude Include="logconnector.h" />
+    <ClInclude Include="logconnectormgr.h" />
     <ClInclude Include="luafoldertask.h" />
     <ClInclude Include="luahotfixtask.h" />
     <ClInclude Include="luacallbacktask.h" />
@@ -76,6 +81,7 @@
     <ClInclude Include="protocc\game.pb.h" />
     <ClInclude Include="protocc\gate.pb.h" />
     <ClInclude Include="protocc\internal.pb.h" />
+    <ClInclude Include="protocc\log.pb.h" />
     <ClInclude Include="protocc\login.pb.h" />
     <ClInclude Include="protocc\world.pb.h" />
     <ClInclude Include="reconnecttimer.h" />

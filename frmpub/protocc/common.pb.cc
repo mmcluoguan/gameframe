@@ -165,22 +165,22 @@ const char descriptor_table_protodef_common_2eproto[] PROTOBUF_SECTION_VARIABLE(
   "ame\030\005 \001(\t\")\n\013FieldsEntry\022\013\n\003key\030\001 \001(\t\022\r\n"
   "\005value\030\002 \001(\t\"=\n\007errcode\022$\n\004code\030\001 \001(\0162\026."
   "frmpub.protocc.errnum\022\014\n\004desc\030\002 \001(\t*\035\n\016B"
-  "roadcastMsgId\022\013\n\007ERRCODE\020\000*O\n\nServerType"
+  "roadcastMsgId\022\013\n\007ERRCODE\020\000*X\n\nServerType"
   "\022\n\n\006UNKNOW\020\000\022\013\n\007DBVISIT\020\001\022\t\n\005WORLD\020\002\022\t\n\005"
-  "LOGIN\020\003\022\010\n\004GAME\020\004\022\010\n\004GATE\020\005*\304\002\n\006errnum\022\031"
-  "\n\025MESSAGE_PARSING_ERROR\020\000\022\033\n\027ILLEGAL_UNK"
-  "NOWN_MESSAGE\020\001\022\022\n\016GAME_NOT_EXIST\020\002\022\023\n\017LO"
-  "GIN_NOT_EXIST\020\003\022\023\n\017WORLD_NOT_EXIST\020\004\022\025\n\021"
-  "DBVISIT_NOT_EXIST\020\005\022\022\n\016GATE_NOT_EXIST\020\006\022"
-  "\022\n\016DB_CACHE_ERROR\020\007\022\023\n\017UNAUTHENTICATED\020\010"
-  "\022\022\n\016CLIENT_CLOSEED\020\t\022\027\n\023UNKNOWN_SERVER_T"
-  "YPE\020\n\022\025\n\021EXTEND_FORMAT_ERR\020\013\022\023\n\017NO_ROUTI"
-  "NG_INFO\020\014\022\027\n\023GAME_ROLE_NOT_EXIST\020\rb\006prot"
-  "o3"
+  "LOGIN\020\003\022\010\n\004GAME\020\004\022\010\n\004GATE\020\005\022\007\n\003LOG\020\006*\304\002\n"
+  "\006errnum\022\031\n\025MESSAGE_PARSING_ERROR\020\000\022\033\n\027IL"
+  "LEGAL_UNKNOWN_MESSAGE\020\001\022\022\n\016GAME_NOT_EXIS"
+  "T\020\002\022\023\n\017LOGIN_NOT_EXIST\020\003\022\023\n\017WORLD_NOT_EX"
+  "IST\020\004\022\025\n\021DBVISIT_NOT_EXIST\020\005\022\022\n\016GATE_NOT"
+  "_EXIST\020\006\022\022\n\016DB_CACHE_ERROR\020\007\022\023\n\017UNAUTHEN"
+  "TICATED\020\010\022\022\n\016CLIENT_CLOSEED\020\t\022\027\n\023UNKNOWN"
+  "_SERVER_TYPE\020\n\022\025\n\021EXTEND_FORMAT_ERR\020\013\022\023\n"
+  "\017NO_ROUTING_INFO\020\014\022\027\n\023GAME_ROLE_NOT_EXIS"
+  "T\020\rb\006proto3"
   ;
 static ::PROTOBUF_NAMESPACE_ID::internal::once_flag descriptor_table_common_2eproto_once;
 const ::PROTOBUF_NAMESPACE_ID::internal::DescriptorTable descriptor_table_common_2eproto = {
-  false, false, 842, descriptor_table_protodef_common_2eproto, "common.proto", 
+  false, false, 851, descriptor_table_protodef_common_2eproto, "common.proto", 
   &descriptor_table_common_2eproto_once, nullptr, 0, 5,
   schemas, file_default_instances, TableStruct_common_2eproto::offsets,
   file_level_metadata_common_2eproto, file_level_enum_descriptors_common_2eproto, file_level_service_descriptors_common_2eproto,
@@ -220,6 +220,7 @@ bool ServerType_IsValid(int value) {
     case 3:
     case 4:
     case 5:
+    case 6:
       return true;
     default:
       return false;

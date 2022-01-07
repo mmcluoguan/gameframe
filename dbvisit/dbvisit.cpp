@@ -3,10 +3,13 @@
 #include "dbvisit/dbserver.h"
 #include "dbvisit/luawrapper.h"
 #include "frmpub/frmstdinhandler.h"
+#include "frmpub/logconnector.h"
+#include "frmpub/logconnectormgr.h"
 #include "frmpub/luafoldertask.h"
 #include "shynet/events/eventhandler.h"
 #include "shynet/io/stdinhandler.h"
 #include "shynet/lua/luaengine.h"
+#include "shynet/net/connectreactormgr.h"
 #include "shynet/net/ipaddress.h"
 #include "shynet/pool/mysqlpool.h"
 #include "shynet/pool/threadpool.h"
@@ -115,6 +118,22 @@ int main(int argc, char* argv[])
         shared_ptr<IPAddress> ipaddr(new IPAddress(ip.c_str(), port));
         shared_ptr<DbServer> dbserver(new DbServer(ipaddr));
         Singleton<ListenReactorMgr>::instance().add(dbserver);
+
+        //连接log服务器
+        string logstr = ini.get<string>(g_conf_node, "log");
+        auto loglist = stringop::split(logstr, ",");
+        if (loglist.size() > 2 || loglist.size() == 0) {
+            THROW_EXCEPTION("db配置错误");
+        }
+        for (auto& item : loglist) {
+            string logip = ini.get<string>(item, "ip");
+            short logport = ini.get<short>(item, "port");
+            shared_ptr<IPAddress> dbaddr(new IPAddress(logip.c_str(), logport));
+            Singleton<ConnectReactorMgr>::instance().add(
+                shared_ptr<LogConnector>(
+                    new LogConnector(shared_ptr<IPAddress>(
+                        new IPAddress(logip.c_str(), logport)))));
+        }
 
         const char* pid_dir = "./pid/";
         filepathop::mkdir_recursive(pid_dir);

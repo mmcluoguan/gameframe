@@ -46,6 +46,15 @@
       <Filter>protocc</Filter>
     </ClCompile>
     <ClCompile Include="frmstdinhandler.cpp" />
+    <ClCompile Include="protocc\log.pb.cc">
+      <Filter>protocc</Filter>
+    </ClCompile>
+    <ClCompile Include="logconnector.cpp">
+      <Filter>log</Filter>
+    </ClCompile>
+    <ClCompile Include="logconnectormgr.cpp">
+      <Filter>log</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pingtimer.h" />
@@ -103,6 +112,15 @@
     <ClInclude Include="configcenter.h">
       <Filter>config</Filter>
     </ClInclude>
+    <ClInclude Include="protocc\log.pb.h">
+      <Filter>protocc</Filter>
+    </ClInclude>
+    <ClInclude Include="logconnector.h">
+      <Filter>log</Filter>
+    </ClInclude>
+    <ClInclude Include="logconnectormgr.h">
+      <Filter>log</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="protocc">
@@ -113,6 +131,9 @@
     </Filter>
     <Filter Include="config">
       <UniqueIdentifier>{5c35d0dd-330d-486e-b63f-98759fba4040}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="log">
+      <UniqueIdentifier>{e0ce8722-1515-4a55-be5e-09a9a4f847f5}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

@@ -1,0 +1,13 @@
+syntax = "proto3";
+package frmpub.protocc;
+
+//写工作日志
+message writelog_to_log_c {
+    string dirname = 1; //目录名
+    string logname = 2; //日志名
+    bytes logdata  = 3; //日志
+}
+
+message writelog_to_log_s {
+    int32 result = 1; //0成功
+}
