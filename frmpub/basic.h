@@ -10,6 +10,7 @@
 #include "frmpub/protocc/game.pb.h"
 #include "frmpub/protocc/gate.pb.h"
 #include "frmpub/protocc/internal.pb.h"
+#include "frmpub/protocc/log.pb.h"
 #include "frmpub/protocc/login.pb.h"
 #include "frmpub/protocc/world.pb.h"
 #include "shynet/events/eventbuffer.h"
@@ -104,6 +105,11 @@ inline void default_sigcb(std::shared_ptr<events::EventBase> base, int signum)
         base->loopexit();
     }
 }
+
+/**
+ * @brief 设置日志收集
+*/
+void set_loggather();
 }
 
 namespace magic_enum::customize {

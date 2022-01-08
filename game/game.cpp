@@ -1,4 +1,5 @@
 #include "frmpub/frmstdinhandler.h"
+#include "frmpub/logconnector.h"
 #include "frmpub/luafoldertask.h"
 #include "game/connectormgr.h"
 #include "game/dbconnector.h"
@@ -78,6 +79,22 @@ int main(int argc, char* argv[])
         std::shared_ptr<IPAddress> gameaddr(new IPAddress(gameip.c_str(), gameport));
         std::shared_ptr<GameServer> gameserver(new GameServer(gameaddr));
         Singleton<ListenReactorMgr>::instance().add(gameserver);
+
+        //连接log服务器
+        string logstr = ini.get<string>(g_conf_node, "log");
+        auto loglist = stringop::split(logstr, ",");
+        if (loglist.size() > 2 || loglist.size() == 0) {
+            THROW_EXCEPTION("log配置错误");
+        }
+        for (auto& item : loglist) {
+            string logip = ini.get<string>(item, "ip");
+            short logport = ini.get<short>(item, "port");
+            shared_ptr<IPAddress> dbaddr(new IPAddress(logip.c_str(), logport));
+            Singleton<ConnectReactorMgr>::instance().add(
+                shared_ptr<LogConnector>(
+                    new LogConnector(shared_ptr<IPAddress>(
+                        new IPAddress(logip.c_str(), logport)))));
+        }
 
         //连接db服务器
         string dbstr = ini.get<string>(g_conf_node, "db");

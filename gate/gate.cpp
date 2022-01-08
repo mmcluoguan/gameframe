@@ -1,3 +1,4 @@
+#include "frmpub/logconnector.h"
 #include "gate/connectormgr.h"
 #include "gate/gateclientmgr.h"
 #include "gate/gateserver.h"
@@ -68,6 +69,22 @@ int main(int argc, char* argv[])
         std::shared_ptr<IPAddress> gateaddr(new IPAddress(gateip.c_str(), gateport));
         std::shared_ptr<GateServer> gateserver(new GateServer(gateaddr));
         Singleton<ListenReactorMgr>::instance().add(gateserver);
+
+        //连接log服务器
+        string logstr = ini.get<string>(g_conf_node, "log");
+        auto loglist = stringop::split(logstr, ",");
+        if (loglist.size() > 2 || loglist.size() == 0) {
+            THROW_EXCEPTION("log配置错误");
+        }
+        for (auto& item : loglist) {
+            string logip = ini.get<string>(item, "ip");
+            short logport = ini.get<short>(item, "port");
+            shared_ptr<IPAddress> dbaddr(new IPAddress(logip.c_str(), logport));
+            Singleton<ConnectReactorMgr>::instance().add(
+                shared_ptr<LogConnector>(
+                    new LogConnector(shared_ptr<IPAddress>(
+                        new IPAddress(logip.c_str(), logport)))));
+        }
 
         //连接world服务器
         string worldstr = ini.get<string>(g_conf_node, "world");

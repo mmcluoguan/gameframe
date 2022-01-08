@@ -15,6 +15,9 @@
 
 namespace shynet {
 namespace utils {
+    /**
+     * @brief 日志颜色信息
+    */
     struct LogInfo {
         const char* name;
         const char* color;
@@ -25,9 +28,14 @@ namespace utils {
     std::ofstream g_logfile;
     static char g_logfilename[NAME_MAX] = { 0 };
 
+    /**
+     * @brief 获取日志等级名称hash表
+     * 此处栈上存储信息，每次调用拷贝，是因为考虑如果用全局变量会有生命周期释放问题
+     * @return 日志等级名称hash表
+    */
     static std::map<Logger::LogLevel, LogInfo> levelNames()
     {
-        return {
+        std::map<Logger::LogLevel, LogInfo> color = {
             { Logger::LogLevel::TRACE, { "TRACE", "\033[01;36m" } }, //粗体青色
             { Logger::LogLevel::DEBUG, { "DEBUG", "\033[01;32m" } }, //粗体绿色
             { Logger::LogLevel::LUA, { "LUA", "\033[01;37m" } }, //粗体浅灰
@@ -36,6 +44,7 @@ namespace utils {
             { Logger::LogLevel::ERROR, { "ERROR", "\033[01;31m" } }, //粗体红色
             { Logger::LogLevel::FATAL, { "FATAL", "\033[01;34m" } }, //粗体品红
         };
+        return color;
     }
 
     static void defaultOutput(const char* msg, size_t len)
@@ -85,6 +94,11 @@ namespace utils {
             strncpy(g_logfilename, logfilename, strlen(logfilename));
         }
         g_logfile << msg << std::endl;
+        Logger::print_cout(msg, len);
+    }
+
+    void Logger::print_cout(const char* msg, size_t len)
+    {
         for (auto&& [key, value] : levelNames()) {
             if (strstr(msg, value.name) != nullptr) {
                 std::cout << value.color << msg << "\e[0m" << std::endl;

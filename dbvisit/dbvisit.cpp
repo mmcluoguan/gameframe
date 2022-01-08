@@ -123,7 +123,7 @@ int main(int argc, char* argv[])
         string logstr = ini.get<string>(g_conf_node, "log");
         auto loglist = stringop::split(logstr, ",");
         if (loglist.size() > 2 || loglist.size() == 0) {
-            THROW_EXCEPTION("db配置错误");
+            THROW_EXCEPTION("log配置错误");
         }
         for (auto& item : loglist) {
             string logip = ini.get<string>(item, "ip");

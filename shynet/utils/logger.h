@@ -2,6 +2,7 @@
 #define SHYNET_UTILS_LOGGER_H
 
 #include "shynet/basic.h"
+#include <map>
 #include <memory>
 #include <sstream>
 
@@ -69,6 +70,12 @@ namespace utils {
         void writelog(const unsigned char* buffer, size_t size);
 
     public:
+        /**
+         * @brief 输出信息到cout
+         * @param msg 信息
+         * @param len 长度
+        */
+        static void print_cout(const char* msg, size_t len);
         /**
          * @brief 设置日志回调函数
          * @param  日志回调函数

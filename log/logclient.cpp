@@ -29,7 +29,7 @@ LogClient::~LogClient()
     if (active() == net::CloseType::SERVER_CLOSE) {
         str = "服务器log主动关闭连接";
     } else {
-        str = frmpub::Basic::connectname(sif().st()) + std::string("客户端主动关闭连接");
+        str = "客户端主动关闭连接";
     }
     LOG_INFO << str << "[ip:" << remote_addr()->ip() << ":" << remote_addr()->port() << "]";
 }

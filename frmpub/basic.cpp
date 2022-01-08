@@ -1,5 +1,6 @@
 #include "frmpub/basic.h"
-#include "shynet/utils/logger.h"
+#include "frmpub/logconnectormgr.h"
+#include "shynet/utils/stuff.h"
 
 namespace frmpub {
 
@@ -19,6 +20,44 @@ rapidjson::Value& get_json_value(rapidjson::Document& doc, std::string key)
         return iter->value;
     }
     THROW_EXCEPTION("找不到json key:" + key);
+}
+
+/**
+ * @brief 设置日志收集
+*/
+void set_loggather()
+{
+    static bool flag = false;
+    if (flag == false) {
+        shynet::utils::Logger::setoutput([](const char* msg, size_t len) {
+            static char processname[NAME_MAX] = { 0 };
+            std::shared_ptr<LogConnector> logger = nullptr;
+            try {
+                logger = shynet::utils::Singleton<frmpub::LogConnectorMgr>::get_instance().log_connector();
+            } catch (const std::exception& err) {
+                logger = nullptr;
+            }
+            if (logger != nullptr) {
+                if (strlen(processname) == 0) {
+                    char path[PATH_MAX] = { 0 };
+                    shynet::utils::stuff::executable_path(path, processname, sizeof(path));
+                    char* processname_end = strrchr(processname, '.');
+                    if (processname != nullptr && processname_end != nullptr) {
+                        *processname_end = '\0';
+                    }
+                }
+
+                frmpub::protocc::writelog_to_log_c msgc;
+                msgc.set_dirname(processname);
+                msgc.set_logname(shynet::utils::Logger::logname());
+                msgc.set_logdata(msg, len);
+                logger->send_proto(protocc::WRITELOG_TO_LOG_C, &msgc);
+
+                shynet::utils::Logger::print_cout(msg, len);
+            }
+        });
+    }
+    flag = true;
 }
 
 std::string Basic::internal_msgname(int id)

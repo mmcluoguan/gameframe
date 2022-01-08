@@ -1,6 +1,5 @@
 #include "frmpub/logconnector.h"
 #include "frmpub/logconnectormgr.h"
-#include "frmpub/protocc/log.pb.h"
 #include "frmpub/reconnecttimer.h"
 
 namespace frmpub {
@@ -34,10 +33,12 @@ LogConnector::~LogConnector()
         shynet::utils::Singleton<net::TimerReactorMgr>::instance().add(reconnect);
     }
 }
+
 void LogConnector::complete()
 {
     LOG_INFO << "连接服务器log成功 [ip:" << connect_addr()->ip() << ":" << connect_addr()->port() << "]";
     shynet::utils::Singleton<LogConnectorMgr>::instance().add_logctor(connectid());
+    set_loggather();
 }
 int LogConnector::input_handle(std::shared_ptr<protocc::CommonObject> obj, std::shared_ptr<std::stack<FilterData::Envelope>> enves)
 {

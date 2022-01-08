@@ -72,8 +72,8 @@ int main(int argc, char* argv[])
         Singleton<ThreadPool>::instance().start();
 
         shared_ptr<IPAddress> ipaddr(new IPAddress(ip.c_str(), port));
-        shared_ptr<LogServer> dbserver(new LogServer(ipaddr));
-        Singleton<ListenReactorMgr>::instance().add(dbserver);
+        shared_ptr<LogServer> logserver(new LogServer(ipaddr));
+        Singleton<ListenReactorMgr>::instance().add(logserver);
 
         const char* pid_dir = "./pid/";
         filepathop::mkdir_recursive(pid_dir);

@@ -140,7 +140,7 @@ done
 
 #启动的服务器列表,按先后顺序排列
 if [ "$SERVERLIST" == "" ] ; then
-	SERVERLIST="dbvisit_account_master dbvisit_game_master dbvisit_world_master world_master game_20 login_10 gate_30"
+	SERVERLIST="log_master dbvisit_account_master dbvisit_game_master dbvisit_world_master world_master game_30 login_20 gate_40"
 fi
 
 echo -e "======================================== \033[35m`echo $MODE|tr 'a-z' 'A-Z'`\033[0m ========================================"

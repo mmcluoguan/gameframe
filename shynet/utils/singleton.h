@@ -33,7 +33,8 @@ namespace utils {
         };
 
         /**
-         * @brief 获取实例,这个接口保证单例一定创建完成,否则抛出异常
+         * @brief 获取实例,
+         这个接口保证单例一定创建完成并且创建的单例没有被释放,否则抛出异常
          目的用于发现单例的创建是否在预期内
          * @return 实例
         */
@@ -41,7 +42,7 @@ namespace utils {
         {
             if (instance_ == nullptr) {
                 std::ostringstream err;
-                err << T::kClassname << " 单例没有初始化";
+                err << T::kClassname << " 单例没有初始化或者已被释放";
                 THROW_EXCEPTION(err.str());
             }
             return *instance_;
