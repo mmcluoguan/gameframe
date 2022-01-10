@@ -175,17 +175,6 @@ public:
     std::unordered_map<int64_t, Goods>& goodsmap() { return goodsmap_; }
 
     /**
-     * @brief  发送proto数据封包
-     * @param msgid msgid
-     * @param data protobuf
-     * @param enves 路由信息
-     * @param extend 扩展字符串数据
-     * @return 0成功 -1失败
-    */
-    int send_proto(int msgid, const google::protobuf::Message* data = nullptr,
-        std::stack<FilterData::Envelope>* enves = nullptr, const std::string* extend = nullptr) const;
-
-    /**
      * @brief 发送错误信息
      * @param code code
      * @param desc desc

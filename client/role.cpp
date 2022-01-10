@@ -6,42 +6,17 @@ namespace client {
 Role::Role()
 {
     pmb_ = {
-        { protocc::LOADROLE_CLIENT_GATE_S,
-            std::bind(&Role::loadrole_client_gate_s, this, std::placeholders::_1, std::placeholders::_2) },
-        { protocc::LOADGOODS_CLIENT_GATE_S,
-            std::bind(&Role::loadgoods_client_gate_s, this, std::placeholders::_1, std::placeholders::_2) },
         { protocc::GOODSUPDATA_CLIENT_GATE_G,
             std::bind(&Role::goodsupdata_client_gate_g, this, std::placeholders::_1, std::placeholders::_2) },
         { protocc::GOODSUPDATA_CLIENT_GATE_G,
             std::bind(&Role::goodsupdata_client_gate_g, this, std::placeholders::_1, std::placeholders::_2) },
         { protocc::NOTICE_INFO_CLENT_GATE_G,
             std::bind(&Role::notice_info_clent_gate_g, this, std::placeholders::_1, std::placeholders::_2) },
-        { protocc::NOTICE_INFO_LIST_CLENT_GATE_S,
-            std::bind(&Role::notice_info_list_clent_gate_s, this, std::placeholders::_1, std::placeholders::_2) },
         { protocc::EMAIL_NEW_CLIENT_GATE_G,
             std::bind(&Role::email_new_client_gate_g, this, std::placeholders::_1, std::placeholders::_2) },
-        { protocc::SETLEVEL_CLIENT_GATE_S,
-            std::bind(&Role::setlevel_client_gate_s, this, std::placeholders::_1, std::placeholders::_2) },
-        { protocc::LOADEMAILS_CLIENT_GATE_S,
-            std::bind(&Role::loademails_client_gate_s, this, std::placeholders::_1, std::placeholders::_2) },
-        { protocc::LOOKEMAIL_CLIENT_GATE_S,
-            std::bind(&Role::lookemail_client_gate_s, this, std::placeholders::_1, std::placeholders::_2) },
-        { protocc::GETANNEX_CLIENT_GATE_S,
-            std::bind(&Role::getannex_client_gate_s, this, std::placeholders::_1, std::placeholders::_2) },
         { protocc::BASEUPDATA_CLIENT_GATE_G,
             std::bind(&Role::baseupdata_client_gate_g, this, std::placeholders::_1, std::placeholders::_2) },
     };
-}
-
-int Role::send_proto(int msgid, const google::protobuf::Message* data, std::stack<FilterData::Envelope>* enves, const std::string* extend) const
-{
-    std::shared_ptr<GateConnector> sh = gate_.lock();
-    if (sh) {
-        return sh->send_proto(msgid, data, enves, extend);
-    } else {
-        LOG_WARN << "角色:" << id_ << " 连接已断开";
-    }
-    return 0;
 }
 
 int Role::send_errcode(protocc::errnum code, const std::string& desc,
@@ -88,8 +63,17 @@ int Role::loadrole_client_gate_s(std::shared_ptr<protocc::CommonObject> data,
         diamond_ = msgs.diamond();
         lottery_ = msgs.lottery();
 
-        send_proto(protocc::LOADGOODS_CLIENT_GATE_C);
-        LOG_DEBUG << "加载角色物品数据 roleid:" << id_;
+        std::shared_ptr<GateConnector> sh = gate_.lock();
+        if (sh) {
+            LOG_DEBUG << "加载角色物品数据 roleid:" << id_;
+            return sh->send_proto(FilterData::ProtoMessage { protocc::LOADGOODS_CLIENT_GATE_C },
+                { protocc::LOADGOODS_CLIENT_GATE_S,
+                    [&](std::shared_ptr<protocc::CommonObject> data, std::shared_ptr<std::stack<FilterData::Envelope>> enves) -> int {
+                        return loadgoods_client_gate_s(data, enves);
+                    } });
+        } else {
+            LOG_WARN << "角色:" << id_ << " 连接已断开";
+        }
     } else {
         std::stringstream stream;
         stream << "消息" << frmpub::Basic::msgname(data->msgid()) << "解析错误";
@@ -114,8 +98,17 @@ int Role::loadgoods_client_gate_s(std::shared_ptr<protocc::CommonObject> data, s
             };
             LOG_DEBUG << " 物品id:" << msgs.goods(i).id() << " cfgid:" << msgs.goods(i).cfgid() << " num:" << msgs.goods(i).num();
         }
-        send_proto(protocc::NOTICE_INFO_LIST_CLENT_GATE_C);
-        LOG_DEBUG << "获取广播公告信息列表";
+        std::shared_ptr<GateConnector> sh = gate_.lock();
+        if (sh) {
+            LOG_DEBUG << "获取广播公告信息列表";
+            return sh->send_proto(FilterData::ProtoMessage { protocc::NOTICE_INFO_LIST_CLENT_GATE_C },
+                { protocc::NOTICE_INFO_LIST_CLENT_GATE_S,
+                    [&](std::shared_ptr<protocc::CommonObject> data, std::shared_ptr<std::stack<FilterData::Envelope>> enves) -> int {
+                        return notice_info_list_clent_gate_s(data, enves);
+                    } });
+        } else {
+            LOG_WARN << "角色:" << id_ << " 连接已断开";
+        }
     } else {
         std::stringstream stream;
         stream << "消息" << frmpub::Basic::msgname(data->msgid()) << "解析错误";
@@ -175,8 +168,17 @@ int Role::notice_info_list_clent_gate_s(std::shared_ptr<protocc::CommonObject> d
 
             LOG_INFO_BASE << "  区服广播信息 info:" << item.info() << " 时间:" << timebuf;
         }
-        LOG_DEBUG << "加载邮件列表";
-        send_proto(protocc::LOADEMAILS_CLIENT_GATE_C);
+        std::shared_ptr<GateConnector> sh = gate_.lock();
+        if (sh) {
+            LOG_DEBUG << "加载邮件列表";
+            return sh->send_proto(FilterData::ProtoMessage { protocc::LOADEMAILS_CLIENT_GATE_C },
+                { protocc::LOADEMAILS_CLIENT_GATE_S,
+                    [&](std::shared_ptr<protocc::CommonObject> data, std::shared_ptr<std::stack<FilterData::Envelope>> enves) -> int {
+                        return loademails_client_gate_s(data, enves);
+                    } });
+        } else {
+            LOG_WARN << "角色:" << id_ << " 连接已断开";
+        }
     } else {
         std::stringstream stream;
         stream << "消息" << frmpub::Basic::msgname(data->msgid()) << "解析错误";

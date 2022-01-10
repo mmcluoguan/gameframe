@@ -514,8 +514,8 @@ int DbClient::login_client_gate_c(std::shared_ptr<protocc::CommonObject> data,
                     //跨服顶号处理
                     protocc::repeatlogin_client_gate_s notify;
                     notify.set_aid(accountid);
-                    send_proto(protocc::REPEATLOGIN_CLIENT_GATE_S, &notify, nullptr, &old_gate_sid);
-                    LOG_DEBUG << "发送消息" << frmpub::Basic::msgname(protocc::REPEATLOGIN_CLIENT_GATE_S) << "到"
+                    send_proto(protocc::REPEATLOGIN_CLIENT_GATE_G, &notify, nullptr, &old_gate_sid);
+                    LOG_DEBUG << "发送消息" << frmpub::Basic::msgname(protocc::REPEATLOGIN_CLIENT_GATE_G) << "到"
                               << frmpub::Basic::connectname(sif().st());
                 }
             }

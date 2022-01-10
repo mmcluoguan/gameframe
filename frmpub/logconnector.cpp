@@ -6,12 +6,9 @@ namespace frmpub {
 LogConnector::LogConnector(std::shared_ptr<net::IPAddress> connect_addr)
     : frmpub::Connector(connect_addr, "LogConnector")
 {
-
     pmb_ = {
         { protocc::ERRCODE,
             std::bind(&LogConnector::errcode, this, std::placeholders::_1, std::placeholders::_2) },
-        { protocc::WRITELOG_TO_LOG_S,
-            std::bind(&LogConnector::writelog_to_log_s, this, std::placeholders::_1, std::placeholders::_2) },
     };
 }
 LogConnector::~LogConnector()
@@ -75,18 +72,6 @@ int LogConnector::errcode(std::shared_ptr<protocc::CommonObject> data, std::shar
         stream << "消息" << frmpub::Basic::msgname(data->msgid()) << "解析错误";
         SEND_ERR(protocc::MESSAGE_PARSING_ERROR, stream.str());
     }
-    return 0;
-}
-
-int LogConnector::writelog_to_log_s(std::shared_ptr<protocc::CommonObject> data, std::shared_ptr<std::stack<FilterData::Envelope>> enves)
-{
-    /*protocc::writelog_to_log_s msgc;
-    if (msgc.ParseFromString(data->msgdata()) == true) {
-    } else {
-        std::stringstream stream;
-        stream << "消息" << frmpub::Basic::msgname(data->msgid()) << "解析错误";
-        SEND_ERR(protocc::MESSAGE_PARSING_ERROR, stream.str());
-    }*/
     return 0;
 }
 }

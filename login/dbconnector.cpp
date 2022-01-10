@@ -22,8 +22,8 @@ DbConnector::DbConnector(std::shared_ptr<net::IPAddress> connect_addr)
             std::bind(&DbConnector::errcode, this, std::placeholders::_1, std::placeholders::_2) },
         { protocc::REGISTER_LOGIN_DBVISIT_S,
             std::bind(&DbConnector::register_login_dbvisit_s, this, std::placeholders::_1, std::placeholders::_2) },
-        { protocc::REPEATLOGIN_CLIENT_GATE_S,
-            std::bind(&DbConnector::repeatlogin_client_gate_s, this, std::placeholders::_1, std::placeholders::_2) },
+        { protocc::REPEATLOGIN_CLIENT_GATE_G,
+            std::bind(&DbConnector::repeatlogin_client_gate_g, this, std::placeholders::_1, std::placeholders::_2) },
         { protocc::LOGIN_CLIENT_GATE_S,
             std::bind(&DbConnector::login_client_gate_s, this, std::placeholders::_1, std::placeholders::_2) },
     };
@@ -162,7 +162,7 @@ int DbConnector::register_login_dbvisit_s(std::shared_ptr<protocc::CommonObject>
     return 0;
 }
 
-int DbConnector::repeatlogin_client_gate_s(std::shared_ptr<protocc::CommonObject> data,
+int DbConnector::repeatlogin_client_gate_g(std::shared_ptr<protocc::CommonObject> data,
     std::shared_ptr<std::stack<FilterData::Envelope>> enves)
 {
     auto gate = shynet::utils::Singleton<LoginClientMgr>::instance().find_from_sid(data->extend());

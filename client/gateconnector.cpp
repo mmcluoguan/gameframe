@@ -22,20 +22,21 @@ GateConnector::GateConnector(std::shared_ptr<net::IPAddress> connect_addr,
     pmb_ = {
         { protocc::ERRCODE,
             std::bind(&GateConnector::errcode, this, std::placeholders::_1, std::placeholders::_2) },
-        { protocc::SERVERLIST_CLIENT_GATE_S,
-            std::bind(&GateConnector::serverlist_client_gate_s, this, std::placeholders::_1, std::placeholders::_2) },
-        { protocc::SELECTSERVER_CLIENT_GATE_S,
+        { protocc::REPEATLOGIN_CLIENT_GATE_G,
+            std::bind(&GateConnector::repeatlogin_client_gate_g, this, std::placeholders::_1, std::placeholders::_2) },
+        /*{ protocc::SERVERLIST_CLIENT_GATE_S,
+            std::bind(&GateConnector::serverlist_client_gate_s, this, std::placeholders::_1, std::placeholders::_2) },*/
+        /*{ protocc::SELECTSERVER_CLIENT_GATE_S,
             std::bind(&GateConnector::selectserver_client_gate_s, this, std::placeholders::_1, std::placeholders::_2) },
         { protocc::LOGIN_CLIENT_GATE_S,
             std::bind(&GateConnector::login_client_gate_s, this, std::placeholders::_1, std::placeholders::_2) },
-        { protocc::REPEATLOGIN_CLIENT_GATE_S,
-            std::bind(&GateConnector::repeatlogin_client_gate_s, this, std::placeholders::_1, std::placeholders::_2) },
+        
         { protocc::RECONNECT_CLIENT_GATE_S,
             std::bind(&GateConnector::reconnect_client_gate_s, this, std::placeholders::_1, std::placeholders::_2) },
         { protocc::CREATEROLE_CLIENT_GATE_S,
             std::bind(&GateConnector::createrole_client_gate_s, this, std::placeholders::_1, std::placeholders::_2) },
         { protocc::GMORDER_CLIENT_GATE_S,
-            std::bind(&GateConnector::gmorder_client_gate_s, this, std::placeholders::_1, std::placeholders::_2) },
+            std::bind(&GateConnector::gmorder_client_gate_s, this, std::placeholders::_1, std::placeholders::_2) },*/
     };
 }
 GateConnector::~GateConnector()
@@ -63,12 +64,21 @@ void GateConnector::complete()
     LOG_INFO << "连接服务器gate成功 [ip:" << connect_addr()->ip() << ":" << connect_addr()->port() << "]";
     if (disconnect_ == nullptr) {
         //获取服务器列表
-        send_proto(protocc::SERVERLIST_CLIENT_GATE_C);
+        //send_proto(protocc::SERVERLIST_CLIENT_GATE_C);
+        send_proto(ProtoMessage { protocc::SERVERLIST_CLIENT_GATE_C },
+            { protocc::SERVERLIST_CLIENT_GATE_S,
+                [&](std::shared_ptr<protocc::CommonObject> data, std::shared_ptr<std::stack<FilterData::Envelope>> enves) -> int {
+                    return serverlist_client_gate_s(data, enves);
+                } });
         LOG_DEBUG << "获取服务器列表";
     } else {
         if (disconnect_->accountid.empty()) {
             //获取服务器列表
-            send_proto(protocc::SERVERLIST_CLIENT_GATE_C);
+            send_proto(ProtoMessage { protocc::SERVERLIST_CLIENT_GATE_C },
+                { protocc::SERVERLIST_CLIENT_GATE_S,
+                    [&](std::shared_ptr<protocc::CommonObject> data, std::shared_ptr<std::stack<FilterData::Envelope>> enves) -> int {
+                        return serverlist_client_gate_s(data, enves);
+                    } });
             LOG_DEBUG << "获取服务器列表";
         } else {
             //模拟断线重连
@@ -79,7 +89,11 @@ void GateConnector::complete()
             msg.set_aid(disconnect_->accountid);
             msg.set_loginid(disconnect_->login_id);
             msg.set_gameid(disconnect_->game_id);
-            send_proto(protocc::RECONNECT_CLIENT_GATE_C, &msg);
+            send_proto(ProtoMessage { protocc::RECONNECT_CLIENT_GATE_C },
+                { protocc::RECONNECT_CLIENT_GATE_S,
+                    [&](std::shared_ptr<protocc::CommonObject> data, std::shared_ptr<std::stack<FilterData::Envelope>> enves) -> int {
+                        return reconnect_client_gate_s(data, enves);
+                    } });
             LOG_DEBUG << "模拟断线重连";
         }
     }
@@ -92,7 +106,7 @@ int GateConnector::input_handle(std::shared_ptr<protocc::CommonObject> obj, std:
         if (it != pmb_.end()) {
             return it->second(obj, enves);
         } else {
-            if (role_ != 0) {
+            if (role_ != nullptr) {
                 return role_->input_handle(obj, enves);
             } else {
                 LOG_DEBUG << "消息" << frmpub::Basic::msgname(obj->msgid()) << " 没有处理函数";
@@ -128,7 +142,11 @@ int GateConnector::errcode(std::shared_ptr<protocc::CommonObject> data, std::sha
                 protocc::loadrole_client_gate_c msg;
                 msg.set_aid(accountid_);
                 msg.set_roleid(role_->id());
-                send_proto(protocc::LOADROLE_CLIENT_GATE_C, &msg);
+                send_proto(ProtoMessage { protocc::LOADROLE_CLIENT_GATE_C, &msg },
+                    { protocc::LOADROLE_CLIENT_GATE_S,
+                        [&](std::shared_ptr<protocc::CommonObject> data, std::shared_ptr<std::stack<FilterData::Envelope>> enves) -> int {
+                            return role_->loadrole_client_gate_s(data, enves);
+                        } });
                 LOG_DEBUG << "重新加载角色数据 roleid:" << role_->id();
             }
         }
@@ -156,7 +174,11 @@ int GateConnector::serverlist_client_gate_s(std::shared_ptr<protocc::CommonObjec
         protocc::selectserver_client_gate_c msg;
         msg.set_loginid(login_id_);
         msg.set_gameid(game_id_);
-        send_proto(protocc::SELECTSERVER_CLIENT_GATE_C, &msg);
+        send_proto({ protocc::SELECTSERVER_CLIENT_GATE_C, &msg },
+            { protocc::SELECTSERVER_CLIENT_GATE_S,
+                [&](std::shared_ptr<protocc::CommonObject> data, std::shared_ptr<std::stack<FilterData::Envelope>> enves) -> int {
+                    return selectserver_client_gate_s(data, enves);
+                } });
     } else {
         std::stringstream stream;
         stream << "消息" << frmpub::Basic::msgname(data->msgid()) << "解析错误";
@@ -170,7 +192,11 @@ int GateConnector::selectserver_client_gate_s(std::shared_ptr<protocc::CommonObj
     if (msgs.ParseFromString(data->msgdata()) == true) {
         protocc::login_client_gate_c msgc;
         msgc.set_platform_key(platform_key_);
-        send_proto(protocc::LOGIN_CLIENT_GATE_C, &msgc);
+        send_proto({ protocc::LOGIN_CLIENT_GATE_C, &msgc },
+            { protocc::LOGIN_CLIENT_GATE_S,
+                [&](std::shared_ptr<protocc::CommonObject> data, std::shared_ptr<std::stack<FilterData::Envelope>> enves) -> int {
+                    return login_client_gate_s(data, enves);
+                } });
         LOG_DEBUG << "登陆 platform_key:" << platform_key_;
     } else {
         std::stringstream stream;
@@ -187,14 +213,17 @@ int GateConnector::login_client_gate_s(std::shared_ptr<protocc::CommonObject> da
     if (msgc.ParseFromString(data->msgdata()) == true) {
         LOG_DEBUG << count << "登录结果:" << msgc.result() << " aid:" << msgc.aid();
         count++;
-        //return 0;
         if (msgc.result() == 0) {
             accountid_ = msgc.aid();
             if (msgc.roleid() == 0) {
                 //创建角色
                 protocc::createrole_client_gate_c msg;
                 msg.set_aid(accountid_);
-                send_proto(protocc::CREATEROLE_CLIENT_GATE_C, &msg);
+                send_proto({ protocc::CREATEROLE_CLIENT_GATE_C, &msg },
+                    { protocc::CREATEROLE_CLIENT_GATE_S,
+                        [&](std::shared_ptr<protocc::CommonObject> data, std::shared_ptr<std::stack<FilterData::Envelope>> enves) -> int {
+                            return createrole_client_gate_s(data, enves);
+                        } });
                 LOG_DEBUG << "创建角色";
             } else {
                 //加载角色数据
@@ -207,7 +236,11 @@ int GateConnector::login_client_gate_s(std::shared_ptr<protocc::CommonObject> da
                 protocc::loadrole_client_gate_c msg;
                 msg.set_aid(accountid_);
                 msg.set_roleid(msgc.roleid());
-                send_proto(protocc::LOADROLE_CLIENT_GATE_C, &msg);
+                send_proto({ protocc::LOADROLE_CLIENT_GATE_C, &msg },
+                    { protocc::LOADROLE_CLIENT_GATE_S,
+                        [&](std::shared_ptr<protocc::CommonObject> data, std::shared_ptr<std::stack<FilterData::Envelope>> enves) -> int {
+                            return role_->loadrole_client_gate_s(data, enves);
+                        } });
                 LOG_DEBUG << "加载角色数据 roleid:" << role_->id()
                           << " accountid:" << accountid_
                           << " platform_key:" << platform_key_;
@@ -220,7 +253,7 @@ int GateConnector::login_client_gate_s(std::shared_ptr<protocc::CommonObject> da
     }
     return 0;
 }
-int GateConnector::repeatlogin_client_gate_s(std::shared_ptr<protocc::CommonObject> data, std::shared_ptr<std::stack<FilterData::Envelope>> enves)
+int GateConnector::repeatlogin_client_gate_g(std::shared_ptr<protocc::CommonObject> data, std::shared_ptr<std::stack<FilterData::Envelope>> enves)
 {
     LOG_DEBUG << "此账号在其他设备上登录";
     enable_reconnect_ = false;
@@ -238,7 +271,11 @@ int GateConnector::reconnect_client_gate_s(std::shared_ptr<protocc::CommonObject
             protocc::selectserver_client_gate_c msg;
             msg.set_loginid(login_id_);
             msg.set_gameid(game_id_);
-            send_proto(protocc::SELECTSERVER_CLIENT_GATE_C, &msg);
+            send_proto({ protocc::SELECTSERVER_CLIENT_GATE_C, &msg },
+                { protocc::SELECTSERVER_CLIENT_GATE_S,
+                    [&](std::shared_ptr<protocc::CommonObject> data, std::shared_ptr<std::stack<FilterData::Envelope>> enves) -> int {
+                        return selectserver_client_gate_s(data, enves);
+                    } });
             LOG_DEBUG << "重新选择服务器";
         }
     } else {
@@ -265,7 +302,11 @@ int client::GateConnector::createrole_client_gate_s(std::shared_ptr<protocc::Com
             //加载角色数据
             protocc::loadrole_client_gate_c msg;
             msg.set_roleid(role_->id());
-            send_proto(protocc::LOADROLE_CLIENT_GATE_C, &msg);
+            send_proto({ protocc::LOADROLE_CLIENT_GATE_C, &msg },
+                { protocc::LOADROLE_CLIENT_GATE_S,
+                    [&](std::shared_ptr<protocc::CommonObject> data, std::shared_ptr<std::stack<FilterData::Envelope>> enves) -> int {
+                        return role_->loadrole_client_gate_s(data, enves);
+                    } });
             LOG_DEBUG << "加载角色数据";
         }
     } else {

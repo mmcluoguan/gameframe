@@ -48,6 +48,44 @@ public:
         }
     };
 
+    struct ProtoStr {
+        int msgid;
+        const std::string data;
+        std::stack<Envelope>* enves = nullptr;
+        const std::string* extend = nullptr;
+    };
+
+    struct ProtoMessage {
+        int msgid;
+        const google::protobuf::Message* data = nullptr;
+        std::stack<Envelope>* enves = nullptr;
+        const std::string* extend = nullptr;
+    };
+
+    using ProtoMsgBind = std::function<int(std::shared_ptr<protocc::CommonObject> obj,
+        std::shared_ptr<std::stack<Envelope>> enves)>;
+    struct ProtoResponse {
+        int msgid;
+        ProtoMsgBind fun;
+    };
+
+    struct JsonDoc {
+        rapidjson::Document* doc;
+        std::stack<Envelope>* enves = nullptr;
+    };
+
+    struct JsonValue {
+        int msgid;
+        rapidjson::Value* data = nullptr;
+    };
+
+    using JsonMsgBind = std::function<int(std::shared_ptr<rapidjson::Document> doc,
+        std::shared_ptr<std::stack<Envelope>> enves)>;
+    struct JsonResponse {
+        int msgid;
+        JsonMsgBind fun;
+    };
+
     /**
      * @brief 构造
      * @param pd 数据封包类型 
@@ -127,6 +165,17 @@ public:
     int send_proto(int msgid, const std::string data,
         std::stack<Envelope>* enves = nullptr, const std::string* extend = nullptr) const;
 
+    int send_proto(const ProtoStr c, const ProtoResponse s)
+    {
+        pmb_[s.msgid] = s.fun;
+        return send_proto(c.msgid, c.data, c.enves, c.extend);
+    }
+
+    int send_proto(const ProtoMessage c, const ProtoResponse s)
+    {
+        pmb_[s.msgid] = s.fun;
+        return send_proto(c.msgid, c.data, c.enves, c.extend);
+    }
     /**
      * @brief 发送json数据封包
      * @param doc json文档
@@ -178,15 +227,11 @@ protected:
     */
     int json_handle(const char* original_data, size_t datalen);
 
-    using ProtoMsgBind = std::function<int(std::shared_ptr<protocc::CommonObject> obj,
-        std::shared_ptr<std::stack<Envelope>> enves)>;
     /**
      * @brief proto消息id与处理函数映射hash表
     */
     std::unordered_map<int, ProtoMsgBind> pmb_;
 
-    using JsonMsgBind = std::function<int(std::shared_ptr<rapidjson::Document> doc,
-        std::shared_ptr<std::stack<Envelope>> enves)>;
     /**
      * @brief josn消息id与处理函数映射hash表 
     */

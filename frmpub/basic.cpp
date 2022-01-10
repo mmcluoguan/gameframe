@@ -51,7 +51,11 @@ void set_loggather()
                 msgc.set_dirname(processname);
                 msgc.set_logname(shynet::utils::Logger::logname());
                 msgc.set_logdata(msg, len);
-                logger->send_proto(protocc::WRITELOG_TO_LOG_C, &msgc);
+                logger->send_proto({ protocc::WRITELOG_TO_LOG_C, &msgc },
+                    { protocc::WRITELOG_TO_LOG_S,
+                        [&](std::shared_ptr<protocc::CommonObject> data, std::shared_ptr<std::stack<FilterData::Envelope>> enves) -> int {
+                            return 0;
+                        } });
 
                 shynet::utils::Logger::print_cout(msg, len);
             }

@@ -35,7 +35,6 @@ public:
     */
     void close(net::CloseType active) override;
 
-private:
     /**
      * @brief 接收log服务器发来的错误信息
      * @param data protobuf对象
@@ -43,15 +42,6 @@ private:
      * @return 0成功 -1失败 失败将关闭对端连接
     */
     int errcode(std::shared_ptr<protocc::CommonObject> data,
-        std::shared_ptr<std::stack<FilterData::Envelope>> enves);
-
-    /**
-     * @brief 接收log服务器发来的写日志结果信息
-     * @param data protobuf对象
-     * @param enves 路由信息
-     * @return 0成功 -1失败 失败将关闭对端连接
-    */
-    int writelog_to_log_s(std::shared_ptr<protocc::CommonObject> data,
         std::shared_ptr<std::stack<FilterData::Envelope>> enves);
 };
 }

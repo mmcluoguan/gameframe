@@ -19,8 +19,8 @@ LoginConnector::LoginConnector(std::shared_ptr<net::IPAddress> connect_addr)
     pmb_ = {
         { protocc::ERRCODE,
             std::bind(&LoginConnector::errcode, this, std::placeholders::_1, std::placeholders::_2) },
-        { protocc::REPEATLOGIN_CLIENT_GATE_S,
-            std::bind(&LoginConnector::repeatlogin_client_gate_s, this, std::placeholders::_1, std::placeholders::_2) },
+        { protocc::REPEATLOGIN_CLIENT_GATE_G,
+            std::bind(&LoginConnector::repeatlogin_client_gate_g, this, std::placeholders::_1, std::placeholders::_2) },
     };
 }
 LoginConnector::~LoginConnector()
@@ -185,7 +185,7 @@ int LoginConnector::forward_login_client_c(std::shared_ptr<protocc::CommonObject
     return 0;
 }
 
-int LoginConnector::repeatlogin_client_gate_s(std::shared_ptr<protocc::CommonObject> data, std::shared_ptr<std::stack<FilterData::Envelope>> enves)
+int LoginConnector::repeatlogin_client_gate_g(std::shared_ptr<protocc::CommonObject> data, std::shared_ptr<std::stack<FilterData::Envelope>> enves)
 {
     protocc::repeatlogin_client_gate_s msg;
     if (msg.ParseFromString(data->msgdata()) == true) {

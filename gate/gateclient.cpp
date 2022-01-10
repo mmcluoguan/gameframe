@@ -132,7 +132,7 @@ int GateClient::login_message(std::shared_ptr<protocc::CommonObject> obj,
                 if (cli) {
                     protocc::repeatlogin_client_gate_s msgs;
                     msgs.set_aid(cli->accountid());
-                    cli->send_proto(protocc::REPEATLOGIN_CLIENT_GATE_S, &msgs);
+                    cli->send_proto(protocc::REPEATLOGIN_CLIENT_GATE_G, &msgs);
                     cli->close(net::CloseType::SERVER_CLOSE);
                 }
                 platform_key_ = msgc.platform_key();

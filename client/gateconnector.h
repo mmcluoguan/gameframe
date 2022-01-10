@@ -71,7 +71,6 @@ public:
     */
     std::shared_ptr<Role> role() { return role_; };
 
-private:
     /**
      * @brief 接收gate服务器发来的错误信息
      * @param data protobuf对象
@@ -110,7 +109,7 @@ private:
      * @param enves 路由信息
      * @return 0成功 -1失败 失败将关闭对端连接
     */
-    int repeatlogin_client_gate_s(std::shared_ptr<protocc::CommonObject> data,
+    int repeatlogin_client_gate_g(std::shared_ptr<protocc::CommonObject> data,
         std::shared_ptr<std::stack<FilterData::Envelope>> enves);
     /**
      * @brief 接收gate服务器发来的重连服务器结果信息

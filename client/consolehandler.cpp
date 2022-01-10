@@ -98,7 +98,11 @@ void ConsoleHandler::login_order(const OrderItem& order, int argc, char** argv)
     std::shared_ptr<GateConnector> gate = std::dynamic_pointer_cast<GateConnector>(
         shynet::utils::Singleton<net::ConnectReactorMgr>::instance().find(g_gateconnect_id));
     if (gate != nullptr) {
-        gate->send_proto(protocc::LOGIN_CLIENT_GATE_C, &msg);
+        gate->send_proto({ protocc::LOGIN_CLIENT_GATE_C, &msg },
+            { protocc::LOGIN_CLIENT_GATE_S,
+                [&](std::shared_ptr<protocc::CommonObject> data, std::shared_ptr<std::stack<FilterData::Envelope>> enves) -> int {
+                    return gate->login_client_gate_s(data, enves);
+                } });
         LOG_DEBUG << "发送" << frmpub::Basic::msgname(protocc::LOGIN_CLIENT_GATE_C);
     } else {
         LOG_WARN << "连接已经释放";
@@ -147,7 +151,11 @@ void ConsoleHandler::gm_order(const OrderItem& order, int argc, char** argv)
             shynet::utils::Singleton<net::ConnectReactorMgr>::instance().find(g_gateconnect_id));
     if (gate != nullptr && gate->role() != nullptr) {
         msg.set_roleid(gate->role()->id());
-        gate->send_proto(protocc::GMORDER_CLIENT_GATE_C, &msg);
+        gate->send_proto({ protocc::GMORDER_CLIENT_GATE_C, &msg },
+            { protocc::GMORDER_CLIENT_GATE_S,
+                [&](std::shared_ptr<protocc::CommonObject> data, std::shared_ptr<std::stack<FilterData::Envelope>> enves) -> int {
+                    return gate->gmorder_client_gate_s(data, enves);
+                } });
         LOG_DEBUG << "发送" << frmpub::Basic::msgname(protocc::GMORDER_CLIENT_GATE_C);
     } else {
         LOG_WARN << "连接已经释放";
@@ -219,8 +227,12 @@ void ConsoleHandler::setlevel_order(const OrderItem& order, int argc, char** arg
 
     std::shared_ptr<GateConnector> gate = std::dynamic_pointer_cast<GateConnector>(
         shynet::utils::Singleton<net::ConnectReactorMgr>::instance().find(g_gateconnect_id));
-    if (gate != nullptr) {
-        gate->send_proto(protocc::SETLEVEL_CLIENT_GATE_C, &msg);
+    if (gate != nullptr && gate->role() != nullptr) {
+        gate->send_proto({ protocc::SETLEVEL_CLIENT_GATE_C, &msg },
+            { protocc::SETLEVEL_CLIENT_GATE_S,
+                [&](std::shared_ptr<protocc::CommonObject> data, std::shared_ptr<std::stack<FilterData::Envelope>> enves) -> int {
+                    return gate->role()->setlevel_client_gate_s(data, enves);
+                } });
         LOG_DEBUG << "发送" << frmpub::Basic::msgname(protocc::SETLEVEL_CLIENT_GATE_C);
     } else {
         LOG_WARN << "连接已经释放";
@@ -261,8 +273,12 @@ void ConsoleHandler::lookemail_order(const OrderItem& order, int argc, char** ar
 
     std::shared_ptr<GateConnector> gate = std::dynamic_pointer_cast<GateConnector>(
         shynet::utils::Singleton<net::ConnectReactorMgr>::instance().find(g_gateconnect_id));
-    if (gate != nullptr) {
-        gate->send_proto(protocc::LOOKEMAIL_CLIENT_GATE_C, &msg);
+    if (gate != nullptr && gate->role() != nullptr) {
+        gate->send_proto({ protocc::LOOKEMAIL_CLIENT_GATE_C, &msg },
+            { protocc::LOOKEMAIL_CLIENT_GATE_S,
+                [&](std::shared_ptr<protocc::CommonObject> data, std::shared_ptr<std::stack<FilterData::Envelope>> enves) -> int {
+                    return gate->role()->lookemail_client_gate_s(data, enves);
+                } });
         LOG_DEBUG << "发送" << frmpub::Basic::msgname(protocc::LOOKEMAIL_CLIENT_GATE_C);
     } else {
         LOG_WARN << "连接已经释放";
@@ -303,8 +319,12 @@ void ConsoleHandler::getannex_order(const OrderItem& order, int argc, char** arg
 
     std::shared_ptr<GateConnector> gate = std::dynamic_pointer_cast<GateConnector>(
         shynet::utils::Singleton<net::ConnectReactorMgr>::instance().find(g_gateconnect_id));
-    if (gate != nullptr) {
-        gate->send_proto(protocc::GETANNEX_CLIENT_GATE_C, &msg);
+    if (gate != nullptr && gate->role() != nullptr) {
+        gate->send_proto({ protocc::GETANNEX_CLIENT_GATE_C, &msg },
+            { protocc::GETANNEX_CLIENT_GATE_S,
+                [&](std::shared_ptr<protocc::CommonObject> data, std::shared_ptr<std::stack<FilterData::Envelope>> enves) -> int {
+                    return gate->role()->getannex_client_gate_s(data, enves);
+                } });
         LOG_DEBUG << "发送" << frmpub::Basic::msgname(protocc::GETANNEX_CLIENT_GATE_C);
     } else {
         LOG_WARN << "连接已经释放";
