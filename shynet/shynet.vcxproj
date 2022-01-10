@@ -303,7 +303,7 @@
   </ItemGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|ARM'">
     <Link>
-      <LibraryDependencies>jemalloc;event;event_pthreads;ssl;crypto;event_openssl;pthread;mysqlcppconn8;lua;readline</LibraryDependencies>
+      <LibraryDependencies>jemalloc;event;event_pthreads;ssl;crypto;event_openssl;pthread;mysqlcppconn8;lua;readline;fmt</LibraryDependencies>
       <AdditionalOptions>
       </AdditionalOptions>
       <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
@@ -320,7 +320,7 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|ARM64'">
     <Link>
-      <LibraryDependencies>jemalloc;event;event_pthreads;ssl;crypto;event_openssl;pthread;mysqlcppconn8;lua;readline</LibraryDependencies>
+      <LibraryDependencies>jemalloc;event;event_pthreads;ssl;crypto;event_openssl;pthread;mysqlcppconn8;lua;readline;fmt</LibraryDependencies>
       <AdditionalOptions>
       </AdditionalOptions>
       <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
@@ -337,7 +337,7 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <Link>
-      <LibraryDependencies>jemalloc;event;event_pthreads;ssl;crypto;event_openssl;pthread;mysqlcppconn8;lua;readline</LibraryDependencies>
+      <LibraryDependencies>jemalloc;event;event_pthreads;ssl;crypto;event_openssl;pthread;mysqlcppconn8;lua;readline;fmt</LibraryDependencies>
       <AdditionalOptions>
       </AdditionalOptions>
       <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
@@ -354,7 +354,7 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x86'">
     <Link>
-      <LibraryDependencies>jemalloc;event;event_pthreads;ssl;crypto;event_openssl;pthread;mysqlcppconn8;lua;readline</LibraryDependencies>
+      <LibraryDependencies>jemalloc;event;event_pthreads;ssl;crypto;event_openssl;pthread;mysqlcppconn8;lua;readline;fmt</LibraryDependencies>
       <AdditionalOptions>
       </AdditionalOptions>
       <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>

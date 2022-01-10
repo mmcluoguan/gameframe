@@ -216,7 +216,7 @@
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|ARM'">
     <Link>
-      <LibraryDependencies>jemalloc;shynet;protobuf;curl;lua</LibraryDependencies>
+      <LibraryDependencies>jemalloc;shynet;protobuf;curl;lua;fmt</LibraryDependencies>
       <AdditionalLibraryDirectories>/root/gameframe/libs;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalOptions>
       </AdditionalOptions>
@@ -248,7 +248,7 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|ARM64'">
     <Link>
-      <LibraryDependencies>jemalloc;shynet;protobuf;curl;lua</LibraryDependencies>
+      <LibraryDependencies>jemalloc;shynet;protobuf;curl;lua;fmt</LibraryDependencies>
       <AdditionalLibraryDirectories>/root/gameframe/libs;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalOptions>
       </AdditionalOptions>
@@ -280,7 +280,7 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <Link>
-      <LibraryDependencies>jemalloc;shynet;protobuf;curl;lua</LibraryDependencies>
+      <LibraryDependencies>jemalloc;shynet;protobuf;curl;lua;fmt</LibraryDependencies>
       <AdditionalLibraryDirectories>/root/gameframe/libs;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalOptions>
       </AdditionalOptions>
@@ -312,7 +312,7 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x86'">
     <Link>
-      <LibraryDependencies>jemalloc;shynet;protobuf;curl;lua</LibraryDependencies>
+      <LibraryDependencies>jemalloc;shynet;protobuf;curl;lua;fmt</LibraryDependencies>
       <AdditionalLibraryDirectories>/root/gameframe/libs;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalOptions>
       </AdditionalOptions>

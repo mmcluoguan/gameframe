@@ -18,9 +18,10 @@ namespace pool {
         /**
          * @brief 构造
          * @param opt mysql连接配置
-         * @param capactiy 容量
+         * @param capactiy 初始容量
+         * @param max_capactiy 最大容量
         */
-        MysqlPool(const mysqlx::SessionSettings& opt, size_t capactiy = 1);
+        MysqlPool(const mysqlx::SessionSettings& opt, size_t capactiy = 5, size_t max_capactiy = 20);
 
     public:
         /**
@@ -74,9 +75,13 @@ namespace pool {
         */
         mysqlx::SessionSettings option_;
         /**
-         * @brief 容量
+         * @brief 初始容量
         */
         size_t capactiy_ = 1;
+        /**
+         * @brief 最大容量
+        */
+        size_t max_capactiy_ = 1;
         /**
          * @brief 当前建立的连接数
         */
