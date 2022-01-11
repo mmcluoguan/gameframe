@@ -42,7 +42,8 @@ void LoginConnector::complete()
 
     //通知lua的onConnect函数
     shynet::utils::Singleton<lua::LuaEngine>::get_instance().append(
-        std::make_shared<frmpub::OnConnectorTask<LoginConnector>>(shared_from_this()));
+        std::make_shared<frmpub::OnConnectorTask<LoginConnector>>(
+            std::dynamic_pointer_cast<LoginConnector>(shared_from_this())));
 
     //向登录服注册服务器信息
     protocc::register_gate_login_c msgc;
@@ -57,31 +58,17 @@ void LoginConnector::complete()
     sif->set_name(name);
     send_proto(protocc::REGISTER_GATE_LOGIN_C, &msgc);
 }
-int LoginConnector::input_handle(std::shared_ptr<protocc::CommonObject> obj, std::shared_ptr<std::stack<FilterData::Envelope>> enves)
+int LoginConnector::default_handle(std::shared_ptr<protocc::CommonObject> obj, std::shared_ptr<std::stack<FilterData::Envelope>> enves)
 {
-    auto cb = [&]() {
-        //直接处理的登录服消息
-        auto it = pmb_.find(obj->msgid());
-        if (it != pmb_.end()) {
-            return it->second(obj, enves);
-        } else {
-            if (enves->empty() == false) {
-                return forward_login_client_c(obj, enves);
-            } else {
-                //通知lua的onMessage函数
-                shynet::utils::Singleton<lua::LuaEngine>::get_instance().append(
-                    std::make_shared<frmpub::OnMessageTask<LoginConnector>>(shared_from_this(), obj, enves));
-            }
-        }
-        return 0;
-    };
-#ifdef USE_DEBUG
-    std::string str = fmt::format("工作线程单任务执行 {}", frmpub::Basic::msgname(obj->msgid()));
-    shynet::utils::elapsed(str.c_str());
-    return cb();
-#else
-    return cb();
-#endif
+    if (enves->empty() == false) {
+        return forward_login_client_c(obj, enves);
+    } else {
+        //通知lua的onMessage函数
+        shynet::utils::Singleton<lua::LuaEngine>::get_instance().append(
+            std::make_shared<frmpub::OnMessageTask<LoginConnector>>(
+                std::dynamic_pointer_cast<LoginConnector>(shared_from_this()), obj, enves));
+    }
+    return 0;
 }
 void LoginConnector::close(net::CloseType active)
 {

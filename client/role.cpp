@@ -68,7 +68,7 @@ int Role::loadrole_client_gate_s(std::shared_ptr<protocc::CommonObject> data,
             LOG_DEBUG << "加载角色物品数据 roleid:" << id_;
             return sh->send_proto(FilterData::ProtoMessage { protocc::LOADGOODS_CLIENT_GATE_C },
                 { protocc::LOADGOODS_CLIENT_GATE_S,
-                    [&](std::shared_ptr<protocc::CommonObject> data, std::shared_ptr<std::stack<FilterData::Envelope>> enves) -> int {
+                    [&](auto data, auto enves) -> int {
                         return loadgoods_client_gate_s(data, enves);
                     } });
         } else {
@@ -103,7 +103,7 @@ int Role::loadgoods_client_gate_s(std::shared_ptr<protocc::CommonObject> data, s
             LOG_DEBUG << "获取广播公告信息列表";
             return sh->send_proto(FilterData::ProtoMessage { protocc::NOTICE_INFO_LIST_CLENT_GATE_C },
                 { protocc::NOTICE_INFO_LIST_CLENT_GATE_S,
-                    [&](std::shared_ptr<protocc::CommonObject> data, std::shared_ptr<std::stack<FilterData::Envelope>> enves) -> int {
+                    [&](auto data, auto enves) -> int {
                         return notice_info_list_clent_gate_s(data, enves);
                     } });
         } else {
@@ -173,7 +173,7 @@ int Role::notice_info_list_clent_gate_s(std::shared_ptr<protocc::CommonObject> d
             LOG_DEBUG << "加载邮件列表";
             return sh->send_proto(FilterData::ProtoMessage { protocc::LOADEMAILS_CLIENT_GATE_C },
                 { protocc::LOADEMAILS_CLIENT_GATE_S,
-                    [&](std::shared_ptr<protocc::CommonObject> data, std::shared_ptr<std::stack<FilterData::Envelope>> enves) -> int {
+                    [&](auto data, auto enves) -> int {
                         return loademails_client_gate_s(data, enves);
                     } });
         } else {

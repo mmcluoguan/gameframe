@@ -22,8 +22,6 @@ WorldConnector::WorldConnector(std::shared_ptr<net::IPAddress> connect_addr)
     pmb_ = {
         { protocc::ERRCODE,
             std::bind(&WorldConnector::errcode, this, std::placeholders::_1, std::placeholders::_2) },
-        { protocc::REGISTER_GATE_WORLD_S,
-            std::bind(&WorldConnector::register_gate_world_s, this, std::placeholders::_1, std::placeholders::_2) },
         { protocc::SERONLINE_WORLD_GATE_G,
             std::bind(&WorldConnector::seronline_world_gate_g, this, std::placeholders::_1, std::placeholders::_2) },
     };
@@ -54,7 +52,8 @@ void WorldConnector::complete()
 
     //通知lua的onConnect函数
     shynet::utils::Singleton<lua::LuaEngine>::get_instance().append(
-        std::make_shared<frmpub::OnConnectorTask<WorldConnector>>(shared_from_this()));
+        std::make_shared<frmpub::OnConnectorTask<WorldConnector>>(
+            std::dynamic_pointer_cast<WorldConnector>(shared_from_this())));
 
     //向世界服注册网关服信息
     protocc::register_gate_world_c msgc;
@@ -67,32 +66,23 @@ void WorldConnector::complete()
     sif->set_sid(sid);
     std::string name = ini.get<std::string>(g_conf_node, "name");
     sif->set_name(name);
-    send_proto(protocc::REGISTER_GATE_WORLD_C, &msgc);
+    send_proto({ protocc::REGISTER_GATE_WORLD_C, &msgc },
+        { protocc::REGISTER_GATE_WORLD_S,
+            [&](auto data, auto enves) -> int {
+                return register_gate_world_s(data, enves);
+            } });
 }
-int WorldConnector::input_handle(std::shared_ptr<protocc::CommonObject> obj, std::shared_ptr<std::stack<FilterData::Envelope>> enves)
+int WorldConnector::default_handle(std::shared_ptr<protocc::CommonObject> obj, std::shared_ptr<std::stack<FilterData::Envelope>> enves)
 {
-    auto cb = [&]() {
-        auto it = pmb_.find(obj->msgid());
-        if (it != pmb_.end()) {
-            return it->second(obj, enves);
-        } else {
-            if (enves->empty() == false) {
-                return forward_world_client_c(obj, enves);
-            } else {
-                //通知lua的onMessage函数
-                shynet::utils::Singleton<lua::LuaEngine>::get_instance().append(
-                    std::make_shared<frmpub::OnMessageTask<WorldConnector>>(shared_from_this(), obj, enves));
-            }
-        }
-        return 0;
-    };
-#ifdef USE_DEBUG
-    std::string str = fmt::format("工作线程单任务执行 {}", frmpub::Basic::msgname(obj->msgid()));
-    shynet::utils::elapsed(str.c_str());
-    return cb();
-#else
-    return cb();
-#endif
+    if (enves->empty() == false) {
+        return forward_world_client_c(obj, enves);
+    } else {
+        //通知lua的onMessage函数
+        shynet::utils::Singleton<lua::LuaEngine>::get_instance().append(
+            std::make_shared<frmpub::OnMessageTask<WorldConnector>>(
+                std::dynamic_pointer_cast<WorldConnector>(shared_from_this()), obj, enves));
+    }
+    return 0;
 }
 
 void WorldConnector::close(net::CloseType active)

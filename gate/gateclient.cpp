@@ -34,43 +34,29 @@ GateClient::~GateClient()
              << "[ip:" << remote_addr()->ip() << ":" << remote_addr()->port() << "]";
 }
 
-int GateClient::input_handle(std::shared_ptr<protocc::CommonObject> obj, std::shared_ptr<std::stack<FilterData::Envelope>> enves)
+void GateClient::preinput_handle(const std::shared_ptr<protocc::CommonObject> obj,
+    std::shared_ptr<std::stack<FilterData::Envelope>> enves)
 {
-    auto cb = [&]() {
-        LOG_DEBUG << "接收账号id:" << accountid_
-                  << " 消息" << frmpub::Basic::msgname(obj->msgid());
-        if (obj->msgid() > protocc::CLIENT_LOGIN_BEGIN && obj->msgid() < protocc::CLIENT_LOGIN_END) {
-            return login_message(obj, enves);
-        }
+    LOG_DEBUG << "接收账号id:" << accountid_ << " 消息" << frmpub::Basic::msgname(obj->msgid());
+}
 
-        else if (obj->msgid() > protocc::CLIENT_GAME_BEGIN && obj->msgid() < protocc::CLIENT_GAME_END) {
-            return game_message(obj, enves);
-        }
-
-        else if (obj->msgid() > protocc::CLIENT_GATE_BEGIN && obj->msgid() < protocc::CLIENT_GATE_END) {
-            auto it = pmb_.find(obj->msgid());
-            if (it != pmb_.end()) {
-                return it->second(obj, enves);
-            } else {
-                //通知lua的onMessage函数
-                shynet::utils::Singleton<lua::LuaEngine>::get_instance().append(
-                    std::make_shared<frmpub::OnMessageTask<GateClient>>(shared_from_this(), obj, enves));
-            }
-        } else {
-            std::stringstream stream;
-            stream << "非法消息" << obj->msgid();
-            SEND_ERR(protocc::ILLEGAL_UNKNOWN_MESSAGE, stream.str());
-        }
-        return 0;
-    };
-
-#ifdef USE_DEBUG
-    std::string str = fmt::format("工作线程单任务执行 {}", frmpub::Basic::msgname(obj->msgid()));
-    shynet::utils::elapsed(str.c_str());
-    return cb();
-#else
-    return cb();
-#endif
+int GateClient::default_handle(std::shared_ptr<protocc::CommonObject> obj, std::shared_ptr<std::stack<FilterData::Envelope>> enves)
+{
+    if (obj->msgid() > protocc::CLIENT_LOGIN_BEGIN && obj->msgid() < protocc::CLIENT_LOGIN_END) {
+        return login_message(obj, enves);
+    } else if (obj->msgid() > protocc::CLIENT_GAME_BEGIN && obj->msgid() < protocc::CLIENT_GAME_END) {
+        return game_message(obj, enves);
+    } else if (obj->msgid() > protocc::CLIENT_GATE_BEGIN && obj->msgid() < protocc::CLIENT_GATE_END) {
+        //通知lua的onMessage函数
+        shynet::utils::Singleton<lua::LuaEngine>::get_instance().append(
+            std::make_shared<frmpub::OnMessageTask<GateClient>>(
+                std::dynamic_pointer_cast<GateClient>(shared_from_this()), obj, enves));
+    } else {
+        std::stringstream stream;
+        stream << "非法消息" << obj->msgid();
+        SEND_ERR(protocc::ILLEGAL_UNKNOWN_MESSAGE, stream.str());
+    }
+    return 0;
 }
 
 void GateClient::close(net::CloseType active)
@@ -127,7 +113,6 @@ int GateClient::login_message(std::shared_ptr<protocc::CommonObject> obj,
             //同服顶号处理
             protocc::login_client_gate_c msgc;
             if (msgc.ParseFromString(obj->msgdata()) == true) {
-                //assert(msgc.platform_key().empty() == false);
                 auto cli = shynet::utils::Singleton<GateClientMgr>::instance().find(msgc.platform_key());
                 if (cli) {
                     protocc::repeatlogin_client_gate_s msgs;

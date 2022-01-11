@@ -1,8 +1,13 @@
 #include "frmpub/filterdata.h"
+#include "3rd/fmt/format.h"
 #include "3rd/rapidjson/stringbuffer.h"
 #include "3rd/rapidjson/writer.h"
+#include "frmpub/responsetimer.h"
 #include "shynet/net/ipaddress.h"
+#include "shynet/net/timerreactormgr.h"
+#include "shynet/utils/elapsed.h"
 #include "shynet/utils/logger.h"
+#include "shynet/utils/singleton.h"
 #include <memory>
 
 namespace frmpub {
@@ -90,6 +95,114 @@ int FilterData::native_handle(const char* original_data, size_t datalen)
     return input_handle(original_data, datalen, enves);
 }
 
+int FilterData::input_handle(const std::shared_ptr<protocc::CommonObject> obj,
+    std::shared_ptr<std::stack<Envelope>> enves)
+{
+#ifdef USE_DEBUG
+    {
+        std::lock_guard<std::mutex> lock(rtbmut_);
+        auto it = response_timer_bind_.find(obj->msgid());
+        if (it != response_timer_bind_.end()) {
+            //清除服务器回应消息超时计时器
+            if (it->second.empty() == false) {
+                int timerid = *it->second.begin();
+                it->second.pop_front();
+                auto& timermgr = shynet::utils::Singleton<shynet::net::TimerReactorMgr>::get_instance();
+                timermgr.remove(timerid);
+            }
+            if (it->second.empty()) {
+                response_timer_bind_.erase(obj->msgid());
+            }
+        }
+    }
+#endif
+    preinput_handle(obj, enves);
+    auto cb = [&]() {
+        auto it = pmb_.find(obj->msgid());
+        if (it != pmb_.end()) {
+            return it->second(obj, enves);
+        }
+        return default_handle(obj, enves);
+    };
+
+#ifdef USE_DEBUG
+    std::string str = fmt::format("工作线程单任务执行 {}", frmpub::Basic::msgname(obj->msgid()));
+    shynet::utils::elapsed(str.c_str());
+    return cb();
+#else
+    return cb();
+#endif
+};
+
+int FilterData::input_handle(const std::shared_ptr<rapidjson::Document> obj,
+    std::shared_ptr<std::stack<Envelope>> enves)
+{
+    int msgid = (*obj)["msgid"].GetInt();
+#ifdef USE_DEBUG
+    {
+        std::lock_guard<std::mutex> lock(rtbmut_);
+        auto it = response_timer_bind_.find(msgid);
+        if (it != response_timer_bind_.end()) {
+            //清除服务器回应消息超时计时器
+            if (it->second.empty() == false) {
+                int timerid = *it->second.begin();
+                it->second.pop_front();
+                auto& timermgr = shynet::utils::Singleton<shynet::net::TimerReactorMgr>::get_instance();
+                timermgr.remove(timerid);
+            }
+            if (it->second.empty()) {
+                response_timer_bind_.erase(msgid);
+            }
+        }
+    }
+#endif
+    preinput_handle(obj, enves);
+    auto cb = [&]() {
+        auto it = jmb_.find(msgid);
+        if (it != jmb_.end()) {
+            return it->second(obj, enves);
+        }
+        return default_handle(obj, enves);
+    };
+
+#ifdef USE_DEBUG
+    std::string str = fmt::format("工作线程单任务执行 {}", frmpub::Basic::msgname(msgid));
+    shynet::utils::elapsed(str.c_str());
+    return cb();
+#else
+    return cb();
+#endif
+}
+
+void FilterData::default_response_timeout(int msgid_c, int msgid_s)
+{
+#ifdef USE_DEBUG
+    {
+        std::lock_guard<std::mutex> lock(rtbmut_);
+        auto it = response_timer_bind_.find(msgid_s);
+        if (it != response_timer_bind_.end()) {
+            if (it->second.empty() == false) {
+                it->second.pop_back();
+            }
+            if (it->second.empty()) {
+                response_timer_bind_.erase(msgid_s);
+            }
+        }
+    }
+    {
+        std::lock_guard<std::mutex> lock(pmbmut_);
+        pmb_.erase(msgid_s);
+    }
+    {
+        std::lock_guard<std::mutex> lock(jmbmut_);
+        jmb_.erase(msgid_s);
+    }
+    LOG_DEBUG << "客户端请求消息id:" << frmpub::Basic::msgname(msgid_c)
+              << " 期望服务器回应消息id:" << frmpub::Basic::msgname(msgid_s)
+              << " 超时";
+#endif
+}
+
 int FilterData::send_proto(protocc::CommonObject* data,
     std::stack<Envelope>* enves) const
 {
@@ -134,6 +247,60 @@ int FilterData::send_proto(int msgid, const std::string data,
     }
     return send_proto(&obj, enves);
 }
+int FilterData::send_proto(const ProtoStr c, const ProtoResponse s)
+{
+#ifdef USE_DEBUG
+    auto& timermgr = shynet::utils::Singleton<shynet::net::TimerReactorMgr>::instance();
+    int timerid = timermgr.add(std::make_shared<ResponseTimer>(
+        s.timeout_sec,
+        shared_from_this(),
+        c.msgid,
+        s.msgid));
+    {
+        std::lock_guard<std::mutex> lock(rtbmut_);
+        auto it = response_timer_bind_.find(s.msgid);
+        if (it == response_timer_bind_.end()) {
+            std::list<int> ls;
+            ls.emplace_back(timerid);
+            response_timer_bind_.insert({ s.msgid, ls });
+        } else {
+            it->second.emplace_back(timerid);
+        }
+    }
+#endif
+    {
+        std::lock_guard<std::mutex> lock(pmbmut_);
+        pmb_[s.msgid] = s.fun;
+    }
+    return send_proto(c.msgid, c.data, c.enves, c.extend);
+}
+int FilterData::send_proto(const ProtoMessage c, const ProtoResponse s)
+{
+#ifdef USE_DEBUG
+    auto& timermgr = shynet::utils::Singleton<shynet::net::TimerReactorMgr>::instance();
+    int timerid = timermgr.add(std::make_shared<ResponseTimer>(
+        s.timeout_sec,
+        shared_from_this(),
+        c.msgid,
+        s.msgid));
+    {
+        std::lock_guard<std::mutex> lock(rtbmut_);
+        auto it = response_timer_bind_.find(s.msgid);
+        if (it == response_timer_bind_.end()) {
+            std::list<int> ls;
+            ls.emplace_back(timerid);
+            response_timer_bind_.insert({ s.msgid, ls });
+        } else {
+            it->second.emplace_back(timerid);
+        }
+    }
+#endif
+    {
+        std::lock_guard<std::mutex> lock(pmbmut_);
+        pmb_[s.msgid] = s.fun;
+    }
+    return send_proto(c.msgid, c.data, c.enves, c.extend);
+}
 
 int FilterData::send_json(rapidjson::Document* doc, std::stack<Envelope>* enves) const
 {
@@ -169,6 +336,61 @@ int FilterData::send_json(int msgid, rapidjson::Value* data, std::stack<Envelope
         root.AddMember("msgdata", *data, root.GetAllocator());
     }
     return send_json(&root, enves);
+}
+int FilterData::send_json(const JsonDoc c, const JsonResponse s)
+{
+#ifdef USE_DEBUG
+    int msgid = (*c.doc)["msgid"].GetInt();
+    auto& timermgr = shynet::utils::Singleton<shynet::net::TimerReactorMgr>::instance();
+    int timerid = timermgr.add(std::make_shared<ResponseTimer>(
+        s.timeout_sec,
+        shared_from_this(),
+        msgid,
+        s.msgid));
+    {
+        std::lock_guard<std::mutex> lock(rtbmut_);
+        auto it = response_timer_bind_.find(s.msgid);
+        if (it == response_timer_bind_.end()) {
+            std::list<int> ls;
+            ls.emplace_back(timerid);
+            response_timer_bind_.insert({ s.msgid, ls });
+        } else {
+            it->second.emplace_back(timerid);
+        }
+    }
+#endif
+    {
+        std::lock_guard<std::mutex> lock(jmbmut_);
+        jmb_[s.msgid] = s.fun;
+    }
+    return send_json(c.doc, c.enves);
+}
+int FilterData::send_json(const JsonValue c, const JsonResponse s)
+{
+#ifdef USE_DEBUG
+    auto& timermgr = shynet::utils::Singleton<shynet::net::TimerReactorMgr>::instance();
+    int timerid = timermgr.add(std::make_shared<ResponseTimer>(
+        s.timeout_sec,
+        shared_from_this(),
+        c.msgid,
+        s.msgid));
+    {
+        std::lock_guard<std::mutex> lock(rtbmut_);
+        auto it = response_timer_bind_.find(s.msgid);
+        if (it == response_timer_bind_.end()) {
+            std::list<int> ls;
+            ls.emplace_back(timerid);
+            response_timer_bind_.insert({ s.msgid, ls });
+        } else {
+            it->second.emplace_back(timerid);
+        }
+    }
+#endif
+    {
+        std::lock_guard<std::mutex> lock(jmbmut_);
+        jmb_[s.msgid] = s.fun;
+    }
+    return send_json(c.msgid, c.data, c.enves);
 }
 
 int FilterData::send_errcode(protocc::errnum code,

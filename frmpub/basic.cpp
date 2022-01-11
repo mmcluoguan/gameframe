@@ -1,4 +1,5 @@
 #include "frmpub/basic.h"
+#include "3rd/fmt/format.h"
 #include "frmpub/logconnectormgr.h"
 #include "shynet/utils/stuff.h"
 
@@ -53,7 +54,7 @@ void set_loggather()
                 msgc.set_logdata(msg, len);
                 logger->send_proto({ protocc::WRITELOG_TO_LOG_C, &msgc },
                     { protocc::WRITELOG_TO_LOG_S,
-                        [&](std::shared_ptr<protocc::CommonObject> data, std::shared_ptr<std::stack<FilterData::Envelope>> enves) -> int {
+                        [&](auto data, auto enves) -> int {
                             return 0;
                         } });
 
@@ -90,7 +91,7 @@ std::string Basic::msgname(int id)
         }
     }
     if (str == "(:" + std::to_string(id) + ")") {
-        return "(unkonw:unkonw)";
+        return fmt::format("(unkonw:{})", id);
     }
     return str;
 }

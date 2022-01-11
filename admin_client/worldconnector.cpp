@@ -14,12 +14,6 @@ WorldConnector::WorldConnector(std::shared_ptr<net::IPAddress> connect_addr)
     jmb_ = {
         { int(protocc::ERRCODE),
             std::bind(&WorldConnector::errcode, this, std::placeholders::_1, std::placeholders::_2) },
-        { int(frmpub::JosnMsgId::GETGAMELIST_ADMIN_WORLD_S),
-            std::bind(&WorldConnector::getgamelist_admin_world_s, this, std::placeholders::_1, std::placeholders::_2) },
-        { int(frmpub::JosnMsgId::NOTICESERVER_ADMIN_WORLD_S),
-            std::bind(&WorldConnector::noticeserver_admin_world_s, this, std::placeholders::_1, std::placeholders::_2) },
-        { int(frmpub::JosnMsgId::SYSEMAIL_ADMIN_WORLD_S),
-            std::bind(&WorldConnector::sysemail_admin_world_s, this, std::placeholders::_1, std::placeholders::_2) },
     };
 }
 
@@ -46,28 +40,6 @@ void WorldConnector::complete()
 {
     LOG_INFO << "连接服务器world成功 [ip:" << connect_addr()->ip() << ":" << connect_addr()->port() << "]";
     shynet::utils::Singleton<ConnectorMgr>::instance().add_worldctor(connectid());
-}
-
-int WorldConnector::input_handle(std::shared_ptr<rapidjson::Document> doc, std::shared_ptr<std::stack<FilterData::Envelope>> enves)
-{
-    int msgid = (*doc)["msgid"].GetInt();
-    auto cb = [&]() {
-        auto it = jmb_.find(msgid);
-        if (it != jmb_.end()) {
-            return it->second(doc, enves);
-        } else {
-            LOG_DEBUG << "消息" << frmpub::Basic::msgname(msgid) << " 没有处理函数";
-        }
-        return 0;
-    };
-
-#ifdef USE_DEBUG
-    std::string str = fmt::format("工作线程单任务执行 {}", frmpub::Basic::msgname(msgid));
-    shynet::utils::elapsed(str.c_str());
-    return cb();
-#else
-    return cb();
-#endif
 }
 
 void WorldConnector::close(net::CloseType active)

@@ -34,24 +34,6 @@ LogClient::~LogClient()
     LOG_INFO << str << "[ip:" << remote_addr()->ip() << ":" << remote_addr()->port() << "]";
 }
 
-int LogClient::input_handle(std::shared_ptr<protocc::CommonObject> obj, std::shared_ptr<std::stack<FilterData::Envelope>> enves)
-{
-    auto cb = [&]() {
-        auto it = pmb_.find(obj->msgid());
-        if (it != pmb_.end()) {
-            return it->second(obj, enves);
-        }
-        return 0;
-    };
-#ifdef USE_DEBUG
-    std::string str = fmt::format("工作线程单任务执行 {}", frmpub::Basic::msgname(obj->msgid()));
-    shynet::utils::elapsed(str.c_str());
-    return cb();
-#else
-    return cb();
-#endif
-}
-
 void LogClient::close(net::CloseType active)
 {
     frmpub::Client::close(active);

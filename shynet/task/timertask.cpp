@@ -11,9 +11,13 @@ namespace task {
 
     void TimerTask::operator()()
     {
-        std::shared_ptr<net::TimerEvent> tv = utils::Singleton<net::TimerReactorMgr>::instance().find(timerid_);
+        auto& timermgr = utils::Singleton<net::TimerReactorMgr>::instance();
+        std::shared_ptr<net::TimerEvent> tv = timermgr.find(timerid_);
         if (tv != nullptr) {
             tv->timeout();
+            if (!(tv->what() & EV_PERSIST)) {
+                timermgr.remove(timerid_);
+            }
         }
     }
 }

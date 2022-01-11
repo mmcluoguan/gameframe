@@ -21,14 +21,6 @@ public:
     ~LogClient();
 
     /**
-     * @brief 处理protobuf数据封包
-     * @param obj protobuf对象
-     * @param enves 路由信息
-     * @return 0成功 -1失败 失败将关闭对端连接
-    */
-    int input_handle(std::shared_ptr<protocc::CommonObject> obj, std::shared_ptr<std::stack<FilterData::Envelope>> enves) override;
-
-    /**
      * @brief 客户端连接与db服务器断开连接回调
      * @param active 连接断开原因
     */

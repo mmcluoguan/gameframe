@@ -41,7 +41,8 @@ void GameConnector::complete()
 
     //通知lua的onConnect函数
     shynet::utils::Singleton<lua::LuaEngine>::get_instance().append(
-        std::make_shared<frmpub::OnConnectorTask<GameConnector>>(shared_from_this()));
+        std::make_shared<frmpub::OnConnectorTask<GameConnector>>(
+            std::dynamic_pointer_cast<GameConnector>(shared_from_this())));
 
     //向游戏服注册服务器信息
     protocc::register_gate_game_c msgc;
@@ -57,31 +58,17 @@ void GameConnector::complete()
     send_proto(protocc::REGISTER_GATE_GAME_C, &msgc);
 }
 
-int GameConnector::input_handle(std::shared_ptr<protocc::CommonObject> obj, std::shared_ptr<std::stack<FilterData::Envelope>> enves)
+int GameConnector::default_handle(std::shared_ptr<protocc::CommonObject> obj, std::shared_ptr<std::stack<FilterData::Envelope>> enves)
 {
-    auto cb = [&]() {
-        //直接处理的游戏服消息
-        auto it = pmb_.find(obj->msgid());
-        if (it != pmb_.end()) {
-            return it->second(obj, enves);
-        } else {
-            if (enves->empty() == false) {
-                return forward_game_client_c(obj, enves);
-            } else {
-                //通知lua的onMessage函数
-                shynet::utils::Singleton<lua::LuaEngine>::get_instance().append(
-                    std::make_shared<frmpub::OnMessageTask<GameConnector>>(shared_from_this(), obj, enves));
-            }
-        }
-        return 0;
-    };
-#ifdef USE_DEBUG
-    std::string str = fmt::format("工作线程单任务执行 {}", frmpub::Basic::msgname(obj->msgid()));
-    shynet::utils::elapsed(str.c_str());
-    return cb();
-#else
-    return cb();
-#endif
+    if (enves->empty() == false) {
+        return forward_game_client_c(obj, enves);
+    } else {
+        //通知lua的onMessage函数
+        shynet::utils::Singleton<lua::LuaEngine>::get_instance().append(
+            std::make_shared<frmpub::OnMessageTask<GameConnector>>(
+                std::dynamic_pointer_cast<GameConnector>(shared_from_this()), obj, enves));
+    }
+    return 0;
 }
 
 void GameConnector::close(net::CloseType active)
@@ -95,7 +82,8 @@ void GameConnector::close(net::CloseType active)
 
     //通知lua的onConnect函数
     shynet::utils::Singleton<lua::LuaEngine>::get_instance().append(
-        std::make_shared<frmpub::OnConnectorTask<GameConnector>>(shared_from_this()));
+        std::make_shared<frmpub::OnConnectorTask<GameConnector>>(
+            std::dynamic_pointer_cast<GameConnector>(shared_from_this())));
 
     //向游戏服注册服务器信息
     protocc::register_gate_game_c msgc;

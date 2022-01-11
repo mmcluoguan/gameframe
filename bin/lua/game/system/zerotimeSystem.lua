@@ -2,11 +2,8 @@
 local zerotimeSystem = { is_start = false}
 
 function zerotimeSystem:zerotime()
-    for k,v in pairs(RoleMgr) do
-        if type(v) == "table" then
-            --遍历角色
-            v:resetdata()
-        end
+    for k,v in pairs(RoleMgr.rid) do
+        v:resetdata()
     end
     TimerMgr:bind(24 * 60 * 60 * 1000,false,zerotimeSystem,'zerotime',self)
 end

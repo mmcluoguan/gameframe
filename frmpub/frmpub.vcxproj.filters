@@ -55,6 +55,7 @@
     <ClCompile Include="logconnectormgr.cpp">
       <Filter>log</Filter>
     </ClCompile>
+    <ClCompile Include="responsetimer.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pingtimer.h" />
@@ -121,6 +122,7 @@
     <ClInclude Include="logconnectormgr.h">
       <Filter>log</Filter>
     </ClInclude>
+    <ClInclude Include="responsetimer.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="protocc">

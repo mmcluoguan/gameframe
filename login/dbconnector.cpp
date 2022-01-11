@@ -20,8 +20,6 @@ DbConnector::DbConnector(std::shared_ptr<net::IPAddress> connect_addr)
     pmb_ = {
         { protocc::ERRCODE,
             std::bind(&DbConnector::errcode, this, std::placeholders::_1, std::placeholders::_2) },
-        { protocc::REGISTER_LOGIN_DBVISIT_S,
-            std::bind(&DbConnector::register_login_dbvisit_s, this, std::placeholders::_1, std::placeholders::_2) },
         { protocc::REPEATLOGIN_CLIENT_GATE_G,
             std::bind(&DbConnector::repeatlogin_client_gate_g, this, std::placeholders::_1, std::placeholders::_2) },
         { protocc::LOGIN_CLIENT_GATE_S,
@@ -54,7 +52,8 @@ void DbConnector::complete()
 
     //通知lua的onConnect函数
     shynet::utils::Singleton<lua::LuaEngine>::get_instance().append(
-        std::make_shared<frmpub::OnConnectorTask<DbConnector>>(shared_from_this()));
+        std::make_shared<frmpub::OnConnectorTask<DbConnector>>(
+            std::dynamic_pointer_cast<DbConnector>(shared_from_this())));
 
     //向db服注册服务器信息
     protocc::register_login_dbvisit_c msgc;
@@ -69,34 +68,21 @@ void DbConnector::complete()
     sif->set_sid(sid);
     std::string name = ini.get<std::string>(g_conf_node, "name");
     sif->set_name(name);
-    send_proto(protocc::REGISTER_LOGIN_DBVISIT_C, &msgc);
+    send_proto({ protocc::REGISTER_LOGIN_DBVISIT_C, &msgc },
+        { protocc::REGISTER_LOGIN_DBVISIT_S,
+            [&](auto data, auto enves) -> int {
+                return register_login_dbvisit_s(data, enves);
+            } });
 }
 
-int DbConnector::input_handle(std::shared_ptr<protocc::CommonObject> obj,
+int DbConnector::default_handle(std::shared_ptr<protocc::CommonObject> obj,
     std::shared_ptr<std::stack<FilterData::Envelope>> enves)
 {
-    auto cb = [&]() {
-        auto it = pmb_.find(obj->msgid());
-        if (it != pmb_.end()) {
-            return it->second(obj, enves);
-        } else {
-            if (enves->empty() == false) {
-                return forward_db_gate_c(obj, enves);
-            } else {
-                //通知lua的onMessage函数
-                shynet::utils::Singleton<lua::LuaEngine>::get_instance().append(
-                    std::make_shared<frmpub::OnMessageTask<DbConnector>>(shared_from_this(), obj, enves));
-            }
-        }
-        return 0;
-    };
-#ifdef USE_DEBUG
-    std::string str = fmt::format("工作线程单任务执行 {}", frmpub::Basic::msgname(obj->msgid()));
-    shynet::utils::elapsed(str.c_str());
-    return cb();
-#else
-    return cb();
-#endif
+    //通知lua的onMessage函数
+    shynet::utils::Singleton<lua::LuaEngine>::get_instance().append(
+        std::make_shared<frmpub::OnMessageTask<DbConnector>>(
+            std::dynamic_pointer_cast<DbConnector>(shared_from_this()), obj, enves));
+    return 0;
 }
 
 void DbConnector::close(net::CloseType active)

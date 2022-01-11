@@ -100,7 +100,7 @@ void ConsoleHandler::login_order(const OrderItem& order, int argc, char** argv)
     if (gate != nullptr) {
         gate->send_proto({ protocc::LOGIN_CLIENT_GATE_C, &msg },
             { protocc::LOGIN_CLIENT_GATE_S,
-                [&](std::shared_ptr<protocc::CommonObject> data, std::shared_ptr<std::stack<FilterData::Envelope>> enves) -> int {
+                [&](auto data, auto enves) -> int {
                     return gate->login_client_gate_s(data, enves);
                 } });
         LOG_DEBUG << "发送" << frmpub::Basic::msgname(protocc::LOGIN_CLIENT_GATE_C);
@@ -153,7 +153,7 @@ void ConsoleHandler::gm_order(const OrderItem& order, int argc, char** argv)
         msg.set_roleid(gate->role()->id());
         gate->send_proto({ protocc::GMORDER_CLIENT_GATE_C, &msg },
             { protocc::GMORDER_CLIENT_GATE_S,
-                [&](std::shared_ptr<protocc::CommonObject> data, std::shared_ptr<std::stack<FilterData::Envelope>> enves) -> int {
+                [&](auto data, auto enves) -> int {
                     return gate->gmorder_client_gate_s(data, enves);
                 } });
         LOG_DEBUG << "发送" << frmpub::Basic::msgname(protocc::GMORDER_CLIENT_GATE_C);
@@ -230,7 +230,7 @@ void ConsoleHandler::setlevel_order(const OrderItem& order, int argc, char** arg
     if (gate != nullptr && gate->role() != nullptr) {
         gate->send_proto({ protocc::SETLEVEL_CLIENT_GATE_C, &msg },
             { protocc::SETLEVEL_CLIENT_GATE_S,
-                [&](std::shared_ptr<protocc::CommonObject> data, std::shared_ptr<std::stack<FilterData::Envelope>> enves) -> int {
+                [&](auto data, auto enves) -> int {
                     return gate->role()->setlevel_client_gate_s(data, enves);
                 } });
         LOG_DEBUG << "发送" << frmpub::Basic::msgname(protocc::SETLEVEL_CLIENT_GATE_C);
@@ -276,7 +276,7 @@ void ConsoleHandler::lookemail_order(const OrderItem& order, int argc, char** ar
     if (gate != nullptr && gate->role() != nullptr) {
         gate->send_proto({ protocc::LOOKEMAIL_CLIENT_GATE_C, &msg },
             { protocc::LOOKEMAIL_CLIENT_GATE_S,
-                [&](std::shared_ptr<protocc::CommonObject> data, std::shared_ptr<std::stack<FilterData::Envelope>> enves) -> int {
+                [&](auto data, auto enves) -> int {
                     return gate->role()->lookemail_client_gate_s(data, enves);
                 } });
         LOG_DEBUG << "发送" << frmpub::Basic::msgname(protocc::LOOKEMAIL_CLIENT_GATE_C);
@@ -322,7 +322,7 @@ void ConsoleHandler::getannex_order(const OrderItem& order, int argc, char** arg
     if (gate != nullptr && gate->role() != nullptr) {
         gate->send_proto({ protocc::GETANNEX_CLIENT_GATE_C, &msg },
             { protocc::GETANNEX_CLIENT_GATE_S,
-                [&](std::shared_ptr<protocc::CommonObject> data, std::shared_ptr<std::stack<FilterData::Envelope>> enves) -> int {
+                [&](auto data, auto enves) -> int {
                     return gate->role()->getannex_client_gate_s(data, enves);
                 } });
         LOG_DEBUG << "发送" << frmpub::Basic::msgname(protocc::GETANNEX_CLIENT_GATE_C);

@@ -37,24 +37,6 @@ void LogConnector::complete()
     shynet::utils::Singleton<LogConnectorMgr>::instance().add_logctor(connectid());
     set_loggather();
 }
-int LogConnector::input_handle(std::shared_ptr<protocc::CommonObject> obj, std::shared_ptr<std::stack<FilterData::Envelope>> enves)
-{
-    auto cb = [&]() {
-        auto it = pmb_.find(obj->msgid());
-        if (it != pmb_.end()) {
-            return it->second(obj, enves);
-        }
-        return 0;
-    };
-#ifdef USE_DEBUG
-    std::string str("工作线程单任务执行 ");
-    str.append(frmpub::Basic::msgname(obj->msgid()));
-    shynet::utils::elapsed(str.c_str());
-    return cb();
-#else
-    return cb();
-#endif
-}
 
 void LogConnector::close(net::CloseType active)
 {

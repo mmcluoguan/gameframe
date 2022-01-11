@@ -57,6 +57,7 @@
     <ClCompile Include="protocc\log.pb.cc" />
     <ClCompile Include="protocc\login.pb.cc" />
     <ClCompile Include="protocc\world.pb.cc" />
+    <ClCompile Include="responsetimer.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="basic.h" />
@@ -85,6 +86,7 @@
     <ClInclude Include="protocc\login.pb.h" />
     <ClInclude Include="protocc\world.pb.h" />
     <ClInclude Include="reconnecttimer.h" />
+    <ClInclude Include="responsetimer.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{6094c37a-dff3-42d7-a289-933fa442b5df}</ProjectGuid>

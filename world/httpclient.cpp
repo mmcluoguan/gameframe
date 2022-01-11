@@ -43,27 +43,13 @@ HttpClient::~HttpClient()
     LOG_INFO << str << "[ip:" << remote_addr()->ip() << ":" << remote_addr()->port() << "]";
 }
 
-int HttpClient::input_handle(std::shared_ptr<rapidjson::Document> doc, std::shared_ptr<std::stack<FilterData::Envelope>> enves)
+int HttpClient::default_handle(std::shared_ptr<rapidjson::Document> doc, std::shared_ptr<std::stack<FilterData::Envelope>> enves)
 {
-    int msgid = (*doc)["msgid"].GetInt();
-    auto cb = [&]() {
-        auto it = jmb_.find(msgid);
-        if (it != jmb_.end()) {
-            return it->second(doc, enves);
-        } else {
-            //通知lua的onMessage函数
-            shynet::utils::Singleton<lua::LuaEngine>::get_instance().append(
-                std::make_shared<frmpub::OnMessageTask<HttpClient>>(shared_from_this(), doc, enves));
-        }
-        return 0;
-    };
-#ifdef USE_DEBUG
-    std::string str = fmt::format("工作线程单任务执行 {}", frmpub::Basic::msgname(msgid));
-    shynet::utils::elapsed(str.c_str());
-    return cb();
-#else
-    return cb();
-#endif
+    //通知lua的onMessage函数
+    shynet::utils::Singleton<lua::LuaEngine>::get_instance().append(
+        std::make_shared<frmpub::OnMessageTask<HttpClient>>(
+            std::dynamic_pointer_cast<HttpClient>(shared_from_this()), doc, enves));
+    return 0;
 }
 
 void HttpClient::close(net::CloseType active)

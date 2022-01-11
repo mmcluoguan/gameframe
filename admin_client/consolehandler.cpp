@@ -32,7 +32,11 @@ void ConsoleHandler::getgamelist(const OrderItem& order, int argc, char** argv)
 {
     std::shared_ptr<WorldConnector> world = shynet::utils::Singleton<ConnectorMgr>::instance().world_connector();
     if (world != nullptr) {
-        world->send_json(frmpub::JosnMsgId::GETGAMELIST_ADMIN_WORLD_C);
+        world->send_json(frmpub::FilterData::JsonValue { frmpub::JosnMsgId::GETGAMELIST_ADMIN_WORLD_C },
+            { frmpub::JosnMsgId::GETGAMELIST_ADMIN_WORLD_S,
+                [&](auto data, auto enves) -> int {
+                    return world->getgamelist_admin_world_s(data, enves);
+                } });
         LOG_DEBUG << "发送" << frmpub::Basic::msgname(frmpub::JosnMsgId::GETGAMELIST_ADMIN_WORLD_C);
     } else {
         LOG_DEBUG << "没有可选的world连接";
@@ -78,7 +82,11 @@ void ConsoleHandler::noticeserver(const OrderItem& order, int argc, char** argv)
         rapidjson::Value msgc(rapidjson::kObjectType);
         msgc.AddMember("sid", sid, doc.GetAllocator());
         msgc.AddMember("info", rapidjson::StringRef(info), doc.GetAllocator());
-        world->send_json(frmpub::JosnMsgId::NOTICESERVER_ADMIN_WORLD_C, &msgc);
+        world->send_json(frmpub::FilterData::JsonValue { frmpub::JosnMsgId::NOTICESERVER_ADMIN_WORLD_C },
+            { frmpub::JosnMsgId::NOTICESERVER_ADMIN_WORLD_S,
+                [&](auto data, auto enves) -> int {
+                    return world->noticeserver_admin_world_s(data, enves);
+                } });
         LOG_DEBUG << "发送" << frmpub::Basic::msgname(frmpub::JosnMsgId::NOTICESERVER_ADMIN_WORLD_C);
     } else {
         LOG_DEBUG << "没有可用的world连接";
@@ -114,7 +122,11 @@ void ConsoleHandler::sysemail(const OrderItem& order, int argc, char** argv)
         rapidjson::Document doc;
         rapidjson::Value& msgc = doc.Parse(josnstr);
         if (msgc.IsObject()) {
-            world->send_json(frmpub::JosnMsgId::SYSEMAIL_ADMIN_WORLD_C, &msgc);
+            world->send_json(frmpub::FilterData::JsonValue { frmpub::JosnMsgId::SYSEMAIL_ADMIN_WORLD_C },
+                { frmpub::JosnMsgId::SYSEMAIL_ADMIN_WORLD_S,
+                    [&](auto data, auto enves) -> int {
+                        return world->sysemail_admin_world_s(data, enves);
+                    } });
             LOG_DEBUG << "发送" << frmpub::Basic::msgname(frmpub::JosnMsgId::SYSEMAIL_ADMIN_WORLD_C);
         } else {
             LOG_DEBUG << "输入参数值不是合法的json格式";
@@ -123,5 +135,4 @@ void ConsoleHandler::sysemail(const OrderItem& order, int argc, char** argv)
         LOG_DEBUG << "没有可用的world连接";
     }
 }
-
 }

@@ -32,27 +32,13 @@ GameClient::~GameClient()
     LOG_INFO << str << "[ip:" << remote_addr()->ip() << ":" << remote_addr()->port() << "]";
 }
 
-int GameClient::input_handle(std::shared_ptr<protocc::CommonObject> obj, std::shared_ptr<std::stack<FilterData::Envelope>> enves)
+int GameClient::default_handle(std::shared_ptr<protocc::CommonObject> obj, std::shared_ptr<std::stack<FilterData::Envelope>> enves)
 {
-    auto cb = [&]() {
-        auto it = pmb_.find(obj->msgid());
-        if (it != pmb_.end()) {
-            return it->second(obj, enves);
-        } else {
-            //通知lua的onMessage函数
-            shynet::utils::Singleton<lua::LuaEngine>::get_instance().append(
-                std::make_shared<frmpub::OnMessageTask<GameClient>>(shared_from_this(), obj, enves));
-        }
-        return 0;
-    };
-
-#ifdef USE_DEBUG
-    std::string str = fmt::format("工作线程单任务执行 {}", frmpub::Basic::msgname(obj->msgid()));
-    shynet::utils::elapsed(str.c_str());
-    return cb();
-#else
-    return cb();
-#endif
+    //通知lua的onMessage函数
+    shynet::utils::Singleton<lua::LuaEngine>::get_instance().append(
+        std::make_shared<frmpub::OnMessageTask<GameClient>>(
+            std::dynamic_pointer_cast<GameClient>(shared_from_this()), obj, enves));
+    return 0;
 }
 
 void GameClient::close(net::CloseType active)

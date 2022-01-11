@@ -31,3 +31,5 @@ test/obj/
 tools/export_tb/obj/
 log/obj/
 libs/libfrmpub.so.1.0.1
+frmpub/obj/
+game/obj/

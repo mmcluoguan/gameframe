@@ -20,13 +20,6 @@ public:
      * @brief 连接完成回调
     */
     void complete() override;
-    /**
-     * @brief 处理josn数据封包
-     * @param doc josn文档
-     * @param enves 路由信息
-     * @return 0成功 -1失败 失败将关闭对端连接
-    */
-    int input_handle(std::shared_ptr<rapidjson::Document> doc, std::shared_ptr<std::stack<FilterData::Envelope>> enves) override;
 
     /**
      * @brief 与world服务器断开连接回调
@@ -34,13 +27,6 @@ public:
     */
     void close(net::CloseType active) override;
 
-private:
-    /*
-    * @brief 游戏服id与游戏信息映射的hash表
-    */
-    std::unordered_map<int32_t, protocc::ServerInfo> gamemap_;
-
-private:
     /**
      * @brief 接收服务器发来的错误信息
      * @param doc josn文档
@@ -73,6 +59,12 @@ private:
     */
     int sysemail_admin_world_s(std::shared_ptr<rapidjson::Document> doc,
         std::shared_ptr<std::stack<FilterData::Envelope>> enves);
+
+private:
+    /*
+    * @brief 游戏服id与游戏信息映射的hash表
+    */
+    std::unordered_map<int32_t, protocc::ServerInfo> gamemap_;
 };
 }
 

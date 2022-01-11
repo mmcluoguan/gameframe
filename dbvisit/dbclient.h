@@ -10,7 +10,7 @@ namespace dbvisit {
 /**
  * @brief db客户端连接
 */
-class DbClient : public frmpub::Client, public std::enable_shared_from_this<DbClient> {
+class DbClient : public frmpub::Client {
 public:
     /**
      * @brief 构造
@@ -29,7 +29,7 @@ public:
      * @param enves 路由信息
      * @return 0成功 -1失败 失败将关闭对端连接
     */
-    int input_handle(std::shared_ptr<protocc::CommonObject> obj, std::shared_ptr<std::stack<FilterData::Envelope>> enves) override;
+    int default_handle(std::shared_ptr<protocc::CommonObject> obj, std::shared_ptr<std::stack<FilterData::Envelope>> enves) override;
 
     /**
      * @brief 客户端连接与db服务器断开连接回调
