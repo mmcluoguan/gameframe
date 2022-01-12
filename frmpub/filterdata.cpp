@@ -250,7 +250,7 @@ int FilterData::send_proto(int msgid, const std::string data,
 int FilterData::send_proto(const ProtoStr c, const ProtoResponse s)
 {
 #ifdef USE_DEBUG
-    if (s.timeout_sec.tv_sec != 0 && s.timeout_sec.tv_usec != 0) {
+    if (!(s.timeout_sec.tv_sec == 0 && s.timeout_sec.tv_usec == 0)) {
         auto& timermgr = shynet::utils::Singleton<shynet::net::TimerReactorMgr>::instance();
         int timerid = timermgr.add(std::make_shared<ResponseTimer>(
             s.timeout_sec,
@@ -279,7 +279,7 @@ int FilterData::send_proto(const ProtoStr c, const ProtoResponse s)
 int FilterData::send_proto(const ProtoMessage c, const ProtoResponse s)
 {
 #ifdef USE_DEBUG
-    if (s.timeout_sec.tv_sec != 0 && s.timeout_sec.tv_usec != 0) {
+    if (!(s.timeout_sec.tv_sec == 0 && s.timeout_sec.tv_usec == 0)) {
         auto& timermgr = shynet::utils::Singleton<shynet::net::TimerReactorMgr>::instance();
         int timerid = timermgr.add(std::make_shared<ResponseTimer>(
             s.timeout_sec,
@@ -344,7 +344,7 @@ int FilterData::send_json(int msgid, rapidjson::Value* data, std::stack<Envelope
 int FilterData::send_json(const JsonDoc c, const JsonResponse s)
 {
 #ifdef USE_DEBUG
-    if (s.timeout_sec.tv_sec != 0 && s.timeout_sec.tv_usec != 0) {
+    if (!(s.timeout_sec.tv_sec == 0 && s.timeout_sec.tv_usec == 0)) {
         int msgid = (*c.doc)["msgid"].GetInt();
         auto& timermgr = shynet::utils::Singleton<shynet::net::TimerReactorMgr>::instance();
         int timerid = timermgr.add(std::make_shared<ResponseTimer>(
@@ -374,7 +374,7 @@ int FilterData::send_json(const JsonDoc c, const JsonResponse s)
 int FilterData::send_json(const JsonValue c, const JsonResponse s)
 {
 #ifdef USE_DEBUG
-    if (s.timeout_sec.tv_sec != 0 && s.timeout_sec.tv_usec != 0) {
+    if (!(s.timeout_sec.tv_sec == 0 && s.timeout_sec.tv_usec == 0)) {
         auto& timermgr = shynet::utils::Singleton<shynet::net::TimerReactorMgr>::instance();
         int timerid = timermgr.add(std::make_shared<ResponseTimer>(
             s.timeout_sec,
