@@ -6,7 +6,7 @@ namespace net {
 
     void ListenReactorMgr::notify(const void* data, size_t len)
     {
-        std::shared_ptr<thread::ListenThread> lth = utils::Singleton<pool::ThreadPool>::get_instance().listernTh().lock();
+        std::shared_ptr<thread::ListenThread> lth = utils::Singleton<pool::ThreadPool>::instance().listernTh().lock();
         if (lth != nullptr) {
             lth->notify(data, len);
         } else

@@ -6,7 +6,7 @@ namespace shynet {
 namespace net {
     void TimerReactorMgr::notify(const void* data, size_t len)
     {
-        std::shared_ptr<thread::TimerThread> tth = utils::Singleton<pool::ThreadPool>::get_instance().timerTh().lock();
+        std::shared_ptr<thread::TimerThread> tth = utils::Singleton<pool::ThreadPool>::instance().timerTh().lock();
         if (tth != nullptr) {
             tth->notify(data, len);
         } else

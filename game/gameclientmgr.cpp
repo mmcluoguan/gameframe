@@ -9,7 +9,7 @@ void GameClientMgr::add(int k, std::shared_ptr<GameClient> v)
     std::lock_guard<std::mutex> lock(clis_mutex_);
     clis_.insert({ k, v });
     //通知lua的onAccept函数
-    shynet::utils::Singleton<lua::LuaEngine>::get_instance().append(
+    shynet::utils::Singleton<lua::LuaEngine>::instance().append(
         std::make_shared<frmpub::OnAcceptTask<GameClient>>(v));
 }
 
@@ -20,7 +20,7 @@ bool GameClientMgr::remove(int k)
     if (clis_.erase(k) > 0) {
 
         //通知lua的onClose函数
-        shynet::utils::Singleton<lua::LuaEngine>::get_instance().append(
+        shynet::utils::Singleton<lua::LuaEngine>::instance().append(
             std::make_shared<frmpub::OnCloseTask>(k));
 
         return true;

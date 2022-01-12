@@ -11,10 +11,15 @@ namespace world {
 /// </summary>
 class ConnectorMgr {
     friend class shynet::utils::Singleton<ConnectorMgr>;
-    ConnectorMgr();
+    ConnectorMgr() = default;
 
 public:
-    ~ConnectorMgr();
+    /**
+    * @brief 类型名称
+    */
+    static constexpr const char* kClassname = "ConnectorMgr";
+
+    ~ConnectorMgr() = default;
 
     std::shared_ptr<DbConnector> db_connector();
 

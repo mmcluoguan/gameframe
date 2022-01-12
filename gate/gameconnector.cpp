@@ -40,7 +40,7 @@ void GameConnector::complete()
     LOG_INFO << "连接服务器game成功 [ip:" << connect_addr()->ip() << ":" << connect_addr()->port() << "]";
 
     //通知lua的onConnect函数
-    shynet::utils::Singleton<lua::LuaEngine>::get_instance().append(
+    shynet::utils::Singleton<lua::LuaEngine>::instance().append(
         std::make_shared<frmpub::OnConnectorTask<GameConnector>>(
             std::dynamic_pointer_cast<GameConnector>(shared_from_this())));
 
@@ -64,7 +64,7 @@ int GameConnector::default_handle(std::shared_ptr<protocc::CommonObject> obj, st
         return forward_game_client_c(obj, enves);
     } else {
         //通知lua的onMessage函数
-        shynet::utils::Singleton<lua::LuaEngine>::get_instance().append(
+        shynet::utils::Singleton<lua::LuaEngine>::instance().append(
             std::make_shared<frmpub::OnMessageTask<GameConnector>>(
                 std::dynamic_pointer_cast<GameConnector>(shared_from_this()), obj, enves));
     }
@@ -74,14 +74,14 @@ int GameConnector::default_handle(std::shared_ptr<protocc::CommonObject> obj, st
 void GameConnector::close(net::CloseType active)
 {
     //通知lua的onClose函数
-    shynet::utils::Singleton<lua::LuaEngine>::get_instance().append(
+    shynet::utils::Singleton<lua::LuaEngine>::instance().append(
         std::make_shared<frmpub::OnCloseTask>(fd()));
 
     shynet::utils::Singleton<ConnectorMgr>::instance().remove(game_connect_id_);
     Connector::close(active);
 
     //通知lua的onConnect函数
-    shynet::utils::Singleton<lua::LuaEngine>::get_instance().append(
+    shynet::utils::Singleton<lua::LuaEngine>::instance().append(
         std::make_shared<frmpub::OnConnectorTask<GameConnector>>(
             std::dynamic_pointer_cast<GameConnector>(shared_from_this())));
 

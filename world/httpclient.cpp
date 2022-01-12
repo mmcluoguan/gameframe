@@ -46,7 +46,7 @@ HttpClient::~HttpClient()
 int HttpClient::default_handle(std::shared_ptr<rapidjson::Document> doc, std::shared_ptr<std::stack<FilterData::Envelope>> enves)
 {
     //通知lua的onMessage函数
-    shynet::utils::Singleton<lua::LuaEngine>::get_instance().append(
+    shynet::utils::Singleton<lua::LuaEngine>::instance().append(
         std::make_shared<frmpub::OnMessageTask<HttpClient>>(
             std::dynamic_pointer_cast<HttpClient>(shared_from_this()), doc, enves));
     return 0;

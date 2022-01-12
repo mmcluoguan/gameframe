@@ -29,13 +29,13 @@ namespace utils {
             std::call_once(onceflag_,
                 std::forward<void(Args && ...)>(&Singleton<T>::init),
                 std::forward<Args>(args)...);
-            return *instance_;
+            return get_instance();
         };
 
         /**
          * @brief 获取实例,
          这个接口保证单例一定创建完成并且创建的单例没有被释放,否则抛出异常
-         目的用于发现单例的创建是否在预期内
+         目的用于发现单例的创建和释放是否在预期内
          * @return 实例
         */
         static T& get_instance()
@@ -46,6 +46,15 @@ namespace utils {
                 THROW_EXCEPTION(err.str());
             }
             return *instance_;
+        }
+
+        /**
+         * @brief 返回单例对象是否存在
+         * @return 是否存在
+        */
+        static bool exist_instance()
+        {
+            return instance_ == nullptr ? false : true;
         }
 
     private:

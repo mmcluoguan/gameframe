@@ -107,7 +107,7 @@ int FilterData::input_handle(const std::shared_ptr<protocc::CommonObject> obj,
             if (it->second.empty() == false) {
                 int timerid = *it->second.begin();
                 it->second.pop_front();
-                auto& timermgr = shynet::utils::Singleton<shynet::net::TimerReactorMgr>::get_instance();
+                auto& timermgr = shynet::utils::Singleton<shynet::net::TimerReactorMgr>::instance();
                 timermgr.remove(timerid);
             }
             if (it->second.empty()) {
@@ -147,7 +147,7 @@ int FilterData::input_handle(const std::shared_ptr<rapidjson::Document> obj,
             if (it->second.empty() == false) {
                 int timerid = *it->second.begin();
                 it->second.pop_front();
-                auto& timermgr = shynet::utils::Singleton<shynet::net::TimerReactorMgr>::get_instance();
+                auto& timermgr = shynet::utils::Singleton<shynet::net::TimerReactorMgr>::instance();
                 timermgr.remove(timerid);
             }
             if (it->second.empty()) {

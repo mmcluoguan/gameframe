@@ -50,7 +50,7 @@ namespace net {
 
     void ConnectReactorMgr::notify(const void* data, size_t len)
     {
-        std::shared_ptr<thread::ConnectThread> cnt = utils::Singleton<pool::ThreadPool>::get_instance().connectTh().lock();
+        std::shared_ptr<thread::ConnectThread> cnt = utils::Singleton<pool::ThreadPool>::instance().connectTh().lock();
         if (cnt != nullptr) {
             cnt->notify(data, len);
         } else

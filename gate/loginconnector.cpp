@@ -41,7 +41,7 @@ void LoginConnector::complete()
     LOG_INFO << "连接服务器login成功 [ip:" << connect_addr()->ip() << ":" << connect_addr()->port() << "]";
 
     //通知lua的onConnect函数
-    shynet::utils::Singleton<lua::LuaEngine>::get_instance().append(
+    shynet::utils::Singleton<lua::LuaEngine>::instance().append(
         std::make_shared<frmpub::OnConnectorTask<LoginConnector>>(
             std::dynamic_pointer_cast<LoginConnector>(shared_from_this())));
 
@@ -64,7 +64,7 @@ int LoginConnector::default_handle(std::shared_ptr<protocc::CommonObject> obj, s
         return forward_login_client_c(obj, enves);
     } else {
         //通知lua的onMessage函数
-        shynet::utils::Singleton<lua::LuaEngine>::get_instance().append(
+        shynet::utils::Singleton<lua::LuaEngine>::instance().append(
             std::make_shared<frmpub::OnMessageTask<LoginConnector>>(
                 std::dynamic_pointer_cast<LoginConnector>(shared_from_this()), obj, enves));
     }
@@ -73,7 +73,7 @@ int LoginConnector::default_handle(std::shared_ptr<protocc::CommonObject> obj, s
 void LoginConnector::close(net::CloseType active)
 {
     //通知lua的onClose函数
-    shynet::utils::Singleton<lua::LuaEngine>::get_instance().append(
+    shynet::utils::Singleton<lua::LuaEngine>::instance().append(
         std::make_shared<frmpub::OnCloseTask>(fd()));
 
     shynet::utils::Singleton<ConnectorMgr>::instance().remove(login_connect_id_);

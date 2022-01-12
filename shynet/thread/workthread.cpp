@@ -20,7 +20,7 @@ namespace thread {
                     tasks_.pop();
                     LOG_TRACE << "pop local queue task";
                 } else {
-                    pool::ThreadPool& tpool = utils::Singleton<pool::ThreadPool>::get_instance();
+                    pool::ThreadPool& tpool = utils::Singleton<pool::ThreadPool>::instance();
                     std::unique_lock<std::mutex> lock(tpool.tasks_mutex());
                     tpool.tasks_condvar().wait(lock, [&tpool, this] {
                         LOG_TRACE << "start front check  globalsize:" << tpool.tasks().size() << " stop:" << stop_ << " localsize:" << tasks_.size();

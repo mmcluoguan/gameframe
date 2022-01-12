@@ -51,7 +51,7 @@ void DbConnector::complete()
     shynet::utils::Singleton<ConnectorMgr>::instance().add_dbctor(connectid());
 
     //通知lua的onConnect函数
-    shynet::utils::Singleton<lua::LuaEngine>::get_instance().append(
+    shynet::utils::Singleton<lua::LuaEngine>::instance().append(
         std::make_shared<frmpub::OnConnectorTask<DbConnector>>(
             std::dynamic_pointer_cast<DbConnector>(shared_from_this())));
 
@@ -79,7 +79,7 @@ int DbConnector::default_handle(std::shared_ptr<protocc::CommonObject> obj,
     std::shared_ptr<std::stack<FilterData::Envelope>> enves)
 {
     //通知lua的onMessage函数
-    shynet::utils::Singleton<lua::LuaEngine>::get_instance().append(
+    shynet::utils::Singleton<lua::LuaEngine>::instance().append(
         std::make_shared<frmpub::OnMessageTask<DbConnector>>(
             std::dynamic_pointer_cast<DbConnector>(shared_from_this()), obj, enves));
     return 0;
@@ -88,7 +88,7 @@ int DbConnector::default_handle(std::shared_ptr<protocc::CommonObject> obj,
 void DbConnector::close(net::CloseType active)
 {
     //通知lua的onClose函数
-    shynet::utils::Singleton<lua::LuaEngine>::get_instance().append(
+    shynet::utils::Singleton<lua::LuaEngine>::instance().append(
         std::make_shared<frmpub::OnCloseTask>(fd()));
 
     shynet::utils::Singleton<ConnectorMgr>::instance().remove_dbctor(connectid());

@@ -48,7 +48,7 @@ int GateClient::default_handle(std::shared_ptr<protocc::CommonObject> obj, std::
         return game_message(obj, enves);
     } else if (obj->msgid() > protocc::CLIENT_GATE_BEGIN && obj->msgid() < protocc::CLIENT_GATE_END) {
         //通知lua的onMessage函数
-        shynet::utils::Singleton<lua::LuaEngine>::get_instance().append(
+        shynet::utils::Singleton<lua::LuaEngine>::instance().append(
             std::make_shared<frmpub::OnMessageTask<GateClient>>(
                 std::dynamic_pointer_cast<GateClient>(shared_from_this()), obj, enves));
     } else {

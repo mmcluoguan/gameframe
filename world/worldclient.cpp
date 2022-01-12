@@ -43,7 +43,7 @@ WorldClient::~WorldClient()
 int WorldClient::default_handle(std::shared_ptr<protocc::CommonObject> obj, std::shared_ptr<std::stack<FilterData::Envelope>> enves)
 {
     //通知lua的onMessage函数
-    shynet::utils::Singleton<lua::LuaEngine>::get_instance().append(
+    shynet::utils::Singleton<lua::LuaEngine>::instance().append(
         std::make_shared<frmpub::OnMessageTask<WorldClient>>(
             std::dynamic_pointer_cast<WorldClient>(shared_from_this()), obj, enves));
     return 0;

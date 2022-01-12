@@ -51,7 +51,7 @@ void WorldConnector::complete()
     shynet::utils::Singleton<ConnectorMgr>::instance().add_worldctor(connectid());
 
     //通知lua的onConnect函数
-    shynet::utils::Singleton<lua::LuaEngine>::get_instance().append(
+    shynet::utils::Singleton<lua::LuaEngine>::instance().append(
         std::make_shared<frmpub::OnConnectorTask<WorldConnector>>(
             std::dynamic_pointer_cast<WorldConnector>(shared_from_this())));
 
@@ -78,7 +78,7 @@ int WorldConnector::default_handle(std::shared_ptr<protocc::CommonObject> obj, s
         return forward_world_client_c(obj, enves);
     } else {
         //通知lua的onMessage函数
-        shynet::utils::Singleton<lua::LuaEngine>::get_instance().append(
+        shynet::utils::Singleton<lua::LuaEngine>::instance().append(
             std::make_shared<frmpub::OnMessageTask<WorldConnector>>(
                 std::dynamic_pointer_cast<WorldConnector>(shared_from_this()), obj, enves));
     }
@@ -88,7 +88,7 @@ int WorldConnector::default_handle(std::shared_ptr<protocc::CommonObject> obj, s
 void WorldConnector::close(net::CloseType active)
 {
     //通知lua的onClose函数
-    shynet::utils::Singleton<lua::LuaEngine>::get_instance().append(
+    shynet::utils::Singleton<lua::LuaEngine>::instance().append(
         std::make_shared<frmpub::OnCloseTask>(fd()));
 
     shynet::utils::Singleton<ConnectorMgr>::instance().remove_worldctor(connectid());

@@ -32,13 +32,8 @@ void set_loggather()
     if (flag == false) {
         shynet::utils::Logger::setoutput([](const char* msg, size_t len) {
             static char processname[NAME_MAX] = { 0 };
-            std::shared_ptr<LogConnector> logger = nullptr;
-            try {
-                logger = shynet::utils::Singleton<frmpub::LogConnectorMgr>::get_instance().log_connector();
-            } catch (const std::exception& err) {
-                logger = nullptr;
-            }
-            if (logger != nullptr) {
+            if (shynet::utils::Singleton<frmpub::LogConnectorMgr>::exist_instance()) {
+                std::shared_ptr<LogConnector> logger = shynet::utils::Singleton<frmpub::LogConnectorMgr>::instance().log_connector();
                 if (strlen(processname) == 0) {
                     char path[PATH_MAX] = { 0 };
                     shynet::utils::stuff::executable_path(path, processname, sizeof(path));
@@ -47,7 +42,6 @@ void set_loggather()
                         *processname_end = '\0';
                     }
                 }
-
                 frmpub::protocc::writelog_to_log_c msgc;
                 msgc.set_dirname(processname);
                 msgc.set_logname(shynet::utils::Logger::logname());

@@ -18,7 +18,7 @@ namespace net {
     {
         std::shared_ptr<thread::AcceptThread> ath;
         int tot = -1;
-        utils::Singleton<pool::ThreadPool>::get_instance()
+        utils::Singleton<pool::ThreadPool>::instance()
             .foreach_acceptThs([&](std::weak_ptr<thread::AcceptThread> it) {
                 std::shared_ptr<thread::AcceptThread> rtkp = it.lock();
                 if (rtkp != nullptr) {

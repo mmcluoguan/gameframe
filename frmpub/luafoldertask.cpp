@@ -31,12 +31,12 @@ int LuaFolderTask::notify_event(std::string path, uint32_t mask)
         }
         if (ismodify) {
             LOG_DEBUG << path << " 被修改";
-            shynet::utils::Singleton<shynet::lua::LuaEngine>::get_instance().append(
+            shynet::utils::Singleton<shynet::lua::LuaEngine>::instance().append(
                 std::make_shared<LuaHotFixTask>(path));
             g_filemodifys[path] = duration_in_ms.count();
         }
     } else if (mask & IN_CREATE) {
-        shynet::utils::Singleton<pool::ThreadPool>::get_instance().notifyTh().lock()->add(
+        shynet::utils::Singleton<pool::ThreadPool>::instance().notifyTh().lock()->add(
             std::make_shared<LuaFolderTask>(path, true));
         LOG_DEBUG << path << " 被加入监控";
     }

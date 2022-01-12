@@ -43,7 +43,7 @@ LuaTimerMgr::LuaTimer::LuaTimer(const timeval val, bool repeat, std::string funn
 void LuaTimerMgr::LuaTimer::timeout()
 {
     std::shared_ptr<LuaTimerTask> task = std::make_shared<LuaTimerTask>(timerid());
-    shynet::utils::Singleton<shynet::lua::LuaEngine>::get_instance().append(task);
+    shynet::utils::Singleton<shynet::lua::LuaEngine>::instance().append(task);
     if (repeat_ == false) {
         shynet::utils::Singleton<net::TimerReactorMgr>::instance().remove(timerid());
     }

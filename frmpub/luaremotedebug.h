@@ -15,6 +15,13 @@ class LuaRemoteDebug final : public shynet::Nocopy {
 
 public:
     /**
+    * @brief 类型名称
+    */
+    static constexpr const char* kClassname = "LuaRemoteDebug";
+
+    ~LuaRemoteDebug() = default;
+
+    /**
      * @brief 启用调试
      * @param debugip 远程服务器地址
      * @return 
