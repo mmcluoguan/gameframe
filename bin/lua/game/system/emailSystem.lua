@@ -25,8 +25,12 @@ function emailSystem:load()
                 {key = 'time', value = '',},
                 {key = 'annex', value = '',},
             },
-        }
-        ConnectorMgr:dbConnector():send('loaddata_more_from_dbvisit_c',emaildata)
+        }        
+        ConnectorMgr:dbConnector():loaddata_more(emaildata,nil,
+            function (complete_msgdata,complete_routing)
+                EmailSystem:loaded(complete_msgdata.objs);
+            end
+        )
         self.is_load = true
     end
 end

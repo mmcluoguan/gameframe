@@ -42,3 +42,17 @@ end
 local zerotimeSystem = require("lua/game/system/zerotimeSystem")
 zerotimeSystem:start()
 
+-- local co = coroutine.create(function(a, b, c)
+--     for i = 1, 3 do
+--         print("before coroutine yield", i)
+--         print('cccccccc',type( coroutine.yield('aaa')))
+--         print("after coroutine yield", i)
+--     end
+--     --return 'aaaaab',1,2
+-- end)
+-- print(coroutine.resume(co, 1, 2, 3)) --true aaa
+-- print(coroutine.status(co),coroutine.running()) --suspended       thread: 0x61b000000088  true
+-- print(coroutine.resume(co, 1, 2, 3))
+
+
+

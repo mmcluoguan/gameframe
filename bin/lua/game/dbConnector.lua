@@ -10,161 +10,56 @@ baseNet.__index = baseNet
 
 function dbConnector:init()
     baseNet:init(self);
+    self.lcb = {}
+    self.mcb = {}
 end
 
 function dbConnector:clean()
     baseNet:clean(self);
 end
 
+--请求加载1条hash数据
+function dbConnector:loaddata_one(data,routing,callback)
+    local temp = split(data.tag,',')
+    self.lcb[temp[1]] = callback
+    self:send('loaddata_from_dbvisit_c',data,routing)
+end
+
+--请求加载n条hash数据
+function dbConnector:loaddata_more(data,routing,callback)
+    local temp = split(data.tag,',')
+    self.mcb[temp[1]] = callback
+    self:send('loaddata_more_from_dbvisit_c',data,routing)
+end
+
+--添加1条hash数据结果
+function dbConnector:insertdata_to_dbvisit_s(msgid,msgdata,routing)
+    
+end
+
+--更新1条hash数据结果
+function dbConnector:updata_to_dbvisit_s(msgid,msgdata,routing)
+    
+end
+
+--删除1条hash数据结果
+function dbConnector:deletedata_to_dbvisit_s(msgid,msgdata,routing)
+    
+end
+
 --加载1条hash数据结果
 function dbConnector:loaddata_from_dbvisit_s(msgid,msgdata,routing)
     local msgs = pb.decode("frmpub.protocc.loaddata_from_dbvisit_s", msgdata)
-    local temp = split(msgs.tag,',')
-    if routing:size() ~= 0 then
-        local gameClientFd = routing:top():fd()
-        routing:pop()
-        local gameClient = AcceptMgr:find(gameClientFd)
-        if gameClient ~= nil then            
-            if msgs.result == 0 then
-                local msgname,msgtable
-                if temp[1] == 'roledata' then
-                    msgname,msgtable = self:loadrole_client_gate_c(tonumber(temp[2]),msgs.fields,gameClientFd,routing);
-                end
-                if msgname ~= nil then
-                    gameClient:send(msgname,msgtable,routing)
-                end
-            else
-                log("加载1条hash数据失败 tag:",msgs.tag)
-                if temp[1] == 'roledata' then
-                    gameClient:send('loadrole_client_gate_s',{ result = 1 },routing)
-                end
-            end
-        else
-            log("网关 fd:",gameClientFd," 已断开连接")
-        end
-    else
-
-    end
+    local cb = self.lcb[split(msgs.tag,',')[1]]
+    cb(msgs,routing)
 end
 
 --加载n条hash数据结果
 function dbConnector:loaddata_more_from_dbvisit_s(msgid,msgdata,routing)
     local msgs = pb.decode("frmpub.protocc.loaddata_more_from_dbvisit_s", msgdata)
-    local temp = split(msgs.tag,',')
-    if routing:size() ~= 0 then
-        local gameClientFd = routing:top():fd()
-        routing:pop()
-        local gameClient = AcceptMgr:find(gameClientFd)
-        if gameClient ~= nil then            
-            local msgname,msgtable
-            if temp[1] == 'goodsdata' then
-                msgname,msgtable = self:loadgoods_client_gate_c(tonumber(temp[2]),msgs.objs);
-            elseif temp[1] == 'noticedata' then
-                msgname,msgtable = self:notice_info_list_clent_gate_c(msgs.objs);
-            elseif temp[1] == 'emailsdata' then
-                msgname,msgtable = self:loademails_client_gate_c(tonumber(temp[2]),msgs.objs);
-            end
-            if msgname ~= nil then
-                gameClient:send(msgname,msgtable,routing)
-            end
-        else
-            log("网关 fd:",gameClientFd," 已断开连接")
-        end
-    else
-        if temp[1] == 'loadsysemail' then
-            EmailSystem:loaded(msgs.objs);
-        end
-    end
-end
-
---加载角色结果
-function dbConnector:loadrole_client_gate_c(roleid,fields,gameClientFd,routing)
-    local roleObj = role:new(roleid,'')
-    roleObj:copyrouting(routing)
-    assert(routing:size() ~= 0,'loadrole_client_gate_c 没有路由信息');
-    log("在db中获取角色数据 roleid:",roleObj.id)
-    roleObj:init_fields()
-    roleObj:loaddata_complete(gameClientFd,routing:top():fd(),fields)
-    RoleMgr:add(roleObj)
-    return 'loadrole_client_gate_s',roleObj:client_roledata()
-end
-
---加载角色物品结果
-function dbConnector:loadgoods_client_gate_c(roleid,objs)
-    local roleObj = RoleMgr:find(roleid)
-    assert(roleObj,"没有角色 roleid:" .. roleid)
-    for i = 1, #objs do
-        roleObj.goods[i] = dynamicData.goodsdata:new()
-        local goodsid = nil
-        for j = 1, #objs[i].fields do
-            local key = objs[i].fields[j].key
-            local value = objs[i].fields[j].value
-            if key == '_id' then
-                goodsid = tonumber(value)   
-                roleObj.goods[i].id = goodsid           
-            elseif key == 'cfgid' then
-                roleObj.goods[i].cfgid = tonumber(value)
-            elseif key == 'num' then
-                roleObj.goods[i].num = tonumber(value)
-            end
-        end
-        roleObj.goods[goodsid] = roleObj.goods[i]
-        roleObj.goods[i] = nil
-    end
-    local goodsdata = {}
-    local i = 1
-    for k,v in pairs(roleObj.goods) do
-        table.insert(goodsdata,i,v)
-        i = i + 1
-    end
-    log("在db中获取角色物品数据 roleid:",roleObj.id)
-    return 'loadgoods_client_gate_s',{ goods = goodsdata}
-end
-
---广播公告信息列表
-function dbConnector:notice_info_list_clent_gate_c(objs)
-    local noticedata ={}
-    for i = 1, #objs do
-        local notice = {}
-        for j = 1, #objs[i].fields do
-            local key = objs[i].fields[j].key
-            local value = objs[i].fields[j].value
-            if key == 'info' then
-                notice.info = value
-            elseif key == 'time' then
-                notice.time = tonumber(value)
-            end
-        end
-        table.insert(noticedata,notice)
-    end
-    log("在db中获取广播公告信息列表 len:",#noticedata)
-    return 'notice_info_list_clent_gate_s',{ datas = noticedata}
-end
-
---加载角色邮件列表
-function dbConnector:loademails_client_gate_c(roleid,objs)
-    local roleObj = RoleMgr:find(roleid)
-    assert(roleObj,"没有角色 roleid:" .. roleid)
-    for i = 1, #objs do
-        roleObj.emails[i] = dynamicData.emaildata:new()
-        local emailid = nil
-        for j = 1, #objs[i].fields do
-            local key = objs[i].fields[j].key
-            local value = objs[i].fields[j].value
-            if key == '_id' then
-                emailid = tonumber(value)   
-                roleObj.emails[i].id = emailid           
-            elseif key == 'is_read' then
-                roleObj.emails[i].is_read = StrtoBool(value)
-            elseif key == 'is_receive' then
-                roleObj.emails[i].is_receive = StrtoBool(value)
-            end
-        end
-        roleObj.emails[emailid] = roleObj.emails[i]
-        roleObj.emails[i] = nil
-    end    
-    log("在db中获取角色邮件列表 roleid:",roleObj.id)
-    return roleObj:emails_data()
+    local cb = self.mcb[split(msgs.tag,',')[1]]
+    assert(cb,'没有设置回调函数 tag:' .. msgs.tag)
+    cb(msgs,routing)
 end
 
 return dbConnector;

@@ -250,21 +250,23 @@ int FilterData::send_proto(int msgid, const std::string data,
 int FilterData::send_proto(const ProtoStr c, const ProtoResponse s)
 {
 #ifdef USE_DEBUG
-    auto& timermgr = shynet::utils::Singleton<shynet::net::TimerReactorMgr>::instance();
-    int timerid = timermgr.add(std::make_shared<ResponseTimer>(
-        s.timeout_sec,
-        shared_from_this(),
-        c.msgid,
-        s.msgid));
-    {
-        std::lock_guard<std::mutex> lock(rtbmut_);
-        auto it = response_timer_bind_.find(s.msgid);
-        if (it == response_timer_bind_.end()) {
-            std::list<int> ls;
-            ls.emplace_back(timerid);
-            response_timer_bind_.insert({ s.msgid, ls });
-        } else {
-            it->second.emplace_back(timerid);
+    if (s.timeout_sec.tv_sec != 0 && s.timeout_sec.tv_usec != 0) {
+        auto& timermgr = shynet::utils::Singleton<shynet::net::TimerReactorMgr>::instance();
+        int timerid = timermgr.add(std::make_shared<ResponseTimer>(
+            s.timeout_sec,
+            shared_from_this(),
+            c.msgid,
+            s.msgid));
+        {
+            std::lock_guard<std::mutex> lock(rtbmut_);
+            auto it = response_timer_bind_.find(s.msgid);
+            if (it == response_timer_bind_.end()) {
+                std::list<int> ls;
+                ls.emplace_back(timerid);
+                response_timer_bind_.insert({ s.msgid, ls });
+            } else {
+                it->second.emplace_back(timerid);
+            }
         }
     }
 #endif
@@ -277,21 +279,23 @@ int FilterData::send_proto(const ProtoStr c, const ProtoResponse s)
 int FilterData::send_proto(const ProtoMessage c, const ProtoResponse s)
 {
 #ifdef USE_DEBUG
-    auto& timermgr = shynet::utils::Singleton<shynet::net::TimerReactorMgr>::instance();
-    int timerid = timermgr.add(std::make_shared<ResponseTimer>(
-        s.timeout_sec,
-        shared_from_this(),
-        c.msgid,
-        s.msgid));
-    {
-        std::lock_guard<std::mutex> lock(rtbmut_);
-        auto it = response_timer_bind_.find(s.msgid);
-        if (it == response_timer_bind_.end()) {
-            std::list<int> ls;
-            ls.emplace_back(timerid);
-            response_timer_bind_.insert({ s.msgid, ls });
-        } else {
-            it->second.emplace_back(timerid);
+    if (s.timeout_sec.tv_sec != 0 && s.timeout_sec.tv_usec != 0) {
+        auto& timermgr = shynet::utils::Singleton<shynet::net::TimerReactorMgr>::instance();
+        int timerid = timermgr.add(std::make_shared<ResponseTimer>(
+            s.timeout_sec,
+            shared_from_this(),
+            c.msgid,
+            s.msgid));
+        {
+            std::lock_guard<std::mutex> lock(rtbmut_);
+            auto it = response_timer_bind_.find(s.msgid);
+            if (it == response_timer_bind_.end()) {
+                std::list<int> ls;
+                ls.emplace_back(timerid);
+                response_timer_bind_.insert({ s.msgid, ls });
+            } else {
+                it->second.emplace_back(timerid);
+            }
         }
     }
 #endif
@@ -340,22 +344,24 @@ int FilterData::send_json(int msgid, rapidjson::Value* data, std::stack<Envelope
 int FilterData::send_json(const JsonDoc c, const JsonResponse s)
 {
 #ifdef USE_DEBUG
-    int msgid = (*c.doc)["msgid"].GetInt();
-    auto& timermgr = shynet::utils::Singleton<shynet::net::TimerReactorMgr>::instance();
-    int timerid = timermgr.add(std::make_shared<ResponseTimer>(
-        s.timeout_sec,
-        shared_from_this(),
-        msgid,
-        s.msgid));
-    {
-        std::lock_guard<std::mutex> lock(rtbmut_);
-        auto it = response_timer_bind_.find(s.msgid);
-        if (it == response_timer_bind_.end()) {
-            std::list<int> ls;
-            ls.emplace_back(timerid);
-            response_timer_bind_.insert({ s.msgid, ls });
-        } else {
-            it->second.emplace_back(timerid);
+    if (s.timeout_sec.tv_sec != 0 && s.timeout_sec.tv_usec != 0) {
+        int msgid = (*c.doc)["msgid"].GetInt();
+        auto& timermgr = shynet::utils::Singleton<shynet::net::TimerReactorMgr>::instance();
+        int timerid = timermgr.add(std::make_shared<ResponseTimer>(
+            s.timeout_sec,
+            shared_from_this(),
+            msgid,
+            s.msgid));
+        {
+            std::lock_guard<std::mutex> lock(rtbmut_);
+            auto it = response_timer_bind_.find(s.msgid);
+            if (it == response_timer_bind_.end()) {
+                std::list<int> ls;
+                ls.emplace_back(timerid);
+                response_timer_bind_.insert({ s.msgid, ls });
+            } else {
+                it->second.emplace_back(timerid);
+            }
         }
     }
 #endif
@@ -368,21 +374,23 @@ int FilterData::send_json(const JsonDoc c, const JsonResponse s)
 int FilterData::send_json(const JsonValue c, const JsonResponse s)
 {
 #ifdef USE_DEBUG
-    auto& timermgr = shynet::utils::Singleton<shynet::net::TimerReactorMgr>::instance();
-    int timerid = timermgr.add(std::make_shared<ResponseTimer>(
-        s.timeout_sec,
-        shared_from_this(),
-        c.msgid,
-        s.msgid));
-    {
-        std::lock_guard<std::mutex> lock(rtbmut_);
-        auto it = response_timer_bind_.find(s.msgid);
-        if (it == response_timer_bind_.end()) {
-            std::list<int> ls;
-            ls.emplace_back(timerid);
-            response_timer_bind_.insert({ s.msgid, ls });
-        } else {
-            it->second.emplace_back(timerid);
+    if (s.timeout_sec.tv_sec != 0 && s.timeout_sec.tv_usec != 0) {
+        auto& timermgr = shynet::utils::Singleton<shynet::net::TimerReactorMgr>::instance();
+        int timerid = timermgr.add(std::make_shared<ResponseTimer>(
+            s.timeout_sec,
+            shared_from_this(),
+            c.msgid,
+            s.msgid));
+        {
+            std::lock_guard<std::mutex> lock(rtbmut_);
+            auto it = response_timer_bind_.find(s.msgid);
+            if (it == response_timer_bind_.end()) {
+                std::list<int> ls;
+                ls.emplace_back(timerid);
+                response_timer_bind_.insert({ s.msgid, ls });
+            } else {
+                it->second.emplace_back(timerid);
+            }
         }
     }
 #endif

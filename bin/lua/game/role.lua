@@ -1,5 +1,6 @@
 local global_cfg = require("lua/config/global_cfg")
 local pb = require("pb")
+local dynamicData = require("lua/game/data/dynamicData")
 --角色表
 local role = {}
 
@@ -195,7 +196,7 @@ function role:loademails_client_gate_c(msgdata,routing)
         enve:addr(gameclient.cpp_socket:remote_addr())
         routing:push(enve)
         local emailsdata = {
-            tag = "emailsdata," .. self.id,
+            tag = "emailsdata",
             condition = "email_*_" .. self.id,
             sort = "_id desc",
             limit = 100,
@@ -206,10 +207,40 @@ function role:loademails_client_gate_c(msgdata,routing)
                 {key = 'is_receive', value = '0',},
             },
         }
-        ConnectorMgr:dbConnector():send('loaddata_more_from_dbvisit_c',emailsdata,routing)
-       
+        ConnectorMgr:dbConnector():loaddata_more(emailsdata,routing,
+            function (complete_msgdata,complete_routing)
+                --从db加载邮件列表结果
+                local gateClientFd = complete_routing:top():fd()
+                complete_routing:pop()
+                local clientFd = complete_routing:top():fd()
+                local roleObj = RoleMgr:findby_clientfd(clientFd)
+                assert(roleObj,"玩家已断线 clientFd:" .. clientFd)
+                local objs = complete_msgdata.objs
+                for i = 1, #objs do
+                    roleObj.emails[i] = dynamicData.emaildata:new()
+                    local emailid = nil
+                    for j = 1, #objs[i].fields do
+                        local key = objs[i].fields[j].key
+                        local value = objs[i].fields[j].value
+                        if key == '_id' then
+                            emailid = tonumber(value)   
+                            roleObj.emails[i].id = emailid           
+                        elseif key == 'is_read' then
+                            roleObj.emails[i].is_read = StrtoBool(value)
+                        elseif key == 'is_receive' then
+                            roleObj.emails[i].is_receive = StrtoBool(value)
+                        end
+                    end
+                    roleObj.emails[emailid] = roleObj.emails[i]
+                    roleObj.emails[i] = nil
+                end
+                log("在db中获取角色邮件列表 roleid:",roleObj.id)
+                local msgname,msgtable = roleObj:emails_data()
+                roleObj:send(msgname,msgtable,complete_routing)
+            end
+        )
     else
-        log("在本地内存中获取角色邮件数据 len:",Get_Tablekey_Size(self.emails))        
+        log("在本地内存中获取角色邮件数据 len:",Get_Tablekey_Size(self.emails))
         local msgname,msgtable = self:emails_data()
         self:send(msgname,msgtable,routing)
     end

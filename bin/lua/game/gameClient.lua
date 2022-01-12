@@ -1,5 +1,7 @@
 local pb = require("pb")
 local baseNet = require ("lua/common/baseNet")
+local dynamicData = require("lua/game/data/dynamicData")
+local roleModule = require("lua/game/role")
 local gameClient = {}
 --继承
 setmetatable(gameClient,baseNet)
@@ -46,8 +48,7 @@ function gameClient:createrole_client_gate_c(msgid,msgdata,routing)
     msgdata.result = 0;
     if RoleMgr:findby_accountid(msgtable.aid) == nil then
         --创建角色
-        local role = require("lua/game/role")
-        local roleObj = role:new(newid(),msgtable.aid)
+        local roleObj = roleModule:new(newid(),msgtable.aid)
         local initdata = {
             cache_key = 'role_' .. roleObj.id,
             opertype = 0,
@@ -100,15 +101,37 @@ function gameClient:loadrole_client_gate_c(msgid,msgdata,routing)
         enve:fd(self.id)
         enve:addr(self.cpp_socket:remote_addr())
         routing:push(enve)
-        role = require("lua/game/role")
-        local roleObj = role:new(msgtable.roleid,msgtable.aid)
+        local roleObj = roleModule:new(msgtable.roleid,msgtable.aid)
         local roledata = {
             cache_key = "role_" .. msgtable.roleid,
             tag = "roledata," .. msgtable.roleid,
             opertype = 0,
             fields = roleObj:init_fields(),
         };
-        ConnectorMgr:dbConnector():send('loaddata_from_dbvisit_c',roledata,routing)
+        ConnectorMgr:dbConnector():loaddata_one(roledata,routing,
+            function (complete_msgdata,complete_routing)
+                --从db加载角色数据结果                
+                local gateClientFd = complete_routing:top():fd()
+                complete_routing:pop()
+                local clientFd = complete_routing:top():fd()
+                local gateClient = AcceptMgr:find(gateClientFd)
+                if gateClient ~= nil then
+                    local roleid = tonumber(split(complete_msgdata.tag,',')[2])
+                    if complete_msgdata.result == 0 then
+                        local roleObj = roleModule:new(roleid,'')
+                        roleObj:copyrouting(complete_routing)
+                        log("在db中获取角色数据 roleid:",roleObj.id)
+                        roleObj:init_fields()
+                        roleObj:loaddata_complete(gateClientFd,clientFd,complete_msgdata.fields)
+                        RoleMgr:add(roleObj)
+                        gateClient:send('loadrole_client_gate_s',roleObj:client_roledata(),complete_routing)
+                    else
+                        log("加载角色数据失败 roleid:",roleid)
+                        gateClient:send('loadrole_client_gate_s',{ result = 1 },complete_routing)
+                    end
+                end
+            end
+        );
     end
 end
 
@@ -135,7 +158,7 @@ function gameClient:loadgoods_client_gate_c(msgid,msgdata,routing)
         enve:addr(self.cpp_socket:remote_addr())
         routing:push(enve)
         local goodsdata = {
-            tag = "goodsdata," .. role.id,
+            tag = "goodsdata",
             condition = "goods_*_" .. role.id,
             sort = "",
             limit = 0,
@@ -146,7 +169,43 @@ function gameClient:loadgoods_client_gate_c(msgid,msgdata,routing)
                 {key = 'num', value = '',},
             },
         }
-        ConnectorMgr:dbConnector():send('loaddata_more_from_dbvisit_c',goodsdata,routing)
+        ConnectorMgr:dbConnector():loaddata_more(goodsdata,routing,
+            function (complete_msgdata,complete_routing)
+                --从db加载角色物品数据结果
+                local gateClientFd = complete_routing:top():fd()
+                complete_routing:pop()
+                local clientFd = complete_routing:top():fd()
+                local roleObj = RoleMgr:findby_clientfd(clientFd)
+                assert(roleObj,"玩家已断线 clientFd:" .. clientFd)
+                local objs = complete_msgdata.objs
+                for i = 1, #objs do
+                    roleObj.goods[i] = dynamicData.goodsdata:new()
+                    local goodsid = nil
+                    for j = 1, #objs[i].fields do
+                        local key = objs[i].fields[j].key
+                        local value = objs[i].fields[j].value
+                        if key == '_id' then
+                            goodsid = tonumber(value)   
+                            roleObj.goods[i].id = goodsid           
+                        elseif key == 'cfgid' then
+                            roleObj.goods[i].cfgid = tonumber(value)
+                        elseif key == 'num' then
+                            roleObj.goods[i].num = tonumber(value)
+                        end
+                    end
+                    roleObj.goods[goodsid] = roleObj.goods[i]
+                    roleObj.goods[i] = nil
+                end
+                local goodsdata = {}
+                local i = 1
+                for k,v in pairs(roleObj.goods) do
+                    table.insert(goodsdata,i,v)
+                    i = i + 1
+                end
+                log("在db中获取角色物品数据 roleid:",roleObj.id)
+                roleObj:send('loadgoods_client_gate_s',{ goods = goodsdata},complete_routing)            
+            end
+        );
     end
 end
 
@@ -214,7 +273,33 @@ function gameClient:notice_info_list_clent_gate_c(msgid,msgdata,routing)
             {key = 'time', value = '',},
         },
     }
-    ConnectorMgr:dbConnector():send('loaddata_more_from_dbvisit_c',noticedata,routing)
+    ConnectorMgr:dbConnector():loaddata_more(noticedata,routing,
+        function (complete_msgdata,complete_routing)
+            --从db获取广播公告信息列表结果
+            local gateClientFd = complete_routing:top():fd()
+            complete_routing:pop()
+            local gateClient = AcceptMgr:find(gateClientFd)
+            if gateClient ~= nil then
+                local objs = complete_msgdata.objs
+                local noticedata ={}
+                for i = 1, #objs do
+                    local notice = {}
+                    for j = 1, #objs[i].fields do
+                        local key = objs[i].fields[j].key
+                        local value = objs[i].fields[j].value
+                        if key == 'info' then
+                            notice.info = value
+                        elseif key == 'time' then
+                            notice.time = tonumber(value)
+                        end
+                    end
+                    table.insert(noticedata,notice)
+                end
+                log("在db中获取广播公告信息列表 len:",#noticedata)
+                gateClient:send('notice_info_list_clent_gate_s',{ datas = noticedata},complete_routing)
+            end
+        end
+    )
 end
 
 return gameClient;

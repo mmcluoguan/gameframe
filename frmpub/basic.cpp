@@ -56,7 +56,8 @@ void set_loggather()
                     { protocc::WRITELOG_TO_LOG_S,
                         [&](auto data, auto enves) -> int {
                             return 0;
-                        } });
+                        },
+                        timeval {} });
 
                 shynet::utils::Logger::print_cout(msg, len);
             }
