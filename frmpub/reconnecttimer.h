@@ -31,7 +31,6 @@ public:
     void timeout() override
     {
         auto cb = [&]() {
-            shynet::utils::Singleton<net::TimerReactorMgr>::instance().remove(timerid());
             std::shared_ptr<T> reconnect = std::make_shared<T>(connect_addr_);
             shynet::utils::Singleton<net::ConnectReactorMgr>::instance().add(reconnect);
             reconnect.reset();

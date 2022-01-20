@@ -14,7 +14,6 @@ namespace net {
     void ConnectHeartbeat::timeout()
     {
         auto cb = [&]() {
-            utils::Singleton<TimerReactorMgr>::instance().remove(timerid());
             std::shared_ptr<ConnectEvent> cnv = cnv_.lock();
             if (cnv != nullptr) {
                 cnv->timerout(net::CloseType::TIMEOUT_CLOSE);

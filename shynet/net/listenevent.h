@@ -1,6 +1,7 @@
 #ifndef SHYNET_NET_LISTENEVENT_H
 #define SHYNET_NET_LISTENEVENT_H
 
+#include "shynet/events/eventhandler.h"
 #include "shynet/net/acceptnewfd.h"
 #include "shynet/net/ipaddress.h"
 #include <openssl/err.h>

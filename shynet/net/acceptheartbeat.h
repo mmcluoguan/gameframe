@@ -11,7 +11,7 @@ namespace net {
     class AcceptNewFd;
 
     /**
-     * @brief 服务器检测客户端心跳包超时处理器
+     * @brief 服务器检测客户端连接状态超时处理器
     */
     class AcceptHeartbeat : public TimerEvent {
     public:
@@ -24,7 +24,7 @@ namespace net {
         ~AcceptHeartbeat() = default;
 
         /**
-         * @brief 服务器检测客户端心跳包超时处理
+         * @brief 服务器检测与客户端连接状态超时处理
         */
         void timeout() override;
 

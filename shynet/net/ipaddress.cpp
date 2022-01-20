@@ -15,11 +15,21 @@ namespace net {
             in4->sin_family = AF_INET;
             in4->sin_addr.s_addr = INADDR_ANY;
             in4->sin_port = htons(port);
+            char ipbuff[INET_ADDRSTRLEN] = { 0 };
+            if (inet_ntop(family_, &in4->sin_addr, ipbuff, INET_ADDRSTRLEN) == nullptr) {
+                THROW_EXCEPTION("call inet_ntop");
+            }
+            ip_ = std::string(ipbuff);
         } else if (family == AF_INET6) {
             struct sockaddr_in6* in6 = (struct sockaddr_in6*)&addrs_;
             in6->sin6_family = AF_INET6;
             in6->sin6_addr = in6addr_any;
             in6->sin6_port = htons(port);
+            char ipbuff[INET_ADDRSTRLEN] = { 0 };
+            if (inet_ntop(family_, &in6->sin6_addr, ipbuff, INET_ADDRSTRLEN) == nullptr) {
+                THROW_EXCEPTION("call inet_ntop");
+            }
+            ip_ = std::string(ipbuff);
         } else {
             std::ostringstream err;
             err << "family_:" << family_ << " 无效";

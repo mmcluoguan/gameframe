@@ -1,5 +1,6 @@
 #include "shynet/net/acceptiobuffer.h"
 #include "shynet/net/acceptreactormgr.h"
+#include "shynet/net/timerreactormgr.h"
 #include "shynet/pool/threadpool.h"
 #include "shynet/task/acceptreadiotask.h"
 
@@ -57,6 +58,11 @@ namespace net {
     {
         std::shared_ptr<AcceptNewFd> aptnewfd = newfd_.lock();
         if (aptnewfd != nullptr) {
+            if (aptnewfd->enable_check()) {
+                //延迟检测与客户端连接状态的计时处理器时间
+                auto heart = utils::Singleton<TimerReactorMgr>::instance().find(aptnewfd->check_timeid());
+                heart->set_val({ aptnewfd->check_second(), 0L });
+            }
             std::shared_ptr<task::AcceptReadIoTask> io = std::make_shared<task::AcceptReadIoTask>(aptnewfd);
             utils::Singleton<pool::ThreadPool>::instance().appendwork(fd(), io);
         }

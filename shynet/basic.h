@@ -75,7 +75,7 @@ namespace net {
             */
         CONNECT_FAIL,
         /**
-             * @brief 心跳包超时
+             * @brief 没有心跳超时
             */
         TIMEOUT_CLOSE,
     };

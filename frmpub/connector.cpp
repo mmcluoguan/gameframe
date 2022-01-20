@@ -22,7 +22,7 @@ Connector::~Connector()
 {
     std::shared_ptr<PingTimer> pt = ping_timer_.lock();
     if (pt != nullptr) {
-        pt->clean_connector();
+        pt->clean_filter();
     }
 }
 void Connector::success()
@@ -37,7 +37,7 @@ void Connector::success()
 }
 net::InputResult Connector::input()
 {
-    //有数据接收到，因此延迟心跳计时器时间
+    //有数据接收到，因此延迟发送心跳计时器时间
     std::shared_ptr<PingTimer> pt = ping_timer_.lock();
     if (pt != nullptr) {
         pt->set_val({ heartSecond_, 0L });
@@ -57,7 +57,7 @@ void Connector::close(net::CloseType active)
 }
 void Connector::timerout(net::CloseType active)
 {
-    LOG_INFO << "服务器心跳超时 [ip:" << connect_addr()->ip() << ":" << connect_addr()->port() << "]";
+    LOG_INFO << "检测到与服务器没有心跳超时 [ip:" << connect_addr()->ip() << ":" << connect_addr()->port() << "]";
     close(active);
 }
 

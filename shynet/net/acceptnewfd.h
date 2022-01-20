@@ -2,7 +2,6 @@
 #define SHYNET_NET_ACCEPTNEWFD_H
 
 #include "shynet/events/eventbuffer.h"
-#include "shynet/net/acceptheartbeat.h"
 #include "shynet/net/ipaddress.h"
 #include "shynet/protocol/filterproces.h"
 
@@ -19,14 +18,14 @@ namespace net {
          * @param listenAddr 服务器监听地址
          * @param iobuf 管理io读写缓冲区
          * @param pt 协议类型 SHY,HTTP,WEBSOCKET
-         * @param enableHeart 是否启用心跳包检测客户端
-         * @param heartSecond 心跳包检测秒数
+         * @param enable_check 是否启用检测与服务器连接状态
+         * @param check_second 检测秒数
         */
         AcceptNewFd(std::shared_ptr<IPAddress> remoteAddr,
             std::shared_ptr<IPAddress> listenAddr,
             std::shared_ptr<events::EventBuffer> iobuf,
             FilterProces::ProtoType pt,
-            bool enableHeart = true, ssize_t heartSecond = 5);
+            bool enable_check = true, ssize_t check_second = 5);
         ~AcceptNewFd() = default;
 
         /**
@@ -48,8 +47,8 @@ namespace net {
         */
         virtual void close(CloseType active) = 0;
         /**
-         * @brief 心跳包检测到客户端超时回调
-         * @param active 断开原因
+         * @brief 检测到与客户端没有心跳超时回调
+         * @param active 断开原因 TIMEOUT_CLOSE
         */
         virtual void timerout(CloseType active) = 0;
 
@@ -64,15 +63,15 @@ namespace net {
         */
         std::shared_ptr<IPAddress> listen_addr() const;
         /**
-         * @brief 获取是否检测客户端心跳
-         * @return 是否检测客户端心跳
+         * @brief 获取是否启用检测与服务器连接状态
+         * @return 是否启用检测与服务器连接状态
         */
-        bool enableHeart() const;
+        bool enable_check() const;
         /**
-         * @brief 获取心跳包间隔时间(单位秒)
-         * @return 心跳包间隔时间(单位秒)
+         * @brief 获取检测秒数
+         * @return 检测秒数
         */
-        ssize_t heart_second() const;
+        ssize_t check_second() const;
 
         /**
          * @brief 获取socket文件描述符
@@ -81,15 +80,15 @@ namespace net {
         int fd() const { return iobuf()->fd(); }
 
         /**
-         * @brief 获取心跳包计时器
-         * @return 心跳包计时器
+         * @brief 获取检测与客户端连接状态计时器id
+         * @return 检测与客户端连接状态计时器id
         */
-        std::weak_ptr<AcceptHeartbeat> heart() const;
+        int check_timeid() const;
         /**
-         * @brief 设置心跳包计时器
-         * @param heart 心跳包计时器
+         * @brief 设置检测与客户端连接状态计时器id
+         * @param heart 检测与客户端连接状态计时器id
         */
-        void set_heart(std::weak_ptr<AcceptHeartbeat> heart);
+        void set_check_timeid(int heart);
 
     private:
         /**
@@ -101,17 +100,17 @@ namespace net {
         */
         std::shared_ptr<IPAddress> listen_addr_ = nullptr;
         /**
-         * @brief 是否检测客户端心跳
+         * @brief 是否检测与服务器连接状态
         */
-        bool enable_heart_ = true;
+        bool enable_check_ = true;
         /**
-         * @brief 心跳包检测秒数
+         * @brief 检测秒数
         */
-        ssize_t heart_second_ = 5;
+        ssize_t check_second_ = 5;
         /**
-         * @brief 心跳包计时器
+         * @brief 服务器检测与客户端连接状态计时器id
         */
-        std::weak_ptr<AcceptHeartbeat> heart_;
+        int check_timeid_;
     };
 
 }

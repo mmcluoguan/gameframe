@@ -10,10 +10,6 @@ namespace task {
 
     void ConnectReadIoTask::operator()()
     {
-        std::shared_ptr<net::ConnectHeartbeat> ht = cntevent_->heart().lock();
-        if (ht != nullptr) {
-            ht->set_val({ cntevent_->heart_second(), 0 });
-        }
         net::InputResult ret = cntevent_->input();
         if (ret == net::InputResult::INITIATIVE_CLOSE) {
             cntevent_->close(net::CloseType::CLIENT_CLOSE);

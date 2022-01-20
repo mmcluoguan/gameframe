@@ -60,10 +60,6 @@ class LuaTimerMgr {
 
     private:
         /**
-         * @brief true为重复执行,false为只执行1次
-        */
-        bool repeat_ = true;
-        /**
          * @brief lua计时器调用lua函数名
         */
         std::string funname_;

@@ -2,6 +2,7 @@
 #define FRMPUB_CLIENT_H
 
 #include "frmpub/filterdata.h"
+#include "frmpub/pingtimer.h"
 #include "shynet/events/eventbuffer.h"
 #include "shynet/net/acceptnewfd.h"
 
@@ -16,18 +17,18 @@ public:
          * @param remote_addr 客户端连接地址
          * @param listen_addr 服务器监听地址
          * @param iobuf 管理io读写缓冲区
-         * @param enableHeart 是否启用心跳包检测客户端
-         * @param heartSecond 心跳包检测秒数
+         * @param enable_ping 是否发送心跳
+         * @param heartSecond 发送心跳时间间隔(s)
          * @param pt 协议类型 SHY,HTTP,WEBSOCKET
          * @param pd 数据封包 PROTOBUF,JSON,NATIVE
         */
     Client(std::shared_ptr<net::IPAddress> remote_addr,
         std::shared_ptr<net::IPAddress> listen_addr,
         std::shared_ptr<events::EventBuffer> iobuf,
-        bool enableHeart = false, ssize_t heartSecond = 5,
+        bool enable_ping = false, ssize_t heartSecond = 3,
         protocol::FilterProces::ProtoType pt = protocol::FilterProces::ProtoType::SHY,
         FilterData::ProtoData pd = FilterData::ProtoData::PROTOBUF);
-    ~Client() = default;
+    ~Client();
 
     /**
     * @brief 客户端连接断开回调
@@ -35,10 +36,17 @@ public:
     */
     void close(net::CloseType active) override;
     /**
-         * @brief 心跳包检测到客户端超时回调
-         * @param active 断开原因
+         * @brief 检测到与客户端没有心跳超时回调
+         * @param active 断开原因 TIMEOUT_CLOSE
         */
     void timerout(net::CloseType) override;
+    /**
+    * @brief socket数据已经保存到管理io缓冲,可以读取回调
+    * @return 返回SUCCESS正常没有操作,
+    返回INITIATIVE_CLOSE服务器将关闭底层socket，并触发close(CLIENT_CLOSE)
+    返回PASSIVE_CLOSE服务器将关闭底层socket，并触发close(SERVER_CLOSE)
+    */
+    net::InputResult input() override;
     /**
      * @brief 消息数据封包处理
      * @param original_data 指定数据的指针
@@ -73,6 +81,18 @@ private:
      * @brief 连接断开原因
     */
     net::CloseType active_ = net::CloseType::SERVER_CLOSE;
+    /**
+     * @brief ping客户端计时器
+    */
+    std::weak_ptr<PingTimer> ping_timer_;
+    /**
+     * @brief 是否发送心跳
+    */
+    bool enable_ping_ = false;
+    /**
+     * @brief 发送心跳时间间隔(s)
+    */
+    ssize_t heartSecond_ = 5;
 };
 }
 

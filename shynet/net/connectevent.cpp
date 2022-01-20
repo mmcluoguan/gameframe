@@ -9,13 +9,13 @@ namespace net {
     ConnectEvent::ConnectEvent(std::shared_ptr<net::IPAddress> connect_addr,
         FilterProces::ProtoType pt,
         bool enable_ssl,
-        bool enableHeart, ssize_t heartSecond)
+        bool enable_check, ssize_t check_second)
         : protocol::FilterProces(nullptr, pt, protocol::FilterProces::Identity::CONNECTOR)
     {
         connect_addr_ = connect_addr;
         enable_ssl_ = enable_ssl;
-        heart_second_ = heartSecond;
-        enable_heart_ = enableHeart;
+        check_second_ = check_second;
+        enable_check_ = enable_check;
         if (enable_ssl_) {
             ctx_ = SSL_CTX_new(SSLv23_client_method());
             if (ctx_ == nullptr) {
@@ -26,14 +26,14 @@ namespace net {
 
     ConnectEvent::ConnectEvent(const char* hostname, short port,
         FilterProces::ProtoType pt,
-        bool enable_ssl, bool enableHeart, ssize_t heartSecond)
+        bool enable_ssl, bool enable_check, ssize_t check_second)
         : protocol::FilterProces(nullptr, pt, protocol::FilterProces::Identity::CONNECTOR)
     {
         hostname_ = hostname;
         dnsport_ = port;
         enable_ssl_ = enable_ssl;
-        enable_heart_ = enableHeart;
-        heart_second_ = heartSecond;
+        enable_check_ = enable_check;
+        check_second_ = check_second;
         if (enable_ssl_) {
             ctx_ = SSL_CTX_new(SSLv23_client_method());
             if (ctx_ == nullptr) {
@@ -89,23 +89,23 @@ namespace net {
         return process();
     }
 
-    bool ConnectEvent::enable_heart() const
+    bool ConnectEvent::enable_check() const
     {
-        return enable_heart_;
+        return enable_check_;
     }
-    std::weak_ptr<ConnectHeartbeat> ConnectEvent::heart() const
+    int ConnectEvent::check_timeid() const
     {
-        return heart_;
-    }
-
-    void ConnectEvent::set_heart(std::weak_ptr<ConnectHeartbeat> ht)
-    {
-        heart_ = ht;
+        return check_timeid_;
     }
 
-    ssize_t ConnectEvent::heart_second() const
+    void ConnectEvent::set_check_timeid(int ht)
     {
-        return heart_second_;
+        check_timeid_ = ht;
+    }
+
+    ssize_t ConnectEvent::check_second() const
+    {
+        return check_second_;
     }
 }
 }

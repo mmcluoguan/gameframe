@@ -4,16 +4,16 @@
 #include "shynet/utils/elapsed.h"
 
 namespace frmpub {
-PingTimer::PingTimer(const timeval val, Connector* connector)
+PingTimer::PingTimer(const timeval val, shynet::protocol::FilterProces* filter)
     : net::TimerEvent(val, EV_TIMEOUT | EV_PERSIST)
 {
-    connector_ = connector;
+    filter_ = filter;
 }
 void PingTimer::timeout()
 {
     auto cb = [&]() {
-        if (connector_ != nullptr) {
-            connector_->ping();
+        if (filter_ != nullptr) {
+            filter_->ping();
         } else {
             shynet::utils::Singleton<net::TimerReactorMgr>::instance().remove(timerid());
         }

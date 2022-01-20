@@ -17,15 +17,15 @@ public:
      * @param name 连接器名称
      * @param enable_ssl 是否启用ssl
      * @param enable_ping 是否发送心跳
-     * @param heartSecond 心跳时间间隔(s)
-     * @param pt 协议类型
-     * @param pd 数据封包类型
+     * @param heartSecond 发送心跳时间间隔(s)
+     * @param pt 协议类型 SHY,HTTP,WEBSOCKET
+     * @param pd 数据封包类型 PROTOBUF,JSON,NATIVE
     */
     Connector(std::shared_ptr<net::IPAddress> connect_addr,
         std::string name = "Connector",
         bool enable_ssl = false,
         bool enable_ping = false,
-        ssize_t heartSecond = 5,
+        ssize_t heartSecond = 3,
         protocol::FilterProces::ProtoType pt = protocol::FilterProces::ProtoType::SHY,
         FilterData::ProtoData pd = FilterData::ProtoData::PROTOBUF);
     ~Connector();
@@ -36,7 +36,7 @@ public:
     */
     void close(net::CloseType active) override;
     /**
-    * @brief 心跳包检测到服务器超时回调
+    * @brief 检测到与服务器没有心跳超时回调
     * @param active 断开原因 TIMEOUT_CLOSE
     */
     void timerout(net::CloseType active) override;
@@ -84,7 +84,7 @@ private:
     */
     bool enable_ping_ = false;
     /**
-     * @brief 心跳时间间隔(s)
+     * @brief 发送心跳时间间隔(s)
     */
     ssize_t heartSecond_ = 5;
     /**

@@ -6,31 +6,31 @@
 namespace shynet {
 namespace net {
     /**
-     * @brief ½ÓÊÕ·şÎñÆ÷Êı¾İ´¦ÀíÆ÷
+     * @brief æ¥æ”¶æœåŠ¡å™¨æ•°æ®å¤„ç†å™¨
     */
     class ConnectEvent;
 
     /**
-     * @brief ¿Í»§¶Ë¼ì²â·şÎñÆ÷ĞÄÌø°ü³¬Ê±´¦ÀíÆ÷
+     * @brief å®¢æˆ·ç«¯æ£€æµ‹ä¸æœåŠ¡å™¨è¿æ¥çŠ¶æ€è¶…æ—¶å¤„ç†å™¨
     */
     class ConnectHeartbeat : public TimerEvent {
     public:
         /**
-         * @brief ¹¹Ôì
-         * @param cnv ½ÓÊÕ·şÎñÆ÷Êı¾İ´¦ÀíÆ÷
-         * @param val ³¬Ê±Ïà¶ÔÊ±¼äÖµ
+         * @brief æ„é€ 
+         * @param cnv æ¥æ”¶æœåŠ¡å™¨æ•°æ®å¤„ç†å™¨
+         * @param val è¶…æ—¶ç›¸å¯¹æ—¶é—´å€¼
         */
         ConnectHeartbeat(std::weak_ptr<ConnectEvent> cnv, const struct timeval val);
         ~ConnectHeartbeat() = default;
 
         /**
-         * @brief ¿Í»§¶Ë¼ì²â·şÎñÆ÷ĞÄÌø°ü³¬Ê±´¦Àí´¦Àí
+         * @brief å®¢æˆ·ç«¯æ£€æµ‹ä¸æœåŠ¡å™¨è¿æ¥çŠ¶æ€è¶…æ—¶å¤„ç†
         */
         void timeout() override;
 
     private:
         /**
-         * @brief ½ÓÊÕ·şÎñÆ÷Êı¾İ´¦ÀíÆ÷
+         * @brief æ¥æ”¶æœåŠ¡å™¨æ•°æ®å¤„ç†å™¨
         */
         std::weak_ptr<ConnectEvent> cnv_;
     };

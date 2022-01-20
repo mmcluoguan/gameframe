@@ -23,10 +23,9 @@ namespace events {
     {
         if (ssl_ != nullptr) {
             std::signal(SIGPIPE, SIG_IGN);
+            SSL_set_shutdown(ssl_, SSL_RECEIVED_SHUTDOWN | SSL_SENT_SHUTDOWN);
             SSL_shutdown(ssl_);
-            SSL_set_shutdown(ssl_, SSL_SENT_SHUTDOWN);
-            SSL_set_shutdown(ssl_, SSL_RECEIVED_SHUTDOWN);
-            //SSL_free(ssl_);
+            SSL_free(ssl_);
         }
         if (buffer() != nullptr)
             bufferevent_free(buffer());

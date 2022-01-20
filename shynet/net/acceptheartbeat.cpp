@@ -13,7 +13,6 @@ namespace net {
     void AcceptHeartbeat::timeout()
     {
         auto cb = [&]() {
-            utils::Singleton<TimerReactorMgr>::instance().remove(timerid());
             std::shared_ptr<AcceptNewFd> newfd = newfd_.lock();
             if (newfd != nullptr) {
                 newfd->timerout(net::CloseType::TIMEOUT_CLOSE);

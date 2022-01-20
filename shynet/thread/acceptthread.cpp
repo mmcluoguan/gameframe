@@ -23,7 +23,6 @@ namespace thread {
         }
     }
 
-    static std::mutex g_aptMutex;
     void AcceptThread::process(bufferevent* bev)
     {
         events::EventBuffer pbuf(bev);
@@ -42,17 +41,13 @@ namespace thread {
                 memset(&cliaddr, 0, sizeof(cliaddr));
                 socklen_t socklen = sizeof(cliaddr);
 
-                int newfd;
-                {
-                    std::lock_guard<std::mutex> lock(g_aptMutex);
-                    newfd = accept(apnf->listenfd(), (struct sockaddr*)&cliaddr, &socklen);
-                    if (newfd < 0) {
-                        return;
-                    }
-                    if (evutil_make_socket_nonblocking(apnf->listenfd()) < 0) {
-                        evutil_closesocket(newfd);
-                        THROW_EXCEPTION("call evutil_make_socket_nonblocking");
-                    }
+                int newfd = accept(apnf->listenfd(), (struct sockaddr*)&cliaddr, &socklen);
+                if (newfd < 0) {
+                    return;
+                }
+                if (evutil_make_socket_nonblocking(apnf->listenfd()) < 0) {
+                    evutil_closesocket(newfd);
+                    THROW_EXCEPTION("call evutil_make_socket_nonblocking");
                 }
                 eventTot_++;
                 std::shared_ptr<net::IPAddress> newfdAddr = std::make_shared<net::IPAddress>(&cliaddr);
@@ -67,11 +62,12 @@ namespace thread {
                 }
                 std::shared_ptr<net::AcceptNewFd> apnewfd = apnf->accept_newfd(newfdAddr, iobuf).lock();
                 iobuf->set_newfd(apnewfd);
-                if (apnewfd->enableHeart()) {
+                if (apnewfd->enable_check()) {
+                    //设置检测与服务器连接状态计时器
                     std::shared_ptr<net::AcceptHeartbeat> ht = std::make_shared<net::AcceptHeartbeat>(
-                        apnewfd, timeval { apnewfd->heart_second(), 0L });
-                    utils::Singleton<net::TimerReactorMgr>::instance().add(ht);
-                    apnewfd->set_heart(ht);
+                        apnewfd, timeval { apnewfd->check_second(), 0L });
+                    int id = utils::Singleton<net::TimerReactorMgr>::instance().add(ht);
+                    apnewfd->set_check_timeid(id);
                 }
             }
         } while (true);

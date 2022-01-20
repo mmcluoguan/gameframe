@@ -34,9 +34,8 @@ int LuaTimerMgr::LuaTimerTask::run(thread::Thread* tif)
 }
 
 LuaTimerMgr::LuaTimer::LuaTimer(const timeval val, bool repeat, std::string funname)
-    : net::TimerEvent(val, EV_TIMEOUT | EV_PERSIST)
+    : net::TimerEvent(val, repeat ? EV_TIMEOUT | EV_PERSIST : EV_TIMEOUT)
 {
-    repeat_ = repeat;
     funname_ = funname;
 }
 
@@ -44,9 +43,6 @@ void LuaTimerMgr::LuaTimer::timeout()
 {
     std::shared_ptr<LuaTimerTask> task = std::make_shared<LuaTimerTask>(timerid());
     shynet::utils::Singleton<shynet::lua::LuaEngine>::instance().append(task);
-    if (repeat_ == false) {
-        shynet::utils::Singleton<net::TimerReactorMgr>::instance().remove(timerid());
-    }
 }
 int LuaTimerMgr::add(const timeval val, bool repeat, std::string funname)
 {

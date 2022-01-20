@@ -3,39 +3,40 @@
 
 #include "shynet/net/ipaddress.h"
 #include "shynet/net/timerevent.h"
+#include "shynet/protocol/filterproces.h"
 
 namespace frmpub {
 /**
- * @brief ·şÎñÆ÷Á¬½ÓÆ÷
+ * @brief æœåŠ¡å™¨è¿æ¥å™¨
 */
 class Connector;
 /**
- * @brief ¿Í»§¶ËÓë·şÎñÆ÷ĞÄÌø¼ÆÊ±´¦ÀíÆ÷
+ * @brief å®¢æˆ·ç«¯ä¸æœåŠ¡å™¨å¿ƒè·³è®¡æ—¶å¤„ç†å™¨
 */
 class PingTimer : public net::TimerEvent {
 public:
     /**
-     * @brief ¹¹Ôì
-     * @param val ³¬Ê±Ïà¶ÔÊ±¼äÖµ
-     * @param connector ·şÎñÆ÷Á¬½ÓÆ÷
+     * @brief æ„é€ 
+     * @param val è¶…æ—¶ç›¸å¯¹æ—¶é—´å€¼
+     * @param connector åè®®è¿‡æ»¤å™¨
     */
     PingTimer(const struct timeval val,
-        Connector* connector);
+        shynet::protocol::FilterProces* filter);
     ~PingTimer() = default;
     /**
-    * @brief ¼ÆÊ±Æ÷³¬Ê±ºó,ÔÚ¹¤×÷Ïß³ÌÖĞ´¦Àí³¬Ê±»Øµ÷
+    * @brief è®¡æ—¶å™¨è¶…æ—¶å,åœ¨å·¥ä½œçº¿ç¨‹ä¸­å¤„ç†è¶…æ—¶å›è°ƒ
     */
     void timeout() override;
     /**
-     * @brief Çå³ı¹ØÁªµÄ·şÎñÆ÷Á¬½ÓÆ÷
+     * @brief æ¸…é™¤å…³è”çš„åè®®è¿‡æ»¤å™¨
     */
-    void clean_connector()
+    void clean_filter()
     {
-        connector_ = nullptr;
+        filter_ = nullptr;
     }
 
 private:
-    Connector* connector_;
+    shynet::protocol::FilterProces* filter_;
 };
 }
 

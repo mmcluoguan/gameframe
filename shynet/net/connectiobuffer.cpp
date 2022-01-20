@@ -1,4 +1,5 @@
 #include "shynet/net/connectiobuffer.h"
+#include "shynet/net/connectheartbeat.h"
 #include "shynet/net/timerreactormgr.h"
 #include "shynet/pool/threadpool.h"
 #include "shynet/task/connectreadiotask.h"
@@ -54,6 +55,11 @@ namespace net {
     {
         std::shared_ptr<ConnectEvent> shconector = cnev_.lock();
         if (shconector != nullptr) {
+            if (shconector->enable_check()) {
+                //延迟检测与服务器连接状态的计时处理器时间
+                auto heart = utils::Singleton<TimerReactorMgr>::instance().find(shconector->check_timeid());
+                heart->set_val({ shconector->check_second(), 0L });
+            }
             std::shared_ptr<task::ConnectReadIoTask> io
                 = std::make_shared<task::ConnectReadIoTask>(shconector);
             utils::Singleton<pool::ThreadPool>::instance().appendwork(fd(), io);
@@ -76,12 +82,13 @@ namespace net {
         std::shared_ptr<ConnectEvent> shconector = cnev_.lock();
         if (shconector != nullptr) {
             if (events & BEV_EVENT_CONNECTED) {
-                if (shconector->enable_heart()) {
+                if (shconector->enable_check()) {
+                    //设置检测与服务器连接状态计时处理器
                     std::shared_ptr<ConnectHeartbeat> ht
                         = std::make_shared<ConnectHeartbeat>(
-                            shconector, timeval { shconector->heart_second(), 0L });
-                    utils::Singleton<TimerReactorMgr>::instance().add(ht);
-                    shconector->set_heart(ht);
+                            shconector, timeval { shconector->check_second(), 0L });
+                    int id = utils::Singleton<TimerReactorMgr>::instance().add(ht);
+                    shconector->set_check_timeid(id);
                 }
                 shconector->success();
             } else if (events & BEV_EVENT_EOF) {

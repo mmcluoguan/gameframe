@@ -2,7 +2,6 @@
 #define SHYNET_NET_CONNECTEVENT_H
 
 #include "shynet/events/eventhandler.h"
-#include "shynet/net/connectheartbeat.h"
 #include "shynet/net/ipaddress.h"
 #include "shynet/protocol/filterproces.h"
 #include <event2/dns.h>
@@ -21,13 +20,13 @@ namespace net {
          * @param connect_addr 需要连接的服务器地址
          * @param pt 协议类型
          * @param enable_ssl 是否启用ssl
-         * @param enableHeart 是否启用验证服务器心跳
-         * @param heartSecond 心跳包检测秒数
+         * @param enable_check 是否启用检测与服务器连接状态
+         * @param check_second 检测秒数
         */
         ConnectEvent(std::shared_ptr<net::IPAddress> connect_addr,
             FilterProces::ProtoType pt,
             bool enable_ssl = false,
-            bool enableHeart = true, ssize_t heartSecond = 5);
+            bool enable_check = true, ssize_t check_second = 5);
 
         /**
          * @brief 构造
@@ -35,13 +34,13 @@ namespace net {
          * @param port 端口
          * @param pt 协议类型
          * @param enable_ssl 是否启用ssl
-         * @param enableHeart 是否启用验证服务器心跳
-         * @param heartSecond 心跳包检测秒数
+         * @param enableHeart 是否启用检测与服务器连接状态
+         * @param heartSecond 检测秒数
         */
         ConnectEvent(const char* hostname, short port,
             FilterProces::ProtoType pt,
             bool enable_ssl = false,
-            bool enableHeart = true, ssize_t heartSecond = 5);
+            bool enable_check = true, ssize_t check_second = 5);
         ~ConnectEvent();
 
         /**
@@ -94,21 +93,21 @@ namespace net {
         */
         virtual void close(CloseType active) = 0;
         /**
-         * @brief 心跳包检测到服务器超时回调
+         * @brief 检测到与服务器没有心跳超时回调
          * @param active 断开原因 TIMEOUT_CLOSE
         */
         virtual void timerout(CloseType active) = 0;
 
         /**
-         * @brief 获取是否检测客户端心跳
-         * @return 是否检测客户端心跳
+         * @brief 获取是否启用检测与服务器连接状态
+         * @return 是否启用检测与服务器连接状态
         */
-        bool enable_heart() const;
+        bool enable_check() const;
         /**
-         * @brief 获取心跳包间隔时间(单位秒)
-         * @return 心跳包间隔时间(单位秒)
+         * @brief 获取检测秒数
+         * @return 检测秒数
         */
-        ssize_t heart_second() const;
+        ssize_t check_second() const;
 
         /**
          * @brief 获取socket文件描述符
@@ -120,15 +119,15 @@ namespace net {
         }
 
         /**
-         * @brief 获取心跳包计时器
-         * @return 心跳包计时器
+         * @brief 获取检测与服务器连接状态计时器id
+         * @return 检测与服务器连接状态计时器id
         */
-        std::weak_ptr<ConnectHeartbeat> heart() const;
+        int check_timeid() const;
         /**
-         * @brief 设置心跳包计时器
-         * @param heart 心跳包计时器
+         * @brief 设置检测与服务器连接状态计时器id
+         * @param heart 检测与服务器连接状态计时器id
         */
-        void set_heart(std::weak_ptr<ConnectHeartbeat> ht);
+        void set_check_timeid(int ht);
 
         /**
          * @brief 获取端口
@@ -170,17 +169,17 @@ namespace net {
         */
         int conectid_ = -1;
         /**
-         * @brief 是否检测客户端心跳
+         * @brief 是否检测与服务器连接状态
         */
-        bool enable_heart_ = true;
+        bool enable_check_ = true;
         /**
-         * @brief 心跳包间隔时间(单位秒)
+         * @brief 检测秒数
         */
-        ssize_t heart_second_ = 5;
+        ssize_t check_second_ = 5;
         /**
-         * @brief 客户端检测服务器心跳包超时处理器
+         * @brief 客户端检测与服务器连接状态超时处理器id
         */
-        std::weak_ptr<ConnectHeartbeat> heart_;
+        int check_timeid_;
         /**
          * @brief dns对象
         */

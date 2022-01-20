@@ -5,6 +5,7 @@
 #include "shynet/events/eventhandler.h"
 #include "shynet/io/stdinhandler.h"
 #include "shynet/net/ipaddress.h"
+#include "shynet/net/timerreactormgr.h"
 #include "shynet/signal/signalhandler.h"
 #include "shynet/utils/filepathop.h"
 #include "shynet/utils/idworker.h"

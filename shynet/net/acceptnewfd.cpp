@@ -7,13 +7,13 @@ namespace net {
         std::shared_ptr<IPAddress> listenAddr,
         std::shared_ptr<events::EventBuffer> iobuf,
         FilterProces::ProtoType pt,
-        bool enableHeart, ssize_t heartSecond)
+        bool enable_check, ssize_t check_second)
         : FilterProces(iobuf, pt, FilterProces::Identity::ACCEPTOR)
     {
         remote_addr_ = remoteAddr;
         listen_addr_ = listenAddr;
-        enable_heart_ = enableHeart;
-        heart_second_ = heartSecond;
+        enable_check_ = enable_check;
+        check_second_ = check_second;
     }
 
     InputResult AcceptNewFd::input()
@@ -31,24 +31,24 @@ namespace net {
         return listen_addr_;
     }
 
-    bool AcceptNewFd::enableHeart() const
+    bool AcceptNewFd::enable_check() const
     {
-        return enable_heart_;
+        return enable_check_;
     }
 
-    ssize_t AcceptNewFd::heart_second() const
+    ssize_t AcceptNewFd::check_second() const
     {
-        return heart_second_;
+        return check_second_;
     }
 
-    std::weak_ptr<AcceptHeartbeat> AcceptNewFd::heart() const
+    int AcceptNewFd::check_timeid() const
     {
-        return heart_;
+        return check_timeid_;
     }
 
-    void AcceptNewFd::set_heart(std::weak_ptr<AcceptHeartbeat> heart)
+    void AcceptNewFd::set_check_timeid(int heart)
     {
-        heart_ = heart;
+        check_timeid_ = heart;
     }
 
 }
