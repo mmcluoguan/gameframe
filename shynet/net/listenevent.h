@@ -17,9 +17,12 @@ namespace net {
         /**
          * @brief 构造
          * @param listen_addr 侦听的服务器地址
+         * @param type SOCK_STREAM,SOCK_DGRAM
          * @param enable_ssl 是否启用ssl
         */
-        ListenEvent(std::shared_ptr<net::IPAddress> listen_addr, bool enable_ssl = false);
+        ListenEvent(std::shared_ptr<net::IPAddress> listen_addr,
+            __socket_type type = SOCK_STREAM,
+            bool enable_ssl = false);
         ~ListenEvent();
 
         /**
@@ -36,35 +39,27 @@ namespace net {
          * @brief 获取侦听的服务器地址
          * @return 侦听的服务器地址
         */
-        std::shared_ptr<net::IPAddress> listenaddr() const
-        {
-            return listen_addr_;
-        }
+        std::shared_ptr<net::IPAddress> listenaddr() const { return listen_addr_; }
         /**
          * @brief 获取侦听的服务器socket文件描述符
          * @return 侦听的服务器socket文件描述符
         */
-        int listenfd() const
-        {
-            return listenfd_;
-        }
+        int listenfd() const { return listenfd_; }
         /**
          * @brief 获取是否启用ssl
          * @return 是否启用ssl
         */
-        bool enable_ssl() const
-        {
-            return enable_ssl_;
-        }
+        bool enable_ssl() const { return enable_ssl_; }
         /**
          * @brief 获取ssl上下文
          * @return ssl上下文
         */
-        SSL_CTX* ctx() const
-        {
-            return ctx_;
-        }
-
+        SSL_CTX* ctx() const { return ctx_; }
+        /**
+         * @brief 获取socket类型 SOCK_STREAM,SOCK_DGRAM
+         * @return SOCK_STREAM,SOCK_DGRAM
+        */
+        __socket_type type() const { return type_; };
         /**
          * @brief 侦听的服务器地址准备完成回调
          * @param listenfd socket文件描述符
@@ -99,6 +94,15 @@ namespace net {
 
     private:
         /**
+         * @brief 初始化tcp
+        */
+        void init_tcp();
+        /**
+         * @brief 初始化udp
+        */
+        void init_udp();
+
+        /**
          * @brief 指向自己的指针
         */
         ListenEvent* self = nullptr;
@@ -110,6 +114,10 @@ namespace net {
          * @brief 侦听的服务器地址
         */
         int serverid_ = -1;
+        /**
+         * @brief SOCK_STREAM,SOCK_DGRAM
+        */
+        __socket_type type_;
         /**
          * @brief 侦听的服务器地址
         */

@@ -54,6 +54,11 @@ namespace net {
          * @return ipv4,ipv6结构 
         */
         const sockaddr_storage* sockaddr() const { return &addrs_; }
+        /**
+         * @brief 获取地址长度
+         * @return 地址长度
+        */
+        socklen_t socketlen() const { return sizeof(addrs_); };
 
     private:
         /**

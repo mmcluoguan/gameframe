@@ -7,6 +7,7 @@
 #include "shynet/thread/listenthread.h"
 #include "shynet/thread/luathread.h"
 #include "shynet/thread/timerthread.h"
+#include "shynet/thread/udpthread.h"
 #include "shynet/thread/workthread.h"
 #include "shynet/utils/singleton.h"
 #include <functional>
@@ -255,6 +256,15 @@ namespace pool {
             return notifyTh_;
         }
 
+        /**
+         * @brief 获取udp逻辑线程
+         * @return udp逻辑线程
+        */
+        std::weak_ptr<thread::UdpThread> udpTh() const
+        {
+            return udpTh_;
+        }
+
     private:
         /**
          * @brief 服务器接收新连接线程数量
@@ -309,6 +319,10 @@ namespace pool {
 		* 目录监控线程
 		*/
         std::weak_ptr<thread::InotifyThread> notifyTh_;
+        /**
+         * @brief udp逻辑线程
+        */
+        std::weak_ptr<thread::UdpThread> udpTh_;
     };
 }
 }

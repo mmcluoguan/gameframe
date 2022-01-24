@@ -2,63 +2,72 @@
 #define SHYNET_THREAD_ACCEPTTHREAD_H
 
 #include "shynet/events/eventbuffer.h"
+#include "shynet/net/listenevent.h"
 #include "shynet/thread/thread.h"
 
 namespace shynet {
 namespace thread {
     /**
-     * @brief ·şÎñÆ÷½ÓÊÕ¿Í»§¶ËÊı¾İÏß³Ì
+     * @brief æœåŠ¡å™¨æ¥æ”¶å®¢æˆ·ç«¯æ•°æ®çº¿ç¨‹
     */
     class AcceptThread : public Thread {
     public:
         /**
-         * @brief ¹¹Ôì
-         * @param index Ïß³ÌÔÚÏß³Ì³ØÖĞµÄË÷Òı 
+         * @brief æ„é€ 
+         * @param index çº¿ç¨‹åœ¨çº¿ç¨‹æ± ä¸­çš„ç´¢å¼• 
         */
         explicit AcceptThread(size_t index);
         ~AcceptThread() = default;
 
         /**
-         * @brief »ñÈ¡ÀÛ¼Æ½ÓÊÕ¿Í»§¶ËÁ¬½ÓÊıÁ¿
-         * @return ÀÛ¼Æ½ÓÊÕ¿Í»§¶ËÁ¬½ÓÊıÁ¿
+         * @brief è·å–ç´¯è®¡æ¥æ”¶å®¢æˆ·ç«¯è¿æ¥æ•°é‡
+         * @return ç´¯è®¡æ¥æ”¶å®¢æˆ·ç«¯è¿æ¥æ•°é‡
         */
         int event_tot() const { return eventTot_; }
 
         /**
-         * @brief Ïß³ÌÔËĞĞ»Øµ÷
-         * @return 0³É¹¦ -1Ê§°Ü
+         * @brief çº¿ç¨‹è¿è¡Œå›è°ƒ
+         * @return 0æˆåŠŸ -1å¤±è´¥
         */
         int run() override;
         /**
-         * @brief °²È«ÖÕÖ¹Ïß³Ì
-         * @return 0³É¹¦ -1Ê§°Ü
+         * @brief å®‰å…¨ç»ˆæ­¢çº¿ç¨‹
+         * @return 0æˆåŠŸ -1å¤±è´¥
         */
         int stop() override;
 
         /**
-         * @brief Í¨Öª·şÎñÆ÷½ÓÊÕ¿Í»§¶ËÊı¾İÏß³Ì½ÓÊÕĞÂµÄÁ¬½Ó
-         * @param data Êı¾İÎª ListenEvent*
-         * @param len Êı¾İ³¤¶È
+         * @brief é€šçŸ¥æœåŠ¡å™¨æ¥æ”¶å®¢æˆ·ç«¯æ•°æ®çº¿ç¨‹æ¥æ”¶æ–°çš„è¿æ¥
+         * @param data æ•°æ®ä¸º ListenEvent*
+         * @param len æ•°æ®é•¿åº¦
         */
         int notify(const void* data, size_t len) const;
 
         /**
-         * @brief ´¦ÀíÍ¨ÖªÀ´µÄĞÅÏ¢
-         * @param bev Í¨ÖªÀ´µÄĞÅÏ¢
+         * @brief å¤„ç†é€šçŸ¥æ¥çš„ä¿¡æ¯
+         * @param bev é€šçŸ¥æ¥çš„ä¿¡æ¯
         */
         void process(struct bufferevent* bev);
 
     private:
         /**
-         * @brief ½ÓÊÕÍ¨ÖªµÄ¹ÜµÀ
+         * @brief tcpæ¡æ‰‹
+        */
+        void tcp_accept(net::ListenEvent* apnf);
+        /**
+         * @brief udpæ¡æ‰‹
+        */
+        void udp_accept(net::ListenEvent* apnf);
+        /**
+         * @brief æ¥æ”¶é€šçŸ¥çš„ç®¡é“
         */
         std::shared_ptr<events::EventBuffer> pair_[2] = { 0 };
         /**
-         * @brief ·´Ó¦Æ÷
+         * @brief ååº”å™¨
         */
         std::shared_ptr<events::EventBase> base_ = nullptr;
         /**
-         * @brief ÀÛ¼Æ½ÓÊÕ¿Í»§¶ËÁ¬½ÓÊıÁ¿
+         * @brief ç´¯è®¡æ¥æ”¶å®¢æˆ·ç«¯è¿æ¥æ•°é‡
         */
         int eventTot_ = 0;
     };

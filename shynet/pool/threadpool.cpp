@@ -100,6 +100,13 @@ namespace pool {
                 tifs_.push_back(shnotify);
                 LOG_TRACE << "InotifyThread start [" << i << "]:" << std::hash<std::thread::id>()(id);
 
+                i++;
+                std::shared_ptr<thread::UdpThread> udp = std::make_shared<thread::UdpThread>(i);
+                udpTh_ = udp;
+                id = udp->start()->get_id();
+                tifs_.push_back(udp);
+                LOG_TRACE << "UdpThread start [" << i << "]:" << std::hash<std::thread::id>()(id);
+
                 //等待ListenThread,ConnectThread,TimerThread,LuaThread,InotifyThread准备完成
                 pthread_barrier_wait(&g_barrier);
             });

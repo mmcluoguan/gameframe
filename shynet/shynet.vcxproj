@@ -215,6 +215,7 @@
     <ClInclude Include="pool\threadpool.h" />
     <ClInclude Include="protocol\filterproces.h" />
     <ClInclude Include="protocol\http.h" />
+    <ClInclude Include="protocol\ikcp.h" />
     <ClInclude Include="protocol\request.h" />
     <ClInclude Include="protocol\responses.h" />
     <ClInclude Include="protocol\tcpip.h" />
@@ -231,6 +232,7 @@
     <ClInclude Include="thread\luathread.h" />
     <ClInclude Include="thread\thread.h" />
     <ClInclude Include="thread\timerthread.h" />
+    <ClInclude Include="thread\udpthread.h" />
     <ClInclude Include="thread\workthread.h" />
     <ClInclude Include="utils\databuffer.h" />
     <ClInclude Include="utils\elapsed.h" />
@@ -277,6 +279,7 @@
     <ClCompile Include="pool\threadpool.cpp" />
     <ClCompile Include="protocol\filterproces.cpp" />
     <ClCompile Include="protocol\http.cpp" />
+    <ClCompile Include="protocol\ikcp.c" />
     <ClCompile Include="protocol\request.cpp" />
     <ClCompile Include="protocol\responses.cpp" />
     <ClCompile Include="protocol\tcpip.cpp" />
@@ -293,6 +296,7 @@
     <ClCompile Include="thread\luathread.cpp" />
     <ClCompile Include="thread\thread.cpp" />
     <ClCompile Include="thread\timerthread.cpp" />
+    <ClCompile Include="thread\udpthread.cpp" />
     <ClCompile Include="thread\workthread.cpp" />
     <ClCompile Include="utils\filepathop.cpp" />
     <ClCompile Include="utils\idworker.cpp" />

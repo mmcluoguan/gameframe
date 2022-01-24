@@ -2,52 +2,64 @@
 #define SHYNET_THREAD_CONNECTTHREAD_H
 
 #include "shynet/events/eventbuffer.h"
+#include "shynet/net/connectevent.h"
 #include "shynet/thread/thread.h"
 
 namespace shynet {
 namespace thread {
     /**
-     * @brief Á¬½Ó·şÎñÆ÷Ïß³Ì
+     * @brief è¿æ¥æœåŠ¡å™¨çº¿ç¨‹
     */
     class ConnectThread : public Thread {
     public:
         /**
-         * @brief ¹¹Ôì
-         * @param index Ïß³ÌÔÚÏß³Ì³ØÖĞµÄË÷Òı
+         * @brief æ„é€ 
+         * @param index çº¿ç¨‹åœ¨çº¿ç¨‹æ± ä¸­çš„ç´¢å¼•
         */
         explicit ConnectThread(size_t index);
         ~ConnectThread() = default;
 
         /**
-         * @brief Ïß³ÌÔËĞĞ»Øµ÷
-         * @return 0³É¹¦ -1Ê§°Ü
+         * @brief çº¿ç¨‹è¿è¡Œå›è°ƒ
+         * @return 0æˆåŠŸ -1å¤±è´¥
         */
         int run() override;
         /**
-         * @brief °²È«ÖÕÖ¹Ïß³Ì
-         * @return 0³É¹¦ -1Ê§°Ü
+         * @brief å®‰å…¨ç»ˆæ­¢çº¿ç¨‹
+         * @return 0æˆåŠŸ -1å¤±è´¥
         */
         int stop() override;
         /**
-         * @brief Í¨ÖªÁ¬½Ó·şÎñÆ÷Ïß³Ì½ÓÊÕĞÂµÄÁ¬½Ó
-         * @param data ¿Í»§¶ËidµÄµØÖ·
-         * @param len ¿Í»§¶ËidµØÖ·´óĞ¡
+         * @brief é€šçŸ¥è¿æ¥æœåŠ¡å™¨çº¿ç¨‹æ¥æ”¶æ–°çš„è¿æ¥
+         * @param data å®¢æˆ·ç«¯idçš„åœ°å€
+         * @param len å®¢æˆ·ç«¯idåœ°å€å¤§å°
         */
         int notify(const void* data, size_t len) const;
 
         /**
-         * @brief ´¦ÀíÍ¨ÖªÀ´µÄĞÅÏ¢
-         * @param bev Í¨ÖªÀ´µÄĞÅÏ¢
+         * @brief å¤„ç†é€šçŸ¥æ¥çš„ä¿¡æ¯
+         * @param bev é€šçŸ¥æ¥çš„ä¿¡æ¯
         */
         void process(struct bufferevent* bev);
 
     private:
         /**
-         * @brief ½ÓÊÕÍ¨ÖªµÄ¹ÜµÀ
+         * @brief å¼€å§‹tcpè¿æ¥
+         * @param connect æ¥æ”¶æœåŠ¡å™¨æ•°æ®å¤„ç†å™¨
+        */
+        void tcp_connect(std::shared_ptr<net::ConnectEvent> connect);
+        /**
+         * @brief å¼€å§‹udpè¿æ¥
+         * @param connect æ¥æ”¶æœåŠ¡å™¨æ•°æ®å¤„ç†å™¨
+        */
+        void udp_connect(std::shared_ptr<net::ConnectEvent> connect);
+
+        /**
+         * @brief æ¥æ”¶é€šçŸ¥çš„ç®¡é“
         */
         std::shared_ptr<events::EventBuffer> pair_[2] = { 0 };
         /**
-         * @brief ·´Ó¦Æ÷
+         * @brief ååº”å™¨
         */
         std::shared_ptr<events::EventBase> base_ = nullptr;
     };

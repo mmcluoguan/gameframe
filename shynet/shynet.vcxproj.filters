@@ -157,6 +157,12 @@
     <ClCompile Include="signal\signalhandler.cpp">
       <Filter>signal</Filter>
     </ClCompile>
+    <ClCompile Include="thread\udpthread.cpp">
+      <Filter>thread</Filter>
+    </ClCompile>
+    <ClCompile Include="protocol\ikcp.c">
+      <Filter>protocol</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="basic.h" />
@@ -357,6 +363,12 @@
     </ClInclude>
     <ClInclude Include="utils\elapsed.h">
       <Filter>utils</Filter>
+    </ClInclude>
+    <ClInclude Include="thread\udpthread.h">
+      <Filter>thread</Filter>
+    </ClInclude>
+    <ClInclude Include="protocol\ikcp.h">
+      <Filter>protocol</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

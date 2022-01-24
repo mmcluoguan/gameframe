@@ -33,7 +33,7 @@ namespace protocol {
         */
         enum class ProtoType {
             /**
-             * @brief 自定义协议 {/r/n + uint32 + len}
+             * @brief 自定义协议 {/r/n + char + uint32 + len}
             */
             SHY,
             /**

@@ -42,7 +42,12 @@ namespace thread {
             /**
              * @brief 目录监控线程
             */
-            INOTIFY
+            INOTIFY,
+            /**
+             * @brief udp逻辑线程
+            */
+            UDP
+
         };
 
         /**

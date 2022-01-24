@@ -1,7 +1,6 @@
 #include "shynet/thread/acceptthread.h"
 #include "shynet/net/acceptheartbeat.h"
 #include "shynet/net/acceptiobuffer.h"
-#include "shynet/net/listenevent.h"
 #include "shynet/utils/logger.h"
 #include "shynet/utils/stuff.h"
 
@@ -36,41 +35,53 @@ namespace thread {
             } else {
                 uintptr_t* p = reinterpret_cast<uintptr_t*>(buf);
                 net::ListenEvent* apnf = reinterpret_cast<net::ListenEvent*>(*p);
-
-                struct sockaddr_storage cliaddr;
-                memset(&cliaddr, 0, sizeof(cliaddr));
-                socklen_t socklen = sizeof(cliaddr);
-
-                int newfd = accept(apnf->listenfd(), (struct sockaddr*)&cliaddr, &socklen);
-                if (newfd < 0) {
-                    return;
-                }
-                if (evutil_make_socket_nonblocking(apnf->listenfd()) < 0) {
-                    evutil_closesocket(newfd);
-                    THROW_EXCEPTION("call evutil_make_socket_nonblocking");
-                }
-                eventTot_++;
-                std::shared_ptr<net::IPAddress> newfdAddr = std::make_shared<net::IPAddress>(&cliaddr);
-                LOG_TRACE << "accept newfd ip:" << newfdAddr->ip() << " port:" << newfdAddr->port();
-                std::shared_ptr<net::AcceptIoBuffer> iobuf;
-                if (apnf->enable_ssl()) {
-                    iobuf = std::make_shared<net::AcceptIoBuffer>(
-                        base_, newfd, true, apnf->ctx());
+                if (apnf->type() == SOCK_STREAM) {
+                    tcp_accept(apnf);
                 } else {
-                    iobuf = std::make_shared<net::AcceptIoBuffer>(
-                        base_, newfd, false);
-                }
-                std::shared_ptr<net::AcceptNewFd> apnewfd = apnf->accept_newfd(newfdAddr, iobuf).lock();
-                iobuf->set_newfd(apnewfd);
-                if (apnewfd->enable_check()) {
-                    //设置检测与服务器连接状态计时器
-                    std::shared_ptr<net::AcceptHeartbeat> ht = std::make_shared<net::AcceptHeartbeat>(
-                        apnewfd, timeval { apnewfd->check_second(), 0L });
-                    int id = utils::Singleton<net::TimerReactorMgr>::instance().add(ht);
-                    apnewfd->set_check_timeid(id);
+                    udp_accept(apnf);
                 }
             }
         } while (true);
+    }
+
+    void AcceptThread::tcp_accept(net::ListenEvent* apnf)
+    {
+        struct sockaddr_storage cliaddr;
+        memset(&cliaddr, 0, sizeof(cliaddr));
+        socklen_t socklen = sizeof(cliaddr);
+
+        int newfd = accept(apnf->listenfd(), (struct sockaddr*)&cliaddr, &socklen);
+        if (newfd < 0) {
+            return;
+        }
+        if (evutil_make_socket_nonblocking(apnf->listenfd()) < 0) {
+            evutil_closesocket(newfd);
+            THROW_EXCEPTION("call evutil_make_socket_nonblocking");
+        }
+        eventTot_++;
+        std::shared_ptr<net::IPAddress> newfdAddr = std::make_shared<net::IPAddress>(&cliaddr);
+        LOG_TRACE << "accept newfd ip:" << newfdAddr->ip() << " port:" << newfdAddr->port();
+        std::shared_ptr<net::AcceptIoBuffer> iobuf;
+        if (apnf->enable_ssl()) {
+            iobuf = std::make_shared<net::AcceptIoBuffer>(
+                base_, newfd, true, apnf->ctx());
+        } else {
+            iobuf = std::make_shared<net::AcceptIoBuffer>(
+                base_, newfd, false);
+        }
+        std::shared_ptr<net::AcceptNewFd> apnewfd = apnf->accept_newfd(newfdAddr, iobuf).lock();
+        iobuf->set_newfd(apnewfd);
+        if (apnewfd->enable_check()) {
+            //设置检测与服务器连接状态计时器
+            std::shared_ptr<net::AcceptHeartbeat> ht = std::make_shared<net::AcceptHeartbeat>(
+                apnewfd, timeval { apnewfd->check_second(), 0L });
+            int id = utils::Singleton<net::TimerReactorMgr>::instance().add(ht);
+            apnewfd->set_check_timeid(id);
+        }
+    }
+
+    void AcceptThread::udp_accept(net::ListenEvent* apnf)
+    {
     }
 
     int AcceptThread::run()

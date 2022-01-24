@@ -1,6 +1,7 @@
 #include "shynet/thread/connectthread.h"
 #include "shynet/net/connectiobuffer.h"
 #include "shynet/net/connectreactormgr.h"
+#include "shynet/pool/threadpool.h"
 #include "shynet/utils/logger.h"
 #include "shynet/utils/stuff.h"
 
@@ -40,35 +41,52 @@ namespace thread {
 
                 std::shared_ptr<net::ConnectEvent> connect = utils::Singleton<net::ConnectReactorMgr>::instance().find(connectid);
                 if (connect != nullptr) {
-                    struct sockaddr* address = (struct sockaddr*)connect->connect_addr()->sockaddr();
-
-                    std::shared_ptr<net::ConnectIoBuffer> buffer;
-                    if (connect->enable_ssl()) {
-                        buffer = std::make_shared<net::ConnectIoBuffer>(base_, true, connect->ctx());
+                    if (connect->type() == SOCK_STREAM) {
+                        tcp_connect(connect);
                     } else {
-                        buffer = std::make_shared<net::ConnectIoBuffer>(base_, false);
-                    }
-                    buffer->set_cnev(connect);
-                    connect->set_iobuf(buffer);
-                    if (connect->dnsport() != 0) {
-                        evdns_base* dnsbase = evdns_base_new(base_->base(), 1);
-                        if (dnsbase == nullptr) {
-                            THROW_EXCEPTION("call connect_hostname")
-                        }
-                        connect->set_dnsbase(dnsbase);
-                        if (bufferevent_socket_connect_hostname(buffer->buffer(), dnsbase, AF_UNSPEC,
-                                connect->hostname().c_str(), connect->dnsport())
-                            == -1) {
-                            THROW_EXCEPTION("call bufferevent_socket_connect_hostname")
-                        }
-                    } else {
-                        if (bufferevent_socket_connect(buffer->buffer(), address, sizeof(sockaddr_storage)) == -1) {
-                            THROW_EXCEPTION("call bufferevent_socket_connect")
-                        }
+                        udp_connect(connect);
                     }
                 }
             }
         } while (true);
+    }
+
+    void ConnectThread::tcp_connect(std::shared_ptr<net::ConnectEvent> connect)
+    {
+        struct sockaddr* address = (struct sockaddr*)connect->connect_addr()->sockaddr();
+
+        std::shared_ptr<net::ConnectIoBuffer> buffer;
+        if (connect->enable_ssl()) {
+            buffer = std::make_shared<net::ConnectIoBuffer>(base_, true, connect->ctx());
+        } else {
+            buffer = std::make_shared<net::ConnectIoBuffer>(base_, false);
+        }
+        buffer->set_cnev(connect);
+        connect->set_iobuf(buffer);
+        if (connect->dnsport() != 0) {
+            evdns_base* dnsbase = evdns_base_new(base_->base(), 1);
+            if (dnsbase == nullptr) {
+                THROW_EXCEPTION("call connect_hostname")
+            }
+            connect->set_dnsbase(dnsbase);
+            if (bufferevent_socket_connect_hostname(buffer->buffer(), dnsbase, AF_UNSPEC,
+                    connect->hostname().c_str(), connect->dnsport())
+                == -1) {
+                THROW_EXCEPTION("call bufferevent_socket_connect_hostname")
+            }
+        } else {
+            if (bufferevent_socket_connect(buffer->buffer(), address, sizeof(sockaddr_storage)) == -1) {
+                THROW_EXCEPTION("call bufferevent_socket_connect")
+            }
+        }
+    }
+
+    void ConnectThread::udp_connect(std::shared_ptr<net::ConnectEvent> connect)
+    {
+        auto udpth = utils::Singleton<pool::ThreadPool>::instance().udpTh().lock();
+        if (udpth) {
+            udpth->add(connect->connectid(), connect->connect_addr().get());
+        }
     }
 
     int ConnectThread::run()

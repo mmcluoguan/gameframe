@@ -2,21 +2,21 @@
 #include "shynet/utils/logger.h"
 
 namespace shynet {
-extern pthread_barrier_t g_barrier;
-
 namespace net {
 
     ConnectEvent::ConnectEvent(std::shared_ptr<net::IPAddress> connect_addr,
         FilterProces::ProtoType pt,
+        __socket_type type,
         bool enable_ssl,
         bool enable_check, ssize_t check_second)
         : protocol::FilterProces(nullptr, pt, protocol::FilterProces::Identity::CONNECTOR)
     {
         connect_addr_ = connect_addr;
+        type_ = type;
         enable_ssl_ = enable_ssl;
         check_second_ = check_second;
         enable_check_ = enable_check;
-        if (enable_ssl_) {
+        if (enable_ssl_ && type_ == SOCK_STREAM) {
             ctx_ = SSL_CTX_new(SSLv23_client_method());
             if (ctx_ == nullptr) {
                 THROW_EXCEPTION("call SSL_CTX_new");
@@ -26,15 +26,17 @@ namespace net {
 
     ConnectEvent::ConnectEvent(const char* hostname, short port,
         FilterProces::ProtoType pt,
+        __socket_type type,
         bool enable_ssl, bool enable_check, ssize_t check_second)
         : protocol::FilterProces(nullptr, pt, protocol::FilterProces::Identity::CONNECTOR)
     {
         hostname_ = hostname;
         dnsport_ = port;
+        type_ = type;
         enable_ssl_ = enable_ssl;
         enable_check_ = enable_check;
         check_second_ = check_second;
-        if (enable_ssl_) {
+        if (enable_ssl_ && type_ == SOCK_STREAM) {
             ctx_ = SSL_CTX_new(SSLv23_client_method());
             if (ctx_ == nullptr) {
                 THROW_EXCEPTION("call SSL_CTX_new");

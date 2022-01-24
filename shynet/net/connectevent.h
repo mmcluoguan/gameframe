@@ -19,12 +19,14 @@ namespace net {
          * @brief 构造
          * @param connect_addr 需要连接的服务器地址
          * @param pt 协议类型
+         * @param type SOCK_STREAM,SOCK_DGRAM
          * @param enable_ssl 是否启用ssl
          * @param enable_check 是否启用检测与服务器连接状态
          * @param check_second 检测秒数
         */
         ConnectEvent(std::shared_ptr<net::IPAddress> connect_addr,
             FilterProces::ProtoType pt,
+            __socket_type type = SOCK_STREAM,
             bool enable_ssl = false,
             bool enable_check = true, ssize_t check_second = 5);
 
@@ -33,12 +35,14 @@ namespace net {
          * @param hostname 服务器主机名
          * @param port 端口
          * @param pt 协议类型
+         * @param type SOCK_STREAM,SOCK_DGRAM
          * @param enable_ssl 是否启用ssl
          * @param enableHeart 是否启用检测与服务器连接状态
          * @param heartSecond 检测秒数
         */
         ConnectEvent(const char* hostname, short port,
             FilterProces::ProtoType pt,
+            __socket_type type = SOCK_STREAM,
             bool enable_ssl = false,
             bool enable_check = true, ssize_t check_second = 5);
         ~ConnectEvent();
@@ -53,7 +57,11 @@ namespace net {
          * @param id 服务器数据处理器id
         */
         void connectid(int id);
-
+        /**
+         * @brief 获取socket类型 SOCK_STREAM,SOCK_DGRAM
+         * @return SOCK_STREAM,SOCK_DGRAM
+        */
+        __socket_type type() const { return type_; };
         /*
 		* 获取连接的服务器地址
         * @return 连接的服务器地址
@@ -168,6 +176,10 @@ namespace net {
          * @brief 服务器数据处理器id
         */
         int conectid_ = -1;
+        /**
+         * @brief SOCK_STREAM,SOCK_DGRAM
+        */
+        __socket_type type_;
         /**
          * @brief 是否检测与服务器连接状态
         */
