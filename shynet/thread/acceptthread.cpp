@@ -106,9 +106,10 @@ namespace thread {
                     if (sock == nullptr) {
                         //处理不可靠消息
                         if (buffer[0] == (char)protocol::UdpMessageDefine::ID_ATTEMPT_CONNECT) {
-                            net::IPAddressHash iphash;
-                            uint32_t guid = static_cast<uint32_t>(iphash(ipaddr));
-                            std::cout << "ID_ATTEMPT_CONNECT:" << guid << std::endl;
+                            auto now = std::chrono::steady_clock::now().time_since_epoch().count();
+                            uint32_t guid = (uint32_t)shynet::utils::hash_val(ipaddr.ip(), ipaddr.port(), now);
+                            //uint32_t guid = static_cast<uint32_t>(iphash(ipaddr));
+                            //std::cout << "ID_ATTEMPT_CONNECT:" << guid << std::endl;
                             //udp_new_connect_fd++;
                             char msg[MAXIMUM_MTU_SIZE] { 0 };
                             msg[0] = (char)protocol::UdpMessageDefine::ID_ATTEMPT_CONNECT_ACK;
@@ -137,8 +138,6 @@ namespace thread {
                             }
                         }
                     } else {
-                        //std::cout << " AcceptThread::udp_accept111 guid:" << sock->guid()
-                        //          << " ret:" << ret << std::endl;
                         if (buffer[0] == (char)protocol::UdpMessageDefine::ID_CLOSE) {
                             uint32_t guid;
                             memcpy(&guid, buffer + sizeof(char), sizeof(guid));

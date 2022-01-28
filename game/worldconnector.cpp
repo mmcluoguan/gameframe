@@ -14,7 +14,7 @@ extern const char* g_conf_node;
 
 namespace game {
 WorldConnector::WorldConnector(std::shared_ptr<net::IPAddress> connect_addr)
-    : frmpub::Connector(connect_addr, "WorldConnector", SOCK_DGRAM)
+    : frmpub::Connector(connect_addr, "WorldConnector")
 {
     pmb_ = {
         { protocc::ERRCODE,

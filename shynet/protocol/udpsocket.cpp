@@ -14,8 +14,9 @@ namespace protocol {
         UdpSocket* udp = (UdpSocket*)ctx;
         if (udp) {
             ssize_t ret = udp->sendto(data, size);
-            std::cout << udp->kcp() << " sendto:" << udp->guid()
-                      << " ret:" << ret << std::endl;
+            (void)ret;
+            //std::cout << " sendto:" << udp->guid()
+            //          << " ret:" << ret << std::endl;
         }
         return 0;
     }
@@ -67,7 +68,6 @@ namespace protocol {
         int32_t id = htonl(guid_);
         memcpy(msg + sizeof(char), &id, sizeof(id));
         sendto(msg, MAXIMUM_MTU_SIZE);
-        //LOG_DEBUG << "ID_CLOSE";
     }
 
     void UdpSocket::init_pair_buffer(std::shared_ptr<events::EventBase> base)
@@ -89,6 +89,8 @@ namespace protocol {
     int UdpSocket::send(const char* data, size_t size)
     {
         int ret = ikcp_send(kcp_, data, static_cast<int>(size));
+        (void)ret;
+        ikcp_flush(kcp_);
         //std::cout << kcp_ << " ikcp_send:" << guid()
         //          << " s1:" << size << " s2:" << ret << std::endl;
         return ret;
@@ -107,16 +109,16 @@ namespace protocol {
 
         size_t buflen = recv_buffer_length_ + size;
         std::unique_ptr<char[]> complete_data(new char[buflen]);
+        //std::cout << "recv:" << buflen
+        //         << " recv_buffer_length_:" << recv_buffer_length_ << std::endl;
         int ret = ikcp_recv(kcp_, complete_data.get(), int(buflen));
         if (ret > 0) {
-            std::cout << " ikcp_recv:" << guid() << " ret:" << ret << std::endl;
+            //std::cout << " ikcp_recv:" << guid() << " ret:" << ret << std::endl;
             recv_buffer_length_ = 0;
             input_buffer->write(complete_data.get(), ret);
         } else {
-            //if (ret == 3) {
             recv_buffer_length_ += size;
-            //}
-            std::cout << " ikcp_recv:" << guid() << " ret:" << ret << std::endl;
+            //std::cout << " ikcp_recv:" << guid() << " ret:" << ret << std::endl;
         }
         return ret;
     }

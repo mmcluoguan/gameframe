@@ -4,7 +4,7 @@
 
 namespace logs {
 LogServer::LogServer(std::shared_ptr<net::IPAddress> listen_addr)
-    : net::ListenEvent(listen_addr, SOCK_DGRAM)
+    : net::ListenEvent(listen_addr)
 {
     LOG_INFO << "服务器log启动 [ip:" << listen_addr->ip() << ":" << listen_addr->port() << "]";
     shynet::utils::Singleton<LogClientMgr>::instance().set_listen_addr(*listenaddr());

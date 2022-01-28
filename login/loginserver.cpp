@@ -5,7 +5,7 @@
 
 namespace login {
 LoginServer::LoginServer(std::shared_ptr<net::IPAddress> listen_addr)
-    : net::ListenEvent(listen_addr, SOCK_DGRAM)
+    : net::ListenEvent(listen_addr)
 {
     LOG_INFO << "服务器login启动 [ip:" << listen_addr->ip() << ":" << listen_addr->port() << "]";
     shynet::utils::Singleton<LoginClientMgr>::instance().set_listen_addr(*listenaddr());

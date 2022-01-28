@@ -5,7 +5,7 @@
 
 namespace game {
 GameServer::GameServer(std::shared_ptr<net::IPAddress> listen_addr)
-    : net::ListenEvent(listen_addr, SOCK_DGRAM)
+    : net::ListenEvent(listen_addr)
 {
     LOG_INFO << "服务器game启动 [ip:" << listen_addr->ip() << ":" << listen_addr->port() << "]";
     shynet::utils::Singleton<GameClientMgr>::instance().set_listen_addr(*listenaddr());

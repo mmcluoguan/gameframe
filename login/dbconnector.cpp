@@ -15,7 +15,7 @@ extern const char* g_conf_node;
 
 namespace login {
 DbConnector::DbConnector(std::shared_ptr<net::IPAddress> connect_addr)
-    : frmpub::Connector(connect_addr, "DbConnector", SOCK_DGRAM)
+    : frmpub::Connector(connect_addr, "DbConnector")
 {
     pmb_ = {
         { protocc::ERRCODE,
@@ -73,7 +73,6 @@ void DbConnector::complete()
             [&](auto data, auto enves) -> int {
                 return register_login_dbvisit_s(data, enves);
             } });
-    LOG_DEBUG << "发送:REGISTER_LOGIN_DBVISIT_C";
 }
 
 int DbConnector::default_handle(std::shared_ptr<protocc::CommonObject> obj,

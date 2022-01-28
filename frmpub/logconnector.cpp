@@ -4,7 +4,7 @@
 
 namespace frmpub {
 LogConnector::LogConnector(std::shared_ptr<net::IPAddress> connect_addr)
-    : frmpub::Connector(connect_addr, "LogConnector", SOCK_DGRAM)
+    : frmpub::Connector(connect_addr, "LogConnector")
 {
     pmb_ = {
         { protocc::ERRCODE,

@@ -10,7 +10,7 @@
 namespace client {
 GateConnector::GateConnector(std::shared_ptr<net::IPAddress> connect_addr,
     std::shared_ptr<DisConnectData> disconnect)
-    : frmpub::Connector(connect_addr, "GateConnector", SOCK_DGRAM, false, false, 5L, shynet::protocol::FilterProces::ProtoType::WEBSOCKET)
+    : frmpub::Connector(connect_addr, "GateConnector", SOCK_STREAM, false, false, 5L, shynet::protocol::FilterProces::ProtoType::WEBSOCKET)
 {
     disconnect_ = disconnect;
     if (disconnect_ != nullptr) {

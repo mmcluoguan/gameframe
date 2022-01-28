@@ -90,10 +90,11 @@ function gameClient:loadrole_client_gate_c(msgid,msgdata,routing)
     local role = RoleMgr:find(msgtable.roleid)
     if role ~= nil then
         --在本地内存中获取
-        log("在本地内存中获取角色数据 roleid:",role.id)
+        log("在本地内存中获取角色数据 roleid:",role.id, " clientfd:",clientfd)
         role:copyrouting(routing)
         assert(routing:size() ~= 0,'loadrole_client_gate_c 没有路由信息');
         role:loaddata_complete(self.id,clientfd)
+        RoleMgr.cfd[role.clientfd] = role
         self:send("loadrole_client_gate_s",role:client_roledata(),routing)
     else
         --转发消息到db获取角色数据
@@ -108,6 +109,7 @@ function gameClient:loadrole_client_gate_c(msgid,msgdata,routing)
             opertype = 0,
             fields = roleObj:init_fields(),
         };
+        log('转发消息到db获取角色数据')
         ConnectorMgr:dbConnector():loaddata_one(roledata,routing,
             function (complete_msgdata,complete_routing)
                 --从db加载角色数据结果                
@@ -140,7 +142,7 @@ function gameClient:loadgoods_client_gate_c(msgid,msgdata,routing)
     assert(routing:size() ~= 0,'loadgoods_client_gate_c 没有路由信息');
     local clientfd = routing:top():fd()
     local role = RoleMgr:findby_clientfd(clientfd)
-    assert(role,'角色不存在,必须先获取角色基础数据')
+    assert(role,'角色不存在,必须先获取角色基础数据 clientfd:'.. clientfd)
     if Get_Tablekey_Size(role.goods) ~= 0 then
         --在本地内存中获取
         log("在本地内存中获取角色物品数据 roleid:",role.id)
@@ -152,7 +154,7 @@ function gameClient:loadgoods_client_gate_c(msgid,msgdata,routing)
         end
         self:send("loadgoods_client_gate_s",{ goods = goodsdata },routing)
     else
-        --转发消息到db获取角色数据
+        --转发消息到db获取角色物品数据
         local enve = Envelope_CPP.new()
         enve:fd(self.id)
         enve:addr(self.cpp_socket:remote_addr())
@@ -169,6 +171,7 @@ function gameClient:loadgoods_client_gate_c(msgid,msgdata,routing)
                 {key = 'num', value = '',},
             },
         }
+        log('转发消息到db获取角色物品数据')
         ConnectorMgr:dbConnector():loaddata_more(goodsdata,routing,
             function (complete_msgdata,complete_routing)
                 --从db加载角色物品数据结果
@@ -214,6 +217,7 @@ function gameClient:clioffline_gate_all_c(msgid,msgdata,routing)
     local msgtable = pb.decode("frmpub.protocc.clioffline_gate_all_c", msgdata)
     local role = RoleMgr:findby_accountid(msgtable.aid)
     if role ~= nil then
+        RoleMgr.cfd[role.clientfd] = nil
         --延迟10s销毁角色数据
         log('角色下线,延迟10s销毁角色数据 roleid:',role.id)
         role.online = false;

@@ -3,7 +3,6 @@
 #include <event2/util.h>
 
 namespace shynet {
-extern pthread_barrier_t g_barrier;
 namespace thread {
     UdpThread::UdpThread(size_t index)
         : Thread(ThreadType::UDP, index)

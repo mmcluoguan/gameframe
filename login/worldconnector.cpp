@@ -14,7 +14,7 @@ extern const char* g_conf_node;
 
 namespace login {
 WorldConnector::WorldConnector(std::shared_ptr<net::IPAddress> connect_addr)
-    : frmpub::Connector(connect_addr, "WorldConnector", SOCK_DGRAM)
+    : frmpub::Connector(connect_addr, "WorldConnector")
 {
     pmb_ = {
         { protocc::ERRCODE,
@@ -64,7 +64,6 @@ void WorldConnector::complete()
     std::string name = ini.get<std::string>(g_conf_node, "name");
     sif->set_name(name);
     send_proto(protocc::REGISTER_LOGIN_WORLD_C, &msgc);
-    LOG_DEBUG << "发送:REGISTER_LOGIN_WORLD_C";
 }
 int WorldConnector::default_handle(std::shared_ptr<protocc::CommonObject> obj, std::shared_ptr<std::stack<FilterData::Envelope>> enves)
 {

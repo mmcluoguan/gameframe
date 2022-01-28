@@ -299,7 +299,7 @@ int DbClient::loaddata_more_from_dbvisit_c(std::shared_ptr<protocc::CommonObject
                 msgs.set_result(1);
             }
             msgs.set_tag(msgc.tag());
-            LOG_DEBUG << "LOADDATA_FROM_DBVISIT_S大小:" << msgs.SerializeAsString().length();
+            LOG_DEBUG << "loaddata_more_from_dbvisit_c:" << msgs.SerializeAsString().length();
             send_proto(protocc::LOADDATA_MORE_FROM_DBVISIT_S, &msgs, enves.get());
             LOG_DEBUG << "发送消息" << frmpub::Basic::msgname(protocc::LOADDATA_MORE_FROM_DBVISIT_S) << "到"
                       << frmpub::Basic::connectname(sif().st())

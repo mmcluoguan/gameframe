@@ -6,6 +6,7 @@
 #include "shynet/net/ipaddress.h"
 #include "shynet/protocol/filterproces.h"
 #include "shynet/protocol/ikcp.h"
+#include <mutex>
 
 namespace shynet {
 namespace net {
