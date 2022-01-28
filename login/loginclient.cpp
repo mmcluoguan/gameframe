@@ -81,6 +81,7 @@ int LoginClient::register_gate_login_c(std::shared_ptr<protocc::CommonObject> da
         protocc::register_gate_login_s msgs;
         msgs.set_result(0);
         send_proto(protocc::REGISTER_GATE_LOGIN_S, &msgs);
+        LOG_DEBUG << "发送:REGISTER_GATE_LOGIN_S";
     } else {
         std::stringstream stream;
         stream << "消息" << frmpub::Basic::msgname(data->msgid()) << "解析错误";

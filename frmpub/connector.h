@@ -15,6 +15,7 @@ public:
      * @brief 
      * @param connect_addr 需要连接的服务器地址
      * @param name 连接器名称
+     * @param type SOCK_STREAM SOCK_DGRAM
      * @param enable_ssl 是否启用ssl
      * @param enable_ping 是否发送心跳
      * @param heartSecond 发送心跳时间间隔(s)
@@ -23,6 +24,7 @@ public:
     */
     Connector(std::shared_ptr<net::IPAddress> connect_addr,
         std::string name = "Connector",
+        __socket_type type = SOCK_STREAM,
         bool enable_ssl = false,
         bool enable_ping = false,
         ssize_t heartSecond = 3,

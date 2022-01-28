@@ -14,7 +14,7 @@ extern const char* g_conf_node;
 
 namespace game {
 WorldConnector::WorldConnector(std::shared_ptr<net::IPAddress> connect_addr)
-    : frmpub::Connector(connect_addr, "WorldConnector")
+    : frmpub::Connector(connect_addr, "WorldConnector", SOCK_DGRAM)
 {
     pmb_ = {
         { protocc::ERRCODE,
@@ -61,7 +61,11 @@ void WorldConnector::complete()
     sif->set_sid(sid);
     std::string name = ini.get<std::string>(g_conf_node, "name");
     sif->set_name(name);
-    send_proto(protocc::REGISTER_GAME_WORLD_C, &msgc);
+    send_proto({ protocc::REGISTER_GAME_WORLD_C, &msgc },
+        { protocc::REGISTER_GAME_WORLD_S,
+            [&](auto data, auto enves) -> int {
+                return 0;
+            } });
 }
 
 int WorldConnector::default_handle(std::shared_ptr<protocc::CommonObject> obj, std::shared_ptr<std::stack<FilterData::Envelope>> enves)

@@ -5,7 +5,7 @@
 
 namespace world {
 WorldServer::WorldServer(std::shared_ptr<net::IPAddress> listen_addr)
-    : net::ListenEvent(listen_addr)
+    : net::ListenEvent(listen_addr, SOCK_DGRAM)
 {
     LOG_INFO << "服务器world启动 [ip:" << listen_addr->ip() << ":" << listen_addr->port() << "]";
     shynet::utils::Singleton<WorldClientMgr>::instance().set_listen_addr(*listenaddr());

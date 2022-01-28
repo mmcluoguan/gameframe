@@ -13,7 +13,7 @@ namespace net {
             std::lock_guard<std::mutex> lock(cnt_mutex_);
             connectid++;
             cnts_.insert({ connectid, v });
-            v->connectid(connectid);
+            v->set_connectid(connectid);
         }
         notify(&connectid, sizeof(connectid));
         return connectid;

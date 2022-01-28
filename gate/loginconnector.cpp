@@ -14,7 +14,7 @@ extern const char* g_conf_node;
 
 namespace gate {
 LoginConnector::LoginConnector(std::shared_ptr<net::IPAddress> connect_addr)
-    : frmpub::Connector(connect_addr, "LoginConnector")
+    : frmpub::Connector(connect_addr, "LoginConnector", SOCK_DGRAM)
 {
     pmb_ = {
         { protocc::ERRCODE,

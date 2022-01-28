@@ -4,7 +4,7 @@
 
 namespace logs {
 LogServer::LogServer(std::shared_ptr<net::IPAddress> listen_addr)
-    : net::ListenEvent(listen_addr)
+    : net::ListenEvent(listen_addr, SOCK_DGRAM)
 {
     LOG_INFO << "服务器log启动 [ip:" << listen_addr->ip() << ":" << listen_addr->port() << "]";
     shynet::utils::Singleton<LogClientMgr>::instance().set_listen_addr(*listenaddr());
@@ -21,7 +21,6 @@ std::weak_ptr<net::AcceptNewFd> LogServer::accept_newfd(
 {
     std::shared_ptr<LogClient> cli(new LogClient(remote_addr, listenaddr(), iobuf));
     shynet::utils::Singleton<LogClientMgr>::instance().add(iobuf->fd(), cli);
-
     return cli;
 }
 }

@@ -58,6 +58,9 @@ namespace events {
 
     evutil_socket_t EventHandler::fd() const
     {
+        if (event_ == nullptr) {
+            THROW_EXCEPTION("event 不存在");
+        }
         return event_get_fd(event_);
     }
 
@@ -68,6 +71,9 @@ namespace events {
 
     short EventHandler::what() const
     {
+        if (event_ == nullptr) {
+            THROW_EXCEPTION("event 不存在");
+        }
         return event_get_events(event_);
     }
 }

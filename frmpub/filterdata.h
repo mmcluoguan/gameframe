@@ -334,8 +334,7 @@ protected:
     /**
      * @brief proto消息id与处理函数映射hash表
     */
-    std::unordered_map<int, ProtoMsgBind>
-        pmb_;
+    std::unordered_map<int, ProtoMsgBind> pmb_;
 
     std::mutex jmbmut_;
     /**

@@ -4,6 +4,7 @@
 #include "shynet/events/eventhandler.h"
 #include "shynet/net/ipaddress.h"
 #include "shynet/protocol/filterproces.h"
+#include "shynet/protocol/udpsocket.h"
 #include <event2/dns.h>
 #include <openssl/err.h>
 #include <openssl/ssl.h>
@@ -56,7 +57,7 @@ namespace net {
          * @brief 设置服务器数据处理器id
          * @param id 服务器数据处理器id
         */
-        void connectid(int id);
+        void set_connectid(int id);
         /**
          * @brief 获取socket类型 SOCK_STREAM,SOCK_DGRAM
          * @return SOCK_STREAM,SOCK_DGRAM
@@ -82,6 +83,11 @@ namespace net {
          * @brief 连接成功回调
         */
         virtual void success();
+        /**
+         * @brief EV_READ回调，可以读数据回调,udp专用
+         * @param fd 文件描述符
+        */
+        void input(int fd) override;
         /**
          * @brief socket数据已经保存到管理io缓冲,可以读取回调
          * @return 返回SUCCESS正常没有操作,
@@ -121,10 +127,7 @@ namespace net {
          * @brief 获取socket文件描述符
          * @return socket文件描述符
         */
-        int fd() const
-        {
-            return iobuf()->fd();
-        }
+        uint32_t fd() const;
 
         /**
          * @brief 获取检测与服务器连接状态计时器id
@@ -158,6 +161,16 @@ namespace net {
          * @param base dns对象 
         */
         void set_dnsbase(evdns_base* base) { dnsbase_ = base; };
+        /**
+         * @brief 获取udpsocket
+         * @return udpsocket
+        */
+        std::shared_ptr<protocol::UdpSocket> udpsock() const { return udpsocket_; };
+        /**
+         * @brief 设置udpsocket
+         * @param udp udpsocket
+        */
+        void set_udpsock(std::shared_ptr<protocol::UdpSocket> udp) { udpsocket_ = udp; };
 
     private:
         /**
@@ -204,6 +217,10 @@ namespace net {
          * @brief 连接的主机名
         */
         std::string hostname_;
+        /**
+         * @brief udpsocket
+        */
+        std::shared_ptr<protocol::UdpSocket> udpsocket_;
     };
 
 }

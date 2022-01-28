@@ -72,6 +72,7 @@ int GameClient::register_gate_game_c(std::shared_ptr<protocc::CommonObject> data
         protocc::register_gate_game_s msgs;
         msgs.set_result(0);
         send_proto(protocc::REGISTER_GATE_GAME_S, &msgs);
+        LOG_DEBUG << "发送:REGISTER_GATE_GAME_S";
     } else {
         std::stringstream stream;
         stream << "消息" << frmpub::Basic::msgname(data->msgid()) << "解析错误";

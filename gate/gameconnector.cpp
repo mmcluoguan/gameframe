@@ -14,7 +14,7 @@ extern const char* g_conf_node;
 
 namespace gate {
 GameConnector::GameConnector(std::shared_ptr<net::IPAddress> connect_addr)
-    : frmpub::Connector(connect_addr, "GameConnector")
+    : frmpub::Connector(connect_addr, "GameConnector", SOCK_DGRAM)
 {
 
     pmb_ = {

@@ -5,7 +5,7 @@
 
 namespace world {
 HttpServer::HttpServer(std::shared_ptr<net::IPAddress> listen_addr)
-    : net::ListenEvent(listen_addr, false)
+    : net::ListenEvent(listen_addr, SOCK_DGRAM)
 {
     LOG_INFO << "服务器http启动 [ip:" << listen_addr->ip() << ":" << listen_addr->port() << "]";
     shynet::utils::Singleton<HttpClientMgr>::instance().set_listen_addr(*listenaddr());

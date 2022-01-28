@@ -4,6 +4,7 @@
 #include "shynet/events/eventbuffer.h"
 #include "shynet/net/ipaddress.h"
 #include "shynet/protocol/filterproces.h"
+#include "shynet/protocol/udpsocket.h"
 
 namespace shynet {
 namespace net {
@@ -77,7 +78,7 @@ namespace net {
          * @brief 获取socket文件描述符
          * @return socket文件描述符
         */
-        int fd() const { return iobuf()->fd(); }
+        uint32_t fd() const { return iobuf()->fd(); }
 
         /**
          * @brief 获取检测与客户端连接状态计时器id
@@ -89,6 +90,16 @@ namespace net {
          * @param heart 检测与客户端连接状态计时器id
         */
         void set_check_timeid(int heart);
+        /**
+         * @brief 获取udpsocket
+         * @return udpsocket
+        */
+        std::shared_ptr<protocol::UdpSocket> udpsock() const { return udpsocket_; };
+        /**
+         * @brief 设置udpsocket
+         * @param udp udpsocket
+        */
+        void set_udpsock(std::shared_ptr<protocol::UdpSocket> udp) { udpsocket_ = udp; };
 
     private:
         /**
@@ -111,6 +122,10 @@ namespace net {
          * @brief 服务器检测与客户端连接状态计时器id
         */
         int check_timeid_;
+        /**
+         * @brief udpsocket
+        */
+        std::shared_ptr<protocol::UdpSocket> udpsocket_;
     };
 
 }

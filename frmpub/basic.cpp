@@ -34,25 +34,26 @@ void set_loggather()
             static char processname[NAME_MAX] = { 0 };
             if (shynet::utils::Singleton<frmpub::LogConnectorMgr>::exist_instance()) {
                 std::shared_ptr<LogConnector> logger = shynet::utils::Singleton<frmpub::LogConnectorMgr>::instance().log_connector();
-                if (strlen(processname) == 0) {
-                    char path[PATH_MAX] = { 0 };
-                    shynet::utils::stuff::executable_path(path, processname, sizeof(path));
-                    char* processname_end = strrchr(processname, '.');
-                    if (processname != nullptr && processname_end != nullptr) {
-                        *processname_end = '\0';
+                if (logger) {
+                    if (strlen(processname) == 0) {
+                        char path[PATH_MAX] = { 0 };
+                        shynet::utils::stuff::executable_path(path, processname, sizeof(path));
+                        char* processname_end = strrchr(processname, '.');
+                        if (processname != nullptr && processname_end != nullptr) {
+                            *processname_end = '\0';
+                        }
                     }
+                    frmpub::protocc::writelog_to_log_c msgc;
+                    msgc.set_dirname(processname);
+                    msgc.set_logname(shynet::utils::Logger::logname());
+                    msgc.set_logdata(msg, len);
+                    logger->send_proto({ protocc::WRITELOG_TO_LOG_C, &msgc },
+                        { protocc::WRITELOG_TO_LOG_S,
+                            [&](auto data, auto enves) -> int {
+                                return 0;
+                            },
+                            timeval {} });
                 }
-                frmpub::protocc::writelog_to_log_c msgc;
-                msgc.set_dirname(processname);
-                msgc.set_logname(shynet::utils::Logger::logname());
-                msgc.set_logdata(msg, len);
-                logger->send_proto({ protocc::WRITELOG_TO_LOG_C, &msgc },
-                    { protocc::WRITELOG_TO_LOG_S,
-                        [&](auto data, auto enves) -> int {
-                            return 0;
-                        },
-                        timeval {} });
-
                 shynet::utils::Logger::print_cout(msg, len);
             }
         });

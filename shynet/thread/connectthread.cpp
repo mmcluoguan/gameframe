@@ -2,6 +2,7 @@
 #include "shynet/net/connectiobuffer.h"
 #include "shynet/net/connectreactormgr.h"
 #include "shynet/pool/threadpool.h"
+#include "shynet/protocol/udpsocket.h"
 #include "shynet/utils/logger.h"
 #include "shynet/utils/stuff.h"
 
@@ -85,7 +86,26 @@ namespace thread {
     {
         auto udpth = utils::Singleton<pool::ThreadPool>::instance().udpTh().lock();
         if (udpth) {
-            udpth->add(connect->connectid(), connect->connect_addr().get());
+            int fd = socket(connect->connect_addr()->family(), SOCK_DGRAM, IPPROTO_IP);
+            if (fd == -1) {
+                THROW_EXCEPTION("call socket");
+            }
+            if (evutil_make_socket_nonblocking(fd) < 0) {
+                evutil_closesocket(fd);
+                THROW_EXCEPTION("call evutil_make_socket_nonblocking");
+            }
+            if (evutil_make_socket_closeonexec(fd) < 0) {
+                evutil_closesocket(fd);
+                THROW_EXCEPTION("call evutil_make_socket_closeonexec");
+            }
+            connect->set_event(base_, fd, EV_READ | EV_PERSIST);
+            base_->addevent(connect, nullptr);
+            auto sock = std::make_shared<protocol::UdpSocket>(protocol::FilterProces::Identity::CONNECTOR);
+            sock->fd = fd;
+            sock->addr = *connect->connect_addr();
+            sock->cnev = connect;
+            connect->set_udpsock(sock);
+            udpth->add_waitconnect(sock);
         }
     }
 

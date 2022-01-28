@@ -5,55 +5,55 @@
     <RemoteDebuggerWorkingDirectory>$(RemoteRootDir)/bin</RemoteDebuggerWorkingDirectory>
     <DebuggerFlavor>LinuxDebugger</DebuggerFlavor>
     <RemoteDebuggingTarget>-2095721169;172.28.10.65 (username=, port=22, authentication=Password)</RemoteDebuggingTarget>
-    <RemoteDebuggerCommandArguments>dbvisit_account_master</RemoteDebuggerCommandArguments>
+    <RemoteDebuggerCommandArguments>dbvisit_game_master</RemoteDebuggerCommandArguments>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|ARM'">
     <RemoteTarget>-2095721169;172.28.10.65 (username=, port=22, authentication=Password)</RemoteTarget>
     <RemoteDebuggerWorkingDirectory>$(RemoteRootDir)/bin</RemoteDebuggerWorkingDirectory>
     <DebuggerFlavor>LinuxDebugger</DebuggerFlavor>
     <RemoteDebuggingTarget>-2095721169;172.28.10.65 (username=, port=22, authentication=Password)</RemoteDebuggingTarget>
-    <RemoteDebuggerCommandArguments>dbvisit_account_master</RemoteDebuggerCommandArguments>
+    <RemoteDebuggerCommandArguments>dbvisit_game_master</RemoteDebuggerCommandArguments>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|ARM64'">
     <RemoteTarget>-2095721169;172.28.10.65 (username=, port=22, authentication=Password)</RemoteTarget>
     <RemoteDebuggerWorkingDirectory>$(RemoteRootDir)/bin</RemoteDebuggerWorkingDirectory>
     <DebuggerFlavor>LinuxDebugger</DebuggerFlavor>
     <RemoteDebuggingTarget>-2095721169;172.28.10.65 (username=, port=22, authentication=Password)</RemoteDebuggingTarget>
-    <RemoteDebuggerCommandArguments>dbvisit_account_master</RemoteDebuggerCommandArguments>
+    <RemoteDebuggerCommandArguments>dbvisit_game_master</RemoteDebuggerCommandArguments>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|ARM64'">
     <RemoteTarget>-2095721169;172.28.10.65 (username=, port=22, authentication=Password)</RemoteTarget>
     <RemoteDebuggerWorkingDirectory>$(RemoteRootDir)/bin</RemoteDebuggerWorkingDirectory>
     <DebuggerFlavor>LinuxDebugger</DebuggerFlavor>
     <RemoteDebuggingTarget>-2095721169;172.28.10.65 (username=, port=22, authentication=Password)</RemoteDebuggingTarget>
-    <RemoteDebuggerCommandArguments>dbvisit_account_master</RemoteDebuggerCommandArguments>
+    <RemoteDebuggerCommandArguments>dbvisit_game_master</RemoteDebuggerCommandArguments>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <RemoteTarget>-2095721169;172.28.10.65 (username=, port=22, authentication=Password)</RemoteTarget>
     <RemoteDebuggerWorkingDirectory>$(RemoteRootDir)/bin</RemoteDebuggerWorkingDirectory>
     <DebuggerFlavor>LinuxDebugger</DebuggerFlavor>
     <RemoteDebuggingTarget>-2095721169;172.28.10.65 (username=, port=22, authentication=Password)</RemoteDebuggingTarget>
-    <RemoteDebuggerCommandArguments>dbvisit_account_master</RemoteDebuggerCommandArguments>
+    <RemoteDebuggerCommandArguments>dbvisit_game_master</RemoteDebuggerCommandArguments>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <RemoteTarget>-2095721169;172.28.10.65 (username=, port=22, authentication=Password)</RemoteTarget>
     <RemoteDebuggerWorkingDirectory>$(RemoteRootDir)/bin</RemoteDebuggerWorkingDirectory>
     <DebuggerFlavor>LinuxDebugger</DebuggerFlavor>
     <RemoteDebuggingTarget>-2095721169;172.28.10.65 (username=, port=22, authentication=Password)</RemoteDebuggingTarget>
-    <RemoteDebuggerCommandArguments>dbvisit_account_master</RemoteDebuggerCommandArguments>
+    <RemoteDebuggerCommandArguments>dbvisit_game_master</RemoteDebuggerCommandArguments>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x86'">
     <RemoteTarget>-2095721169;172.28.10.65 (username=, port=22, authentication=Password)</RemoteTarget>
     <RemoteDebuggerWorkingDirectory>$(RemoteRootDir)/bin</RemoteDebuggerWorkingDirectory>
     <DebuggerFlavor>LinuxDebugger</DebuggerFlavor>
     <RemoteDebuggingTarget>-2095721169;172.28.10.65 (username=, port=22, authentication=Password)</RemoteDebuggingTarget>
-    <RemoteDebuggerCommandArguments>dbvisit_account_master</RemoteDebuggerCommandArguments>
+    <RemoteDebuggerCommandArguments>dbvisit_game_master</RemoteDebuggerCommandArguments>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x86'">
     <RemoteTarget>-2095721169;172.28.10.65 (username=, port=22, authentication=Password)</RemoteTarget>
     <RemoteDebuggerWorkingDirectory>$(RemoteRootDir)/bin</RemoteDebuggerWorkingDirectory>
     <DebuggerFlavor>LinuxDebugger</DebuggerFlavor>
     <RemoteDebuggingTarget>-2095721169;172.28.10.65 (username=, port=22, authentication=Password)</RemoteDebuggingTarget>
-    <RemoteDebuggerCommandArguments>dbvisit_account_master</RemoteDebuggerCommandArguments>
+    <RemoteDebuggerCommandArguments>dbvisit_game_master</RemoteDebuggerCommandArguments>
   </PropertyGroup>
 </Project>

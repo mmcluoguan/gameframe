@@ -6,6 +6,7 @@ namespace events {
     EventBuffer::EventBuffer(std::shared_ptr<EventBase> base, evutil_socket_t fd, int options)
     {
         base_ = base;
+        fd_ = fd;
         buffer_ = bufferevent_socket_new(base->base(), fd, options);
         if (buffer_ == nullptr) {
             THROW_EXCEPTION("call bufferevent_socket_new");
@@ -41,9 +42,14 @@ namespace events {
         buffer_ = buffer;
         delflag_ = false;
     }
-    int EventBuffer::fd() const
+
+    uint32_t EventBuffer::fd() const
     {
-        return bufferevent_getfd(buffer_);
+        int id = bufferevent_getfd(buffer_);
+        if (id == -1) {
+            return fd_;
+        }
+        return static_cast<uint32_t>(id);
     }
     void EventBuffer::enabled(short what) const
     {

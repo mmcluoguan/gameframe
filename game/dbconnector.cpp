@@ -15,7 +15,7 @@ extern const char* g_conf_node;
 
 namespace game {
 DbConnector::DbConnector(std::shared_ptr<net::IPAddress> connect_addr)
-    : frmpub::Connector(connect_addr, "DbConnector")
+    : frmpub::Connector(connect_addr, "DbConnector", SOCK_DGRAM)
 {
 
     pmb_ = {

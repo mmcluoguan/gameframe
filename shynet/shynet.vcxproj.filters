@@ -163,6 +163,9 @@
     <ClCompile Include="protocol\ikcp.c">
       <Filter>protocol</Filter>
     </ClCompile>
+    <ClCompile Include="protocol\udpsocket.cpp">
+      <Filter>protocol</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="basic.h" />
@@ -368,6 +371,9 @@
       <Filter>thread</Filter>
     </ClInclude>
     <ClInclude Include="protocol\ikcp.h">
+      <Filter>protocol</Filter>
+    </ClInclude>
+    <ClInclude Include="protocol\udpsocket.h">
       <Filter>protocol</Filter>
     </ClInclude>
   </ItemGroup>

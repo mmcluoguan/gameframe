@@ -9,7 +9,7 @@
 
 namespace admin_client {
 WorldConnector::WorldConnector(std::shared_ptr<net::IPAddress> connect_addr)
-    : frmpub::Connector(connect_addr, "WorldConnector", true, false, 5L, shynet::protocol::FilterProces::ProtoType::HTTP, frmpub::FilterData::ProtoData::JSON)
+    : frmpub::Connector(connect_addr, "WorldConnector", SOCK_DGRAM, true, false, 5L, shynet::protocol::FilterProces::ProtoType::HTTP, frmpub::FilterData::ProtoData::JSON)
 {
     jmb_ = {
         { int(protocc::ERRCODE),

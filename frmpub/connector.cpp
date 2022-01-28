@@ -5,12 +5,13 @@
 namespace frmpub {
 Connector::Connector(std::shared_ptr<net::IPAddress> connect_addr,
     std::string name,
+    __socket_type type,
     bool enable_ssl,
     bool enable_ping,
     ssize_t heartSecond,
     protocol::FilterProces::ProtoType pt,
     FilterData::ProtoData pd)
-    : net::ConnectEvent(connect_addr, pt, enable_ssl, false)
+    : net::ConnectEvent(connect_addr, pt, type, enable_ssl, false)
     , FilterData(pd)
 {
     name_ = name;

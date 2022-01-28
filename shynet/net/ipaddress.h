@@ -1,6 +1,7 @@
 #ifndef SHYNET_NET_IPADDRESS_H
 #define SHYNET_NET_IPADDRESS_H
 
+#include "shynet/utils/hash.h"
 #include <arpa/inet.h>
 #include <string>
 
@@ -53,12 +54,17 @@ namespace net {
          * @brief 获取ipv4,ipv6结构 
          * @return ipv4,ipv6结构 
         */
-        const sockaddr_storage* sockaddr() const { return &addrs_; }
+        sockaddr_storage* sockaddr() { return &addrs_; }
         /**
          * @brief 获取地址长度
          * @return 地址长度
         */
         socklen_t socketlen() const { return sizeof(addrs_); };
+
+        bool operator==(const IPAddress& p) const
+        {
+            return p.ip_ == ip_ && p.port_ == port_;
+        }
 
     private:
         /**
@@ -77,6 +83,14 @@ namespace net {
          * @brief 端口
         */
         unsigned short port_ = 0;
+    };
+
+    struct IPAddressHash {
+    public:
+        size_t operator()(const IPAddress& p) const
+        {
+            return shynet::utils::hash_val(p.ip(), p.port());
+        }
     };
 }
 }

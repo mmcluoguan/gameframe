@@ -219,6 +219,7 @@
     <ClInclude Include="protocol\request.h" />
     <ClInclude Include="protocol\responses.h" />
     <ClInclude Include="protocol\tcpip.h" />
+    <ClInclude Include="protocol\udpsocket.h" />
     <ClInclude Include="protocol\websocket.h" />
     <ClInclude Include="signal\signalhandler.h" />
     <ClInclude Include="task\acceptreadiotask.h" />
@@ -283,6 +284,7 @@
     <ClCompile Include="protocol\request.cpp" />
     <ClCompile Include="protocol\responses.cpp" />
     <ClCompile Include="protocol\tcpip.cpp" />
+    <ClCompile Include="protocol\udpsocket.cpp" />
     <ClCompile Include="protocol\websocket.cpp" />
     <ClCompile Include="signal\signalhandler.cpp" />
     <ClCompile Include="task\acceptreadiotask.cpp" />
@@ -316,7 +318,7 @@
       <AdditionalIncludeDirectories>$(SolutionDir)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>USE_DEBUG;JEMALLOC_NO_DEMANGLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <CppLanguageStandard>c++17</CppLanguageStandard>
-      <AdditionalOptions>-W"no-conversion" -W"no-stringop-truncation" -W"no-stringop-overflow"</AdditionalOptions>
+      <AdditionalOptions>-W"no-stringop-truncation" -W"no-stringop-overflow"</AdditionalOptions>
       <TreatWarningAsError>false</TreatWarningAsError>
       <UnrollLoops>true</UnrollLoops>
       <WarningLevel>EnableAllWarnings</WarningLevel>
@@ -333,7 +335,7 @@
       <AdditionalIncludeDirectories>$(SolutionDir)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>USE_DEBUG;JEMALLOC_NO_DEMANGLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <CppLanguageStandard>c++17</CppLanguageStandard>
-      <AdditionalOptions>-W"no-conversion" -W"no-stringop-truncation" -W"no-stringop-overflow"</AdditionalOptions>
+      <AdditionalOptions>-W"no-stringop-truncation" -W"no-stringop-overflow"</AdditionalOptions>
       <TreatWarningAsError>false</TreatWarningAsError>
       <UnrollLoops>true</UnrollLoops>
       <WarningLevel>EnableAllWarnings</WarningLevel>
@@ -350,7 +352,7 @@
       <AdditionalIncludeDirectories>$(SolutionDir)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>USE_DEBUG;JEMALLOC_NO_DEMANGLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <CppLanguageStandard>c++17</CppLanguageStandard>
-      <AdditionalOptions>-W"no-conversion" -W"no-stringop-truncation" -W"no-stringop-overflow"</AdditionalOptions>
+      <AdditionalOptions>-W"no-stringop-truncation" -W"no-stringop-overflow"</AdditionalOptions>
       <TreatWarningAsError>false</TreatWarningAsError>
       <UnrollLoops>true</UnrollLoops>
       <WarningLevel>EnableAllWarnings</WarningLevel>
@@ -367,7 +369,7 @@
       <AdditionalIncludeDirectories>$(SolutionDir)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>USE_DEBUG;JEMALLOC_NO_DEMANGLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <CppLanguageStandard>c++17</CppLanguageStandard>
-      <AdditionalOptions>-W"no-conversion" -W"no-stringop-truncation" -W"no-stringop-overflow"</AdditionalOptions>
+      <AdditionalOptions>-W"no-stringop-truncation" -W"no-stringop-overflow"</AdditionalOptions>
       <TreatWarningAsError>false</TreatWarningAsError>
       <UnrollLoops>true</UnrollLoops>
       <WarningLevel>EnableAllWarnings</WarningLevel>
@@ -378,7 +380,7 @@
       <AdditionalIncludeDirectories>$(SolutionDir)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>NDEBUG;JEMALLOC_NO_DEMANGLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <CppLanguageStandard>c++17</CppLanguageStandard>
-      <AdditionalOptions>-W"no-conversion" -W"no-stringop-truncation" -W"no-stringop-overflow"</AdditionalOptions>
+      <AdditionalOptions>-W"no-stringop-truncation" -W"no-stringop-overflow"</AdditionalOptions>
       <TreatWarningAsError>false</TreatWarningAsError>
       <UnrollLoops>true</UnrollLoops>
       <WarningLevel>EnableAllWarnings</WarningLevel>
@@ -395,7 +397,7 @@
       <AdditionalIncludeDirectories>$(SolutionDir)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>NDEBUG;JEMALLOC_NO_DEMANGLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <CppLanguageStandard>c++17</CppLanguageStandard>
-      <AdditionalOptions>-W"no-conversion" -W"no-stringop-truncation" -W"no-stringop-overflow"</AdditionalOptions>
+      <AdditionalOptions>-W"no-stringop-truncation" -W"no-stringop-overflow"</AdditionalOptions>
       <TreatWarningAsError>false</TreatWarningAsError>
       <UnrollLoops>true</UnrollLoops>
       <WarningLevel>EnableAllWarnings</WarningLevel>
@@ -412,7 +414,7 @@
       <AdditionalIncludeDirectories>$(SolutionDir)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>NDEBUG;JEMALLOC_NO_DEMANGLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <CppLanguageStandard>c++17</CppLanguageStandard>
-      <AdditionalOptions>-W"no-conversion" -W"no-stringop-truncation" -W"no-stringop-overflow"</AdditionalOptions>
+      <AdditionalOptions>-W"no-stringop-truncation" -W"no-stringop-overflow"</AdditionalOptions>
       <TreatWarningAsError>false</TreatWarningAsError>
       <UnrollLoops>true</UnrollLoops>
       <WarningLevel>EnableAllWarnings</WarningLevel>
@@ -429,7 +431,7 @@
       <AdditionalIncludeDirectories>$(SolutionDir)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>NDEBUG;JEMALLOC_NO_DEMANGLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <CppLanguageStandard>c++17</CppLanguageStandard>
-      <AdditionalOptions>-W"no-conversion" -W"no-stringop-truncation" -W"no-stringop-overflow"</AdditionalOptions>
+      <AdditionalOptions>-W"no-stringop-truncation" -W"no-stringop-overflow"</AdditionalOptions>
       <TreatWarningAsError>false</TreatWarningAsError>
       <UnrollLoops>true</UnrollLoops>
       <WarningLevel>EnableAllWarnings</WarningLevel>

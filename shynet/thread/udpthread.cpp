@@ -1,5 +1,5 @@
 #include "shynet/thread/udpthread.h"
-#include <atomic>
+#include "shynet/utils/logger.h"
 #include <event2/util.h>
 
 namespace shynet {
@@ -12,19 +12,76 @@ namespace thread {
 
     int UdpThread::run()
     {
-        std::atomic<int64_t> sleepms = 10;
+        int64_t sleepms = 10;
         auto start_time = std::chrono::steady_clock::now();
         while (!stop_) {
             std::this_thread::sleep_for(std::chrono::milliseconds(sleepms));
             auto elapsed = std::chrono::steady_clock::now() - start_time;
+            int64_t elapsed_num = std::chrono::duration_cast<std::chrono::milliseconds>(elapsed).count();
+            //处理待连接列表
             {
-                std::lock_guard<std::mutex> lock(waitconnect_map_mtx_);
-                for (auto&& [key, sock] : waitconnect_map_) {
-                    int64_t t = std::chrono::duration_cast<std::chrono::milliseconds>(elapsed).count();
-                    if (sock->next_request_time < t) {
-                        //发包
-                        sock->next_request_time = t + 500;
+                std::lock_guard<std::mutex> lock(waitconnect_list_mtx_);
+                auto iter = waitconnect_list_.begin();
+                while (iter != waitconnect_list_.end()) {
+                    std::shared_ptr<protocol::UdpSocket> sock = (*iter).lock();
+                    if (sock) {
+                        if (sock->next_request_time < elapsed_num) {
+                            if (sock->curr_request_num == sock->send_connection_attempt_count + 1
+                                || sock->st == protocol::UdpSocket::CONNECTSUCCESS) {
+                                if (sock->curr_request_num == sock->send_connection_attempt_count + 1) {
+                                    //尝试连接服务器失败
+                                    sock->st = protocol::UdpSocket::CONNECTFAIL;
+                                    auto cnt = sock->cnev.lock();
+                                    if (cnt)
+                                        cnt->close(net::CloseType::CONNECT_FAIL);
+                                }
+                                iter = waitconnect_list_.erase(iter);
+                                continue;
+                            } else {
+                                sock->next_request_time = elapsed_num + sock->next_requset_interval;
+                                sock->curr_request_num++;
+                                char msg[MAXIMUM_MTU_SIZE] { 0 };
+                                msg[0] = static_cast<char>(protocol::UdpMessageDefine::ID_ATTEMPT_CONNECT);
+                                sock->sendto(msg, MAXIMUM_MTU_SIZE);
+                            }
+                        }
+                    } else {
+                        iter = waitconnect_list_.erase(iter);
+                        continue;
                     }
+                    ++iter;
+                }
+            }
+            //处理已连接的udp连接
+            {
+                std::lock_guard<std::mutex> lock(connect_udp_mtx_);
+                auto iter = connect_udp_layer_.begin();
+                while (iter != connect_udp_layer_.end()) {
+                    std::shared_ptr<protocol::UdpSocket> sock = iter->second.lock();
+                    if (sock && sock->kcp()) {
+                        ikcp_update(sock->kcp(), static_cast<uint32_t>(elapsed_num));
+                        sleepms = ikcp_check(sock->kcp(), static_cast<uint32_t>(elapsed_num)) - elapsed_num;
+                    } else {
+                        iter = connect_udp_layer_.erase(iter);
+                        continue;
+                    }
+                    ++iter;
+                }
+            }
+            //处理连接udp服务器的client
+            {
+                std::lock_guard<std::mutex> lock(accept_udp_mtx_);
+                auto iter = accept_udp_layer_.begin();
+                while (iter != accept_udp_layer_.end()) {
+                    std::shared_ptr<protocol::UdpSocket> sock = iter->second.lock();
+                    if (sock && sock->kcp()) {
+                        ikcp_update(sock->kcp(), static_cast<uint32_t>(elapsed_num));
+                        sleepms = ikcp_check(sock->kcp(), static_cast<uint32_t>(elapsed_num)) - elapsed_num;
+                    } else {
+                        iter = accept_udp_layer_.erase(iter);
+                        continue;
+                    }
+                    ++iter;
                 }
             }
         }
@@ -36,58 +93,34 @@ namespace thread {
         return 0;
     }
 
-    void UdpThread::add(int32_t key, net::IPAddress* addr)
+    void UdpThread::add_waitconnect(std::weak_ptr<protocol::UdpSocket> sock)
     {
-        std::lock_guard<std::mutex> lock(waitconnect_map_mtx_);
-        if (waitconnect_map_.find(key) == waitconnect_map_.end()) {
-            waitconnect_map_.insert({ key, std::make_shared<UdpSocket>(key, addr) });
-        }
+        std::lock_guard<std::mutex> lock(waitconnect_list_mtx_);
+        waitconnect_list_.push_back(sock);
     }
 
-    int udp_output_client(const char* data, int size, ikcpcb* kcp, void* ctx)
+    void UdpThread::add_accept_udp(net::IPAddress& ip, std::weak_ptr<protocol::UdpSocket> sock)
     {
-        UdpThread::UdpSocket* udp = (UdpThread::UdpSocket*)ctx;
-        if (udp) {
-            udp->sendto(data, size);
-        }
-        return 0;
+        std::lock_guard<std::mutex> lock(accept_udp_mtx_);
+        if (accept_udp_layer_.find(ip) == accept_udp_layer_.end())
+            accept_udp_layer_.insert({ ip, sock });
     }
 
-    UdpThread::UdpSocket::UdpSocket(int32_t key, net::IPAddress* addr)
+    void UdpThread::add_connect_udp(int64_t guid, std::weak_ptr<protocol::UdpSocket> sock)
     {
-        key_ = key;
-        addr_ = *addr;
-        fd_ = socket(addr->family(), SOCK_DGRAM, IPPROTO_IP);
-        if (fd_ == -1) {
-            THROW_EXCEPTION("call socket");
-        }
-        if (evutil_make_socket_nonblocking(fd_) < 0) {
-            evutil_closesocket(fd_);
-            THROW_EXCEPTION("call evutil_make_socket_nonblocking");
-        }
-        if (evutil_make_socket_closeonexec(fd_) < 0) {
-            evutil_closesocket(fd_);
-            THROW_EXCEPTION("call evutil_make_socket_closeonexec");
-        }
-        kcp_ = ikcp_create(key, this);
-        kcp_->output = udp_output_client;
+        std::lock_guard<std::mutex> lock(connect_udp_mtx_);
+        if (connect_udp_layer_.find(guid) == connect_udp_layer_.end())
+            connect_udp_layer_.insert({ guid, sock });
     }
-    UdpThread::UdpSocket::~UdpSocket()
+
+    std::weak_ptr<protocol::UdpSocket> UdpThread::find_accept_udp(net::IPAddress& ip)
     {
-        if (fd_ != -1)
-            evutil_closesocket(fd_);
-        if (kcp_ != nullptr)
-            ikcp_release(kcp_);
-    }
-    int UdpThread::UdpSocket::send(const char* data, size_t size)
-    {
-        return ikcp_send(kcp_, data, size);
-    }
-    int UdpThread::UdpSocket::sendto(const char* data, size_t size)
-    {
-        return ::sendto(fd_, data, size, 0,
-            reinterpret_cast<const sockaddr*>(addr_.sockaddr()),
-            addr_.socketlen());
+        std::lock_guard<std::mutex> lock(accept_udp_mtx_);
+        auto it = accept_udp_layer_.find(ip);
+        if (it != accept_udp_layer_.end()) {
+            return it->second;
+        }
+        return std::weak_ptr<protocol::UdpSocket>();
     }
 }
 }

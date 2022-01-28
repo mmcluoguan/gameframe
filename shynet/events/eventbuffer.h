@@ -51,7 +51,12 @@ namespace events {
          * @brief 获取管理io缓冲关联的fd
          * @return 管理io缓冲关联的fd
         */
-        int fd() const;
+        uint32_t fd() const;
+        /**
+         * @brief 设置管理io缓冲关联的fd
+         * @param fd 管理io缓冲关联的fd
+        */
+        void set_fd(uint32_t fd) { fd_ = fd; };
         /**
          * @brief 设置回调
          * @param readcb socket数据已经保存到管理io缓冲,可以读取回调
@@ -137,6 +142,11 @@ namespace events {
          * @brief 析构时是否释放管理原生io缓冲
         */
         bool delflag_ = true;
+        /**
+         * @brief 如果是tcp,fd为socket文件描述符
+         * 如果是udp,fd为udp连接唯一标识id
+        */
+        uint32_t fd_ = -1;
     };
 }
 }

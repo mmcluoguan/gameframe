@@ -2,6 +2,7 @@
 #define SHYNET_PROTOCOL_FILTERPROCES_H
 
 #include "shynet/events/eventbuffer.h"
+#include "shynet/events/eventhandler.h"
 #include "shynet/net/ipaddress.h"
 #include "shynet/protocol/http.h"
 #include "shynet/protocol/tcpip.h"
@@ -12,7 +13,7 @@ namespace protocol {
     /**
      * @brief 协议过滤器
     */
-    class FilterProces : public Nocopy {
+    class FilterProces : public events::EventHandler {
     public:
         /**
          * @brief 身份标识

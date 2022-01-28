@@ -80,6 +80,7 @@ int WorldClient::register_login_world_c(std::shared_ptr<protocc::CommonObject> d
         protocc::register_login_world_s msgs;
         msgs.set_result(0);
         send_proto(protocc::REGISTER_LOGIN_WORLD_S, &msgs);
+        LOG_DEBUG << "发送:REGISTER_LOGIN_WORLD_S";
 
         //通知网关服务器登录服务器上线
         protocc::seronline_world_gate_g msgg;
@@ -152,6 +153,7 @@ int WorldClient::register_gate_world_c(std::shared_ptr<protocc::CommonObject> da
                 }
             });
         send_proto(protocc::REGISTER_GATE_WORLD_S, &msgs);
+        LOG_DEBUG << "发送:REGISTER_GATE_WORLD_S";
     } else {
         std::stringstream stream;
         stream << "消息" << frmpub::Basic::msgname(data->msgid()) << "解析错误";
