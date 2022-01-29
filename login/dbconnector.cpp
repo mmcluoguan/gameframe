@@ -121,7 +121,8 @@ int DbConnector::forward_db_gate_c(std::shared_ptr<protocc::CommonObject> data,
             LOG_DEBUG << "转发消息" << frmpub::Basic::msgname(data->msgid())
                       << "到gate[" << gate->remote_addr()->ip() << ":"
                       << gate->remote_addr()->port() << "]"
-                      << " gate fd:" << env.fd;
+                      << " gate fd:" << env.fd
+                      << " client fd:" << enves->top().fd;
         } else {
             std::stringstream stream;
             stream << "gate fd:" << env.fd << " 已断开连接";

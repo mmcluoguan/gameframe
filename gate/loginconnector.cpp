@@ -110,9 +110,8 @@ int LoginConnector::forward_login_client_c(std::shared_ptr<protocc::CommonObject
     std::shared_ptr<std::stack<FilterData::Envelope>> enves)
 {
     if (enves->empty() == false) {
-        std::stack<FilterData::Envelope> copy_enves = *enves;
-        FilterData::Envelope& env = copy_enves.top();
-        copy_enves.pop();
+        FilterData::Envelope& env = enves->top();
+        enves->pop();
         std::shared_ptr<GateClient> client = shynet::utils::Singleton<GateClientMgr>::instance().find(env.fd);
         if (client != nullptr) {
             if (data->msgid() == protocc::LOGIN_CLIENT_GATE_S) {

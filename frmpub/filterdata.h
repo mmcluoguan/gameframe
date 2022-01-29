@@ -26,7 +26,7 @@ public:
      * @brief 消息路由信封
     */
     struct Envelope {
-        uint32_t fd;
+        uint32_t fd = 0;
         /**
          * @brief 消息源地址
         */
@@ -82,7 +82,7 @@ public:
          * @brief 服务器回应消息超时时间,默认1s
         */
         struct timeval timeout_sec {
-            1L, 0L
+            120L, 0L
         };
     };
 

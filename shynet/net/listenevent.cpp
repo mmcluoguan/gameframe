@@ -10,7 +10,6 @@ namespace net {
         bool enable_ssl)
         : events::EventHandler()
     {
-        self = this;
         listen_addr_ = listen_addr;
         enable_ssl_ = enable_ssl;
         type_ = type;
@@ -30,7 +29,7 @@ namespace net {
 
     void ListenEvent::input(int listenfd)
     {
-        utils::Singleton<AcceptReactorMgr>::instance().notify(&self, sizeof(uintptr_t));
+        utils::Singleton<AcceptReactorMgr>::instance().notify(&serverid_, sizeof(serverid_));
     }
 
     bool ListenEvent::stop() const

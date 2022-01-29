@@ -26,7 +26,7 @@ namespace pool {
          * @param workNum work线程数量
          * @param acceptNum 服务器接收新连接线程数量
         */
-        explicit ThreadPool(size_t workNum = 4, size_t acceptNum = 2);
+        explicit ThreadPool(size_t workNum = 4, size_t acceptNum = 1);
 
     public:
         /**

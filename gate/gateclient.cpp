@@ -158,7 +158,9 @@ int GateClient::login_message(std::shared_ptr<protocc::CommonObject> obj,
         login->send_proto(obj.get(), enves.get());
         LOG_DEBUG << "转发消息" << frmpub::Basic::msgname(obj->msgid())
                   << "到login[" << login->connect_addr()->ip() << ":"
-                  << login->connect_addr()->port() << "]";
+                  << login->connect_addr()->port() << "]"
+                  << " client fd:" << enve.fd;
+
     } else {
         std::stringstream stream;
         stream << "没有可用的" << frmpub::Basic::connectname(protocc::ServerType::LOGIN) << "连接";

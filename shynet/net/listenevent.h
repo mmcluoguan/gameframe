@@ -21,7 +21,7 @@ namespace net {
          * @param enable_ssl 是否启用ssl
         */
         ListenEvent(std::shared_ptr<net::IPAddress> listen_addr,
-            __socket_type type = SOCK_STREAM,
+            __socket_type type = SOCK_DGRAM,
             bool enable_ssl = false);
         ~ListenEvent();
 
@@ -101,11 +101,6 @@ namespace net {
          * @brief 初始化udp
         */
         void init_udp();
-
-        /**
-         * @brief 指向自己的指针
-        */
-        ListenEvent* self = nullptr;
         /**
          * @brief 侦听的服务器socket文件描述符
         */

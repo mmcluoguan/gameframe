@@ -105,11 +105,23 @@ namespace thread {
             accept_udp_layer_.insert({ ip, sock });
     }
 
-    void UdpThread::add_connect_udp(int64_t guid, std::weak_ptr<protocol::UdpSocket> sock)
+    void UdpThread::remove_accept_udp(net::IPAddress& ip)
+    {
+        std::lock_guard<std::mutex> lock(accept_udp_mtx_);
+        accept_udp_layer_.erase(ip);
+    }
+
+    void UdpThread::add_connect_udp(uint32_t guid, std::weak_ptr<protocol::UdpSocket> sock)
     {
         std::lock_guard<std::mutex> lock(connect_udp_mtx_);
         if (connect_udp_layer_.find(guid) == connect_udp_layer_.end())
             connect_udp_layer_.insert({ guid, sock });
+    }
+
+    void UdpThread::remove_connect_udp(uint32_t guid)
+    {
+        std::lock_guard<std::mutex> lock(connect_udp_mtx_);
+        connect_udp_layer_.erase(guid);
     }
 
     std::weak_ptr<protocol::UdpSocket> UdpThread::find_accept_udp(net::IPAddress& ip)

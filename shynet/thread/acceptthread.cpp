@@ -1,6 +1,7 @@
 #include "shynet/thread/acceptthread.h"
 #include "shynet/net/acceptheartbeat.h"
 #include "shynet/net/acceptiobuffer.h"
+#include "shynet/net/listenreactormgr.h"
 #include "shynet/pool/threadpool.h"
 #include "shynet/protocol/udpsocket.h"
 #include "shynet/utils/logger.h"
@@ -28,26 +29,27 @@ namespace thread {
     void AcceptThread::process(bufferevent* bev)
     {
         events::EventBuffer pbuf(bev);
-        char buf[sizeof(uintptr_t)] = { 0 };
+        int serverid = 0;
         do {
-            size_t len = pbuf.read(&buf, sizeof(buf));
+            size_t len = pbuf.read(&serverid, sizeof(serverid));
             if (len == 0) {
                 break;
-            } else if (len != sizeof(buf)) {
+            } else if (len != sizeof(serverid)) {
                 LOG_WARN << "AcceptThread没有足够的数据";
             } else {
-                uintptr_t* p = reinterpret_cast<uintptr_t*>(buf);
-                net::ListenEvent* apnf = reinterpret_cast<net::ListenEvent*>(*p);
-                if (apnf->type() == SOCK_STREAM) {
-                    tcp_accept(apnf);
-                } else {
-                    udp_accept(apnf);
+                auto apnf = utils::Singleton<net::ListenReactorMgr>::instance().find(serverid);
+                if (apnf) {
+                    if (apnf->type() == SOCK_STREAM) {
+                        tcp_accept(apnf);
+                    } else {
+                        udp_accept(apnf);
+                    }
                 }
             }
         } while (true);
     }
 
-    void AcceptThread::tcp_accept(net::ListenEvent* apnf)
+    void AcceptThread::tcp_accept(std::shared_ptr<net::ListenEvent> apnf)
     {
         struct sockaddr_storage cliaddr;
         memset(&cliaddr, 0, sizeof(cliaddr));
@@ -83,9 +85,7 @@ namespace thread {
         }
     }
 
-    static std::atomic<int32_t> udp_new_connect_fd = 1;
-
-    void AcceptThread::udp_accept(net::ListenEvent* apnf)
+    void AcceptThread::udp_accept(std::shared_ptr<net::ListenEvent> apnf)
     {
         if (apnf->type() == SOCK_DGRAM) {
             char buffer[MAXIMUM_MTU_SIZE];
@@ -97,8 +97,6 @@ namespace thread {
                 reinterpret_cast<sockaddr*>(&cliaddr),
                 &socklen);
             if (ret > 0) {
-                //std::cout << " AcceptThread::udp_accept"
-                //          << " ret:" << ret << std::endl;
                 auto udpth = utils::Singleton<pool::ThreadPool>::instance().udpTh().lock();
                 if (udpth) {
                     net::IPAddress ipaddr(&cliaddr);
@@ -106,11 +104,9 @@ namespace thread {
                     if (sock == nullptr) {
                         //处理不可靠消息
                         if (buffer[0] == (char)protocol::UdpMessageDefine::ID_ATTEMPT_CONNECT) {
-                            auto now = std::chrono::steady_clock::now().time_since_epoch().count();
-                            uint32_t guid = (uint32_t)shynet::utils::hash_val(ipaddr.ip(), ipaddr.port(), now);
-                            //uint32_t guid = static_cast<uint32_t>(iphash(ipaddr));
-                            //std::cout << "ID_ATTEMPT_CONNECT:" << guid << std::endl;
-                            //udp_new_connect_fd++;
+                            uint32_t guid;
+                            utils::stuff::random(&guid, sizeof(uint32_t));
+                            std::cout << "ID_ATTEMPT_CONNECT:" << guid << std::endl;
                             char msg[MAXIMUM_MTU_SIZE] { 0 };
                             msg[0] = (char)protocol::UdpMessageDefine::ID_ATTEMPT_CONNECT_ACK;
                             guid = htonl(guid);

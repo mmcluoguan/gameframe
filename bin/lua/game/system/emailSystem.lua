@@ -25,7 +25,8 @@ function emailSystem:load()
                 {key = 'time', value = '',},
                 {key = 'annex', value = '',},
             },
-        }        
+        }       
+        log('请求加载系统邮件列表') 
         ConnectorMgr:dbConnector():loaddata_more(emaildata,nil,
             function (complete_msgdata,complete_routing)
                 EmailSystem:loaded(complete_msgdata.objs);

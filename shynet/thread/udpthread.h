@@ -34,10 +34,13 @@ namespace thread {
         int stop() override;
 
         void add_waitconnect(std::weak_ptr<protocol::UdpSocket> sock);
-        void add_accept_udp(net::IPAddress& ip, std::weak_ptr<protocol::UdpSocket> sock);
-        void add_connect_udp(int64_t guid, std::weak_ptr<protocol::UdpSocket> sock);
 
+        void add_accept_udp(net::IPAddress& ip, std::weak_ptr<protocol::UdpSocket> sock);
+        void remove_accept_udp(net::IPAddress& ip);
         std::weak_ptr<protocol::UdpSocket> find_accept_udp(net::IPAddress& ip);
+
+        void add_connect_udp(uint32_t guid, std::weak_ptr<protocol::UdpSocket> sock);
+        void remove_connect_udp(uint32_t guid);
 
     private:
         /**
@@ -52,7 +55,7 @@ namespace thread {
         std::unordered_map<net::IPAddress, std::weak_ptr<protocol::UdpSocket>, net::IPAddressHash> accept_udp_layer_;
 
         std::mutex connect_udp_mtx_;
-        std::unordered_map<int64_t, std::weak_ptr<protocol::UdpSocket>> connect_udp_layer_;
+        std::unordered_map<uint32_t, std::weak_ptr<protocol::UdpSocket>> connect_udp_layer_;
     };
 }
 }

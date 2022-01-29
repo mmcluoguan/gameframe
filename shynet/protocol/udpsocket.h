@@ -103,6 +103,14 @@ namespace protocol {
          * @brief 接收缓存累计大小
         */
         size_t recv_buffer_length_ = 0;
+        /**
+         * @brief 发送窗口大小
+        */
+        const int32_t sndwnd_size_ = 128;
+        /**
+         * @brief 接收窗口大小
+        */
+        const int32_t rcvwnd_size_ = 128;
     };
 }
 }

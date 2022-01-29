@@ -525,7 +525,9 @@ int DbClient::login_client_gate_c(std::shared_ptr<protocc::CommonObject> data,
             LOG_DEBUG << "发送消息" << frmpub::Basic::msgname(protocc::LOGIN_CLIENT_GATE_S) << "到"
                       << frmpub::Basic::connectname(sif().st())
                       << " result:" << msgs.result()
-                      << " aid:" << msgs.aid();
+                      << " aid:" << msgs.aid()
+                      << " gate fd:" << gate_enve.fd
+                      << " client fd:" << cli_enve.fd;
         } catch (const std::exception& err) {
             SEND_ERR(protocc::DB_CACHE_ERROR, err.what());
         }

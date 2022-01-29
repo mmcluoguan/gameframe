@@ -101,6 +101,10 @@ int LoginClient::forward_client_gate_c(std::shared_ptr<protocc::CommonObject> da
 {
     std::shared_ptr<DbConnector> db = shynet::utils::Singleton<ConnectorMgr>::instance().db_connector();
     if (db != nullptr) {
+        FilterData::Envelope cli_enve;
+        if (enves->size() > 0) {
+            cli_enve = enves->top();
+        }
         FilterData::Envelope enve;
         enve.fd = iobuf()->fd();
         enve.addr = *remote_addr()->sockaddr();
@@ -108,7 +112,9 @@ int LoginClient::forward_client_gate_c(std::shared_ptr<protocc::CommonObject> da
         db->send_proto(data.get(), enves.get());
         LOG_DEBUG << "转发消息" << frmpub::Basic::msgname(data->msgid())
                   << "到dbvisit[" << db->connect_addr()->ip() << ":"
-                  << db->connect_addr()->port() << "]";
+                  << db->connect_addr()->port() << "]"
+                  << " client fd:" << cli_enve.fd
+                  << " gate fd:" << enve.fd;
     } else {
         SEND_ERR_EX(protocc::DBVISIT_NOT_EXIST, "没有可选的db连接", enves.get());
     }

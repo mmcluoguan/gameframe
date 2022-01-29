@@ -15,8 +15,7 @@ namespace protocol {
         if (udp) {
             ssize_t ret = udp->sendto(data, size);
             (void)ret;
-            //std::cout << " sendto:" << udp->guid()
-            //          << " ret:" << ret << std::endl;
+            //std::cout << " sendto:" << udp->guid() << " ret:" << ret << std::endl;
         }
         return 0;
     }
@@ -58,16 +57,27 @@ namespace protocol {
 
     UdpSocket::~UdpSocket()
     {
-        if (kcp_ != nullptr) {
-            ikcp_release(kcp_);
-            kcp_ = nullptr;
-        }
         //发送断开连接包
         char msg[MAXIMUM_MTU_SIZE] { 0 };
         msg[0] = static_cast<char>(protocol::UdpMessageDefine::ID_CLOSE);
         int32_t id = htonl(guid_);
         memcpy(msg + sizeof(char), &id, sizeof(id));
         sendto(msg, MAXIMUM_MTU_SIZE);
+
+        //从udp线程移除
+        auto udpth = utils::Singleton<pool::ThreadPool>::instance().udpTh().lock();
+        if (udpth) {
+            if (ident_ == FilterProces::Identity::ACCEPTOR) {
+                udpth->remove_accept_udp(addr);
+            } else if (ident_ == FilterProces::Identity::CONNECTOR) {
+                udpth->remove_connect_udp(guid_);
+            }
+        }
+
+        if (kcp_ != nullptr) {
+            ikcp_release(kcp_);
+            kcp_ = nullptr;
+        }
     }
 
     void UdpSocket::init_pair_buffer(std::shared_ptr<events::EventBase> base)
@@ -88,11 +98,15 @@ namespace protocol {
 
     int UdpSocket::send(const char* data, size_t size)
     {
-        int ret = ikcp_send(kcp_, data, static_cast<int>(size));
-        (void)ret;
-        ikcp_flush(kcp_);
-        //std::cout << kcp_ << " ikcp_send:" << guid()
-        //          << " s1:" << size << " s2:" << ret << std::endl;
+        int ret = -1;
+        int waitnum = ikcp_waitsnd(kcp_);
+        if (waitnum < sndwnd_size_ * 2) {
+            ret = ikcp_send(kcp_, data, static_cast<int>(size));
+            ikcp_flush(kcp_);
+        } else {
+            LOG_WARN << "网络拥堵,发送队列中等待的包数量:" << waitnum
+                     << " 发送窗口大小:" << sndwnd_size_;
+        }
         return ret;
     }
 
@@ -109,8 +123,6 @@ namespace protocol {
 
         size_t buflen = recv_buffer_length_ + size;
         std::unique_ptr<char[]> complete_data(new char[buflen]);
-        //std::cout << "recv:" << buflen
-        //         << " recv_buffer_length_:" << recv_buffer_length_ << std::endl;
         int ret = ikcp_recv(kcp_, complete_data.get(), int(buflen));
         if (ret > 0) {
             //std::cout << " ikcp_recv:" << guid() << " ret:" << ret << std::endl;
@@ -137,8 +149,8 @@ namespace protocol {
         if (kcp_ != nullptr)
             ikcp_release(kcp_);
         kcp_ = ikcp_create(guid, this);
-        //ikcp_wndsize(kcp_, MAXIMUM_MTU_SIZE * 5, MAXIMUM_MTU_SIZE * 5);
-        //ikcp_nodelay(kcp_, 0, 10, 1, 0);
+        //ikcp_wndsize(kcp_, sndwnd_size_, rcvwnd_size_);
+        //ikcp_nodelay(kcp_, 1, 10, 2, 0);
         kcp_->output = udp_output_client;
     }
 }

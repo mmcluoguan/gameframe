@@ -53,11 +53,11 @@ namespace thread {
         /**
          * @brief tcp握手
         */
-        void tcp_accept(net::ListenEvent* apnf);
+        void tcp_accept(std::shared_ptr<net::ListenEvent> apnf);
         /**
          * @brief udp握手
         */
-        void udp_accept(net::ListenEvent* apnf);
+        void udp_accept(std::shared_ptr<net::ListenEvent> apnf);
         /**
          * @brief 接收通知的管道
         */
