@@ -31,10 +31,9 @@ namespace thread {
         int stop() override;
         /**
          * @brief 通知连接服务器线程接收新的连接
-         * @param data 客户端id的地址
-         * @param len 客户端id地址大小
+         * @param int connectid
         */
-        int notify(const void* data, size_t len) const;
+        int notify(int connectid) const;
 
         /**
          * @brief 处理通知来的信息

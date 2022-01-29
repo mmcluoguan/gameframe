@@ -68,12 +68,12 @@ namespace net {
 
     int ConnectEvent::connectid() const
     {
-        return conectid_;
+        return connectid_;
     }
 
     void ConnectEvent::set_connectid(int id)
     {
-        conectid_ = id;
+        connectid_ = id;
     }
 
     std::shared_ptr<net::IPAddress> ConnectEvent::connect_addr() const
@@ -102,57 +102,12 @@ namespace net {
     void ConnectEvent::input(int fd)
     {
         if (type_ == SOCK_DGRAM) {
-            char buffer[MAXIMUM_MTU_SIZE];
-            ssize_t ret = udpsocket_->recvfrom(buffer, MAXIMUM_MTU_SIZE);
-            if (ret > 0) {
-                //std::cout << " ConnectEvent::input guid:" << udpsocket_->guid()
-                //          << " ret:" << ret << std::endl;
-                if (udpsocket_->guid() == static_cast<uint32_t>(-1)) {
-                    //处理不可靠消息
-                    if (buffer[0] == (char)protocol::UdpMessageDefine::ID_ATTEMPT_CONNECT_ACK
-                        && udpsocket_->st == protocol::UdpSocket::CONNECTING) {
-                        uint32_t guid;
-                        memcpy(&guid, buffer + sizeof(char), sizeof(guid));
-                        guid = ntohl(guid);
-                        //std::cout << "ID_ATTEMPT_CONNECT_ACK:" << guid << std::endl;
-                        //建立可靠的udp连接层
-                        udpsocket_->set_guid(guid);
-                        udpsocket_->st = protocol::UdpSocket::CONNECTSUCCESS;
-                        udpsocket_->init_pair_buffer(base());
-                        set_iobuf(udpsocket_->output_buffer);
-                        auto udpth = utils::Singleton<pool::ThreadPool>::instance().udpTh().lock();
-                        if (udpth) {
-                            udpth->add_connect_udp(guid, udpsocket_);
-                        }
-                        //发送第3次握手
-                        buffer[0] = (char)protocol::UdpMessageDefine::ID_CONNECT;
-                        udpsocket_->sendto(buffer, MAXIMUM_MTU_SIZE);
-                        //LOG_DEBUG << "CONNECTING:" << guid;
-                        success();
-                    }
-                } else {
-                    if (buffer[0] == (char)protocol::UdpMessageDefine::ID_CLOSE) {
-                        uint32_t guid;
-                        memcpy(&guid, buffer + sizeof(char), sizeof(guid));
-                        guid = htonl(guid);
-                        if (udpsocket_->guid() == guid) {
-                            auto shclient = udpsocket_->cnev.lock();
-                            if (shclient) {
-                                shclient->close(net::CloseType::SERVER_CLOSE);
-                            }
-                        }
-                    } else {
-                        //处理可靠消息
-                        udpsocket_->recv(buffer, ret);
-                    }
-                }
+            auto udpth = utils::Singleton<pool::ThreadPool>::instance().udpTh().lock();
+            if (udpth) {
+                int ident = static_cast<int>(protocol::FilterProces::Identity::CONNECTOR);
+                udpth->notify(ident, connectid_);
             } else {
-                if (errno != EAGAIN) {
-                    std::error_condition econd = std::system_category().default_error_condition(errno);
-                    LOG_WARN << "[" << econd.category().name()
-                             << "(" << econd.value() << ")"
-                             << " " << econd.message() << "] ";
-                }
+                THROW_EXCEPTION("udpthread 未创建");
             }
         }
     }

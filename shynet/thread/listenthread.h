@@ -31,10 +31,9 @@ namespace thread {
 
         /**
          * @brief 通知侦听的服务器地址线程有新的服务器地址需要侦听
-         * @param data 服务器id的地址
-         * @param len 服务器id的地址长度
+         * @param serverid
         */
-        int notify(const void* data, size_t len) const;
+        int notify(int serverid) const;
 
         /**
          * @brief 处理通知来的信息

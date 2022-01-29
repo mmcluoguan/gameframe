@@ -1,7 +1,6 @@
 #ifndef SHYNET_PROTOCOL_UDPSOCKET_H
 #define SHYNET_PROTOCOL_UDPSOCKET_H
 
-#include "shynet/basic.h"
 #include "shynet/events/eventbuffer.h"
 #include "shynet/net/ipaddress.h"
 #include "shynet/protocol/filterproces.h"

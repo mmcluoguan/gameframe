@@ -29,7 +29,7 @@ namespace net {
 
     void ListenEvent::input(int listenfd)
     {
-        utils::Singleton<AcceptReactorMgr>::instance().notify(&serverid_, sizeof(serverid_));
+        utils::Singleton<AcceptReactorMgr>::instance().notify(serverid_);
     }
 
     bool ListenEvent::stop() const

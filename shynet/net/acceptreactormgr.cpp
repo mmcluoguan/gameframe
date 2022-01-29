@@ -5,11 +5,11 @@
 namespace shynet {
 namespace net {
 
-    void AcceptReactorMgr::notify(const void* data, size_t len)
+    void AcceptReactorMgr::notify(int serverid)
     {
         std::shared_ptr<thread::AcceptThread> rtk = find_rtk();
         if (rtk != nullptr) {
-            rtk->notify(data, len);
+            rtk->notify(serverid);
         } else
             LOG_WARN << "没有可用的 AcceptThread";
     }

@@ -38,10 +38,9 @@ namespace thread {
 
         /**
          * @brief 通知服务器接收客户端数据线程接收新的连接
-         * @param data 数据为 ListenEvent*
-         * @param len 数据长度
+         * @param serverid
         */
-        int notify(const void* data, size_t len) const;
+        int notify(int serverid) const;
 
         /**
          * @brief 处理通知来的信息
@@ -54,10 +53,6 @@ namespace thread {
          * @brief tcp握手
         */
         void tcp_accept(std::shared_ptr<net::ListenEvent> apnf);
-        /**
-         * @brief udp握手
-        */
-        void udp_accept(std::shared_ptr<net::ListenEvent> apnf);
         /**
          * @brief 接收通知的管道
         */

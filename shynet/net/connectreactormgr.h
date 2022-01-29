@@ -51,10 +51,9 @@ namespace net {
     private:
         /**
          * @brief 通知连接服务器的线程有新的连接请求
-         * @param data 客户端id的地址
-         * @param len 客户端id地址大小
+         * @param connectid
         */
-        void notify(const void* data, size_t len);
+        void notify(int connectid);
 
     private:
         /**

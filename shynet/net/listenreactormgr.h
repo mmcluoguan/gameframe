@@ -48,10 +48,9 @@ namespace net {
     private:
         /**
          * @brief 通知侦听的服务器地址线程有新的服务器地址需要侦听
-         * @param data 服务器id的地址
-         * @param len 服务器id的地址长度
+         * @param serverid
         */
-        void notify(const void* data, size_t len);
+        void notify(int serverid);
 
     private:
         /**

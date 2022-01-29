@@ -3,7 +3,7 @@
 #include "shynet/net/acceptiobuffer.h"
 #include "shynet/net/listenreactormgr.h"
 #include "shynet/pool/threadpool.h"
-#include "shynet/protocol/udpsocket.h"
+#include "shynet/thread/udpthread.h"
 #include "shynet/utils/logger.h"
 #include "shynet/utils/stuff.h"
 #include <atomic>
@@ -32,17 +32,22 @@ namespace thread {
         int serverid = 0;
         do {
             size_t len = pbuf.read(&serverid, sizeof(serverid));
-            if (len == 0) {
-                break;
-            } else if (len != sizeof(serverid)) {
+            if (len == 0 || len != sizeof(serverid)) {
                 LOG_WARN << "AcceptThread没有足够的数据";
+                break;
             } else {
                 auto apnf = utils::Singleton<net::ListenReactorMgr>::instance().find(serverid);
                 if (apnf) {
                     if (apnf->type() == SOCK_STREAM) {
                         tcp_accept(apnf);
-                    } else {
-                        udp_accept(apnf);
+                    } else if (apnf->type() == SOCK_DGRAM) {
+                        auto udpth = utils::Singleton<pool::ThreadPool>::instance().udpTh().lock();
+                        if (udpth) {
+                            int ident = static_cast<int>(protocol::FilterProces::Identity::ACCEPTOR);
+                            udpth->notify(ident, serverid);
+                        } else {
+                            THROW_EXCEPTION("udpthread 未创建");
+                        }
                     }
                 }
             }
@@ -85,82 +90,6 @@ namespace thread {
         }
     }
 
-    void AcceptThread::udp_accept(std::shared_ptr<net::ListenEvent> apnf)
-    {
-        if (apnf->type() == SOCK_DGRAM) {
-            char buffer[MAXIMUM_MTU_SIZE];
-            struct sockaddr_storage cliaddr;
-            memset(&cliaddr, 0, sizeof(cliaddr));
-            socklen_t socklen = sizeof(cliaddr);
-
-            ssize_t ret = recvfrom(apnf->listenfd(), buffer, MAXIMUM_MTU_SIZE, 0,
-                reinterpret_cast<sockaddr*>(&cliaddr),
-                &socklen);
-            if (ret > 0) {
-                auto udpth = utils::Singleton<pool::ThreadPool>::instance().udpTh().lock();
-                if (udpth) {
-                    net::IPAddress ipaddr(&cliaddr);
-                    auto sock = udpth->find_accept_udp(ipaddr).lock();
-                    if (sock == nullptr) {
-                        //处理不可靠消息
-                        if (buffer[0] == (char)protocol::UdpMessageDefine::ID_ATTEMPT_CONNECT) {
-                            uint32_t guid;
-                            utils::stuff::random(&guid, sizeof(uint32_t));
-                            std::cout << "ID_ATTEMPT_CONNECT:" << guid << std::endl;
-                            char msg[MAXIMUM_MTU_SIZE] { 0 };
-                            msg[0] = (char)protocol::UdpMessageDefine::ID_ATTEMPT_CONNECT_ACK;
-                            guid = htonl(guid);
-                            memcpy(msg + sizeof(char), &guid, sizeof(guid));
-                            sendto(apnf->listenfd(), msg, sizeof(msg), 0,
-                                reinterpret_cast<sockaddr*>(&cliaddr),
-                                socklen);
-                        } else if (buffer[0] == (char)protocol::UdpMessageDefine::ID_CONNECT) {
-                            //3次握手完成,建立可靠的udp连接层
-                            uint32_t guid;
-                            memcpy(&guid, buffer + sizeof(char), sizeof(guid));
-                            guid = ntohl(guid);
-                            //LOG_DEBUG << "ID_CONNECT:" << guid;
-                            std::shared_ptr<net::IPAddress> newfdAddr = std::make_shared<net::IPAddress>(&cliaddr);
-                            auto sock = std::make_shared<protocol::UdpSocket>(protocol::FilterProces::Identity::ACCEPTOR);
-                            sock->fd = apnf->listenfd();
-                            sock->addr = *newfdAddr;
-                            sock->set_guid(guid);
-                            sock->init_pair_buffer(base_);
-                            sock->client = apnf->accept_newfd(newfdAddr, sock->output_buffer);
-                            auto shclient = sock->client.lock();
-                            if (shclient) {
-                                shclient->set_udpsock(sock);
-                                udpth->add_accept_udp(*newfdAddr, sock);
-                            }
-                        }
-                    } else {
-                        if (buffer[0] == (char)protocol::UdpMessageDefine::ID_CLOSE) {
-                            uint32_t guid;
-                            memcpy(&guid, buffer + sizeof(char), sizeof(guid));
-                            guid = htonl(guid);
-                            if (sock->guid() == guid) {
-                                auto shclient = sock->client.lock();
-                                if (shclient) {
-                                    shclient->close(net::CloseType::CLIENT_CLOSE);
-                                }
-                            }
-                        } else {
-                            //处理可靠消息
-                            sock->recv(buffer, ret);
-                        }
-                    }
-                }
-            } else {
-                if (errno != EAGAIN) {
-                    std::error_condition econd = std::system_category().default_error_condition(errno);
-                    LOG_WARN << "[" << econd.category().name()
-                             << "(" << econd.value() << ")"
-                             << " " << econd.message() << "] ";
-                }
-            }
-        }
-    }
-
     int AcceptThread::run()
     {
         try {
@@ -187,9 +116,9 @@ namespace thread {
         return 0;
     }
 
-    int AcceptThread::notify(const void* data, size_t len) const
+    int AcceptThread::notify(int serverid) const
     {
-        return pair_[0]->write(data, len);
+        return pair_[0]->write(&serverid, sizeof(serverid));
     }
 }
 }

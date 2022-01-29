@@ -13,9 +13,9 @@ namespace thread {
     {
     }
 
-    int TimerThread::notify(const void* data, size_t len) const
+    int TimerThread::notify(int timerid) const
     {
-        return pair_[0]->write(data, len);
+        return pair_[0]->write(&timerid, sizeof(timerid));
     }
 
     static void pipeReadcb(struct bufferevent* bev, void* ptr)
@@ -31,19 +31,13 @@ namespace thread {
     void TimerThread::process(bufferevent* bev)
     {
         events::EventBuffer pbuf(bev);
-        char buf[sizeof(int)] = { 0 };
+        int timerid = 0;
         do {
-            size_t len = pbuf.read(&buf, sizeof(buf));
-            if (len == 0) {
-                break;
-            } else if (len != sizeof(buf)) {
+            size_t len = pbuf.read(&timerid, sizeof(timerid));
+            if (len == 0 || len != sizeof(timerid)) {
                 LOG_WARN << "TimerThread没有足够的数据";
+                break;
             } else {
-                int timerid = 0;
-                size_t index = 0;
-                memcpy(&timerid, buf + index, sizeof(timerid));
-                index += sizeof(timerid);
-
                 std::shared_ptr<net::TimerEvent> timerEv = utils::Singleton<net::TimerReactorMgr>::instance().find(timerid);
                 if (timerEv != nullptr) {
                     timerEv->set_event(base_, -1, timerEv->what());

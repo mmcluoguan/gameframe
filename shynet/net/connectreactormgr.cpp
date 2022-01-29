@@ -15,7 +15,7 @@ namespace net {
             cnts_.insert({ connectid, v });
             v->set_connectid(connectid);
         }
-        notify(&connectid, sizeof(connectid));
+        notify(connectid);
         return connectid;
     }
 
@@ -48,11 +48,11 @@ namespace net {
         return nullptr;
     }
 
-    void ConnectReactorMgr::notify(const void* data, size_t len)
+    void ConnectReactorMgr::notify(int connectid)
     {
         std::shared_ptr<thread::ConnectThread> cnt = utils::Singleton<pool::ThreadPool>::instance().connectTh().lock();
         if (cnt != nullptr) {
-            cnt->notify(data, len);
+            cnt->notify(connectid);
         } else
             LOG_WARN << "没有可用的 ConnectThread";
     }

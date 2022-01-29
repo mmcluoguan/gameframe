@@ -31,10 +31,9 @@ namespace thread {
 
         /**
          * @brief 通知计时器线程有新的计时器加入
-         * @param data 计时器id的地址
-         * @param len 计时器id的地址大小
+         * @param timerid
         */
-        int notify(const void* data, size_t len) const;
+        int notify(int timerid) const;
 
         /**
          * @brief 处理通知来的信息

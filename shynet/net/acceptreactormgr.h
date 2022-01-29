@@ -26,10 +26,9 @@ namespace net {
 
         /**
          * @brief 通知服务器接收客户端数据线程接收新的连接
-         * @param data 数据为 ListenEvent*
-         * @param len 数据长度
+         * @param serverid
         */
-        void notify(const void* data, size_t len);
+        void notify(int serverid);
 
     private:
         /**

@@ -4,11 +4,11 @@
 namespace shynet {
 namespace net {
 
-    void ListenReactorMgr::notify(const void* data, size_t len)
+    void ListenReactorMgr::notify(int serverid)
     {
         std::shared_ptr<thread::ListenThread> lth = utils::Singleton<pool::ThreadPool>::instance().listernTh().lock();
         if (lth != nullptr) {
-            lth->notify(data, len);
+            lth->notify(serverid);
         } else
             LOG_WARN << "没有可用的 ListenThread";
     }
@@ -22,7 +22,7 @@ namespace net {
             les_.insert({ serverid, v });
             v->set_serverid(serverid);
         }
-        notify(&serverid, sizeof(serverid));
+        notify(serverid);
         return serverid;
     }
 

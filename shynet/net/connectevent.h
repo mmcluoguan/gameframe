@@ -188,7 +188,7 @@ namespace net {
         /**
          * @brief 服务器数据处理器id
         */
-        int conectid_ = -1;
+        int connectid_ = -1;
         /**
          * @brief SOCK_STREAM,SOCK_DGRAM
         */

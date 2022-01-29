@@ -27,19 +27,13 @@ namespace thread {
     void ConnectThread::process(bufferevent* bev)
     {
         events::EventBuffer pbuf(bev);
-        char buf[sizeof(int)] = { 0 };
+        int connectid = 0;
         do {
-            size_t len = pbuf.read(&buf, sizeof(buf));
-            if (len == 0) {
-                break;
-            } else if (len != sizeof(buf)) {
+            size_t len = pbuf.read(&connectid, sizeof(connectid));
+            if (len == 0 || len != sizeof(connectid)) {
                 LOG_WARN << "ConnectThread没有足够的数据";
+                break;
             } else {
-                int connectid = 0;
-                size_t index = 0;
-                memcpy(&connectid, buf + index, sizeof(connectid));
-                index += sizeof(connectid);
-
                 std::shared_ptr<net::ConnectEvent> connect = utils::Singleton<net::ConnectReactorMgr>::instance().find(connectid);
                 if (connect != nullptr) {
                     if (connect->type() == SOCK_STREAM) {
@@ -86,26 +80,9 @@ namespace thread {
     {
         auto udpth = utils::Singleton<pool::ThreadPool>::instance().udpTh().lock();
         if (udpth) {
-            int fd = socket(connect->connect_addr()->family(), SOCK_DGRAM, IPPROTO_IP);
-            if (fd == -1) {
-                THROW_EXCEPTION("call socket");
-            }
-            if (evutil_make_socket_nonblocking(fd) < 0) {
-                evutil_closesocket(fd);
-                THROW_EXCEPTION("call evutil_make_socket_nonblocking");
-            }
-            if (evutil_make_socket_closeonexec(fd) < 0) {
-                evutil_closesocket(fd);
-                THROW_EXCEPTION("call evutil_make_socket_closeonexec");
-            }
-            connect->set_event(base_, fd, EV_READ | EV_PERSIST);
-            base_->addevent(connect, nullptr);
-            auto sock = std::make_shared<protocol::UdpSocket>(protocol::FilterProces::Identity::CONNECTOR);
-            sock->fd = fd;
-            sock->addr = *connect->connect_addr();
-            sock->cnev = connect;
-            connect->set_udpsock(sock);
-            udpth->add_waitconnect(sock);
+            udpth->connect_server(connect);
+        } else {
+            THROW_EXCEPTION("udpthread 未创建");
         }
     }
 
@@ -136,9 +113,9 @@ namespace thread {
         return 0;
     }
 
-    int ConnectThread::notify(const void* data, size_t len) const
+    int ConnectThread::notify(int connectid) const
     {
-        return pair_[0]->write(data, len);
+        return pair_[0]->write(&connectid, sizeof(connectid));
     }
 }
 }

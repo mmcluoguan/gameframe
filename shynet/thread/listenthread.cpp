@@ -13,9 +13,9 @@ namespace thread {
     {
     }
 
-    int ListenThread::notify(const void* data, size_t len) const
+    int ListenThread::notify(int serverid) const
     {
-        return pair_[0]->write(data, len);
+        return pair_[0]->write(&serverid, sizeof(serverid));
     }
 
     static void pipeReadcb(struct bufferevent* bev, void* ptr)
@@ -31,19 +31,13 @@ namespace thread {
     void ListenThread::process(bufferevent* bev)
     {
         events::EventBuffer pbuf(bev);
-        char buf[sizeof(int)] = { 0 };
+        int serverid = 0;
         do {
-            size_t len = pbuf.read(&buf, sizeof(buf));
-            if (len == 0) {
-                break;
-            } else if (len != sizeof(buf)) {
+            size_t len = pbuf.read(&serverid, sizeof(serverid));
+            if (len == 0 || len != sizeof(serverid)) {
                 LOG_WARN << "ListenThread没有足够的数据";
+                break;
             } else {
-                int serverid = 0;
-                size_t index = 0;
-                memcpy(&serverid, buf + index, sizeof(serverid));
-                index += sizeof(serverid);
-
                 std::shared_ptr<net::ListenEvent> listenEv = utils::Singleton<net::ListenReactorMgr>::instance().find(serverid);
                 if (listenEv != nullptr) {
                     listenEv->set_event(base_, listenEv->listenfd(), EV_READ | EV_PERSIST);

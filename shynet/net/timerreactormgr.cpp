@@ -4,11 +4,11 @@
 
 namespace shynet {
 namespace net {
-    void TimerReactorMgr::notify(const void* data, size_t len)
+    void TimerReactorMgr::notify(int timerid)
     {
         std::shared_ptr<thread::TimerThread> tth = utils::Singleton<pool::ThreadPool>::instance().timerTh().lock();
         if (tth != nullptr) {
-            tth->notify(data, len);
+            tth->notify(timerid);
         } else
             LOG_WARN << "没有可用的 TimerThread";
     }
@@ -22,7 +22,7 @@ namespace net {
             times_.insert({ timerid, v });
             v->set_timerid(timerid);
         }
-        notify(&timerid, sizeof(timerid));
+        notify(timerid);
         return timerid;
     }
 
