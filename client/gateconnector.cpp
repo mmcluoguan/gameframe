@@ -6,6 +6,7 @@
 #include "shynet/net/connectreactormgr.h"
 #include "shynet/pool/threadpool.h"
 #include "shynet/utils/elapsed.h"
+#include <atomic>
 
 namespace client {
 GateConnector::GateConnector(std::shared_ptr<net::IPAddress> connect_addr,
@@ -48,10 +49,12 @@ GateConnector::~GateConnector()
 }
 void GateConnector::complete()
 {
-    LOG_INFO << "连接服务器gate成功 [ip:" << connect_addr()->ip() << ":" << connect_addr()->port() << "]";
+    static int count = 0;
+    count++;
+    LOG_INFO << count << "连接服务器gate成功 [ip:" << connect_addr()->ip() << ":" << connect_addr()->port() << "]";
+    //return;
     if (disconnect_ == nullptr) {
         //获取服务器列表
-        //send_proto(protocc::SERVERLIST_CLIENT_GATE_C);
         send_proto(ProtoMessage { protocc::SERVERLIST_CLIENT_GATE_C },
             { protocc::SERVERLIST_CLIENT_GATE_S,
                 [&](auto data, auto enves) -> int {
@@ -124,6 +127,9 @@ int GateConnector::serverlist_client_gate_s(std::shared_ptr<protocc::CommonObjec
 {
     protocc::serverlist_client_gate_s msgc;
     if (msgc.ParseFromString(data->msgdata()) == true) {
+        static int count = 0;
+        count++;
+        LOG_DEBUG << count << "获取服务器列表器结果";
         for (int i = 0; i < msgc.sifs_size(); i++) {
             const protocc::ServerInfo& sif = msgc.sifs(i);
             if (sif.st() == protocc::ServerType::LOGIN && login_id_ == 0) {
@@ -153,6 +159,10 @@ int GateConnector::selectserver_client_gate_s(std::shared_ptr<protocc::CommonObj
 {
     protocc::selectserver_client_gate_s msgs;
     if (msgs.ParseFromString(data->msgdata()) == true) {
+        static int count = 0;
+        count++;
+        //return 0;
+        LOG_DEBUG << count << "选择服务器结果";
         protocc::login_client_gate_c msgc;
         msgc.set_platform_key(platform_key_);
         send_proto({ protocc::LOGIN_CLIENT_GATE_C, &msgc },
@@ -160,7 +170,7 @@ int GateConnector::selectserver_client_gate_s(std::shared_ptr<protocc::CommonObj
                 [&](auto data, auto enves) -> int {
                     return login_client_gate_s(data, enves);
                 } });
-        LOG_DEBUG << "登陆 platform_key:" << platform_key_;
+        LOG_DEBUG << count << "登陆 platform_key:" << platform_key_;
     } else {
         std::stringstream stream;
         stream << "消息" << frmpub::Basic::msgname(data->msgid()) << "解析错误";
@@ -171,11 +181,12 @@ int GateConnector::selectserver_client_gate_s(std::shared_ptr<protocc::CommonObj
 int GateConnector::login_client_gate_s(std::shared_ptr<protocc::CommonObject> data,
     std::shared_ptr<std::stack<FilterData::Envelope>> enves)
 {
-    static int count = 0;
     protocc::login_client_gate_s msgc;
     if (msgc.ParseFromString(data->msgdata()) == true) {
-        LOG_DEBUG << count << "登录结果:" << msgc.result() << " aid:" << msgc.aid();
+        static int count = 0;
         count++;
+        LOG_DEBUG << count << "登录结果:" << msgc.result() << " aid:" << msgc.aid();
+        //return 0;
         if (msgc.result() == 0) {
             accountid_ = msgc.aid();
             if (msgc.roleid() == 0) {
@@ -252,9 +263,10 @@ int GateConnector::reconnect_client_gate_s(std::shared_ptr<protocc::CommonObject
 int client::GateConnector::createrole_client_gate_s(std::shared_ptr<protocc::CommonObject> data,
     std::shared_ptr<std::stack<FilterData::Envelope>> enves)
 {
+    static int count = 0;
     protocc::createrole_client_gate_s msgc;
     if (msgc.ParseFromString(data->msgdata()) == true) {
-        LOG_DEBUG << "创建角色结果:" << msgc.result();
+        LOG_DEBUG << count << "创建角色结果:" << msgc.result();
         if (msgc.result() == 0) {
             if (role_ == nullptr) {
                 role_ = std::make_shared<Role>();

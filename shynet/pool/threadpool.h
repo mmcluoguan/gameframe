@@ -40,6 +40,10 @@ namespace pool {
          * @brief 启动
         */
         void start();
+        /**
+         * @brief 停止
+        */
+        void stop();
 
         /**
          * @brief 添加任务到线程池公共的任务队列中

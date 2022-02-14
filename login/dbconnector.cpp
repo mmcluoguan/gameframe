@@ -139,8 +139,7 @@ int DbConnector::register_login_dbvisit_s(std::shared_ptr<protocc::CommonObject>
 {
     protocc::register_login_dbvisit_s msgc;
     if (msgc.ParseFromString(data->msgdata()) == true) {
-        if (msgc.result() == 0) {
-        }
+        LOG_DEBUG << "登录服注册结果:" << msgc.result();
     } else {
         std::stringstream stream;
         stream << "消息" << frmpub::Basic::msgname(data->msgid()) << "解析错误";

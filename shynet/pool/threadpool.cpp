@@ -16,29 +16,7 @@ namespace pool {
 
     ThreadPool::~ThreadPool()
     {
-        for (const auto& it : tifs_) {
-            it->stop();
-        }
-        {
-            std::lock_guard<std::mutex> lock(tasks_mutex_);
-            tasks_condvar_.notify_all();
-        }
-        int i = 0;
-        for (const auto& it : tifs_) {
-            std::thread::id id = it->thread()->get_id();
-            LOG_TRACE << "over thread:[" << i << "]:" << std::hash<std::thread::id>()(id) << " wait";
-            try {
-                if (it->thread()->joinable())
-                    it->thread()->join();
-            } catch (const std::exception& err) {
-                LOG_WARN << "over thread:[" << i << "]" << std::hash<std::thread::id>()(id) << " abort";
-                //分离异常终止的线程
-                it->thread()->detach();
-            }
-            LOG_TRACE << "over thread:[" << i << "]:" << std::hash<std::thread::id>()(id) << " complete";
-            i++;
-        }
-        tifs_.clear();
+        stop();
     }
 
     void ThreadPool::start()
@@ -110,6 +88,33 @@ namespace pool {
                 //等待ListenThread,ConnectThread,TimerThread,LuaThread,InotifyThread准备完成
                 pthread_barrier_wait(&g_barrier);
             });
+    }
+
+    void ThreadPool::stop()
+    {
+        for (const auto& it : tifs_) {
+            it->stop();
+        }
+        {
+            std::lock_guard<std::mutex> lock(tasks_mutex_);
+            tasks_condvar_.notify_all();
+        }
+        int i = 0;
+        for (const auto& it : tifs_) {
+            std::thread::id id = it->thread()->get_id();
+            LOG_TRACE << "over thread:[" << i << "]:" << std::hash<std::thread::id>()(id) << " wait";
+            try {
+                if (it->thread()->joinable())
+                    it->thread()->join();
+            } catch (const std::exception& err) {
+                LOG_WARN << "over thread:[" << i << "]" << std::hash<std::thread::id>()(id) << " abort";
+                //分离异常终止的线程
+                it->thread()->detach();
+            }
+            LOG_TRACE << "over thread:[" << i << "]:" << std::hash<std::thread::id>()(id) << " complete";
+            i++;
+        }
+        tifs_.clear();
     }
 }
 }

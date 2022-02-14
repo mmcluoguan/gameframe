@@ -130,10 +130,6 @@ namespace thread {
          * @brief 连接端不可靠udp层处理消息
         */
         void handler_connect_no_reliable(std::shared_ptr<net::ConnectEvent> cnt, char* buffer, ssize_t size);
-        /**
-         * @brief 线程结束标识
-        */
-        bool stop_ = false;
 
         std::mutex waitconnect_list_mtx_;
         /**
@@ -164,7 +160,7 @@ namespace thread {
         /**
          * @brief 更新毫秒时间
         */
-        int64_t updata_elapsed_ = 10;
+        int64_t updata_elapsed_ = 20;
         /**
          * @brief 线程开始时间
         */

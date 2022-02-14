@@ -30,9 +30,10 @@ namespace thread {
         int connectid = 0;
         do {
             size_t len = pbuf.read(&connectid, sizeof(connectid));
-            if (len == 0 || len != sizeof(connectid)) {
-                LOG_WARN << "ConnectThread没有足够的数据";
+            if (len == 0) {
                 break;
+            } else if (len != sizeof(connectid)) {
+                THROW_EXCEPTION("ConnectThread没有足够的数据");
             } else {
                 std::shared_ptr<net::ConnectEvent> connect = utils::Singleton<net::ConnectReactorMgr>::instance().find(connectid);
                 if (connect != nullptr) {

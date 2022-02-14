@@ -23,6 +23,8 @@ namespace net {
     }
     ListenEvent::~ListenEvent()
     {
+        if (listenfd_ != -1)
+            evutil_closesocket(listenfd_);
         if (ctx_ != nullptr)
             SSL_CTX_free(ctx_);
     }

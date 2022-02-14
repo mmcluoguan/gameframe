@@ -44,11 +44,11 @@ namespace protocol {
         /**
         * @brief 累计连接超时次数
         */
-        const int32_t send_connection_attempt_count = 12;
+        const int32_t send_connection_attempt_count = 10;
         /**
         * @brief 下次连接重试间隔ms
         */
-        const int32_t next_requset_interval = 100;
+        const int32_t next_requset_interval = 500;
         /**
          * @brief 当前连接状态
         */

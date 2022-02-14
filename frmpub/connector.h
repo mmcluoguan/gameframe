@@ -24,7 +24,7 @@ public:
     */
     Connector(std::shared_ptr<net::IPAddress> connect_addr,
         std::string name = "Connector",
-        __socket_type type = SOCK_DGRAM,
+        __socket_type type = SOCK_STREAM,
         bool enable_ssl = false,
         bool enable_ping = false,
         ssize_t heartSecond = 3,

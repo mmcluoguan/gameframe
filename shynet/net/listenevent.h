@@ -21,7 +21,7 @@ namespace net {
          * @param enable_ssl 是否启用ssl
         */
         ListenEvent(std::shared_ptr<net::IPAddress> listen_addr,
-            __socket_type type = SOCK_DGRAM,
+            __socket_type type = SOCK_STREAM,
             bool enable_ssl = false);
         ~ListenEvent();
 
@@ -104,7 +104,7 @@ namespace net {
         /**
          * @brief 侦听的服务器socket文件描述符
         */
-        int listenfd_ = 0;
+        int listenfd_ = -1;
         /**
          * @brief 侦听的服务器地址
         */

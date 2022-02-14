@@ -13,6 +13,9 @@
 extern const char* g_conf_node;
 
 namespace gate {
+
+extern std::atomic<int> ncount;
+
 LoginConnector::LoginConnector(std::shared_ptr<net::IPAddress> connect_addr)
     : frmpub::Connector(connect_addr, "LoginConnector")
 {
@@ -155,11 +158,11 @@ int LoginConnector::forward_login_client_c(std::shared_ptr<protocc::CommonObject
             }
 
             client->send_proto(data.get(), enves.get());
-            LOG_DEBUG << "发送账号id:" << client->accountid()
-                      << " platform_key:" << client->platform_key()
-                      << " 转发消息" << frmpub::Basic::msgname(data->msgid())
+            LOG_DEBUG << "转发消息" << frmpub::Basic::msgname(data->msgid())
                       << "到client[" << client->remote_addr()->ip() << ":"
-                      << client->remote_addr()->port() << "]";
+                      << client->remote_addr()->port() << "]"
+                      << "账号id:" << client->accountid()
+                      << " platform_key:" << client->platform_key();
         } else {
             std::stringstream stream;
             stream << "client fd:" << env.fd << " 已断开连接";

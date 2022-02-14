@@ -14,6 +14,7 @@
 #include "frmpub/protocc/login.pb.h"
 #include "frmpub/protocc/world.pb.h"
 #include "shynet/events/eventbuffer.h"
+#include "shynet/pool/threadpool.h"
 #include "shynet/utils/logger.h"
 #include <csignal>
 #include <stack>
@@ -96,6 +97,7 @@ private:
 */
 inline void default_sigcb(std::shared_ptr<events::EventBase> base, int signum)
 {
+    shynet::utils::Singleton<shynet::pool::ThreadPool>::instance().stop();
     if (signum == SIGINT) {
         struct timeval delay = { 2, 0 };
         LOG_INFO << "捕获到中断信号,程序将在2秒后安全退出";

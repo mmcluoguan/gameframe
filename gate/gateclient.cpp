@@ -13,6 +13,7 @@
 extern const char* g_conf_node;
 
 namespace gate {
+
 GateClient::GateClient(std::shared_ptr<net::IPAddress> remote_addr,
     std::shared_ptr<net::IPAddress> listen_addr,
     std::shared_ptr<events::EventBuffer> iobuf)
@@ -37,7 +38,7 @@ GateClient::~GateClient()
 void GateClient::preinput_handle(const std::shared_ptr<protocc::CommonObject> obj,
     std::shared_ptr<std::stack<FilterData::Envelope>> enves)
 {
-    LOG_DEBUG << "接收账号id:" << accountid_ << " 消息" << frmpub::Basic::msgname(obj->msgid());
+    LOG_INFO << "接收账号id:" << accountid_ << " 消息" << frmpub::Basic::msgname(obj->msgid());
 }
 
 int GateClient::default_handle(std::shared_ptr<protocc::CommonObject> obj, std::shared_ptr<std::stack<FilterData::Envelope>> enves)
@@ -207,6 +208,7 @@ int GateClient::serverlist_client_gate_c(std::shared_ptr<protocc::CommonObject> 
     send_proto(protocc::SERVERLIST_CLIENT_GATE_S, &msgs);
     return 0;
 }
+
 int GateClient::selectserver_client_gate_c(std::shared_ptr<protocc::CommonObject> data,
     std::shared_ptr<std::stack<FilterData::Envelope>> enves)
 {

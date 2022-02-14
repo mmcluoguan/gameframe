@@ -26,18 +26,21 @@ namespace thread {
     void UdpThread::process(bufferevent* bev)
     {
         events::EventBuffer pbuf(bev);
+        int ident = 0;
+        int targetid = 0;
         do {
-            int ident = 0;
-            int targetid = 0;
+
             size_t len = pbuf.read(&ident, sizeof(ident));
-            if (len == 0 || len != sizeof(ident)) {
-                LOG_WARN << "UdpThread没有足够的数据";
+            if (len == 0) {
                 break;
+            } else if (len != sizeof(ident)) {
+                THROW_EXCEPTION("UdpThread没有足够的数据");
             }
             len = pbuf.read(&targetid, sizeof(targetid));
-            if (len == 0 || len != sizeof(targetid)) {
-                LOG_WARN << "UdpThread没有足够的数据";
+            if (len == 0) {
                 break;
+            } else if (len != sizeof(targetid)) {
+                THROW_EXCEPTION("UdpThread没有足够的数据");
             }
             char buffer[MAXIMUM_MTU_SIZE];
             ssize_t ret;
@@ -84,6 +87,7 @@ namespace thread {
             }
         } while (true);
     }
+
     void UdpThread::handler_accept_reliable(std::shared_ptr<protocol::UdpSocket> sock, char* buffer, ssize_t size)
     {
         if (buffer[0] == (char)protocol::UdpMessageDefine::ID_CLOSE) {
@@ -233,6 +237,7 @@ namespace thread {
                         sock->curr_request_num++;
                         char msg[MAXIMUM_MTU_SIZE] { 0 };
                         msg[0] = static_cast<char>(protocol::UdpMessageDefine::ID_ATTEMPT_CONNECT);
+                        std::cout << "尝试连接ID_ATTEMPT_CONNECT" << std::endl;
                         sock->sendto(msg, MAXIMUM_MTU_SIZE);
                     }
                 }
@@ -244,7 +249,7 @@ namespace thread {
     void UdpThread::handler_connected(int64_t elapsed_num)
     {
         std::lock_guard<std::mutex> lock(connect_udp_mtx_);
-        if (accept_udp_layer_.empty() == false) {
+        if (connect_udp_layer_.empty() == false) {
             auto iter = connect_udp_layer_.begin();
             while (iter != connect_udp_layer_.end()) {
                 std::shared_ptr<protocol::UdpSocket> sock = iter->second.lock();
@@ -316,7 +321,7 @@ namespace thread {
 
     int UdpThread::stop()
     {
-        stop_ = true;
+        base_->loopexit();
         return 0;
     }
 

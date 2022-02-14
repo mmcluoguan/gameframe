@@ -88,23 +88,23 @@ bool DbClient::verify_register(const protocc::ServerInfo& sif)
     std::string key = shynet::utils::stringop::str_format("%s_%d", type.c_str(), sif.sid());
     std::unordered_map<std::string, std::string> info;
     try {
-        if (redis.exists(key) == 0) {
-            redis.hmset(key,
-                {
-                    std::make_pair("ip", sif.ip()),
-                    std::make_pair("port", std::to_string(sif.port())),
-                    std::make_pair("sid", std::to_string(sif.sid())),
-                    std::make_pair("type", type),
-                    std::make_pair("name", sif.name()),
-                });
-            return true;
-        } else {
+        //if (redis.exists(key) == 0) {
+        redis.hmset(key,
+            {
+                std::make_pair("ip", sif.ip()),
+                std::make_pair("port", std::to_string(sif.port())),
+                std::make_pair("sid", std::to_string(sif.sid())),
+                std::make_pair("type", type),
+                std::make_pair("name", sif.name()),
+            });
+        return true;
+        /*} else {
             redis.hgetall(key, std::inserter(info, info.begin()));
             if (sif.ip() != info["ip"] || std::to_string(sif.port()) != info["port"]) {
                 return false;
             }
             return true;
-        }
+        }*/
     } catch (const std::exception& err) {
         THROW_EXCEPTION(err.what());
     }
@@ -399,6 +399,7 @@ int DbClient::deletedata_to_dbvisit_c(std::shared_ptr<protocc::CommonObject> dat
 int DbClient::login_client_gate_c(std::shared_ptr<protocc::CommonObject> data,
     std::shared_ptr<std::stack<FilterData::Envelope>> enves)
 {
+
     protocc::login_client_gate_c msgc;
     if (msgc.ParseFromString(data->msgdata()) == true) {
         try {

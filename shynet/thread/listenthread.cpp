@@ -33,10 +33,12 @@ namespace thread {
         events::EventBuffer pbuf(bev);
         int serverid = 0;
         do {
+
             size_t len = pbuf.read(&serverid, sizeof(serverid));
-            if (len == 0 || len != sizeof(serverid)) {
-                LOG_WARN << "ListenThread没有足够的数据";
+            if (len == 0) {
                 break;
+            } else if (len != sizeof(serverid)) {
+                THROW_EXCEPTION("ListenThread没有足够的数据");
             } else {
                 std::shared_ptr<net::ListenEvent> listenEv = utils::Singleton<net::ListenReactorMgr>::instance().find(serverid);
                 if (listenEv != nullptr) {

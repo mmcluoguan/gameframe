@@ -45,9 +45,10 @@ int Role::input_handle(std::shared_ptr<protocc::CommonObject> obj, std::shared_p
 int Role::loadrole_client_gate_s(std::shared_ptr<protocc::CommonObject> data,
     std::shared_ptr<std::stack<FilterData::Envelope>> enves)
 {
-    static int count = 0;
     protocc::loadrole_client_gate_s msgs;
     if (msgs.ParseFromString(data->msgdata()) == true) {
+        static int count = 0;
+        count++;
         LOG_DEBUG << count << "加载角色结果:" << msgs.result()
                   << " aid:" << msgs.aid()
                   << " roleid:" << msgs.roleid()
@@ -55,7 +56,6 @@ int Role::loadrole_client_gate_s(std::shared_ptr<protocc::CommonObject> data,
                   << " gold:" << msgs.gold()
                   << " diamond:" << msgs.diamond()
                   << " lottery:" << msgs.lottery();
-        count++;
         accountid_ = msgs.aid();
         id_ = msgs.roleid();
         level_ = msgs.level();
@@ -83,13 +83,14 @@ int Role::loadrole_client_gate_s(std::shared_ptr<protocc::CommonObject> data,
 }
 int Role::loadgoods_client_gate_s(std::shared_ptr<protocc::CommonObject> data, std::shared_ptr<std::stack<FilterData::Envelope>> enves)
 {
-    static int count = 0;
     protocc::loadgoods_client_gate_s msgs;
     if (msgs.ParseFromString(data->msgdata()) == true) {
         goodsmap_.clear();
+        static int count = 0;
+        count++;
         LOG_DEBUG << count << "获取角色物品数量:" << msgs.goods_size()
                   << " roleid:" << id_;
-        count++;
+        ;
         for (int i = 0; i < msgs.goods_size(); i++) {
             goodsmap_[msgs.goods(i).id()] = {
                 msgs.goods(i).id(),
@@ -153,11 +154,11 @@ int Role::notice_info_clent_gate_g(std::shared_ptr<protocc::CommonObject> data, 
 
 int Role::notice_info_list_clent_gate_s(std::shared_ptr<protocc::CommonObject> data, std::shared_ptr<std::stack<FilterData::Envelope>> enves)
 {
-    static int count = 0;
     protocc::notice_info_list_clent_gate_s gmsg;
     if (gmsg.ParseFromString(data->msgdata()) == true) {
-        LOG_DEBUG << count << "区服广播信息 len:" << gmsg.datas_size();
+        static int count = 0;
         count++;
+        LOG_DEBUG << count << "区服广播信息 len:" << gmsg.datas_size();
         for (auto& item : gmsg.datas()) {
             auto second = std::chrono::seconds(item.time());
             auto tp = std::chrono::time_point<std::chrono::system_clock, std::chrono::seconds>(second);
@@ -218,11 +219,11 @@ int Role::setlevel_client_gate_s(std::shared_ptr<protocc::CommonObject> data, st
 }
 int Role::loademails_client_gate_s(std::shared_ptr<protocc::CommonObject> data, std::shared_ptr<std::stack<FilterData::Envelope>> enves)
 {
-    static int count = 0;
     protocc::loademails_client_gate_s gmsg;
     if (gmsg.ParseFromString(data->msgdata()) == true) {
-        LOG_DEBUG << count << "邮件列表 len:" << gmsg.emails_size();
+        static int count = 0;
         count++;
+        LOG_DEBUG << count << "邮件列表 len:" << gmsg.emails_size();
         for (auto& data : gmsg.emails()) {
             Email email;
             email.id = data.id();

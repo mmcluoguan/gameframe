@@ -78,6 +78,9 @@ namespace protocol {
             ikcp_release(kcp_);
             kcp_ = nullptr;
         }
+
+        if (fd != -1)
+            evutil_closesocket(fd);
     }
 
     void UdpSocket::init_pair_buffer(std::shared_ptr<events::EventBase> base)
@@ -100,12 +103,12 @@ namespace protocol {
     {
         int ret = -1;
         int waitnum = ikcp_waitsnd(kcp_);
-        if (waitnum < sndwnd_size_ * 2) {
+        if (waitnum <= sndwnd_size_ * 2) {
             ret = ikcp_send(kcp_, data, static_cast<int>(size));
             ikcp_flush(kcp_);
         } else {
             LOG_WARN << "网络拥堵,发送队列中等待的包数量:" << waitnum
-                     << " 发送窗口大小:" << sndwnd_size_;
+                     << " 发送窗口大小:" << sndwnd_size_ * 2;
         }
         return ret;
     }
@@ -149,8 +152,9 @@ namespace protocol {
         if (kcp_ != nullptr)
             ikcp_release(kcp_);
         kcp_ = ikcp_create(guid, this);
-        //ikcp_wndsize(kcp_, sndwnd_size_, rcvwnd_size_);
-        //ikcp_nodelay(kcp_, 1, 10, 2, 0);
+        ikcp_wndsize(kcp_, sndwnd_size_, rcvwnd_size_);
+        ikcp_nodelay(kcp_, 1, 20, 2, 1);
+        //ikcp_nodelay(kcp_, 0, 10, 0, 0);
         kcp_->output = udp_output_client;
     }
 }

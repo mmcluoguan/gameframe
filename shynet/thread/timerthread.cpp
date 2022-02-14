@@ -34,9 +34,10 @@ namespace thread {
         int timerid = 0;
         do {
             size_t len = pbuf.read(&timerid, sizeof(timerid));
-            if (len == 0 || len != sizeof(timerid)) {
-                LOG_WARN << "TimerThread没有足够的数据";
+            if (len == 0) {
                 break;
+            } else if (len != sizeof(timerid)) {
+                THROW_EXCEPTION("TimerThread没有足够的数据");
             } else {
                 std::shared_ptr<net::TimerEvent> timerEv = utils::Singleton<net::TimerReactorMgr>::instance().find(timerid);
                 if (timerEv != nullptr) {
