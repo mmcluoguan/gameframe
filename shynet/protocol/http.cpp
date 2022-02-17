@@ -1,6 +1,8 @@
 #include "shynet/protocol/http.h"
 #include "3rd/jemalloc/jemalloc.h"
+#include "shynet/pool/threadpool.h"
 #include "shynet/protocol/filterproces.h"
+#include "shynet/task/acceptreadiotask.h"
 #include "shynet/utils/logger.h"
 #include <cstring>
 
@@ -11,7 +13,7 @@ namespace protocol {
     {
     }
 
-    net::InputResult Http::process()
+    net::InputResult Http::process(std::function<void(std::unique_ptr<char[]>, size_t)> cb)
     {
         std::shared_ptr<events::Streambuff> inputbuffer = filter_->iobuf()->inputbuffer();
         if (inputbuffer->length() >= filter_->max_reve_buf_size) {
@@ -21,11 +23,11 @@ namespace protocol {
         std::shared_ptr<events::Streambuff> restore = std::make_shared<events::Streambuff>();
         while (inputbuffer->length() > 0) {
             if (filter_->ident() == FilterProces::Identity::ACCEPTOR) {
-                net::InputResult ret = process_requset(inputbuffer, restore);
+                net::InputResult ret = process_requset(inputbuffer, restore, cb);
                 if (ret != net::InputResult::SUCCESS)
                     return ret;
             } else if (filter_->ident() == FilterProces::Identity::CONNECTOR) {
-                net::InputResult ret = process_responses(inputbuffer, restore);
+                net::InputResult ret = process_responses(inputbuffer, restore, cb);
                 if (ret != net::InputResult::SUCCESS)
                     return ret;
             }
@@ -34,7 +36,8 @@ namespace protocol {
     }
 
     net::InputResult Http::process_requset(std::shared_ptr<events::Streambuff> inputbuffer,
-        std::shared_ptr<events::Streambuff> restore)
+        std::shared_ptr<events::Streambuff> restore,
+        std::function<void(std::unique_ptr<char[]>, size_t)> cb)
     {
         if (requset_.step() == Step::UNINIT) {
             size_t len;
@@ -86,10 +89,7 @@ namespace protocol {
                     inputbuffer->remove(original_data.get(), data_length);
                     restore.reset(new events::Streambuff);
                     inputbuffer->unlock();
-                    int ret = filter_->message_handle(original_data.get(), data_length);
-                    if (ret == -1) {
-                        return net::InputResult::INITIATIVE_CLOSE;
-                    }
+                    cb(std::move(original_data), data_length);
                     requset_.set_step(Step::UNINIT);
                 } else {
                     LOG_TRACE << "数据包数据不足,需要data_length:" << data_length << " 当前:" << inputbuffer->length();
@@ -102,7 +102,8 @@ namespace protocol {
     }
 
     net::InputResult Http::process_responses(std::shared_ptr<events::Streambuff> inputbuffer,
-        std::shared_ptr<events::Streambuff> restore)
+        std::shared_ptr<events::Streambuff> restore,
+        std::function<void(std::unique_ptr<char[]>, size_t)> cb)
     {
         if (responses_.step() == Step::UNINIT) {
             size_t len;
@@ -147,10 +148,7 @@ namespace protocol {
                     inputbuffer->remove(original_data.get(), data_length);
                     restore.reset(new events::Streambuff);
                     inputbuffer->unlock();
-                    int ret = filter_->message_handle(original_data.get(), data_length);
-                    if (ret == -1) {
-                        return net::InputResult::INITIATIVE_CLOSE;
-                    }
+                    cb(std::move(original_data), data_length);
                     responses_.set_step(Step::UNINIT);
                 } else {
                     LOG_TRACE << "数据包数据不足,需要data_length:" << data_length << " 当前:" << inputbuffer->length();

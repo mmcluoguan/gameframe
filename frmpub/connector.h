@@ -15,21 +15,11 @@ public:
      * @brief 
      * @param connect_addr 需要连接的服务器地址
      * @param name 连接器名称
-     * @param type SOCK_STREAM SOCK_DGRAM
-     * @param enable_ssl 是否启用ssl
-     * @param enable_ping 是否发送心跳
-     * @param heartSecond 发送心跳时间间隔(s)
-     * @param pt 协议类型 SHY,HTTP,WEBSOCKET
-     * @param pd 数据封包类型 PROTOBUF,JSON,NATIVE
+     * @param options 网络配置选项
     */
     Connector(std::shared_ptr<net::IPAddress> connect_addr,
         std::string name = "Connector",
-        __socket_type type = SOCK_STREAM,
-        bool enable_ssl = false,
-        bool enable_ping = false,
-        ssize_t heartSecond = 3,
-        protocol::FilterProces::ProtoType pt = protocol::FilterProces::ProtoType::SHY,
-        FilterData::ProtoData pd = FilterData::ProtoData::PROTOBUF);
+        NetConfigOptions options = {});
     ~Connector();
 
     /**
@@ -52,7 +42,7 @@ public:
     返回INITIATIVE_CLOSE服务器将关闭底层socket，并触发close(CLIENT_CLOSE)
     返回PASSIVE_CLOSE服务器将关闭底层socket，并触发close(SERVER_CLOSE)
     */
-    net::InputResult input() override;
+    net::InputResult input(std::function<void(std::unique_ptr<char[]>, size_t)> cb) override;
     /**
      * @brief 消息数据封包处理
      * @param original_data 指定数据的指针

@@ -73,7 +73,7 @@ namespace protocol {
          * @brief 解析websocket数据流协议
          * @return 管理io缓冲数据处理结果
         */
-        net::InputResult process();
+        net::InputResult process(std::function<void(std::unique_ptr<char[]>, size_t)> cb);
 
         /**
          * @brief 解析请求websocket数据流
@@ -99,7 +99,8 @@ namespace protocol {
          * @return 管理io缓冲数据处理结果
         */
         net::InputResult process_data(std::shared_ptr<events::Streambuff> inputbuffer,
-            std::shared_ptr<events::Streambuff> restore);
+            std::shared_ptr<events::Streambuff> restore,
+            std::function<void(std::unique_ptr<char[]>, size_t)> cb);
 
         /**
          * @brief http协议升级

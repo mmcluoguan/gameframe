@@ -17,17 +17,12 @@ public:
          * @param remote_addr 客户端连接地址
          * @param listen_addr 服务器监听地址
          * @param iobuf 管理io读写缓冲区
-         * @param enable_ping 是否发送心跳
-         * @param heartSecond 发送心跳时间间隔(s)
-         * @param pt 协议类型 SHY,HTTP,WEBSOCKET
-         * @param pd 数据封包 PROTOBUF,JSON,NATIVE
+         * @param options 网络配置选项
         */
     Client(std::shared_ptr<net::IPAddress> remote_addr,
         std::shared_ptr<net::IPAddress> listen_addr,
         std::shared_ptr<events::EventBuffer> iobuf,
-        bool enable_ping = false, ssize_t heartSecond = 3,
-        protocol::FilterProces::ProtoType pt = protocol::FilterProces::ProtoType::SHY,
-        FilterData::ProtoData pd = FilterData::ProtoData::PROTOBUF);
+        NetConfigOptions options = {});
     ~Client();
 
     /**
@@ -46,7 +41,7 @@ public:
     返回INITIATIVE_CLOSE服务器将关闭底层socket，并触发close(CLIENT_CLOSE)
     返回PASSIVE_CLOSE服务器将关闭底层socket，并触发close(SERVER_CLOSE)
     */
-    net::InputResult input() override;
+    net::InputResult input(std::function<void(std::unique_ptr<char[]>, size_t)> cb) override;
     /**
      * @brief 消息数据封包处理
      * @param original_data 指定数据的指针

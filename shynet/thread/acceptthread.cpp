@@ -94,22 +94,18 @@ namespace thread {
 
     int AcceptThread::run()
     {
-        try {
-            LOG_TRACE << "AcceptThread::run threadtype:" << (int)type();
+        LOG_TRACE << "AcceptThread::run threadtype:" << (int)type();
 
-            base_ = std::make_shared<events::EventBase>();
-            base_->make_pair_buffer(pair_);
-            pair_[0]->enabled(EV_WRITE);
-            pair_[0]->disable(EV_READ);
-            pair_[1]->enabled(EV_READ);
-            pair_[1]->disable(EV_WRITE);
-            pair_[1]->setcb(pipeReadcb, nullptr, nullptr, this);
-            base_->loop(EVLOOP_NO_EXIT_ON_EMPTY);
-            pair_[0].reset();
-            pair_[1].reset();
-        } catch (const std::exception& err) {
-            utils::stuff::print_exception(err);
-        }
+        base_ = std::make_shared<events::EventBase>();
+        base_->make_pair_buffer(pair_);
+        pair_[0]->enabled(EV_WRITE);
+        pair_[0]->disable(EV_READ);
+        pair_[1]->enabled(EV_READ);
+        pair_[1]->disable(EV_WRITE);
+        pair_[1]->setcb(pipeReadcb, nullptr, nullptr, this);
+        base_->loop(EVLOOP_NO_EXIT_ON_EMPTY);
+        pair_[0].reset();
+        pair_[1].reset();
         return 0;
     }
     int AcceptThread::stop()

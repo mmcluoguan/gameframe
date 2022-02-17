@@ -58,7 +58,7 @@ DbClient::~DbClient()
         THROW_EXCEPTION(err.what());
     }
     std::string str;
-    if (active() == net::CloseType::SERVER_CLOSE) {
+    if (active() == net::CloseType::SERVER_CLOSE || active() == net::CloseType::TIMEOUT_CLOSE) {
         str = "服务器dbvisit主动关闭连接";
     } else {
         str = frmpub::Basic::connectname(sif().st()) + std::string("客户端主动关闭连接");
@@ -71,7 +71,7 @@ int DbClient::default_handle(std::shared_ptr<protocc::CommonObject> obj, std::sh
     //通知lua的onMessage函数
     shynet::utils::Singleton<lua::LuaEngine>::instance().append(
         std::make_shared<frmpub::OnMessageTask<DbClient>>(
-            std::dynamic_pointer_cast<DbClient>(shared_from_this()), obj, enves));
+            std::dynamic_pointer_cast<DbClient>(FilterData::shared_from_this()), obj, enves));
     return 0;
 }
 

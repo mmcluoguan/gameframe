@@ -112,9 +112,9 @@ namespace net {
         }
     }
 
-    InputResult ConnectEvent::input()
+    InputResult ConnectEvent::input(std::function<void(std::unique_ptr<char[]>, size_t)> cb)
     {
-        return process();
+        return process(cb);
     }
 
     bool ConnectEvent::enable_check() const
@@ -138,10 +138,11 @@ namespace net {
 
     uint32_t ConnectEvent::fd() const
     {
-        auto ptr = iobuf();
-        if (ptr != nullptr)
-            return ptr->fd();
-        return -1;
+        if (type_ == SOCK_STREAM) {
+            return iobuf()->fd();
+        } else {
+            return udpsocket_->guid();
+        }
     }
 }
 }

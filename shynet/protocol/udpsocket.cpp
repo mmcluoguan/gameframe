@@ -1,5 +1,6 @@
 #include "shynet/protocol/udpsocket.h"
 #include "shynet/basic.h"
+#include "shynet/net/timerreactormgr.h"
 #include "shynet/pool/threadpool.h"
 #include "shynet/task/acceptreadiotask.h"
 #include "shynet/task/connectreadiotask.h"
@@ -37,15 +38,44 @@ namespace protocol {
         if (sock->ident() == FilterProces::Identity::ACCEPTOR) {
             auto aptnewfd = sock->client.lock();
             if (aptnewfd) {
-                std::shared_ptr<task::AcceptReadIoTask> io = std::make_shared<task::AcceptReadIoTask>(aptnewfd);
-                utils::Singleton<pool::ThreadPool>::instance().appendwork(sock->guid(), io);
+                if (aptnewfd->enable_check()) {
+                    //延迟检测与客户端连接状态的计时处理器时间
+                    auto heart = utils::Singleton<net::TimerReactorMgr>::instance().find(aptnewfd->check_timeid());
+                    if (heart) {
+                        heart->set_val({ aptnewfd->check_second(), 0L });
+                    }
+                }
+                net::InputResult ret = aptnewfd->input([aptnewfd](std::unique_ptr<char[]> data, size_t len) {
+                    std::shared_ptr<task::AcceptReadIoTask> io
+                        = std::make_shared<task::AcceptReadIoTask>(aptnewfd, std::move(data), len);
+                    utils::Singleton<pool::ThreadPool>::instance().appendwork(aptnewfd->iobuf()->fd(), io);
+                });
+                if (ret == net::InputResult::INITIATIVE_CLOSE) {
+                    aptnewfd->close(net::CloseType::SERVER_CLOSE);
+                } else if (ret == net::InputResult::PASSIVE_CLOSE) {
+                    aptnewfd->close(net::CloseType::CLIENT_CLOSE);
+                }
             }
         } else if (sock->ident() == FilterProces::Identity::CONNECTOR) {
             auto shconector = sock->cnev.lock();
             if (shconector) {
-                std::shared_ptr<task::ConnectReadIoTask> io
-                    = std::make_shared<task::ConnectReadIoTask>(shconector);
-                utils::Singleton<pool::ThreadPool>::instance().appendwork(sock->guid(), io);
+                if (shconector->enable_check()) {
+                    //延迟检测与服务器连接状态的计时处理器时间
+                    auto heart = utils::Singleton<net::TimerReactorMgr>::instance().find(shconector->check_timeid());
+                    if (heart) {
+                        heart->set_val({ shconector->check_second(), 0L });
+                    }
+                }
+                net::InputResult ret = shconector->input([shconector](std::unique_ptr<char[]> data, size_t len) {
+                    std::shared_ptr<task::ConnectReadIoTask> io
+                        = std::make_shared<task::ConnectReadIoTask>(shconector, std::move(data), len);
+                    utils::Singleton<pool::ThreadPool>::instance().appendwork(shconector->iobuf()->fd(), io);
+                });
+                if (ret == net::InputResult::INITIATIVE_CLOSE) {
+                    shconector->close(net::CloseType::CLIENT_CLOSE);
+                } else if (ret == net::InputResult::PASSIVE_CLOSE) {
+                    shconector->close(net::CloseType::SERVER_CLOSE);
+                }
             }
         }
     }
@@ -79,7 +109,7 @@ namespace protocol {
             kcp_ = nullptr;
         }
 
-        if (fd != -1)
+        if (fd != -1 && ident_ == FilterProces::Identity::CONNECTOR)
             evutil_closesocket(fd);
     }
 

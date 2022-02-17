@@ -5,18 +5,13 @@
 namespace frmpub {
 Connector::Connector(std::shared_ptr<net::IPAddress> connect_addr,
     std::string name,
-    __socket_type type,
-    bool enable_ssl,
-    bool enable_ping,
-    ssize_t heartSecond,
-    protocol::FilterProces::ProtoType pt,
-    FilterData::ProtoData pd)
-    : net::ConnectEvent(connect_addr, pt, type, enable_ssl, false)
-    , FilterData(pd)
+    NetConfigOptions opt)
+    : net::ConnectEvent(connect_addr, opt.pt, opt.type, opt.enable_ssl, opt.enable_check, opt.check_second)
+    , FilterData(opt.pd)
 {
     name_ = name;
-    enable_ping_ = enable_ping;
-    heartSecond_ = heartSecond;
+    enable_ping_ = opt.enable_ping;
+    heartSecond_ = opt.heartSecond;
     filter_ = this;
 }
 Connector::~Connector()
@@ -36,14 +31,14 @@ void Connector::success()
         ping_timer_ = pt;
     }
 }
-net::InputResult Connector::input()
+net::InputResult Connector::input(std::function<void(std::unique_ptr<char[]>, size_t)> cb)
 {
     //有数据接收到，因此延迟发送心跳计时器时间
     std::shared_ptr<PingTimer> pt = ping_timer_.lock();
     if (pt != nullptr) {
         pt->set_val({ heartSecond_, 0L });
     }
-    return net::ConnectEvent::input();
+    return net::ConnectEvent::input(cb);
 }
 
 int Connector::message_handle(char* original_data, size_t datalen)

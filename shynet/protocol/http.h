@@ -28,7 +28,7 @@ namespace protocol {
          * @brief 解析http数据流协议
          * @return 管理io缓冲数据处理结果
         */
-        net::InputResult process();
+        net::InputResult process(std::function<void(std::unique_ptr<char[]>, size_t)> cb);
         /**
          * @brief 解析请求http数据流
          * @param inputbuffer io缓冲
@@ -36,7 +36,8 @@ namespace protocol {
          * @return 管理io缓冲数据处理结果
         */
         net::InputResult process_requset(std::shared_ptr<events::Streambuff> inputbuffer,
-            std::shared_ptr<events::Streambuff> restore);
+            std::shared_ptr<events::Streambuff> restore,
+            std::function<void(std::unique_ptr<char[]>, size_t)> cb);
 
         /**
          * @brief 解析响应http数据流
@@ -45,7 +46,8 @@ namespace protocol {
          * @return 管理io缓冲数据处理结果
         */
         net::InputResult process_responses(std::shared_ptr<events::Streambuff> inputbuffer,
-            std::shared_ptr<events::Streambuff> restore);
+            std::shared_ptr<events::Streambuff> restore,
+            std::function<void(std::unique_ptr<char[]>, size_t)> cb);
 
         /**
          * @brief 发送响应http数据

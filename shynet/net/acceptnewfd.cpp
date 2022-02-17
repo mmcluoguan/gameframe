@@ -16,9 +16,9 @@ namespace net {
         check_second_ = check_second;
     }
 
-    InputResult AcceptNewFd::input()
+    InputResult AcceptNewFd::input(std::function<void(std::unique_ptr<char[]>, size_t)> cb)
     {
-        return process();
+        return process(cb);
     }
 
     std::shared_ptr<IPAddress> AcceptNewFd::remote_addr() const

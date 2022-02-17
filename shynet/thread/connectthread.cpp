@@ -75,6 +75,7 @@ namespace thread {
                 THROW_EXCEPTION("call bufferevent_socket_connect")
             }
         }
+        buffer->set_fd(bufferevent_getfd(buffer->buffer()));
     }
 
     void ConnectThread::udp_connect(std::shared_ptr<net::ConnectEvent> connect)
@@ -89,23 +90,19 @@ namespace thread {
 
     int ConnectThread::run()
     {
-        try {
-            LOG_TRACE << "ConnectThread::run threadtype:" << (int)type();
+        LOG_TRACE << "ConnectThread::run threadtype:" << (int)type();
 
-            base_ = std::make_shared<events::EventBase>();
-            base_->make_pair_buffer(pair_);
-            pair_[0]->enabled(EV_WRITE);
-            pair_[0]->disable(EV_READ);
-            pair_[1]->enabled(EV_READ);
-            pair_[1]->disable(EV_WRITE);
-            pair_[1]->setcb(pipeReadcb, nullptr, nullptr, this);
-            pthread_barrier_wait(&g_barrier);
-            base_->loop(EVLOOP_NO_EXIT_ON_EMPTY);
-            pair_[0].reset();
-            pair_[1].reset();
-        } catch (const std::exception& err) {
-            utils::stuff::print_exception(err);
-        }
+        base_ = std::make_shared<events::EventBase>();
+        base_->make_pair_buffer(pair_);
+        pair_[0]->enabled(EV_WRITE);
+        pair_[0]->disable(EV_READ);
+        pair_[1]->enabled(EV_READ);
+        pair_[1]->disable(EV_WRITE);
+        pair_[1]->setcb(pipeReadcb, nullptr, nullptr, this);
+        pthread_barrier_wait(&g_barrier);
+        base_->loop(EVLOOP_NO_EXIT_ON_EMPTY);
+        pair_[0].reset();
+        pair_[1].reset();
         return 0;
     }
     int ConnectThread::stop()

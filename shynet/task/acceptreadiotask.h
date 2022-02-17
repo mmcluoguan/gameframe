@@ -15,7 +15,8 @@ namespace task {
          * @brief 构造
          * @param newfd 接收客户端数据处理器
         */
-        explicit AcceptReadIoTask(std::weak_ptr<net::AcceptNewFd> newfd);
+        explicit AcceptReadIoTask(std::shared_ptr<net::AcceptNewFd> newfd,
+            std::unique_ptr<char[]> complete_data, size_t length);
         ~AcceptReadIoTask() = default;
 
         /**
@@ -27,7 +28,9 @@ namespace task {
         /**
          * @brief 接收客户端数据处理器
         */
-        std::weak_ptr<net::AcceptNewFd> newfd_;
+        std::shared_ptr<net::AcceptNewFd> newfd_;
+        std::unique_ptr<char[]> complete_data_;
+        size_t complete_data_length_;
     };
 }
 }

@@ -17,7 +17,16 @@ namespace gate {
 GateClient::GateClient(std::shared_ptr<net::IPAddress> remote_addr,
     std::shared_ptr<net::IPAddress> listen_addr,
     std::shared_ptr<events::EventBuffer> iobuf)
-    : frmpub::Client(remote_addr, listen_addr, iobuf, false, 0, shynet::protocol::FilterProces::ProtoType::WEBSOCKET)
+    : frmpub::Client(remote_addr, listen_addr, iobuf,
+        frmpub::NetConfigOptions {
+            SOCK_DGRAM,
+            true,
+            false,
+            3,
+            5,
+            false,
+            protocol::FilterProces::ProtoType::WEBSOCKET,
+        })
 {
     LOG_INFO << "新客户端连接 [ip:" << remote_addr->ip() << ":" << remote_addr->port() << "]";
 
@@ -31,7 +40,10 @@ GateClient::GateClient(std::shared_ptr<net::IPAddress> remote_addr,
 
 GateClient::~GateClient()
 {
-    LOG_INFO << (active() == net::CloseType::SERVER_CLOSE ? "服务器gate主动关闭连接 " : "客户端主动关闭连接 ")
+    LOG_INFO << (active() == net::CloseType::SERVER_CLOSE
+                || active() == net::CloseType::TIMEOUT_CLOSE
+            ? "服务器gate主动关闭连接 "
+            : "客户端主动关闭连接 ")
              << "[ip:" << remote_addr()->ip() << ":" << remote_addr()->port() << "]";
 }
 
@@ -51,7 +63,7 @@ int GateClient::default_handle(std::shared_ptr<protocc::CommonObject> obj, std::
         //通知lua的onMessage函数
         shynet::utils::Singleton<lua::LuaEngine>::instance().append(
             std::make_shared<frmpub::OnMessageTask<GateClient>>(
-                std::dynamic_pointer_cast<GateClient>(shared_from_this()), obj, enves));
+                std::dynamic_pointer_cast<GateClient>(FilterData::shared_from_this()), obj, enves));
     } else {
         std::stringstream stream;
         stream << "非法消息" << obj->msgid();

@@ -2,21 +2,19 @@
 
 namespace shynet {
 namespace task {
-    AcceptReadIoTask::AcceptReadIoTask(std::weak_ptr<net::AcceptNewFd> newfd)
+    AcceptReadIoTask::AcceptReadIoTask(std::shared_ptr<net::AcceptNewFd> newfd,
+        std::unique_ptr<char[]> complete_data, size_t length)
     {
         newfd_ = newfd;
+        complete_data_ = std::move(complete_data);
+        complete_data_length_ = length;
     }
 
     void AcceptReadIoTask::operator()()
     {
-        std::shared_ptr<net::AcceptNewFd> aptnewfd = newfd_.lock();
-        if (aptnewfd != nullptr) {
-            net::InputResult ret = aptnewfd->input();
-            if (ret == net::InputResult::INITIATIVE_CLOSE) {
-                aptnewfd->close(net::CloseType::SERVER_CLOSE);
-            } else if (ret == net::InputResult::PASSIVE_CLOSE) {
-                aptnewfd->close(net::CloseType::CLIENT_CLOSE);
-            }
+        int ret = newfd_->message_handle(complete_data_.get(), complete_data_length_);
+        if (ret == -1) {
+            newfd_->close(net::CloseType::SERVER_CLOSE);
         }
     }
 }

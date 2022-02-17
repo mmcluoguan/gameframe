@@ -33,7 +33,7 @@ LoginClient::LoginClient(std::shared_ptr<net::IPAddress> remote_addr,
 LoginClient::~LoginClient()
 {
     std::string str;
-    if (active() == net::CloseType::SERVER_CLOSE) {
+    if (active() == net::CloseType::SERVER_CLOSE || active() == net::CloseType::TIMEOUT_CLOSE) {
         str = "服务器login主动关闭连接";
     } else {
         str = frmpub::Basic::connectname(sif().st()) + "客户端主动关闭连接";
@@ -46,7 +46,7 @@ int LoginClient::default_handle(std::shared_ptr<protocc::CommonObject> obj, std:
     //通知lua的onMessage函数
     shynet::utils::Singleton<lua::LuaEngine>::instance().append(
         std::make_shared<frmpub::OnMessageTask<LoginClient>>(
-            std::dynamic_pointer_cast<LoginClient>(shared_from_this()), obj, enves));
+            std::dynamic_pointer_cast<LoginClient>(FilterData::shared_from_this()), obj, enves));
     return 0;
 }
 

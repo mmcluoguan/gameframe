@@ -26,7 +26,7 @@ LogClient::LogClient(std::shared_ptr<net::IPAddress> remote_addr,
 LogClient::~LogClient()
 {
     std::string str;
-    if (active() == net::CloseType::SERVER_CLOSE) {
+    if (active() == net::CloseType::SERVER_CLOSE || active() == net::CloseType::TIMEOUT_CLOSE) {
         str = "服务器log主动关闭连接";
     } else {
         str = "客户端主动关闭连接";

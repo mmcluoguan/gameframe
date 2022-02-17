@@ -11,7 +11,16 @@
 namespace client {
 GateConnector::GateConnector(std::shared_ptr<net::IPAddress> connect_addr,
     std::shared_ptr<DisConnectData> disconnect)
-    : frmpub::Connector(connect_addr, "GateConnector", SOCK_DGRAM, false, false, 5L, shynet::protocol::FilterProces::ProtoType::WEBSOCKET)
+    : frmpub::Connector(connect_addr, "GateConnector",
+        frmpub::NetConfigOptions {
+            SOCK_DGRAM,
+            true,
+            true,
+            3,
+            5,
+            false,
+            protocol::FilterProces::ProtoType::WEBSOCKET,
+        })
 {
     disconnect_ = disconnect;
     if (disconnect_ != nullptr) {
@@ -204,7 +213,7 @@ int GateConnector::login_client_gate_s(std::shared_ptr<protocc::CommonObject> da
                 if (role_ == nullptr) {
                     role_ = std::make_shared<Role>();
                 }
-                role_->set_gate(std::dynamic_pointer_cast<GateConnector>(shared_from_this()));
+                role_->set_gate(std::dynamic_pointer_cast<GateConnector>(FilterData::shared_from_this()));
                 role_->set_id(msgc.roleid());
                 role_->set_accountid(accountid_);
                 protocc::loadrole_client_gate_c msg;
@@ -271,7 +280,7 @@ int client::GateConnector::createrole_client_gate_s(std::shared_ptr<protocc::Com
             if (role_ == nullptr) {
                 role_ = std::make_shared<Role>();
             }
-            role_->set_gate(std::dynamic_pointer_cast<GateConnector>(shared_from_this()));
+            role_->set_gate(std::dynamic_pointer_cast<GateConnector>(FilterData::shared_from_this()));
             role_->set_id(msgc.roleid());
             role_->set_accountid(accountid_);
             //加载角色数据

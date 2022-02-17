@@ -1,6 +1,9 @@
 #include "shynet/thread/udpthread.h"
+#include "shynet/net/acceptheartbeat.h"
+#include "shynet/net/connectheartbeat.h"
 #include "shynet/net/connectreactormgr.h"
 #include "shynet/net/listenreactormgr.h"
+#include "shynet/net/timerreactormgr.h"
 #include "shynet/utils/logger.h"
 #include "shynet/utils/singleton.h"
 #include "shynet/utils/stuff.h"
@@ -112,7 +115,6 @@ namespace thread {
         if (buffer[0] == (char)protocol::UdpMessageDefine::ID_ATTEMPT_CONNECT) {
             uint32_t guid;
             utils::stuff::random(&guid, sizeof(uint32_t));
-            std::cout << "ID_ATTEMPT_CONNECT:" << guid << std::endl;
             char msg[MAXIMUM_MTU_SIZE] { 0 };
             msg[0] = (char)protocol::UdpMessageDefine::ID_ATTEMPT_CONNECT_ACK;
             guid = htonl(guid);
@@ -131,11 +133,19 @@ namespace thread {
             sock->addr = *newfdAddr;
             sock->set_guid(guid);
             sock->init_pair_buffer(base_);
+            sock->output_buffer->set_fd(guid);
             sock->client = apnf->accept_newfd(newfdAddr, sock->output_buffer);
             auto shclient = sock->client.lock();
             if (shclient) {
                 shclient->set_udpsock(sock);
                 add_accept_udp(*newfdAddr, sock);
+                if (shclient->enable_check()) {
+                    //设置检测与客户端连接状态计时器
+                    std::shared_ptr<net::AcceptHeartbeat> ht = std::make_shared<net::AcceptHeartbeat>(
+                        shclient, timeval { shclient->check_second(), 0L });
+                    int id = utils::Singleton<net::TimerReactorMgr>::instance().add(ht);
+                    shclient->set_check_timeid(id);
+                }
             }
         }
     }
@@ -193,23 +203,36 @@ namespace thread {
             sock->set_guid(guid);
             sock->st = protocol::UdpSocket::CONNECTSUCCESS;
             sock->init_pair_buffer(base_);
+            sock->output_buffer->set_fd(guid);
             cnt->set_iobuf(sock->output_buffer);
             add_connect_udp(guid, sock);
             //发送第3次握手
             buffer[0] = (char)protocol::UdpMessageDefine::ID_CONNECT;
             sock->sendto(buffer, MAXIMUM_MTU_SIZE);
+            if (cnt->enable_check()) {
+                //设置检测与服务器连接状态计时处理器
+                std::shared_ptr<net::ConnectHeartbeat> ht
+                    = std::make_shared<net::ConnectHeartbeat>(
+                        cnt, timeval { cnt->check_second(), 0L });
+                int id = utils::Singleton<net::TimerReactorMgr>::instance().add(ht);
+                cnt->set_check_timeid(id);
+            }
             cnt->success();
         }
     }
 
     static void time_out(evutil_socket_t fd, short what, void* arg)
     {
-        UdpThread* rtk = reinterpret_cast<UdpThread*>(arg);
-        auto elapsed = std::chrono::steady_clock::now() - rtk->start_time();
-        int64_t elapsed_num = std::chrono::duration_cast<std::chrono::milliseconds>(elapsed).count();
-        rtk->handler_waitconnenct(elapsed_num);
-        rtk->handler_connected(elapsed_num);
-        rtk->handler_accpeted(elapsed_num);
+        try {
+            UdpThread* rtk = reinterpret_cast<UdpThread*>(arg);
+            auto elapsed = std::chrono::steady_clock::now() - rtk->start_time();
+            int64_t elapsed_num = std::chrono::duration_cast<std::chrono::milliseconds>(elapsed).count();
+            rtk->handler_waitconnenct(elapsed_num);
+            rtk->handler_connected(elapsed_num);
+            rtk->handler_accpeted(elapsed_num);
+        } catch (const std::exception& err) {
+            utils::stuff::print_exception(err);
+        }
     }
 
     void UdpThread::handler_waitconnenct(int64_t elapsed_num)
@@ -237,7 +260,6 @@ namespace thread {
                         sock->curr_request_num++;
                         char msg[MAXIMUM_MTU_SIZE] { 0 };
                         msg[0] = static_cast<char>(protocol::UdpMessageDefine::ID_ATTEMPT_CONNECT);
-                        std::cout << "尝试连接ID_ATTEMPT_CONNECT" << std::endl;
                         sock->sendto(msg, MAXIMUM_MTU_SIZE);
                     }
                 }
@@ -294,28 +316,24 @@ namespace thread {
 
     int UdpThread::run()
     {
-        try {
-            LOG_TRACE << "AcceptThread::run threadtype:" << (int)type();
-            start_time_ = std::chrono::steady_clock::now();
-            base_ = std::make_shared<events::EventBase>();
-            base_->make_pair_buffer(pair_);
-            pair_[0]->enabled(EV_WRITE);
-            pair_[0]->disable(EV_READ);
-            pair_[1]->enabled(EV_READ);
-            pair_[1]->disable(EV_WRITE);
-            pair_[1]->setcb(pipeReadcb, nullptr, nullptr, this);
-            updata_timer_ = event_new(base_->base(), -1, EV_TIMEOUT | EV_PERSIST, time_out, this);
-            struct timeval val {
-                0, updata_elapsed_ * 1000
-            };
-            event_add(updata_timer_, &val);
-            base_->loop(EVLOOP_NO_EXIT_ON_EMPTY);
-            event_del(updata_timer_);
-            pair_[0].reset();
-            pair_[1].reset();
-        } catch (const std::exception& err) {
-            utils::stuff::print_exception(err);
-        }
+        LOG_TRACE << "AcceptThread::run threadtype:" << (int)type();
+        start_time_ = std::chrono::steady_clock::now();
+        base_ = std::make_shared<events::EventBase>();
+        base_->make_pair_buffer(pair_);
+        pair_[0]->enabled(EV_WRITE);
+        pair_[0]->disable(EV_READ);
+        pair_[1]->enabled(EV_READ);
+        pair_[1]->disable(EV_WRITE);
+        pair_[1]->setcb(pipeReadcb, nullptr, nullptr, this);
+        updata_timer_ = event_new(base_->base(), -1, EV_TIMEOUT | EV_PERSIST, time_out, this);
+        struct timeval val {
+            0, updata_elapsed_ * 1000
+        };
+        event_add(updata_timer_, &val);
+        base_->loop(EVLOOP_NO_EXIT_ON_EMPTY);
+        event_del(updata_timer_);
+        pair_[0].reset();
+        pair_[1].reset();
         return 0;
     }
 

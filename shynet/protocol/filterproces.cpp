@@ -1,6 +1,7 @@
 #include "shynet/protocol/filterproces.h"
 #include "shynet/net/ipaddress.h"
 #include "shynet/utils/logger.h"
+#include <chrono>
 
 namespace shynet {
 namespace protocol {
@@ -18,15 +19,15 @@ namespace protocol {
             websocket_.reset(new protocol::WebSocket(this));
     }
 
-    net::InputResult FilterProces::process()
+    net::InputResult FilterProces::process(std::function<void(std::unique_ptr<char[]>, size_t)> cb)
     {
         switch (pt_) {
         case ProtoType::SHY:
-            return tcpip_->process();
+            return tcpip_->process(cb);
         case ProtoType::HTTP:
-            return http_->process();
+            return http_->process(cb);
         case ProtoType::WEBSOCKET:
-            return websocket_->process();
+            return websocket_->process(cb);
         default:
             LOG_WARN << "未知的协议类型";
             return net::InputResult::INITIATIVE_CLOSE;
@@ -65,12 +66,13 @@ namespace protocol {
 
     int FilterProces::ping() const
     {
+        uint64_t timestamp = std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::steady_clock::now().time_since_epoch()).count();
         switch (pt_) {
         case ProtoType::SHY: {
-            return tcpip_->send(nullptr, 0, Tcpip::FrameType::Ping);
+            return tcpip_->send(&timestamp, sizeof(timestamp), Tcpip::FrameType::Ping);
         }
         case ProtoType::WEBSOCKET: {
-            return websocket_->send(nullptr, 0, protocol::WebSocket::FrameType::Ping);
+            return websocket_->send(&timestamp, sizeof(timestamp), protocol::WebSocket::FrameType::Ping);
         }
         default:
             LOG_WARN << "未知的协议类型";

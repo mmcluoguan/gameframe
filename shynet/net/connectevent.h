@@ -94,7 +94,7 @@ namespace net {
          返回INITIATIVE_CLOSE服务器将关闭底层socket，并触发close(CLIENT_CLOSE)
          返回PASSIVE_CLOSE服务器将关闭底层socket，并触发close(SERVER_CLOSE)
         */
-        virtual InputResult input();
+        virtual InputResult input(std::function<void(std::unique_ptr<char[]>, size_t)> cb);
         /**
          * @brief 指定数据已经完成发送到管理io缓冲回调
          * @return  返回0正常没有操作
@@ -105,7 +105,7 @@ namespace net {
          * @brief 服务器连接断开回调
          * @param active 断开原因 CLIENT_CLOSE,SERVER_CLOSE,TIMEOUT_CLOSE
         */
-        virtual void close(CloseType active) = 0;
+        void close(CloseType active) override = 0;
         /**
          * @brief 检测到与服务器没有心跳超时回调
          * @param active 断开原因 TIMEOUT_CLOSE
