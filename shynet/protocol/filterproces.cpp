@@ -1,6 +1,7 @@
 #include "shynet/protocol/filterproces.h"
 #include "shynet/net/ipaddress.h"
 #include "shynet/utils/logger.h"
+#include "shynet/utils/stuff.h"
 #include <chrono>
 
 namespace shynet {
@@ -67,6 +68,7 @@ namespace protocol {
     int FilterProces::ping() const
     {
         uint64_t timestamp = std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::steady_clock::now().time_since_epoch()).count();
+        timestamp = utils::stuff::hl64ton(timestamp);
         switch (pt_) {
         case ProtoType::SHY: {
             return tcpip_->send(&timestamp, sizeof(timestamp), Tcpip::FrameType::Ping);

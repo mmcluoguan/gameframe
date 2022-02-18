@@ -4,6 +4,7 @@
 #include "shynet/protocol/filterproces.h"
 #include "shynet/task/acceptreadiotask.h"
 #include "shynet/utils/logger.h"
+#include "shynet/utils/stuff.h"
 #include <cstring>
 
 namespace shynet {
@@ -59,6 +60,7 @@ namespace protocol {
                                     //读取Ping时间戳
                                     char timesbuf[sizeof(uint64_t) * 2] = { 0 };
                                     uint64_t ser_timestamp = std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::system_clock::now().time_since_epoch()).count();
+                                    ser_timestamp = utils::stuff::hl64ton(ser_timestamp);
                                     memcpy(timesbuf, &ser_timestamp, sizeof(ser_timestamp));
                                     uint64_t ping_timestamp;
                                     inputbuffer->remove(&ping_timestamp, sizeof(data_length));
@@ -68,12 +70,14 @@ namespace protocol {
                                     //计算延迟
                                     uint64_t ser_timestamp;
                                     inputbuffer->remove(&ser_timestamp, sizeof(ser_timestamp));
+                                    ser_timestamp = utils::stuff::ntohl64(ser_timestamp);
                                     uint64_t ping_timestamp;
                                     inputbuffer->remove(&ping_timestamp, sizeof(ping_timestamp));
+                                    ping_timestamp = utils::stuff::ntohl64(ping_timestamp);
                                     uint64_t delay
                                         = std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::steady_clock::now().time_since_epoch()).count() - ping_timestamp;
                                     uint64_t remote_timestamp = ser_timestamp + delay / 2;
-                                    LOG_DEBUG << "delay:" << delay << "(ms) remote_timestamp:" << remote_timestamp << "(ms)";
+                                    LOG_TRACE << "delay:" << delay << "(ms) remote_timestamp:" << remote_timestamp << "(ms)";
                                     filter_->set_late_delay(delay);
                                     filter_->set_remote_exact_timestamp(remote_timestamp);
                                 } else if (ft == FrameType::Close) {

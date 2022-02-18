@@ -19,13 +19,9 @@ GateClient::GateClient(std::shared_ptr<net::IPAddress> remote_addr,
     std::shared_ptr<events::EventBuffer> iobuf)
     : frmpub::Client(remote_addr, listen_addr, iobuf,
         frmpub::NetConfigOptions {
-            SOCK_DGRAM,
-            true,
-            false,
-            3,
-            5,
-            false,
-            protocol::FilterProces::ProtoType::WEBSOCKET,
+            .type = SOCK_DGRAM,
+            .enable_check = true,
+            .pt = protocol::FilterProces::ProtoType::WEBSOCKET,
         })
 {
     LOG_INFO << "新客户端连接 [ip:" << remote_addr->ip() << ":" << remote_addr->port() << "]";

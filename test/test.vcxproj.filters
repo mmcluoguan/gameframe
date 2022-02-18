@@ -5,6 +5,9 @@
     <ClCompile Include="mmpv\test_mmpv.cpp">
       <Filter>mmpv</Filter>
     </ClCompile>
+    <ClCompile Include="mozart\test-event.cpp">
+      <Filter>mozart</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="skip">
@@ -22,6 +25,9 @@
     <Filter Include="mmpv">
       <UniqueIdentifier>{f94f1163-9159-475f-9110-77a57f80f2c3}</UniqueIdentifier>
     </Filter>
+    <Filter Include="mozart">
+      <UniqueIdentifier>{4d745136-dc05-40c8-bcad-2e88d4481677}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="skip\test_skip.h">
@@ -38,6 +44,24 @@
     </ClInclude>
     <ClInclude Include="mmpv\test_mmpv.h">
       <Filter>mmpv</Filter>
+    </ClInclude>
+    <ClInclude Include="mozart\base.hpp">
+      <Filter>mozart</Filter>
+    </ClInclude>
+    <ClInclude Include="mozart\event_emitter.hpp">
+      <Filter>mozart</Filter>
+    </ClInclude>
+    <ClInclude Include="mozart\exception.hpp">
+      <Filter>mozart</Filter>
+    </ClInclude>
+    <ClInclude Include="mozart\function.hpp">
+      <Filter>mozart</Filter>
+    </ClInclude>
+    <ClInclude Include="mozart\type_traits.hpp">
+      <Filter>mozart</Filter>
+    </ClInclude>
+    <ClInclude Include="mozart\test-event.h">
+      <Filter>mozart</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

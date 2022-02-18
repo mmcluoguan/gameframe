@@ -13,13 +13,10 @@ GateConnector::GateConnector(std::shared_ptr<net::IPAddress> connect_addr,
     std::shared_ptr<DisConnectData> disconnect)
     : frmpub::Connector(connect_addr, "GateConnector",
         frmpub::NetConfigOptions {
-            SOCK_DGRAM,
-            true,
-            true,
-            3,
-            5,
-            false,
-            protocol::FilterProces::ProtoType::WEBSOCKET,
+            .type = SOCK_DGRAM,
+            .enable_check = true,
+            .enable_ping = true,
+            .pt = protocol::FilterProces::ProtoType::WEBSOCKET,
         })
 {
     disconnect_ = disconnect;

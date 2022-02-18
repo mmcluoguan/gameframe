@@ -17,14 +17,8 @@ HttpClient::HttpClient(std::shared_ptr<net::IPAddress> remote_addr,
     std::shared_ptr<events::EventBuffer> iobuf)
     : frmpub::Client(remote_addr, listen_addr, iobuf,
         frmpub::NetConfigOptions {
-            SOCK_STREAM,
-            false,
-            false,
-            3,
-            5,
-            false,
-            protocol::FilterProces::ProtoType::HTTP,
-            frmpub::ProtoData::JSON,
+            .pt = protocol::FilterProces::ProtoType::HTTP,
+            .pd = frmpub::ProtoData::JSON,
         })
 {
     LOG_INFO << "http新客户端连接 [ip:" << remote_addr->ip() << ":" << remote_addr->port() << "]";
