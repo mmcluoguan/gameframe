@@ -28,6 +28,9 @@
     <Filter Include="mozart">
       <UniqueIdentifier>{4d745136-dc05-40c8-bcad-2e88d4481677}</UniqueIdentifier>
     </Filter>
+    <Filter Include="consistent_hash">
+      <UniqueIdentifier>{2274a05c-f16d-4cc2-98ac-0818ae930be1}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="skip\test_skip.h">
@@ -62,6 +65,9 @@
     </ClInclude>
     <ClInclude Include="mozart\test-event.h">
       <Filter>mozart</Filter>
+    </ClInclude>
+    <ClInclude Include="consistent_hash\test_consistent_hash.h">
+      <Filter>consistent_hash</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

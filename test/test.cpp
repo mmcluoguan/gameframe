@@ -1,4 +1,5 @@
 #include "configcenter/test_configcenter.h"
+#include "consistent_hash/test_consistent_hash.h"
 #include "dbg/test_dbg.h"
 #include "mozart/test-event.h"
 #include "reflection/test_reflection.h"
@@ -12,6 +13,7 @@ int main(int argc, char* argv[])
     //test_reflection();
     //test_configcenter();
     //test_mmpv();
-    test_event();
+    //test_event();
+    test_consistent_hash();
     return 0;
 }

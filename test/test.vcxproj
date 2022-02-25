@@ -41,6 +41,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="configcenter\test_configcenter.h" />
+    <ClInclude Include="consistent_hash\test_consistent_hash.h" />
     <ClInclude Include="dbg\test_dbg.h" />
     <ClInclude Include="mmpv\test_mmpv.h" />
     <ClInclude Include="mozart\base.hpp" />

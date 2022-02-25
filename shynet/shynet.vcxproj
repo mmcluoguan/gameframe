@@ -235,6 +235,7 @@
     <ClInclude Include="thread\timerthread.h" />
     <ClInclude Include="thread\udpthread.h" />
     <ClInclude Include="thread\workthread.h" />
+    <ClInclude Include="utils\consistent_hash.h" />
     <ClInclude Include="utils\databuffer.h" />
     <ClInclude Include="utils\elapsed.h" />
     <ClInclude Include="utils\filepathop.h" />
