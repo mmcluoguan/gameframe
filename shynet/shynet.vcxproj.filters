@@ -376,6 +376,9 @@
     <ClInclude Include="protocol\udpsocket.h">
       <Filter>protocol</Filter>
     </ClInclude>
+    <ClInclude Include="utils\consistent_hash.h">
+      <Filter>utils</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="pool">

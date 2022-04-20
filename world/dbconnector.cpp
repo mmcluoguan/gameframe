@@ -50,7 +50,7 @@ void DbConnector::complete()
     //通知lua的onConnect函数
     shynet::utils::Singleton<lua::LuaEngine>::instance().append(
         std::make_shared<frmpub::OnConnectorTask<DbConnector>>(
-            std::dynamic_pointer_cast<DbConnector>(shared_from_this())));
+            std::dynamic_pointer_cast<DbConnector>(FilterData::shared_from_this())));
 
     //向db服注册世界服务器信息
     protocc::register_world_dbvisit_c msgc;
@@ -76,7 +76,7 @@ int DbConnector::default_handle(std::shared_ptr<protocc::CommonObject> obj, std:
     //通知lua的onMessage函数
     shynet::utils::Singleton<lua::LuaEngine>::instance().append(
         std::make_shared<frmpub::OnMessageTask<DbConnector>>(
-            std::dynamic_pointer_cast<DbConnector>(shared_from_this()), obj, enves));
+            std::dynamic_pointer_cast<DbConnector>(FilterData::shared_from_this()), obj, enves));
     return 0;
 }
 

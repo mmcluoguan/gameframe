@@ -14,15 +14,6 @@ namespace frmpub {
 class FilterData : public shynet::Nocopy, public std::enable_shared_from_this<FilterData> {
 public:
     /**
-     * @brief 数据封包类型
-    */
-    enum class ProtoData {
-        PROTOBUF = 0,
-        JSON,
-        NATIVE,
-    };
-
-    /**
      * @brief 消息路由信封
     */
     struct Envelope {
@@ -82,7 +73,7 @@ public:
          * @brief 服务器回应消息超时时间,默认1s
         */
         struct timeval timeout_sec {
-            120L, 0L
+            10L, 0L
         };
     };
 

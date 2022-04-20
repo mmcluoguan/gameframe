@@ -46,7 +46,7 @@ void LoginConnector::complete()
     //通知lua的onConnect函数
     shynet::utils::Singleton<lua::LuaEngine>::instance().append(
         std::make_shared<frmpub::OnConnectorTask<LoginConnector>>(
-            std::dynamic_pointer_cast<LoginConnector>(shared_from_this())));
+            std::dynamic_pointer_cast<LoginConnector>(FilterData::shared_from_this())));
 
     //向登录服注册服务器信息
     protocc::register_gate_login_c msgc;
@@ -69,7 +69,7 @@ int LoginConnector::default_handle(std::shared_ptr<protocc::CommonObject> obj, s
         //通知lua的onMessage函数
         shynet::utils::Singleton<lua::LuaEngine>::instance().append(
             std::make_shared<frmpub::OnMessageTask<LoginConnector>>(
-                std::dynamic_pointer_cast<LoginConnector>(shared_from_this()), obj, enves));
+                std::dynamic_pointer_cast<LoginConnector>(FilterData::shared_from_this()), obj, enves));
     }
     return 0;
 }

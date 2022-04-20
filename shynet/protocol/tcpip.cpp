@@ -1,7 +1,10 @@
 #include "shynet/protocol/tcpip.h"
 #include "3rd/jemalloc/jemalloc.h"
+#include "shynet/pool/threadpool.h"
 #include "shynet/protocol/filterproces.h"
+#include "shynet/task/acceptreadiotask.h"
 #include "shynet/utils/logger.h"
+#include "shynet/utils/stuff.h"
 #include <cstring>
 
 namespace shynet {
@@ -12,7 +15,7 @@ namespace protocol {
     {
     }
 
-    net::InputResult Tcpip::process()
+    net::InputResult Tcpip::process(std::function<void(std::unique_ptr<char[]>, size_t)> cb)
     {
         std::shared_ptr<events::Streambuff> inputbuffer = filter_->iobuf()->inputbuffer();
         std::shared_ptr<events::Streambuff> restore = std::make_shared<events::Streambuff>();
@@ -34,7 +37,9 @@ namespace protocol {
                 if (inputbuffer->length() >= needlen) {
                     //读取帧类型
                     inputbuffer->lock();
-                    inputbuffer->remove(&ft, needlen);
+                    char cft;
+                    inputbuffer->remove(&cft, sizeof(char));
+                    ft = static_cast<FrameType>(cft);
                     restore->add(&ft, needlen);
                     inputbuffer->unlock();
 
@@ -52,29 +57,45 @@ namespace protocol {
                             if (ft != FrameType::Continuation) {
                                 //数据包完整
                                 if (ft == FrameType::Ping) {
-                                    send(nullptr, 0, FrameType::Pong);
+                                    //读取Ping时间戳
+                                    char timesbuf[sizeof(uint64_t) * 2] = { 0 };
+                                    uint64_t ser_timestamp = std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::system_clock::now().time_since_epoch()).count();
+                                    ser_timestamp = utils::stuff::hl64ton(ser_timestamp);
+                                    memcpy(timesbuf, &ser_timestamp, sizeof(ser_timestamp));
+                                    uint64_t ping_timestamp;
+                                    inputbuffer->remove(&ping_timestamp, sizeof(data_length));
+                                    memcpy(timesbuf + sizeof(ser_timestamp), &ping_timestamp, sizeof(ping_timestamp));
+                                    send(&timesbuf, sizeof(timesbuf), FrameType::Pong);
                                 } else if (ft == FrameType::Pong) {
+                                    //计算延迟
+                                    uint64_t ser_timestamp;
+                                    inputbuffer->remove(&ser_timestamp, sizeof(ser_timestamp));
+                                    ser_timestamp = utils::stuff::ntohl64(ser_timestamp);
+                                    uint64_t ping_timestamp;
+                                    inputbuffer->remove(&ping_timestamp, sizeof(ping_timestamp));
+                                    ping_timestamp = utils::stuff::ntohl64(ping_timestamp);
+                                    uint64_t delay
+                                        = std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::steady_clock::now().time_since_epoch()).count() - ping_timestamp;
+                                    uint64_t remote_timestamp = ser_timestamp + delay / 2;
+                                    LOG_TRACE << "delay:" << delay << "(ms) remote_timestamp:" << remote_timestamp << "(ms)";
+                                    filter_->set_late_delay(delay);
+                                    filter_->set_remote_exact_timestamp(remote_timestamp);
                                 } else if (ft == FrameType::Close) {
                                     return net::InputResult::PASSIVE_CLOSE;
                                 } else {
                                     size_t total_length = total_original_data_->length();
+                                    std::shared_ptr<task::AcceptReadIoTask> io;
                                     if (total_length > 0) {
                                         std::unique_ptr<char[]> complete_data(new char[total_length]);
                                         total_original_data_->remove(complete_data.get(), total_length);
-                                        int ret = filter_->message_handle(complete_data.get(), total_length);
-                                        if (ret == -1) {
-                                            return net::InputResult::INITIATIVE_CLOSE;
-                                        }
+                                        cb(std::move(complete_data), total_length);
                                     } else {
                                         std::unique_ptr<char[]> original_data(new char[data_length]);
                                         inputbuffer->lock();
                                         inputbuffer->remove(original_data.get(), data_length);
                                         restore.reset(new events::Streambuff);
                                         inputbuffer->unlock();
-                                        int ret = filter_->message_handle(original_data.get(), data_length);
-                                        if (ret == -1) {
-                                            return net::InputResult::INITIATIVE_CLOSE;
-                                        }
+                                        cb(std::move(original_data), data_length);
                                     }
                                 }
                             } else {

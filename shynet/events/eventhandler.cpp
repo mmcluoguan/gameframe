@@ -1,20 +1,25 @@
 #include "shynet/events/eventhandler.h"
 #include "shynet/utils/logger.h"
+#include "shynet/utils/stuff.h"
 
 namespace shynet {
 namespace events {
 
     static void cbfunc(evutil_socket_t fd, short what, void* arg)
     {
-        EventHandler* handler = static_cast<EventHandler*>(arg);
-        if (what & EV_TIMEOUT) {
-            handler->timeout(fd);
-        } else if (what & EV_READ) {
-            handler->input(fd);
-        } else if (what & EV_WRITE) {
-            handler->output(fd);
-        } else if (what & EV_SIGNAL) {
-            handler->signal(fd);
+        try {
+            EventHandler* handler = static_cast<EventHandler*>(arg);
+            if (what & EV_TIMEOUT) {
+                handler->timeout(fd);
+            } else if (what & EV_READ) {
+                handler->input(fd);
+            } else if (what & EV_WRITE) {
+                handler->output(fd);
+            } else if (what & EV_SIGNAL) {
+                handler->signal(fd);
+            }
+        } catch (const std::exception& err) {
+            utils::stuff::print_exception(err);
         }
     }
 
@@ -54,14 +59,6 @@ namespace events {
     struct event* EventHandler::event() const
     {
         return event_;
-    }
-
-    evutil_socket_t EventHandler::fd() const
-    {
-        if (event_ == nullptr) {
-            THROW_EXCEPTION("event 不存在");
-        }
-        return event_get_fd(event_);
     }
 
     std::shared_ptr<EventBase> EventHandler::base() const

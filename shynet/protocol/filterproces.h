@@ -57,6 +57,12 @@ namespace protocol {
         ~FilterProces() = default;
 
         /**
+         * @brief 连接断开回调
+         * @param active 断开原因 CLIENT_CLOSE,SERVER_CLOSE,TIMEOUT_CLOSE
+        */
+        virtual void close(net::CloseType active) = 0;
+
+        /**
          * @brief 连接服务器完成回调
         */
         virtual void complete() {};
@@ -114,25 +120,41 @@ namespace protocol {
          * @brief 获取管理io缓冲
          * @param iobuf 管理io缓冲 
         */
-        std::shared_ptr<events::EventBuffer> iobuf() const
-        {
-            return iobuf_;
-        }
+        std::shared_ptr<events::EventBuffer> iobuf() const { return iobuf_; }
         /**
          * @brief 设置管理io缓冲
          * @param iobuf 管理io缓冲 
         */
-        void set_iobuf(std::shared_ptr<events::EventBuffer> iobuf)
-        {
-            iobuf_ = iobuf;
-        }
+        void set_iobuf(std::shared_ptr<events::EventBuffer> iobuf) { iobuf_ = iobuf; }
+
+        /**
+         * @brief 获取计算上延迟的精确的对端时间戳(ms)
+         * @return 计算上延迟的精确的对端时间戳(ms)
+        */
+        uint64_t remote_exact_timestamp() const { return remote_exact_timestamp_; };
+        /**
+         * @brief 设置计算上延迟的精确的对端时间戳(ms)
+         * @param t 计算上延迟的精确的对端时间戳(ms)
+        */
+        void set_remote_exact_timestamp(uint64_t t) { remote_exact_timestamp_ = t; };
+
+        /**
+         * @brief 获取最近一次ping的延迟(ms)
+         * @return 最近一次ping的延迟(ms)
+        */
+        uint64_t late_delay() const { return late_delay_; };
+        /**
+         * @brief 设置最近一次ping的延迟(ms)
+         * @param t 最近一次ping的延迟(ms)
+        */
+        void set_late_delay(uint64_t t) { late_delay_ = t; };
 
     protected:
         /**
          * @brief 解析数据流协议
          * @return 管理io缓冲数据处理结果
         */
-        net::InputResult process();
+        net::InputResult process(std::function<void(std::unique_ptr<char[]>, size_t)> cb);
 
         /**
          * @brief 处理websocket握手
@@ -165,6 +187,14 @@ namespace protocol {
          * @brief websocket协议处理器
         */
         std::unique_ptr<WebSocket> websocket_;
+        /**
+         * @brief 计算上延迟的精确的对端时间戳(ms)
+        */
+        uint64_t remote_exact_timestamp_ = 0;
+        /**
+         * @brief 最近一次ping的延迟(ms)
+        */
+        uint64_t late_delay_ = 0;
     };
 }
 }

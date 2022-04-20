@@ -15,7 +15,7 @@ namespace task {
          * @brief 构造
          * @param cntevent 接收服务器数据处理器
         */
-        explicit ConnectReadIoTask(std::shared_ptr<net::ConnectEvent> cntevent);
+        explicit ConnectReadIoTask(std::shared_ptr<net::ConnectEvent> cntevent, std::unique_ptr<char[]> complete_data, size_t length);
         ~ConnectReadIoTask() = default;
 
         /**
@@ -28,6 +28,8 @@ namespace task {
          * @brief 接收服务器数据处理器
         */
         std::shared_ptr<net::ConnectEvent> cntevent_;
+        std::unique_ptr<char[]> complete_data_;
+        size_t complete_data_length_;
     };
 }
 }

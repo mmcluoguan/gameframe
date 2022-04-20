@@ -31,11 +31,12 @@ namespace net {
 
         /**
          * @brief socket数据已经保存到管理io缓冲,可以读取回调
+         * @param cb 解析出网络封包回调
          * @return 返回SUCCESS正常没有操作,
          返回INITIATIVE_CLOSE服务器将关闭底层socket，并触发close(SERVER_CLOSE)
          返回PASSIVE_CLOSE服务器将关闭底层socket，并触发close(CLIENT_CLOSE)
         */
-        virtual InputResult input();
+        virtual InputResult input(std::function<void(std::unique_ptr<char[]>, size_t)> cb);
         /**
          * @brief 指定数据已经完成发送到管理io缓冲回调
          * @return  返回0正常没有操作
@@ -46,7 +47,7 @@ namespace net {
          * @brief 客户端连接断开回调
          * @param active 断开原因 CLIENT_CLOSE,SERVER_CLOSE,TIMEOUT_CLOSE
         */
-        virtual void close(CloseType active) = 0;
+        void close(CloseType active) override = 0;
         /**
          * @brief 检测到与客户端没有心跳超时回调
          * @param active 断开原因 TIMEOUT_CLOSE
@@ -78,7 +79,7 @@ namespace net {
          * @brief 获取socket文件描述符
          * @return socket文件描述符
         */
-        uint32_t fd() const { return iobuf()->fd(); }
+        uint32_t fd() const { return udpsocket_ ? udpsocket_->guid() : iobuf()->fd(); }
 
         /**
          * @brief 获取检测与客户端连接状态计时器id

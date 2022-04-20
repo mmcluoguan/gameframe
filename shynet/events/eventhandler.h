@@ -36,11 +36,6 @@ namespace events {
         */
         struct event* event() const;
         /**
-         * @brief 获取socket文件描述符
-         * @return socket文件描述符
-        */
-        evutil_socket_t fd() const;
-        /**
          * @brief 获取反应堆
          * @return 反应堆
         */

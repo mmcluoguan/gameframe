@@ -2,6 +2,7 @@
 #include "3rd/jemalloc/jemalloc.h"
 #include "shynet/crypto/base64.h"
 #include "shynet/crypto/sha1.h"
+#include "shynet/pool/threadpool.h"
 #include "shynet/protocol/filterproces.h"
 #include "shynet/utils/logger.h"
 #include "shynet/utils/stuff.h"
@@ -15,7 +16,7 @@ namespace protocol {
     {
     }
 
-    net::InputResult WebSocket::process()
+    net::InputResult WebSocket::process(std::function<void(std::unique_ptr<char[]>, size_t)> cb)
     {
         std::shared_ptr<events::Streambuff> inputbuffer = filter_->iobuf()->inputbuffer();
         std::shared_ptr<events::Streambuff> restore = std::make_shared<events::Streambuff>();
@@ -26,7 +27,7 @@ namespace protocol {
                     if (ret != net::InputResult::SUCCESS)
                         return ret;
                 } else if (status_ == Status::Handsharked) {
-                    net::InputResult ret = process_data(inputbuffer, restore);
+                    net::InputResult ret = process_data(inputbuffer, restore, cb);
                     if (ret != net::InputResult::SUCCESS)
                         return ret;
                 }
@@ -37,7 +38,7 @@ namespace protocol {
                     if (ret != net::InputResult::SUCCESS)
                         return ret;
                 } else if (status_ == Status::Handsharked) {
-                    net::InputResult ret = process_data(inputbuffer, restore);
+                    net::InputResult ret = process_data(inputbuffer, restore, cb);
                     if (ret != net::InputResult::SUCCESS)
                         return ret;
                 }
@@ -146,7 +147,8 @@ namespace protocol {
     }
 
     net::InputResult WebSocket::process_data(std::shared_ptr<events::Streambuff> inputbuffer,
-        std::shared_ptr<events::Streambuff> restore)
+        std::shared_ptr<events::Streambuff> restore,
+        std::function<void(std::unique_ptr<char[]>, size_t)> cb)
     {
         size_t n = 0, mask_len = 0;
         char buf[2];
@@ -232,9 +234,30 @@ namespace protocol {
                 }
             }
             if (ft == FrameType::Ping) {
-                send(nullptr, 0, FrameType::Pong);
+                //读取Ping时间戳
+                char timesbuf[sizeof(uint64_t) * 2] = { 0 };
+                uint64_t ser_timestamp = std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::system_clock::now().time_since_epoch()).count();
+                ser_timestamp = utils::stuff::hl64ton(ser_timestamp);
+                memcpy(timesbuf, &ser_timestamp, sizeof(ser_timestamp));
+                uint64_t ping_timestamp;
+                memcpy(&ping_timestamp, original_data.get(), sizeof(ping_timestamp));
+                memcpy(timesbuf + sizeof(ser_timestamp), &ping_timestamp, sizeof(ping_timestamp));
+                send(&timesbuf, sizeof(timesbuf), FrameType::Pong);
                 return net::InputResult::SUCCESS;
             } else if (ft == FrameType::Pong) {
+                //计算延迟
+                uint64_t ser_timestamp;
+                memcpy(&ser_timestamp, original_data.get(), sizeof(ser_timestamp));
+                ser_timestamp = utils::stuff::ntohl64(ser_timestamp);
+                uint64_t ping_timestamp;
+                memcpy(&ping_timestamp, original_data.get() + sizeof(ser_timestamp), sizeof(ping_timestamp));
+                ping_timestamp = utils::stuff::ntohl64(ping_timestamp);
+                uint64_t delay
+                    = std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::steady_clock::now().time_since_epoch()).count() - ping_timestamp;
+                uint64_t remote_timestamp = ser_timestamp + delay / 2;
+                LOG_TRACE << "delay:" << delay << "(ms) remote_timestamp:" << remote_timestamp << "(ms)";
+                filter_->set_late_delay(delay);
+                filter_->set_remote_exact_timestamp(remote_timestamp);
                 return net::InputResult::SUCCESS;
             } else if (ft == FrameType::Close) {
                 return net::InputResult::PASSIVE_CLOSE;
@@ -246,15 +269,9 @@ namespace protocol {
                     if (total_length > 0) {
                         std::unique_ptr<char[]> complete_data(new char[total_length]);
                         total_original_data_->remove(complete_data.get(), total_length);
-                        int ret = filter_->message_handle(complete_data.get(), total_length);
-                        if (ret == -1) {
-                            return net::InputResult::INITIATIVE_CLOSE;
-                        }
+                        cb(std::move(complete_data), total_length);
                     } else {
-                        int ret = filter_->message_handle(original_data.get(), data_length);
-                        if (ret == -1) {
-                            return net::InputResult::INITIATIVE_CLOSE;
-                        }
+                        cb(std::move(original_data), data_length);
                     }
                 } else {
                     //数据包不完整,拷贝数据到缓冲区

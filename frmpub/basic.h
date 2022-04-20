@@ -112,6 +112,29 @@ inline void default_sigcb(std::shared_ptr<events::EventBase> base, int signum)
  * @brief 设置日志收集
 */
 void set_loggather();
+
+/**
+ * @brief 数据封包类型
+*/
+enum class ProtoData {
+    PROTOBUF = 0,
+    JSON,
+    NATIVE,
+};
+
+/**
+ * @brief 网络配置选项
+*/
+struct NetConfigOptions {
+    __socket_type type = SOCK_STREAM; //SOCK_STREAM SOCK_DGRAM
+    bool enable_check = false; //是否启用检测连接状态
+    bool enable_ping = false; //是否发送心跳
+    ssize_t heartSecond = 3; //发送心跳时间间隔(s)
+    ssize_t check_second = 5; //检测时间间隔(s)
+    bool enable_ssl = false; //是否启用ssl
+    protocol::FilterProces::ProtoType pt = protocol::FilterProces::ProtoType::SHY; //协议类型 SHY,HTTP,WEBSOCKET
+    ProtoData pd = ProtoData::PROTOBUF; //数据封包类型 PROTOBUF,JSON,NATIVE
+};
 }
 
 namespace magic_enum::customize {

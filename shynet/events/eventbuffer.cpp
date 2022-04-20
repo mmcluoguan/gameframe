@@ -45,11 +45,7 @@ namespace events {
 
     uint32_t EventBuffer::fd() const
     {
-        int id = bufferevent_getfd(buffer_);
-        if (id == -1) {
-            return fd_;
-        }
-        return static_cast<uint32_t>(id);
+        return fd_;
     }
     void EventBuffer::enabled(short what) const
     {

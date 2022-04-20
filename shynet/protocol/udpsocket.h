@@ -66,23 +66,79 @@ namespace protocol {
         */
         int fd = -1;
 
+        /**
+         * @brief 输入缓冲区
+        */
         std::shared_ptr<events::EventBuffer> input_buffer;
+        /**
+         * @brief 输出缓冲区
+        */
         std::shared_ptr<events::EventBuffer> output_buffer;
 
+        /**
+         * @brief 接收客户端数据处理器
+        */
         std::weak_ptr<net::AcceptNewFd> client;
+        /**
+         * @brief 接收服务器数据处理器
+        */
         std::weak_ptr<net::ConnectEvent> cnev;
 
+        /**
+         * @brief 初始化输入输出缓冲区
+         * @param base 反应堆
+        */
         void init_pair_buffer(std::shared_ptr<events::EventBase> base);
 
+        /**
+         * @brief kcp发送数据
+         * @param data 
+         * @param size 
+         * @return 发送到kcp缓冲区的大小
+        */
         int send(const char* data, size_t size);
+        /**
+         * @brief 原生udp发送数据
+         * @param data 
+         * @param size 
+         * @return 发送的字节数
+        */
         ssize_t sendto(const char* data, size_t size);
 
+        /**
+         * @brief kcp接收数据
+         * @param data 
+         * @param size 
+         * @return 返回接收的字节数
+        */
         int recv(char* data, size_t size);
+        /**
+         * @brief 原生udp接收数据
+         * @param data 
+         * @param size 
+         * @return 返回接收的字节数
+        */
         ssize_t recvfrom(char* data, size_t size);
 
+        /**
+         * @brief 设置kcp标识
+         * @param guid 唯一标识
+        */
         void set_guid(uint32_t guid);
+        /**
+         * @brief 获取kcp标识
+         * @return kcp标识
+        */
         uint32_t guid() const { return guid_; };
+        /**
+         * @brief 获取kcp指针
+         * @return kcp指针
+        */
         ikcpcb* kcp() const { return kcp_; };
+        /**
+         * @brief 获取身份标识
+         * @return 身份标识
+        */
         FilterProces::Identity ident() const { return ident_; };
 
     private:

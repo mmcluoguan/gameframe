@@ -1,5 +1,6 @@
 #include "shynet/io/stdinhandler.h"
 #include "3rd/readline/readline.h"
+#include "shynet/pool/threadpool.h"
 #include "shynet/utils/singleton.h"
 #include "shynet/utils/stringop.h"
 #include "shynet/utils/stuff.h"
@@ -106,6 +107,7 @@ namespace io {
     void StdinHandler::quit_order(const OrderItem& order, int argc, char** argv)
     {
         rl_callback_handler_remove();
+        shynet::utils::Singleton<shynet::pool::ThreadPool>::instance().stop();
         struct timeval delay = { 2, 0 };
         LOG_INFO << "捕获到一个退出命令,程序将在2秒后安全退出";
         base()->loopexit(&delay);

@@ -3,6 +3,7 @@
 #include "shynet/net/timerreactormgr.h"
 #include "shynet/pool/threadpool.h"
 #include "shynet/task/acceptreadiotask.h"
+#include "shynet/utils/stuff.h"
 
 namespace shynet {
 namespace net {
@@ -39,6 +40,7 @@ namespace net {
                 BEV_OPT_CLOSE_ON_FREE | BEV_OPT_THREADSAFE);
         }
         set_buffer(iobuf_->buffer());
+        set_fd(fd);
 
         iobuf_->setcb(ioreadcb, iowritecb, ioeventcb, this);
         iobuf_->enabled(EV_READ | EV_WRITE | EV_PERSIST);
@@ -56,39 +58,61 @@ namespace net {
 
     void AcceptIoBuffer::io_readcb()
     {
-        std::shared_ptr<AcceptNewFd> aptnewfd = newfd_.lock();
-        if (aptnewfd != nullptr) {
-            if (aptnewfd->enable_check()) {
-                //延迟检测与客户端连接状态的计时处理器时间
-                auto heart = utils::Singleton<TimerReactorMgr>::instance().find(aptnewfd->check_timeid());
-                heart->set_val({ aptnewfd->check_second(), 0L });
+        try {
+            std::shared_ptr<AcceptNewFd> aptnewfd = newfd_.lock();
+            if (aptnewfd != nullptr) {
+                if (aptnewfd->enable_check()) {
+                    //延迟检测与客户端连接状态的计时处理器时间
+                    auto heart = utils::Singleton<TimerReactorMgr>::instance().find(aptnewfd->check_timeid());
+                    if (heart) {
+                        heart->set_val({ aptnewfd->check_second(), 0L });
+                    }
+                }
+                net::InputResult ret = aptnewfd->input([aptnewfd](std::unique_ptr<char[]> data, size_t len) {
+                    std::shared_ptr<task::AcceptReadIoTask> io
+                        = std::make_shared<task::AcceptReadIoTask>(aptnewfd, std::move(data), len);
+                    utils::Singleton<pool::ThreadPool>::instance().appendwork(aptnewfd->iobuf()->fd(), io);
+                });
+                if (ret == net::InputResult::INITIATIVE_CLOSE) {
+                    aptnewfd->close(net::CloseType::SERVER_CLOSE);
+                } else if (ret == net::InputResult::PASSIVE_CLOSE) {
+                    aptnewfd->close(net::CloseType::CLIENT_CLOSE);
+                }
             }
-            std::shared_ptr<task::AcceptReadIoTask> io = std::make_shared<task::AcceptReadIoTask>(aptnewfd);
-            utils::Singleton<pool::ThreadPool>::instance().appendwork(fd(), io);
+        } catch (const std::exception& err) {
+            utils::stuff::print_exception(err);
         }
     }
 
     void AcceptIoBuffer::io_writecb()
     {
-        std::shared_ptr<AcceptNewFd> aptnewfd = newfd_.lock();
-        if (aptnewfd != nullptr) {
-            int ret = aptnewfd->output();
-            if (ret == -1) {
-                aptnewfd->close(net::CloseType::SERVER_CLOSE);
+        try {
+            std::shared_ptr<AcceptNewFd> aptnewfd = newfd_.lock();
+            if (aptnewfd != nullptr) {
+                int ret = aptnewfd->output();
+                if (ret == -1) {
+                    aptnewfd->close(net::CloseType::SERVER_CLOSE);
+                }
             }
+        } catch (const std::exception& err) {
+            utils::stuff::print_exception(err);
         }
     }
 
     void AcceptIoBuffer::io_eventcb(short events)
     {
-        std::shared_ptr<AcceptNewFd> aptnewfd = newfd_.lock();
-        if (aptnewfd != nullptr) {
-            if (events & BEV_EVENT_EOF) {
-                aptnewfd->close(net::CloseType::CLIENT_CLOSE);
-            } else if (events & (BEV_EVENT_ERROR | BEV_EVENT_READING | BEV_EVENT_WRITING | BEV_EVENT_TIMEOUT)) {
-                LOG_WARN << evutil_socket_error_to_string(EVUTIL_SOCKET_ERROR());
-                aptnewfd->close(net::CloseType::SERVER_CLOSE);
+        try {
+            std::shared_ptr<AcceptNewFd> aptnewfd = newfd_.lock();
+            if (aptnewfd != nullptr) {
+                if (events & BEV_EVENT_EOF) {
+                    aptnewfd->close(net::CloseType::CLIENT_CLOSE);
+                } else if (events & (BEV_EVENT_ERROR | BEV_EVENT_READING | BEV_EVENT_WRITING | BEV_EVENT_TIMEOUT)) {
+                    LOG_WARN << evutil_socket_error_to_string(EVUTIL_SOCKET_ERROR());
+                    aptnewfd->close(net::CloseType::SERVER_CLOSE);
+                }
             }
+        } catch (const std::exception& err) {
+            utils::stuff::print_exception(err);
         }
     }
 

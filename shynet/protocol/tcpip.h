@@ -3,6 +3,7 @@
 
 #include "shynet/basic.h"
 #include "shynet/events/streambuff.h"
+#include <functional>
 
 namespace shynet {
 namespace protocol {
@@ -53,7 +54,7 @@ namespace protocol {
          * @brief 解析自定义数据流协议
          * @return 管理io缓冲数据处理结果
         */
-        net::InputResult process();
+        net::InputResult process(std::function<void(std::unique_ptr<char[]>, size_t)> cb);
 
         /**
          * @brief 发送数据

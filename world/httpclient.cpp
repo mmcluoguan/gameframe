@@ -15,8 +15,11 @@ namespace world {
 HttpClient::HttpClient(std::shared_ptr<net::IPAddress> remote_addr,
     std::shared_ptr<net::IPAddress> listen_addr,
     std::shared_ptr<events::EventBuffer> iobuf)
-    : frmpub::Client(remote_addr, listen_addr, iobuf, false, 5L,
-        shynet::protocol::FilterProces::ProtoType::HTTP, FilterData::ProtoData::JSON)
+    : frmpub::Client(remote_addr, listen_addr, iobuf,
+        frmpub::NetConfigOptions {
+            .pt = protocol::FilterProces::ProtoType::HTTP,
+            .pd = frmpub::ProtoData::JSON,
+        })
 {
     LOG_INFO << "http新客户端连接 [ip:" << remote_addr->ip() << ":" << remote_addr->port() << "]";
 
@@ -48,7 +51,7 @@ int HttpClient::default_handle(std::shared_ptr<rapidjson::Document> doc, std::sh
     //通知lua的onMessage函数
     shynet::utils::Singleton<lua::LuaEngine>::instance().append(
         std::make_shared<frmpub::OnMessageTask<HttpClient>>(
-            std::dynamic_pointer_cast<HttpClient>(shared_from_this()), doc, enves));
+            std::dynamic_pointer_cast<HttpClient>(FilterData::shared_from_this()), doc, enves));
     return 0;
 }
 
