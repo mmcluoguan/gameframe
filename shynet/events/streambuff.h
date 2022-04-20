@@ -29,12 +29,6 @@ namespace events {
         */
         evbuffer* buffer() const;
 
-        /// <summary>
-        /// 对于单个操作,不需要调用lock()和unlock():
-        /// 如果Streambuff启用了锁,单个操作就已经是原子的.只有在需要多个操作连续执行,
-        /// 不让其线程介入的时候,才需要手动锁定Streambuff
-        /// </summary>
-
         /**
          * @brief 加锁
         对于单个操作,不需要调用lock()和unlock():
@@ -53,14 +47,6 @@ namespace events {
         */
         size_t length() const;
 
-        /// <summary>
-        /// 修改缓冲区的最后一块,或者添加一个新的块,使得缓冲区足以容纳len字节,
-        /// 而不需要更多的内存分配.
-        /// </summary>
-        /// <param name="buff"></param>
-        /// <param name="len"></param>
-        /// <returns>0成功,-1失败</returns>
-
         /**
          * @brief 修改缓冲区的最后一块,或者添加一个新的块,使得缓冲区足以容纳len字节,
         而不需要更多的内存分配.
@@ -68,15 +54,6 @@ namespace events {
          * @return 
         */
         int expand(size_t len) const;
-
-        /// <summary>
-        /// "线性化"buf前面的 size字节,
-        /// 必要时将进行复制或者移动,以保证这些字节是连续的,占据相同的内存块.
-        /// 如果size 是负的,函数会线性化整个缓冲区.如果size 大于缓冲区中的字节数,函数返回NULL.
-        /// 否则,evbuffer_pullup()返回指向buf 中首字节的指针.
-        /// </summary>
-        /// <param name="size"></param>
-        /// <returns></returns>
 
         /**
          * @brief "线性化"buf前面的 size字节,
